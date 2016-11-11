@@ -3,6 +3,7 @@ package org.oscm.rest.event;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -16,6 +17,7 @@ import org.oscm.rest.event.data.EventRepresentation;
 
 import com.sun.jersey.api.core.InjectParam;
 
+@Path(CommonParams.PATH_VERSION + "/events")
 @Stateless
 public class EventResource extends RestResource {
 
