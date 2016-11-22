@@ -17,62 +17,54 @@ import javax.ws.rs.core.Response;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
+import org.oscm.rest.subscription.data.UsageLicenseRepresentation;
 
 import com.sun.jersey.api.core.InjectParam;
 
-@Path(CommonParams.PATH_VERSION + "/subscriptions")
+@Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID
+        + "/usagelicenses")
 @Stateless
-public class SubscriptionResource extends RestResource {
+public class UsageLicenseResource extends RestResource {
 
     @EJB
-    SubscriptionBackend sb;
+    UsageLicenseBackend ulb;
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSubscriptions(@Context Request request,
+    public Response getLicenses(@Context Request request,
             @InjectParam SubscriptionParameters params) throws Exception {
-        return getCollection(request, sb.getCollection(), params);
+        return getCollection(request, ulb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createSubscription(@Context Request request,
-            SubscriptionCreationRepresentation content,
+    public Response createLicense(@Context Request request,
+            UsageLicenseRepresentation content,
             @InjectParam SubscriptionParameters params) throws Exception {
-        return post(request, sb.post(), content, params);
-    }
-
-    @Since(CommonParams.VERSION_1)
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path(CommonParams.PATH_ID)
-    public Response getSubscription(@Context Request request,
-            @InjectParam SubscriptionParameters params) throws Exception {
-        return get(request, sb.get(), params, true);
+        return post(request, ulb.post(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path(CommonParams.PATH_ID)
-    public Response updateSubscription(@Context Request request,
-            SubscriptionCreationRepresentation content,
+    @Path("/{licKey}")
+    public Response updateLicense(@Context Request request,
+            UsageLicenseRepresentation content,
             @InjectParam SubscriptionParameters params) throws Exception {
-        return put(request, sb.put(), content, params);
+        return put(request, ulb.put(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    @Path(CommonParams.PATH_ID)
-    public Response deleteSubscription(@Context Request request,
+    @Path("/{licKey}")
+    public Response deleteLicense(@Context Request request,
             @InjectParam SubscriptionParameters params) throws Exception {
-        return delete(request, sb.delete(), params);
+        return delete(request, ulb.delete(), params);
     }
 
 }

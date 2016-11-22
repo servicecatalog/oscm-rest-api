@@ -1,5 +1,6 @@
 package org.oscm.rest.subscription;
 
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
@@ -9,6 +10,9 @@ public class SubscriptionParameters extends RequestParameters {
 
     @QueryParam("userId")
     private String userId;
+
+    @PathParam("licKey")
+    private Long licKey;
 
     @Override
     public void validateParameters() throws WebApplicationException {
@@ -26,6 +30,14 @@ public class SubscriptionParameters extends RequestParameters {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Long getLicKey() {
+        return licKey;
+    }
+
+    public void setLicKey(Long licKey) {
+        this.licKey = licKey;
     }
 
 }
