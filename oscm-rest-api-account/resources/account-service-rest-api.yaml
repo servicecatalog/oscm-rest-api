@@ -1,0 +1,231 @@
+# Copyright FUJITSU LIMITED 2016
+swagger: '2.0'
+info:
+  title: Account Service REST API
+  description: API account related resources
+  version: "1.0.0"
+
+# the domain of the service
+host: host_port
+# array of schemes that the API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /oscm-account/v1
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+securityDefinitions:
+  authentication:
+    type: basic
+    description: HTTP basic authentication with a user ID and password
+
+security:
+  - authentication: []
+  
+paths:
+  /organizations:
+    post:
+      summary: Account Definition
+      description: Create an organization account
+      parameters:
+        - name: account
+          in: body
+          description: The organization account to create
+          required: true
+          schema:
+            $ref: '#/definitions/Account'
+
+      tags:
+      responses:
+        201:
+          description: Created
+          headers:
+            location:
+              description: The ID of the new organization
+              type: string
+        403:
+          description: Insufficient permissions
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /organizations/{id}:
+  get:
+  
+definitions:
+  Account:
+    type: object
+    properties:
+      organization:
+        type: object
+        $ref: '#/definitions/Organization'
+      user:
+        type: object
+        $ref: '#/definitions/User'
+      password:
+        type: string
+        format: password
+      serviceKey:
+        type: integer
+        format: int64
+      sellerId:
+        type: string
+      ldapProperties:
+        type: object
+        additionalProperties:
+          type: string
+      organizationRoles:
+        type: array
+        items: 
+          type: string
+          enum:
+            - MARKETPLACE_OWNER
+            - PLATFORM_OPERATOR
+            - TECHNOLOGY_PROVIDER
+            - SUPPLIER
+            - CUSTOMER
+            - BROKER
+            - RESELLER
+
+  Organization:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      etag:
+        type: integer
+        format: int64
+      organizationId:
+        type: string
+      address:
+        type: string
+      email:
+        type: string
+        format: email
+      locale:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      url:
+        type: string
+        format: url
+      description:
+        type: string
+      domicileCountry:
+        type: string
+      supportEmail:
+        type: string
+        format: email
+
+  PaymentInfo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      etag:
+        type: integer
+        format: int64
+      infoId:
+        type: string
+      providerName:
+        type: string
+      accountNumber:
+        type: string
+      paymentType:
+        type: object
+        $ref: '#/definitions/PaymentType'
+
+  PaymentType:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      etag:
+        type: integer
+        format: int64
+      name:
+        type: string
+      paymentTypeId:
+        type: string
+      collectionType:
+        type: string
+        enum:
+          - ORGANIZATION
+          - PAYMENT_SERVICE_PROVIDER
+
+  BillingContact:
+    type: object
+    description: Trigger process
+    properties:
+      id:
+        type: integer
+        format: int64
+      etag:
+        type: integer
+        format: int64
+      email:
+        type: string
+      companyName:
+        type: string
+      address:
+        type: string
+      orgAddressUsed:
+        type: boolean
+      contactId:
+        type: string
+
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      etag:
+        type: integer
+        format: int64
+      email:
+        type: string
+      firstName:
+        type: string
+      additionalName:
+        type: string
+      lastName:
+        type: string
+      address:
+        type: string
+      phone:
+        type: string
+      locale:
+        type: string
+      salutation:
+        type: string
+        enum:
+          - MR
+          - MS
+      realmUserId:
+        type: string
+      organizationId:
+        type: string
+      userId:
+        type: string
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      property:
+        type: string
+      moreInfo:
+        type: string
+  
