@@ -27,7 +27,8 @@ public class UserBackend {
         return new RestBackend.GetCollection<UserRepresentation, UserParameters>() {
 
             @Override
-            public RepresentationCollection<UserRepresentation> getCollection(UserParameters params) throws Exception {
+            public RepresentationCollection<UserRepresentation> getCollection(
+                    UserParameters params) throws Exception {
                 Collection<UserRepresentation> list = UserRepresentation
                         .convert(is.searchLdapUsers(params.getPattern()));
                 return new RepresentationCollection<UserRepresentation>(list);
@@ -39,9 +40,11 @@ public class UserBackend {
         return new RestBackend.Post<UserRepresentation, UserParameters>() {
 
             @Override
-            public Object post(UserRepresentation content, UserParameters params) throws Exception {
+            public Object post(UserRepresentation content, UserParameters params)
+                    throws Exception {
                 VOUserDetails vo = content.getVO();
-                is.importLdapUsers(Collections.singletonList(vo), params.getMarketplaceId());
+                is.importLdapUsers(Collections.singletonList(vo),
+                        params.getMarketplaceId());
                 return vo.getUserId();
             }
         };
@@ -51,8 +54,10 @@ public class UserBackend {
         return new RestBackend.GetCollection<UserRepresentation, UserParameters>() {
 
             @Override
-            public RepresentationCollection<UserRepresentation> getCollection(UserParameters params) throws Exception {
-                Collection<UserRepresentation> list = UserRepresentation.convert(is.getUsersForOrganization());
+            public RepresentationCollection<UserRepresentation> getCollection(
+                    UserParameters params) throws Exception {
+                Collection<UserRepresentation> list = UserRepresentation
+                        .convert(is.getUsersForOrganization());
                 return new RepresentationCollection<UserRepresentation>(list);
             }
 
@@ -63,9 +68,12 @@ public class UserBackend {
         return new RestBackend.Post<UserRepresentation, UserParameters>() {
 
             @Override
-            public Object post(UserRepresentation content, UserParameters params) throws Exception {
+            public Object post(UserRepresentation content, UserParameters params)
+                    throws Exception {
                 VOUserDetails vo = content.getVO();
-                vo = is.createUser(vo, new ArrayList<UserRoleType>(vo.getUserRoles()), params.getMarketplaceId());
+                vo = is.createUser(vo,
+                        new ArrayList<UserRoleType>(vo.getUserRoles()),
+                        params.getMarketplaceId());
                 if (vo == null) {
                     return null;
                 }
@@ -78,7 +86,8 @@ public class UserBackend {
         return new RestBackend.Get<UserRepresentation, UserParameters>() {
 
             @Override
-            public UserRepresentation get(UserParameters params) throws Exception {
+            public UserRepresentation get(UserParameters params)
+                    throws Exception {
                 VOUser vo = new VOUser();
                 vo.setUserId(params.getUserId());
                 return new UserRepresentation(is.getUserDetails(vo));
@@ -91,9 +100,10 @@ public class UserBackend {
         return new RestBackend.Put<UserRepresentation, UserParameters>() {
 
             @Override
-            public boolean put(UserRepresentation content, UserParameters params) throws Exception {
+            public boolean put(UserRepresentation content, UserParameters params)
+                    throws Exception {
                 // TODO: handle id change?
-                is.updateUser(content.getVO()).getUserId();
+                is.updateUser(content.getVO());
                 return true;
             }
 
@@ -118,7 +128,8 @@ public class UserBackend {
         return new RestBackend.Get<RolesRepresentation, UserParameters>() {
 
             @Override
-            public RolesRepresentation get(UserParameters params) throws Exception {
+            public RolesRepresentation get(UserParameters params)
+                    throws Exception {
                 VOUser vo = new VOUser();
                 vo.setUserId(params.getUserId());
                 return new RolesRepresentation(is.getUserDetails(vo));
@@ -130,10 +141,12 @@ public class UserBackend {
         return new RestBackend.Put<RolesRepresentation, UserParameters>() {
 
             @Override
-            public boolean put(RolesRepresentation content, UserParameters params) throws Exception {
+            public boolean put(RolesRepresentation content,
+                    UserParameters params) throws Exception {
                 VOUserDetails vo = content.getVO();
                 vo.setUserId(params.getUserId());
-                is.setUserRoles(vo, new ArrayList<UserRoleType>(content.getUserRoles()));
+                is.setUserRoles(vo,
+                        new ArrayList<UserRoleType>(content.getUserRoles()));
                 return true;
             }
         };
@@ -143,8 +156,10 @@ public class UserBackend {
         return new RestBackend.Post<OnBehalfUserRepresentation, UserParameters>() {
 
             @Override
-            public Object post(OnBehalfUserRepresentation content, UserParameters params) throws Exception {
-                return is.createOnBehalfUser(content.getOrganizationId(), content.getPassword()).getUserId();
+            public Object post(OnBehalfUserRepresentation content,
+                    UserParameters params) throws Exception {
+                return is.createOnBehalfUser(content.getOrganizationId(),
+                        content.getPassword()).getUserId();
             }
         };
     }
