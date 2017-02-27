@@ -17,6 +17,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.service.data.ServiceDetailsRepresentation;
+import org.oscm.rest.service.data.StatusRepresentation;
 
 import com.sun.jersey.api.core.InjectParam;
 
@@ -30,14 +31,16 @@ public class ServiceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getServices(@Context Request request, @InjectParam ServiceParameters params) throws Exception {
+    public Response getServices(@Context Request request,
+            @InjectParam ServiceParameters params) throws Exception {
         return getCollection(request, sb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createService(@Context Request request, ServiceDetailsRepresentation content,
+    public Response createService(@Context Request request,
+            ServiceDetailsRepresentation content,
             @InjectParam ServiceParameters params) throws Exception {
         return post(request, sb.post(), content, params);
     }
@@ -46,7 +49,8 @@ public class ServiceResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getService(@Context Request request, @InjectParam ServiceParameters params) throws Exception {
+    public Response getService(@Context Request request,
+            @InjectParam ServiceParameters params) throws Exception {
         return get(request, sb.get(), params, true);
     }
 
@@ -54,7 +58,8 @@ public class ServiceResource extends RestResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updateService(@Context Request request, ServiceDetailsRepresentation content,
+    public Response updateService(@Context Request request,
+            ServiceDetailsRepresentation content,
             @InjectParam ServiceParameters params) throws Exception {
         return put(request, sb.put(), content, params);
     }
@@ -63,8 +68,19 @@ public class ServiceResource extends RestResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteService(@Context Request request, @InjectParam ServiceParameters params) throws Exception {
+    public Response deleteService(@Context Request request,
+            @InjectParam ServiceParameters params) throws Exception {
         return delete(request, sb.delete(), params);
+    }
+
+    @Since(CommonParams.VERSION_1)
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(CommonParams.PATH_ID + "/status")
+    public Response setServiceState(@Context Request request,
+            StatusRepresentation content, @InjectParam ServiceParameters params)
+            throws Exception {
+        return put(request, sb.putStatus(), content, params);
     }
 
 }
