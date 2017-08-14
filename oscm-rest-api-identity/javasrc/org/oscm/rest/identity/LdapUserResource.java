@@ -2,6 +2,7 @@ package org.oscm.rest.identity;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,8 +17,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.identity.data.UserRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/ldapusers")
 @Stateless
 public class LdapUserResource extends RestResource {
@@ -28,16 +27,19 @@ public class LdapUserResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getLdapUsers(@Context Request request, @InjectParam UserParameters params) throws Exception {
+    public Response getLdapUsers(@Context Request request,
+            @BeanParam UserParameters params) throws Exception {
         return getCollection(request, ub.getLdapUsers(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createLdapUser(@Context Request request, UserRepresentation content,
-            @InjectParam UserParameters params) throws Exception {
-        return post(request, ub.postLdapUser(), content, params, UserResource.class, "getUser");
+    public Response createLdapUser(@Context Request request,
+            UserRepresentation content, @BeanParam UserParameters params)
+            throws Exception {
+        // UserResource.class, "getUser"
+        return post(request, ub.postLdapUser(), content, params);
     }
 
 }

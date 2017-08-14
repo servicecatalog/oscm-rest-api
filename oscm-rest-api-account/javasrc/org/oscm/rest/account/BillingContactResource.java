@@ -2,6 +2,7 @@ package org.oscm.rest.account;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,8 +19,6 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/billingcontacts")
 @Stateless
 public class BillingContactResource extends RestResource {
@@ -30,16 +29,17 @@ public class BillingContactResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBillingContacts(@Context Request request, @InjectParam AccountParameters params)
-            throws Exception {
+    public Response getBillingContacts(@Context Request request,
+            @BeanParam AccountParameters params) throws Exception {
         return getCollection(request, ab.getBillingContactCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createBillingContact(@Context Request request, BillingContactRepresentation content,
-            @InjectParam AccountParameters params) throws Exception {
+    public Response createBillingContact(@Context Request request,
+            BillingContactRepresentation content,
+            @BeanParam AccountParameters params) throws Exception {
         return post(request, ab.postBillingContact(), content, params);
     }
 
@@ -47,7 +47,8 @@ public class BillingContactResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getBillingContact(@Context Request request, @InjectParam AccountParameters params) throws Exception {
+    public Response getBillingContact(@Context Request request,
+            @BeanParam AccountParameters params) throws Exception {
         return get(request, ab.getBillingContact(), params, true);
     }
 
@@ -55,8 +56,9 @@ public class BillingContactResource extends RestResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updateBillingContact(@Context Request request, BillingContactRepresentation content,
-            @InjectParam AccountParameters params) throws Exception {
+    public Response updateBillingContact(@Context Request request,
+            BillingContactRepresentation content,
+            @BeanParam AccountParameters params) throws Exception {
         return put(request, ab.putBillingContact(), content, params);
     }
 
@@ -64,8 +66,8 @@ public class BillingContactResource extends RestResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteBillingContact(@Context Request request, @InjectParam AccountParameters params)
-            throws Exception {
+    public Response deleteBillingContact(@Context Request request,
+            @BeanParam AccountParameters params) throws Exception {
         return delete(request, ab.deleteBillingContact(), params);
     }
 

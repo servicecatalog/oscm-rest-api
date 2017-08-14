@@ -2,6 +2,7 @@ package org.oscm.rest.event;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,8 +16,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.event.data.EventRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/events")
 @Stateless
 public class EventResource extends RestResource {
@@ -28,7 +27,7 @@ public class EventResource extends RestResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response recordEvent(@Context Request request,
-            EventRepresentation content, @InjectParam EventParameters params)
+            EventRepresentation content, @BeanParam EventParameters params)
             throws Exception {
         return post(request, eb.post(), content, params);
     }

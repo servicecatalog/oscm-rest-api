@@ -2,6 +2,7 @@ package org.oscm.rest.service;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,9 +19,8 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.service.data.OrganizationRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
-@Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID + "/suppliers")
+@Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID
+        + "/suppliers")
 @Stateless
 public class TSSupplierResource extends RestResource {
 
@@ -30,7 +30,8 @@ public class TSSupplierResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSuppliers(@Context Request request, @InjectParam ServiceParameters params) throws Exception {
+    public Response getSuppliers(@Context Request request,
+            @BeanParam ServiceParameters params) throws Exception {
         return getCollection(request, sb.getCollection(), params);
     }
 
@@ -38,8 +39,9 @@ public class TSSupplierResource extends RestResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addSupplier(@Context Request request, OrganizationRepresentation content,
-            @InjectParam ServiceParameters params) throws Exception {
+    public Response addSupplier(@Context Request request,
+            OrganizationRepresentation content,
+            @BeanParam ServiceParameters params) throws Exception {
         return post(request, sb.post(), content, params);
     }
 
@@ -47,7 +49,8 @@ public class TSSupplierResource extends RestResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{orgId}")
-    public Response removeSupplier(@Context Request request, @InjectParam ServiceParameters params) throws Exception {
+    public Response removeSupplier(@Context Request request,
+            @BeanParam ServiceParameters params) throws Exception {
         return delete(request, sb.delete(), params);
     }
 

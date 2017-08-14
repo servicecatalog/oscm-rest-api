@@ -2,6 +2,7 @@ package org.oscm.rest.subscription;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,8 +20,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless
 public class SubscriptionResource extends RestResource {
@@ -32,7 +31,7 @@ public class SubscriptionResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSubscriptions(@Context Request request,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return getCollection(request, sb.getCollection(), params);
     }
 
@@ -42,7 +41,7 @@ public class SubscriptionResource extends RestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createSubscription(@Context Request request,
             SubscriptionCreationRepresentation content,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return post(request, sb.post(), content, params);
     }
 
@@ -51,7 +50,7 @@ public class SubscriptionResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
     public Response getSubscription(@Context Request request,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return get(request, sb.get(), params, true);
     }
 
@@ -62,7 +61,7 @@ public class SubscriptionResource extends RestResource {
     @Path(CommonParams.PATH_ID)
     public Response updateSubscription(@Context Request request,
             SubscriptionCreationRepresentation content,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return put(request, sb.put(), content, params);
     }
 
@@ -71,7 +70,7 @@ public class SubscriptionResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
     public Response deleteSubscription(@Context Request request,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return delete(request, sb.delete(), params);
     }
 
