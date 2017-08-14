@@ -8,13 +8,12 @@
 
 package org.oscm.rest.event.config;
 
-import java.util.Map;
-
 import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.oscm.rest.common.GsonMessageProvider;
+import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.SecurityFilter;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.event.EventResource;
@@ -27,10 +26,9 @@ import org.oscm.rest.event.EventResource;
 @ApplicationPath("")
 public class EventResourceConfig extends ResourceConfig {
 
-    private Map<String, Object> properties;
-
     public EventResourceConfig() {
         register(EventResource.class);
+        register(OSCMExceptionMapper.class);
         register(GsonMessageProvider.class);
         register(VersionFilter.class);
         register(SecurityFilter.class);

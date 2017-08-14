@@ -13,6 +13,7 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.oscm.rest.common.GsonMessageProvider;
+import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.SecurityFilter;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.marketplace.EntryResource;
@@ -28,6 +29,8 @@ public class MarketplaceResourceConfig extends ResourceConfig {
 
     public MarketplaceResourceConfig() {
         register(EntryResource.class);
+        register(OSCMExceptionMapper.class);
+
         register(GsonMessageProvider.class);
         register(VersionFilter.class);
         register(SecurityFilter.class);

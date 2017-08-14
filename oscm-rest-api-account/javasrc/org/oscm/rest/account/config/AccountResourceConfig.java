@@ -18,6 +18,7 @@ import org.oscm.rest.account.BillingContactResource;
 import org.oscm.rest.account.OrganizationResource;
 import org.oscm.rest.account.PaymentInfoResource;
 import org.oscm.rest.common.GsonMessageProvider;
+import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.SecurityFilter;
 import org.oscm.rest.common.VersionFilter;
 
@@ -36,6 +37,8 @@ public class AccountResourceConfig extends ResourceConfig {
         register(OrganizationResource.class);
         register(BillingContactResource.class);
         register(PaymentInfoResource.class);
+        register(OSCMExceptionMapper.class);
+
         register(GsonMessageProvider.class);
         register(VersionFilter.class);
         register(SecurityFilter.class);
