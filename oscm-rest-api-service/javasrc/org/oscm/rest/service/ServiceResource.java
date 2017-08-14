@@ -2,6 +2,7 @@ package org.oscm.rest.service;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,8 +20,6 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.service.data.ServiceDetailsRepresentation;
 import org.oscm.rest.service.data.StatusRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/services")
 @Stateless
 public class ServiceResource extends RestResource {
@@ -32,7 +31,7 @@ public class ServiceResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getServices(@Context Request request,
-            @InjectParam ServiceParameters params) throws Exception {
+            @BeanParam ServiceParameters params) throws Exception {
         return getCollection(request, sb.getCollection(), params);
     }
 
@@ -41,7 +40,7 @@ public class ServiceResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createService(@Context Request request,
             ServiceDetailsRepresentation content,
-            @InjectParam ServiceParameters params) throws Exception {
+            @BeanParam ServiceParameters params) throws Exception {
         return post(request, sb.post(), content, params);
     }
 
@@ -50,7 +49,7 @@ public class ServiceResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
     public Response getService(@Context Request request,
-            @InjectParam ServiceParameters params) throws Exception {
+            @BeanParam ServiceParameters params) throws Exception {
         return get(request, sb.get(), params, true);
     }
 
@@ -60,7 +59,7 @@ public class ServiceResource extends RestResource {
     @Path(CommonParams.PATH_ID)
     public Response updateService(@Context Request request,
             ServiceDetailsRepresentation content,
-            @InjectParam ServiceParameters params) throws Exception {
+            @BeanParam ServiceParameters params) throws Exception {
         return put(request, sb.put(), content, params);
     }
 
@@ -69,7 +68,7 @@ public class ServiceResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
     public Response deleteService(@Context Request request,
-            @InjectParam ServiceParameters params) throws Exception {
+            @BeanParam ServiceParameters params) throws Exception {
         return delete(request, sb.delete(), params);
     }
 
@@ -78,7 +77,7 @@ public class ServiceResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID + "/status")
     public Response setServiceState(@Context Request request,
-            StatusRepresentation content, @InjectParam ServiceParameters params)
+            StatusRepresentation content, @BeanParam ServiceParameters params)
             throws Exception {
         return put(request, sb.putStatus(), content, params);
     }

@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,8 +26,6 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.service.data.TechnicalServiceRepresentation;
 import org.oscm.string.Strings;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
 public class TechnicalServiceResource extends RestResource {
@@ -40,8 +39,8 @@ public class TechnicalServiceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTechnicalServices(@Context Request request, @InjectParam ServiceParameters params)
-            throws Exception {
+    public Response getTechnicalServices(@Context Request request,
+            @BeanParam ServiceParameters params) throws Exception {
         return getCollection(request, tsb.getCollection(), params);
     }
 
@@ -49,8 +48,9 @@ public class TechnicalServiceResource extends RestResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createTechnicalService(@Context Request request, TechnicalServiceRepresentation content,
-            @InjectParam ServiceParameters params) throws Exception {
+    public Response createTechnicalService(@Context Request request,
+            TechnicalServiceRepresentation content,
+            @BeanParam ServiceParameters params) throws Exception {
         return post(request, tsb.post(), content, params);
     }
 
@@ -58,8 +58,8 @@ public class TechnicalServiceResource extends RestResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteTechnicalService(@Context Request request, @InjectParam ServiceParameters params)
-            throws Exception {
+    public Response deleteTechnicalService(@Context Request request,
+            @BeanParam ServiceParameters params) throws Exception {
         return delete(request, tsb.delete(), params);
     }
 
@@ -67,20 +67,21 @@ public class TechnicalServiceResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path(CommonParams.PATH_ID)
-    public Response exportTechnicalService(@Context Request request, @InjectParam ServiceParameters params)
-            throws Exception {
+    public Response exportTechnicalService(@Context Request request,
+            @BeanParam ServiceParameters params) throws Exception {
         // key needed
         VOTechnicalService ts = new VOTechnicalService();
         ts.setKey(params.getId().longValue());
-        byte[] export = sps.exportTechnicalServices(Collections.singletonList(ts));
+        byte[] export = sps.exportTechnicalServices(Collections
+                .singletonList(ts));
         return Response.ok(export, MediaType.APPLICATION_XML_TYPE).build();
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Response importTechnicalServices(@Context Request request, byte[] input,
-            @InjectParam ServiceParameters params) throws Exception {
+    public Response importTechnicalServices(@Context Request request,
+            byte[] input, @BeanParam ServiceParameters params) throws Exception {
         String msg = sps.importTechnicalServices(input);
         if (Strings.isEmpty(msg)) {
             return Response.noContent().build();

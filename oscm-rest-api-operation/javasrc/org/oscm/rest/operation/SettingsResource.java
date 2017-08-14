@@ -2,6 +2,7 @@ package org.oscm.rest.operation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,8 +19,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.operation.data.SettingRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/settings")
 @Stateless
 public class SettingsResource extends RestResource {
@@ -30,15 +29,17 @@ public class SettingsResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSettings(@Context Request request, @InjectParam OperationParameters params) throws Exception {
+    public Response getSettings(@Context Request request,
+            @BeanParam OperationParameters params) throws Exception {
         return getCollection(request, sb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createSetting(@Context Request request, SettingRepresentation content,
-            @InjectParam OperationParameters params) throws Exception {
+    public Response createSetting(@Context Request request,
+            SettingRepresentation content, @BeanParam OperationParameters params)
+            throws Exception {
         return post(request, sb.post(), content, params);
     }
 
@@ -46,7 +47,8 @@ public class SettingsResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getSetting(@Context Request request, @InjectParam OperationParameters params) throws Exception {
+    public Response getSetting(@Context Request request,
+            @BeanParam OperationParameters params) throws Exception {
         return get(request, sb.get(), params, true);
     }
 
@@ -54,8 +56,9 @@ public class SettingsResource extends RestResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updateUser(@Context Request request, SettingRepresentation content,
-            @InjectParam OperationParameters params) throws Exception {
+    public Response updateUser(@Context Request request,
+            SettingRepresentation content, @BeanParam OperationParameters params)
+            throws Exception {
         return put(request, sb.put(), content, params);
     }
 
@@ -63,7 +66,8 @@ public class SettingsResource extends RestResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteSetting(@Context Request request, @InjectParam OperationParameters params) throws Exception {
+    public Response deleteSetting(@Context Request request,
+            @BeanParam OperationParameters params) throws Exception {
         return delete(request, sb.delete(), params);
     }
 

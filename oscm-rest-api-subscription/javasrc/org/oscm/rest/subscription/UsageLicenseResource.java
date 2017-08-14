@@ -2,6 +2,7 @@ package org.oscm.rest.subscription;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,8 +20,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.subscription.data.UsageLicenseRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID
         + "/usagelicenses")
 @Stateless
@@ -33,7 +32,7 @@ public class UsageLicenseResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getLicenses(@Context Request request,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return getCollection(request, ulb.getCollection(), params);
     }
 
@@ -43,7 +42,7 @@ public class UsageLicenseResource extends RestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createLicense(@Context Request request,
             UsageLicenseRepresentation content,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return post(request, ulb.post(), content, params);
     }
 
@@ -54,7 +53,7 @@ public class UsageLicenseResource extends RestResource {
     @Path("/{licKey}")
     public Response updateLicense(@Context Request request,
             UsageLicenseRepresentation content,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return put(request, ulb.put(), content, params);
     }
 
@@ -63,7 +62,7 @@ public class UsageLicenseResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{licKey}")
     public Response deleteLicense(@Context Request request,
-            @InjectParam SubscriptionParameters params) throws Exception {
+            @BeanParam SubscriptionParameters params) throws Exception {
         return delete(request, ulb.delete(), params);
     }
 

@@ -2,6 +2,7 @@ package org.oscm.rest.identity;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,8 +19,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.identity.data.UserRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
 @Path(CommonParams.PATH_VERSION + "/users")
 @Stateless
 public class UserResource extends RestResource {
@@ -32,14 +31,16 @@ public class UserResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers(@Context Request request, @InjectParam UserParameters params) throws Exception {
+    public Response getUsers(@Context Request request,
+            @BeanParam UserParameters params) throws Exception {
         return getCollection(request, ub.getUsers(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(@Context Request request, UserRepresentation content, @InjectParam UserParameters params)
+    public Response createUser(@Context Request request,
+            UserRepresentation content, @BeanParam UserParameters params)
             throws Exception {
         return post(request, ub.postUser(), content, params);
     }
@@ -48,7 +49,8 @@ public class UserResource extends RestResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(PATH_USERID)
-    public Response getUser(@Context Request request, @InjectParam UserParameters params) throws Exception {
+    public Response getUser(@Context Request request,
+            @BeanParam UserParameters params) throws Exception {
         return get(request, ub.getUser(), params, false);
     }
 
@@ -56,7 +58,8 @@ public class UserResource extends RestResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(PATH_USERID)
-    public Response updateUser(@Context Request request, UserRepresentation content, @InjectParam UserParameters params)
+    public Response updateUser(@Context Request request,
+            UserRepresentation content, @BeanParam UserParameters params)
             throws Exception {
         return put(request, ub.putUser(), content, params);
     }
@@ -65,7 +68,8 @@ public class UserResource extends RestResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(PATH_USERID)
-    public Response deleteUser(@Context Request request, @InjectParam UserParameters params) throws Exception {
+    public Response deleteUser(@Context Request request,
+            @BeanParam UserParameters params) throws Exception {
         return delete(request, ub.deleteUser(), params);
     }
 

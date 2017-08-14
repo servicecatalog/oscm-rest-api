@@ -2,6 +2,7 @@ package org.oscm.rest.service;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -17,9 +18,8 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.service.data.ServiceRepresentation;
 
-import com.sun.jersey.api.core.InjectParam;
-
-@Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/compatibleservices")
+@Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID
+        + "/compatibleservices")
 @Stateless
 public class CompatibleServiceResource extends RestResource {
 
@@ -29,8 +29,8 @@ public class CompatibleServiceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCompatibleServices(@Context Request request, @InjectParam ServiceParameters params)
-            throws Exception {
+    public Response getCompatibleServices(@Context Request request,
+            @BeanParam ServiceParameters params) throws Exception {
         return getCollection(request, sb.getCompatibles(), params);
     }
 
@@ -38,8 +38,8 @@ public class CompatibleServiceResource extends RestResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response setCompatibleServices(@Context Request request,
-            RepresentationCollection<ServiceRepresentation> content, @InjectParam ServiceParameters params)
-            throws Exception {
+            RepresentationCollection<ServiceRepresentation> content,
+            @BeanParam ServiceParameters params) throws Exception {
         return put(request, sb.putCompatibles(), content, params);
     }
 
