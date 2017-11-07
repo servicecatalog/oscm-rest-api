@@ -41,7 +41,8 @@ public class PriceModelRepresentation extends Representation {
 
     @Override
     public void update() {
-        vo.setConsideredEvents(PricedEventRepresentation.update(getConsideredEvents()));
+        vo.setConsideredEvents(PricedEventRepresentation
+                .update(getConsideredEvents()));
         vo.setCurrencyISOCode(getCurrencyISOCode());
         vo.setDescription(getDescription());
         vo.setKey(convertIdToKey());
@@ -49,16 +50,20 @@ public class PriceModelRepresentation extends Representation {
         vo.setPeriod(getPeriod());
         vo.setPricePerPeriod(getPricePerPeriod());
         vo.setPricePerUserAssignment(getPricePerUserAssignment());
-        vo.setRoleSpecificUserPrices(PricedRoleRepresentation.update(getRoleSpecificUserPrices()));
-        vo.setSelectedParameters(PricedParameterRepresentation.update(getSelectedParameters()));
-        vo.setSteppedPrices(SteppedPriceRepresentation.update(getSteppedPrices()));
+        vo.setRoleSpecificUserPrices(PricedRoleRepresentation
+                .update(getRoleSpecificUserPrices()));
+        vo.setSelectedParameters(PricedParameterRepresentation
+                .update(getSelectedParameters()));
+        vo.setSteppedPrices(SteppedPriceRepresentation
+                .update(getSteppedPrices()));
         vo.setType(getType());
         vo.setVersion(convertETagToVersion());
     }
 
     @Override
     public void convert() {
-        setConsideredEvents(PricedEventRepresentation.convert(vo.getConsideredEvents()));
+        setConsideredEvents(PricedEventRepresentation.convert(vo
+                .getConsideredEvents()));
         setCurrencyISOCode(vo.getCurrencyISOCode());
         setDescription(vo.getDescription());
         setETag(Long.valueOf(vo.getVersion()));
@@ -67,9 +72,12 @@ public class PriceModelRepresentation extends Representation {
         setPeriod(vo.getPeriod());
         setPricePerPeriod(vo.getPricePerPeriod());
         setPricePerUserAssignment(vo.getPricePerUserAssignment());
-        setRoleSpecificUserPrices(PricedRoleRepresentation.convert(vo.getRoleSpecificUserPrices()));
-        setSelectedParameters(PricedParameterRepresentation.convert(vo.getSelectedParameters()));
-        setSteppedPrices(SteppedPriceRepresentation.convert(vo.getSteppedPrices()));
+        setRoleSpecificUserPrices(PricedRoleRepresentation.convert(vo
+                .getRoleSpecificUserPrices()));
+        setSelectedParameters(PricedParameterRepresentation.convert(vo
+                .getSelectedParameters()));
+        setSteppedPrices(SteppedPriceRepresentation.convert(vo
+                .getSteppedPrices()));
         setType(vo.getType());
     }
 
@@ -133,7 +141,8 @@ public class PriceModelRepresentation extends Representation {
         return selectedParameters;
     }
 
-    public void setSelectedParameters(List<PricedParameterRepresentation> selectedParameters) {
+    public void setSelectedParameters(
+            List<PricedParameterRepresentation> selectedParameters) {
         this.selectedParameters = selectedParameters;
     }
 
@@ -141,7 +150,8 @@ public class PriceModelRepresentation extends Representation {
         return roleSpecificUserPrices;
     }
 
-    public void setRoleSpecificUserPrices(List<PricedRoleRepresentation> roleSpecificUserPrices) {
+    public void setRoleSpecificUserPrices(
+            List<PricedRoleRepresentation> roleSpecificUserPrices) {
         this.roleSpecificUserPrices = roleSpecificUserPrices;
     }
 
@@ -157,11 +167,28 @@ public class PriceModelRepresentation extends Representation {
         return consideredEvents;
     }
 
-    public void setConsideredEvents(List<PricedEventRepresentation> consideredEvents) {
+    public void setConsideredEvents(
+            List<PricedEventRepresentation> consideredEvents) {
         this.consideredEvents = consideredEvents;
     }
 
     public VOPriceModel getVO() {
         return vo;
+    }
+
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
     }
 }

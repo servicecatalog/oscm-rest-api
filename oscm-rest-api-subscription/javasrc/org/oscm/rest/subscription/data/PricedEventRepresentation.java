@@ -38,18 +38,21 @@ public class PricedEventRepresentation extends Representation {
         }
         vo.setEventPrice(getEventPrice());
         vo.setKey(convertIdToKey());
-        vo.setSteppedPrices(SteppedPriceRepresentation.update(getSteppedPrices()));
+        vo.setSteppedPrices(SteppedPriceRepresentation
+                .update(getSteppedPrices()));
         vo.setVersion(convertETagToVersion());
     }
 
     @Override
     public void convert() {
         setETag(Long.valueOf(vo.getVersion()));
-        setEventDefinition(new EventDefinitionRepresentation(vo.getEventDefinition()));
+        setEventDefinition(new EventDefinitionRepresentation(
+                vo.getEventDefinition()));
         getEventDefinition().convert();
         setEventPrice(vo.getEventPrice());
         setId(Long.valueOf(vo.getKey()));
-        setSteppedPrices(SteppedPriceRepresentation.convert(vo.getSteppedPrices()));
+        setSteppedPrices(SteppedPriceRepresentation.convert(vo
+                .getSteppedPrices()));
     }
 
     public List<SteppedPriceRepresentation> getSteppedPrices() {
@@ -80,7 +83,8 @@ public class PricedEventRepresentation extends Representation {
         return vo;
     }
 
-    public static List<PricedEventRepresentation> convert(List<VOPricedEvent> events) {
+    public static List<PricedEventRepresentation> convert(
+            List<VOPricedEvent> events) {
         if (events == null || events.isEmpty()) {
             return null;
         }
@@ -93,7 +97,8 @@ public class PricedEventRepresentation extends Representation {
         return result;
     }
 
-    public static List<VOPricedEvent> update(List<PricedEventRepresentation> events) {
+    public static List<VOPricedEvent> update(
+            List<PricedEventRepresentation> events) {
         List<VOPricedEvent> result = new ArrayList<VOPricedEvent>();
         if (events == null) {
             return result;
@@ -105,4 +110,19 @@ public class PricedEventRepresentation extends Representation {
         return result;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

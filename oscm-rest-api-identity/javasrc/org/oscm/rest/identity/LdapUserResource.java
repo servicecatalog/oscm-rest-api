@@ -9,8 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -27,19 +27,19 @@ public class LdapUserResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getLdapUsers(@Context Request request,
+    public Response getLdapUsers(@Context UriInfo uriInfo,
             @BeanParam UserParameters params) throws Exception {
-        return getCollection(request, ub.getLdapUsers(), params);
+        return getCollection(uriInfo, ub.getLdapUsers(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createLdapUser(@Context Request request,
+    public Response createLdapUser(@Context UriInfo uriInfo,
             UserRepresentation content, @BeanParam UserParameters params)
             throws Exception {
         // UserResource.class, "getUser"
-        return post(request, ub.postLdapUser(), content, params);
+        return post(uriInfo, ub.postLdapUser(), content, params);
     }
 
 }

@@ -12,8 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -30,28 +30,28 @@ public class MarketplaceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMarketplaces(@Context Request request,
+    public Response getMarketplaces(@Context UriInfo uriInfo,
             @BeanParam MarketplaceParameters params) throws Exception {
-        return getCollection(request, mb.getCollection(), params);
+        return getCollection(uriInfo, mb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createMarketplace(@Context Request request,
+    public Response createMarketplace(@Context UriInfo uriInfo,
             MarketplaceRepresentation content,
             @BeanParam MarketplaceParameters params) throws Exception {
-        return post(request, mb.post(), content, params);
+        return post(uriInfo, mb.post(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getMarketplace(@Context Request request,
+    public Response getMarketplace(@Context UriInfo uriInfo,
             @BeanParam MarketplaceParameters params) throws Exception {
-        return get(request, mb.get(), params, true);
+        return get(uriInfo, mb.get(), params, true);
     }
 
     @Since(CommonParams.VERSION_1)
@@ -59,19 +59,19 @@ public class MarketplaceResource extends RestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updateMarketplace(@Context Request request,
+    public Response updateMarketplace(@Context UriInfo uriInfo,
             MarketplaceRepresentation content,
             @BeanParam MarketplaceParameters params) throws Exception {
-        return put(request, mb.put(), content, params);
+        return put(uriInfo, mb.put(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteMarketplace(@Context Request request,
+    public Response deleteMarketplace(@Context UriInfo uriInfo,
             @BeanParam MarketplaceParameters params) throws Exception {
-        return delete(request, mb.delete(), params);
+        return delete(uriInfo, mb.delete(), params);
     }
 
 }

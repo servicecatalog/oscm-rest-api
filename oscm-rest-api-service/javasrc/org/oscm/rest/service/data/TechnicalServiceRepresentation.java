@@ -162,7 +162,8 @@ public class TechnicalServiceRepresentation extends Representation {
             return result;
         }
         for (VORoleDefinition r : vo.getRoleDefinitions()) {
-            RoleDefinitionRepresentation rr = new RoleDefinitionRepresentation(r);
+            RoleDefinitionRepresentation rr = new RoleDefinitionRepresentation(
+                    r);
             rr.convert();
             result.add(rr);
         }
@@ -175,7 +176,8 @@ public class TechnicalServiceRepresentation extends Representation {
             return result;
         }
         for (VOParameterDefinition p : vo.getParameterDefinitions()) {
-            ParameterDefinitionRepresentation pr = new ParameterDefinitionRepresentation(p);
+            ParameterDefinitionRepresentation pr = new ParameterDefinitionRepresentation(
+                    p);
             pr.convert();
             result.add(pr);
         }
@@ -188,7 +190,8 @@ public class TechnicalServiceRepresentation extends Representation {
             return result;
         }
         for (VOEventDefinition e : vo.getEventDefinitions()) {
-            EventDefinitionRepresentation er = new EventDefinitionRepresentation(e);
+            EventDefinitionRepresentation er = new EventDefinitionRepresentation(
+                    e);
             er.convert();
             result.add(er);
         }
@@ -203,7 +206,8 @@ public class TechnicalServiceRepresentation extends Representation {
         return eventDefinitions;
     }
 
-    public void setEventDefinitions(List<EventDefinitionRepresentation> eventDefinitions) {
+    public void setEventDefinitions(
+            List<EventDefinitionRepresentation> eventDefinitions) {
         this.eventDefinitions = eventDefinitions;
     }
 
@@ -235,7 +239,8 @@ public class TechnicalServiceRepresentation extends Representation {
         return technicalServiceDescription;
     }
 
-    public void setTechnicalServiceDescription(String technicalServiceDescription) {
+    public void setTechnicalServiceDescription(
+            String technicalServiceDescription) {
         this.technicalServiceDescription = technicalServiceDescription;
     }
 
@@ -275,7 +280,8 @@ public class TechnicalServiceRepresentation extends Representation {
         return parameterDefinitions;
     }
 
-    public void setParameterDefinitions(List<ParameterDefinitionRepresentation> parameterDefinitions) {
+    public void setParameterDefinitions(
+            List<ParameterDefinitionRepresentation> parameterDefinitions) {
         this.parameterDefinitions = parameterDefinitions;
     }
 
@@ -283,7 +289,8 @@ public class TechnicalServiceRepresentation extends Representation {
         return roleDefinitions;
     }
 
-    public void setRoleDefinitions(List<RoleDefinitionRepresentation> roleDefinitions) {
+    public void setRoleDefinitions(
+            List<RoleDefinitionRepresentation> roleDefinitions) {
         this.roleDefinitions = roleDefinitions;
     }
 
@@ -323,7 +330,8 @@ public class TechnicalServiceRepresentation extends Representation {
         return technicalServiceOperations;
     }
 
-    public void setTechnicalServiceOperations(List<OperationRepresentation> technicalServiceOperations) {
+    public void setTechnicalServiceOperations(
+            List<OperationRepresentation> technicalServiceOperations) {
         this.technicalServiceOperations = technicalServiceOperations;
     }
 
@@ -335,11 +343,28 @@ public class TechnicalServiceRepresentation extends Representation {
         this.externalBilling = externalBilling;
     }
 
-    public static Collection<TechnicalServiceRepresentation> toCollection(List<VOTechnicalService> technicalServices) {
+    public static Collection<TechnicalServiceRepresentation> toCollection(
+            List<VOTechnicalService> technicalServices) {
         List<TechnicalServiceRepresentation> result = new ArrayList<TechnicalServiceRepresentation>();
         for (VOTechnicalService ts : technicalServices) {
             result.add(new TechnicalServiceRepresentation(ts));
         }
         return result;
+    }
+
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
     }
 }

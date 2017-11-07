@@ -53,9 +53,25 @@ public class OrganizationRepresentation extends Representation {
         return voOrg;
     }
 
-    public static RepresentationCollection<OrganizationRepresentation> toCollection(List<VOOrganization> list) {
+    public static RepresentationCollection<OrganizationRepresentation> toCollection(
+            List<VOOrganization> list) {
         // TODO Auto-generated method stub
         return null;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

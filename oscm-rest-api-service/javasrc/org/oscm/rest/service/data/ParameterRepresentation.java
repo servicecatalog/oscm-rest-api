@@ -42,7 +42,8 @@ public class ParameterRepresentation extends Representation {
     public void convert() {
         setConfigurable(vo.isConfigurable());
         setId(Long.valueOf(vo.getKey()));
-        ParameterDefinitionRepresentation def = new ParameterDefinitionRepresentation(vo.getParameterDefinition());
+        ParameterDefinitionRepresentation def = new ParameterDefinitionRepresentation(
+                vo.getParameterDefinition());
         def.convert();
         setParameterDefinition(def);
         setETag(Long.valueOf(vo.getVersion()));
@@ -53,7 +54,8 @@ public class ParameterRepresentation extends Representation {
         return parameterDefinition;
     }
 
-    public void setParameterDefinition(ParameterDefinitionRepresentation parameterDefinition) {
+    public void setParameterDefinition(
+            ParameterDefinitionRepresentation parameterDefinition) {
         this.parameterDefinition = parameterDefinition;
     }
 
@@ -77,4 +79,19 @@ public class ParameterRepresentation extends Representation {
         return vo;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

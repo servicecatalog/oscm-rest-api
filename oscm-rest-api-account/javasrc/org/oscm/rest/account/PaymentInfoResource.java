@@ -10,8 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.account.data.PaymentInfoRepresentation;
 import org.oscm.rest.common.CommonParams;
@@ -28,37 +28,37 @@ public class PaymentInfoResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPaymentInfos(@Context Request request,
+    public Response getPaymentInfos(@Context UriInfo uriInfo,
             @BeanParam AccountParameters params) throws Exception {
-        return getCollection(request, ab.getPaymentInfoCollection(), params);
+        return getCollection(uriInfo, ab.getPaymentInfoCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getPaymentInfo(@Context Request request,
+    public Response getPaymentInfo(@Context UriInfo uriInfo,
             @BeanParam AccountParameters params) throws Exception {
-        return get(request, ab.getPaymentInfo(), params, true);
+        return get(uriInfo, ab.getPaymentInfo(), params, true);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updatePaymentInfo(@Context Request request,
+    public Response updatePaymentInfo(@Context UriInfo uriInfo,
             PaymentInfoRepresentation content,
             @BeanParam AccountParameters params) throws Exception {
-        return put(request, ab.putPaymentInfo(), content, params);
+        return put(uriInfo, ab.putPaymentInfo(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deletePaymentInfo(@Context Request request,
+    public Response deletePaymentInfo(@Context UriInfo uriInfo,
             @BeanParam AccountParameters params) throws Exception {
-        return delete(request, ab.deletePaymentInfo(), params);
+        return delete(uriInfo, ab.deletePaymentInfo(), params);
     }
 
 }

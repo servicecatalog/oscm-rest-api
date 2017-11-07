@@ -12,8 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -31,19 +31,19 @@ public class UsageLicenseResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getLicenses(@Context Request request,
+    public Response getLicenses(@Context UriInfo uriInfo,
             @BeanParam SubscriptionParameters params) throws Exception {
-        return getCollection(request, ulb.getCollection(), params);
+        return getCollection(uriInfo, ulb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createLicense(@Context Request request,
+    public Response createLicense(@Context UriInfo uriInfo,
             UsageLicenseRepresentation content,
             @BeanParam SubscriptionParameters params) throws Exception {
-        return post(request, ulb.post(), content, params);
+        return post(uriInfo, ulb.post(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
@@ -51,19 +51,19 @@ public class UsageLicenseResource extends RestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{licKey}")
-    public Response updateLicense(@Context Request request,
+    public Response updateLicense(@Context UriInfo uriInfo,
             UsageLicenseRepresentation content,
             @BeanParam SubscriptionParameters params) throws Exception {
-        return put(request, ulb.put(), content, params);
+        return put(uriInfo, ulb.put(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{licKey}")
-    public Response deleteLicense(@Context Request request,
+    public Response deleteLicense(@Context UriInfo uriInfo,
             @BeanParam SubscriptionParameters params) throws Exception {
-        return delete(request, ulb.delete(), params);
+        return delete(uriInfo, ulb.delete(), params);
     }
 
 }

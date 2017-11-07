@@ -9,8 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -27,19 +27,19 @@ public class OnBehalfUserResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createOnBehalfUser(@Context Request request,
+    public Response createOnBehalfUser(@Context UriInfo uriInfo,
             OnBehalfUserRepresentation content, @BeanParam UserParameters params)
             throws Exception {
         // UserResource.class, "getUser"
-        return post(request, ub.postOnBehalfUser(), content, params);
+        return post(uriInfo, ub.postOnBehalfUser(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteOnBehalfUser(@Context Request request,
+    public Response deleteOnBehalfUser(@Context UriInfo uriInfo,
             @BeanParam UserParameters params) throws Exception {
-        return delete(request, ub.deleteOBehalfUser(), params);
+        return delete(uriInfo, ub.deleteOBehalfUser(), params);
     }
 
 }

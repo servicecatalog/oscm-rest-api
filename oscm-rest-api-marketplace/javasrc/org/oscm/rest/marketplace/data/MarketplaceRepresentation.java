@@ -159,7 +159,8 @@ public class MarketplaceRepresentation extends Representation {
         return vo;
     }
 
-    public static Collection<MarketplaceRepresentation> toCollection(List<VOMarketplace> mps) {
+    public static Collection<MarketplaceRepresentation> toCollection(
+            List<VOMarketplace> mps) {
         Collection<MarketplaceRepresentation> result = new ArrayList<MarketplaceRepresentation>();
         if (mps == null || mps.isEmpty()) {
             return result;
@@ -187,4 +188,19 @@ public class MarketplaceRepresentation extends Representation {
         this.owningOrganizationId = owningOrganizationId;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

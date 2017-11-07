@@ -69,7 +69,8 @@ public class OperationRepresentation extends Representation {
             return result;
         }
         for (VOServiceOperationParameter op : vo.getOperationParameters()) {
-            OperationParameterRepresentation opr = new OperationParameterRepresentation(op);
+            OperationParameterRepresentation opr = new OperationParameterRepresentation(
+                    op);
             opr.convert();
             result.add(opr);
         }
@@ -108,8 +109,24 @@ public class OperationRepresentation extends Representation {
         return operationParameters;
     }
 
-    public void setOperationParameters(List<OperationParameterRepresentation> operationParameters) {
+    public void setOperationParameters(
+            List<OperationParameterRepresentation> operationParameters) {
         this.operationParameters = operationParameters;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

@@ -66,13 +66,15 @@ public class SubscriptionRepresentation extends Representation {
         }
         setUnitName(vo.getUnitName());
         if (vo instanceof VOUserSubscription) {
-            UsageLicenseRepresentation ulr = new UsageLicenseRepresentation(((VOUserSubscription) vo).getLicense());
+            UsageLicenseRepresentation ulr = new UsageLicenseRepresentation(
+                    ((VOUserSubscription) vo).getLicense());
             ulr.convert();
             setUsageLicense(ulr);
         }
     }
 
-    public static RepresentationCollection<SubscriptionRepresentation> toCollection(List<? extends VOSubscription> subs) {
+    public static RepresentationCollection<SubscriptionRepresentation> toCollection(
+            List<? extends VOSubscription> subs) {
         List<SubscriptionRepresentation> result = new ArrayList<SubscriptionRepresentation>();
         for (VOSubscription sub : subs) {
             result.add(new SubscriptionRepresentation(sub));
@@ -142,6 +144,22 @@ public class SubscriptionRepresentation extends Representation {
 
     public void setUsageLicense(UsageLicenseRepresentation usageLicense) {
         this.usageLicense = usageLicense;
+    }
+
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
     }
 
 }

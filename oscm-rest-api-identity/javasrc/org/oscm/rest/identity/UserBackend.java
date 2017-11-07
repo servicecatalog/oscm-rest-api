@@ -117,7 +117,7 @@ public class UserBackend {
             public boolean delete(UserParameters params) throws Exception {
                 VOUser vo = new VOUser();
                 vo.setUserId(params.getUserId());
-                vo.setVersion(params.eTagToVersion());
+                vo.setVersion(params.convertETagToVersion());
                 is.deleteUser(vo, params.getMarketplaceId());
                 return true;
             }

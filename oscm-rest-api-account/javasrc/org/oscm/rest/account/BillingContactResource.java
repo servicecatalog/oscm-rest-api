@@ -11,8 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.account.data.BillingContactRepresentation;
 import org.oscm.rest.common.CommonParams;
@@ -29,46 +29,46 @@ public class BillingContactResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBillingContacts(@Context Request request,
+    public Response getBillingContacts(@Context UriInfo uriInfo,
             @BeanParam AccountParameters params) throws Exception {
-        return getCollection(request, ab.getBillingContactCollection(), params);
+        return getCollection(uriInfo, ab.getBillingContactCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createBillingContact(@Context Request request,
+    public Response createBillingContact(@Context UriInfo uriInfo,
             BillingContactRepresentation content,
             @BeanParam AccountParameters params) throws Exception {
-        return post(request, ab.postBillingContact(), content, params);
+        return post(uriInfo, ab.postBillingContact(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getBillingContact(@Context Request request,
+    public Response getBillingContact(@Context UriInfo uriInfo,
             @BeanParam AccountParameters params) throws Exception {
-        return get(request, ab.getBillingContact(), params, true);
+        return get(uriInfo, ab.getBillingContact(), params, true);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updateBillingContact(@Context Request request,
+    public Response updateBillingContact(@Context UriInfo uriInfo,
             BillingContactRepresentation content,
             @BeanParam AccountParameters params) throws Exception {
-        return put(request, ab.putBillingContact(), content, params);
+        return put(uriInfo, ab.putBillingContact(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteBillingContact(@Context Request request,
+    public Response deleteBillingContact(@Context UriInfo uriInfo,
             @BeanParam AccountParameters params) throws Exception {
-        return delete(request, ab.deleteBillingContact(), params);
+        return delete(uriInfo, ab.deleteBillingContact(), params);
     }
 
 }

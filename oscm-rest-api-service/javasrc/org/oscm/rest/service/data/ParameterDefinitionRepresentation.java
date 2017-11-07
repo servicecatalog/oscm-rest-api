@@ -93,7 +93,8 @@ public class ParameterDefinitionRepresentation extends Representation {
             return result;
         }
         for (VOParameterOption po : vo.getParameterOptions()) {
-            ParameterOptionRepresentation rep = new ParameterOptionRepresentation(po);
+            ParameterOptionRepresentation rep = new ParameterOptionRepresentation(
+                    po);
             rep.convert();
             result.add(rep);
         }
@@ -104,7 +105,8 @@ public class ParameterDefinitionRepresentation extends Representation {
         return parameterOptions;
     }
 
-    public void setParameterOptions(List<ParameterOptionRepresentation> parameterOptions) {
+    public void setParameterOptions(
+            List<ParameterOptionRepresentation> parameterOptions) {
         this.parameterOptions = parameterOptions;
     }
 
@@ -192,4 +194,19 @@ public class ParameterDefinitionRepresentation extends Representation {
         return vo;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

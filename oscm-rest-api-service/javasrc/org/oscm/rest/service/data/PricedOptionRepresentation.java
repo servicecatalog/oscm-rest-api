@@ -41,7 +41,8 @@ public class PricedOptionRepresentation extends Representation {
         }
         vo.setPricePerSubscription(getPricePerSubscription());
         vo.setPricePerUser(getPricePerUser());
-        vo.setRoleSpecificUserPrices(PricedRoleRepresentation.update(getRoleSpecificUserPrices()));
+        vo.setRoleSpecificUserPrices(PricedRoleRepresentation
+                .update(getRoleSpecificUserPrices()));
         vo.setVersion(convertETagToVersion());
 
     }
@@ -54,7 +55,8 @@ public class PricedOptionRepresentation extends Representation {
         setParameterOptionKey(Long.valueOf(vo.getParameterOptionKey()));
         setPricePerSubscription(vo.getPricePerSubscription());
         setPricePerUser(vo.getPricePerUser());
-        setRoleSpecificUserPrices(PricedRoleRepresentation.convert(vo.getRoleSpecificUserPrices()));
+        setRoleSpecificUserPrices(PricedRoleRepresentation.convert(vo
+                .getRoleSpecificUserPrices()));
     }
 
     public BigDecimal getPricePerUser() {
@@ -93,7 +95,8 @@ public class PricedOptionRepresentation extends Representation {
         return roleSpecificUserPrices;
     }
 
-    public void setRoleSpecificUserPrices(List<PricedRoleRepresentation> roleSpecificUserPrices) {
+    public void setRoleSpecificUserPrices(
+            List<PricedRoleRepresentation> roleSpecificUserPrices) {
         this.roleSpecificUserPrices = roleSpecificUserPrices;
     }
 
@@ -101,7 +104,8 @@ public class PricedOptionRepresentation extends Representation {
         return vo;
     }
 
-    public static List<PricedOptionRepresentation> convert(List<VOPricedOption> options) {
+    public static List<PricedOptionRepresentation> convert(
+            List<VOPricedOption> options) {
         if (options == null || options.isEmpty()) {
             return null;
         }
@@ -114,7 +118,8 @@ public class PricedOptionRepresentation extends Representation {
         return result;
     }
 
-    public static List<VOPricedOption> update(List<PricedOptionRepresentation> pricedOptions) {
+    public static List<VOPricedOption> update(
+            List<PricedOptionRepresentation> pricedOptions) {
         List<VOPricedOption> result = new ArrayList<VOPricedOption>();
         if (pricedOptions == null) {
             return result;
@@ -126,4 +131,19 @@ public class PricedOptionRepresentation extends Representation {
         return result;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

@@ -9,8 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -28,37 +28,37 @@ public class PriceModelResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@Context Request request,
+    public Response get(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return get(request, pmb.get(), params, true);
+        return get(uriInfo, pmb.get(), params, true);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@Context Request request,
+    public Response update(@Context UriInfo uriInfo,
             PriceModelRepresentation content,
             @BeanParam ServiceParameters params) throws Exception {
-        return put(request, pmb.put(), content, params);
+        return put(uriInfo, pmb.put(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/customer/{orgKey}")
-    public Response getForCustomer(@Context Request request,
+    public Response getForCustomer(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return get(request, pmb.getForCustomer(), params, true);
+        return get(uriInfo, pmb.getForCustomer(), params, true);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/customer/{orgKey}")
-    public Response updateForCustomer(@Context Request request,
+    public Response updateForCustomer(@Context UriInfo uriInfo,
             PriceModelRepresentation content,
             @BeanParam ServiceParameters params) throws Exception {
-        return put(request, pmb.putForCustomer(), content, params);
+        return put(uriInfo, pmb.putForCustomer(), content, params);
     }
 
 }

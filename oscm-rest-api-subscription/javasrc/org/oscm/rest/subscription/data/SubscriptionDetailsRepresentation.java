@@ -59,7 +59,8 @@ public class SubscriptionDetailsRepresentation extends Representation {
     public void convert() {
         setActivationDate(vo.getActivationDate());
         if (vo.getBillingContact() != null) {
-            setBillingContact(new BillingContactRepresentation(vo.getBillingContact()));
+            setBillingContact(new BillingContactRepresentation(
+                    vo.getBillingContact()));
             getBillingContact().convert();
         }
         setCreationDate(vo.getCreationDate());
@@ -67,7 +68,8 @@ public class SubscriptionDetailsRepresentation extends Representation {
         setETag(Long.valueOf(vo.getVersion()));
         setId(Long.valueOf(vo.getKey()));
         setNumberOfAssignedUsers(vo.getNumberOfAssignedUsers());
-        setOperations(OperationRepresentation.convert(vo.getTechnicalServiceOperations()));
+        setOperations(OperationRepresentation.convert(vo
+                .getTechnicalServiceOperations()));
         if (vo.getPaymentInfo() != null) {
             setPaymentInfo(new PaymentInfoRepresentation(vo.getPaymentInfo()));
             getPaymentInfo().convert();
@@ -87,7 +89,8 @@ public class SubscriptionDetailsRepresentation extends Representation {
         setTimeoutMailSent(vo.isTimeoutMailSent());
         setUnitKey(vo.getUnitKey());
         setUnitName(vo.getUnitName());
-        setUsageLicenses(UsageLicenseRepresentation.convert(vo.getUsageLicenses()));
+        setUsageLicenses(UsageLicenseRepresentation.convert(vo
+                .getUsageLicenses()));
     }
 
     public BillingContactRepresentation getBillingContact() {
@@ -258,4 +261,19 @@ public class SubscriptionDetailsRepresentation extends Representation {
         this.priceModel = priceModel;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

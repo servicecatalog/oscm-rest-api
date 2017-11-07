@@ -54,7 +54,8 @@ public class PaymentInfoRepresentation extends Representation {
         return vo;
     }
 
-    public static Collection<PaymentInfoRepresentation> convert(List<VOPaymentInfo> paymentInfos) {
+    public static Collection<PaymentInfoRepresentation> convert(
+            List<VOPaymentInfo> paymentInfos) {
         List<PaymentInfoRepresentation> result = new ArrayList<PaymentInfoRepresentation>();
         for (VOPaymentInfo pi : paymentInfos) {
             result.add(new PaymentInfoRepresentation(pi));
@@ -62,4 +63,19 @@ public class PaymentInfoRepresentation extends Representation {
         return result;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

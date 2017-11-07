@@ -11,8 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -30,56 +30,56 @@ public class ServiceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getServices(@Context Request request,
+    public Response getServices(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return getCollection(request, sb.getCollection(), params);
+        return getCollection(uriInfo, sb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createService(@Context Request request,
+    public Response createService(@Context UriInfo uriInfo,
             ServiceDetailsRepresentation content,
             @BeanParam ServiceParameters params) throws Exception {
-        return post(request, sb.post(), content, params);
+        return post(uriInfo, sb.post(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response getService(@Context Request request,
+    public Response getService(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return get(request, sb.get(), params, true);
+        return get(uriInfo, sb.get(), params, true);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response updateService(@Context Request request,
+    public Response updateService(@Context UriInfo uriInfo,
             ServiceDetailsRepresentation content,
             @BeanParam ServiceParameters params) throws Exception {
-        return put(request, sb.put(), content, params);
+        return put(uriInfo, sb.put(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteService(@Context Request request,
+    public Response deleteService(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return delete(request, sb.delete(), params);
+        return delete(uriInfo, sb.delete(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID + "/status")
-    public Response setServiceState(@Context Request request,
+    public Response setServiceState(@Context UriInfo uriInfo,
             StatusRepresentation content, @BeanParam ServiceParameters params)
             throws Exception {
-        return put(request, sb.putStatus(), content, params);
+        return put(uriInfo, sb.putStatus(), content, params);
     }
 
 }

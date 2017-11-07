@@ -214,11 +214,28 @@ public class UserRepresentation extends Representation {
         return vo;
     }
 
-    public static final Collection<UserRepresentation> convert(List<VOUserDetails> list) {
+    public static final Collection<UserRepresentation> convert(
+            List<VOUserDetails> list) {
         Collection<UserRepresentation> result = new ArrayList<UserRepresentation>();
         for (VOUserDetails vo : list) {
             result.add(new UserRepresentation(vo));
         }
         return result;
+    }
+
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
     }
 }

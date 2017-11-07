@@ -69,7 +69,8 @@ public class PricedRoleRepresentation extends Representation {
         return vo;
     }
 
-    public static List<VOPricedRole> update(List<PricedRoleRepresentation> pricedRoles) {
+    public static List<VOPricedRole> update(
+            List<PricedRoleRepresentation> pricedRoles) {
         List<VOPricedRole> result = new ArrayList<VOPricedRole>();
         if (pricedRoles == null) {
             return result;
@@ -81,7 +82,8 @@ public class PricedRoleRepresentation extends Representation {
         return result;
     }
 
-    public static List<PricedRoleRepresentation> convert(List<VOPricedRole> pricedRoles) {
+    public static List<PricedRoleRepresentation> convert(
+            List<VOPricedRole> pricedRoles) {
         if (pricedRoles == null || pricedRoles.isEmpty()) {
             return null;
         }
@@ -94,4 +96,19 @@ public class PricedRoleRepresentation extends Representation {
         return result;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

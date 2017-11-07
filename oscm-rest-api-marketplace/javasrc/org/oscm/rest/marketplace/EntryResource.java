@@ -9,8 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -29,10 +29,10 @@ public class EntryResource extends RestResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateCatalogEntry(@Context Request request,
+    public Response updateCatalogEntry(@Context UriInfo uriInfo,
             EntryRepresentation content, @BeanParam MarketplaceParameters params)
             throws Exception {
-        return put(request, eb.put(), content, params);
+        return put(uriInfo, eb.put(), content, params);
     }
 
 }

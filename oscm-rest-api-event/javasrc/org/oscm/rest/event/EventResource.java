@@ -8,8 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -26,10 +26,10 @@ public class EventResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response recordEvent(@Context Request request,
+    public Response recordEvent(@Context UriInfo uriInfo,
             EventRepresentation content, @BeanParam EventParameters params)
             throws Exception {
-        return post(request, eb.post(), content, params);
+        return post(uriInfo, eb.post(), content, params);
     }
 
 }

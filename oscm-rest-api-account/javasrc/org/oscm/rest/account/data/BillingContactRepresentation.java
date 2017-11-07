@@ -98,7 +98,8 @@ public class BillingContactRepresentation extends Representation {
         return vo;
     }
 
-    public static final Collection<BillingContactRepresentation> convert(List<VOBillingContact> billingContacts) {
+    public static final Collection<BillingContactRepresentation> convert(
+            List<VOBillingContact> billingContacts) {
         List<BillingContactRepresentation> result = new ArrayList<BillingContactRepresentation>();
         for (VOBillingContact bc : billingContacts) {
             result.add(new BillingContactRepresentation(bc));
@@ -106,4 +107,19 @@ public class BillingContactRepresentation extends Representation {
         return result;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }

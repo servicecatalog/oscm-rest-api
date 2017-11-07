@@ -116,7 +116,8 @@ public class ServiceBackend {
                     ServiceParameters params) throws Exception {
                 VOService vo = new VOService();
                 vo.setKey(params.getId().longValue());
-                vo.setVersion(params.eTagToVersion());
+
+                vo.setVersion(params.getETag().intValue());
                 sps.setCompatibleServices(vo,
                         ServiceRepresentation.toList(content));
                 return true;
@@ -132,7 +133,7 @@ public class ServiceBackend {
                     ServiceParameters params) throws Exception {
                 VOService vo = new VOService();
                 vo.setKey(params.getId().longValue());
-                vo.setVersion(params.eTagToVersion());
+                vo.setVersion(eTagToVersion(params));
                 switch (content.getStatus()) {
                 case ACTIVE:
                     sps.activateService(vo);
@@ -153,4 +154,13 @@ public class ServiceBackend {
             }
         };
     }
+
+    // FIXME move to ServiceParameters
+    protected int eTagToVersion(ServiceParameters params) {
+        if (params.getETag() == null) {
+            return 0;
+        }
+        return params.getETag().intValue();
+    }
+
 }

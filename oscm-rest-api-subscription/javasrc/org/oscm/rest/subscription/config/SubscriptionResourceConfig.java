@@ -14,7 +14,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
-import org.oscm.rest.common.SecurityFilter;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.subscription.SubscriptionResource;
 import org.oscm.rest.subscription.UsageLicenseResource;
@@ -35,7 +34,7 @@ public class SubscriptionResourceConfig extends ResourceConfig {
 
         register(GsonMessageProvider.class);
         register(VersionFilter.class);
-        register(SecurityFilter.class);
+
         register(RolesAllowedDynamicFeature.class);
     }
 

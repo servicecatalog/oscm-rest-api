@@ -14,9 +14,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
@@ -39,35 +39,35 @@ public class TechnicalServiceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTechnicalServices(@Context Request request,
+    public Response getTechnicalServices(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return getCollection(request, tsb.getCollection(), params);
+        return getCollection(uriInfo, tsb.getCollection(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createTechnicalService(@Context Request request,
+    public Response createTechnicalService(@Context UriInfo uriInfo,
             TechnicalServiceRepresentation content,
             @BeanParam ServiceParameters params) throws Exception {
-        return post(request, tsb.post(), content, params);
+        return post(uriInfo, tsb.post(), content, params);
     }
 
     @Since(CommonParams.VERSION_1)
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path(CommonParams.PATH_ID)
-    public Response deleteTechnicalService(@Context Request request,
+    public Response deleteTechnicalService(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
-        return delete(request, tsb.delete(), params);
+        return delete(uriInfo, tsb.delete(), params);
     }
 
     @Since(CommonParams.VERSION_1)
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path(CommonParams.PATH_ID)
-    public Response exportTechnicalService(@Context Request request,
+    public Response exportTechnicalService(@Context UriInfo uriInfo,
             @BeanParam ServiceParameters params) throws Exception {
         // key needed
         VOTechnicalService ts = new VOTechnicalService();
@@ -80,7 +80,7 @@ public class TechnicalServiceResource extends RestResource {
     @Since(CommonParams.VERSION_1)
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Response importTechnicalServices(@Context Request request,
+    public Response importTechnicalServices(@Context UriInfo uriInfo,
             byte[] input, @BeanParam ServiceParameters params) throws Exception {
         String msg = sps.importTechnicalServices(input);
         if (Strings.isEmpty(msg)) {

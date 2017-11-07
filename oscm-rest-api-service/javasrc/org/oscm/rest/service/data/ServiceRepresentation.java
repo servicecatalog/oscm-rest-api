@@ -206,7 +206,8 @@ public class ServiceRepresentation extends Representation {
         this.serviceType = serviceType;
     }
 
-    public static Collection<ServiceRepresentation> toCollection(Collection<VOService> list) {
+    public static Collection<ServiceRepresentation> toCollection(
+            Collection<VOService> list) {
         Collection<ServiceRepresentation> result = new ArrayList<ServiceRepresentation>();
         for (VOService vo : list) {
             result.add(new ServiceRepresentation(vo));
@@ -214,7 +215,8 @@ public class ServiceRepresentation extends Representation {
         return result;
     }
 
-    public static List<VOService> toList(RepresentationCollection<ServiceRepresentation> content) {
+    public static List<VOService> toList(
+            RepresentationCollection<ServiceRepresentation> content) {
         if (content == null || content.getItems() == null) {
             return null;
         }
@@ -223,5 +225,21 @@ public class ServiceRepresentation extends Representation {
             result.add(sr.getVO());
         }
         return result;
+    }
+
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
     }
 }

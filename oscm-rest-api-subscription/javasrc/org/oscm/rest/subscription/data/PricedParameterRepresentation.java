@@ -40,11 +40,14 @@ public class PricedParameterRepresentation extends Representation {
         if (getParameterKey() != null) {
             vo.setParameterKey(getParameterKey().longValue());
         }
-        vo.setPricedOptions(PricedOptionRepresentation.update(getPricedOptions()));
+        vo.setPricedOptions(PricedOptionRepresentation
+                .update(getPricedOptions()));
         vo.setPricePerSubscription(getPricePerSubscription());
         vo.setPricePerUser(getPricePerUser());
-        vo.setRoleSpecificUserPrices(PricedRoleRepresentation.update(getRoleSpecificUserPrices()));
-        vo.setSteppedPrices(SteppedPriceRepresentation.update(getSteppedPrices()));
+        vo.setRoleSpecificUserPrices(PricedRoleRepresentation
+                .update(getRoleSpecificUserPrices()));
+        vo.setSteppedPrices(SteppedPriceRepresentation
+                .update(getSteppedPrices()));
         vo.setVersion(convertETagToVersion());
         if (getParameterDef() != null) {
             getParameterDef().update();
@@ -56,14 +59,18 @@ public class PricedParameterRepresentation extends Representation {
     public void convert() {
         setETag(Long.valueOf(vo.getVersion()));
         setId(Long.valueOf(vo.getKey()));
-        setParameterDef(new ParameterDefinitionRepresentation(vo.getVoParameterDef()));
+        setParameterDef(new ParameterDefinitionRepresentation(
+                vo.getVoParameterDef()));
         getParameterDef().convert();
         setParameterKey(Long.valueOf(vo.getParameterKey()));
-        setPricedOptions(PricedOptionRepresentation.convert(vo.getPricedOptions()));
+        setPricedOptions(PricedOptionRepresentation.convert(vo
+                .getPricedOptions()));
         setPricePerSubscription(vo.getPricePerSubscription());
         setPricePerUser(vo.getPricePerUser());
-        setRoleSpecificUserPrices(PricedRoleRepresentation.convert(vo.getRoleSpecificUserPrices()));
-        setSteppedPrices(SteppedPriceRepresentation.convert(vo.getSteppedPrices()));
+        setRoleSpecificUserPrices(PricedRoleRepresentation.convert(vo
+                .getRoleSpecificUserPrices()));
+        setSteppedPrices(SteppedPriceRepresentation.convert(vo
+                .getSteppedPrices()));
     }
 
     public BigDecimal getPricePerUser() {
@@ -94,7 +101,8 @@ public class PricedParameterRepresentation extends Representation {
         return roleSpecificUserPrices;
     }
 
-    public void setRoleSpecificUserPrices(List<PricedRoleRepresentation> roleSpecificUserPrices) {
+    public void setRoleSpecificUserPrices(
+            List<PricedRoleRepresentation> roleSpecificUserPrices) {
         this.roleSpecificUserPrices = roleSpecificUserPrices;
     }
 
@@ -126,20 +134,23 @@ public class PricedParameterRepresentation extends Representation {
         return vo;
     }
 
-    public static List<PricedParameterRepresentation> convert(List<VOPricedParameter> parameters) {
+    public static List<PricedParameterRepresentation> convert(
+            List<VOPricedParameter> parameters) {
         if (parameters == null || parameters.isEmpty()) {
             return null;
         }
         List<PricedParameterRepresentation> result = new ArrayList<PricedParameterRepresentation>();
         for (VOPricedParameter pp : parameters) {
-            PricedParameterRepresentation ppr = new PricedParameterRepresentation(pp);
+            PricedParameterRepresentation ppr = new PricedParameterRepresentation(
+                    pp);
             ppr.convert();
             result.add(ppr);
         }
         return result;
     }
 
-    public static List<VOPricedParameter> update(List<PricedParameterRepresentation> parameters) {
+    public static List<VOPricedParameter> update(
+            List<PricedParameterRepresentation> parameters) {
         List<VOPricedParameter> result = new ArrayList<VOPricedParameter>();
         if (parameters == null) {
             return result;
@@ -152,4 +163,19 @@ public class PricedParameterRepresentation extends Representation {
         return result;
     }
 
+    // FIXME move to super class
+    protected long convertIdToKey() {
+        if (getId() == null) {
+            return 0L;
+        }
+        return getId().longValue();
+    }
+
+    // FIXME move to super class
+    protected int convertETagToVersion() {
+        if (getETag() == null) {
+            return 0;
+        }
+        return getETag().intValue();
+    }
 }
