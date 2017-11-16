@@ -8,10 +8,12 @@
 
 package org.oscm.rest.event.config;
 
-import javax.ws.rs.ApplicationPath;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
@@ -23,14 +25,20 @@ import org.oscm.rest.event.EventResource;
  * @author Weiser
  */
 @ApplicationPath("")
-public class EventResourceConfig extends ResourceConfig {
+public class EventResourceConfig extends Application {
 
-    public EventResourceConfig() {
-        register(EventResource.class);
-        register(OSCMExceptionMapper.class);
-        register(GsonMessageProvider.class);
-        register(VersionFilter.class);
-        register(RolesAllowedDynamicFeature.class);
+    @Override
+    public Set<Class<?>> getClasses() {
+        final Set<Class<?>> classes = new HashSet<Class<?>>();
+
+        classes.add(EventResource.class);
+
+        classes.add(GsonMessageProvider.class);
+
+        classes.add(OSCMExceptionMapper.class);
+        classes.add(VersionFilter.class);
+
+        return classes;
     }
 
 }
