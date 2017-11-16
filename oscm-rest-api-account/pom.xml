@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.servicecatalog</groupId>
-	<artifactId>rest-api-account</artifactId>
+	<groupId>org.oscm.rest</groupId>
+	<artifactId>oscm-rest-api-account</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -46,10 +46,10 @@
 			<version>1.7.12</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.servicecatalog</groupId>
-			<artifactId>oscm-commons</artifactId>
-			<version>1.1</version>
-		</dependency>
+			<groupId>com.github.servicecatalog.oscm-commons</groupId>
+			<artifactId>oscm-rest-api-common</artifactId>
+			<version>1.2</version>
+		</dependency>		
 	</dependencies>
 
 	<repositories>
