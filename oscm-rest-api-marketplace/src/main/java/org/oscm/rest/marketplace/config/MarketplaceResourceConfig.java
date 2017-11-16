@@ -8,10 +8,12 @@
 
 package org.oscm.rest.marketplace.config;
 
-import javax.ws.rs.ApplicationPath;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
@@ -24,16 +26,18 @@ import org.oscm.rest.marketplace.EntryResource;
  * @author Weiser
  */
 @ApplicationPath("")
-public class MarketplaceResourceConfig extends ResourceConfig {
+public class MarketplaceResourceConfig extends Application {
 
-    public MarketplaceResourceConfig() {
-        register(EntryResource.class);
-        register(OSCMExceptionMapper.class);
+    @Override
+    public Set<Class<?>> getClasses() {
+        final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-        register(GsonMessageProvider.class);
-        register(VersionFilter.class);
+        classes.add(EntryResource.class);
+        classes.add(OSCMExceptionMapper.class);
+        classes.add(GsonMessageProvider.class);
+        classes.add(VersionFilter.class);
 
-        register(RolesAllowedDynamicFeature.class);
+        return classes;
     }
 
 }
