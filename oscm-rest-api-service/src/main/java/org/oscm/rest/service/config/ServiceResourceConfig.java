@@ -8,10 +8,12 @@
 
 package org.oscm.rest.service.config;
 
-import javax.ws.rs.ApplicationPath;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
@@ -28,20 +30,22 @@ import org.oscm.rest.service.TechnicalServiceResource;
  * @author Weiser
  */
 @ApplicationPath("")
-public class ServiceResourceConfig extends ResourceConfig {
+public class ServiceResourceConfig extends Application {
 
-    public ServiceResourceConfig() {
-        register(CompatibleServiceResource.class);
-        register(PriceModelResource.class);
-        register(ServiceImageResource.class);
-        register(TechnicalServiceResource.class);
-        register(TSSupplierResource.class);
-        register(OSCMExceptionMapper.class);
+    @Override
+    public Set<Class<?>> getClasses() {
+        final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-        register(GsonMessageProvider.class);
-        register(VersionFilter.class);
+        classes.add(CompatibleServiceResource.class);
+        classes.add(PriceModelResource.class);
+        classes.add(ServiceImageResource.class);
+        classes.add(TechnicalServiceResource.class);
+        classes.add(TSSupplierResource.class);
+        classes.add(OSCMExceptionMapper.class);
+        classes.add(GsonMessageProvider.class);
+        classes.add(VersionFilter.class);
 
-        register(RolesAllowedDynamicFeature.class);
+        return classes;
     }
 
 }
