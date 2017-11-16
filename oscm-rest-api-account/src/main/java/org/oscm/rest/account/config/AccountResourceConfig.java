@@ -8,12 +8,12 @@
 
 package org.oscm.rest.account.config;
 
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.oscm.rest.account.BillingContactResource;
 import org.oscm.rest.account.OrganizationResource;
 import org.oscm.rest.account.PaymentInfoResource;
@@ -28,20 +28,20 @@ import org.oscm.rest.common.VersionFilter;
  * @author Weiser
  */
 @ApplicationPath("")
-public class AccountResourceConfig extends ResourceConfig {
+public class AccountResourceConfig extends Application {
 
-    private Map<String, Object> properties;
+    @Override
+    public Set<Class<?>> getClasses() {
+        final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    public AccountResourceConfig() {
-        register(OrganizationResource.class);
-        register(BillingContactResource.class);
-        register(PaymentInfoResource.class);
-        register(OSCMExceptionMapper.class);
+        classes.add(OrganizationResource.class);
+        classes.add(BillingContactResource.class);
+        classes.add(PaymentInfoResource.class);
+        classes.add(OSCMExceptionMapper.class);
+        classes.add(GsonMessageProvider.class);
+        classes.add(VersionFilter.class);
 
-        register(GsonMessageProvider.class);
-        register(VersionFilter.class);
-
-        register(RolesAllowedDynamicFeature.class);
+        return classes;
     }
 
 }
