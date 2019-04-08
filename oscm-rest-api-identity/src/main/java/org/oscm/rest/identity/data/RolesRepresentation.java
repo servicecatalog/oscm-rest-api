@@ -5,7 +5,6 @@ import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.Representation;
 
-import javax.ws.rs.WebApplicationException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,9 +21,6 @@ public class RolesRepresentation extends Representation {
   public RolesRepresentation(VOUserDetails details) {
     vo = details;
   }
-
-  @Override
-  public void validateContent() throws WebApplicationException {}
 
   @Override
   public void update() {

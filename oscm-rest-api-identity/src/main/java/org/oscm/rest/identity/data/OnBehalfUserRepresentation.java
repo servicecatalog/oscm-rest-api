@@ -24,14 +24,6 @@ public class OnBehalfUserRepresentation extends Representation {
   @Override
   public void validateContent() throws WebApplicationException {}
 
-  @Override
-  public void update() {
-    // only used as input
-  }
-
-  @Override
-  public void convert() {}
-
   public String getOrganizationId() {
     return organizationId;
   }

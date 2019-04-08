@@ -39,11 +39,6 @@ public class UserRepresentation extends Representation {
   }
 
   @Override
-  public void validateContent() throws WebApplicationException {
-    // nothing right now
-  }
-
-  @Override
   public void update() {
     vo.setAdditionalName(getAdditionalName());
     vo.setAddress(getAddress());
