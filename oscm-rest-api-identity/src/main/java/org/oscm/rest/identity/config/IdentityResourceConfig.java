@@ -1,11 +1,12 @@
-/*******************************************************************************
- *                                                                              
- *  Copyright FUJITSU LIMITED 2016                                           
- *                                                                                                                                 
- *  Creation Date: May 2, 2016                                                      
- *                                                                              
- *******************************************************************************/
-
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2016
+ *
+ * <p>Creation Date: May 2, 2016
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.identity.config;
 
 import java.util.HashSet;
@@ -24,25 +25,24 @@ import org.oscm.rest.identity.UserResource;
 
 /**
  * Registers resources and providers of the user component to the application.
- * 
+ *
  * @author Weiser
  */
 @ApplicationPath("")
 public class IdentityResourceConfig extends Application {
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        final Set<Class<?>> classes = new HashSet<Class<?>>();
+  @Override
+  public Set<Class<?>> getClasses() {
+    final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-        classes.add(UserResource.class);
-        classes.add(RolesResource.class);
-        classes.add(OnBehalfUserResource.class);
-        classes.add(LdapUserResource.class);
-        classes.add(OSCMExceptionMapper.class);
-        classes.add(GsonMessageProvider.class);
-        classes.add(VersionFilter.class);
+    classes.add(UserResource.class);
+    classes.add(RolesResource.class);
+    classes.add(OnBehalfUserResource.class);
+    classes.add(LdapUserResource.class);
+    classes.add(OSCMExceptionMapper.class);
+    classes.add(GsonMessageProvider.class);
+    classes.add(VersionFilter.class);
 
-        return classes;
-    }
-
+    return classes;
+  }
 }
