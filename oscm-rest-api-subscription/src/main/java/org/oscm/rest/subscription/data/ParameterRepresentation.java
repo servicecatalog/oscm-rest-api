@@ -7,80 +7,77 @@ import org.oscm.rest.common.Representation;
 
 public class ParameterRepresentation extends Representation {
 
-    private ParameterDefinitionRepresentation parameterDefinition;
-    private String value;
+  private ParameterDefinitionRepresentation parameterDefinition;
+  private String value;
 
-    private transient VOParameter vo;
+  private transient VOParameter vo;
 
-    public ParameterRepresentation() {
-        this(new VOParameter());
+  public ParameterRepresentation() {
+    this(new VOParameter());
+  }
+
+  public ParameterRepresentation(VOParameter param) {
+    vo = param;
+  }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
+
+  @Override
+  public void update() {
+    vo.setKey(convertIdToKey());
+    if (parameterDefinition != null) {
+      parameterDefinition.update();
+      vo.setParameterDefinition(parameterDefinition.getVO());
     }
+    vo.setValue(getValue());
+    vo.setVersion(convertETagToVersion());
+  }
 
-    public ParameterRepresentation(VOParameter param) {
-        vo = param;
+  @Override
+  public void convert() {
+    setId(Long.valueOf(vo.getKey()));
+    ParameterDefinitionRepresentation def =
+        new ParameterDefinitionRepresentation(vo.getParameterDefinition());
+    def.convert();
+    setParameterDefinition(def);
+    setETag(Long.valueOf(vo.getVersion()));
+    setValue(vo.getValue());
+  }
+
+  public ParameterDefinitionRepresentation getParameterDefinition() {
+    return parameterDefinition;
+  }
+
+  public void setParameterDefinition(ParameterDefinitionRepresentation parameterDefinition) {
+    this.parameterDefinition = parameterDefinition;
+  }
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
+
+  public VOParameter getVO() {
+    return vo;
+  }
+
+  // FIXME move to super class
+  protected long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
     }
+    return getId().longValue();
+  }
 
-    @Override
-    public void validateContent() throws WebApplicationException {
-
+  // FIXME move to super class
+  protected int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
     }
-
-    @Override
-    public void update() {
-        vo.setKey(convertIdToKey());
-        if (parameterDefinition != null) {
-            parameterDefinition.update();
-            vo.setParameterDefinition(parameterDefinition.getVO());
-        }
-        vo.setValue(getValue());
-        vo.setVersion(convertETagToVersion());
-    }
-
-    @Override
-    public void convert() {
-        setId(Long.valueOf(vo.getKey()));
-        ParameterDefinitionRepresentation def = new ParameterDefinitionRepresentation(
-                vo.getParameterDefinition());
-        def.convert();
-        setParameterDefinition(def);
-        setETag(Long.valueOf(vo.getVersion()));
-        setValue(vo.getValue());
-    }
-
-    public ParameterDefinitionRepresentation getParameterDefinition() {
-        return parameterDefinition;
-    }
-
-    public void setParameterDefinition(
-            ParameterDefinitionRepresentation parameterDefinition) {
-        this.parameterDefinition = parameterDefinition;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public VOParameter getVO() {
-        return vo;
-    }
-
-    // FIXME move to super class
-    protected long convertIdToKey() {
-        if (getId() == null) {
-            return 0L;
-        }
-        return getId().longValue();
-    }
-
-    // FIXME move to super class
-    protected int convertETagToVersion() {
-        if (getETag() == null) {
-            return 0;
-        }
-        return getETag().intValue();
-    }
+    return getETag().intValue();
+  }
 }

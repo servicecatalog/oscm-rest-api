@@ -16,7 +16,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 securityDefinitions:
   authentication:
     type: basic
@@ -24,177 +24,177 @@ securityDefinitions:
 
 security:
   - authentication: []
-  
+
 paths:
   /users
-    post:
-      summary: User
-      description: Create a user
-      parameters:
-        - name: user
-          in: body
-          description: The user to create
-          required: true
-          schema:
-            $ref: '#/definitions/User'
-        - name: mId
-          in: query
-          description: The marketplace context
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The ID of the new user
-              type: string
-        202:
-          description: Accepted - if a suspending trigger for user creation is active
-    get:
-      description: Get the users of the calling users organization
-      responses:
-        200:
-          description: the user list
-          schema:
-              $ref: '#/definitions/CollectionUser'
+  post:
+    summary: User
+    description: Create a user
+    parameters:
+      - name: user
+        in: body
+        description: The user to create
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      - name: mId
+        in: query
+        description: The marketplace context
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The ID of the new user
+            type: string
+      202:
+        description: Accepted - if a suspending trigger for user creation is active
+  get:
+    description: Get the users of the calling users organization
+    responses:
+      200:
+        description: the user list
+        schema:
+          $ref: '#/definitions/CollectionUser'
 
   /users/{userId}
-    get: - get the user details of the specified user
-      description: Get the user with the specified id
-      responses:
-        200:
-          description: the user
-          schema:
-              $ref: '#/definitions/User'
+  get: - get the user details of the specified user
+         description: Get the user with the specified id
+         responses:
+           200:
+             description: the user
+             schema:
+               $ref: '#/definitions/User'
 
-    put:
-      description: Update the specified user
-      parameters:
-        - name: userId
-          in: path
-          description: The user id
-          required: true
-          type: string
-        - name: user
-          in: body
-          description: The user with the new values 
-          required: true
-          schema:
-            $ref: '#/definitions/User'
-        - name: If-Match
-          in: header
-          description: The ETag of the user for concurrency checks. If not present or '*',  concurrency is ignored.
-          required: false
-          type: string
-      responses:
-        204:
-          description: No content
+  put:
+    description: Update the specified user
+    parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        type: string
+      - name: user
+        in: body
+        description: The user with the new values
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      - name: If-Match
+        in: header
+        description: The ETag of the user for concurrency checks. If not present or '*',  concurrency is ignored.
+        required: false
+        type: string
+    responses:
+      204:
+        description: No content
 
-    delete:
-      description: Delete the specified user
-      parameters:
-        - name: userId
-          in: path
-          description: The user id
-          required: true
-          type: string
-        - name: mId
-          in: query
-          description: The marketplace context
-      responses:
-        204:
-          description: No content
+  delete:
+    description: Delete the specified user
+    parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        type: string
+      - name: mId
+        in: query
+        description: The marketplace context
+    responses:
+      204:
+        description: No content
 
   /users/{userId}/userroles
-    get:
-      description: Get the user roles of the specified user
-      parameters:
-        - name: userId
-          in: path
-          description: The user id
-          required: true
-          type: string
-      responses:
-        200:
-          description: the user
-          schema:
-              $ref: '#/definitions/Roles'
-    put:
-      description: Set the user roles of the specified user
-      parameters:
-        - name: userId
-          in: path
-          description: The user id
-          required: true
-          type: string
-        - name: roles
-          in: body
-          description: The user roles to set
-          required: true
-          schema:
-            $ref: '#/definitions/Roles'
-        - name: If-Match
-          in: header
-          description: The ETag of the user for concurrency checks. If not present or '*',  concurrency is ignored.
-          required: false
-          type: string
-      responses:
-        204:
-          description: No content
+  get:
+    description: Get the user roles of the specified user
+    parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        type: string
+    responses:
+      200:
+        description: the user
+        schema:
+          $ref: '#/definitions/Roles'
+  put:
+    description: Set the user roles of the specified user
+    parameters:
+      - name: userId
+        in: path
+        description: The user id
+        required: true
+        type: string
+      - name: roles
+        in: body
+        description: The user roles to set
+        required: true
+        schema:
+          $ref: '#/definitions/Roles'
+      - name: If-Match
+        in: header
+        description: The ETag of the user for concurrency checks. If not present or '*',  concurrency is ignored.
+        required: false
+        type: string
+    responses:
+      204:
+        description: No content
 
   /ldapusers
-    get: -  (query parameter 'pattern')
-      description: Search users to import in LDAP by pattern
-      parameters:
-        - name: pattern
-          in: query
-          description: the search pattern
-      responses:
-        200:
-          description: the matching users found in LDAP
-          schema:
-              $ref: '#/definitions/CollectionUser'
-    post:
-      description: Import the specified user from LDAP
-      parameters:
-        - name: user
-          in: body
-          description: The user to import
-          required: true
-          schema:
-            $ref: '#/definitions/User'
-        - name: mId
-          in: query
-          description: The marketplace context
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The ID of the new user
-              type: string
+  get: - (query parameter 'pattern')
+         description: Search users to import in LDAP by pattern
+         parameters:
+           - name: pattern
+             in: query
+             description: the search pattern
+         responses:
+           200:
+             description: the matching users found in LDAP
+             schema:
+               $ref: '#/definitions/CollectionUser'
+  post:
+    description: Import the specified user from LDAP
+    parameters:
+      - name: user
+        in: body
+        description: The user to import
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      - name: mId
+        in: query
+        description: The marketplace context
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The ID of the new user
+            type: string
 
   /onbehalfusers
-    post:
-      description: Create an on-behalf user
-      parameters:
-        - name: user
-          in: body
-          description: The on-behalf user to create
-          required: true
-          schema:
-            $ref: '#/definitions/OnBehalfUser'
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The ID of the new user
-              type: string
-    delete:
-      description: Delete the on-behalf user the caller is logged in with
-      responses:
-        204:
-          description: No content
+  post:
+    description: Create an on-behalf user
+    parameters:
+      - name: user
+        in: body
+        description: The on-behalf user to create
+        required: true
+        schema:
+          $ref: '#/definitions/OnBehalfUser'
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The ID of the new user
+            type: string
+  delete:
+    description: Delete the on-behalf user the caller is logged in with
+    responses:
+      204:
+        description: No content
 
 definitions:
 
@@ -245,7 +245,7 @@ definitions:
             - PASSWORD_MUST_BE_CHANGED
       organizationRoles:
         type: array
-        items: 
+        items:
           type: string
           enum:
             - BROKER
@@ -257,7 +257,7 @@ definitions:
             - TECHNOLOGY_PROVIDER
       userRoles:
         type: array
-        items: 
+        items:
           type: string
           enum:
             - BROKER_MANAGER
@@ -269,7 +269,7 @@ definitions:
             - SUBSCRIPTION_MANAGER
             - TECHNOLOGY_MANAGER
             - UNIT_ADMINISTRATOR
- 
+
   Roles:
     type: object
     properties:
@@ -281,7 +281,7 @@ definitions:
         format: int64
       userRoles:
         type: array
-        items: 
+        items:
           type: string
           enum:
             - BROKER_MANAGER
@@ -293,7 +293,7 @@ definitions:
             - SUBSCRIPTION_MANAGER
             - TECHNOLOGY_MANAGER
             - UNIT_ADMINISTRATOR
-     
+
   OnBehalfUser:
     type: object
     properties:
@@ -310,7 +310,7 @@ definitions:
     properties:
       items:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/User'
 
   Error:

@@ -1,77 +1,74 @@
 package org.oscm.rest.identity;
 
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
-
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RequestParameters;
 import org.oscm.rest.common.WebException;
 
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
+
 public class UserParameters extends RequestParameters {
 
-    @PathParam("userId")
-    private String userId;
+  @PathParam("userId")
+  private String userId;
 
-    @QueryParam("mId")
-    private String marketplaceId;
+  @QueryParam("mId")
+  private String marketplaceId;
 
-    @QueryParam("pattern")
-    private String pattern;
+  @QueryParam("pattern")
+  private String pattern;
 
-    @Override
-    public void validateParameters() throws WebApplicationException {
+  @Override
+  public void validateParameters() throws WebApplicationException {}
+
+  @Override
+  public void update() {}
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public String getMarketplaceId() {
+    return marketplaceId;
+  }
+
+  public void setMarketplaceId(String marketplaceId) {
+    this.marketplaceId = marketplaceId;
+  }
+
+  public String getPattern() {
+    return pattern;
+  }
+
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
+
+  @Override
+  public void validateId() throws WebApplicationException {
+    if (userId == null) {
+      throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
     }
+  }
 
-    @Override
-    public void update() {
+  // FIXME move to super class
+  protected long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
     }
+    return getId().longValue();
+  }
 
-    public String getUserId() {
-        return userId;
+  // FIXME move to super class
+  protected int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
     }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getMarketplaceId() {
-        return marketplaceId;
-    }
-
-    public void setMarketplaceId(String marketplaceId) {
-        this.marketplaceId = marketplaceId;
-    }
-
-    public String getPattern() {
-        return pattern;
-    }
-
-    public void setPattern(String pattern) {
-        this.pattern = pattern;
-    }
-
-    @Override
-    public void validateId() throws WebApplicationException {
-        if (userId == null) {
-            throw WebException.notFound()
-                    .message(CommonParams.ERROR_INVALID_ID).build();
-        }
-    }
-
-    // FIXME move to super class
-    protected long convertIdToKey() {
-        if (getId() == null) {
-            return 0L;
-        }
-        return getId().longValue();
-    }
-
-    // FIXME move to super class
-    protected int convertETagToVersion() {
-        if (getETag() == null) {
-            return 0;
-        }
-        return getETag().intValue();
-    }
+    return getETag().intValue();
+  }
 }

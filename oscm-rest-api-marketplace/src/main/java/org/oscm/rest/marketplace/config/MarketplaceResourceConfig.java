@@ -1,11 +1,12 @@
-/*******************************************************************************
- *                                                                              
- *  Copyright FUJITSU LIMITED 2016                                           
- *                                                                                                                                 
- *  Creation Date: May 2, 2016                                                      
- *                                                                              
- *******************************************************************************/
-
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2016
+ *
+ * <p>Creation Date: May 2, 2016
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.marketplace.config;
 
 import java.util.HashSet;
@@ -20,24 +21,22 @@ import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.marketplace.EntryResource;
 
 /**
- * Registers resources and providers of the marketplace component to the
- * application.
- * 
+ * Registers resources and providers of the marketplace component to the application.
+ *
  * @author Weiser
  */
 @ApplicationPath("")
 public class MarketplaceResourceConfig extends Application {
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        final Set<Class<?>> classes = new HashSet<Class<?>>();
+  @Override
+  public Set<Class<?>> getClasses() {
+    final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-        classes.add(EntryResource.class);
-        classes.add(OSCMExceptionMapper.class);
-        classes.add(GsonMessageProvider.class);
-        classes.add(VersionFilter.class);
+    classes.add(EntryResource.class);
+    classes.add(OSCMExceptionMapper.class);
+    classes.add(GsonMessageProvider.class);
+    classes.add(VersionFilter.class);
 
-        return classes;
-    }
-
+    return classes;
+  }
 }
