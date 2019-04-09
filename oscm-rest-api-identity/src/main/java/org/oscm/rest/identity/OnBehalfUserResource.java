@@ -27,7 +27,6 @@ public class OnBehalfUserResource extends RestResource {
       OnBehalfUserRepresentation content,
       @BeanParam UserParameters params)
       throws Exception {
-    // UserResource.class, "getUser"
     return post(uriInfo, ub.postOnBehalfUser(), content, params);
   }
 
