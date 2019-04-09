@@ -1,5 +1,23 @@
 language: java
+sudo: required
+
 jdk:
   - oraclejdk8
-script:
-  - mvn test
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jobs:
+  include:
+    - stage: verify_code
+      name: Verify Code
+      script:
+        - bash scripts/check_copyrights.sh
+        - bash scripts/format_code.sh
+        - bash scripts/repush_formatted_code.sh
+    - stage: run_tests
+      name: Run Tests
+      script:
+        - git pull
+        - mvn clean test
