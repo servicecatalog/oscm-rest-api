@@ -33,7 +33,6 @@ public class LdapUserResource extends RestResource {
   public Response createLdapUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {
-    // UserResource.class, "getUser"
     return post(uriInfo, ub.postLdapUser(), content, params);
   }
 }
