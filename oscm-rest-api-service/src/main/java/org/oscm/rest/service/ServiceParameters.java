@@ -7,31 +7,33 @@ import javax.ws.rs.WebApplicationException;
 
 public class ServiceParameters extends RequestParameters {
 
-  @PathParam("orgKey")
-  private Long orgKey;
+        @PathParam("orgKey")
+        private Long orgKey;
 
-  @PathParam("orgId")
-  private String orgId;
+        @PathParam("orgId")
+        private String orgId;
 
-  @Override
-  public void validateParameters() throws WebApplicationException {}
+        @Override
+        public void validateParameters() throws WebApplicationException {
+        }
 
-  @Override
-  public void update() {}
+        @Override
+        public void update() {
+        }
 
-  public Long getOrgKey() {
-    return orgKey;
-  }
+        public Long getOrgKey() {
+                return orgKey;
+        }
 
-  public void setOrgKey(Long orgKey) {
-    this.orgKey = orgKey;
-  }
+        public void setOrgKey(Long orgKey) {
+                this.orgKey = orgKey;
+        }
 
-  public String getOrgId() {
-    return orgId;
-  }
+        public String getOrgId() {
+                return orgId;
+        }
 
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
+        public void setOrgId(String orgId) {
+                this.orgId = orgId;
+        }
 }

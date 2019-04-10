@@ -7,82 +7,83 @@ import javax.ws.rs.WebApplicationException;
 
 public class RoleDefinitionRepresentation extends Representation {
 
-  private String roleId;
-  private String name;
-  private String description;
+        private String roleId;
+        private String name;
+        private String description;
 
-  private transient VORoleDefinition vo;
+        private transient VORoleDefinition vo;
 
-  public RoleDefinitionRepresentation() {
-    this(new VORoleDefinition());
-  }
+        public RoleDefinitionRepresentation() {
+                this(new VORoleDefinition());
+        }
 
-  public RoleDefinitionRepresentation(VORoleDefinition r) {
-    vo = r;
-  }
+        public RoleDefinitionRepresentation(VORoleDefinition r) {
+                vo = r;
+        }
 
-  @Override
-  public void validateContent() throws WebApplicationException {}
+        @Override
+        public void validateContent() throws WebApplicationException {
+        }
 
-  @Override
-  public void update() {
-    vo.setDescription(getDescription());
-    vo.setKey(convertIdToKey());
-    vo.setName(getName());
-    vo.setRoleId(getRoleId());
-    vo.setVersion(convertETagToVersion());
-  }
+        @Override
+        public void update() {
+                vo.setDescription(getDescription());
+                vo.setKey(convertIdToKey());
+                vo.setName(getName());
+                vo.setRoleId(getRoleId());
+                vo.setVersion(convertETagToVersion());
+        }
 
-  @Override
-  public void convert() {
-    setDescription(vo.getDescription());
-    setId(Long.valueOf(vo.getKey()));
-    setName(vo.getName());
-    setRoleId(vo.getRoleId());
-    setETag(Long.valueOf(vo.getVersion()));
-  }
+        @Override
+        public void convert() {
+                setDescription(vo.getDescription());
+                setId(Long.valueOf(vo.getKey()));
+                setName(vo.getName());
+                setRoleId(vo.getRoleId());
+                setETag(Long.valueOf(vo.getVersion()));
+        }
 
-  public VORoleDefinition getVO() {
-    return vo;
-  }
+        public VORoleDefinition getVO() {
+                return vo;
+        }
 
-  public String getRoleId() {
-    return roleId;
-  }
+        public String getRoleId() {
+                return roleId;
+        }
 
-  public void setRoleId(String roleId) {
-    this.roleId = roleId;
-  }
+        public void setRoleId(String roleId) {
+                this.roleId = roleId;
+        }
 
-  public String getName() {
-    return name;
-  }
+        public String getName() {
+                return name;
+        }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+        public void setName(String name) {
+                this.name = name;
+        }
 
-  public String getDescription() {
-    return description;
-  }
+        public String getDescription() {
+                return description;
+        }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+        public void setDescription(String description) {
+                this.description = description;
+        }
 
-  // FIXME move to super class
-  protected long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
-  }
+        // FIXME move to super class
+        protected long convertIdToKey() {
+                if (getId() == null) {
+                        return 0L;
+                }
+                return getId().longValue();
+        }
 
-  // FIXME move to super class
-  protected int convertETagToVersion() {
-    if (getETag() == null) {
-      return 0;
-    }
-    return getETag().intValue();
-  }
+        // FIXME move to super class
+        protected int convertETagToVersion() {
+                if (getETag() == null) {
+                        return 0;
+                }
+                return getETag().intValue();
+        }
 }

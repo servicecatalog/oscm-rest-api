@@ -17,56 +17,60 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class MarketplaceResource extends RestResource {
 
-  @EJB MarketplaceBackend mb;
+        @EJB
+        MarketplaceBackend mb;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getMarketplaces(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
-      throws Exception {
-    return getCollection(uriInfo, mb.getCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getMarketplaces(@Context UriInfo uriInfo,
+                @BeanParam MarketplaceParameters params)
+                throws Exception {
+                return getCollection(uriInfo, mb.getCollection(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createMarketplace(
-      @Context UriInfo uriInfo,
-      MarketplaceRepresentation content,
-      @BeanParam MarketplaceParameters params)
-      throws Exception {
-    return post(uriInfo, mb.post(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createMarketplace(
+                @Context UriInfo uriInfo,
+                MarketplaceRepresentation content,
+                @BeanParam MarketplaceParameters params)
+                throws Exception {
+                return post(uriInfo, mb.post(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response getMarketplace(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
-      throws Exception {
-    return get(uriInfo, mb.get(), params, true);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response getMarketplace(@Context UriInfo uriInfo,
+                @BeanParam MarketplaceParameters params)
+                throws Exception {
+                return get(uriInfo, mb.get(), params, true);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response updateMarketplace(
-      @Context UriInfo uriInfo,
-      MarketplaceRepresentation content,
-      @BeanParam MarketplaceParameters params)
-      throws Exception {
-    return put(uriInfo, mb.put(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response updateMarketplace(
+                @Context UriInfo uriInfo,
+                MarketplaceRepresentation content,
+                @BeanParam MarketplaceParameters params)
+                throws Exception {
+                return put(uriInfo, mb.put(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response deleteMarketplace(
-      @Context UriInfo uriInfo, @BeanParam MarketplaceParameters params) throws Exception {
-    return delete(uriInfo, mb.delete(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response deleteMarketplace(
+                @Context UriInfo uriInfo,
+                @BeanParam MarketplaceParameters params) throws Exception {
+                return delete(uriInfo, mb.delete(), params);
+        }
 }

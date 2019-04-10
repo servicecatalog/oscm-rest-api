@@ -29,17 +29,17 @@ import java.util.Set;
 @ApplicationPath("")
 public class AccountResourceConfig extends Application {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    final Set<Class<?>> classes = new HashSet<Class<?>>();
+        @Override
+        public Set<Class<?>> getClasses() {
+                final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    classes.add(OrganizationResource.class);
-    classes.add(BillingContactResource.class);
-    classes.add(PaymentInfoResource.class);
-    classes.add(OSCMExceptionMapper.class);
-    classes.add(GsonMessageProvider.class);
-    classes.add(VersionFilter.class);
+                classes.add(OrganizationResource.class);
+                classes.add(BillingContactResource.class);
+                classes.add(PaymentInfoResource.class);
+                classes.add(OSCMExceptionMapper.class);
+                classes.add(GsonMessageProvider.class);
+                classes.add(VersionFilter.class);
 
-    return classes;
-  }
+                return classes;
+        }
 }

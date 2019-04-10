@@ -6,9 +6,11 @@ import javax.ws.rs.WebApplicationException;
 
 public class OperationParameters extends RequestParameters {
 
-  @Override
-  public void validateParameters() throws WebApplicationException {}
+        @Override
+        public void validateParameters() throws WebApplicationException {
+        }
 
-  @Override
-  public void update() {}
+        @Override
+        public void update() {
+        }
 }

@@ -22,62 +22,70 @@ import java.util.Collections;
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 
-  @EJB TechnicalServiceBackend tsb;
+        @EJB
+        TechnicalServiceBackend tsb;
 
-  @EJB ServiceProvisioningService sps;
+        @EJB
+        ServiceProvisioningService sps;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getTechnicalServices(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
-    return getCollection(uriInfo, tsb.getCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getTechnicalServices(
+                @Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+                throws Exception {
+                return getCollection(uriInfo, tsb.getCollection(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response createTechnicalService(
-      @Context UriInfo uriInfo,
-      TechnicalServiceRepresentation content,
-      @BeanParam ServiceParameters params)
-      throws Exception {
-    return post(uriInfo, tsb.post(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        @Consumes(MediaType.APPLICATION_JSON)
+        public Response createTechnicalService(
+                @Context UriInfo uriInfo,
+                TechnicalServiceRepresentation content,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return post(uriInfo, tsb.post(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response deleteTechnicalService(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
-    return delete(uriInfo, tsb.delete(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response deleteTechnicalService(
+                @Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+                throws Exception {
+                return delete(uriInfo, tsb.delete(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_XML)
-  @Path(CommonParams.PATH_ID)
-  public Response exportTechnicalService(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
-    // key needed
-    VOTechnicalService ts = new VOTechnicalService();
-    ts.setKey(params.getId().longValue());
-    byte[] export = sps.exportTechnicalServices(Collections.singletonList(ts));
-    return Response.ok(export, MediaType.APPLICATION_XML_TYPE).build();
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_XML)
+        @Path(CommonParams.PATH_ID)
+        public Response exportTechnicalService(
+                @Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+                throws Exception {
+                // key needed
+                VOTechnicalService ts = new VOTechnicalService();
+                ts.setKey(params.getId().longValue());
+                byte[] export = sps
+                        .exportTechnicalServices(Collections.singletonList(ts));
+                return Response.ok(export, MediaType.APPLICATION_XML_TYPE)
+                        .build();
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Consumes(MediaType.APPLICATION_XML)
-  public Response importTechnicalServices(
-      @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
-      throws Exception {
-    String msg = sps.importTechnicalServices(input);
-    if (Strings.isEmpty(msg)) {
-      return Response.noContent().build();
-    }
-    return Response.status(Status.BAD_REQUEST).entity(msg).build();
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Consumes(MediaType.APPLICATION_XML)
+        public Response importTechnicalServices(
+                @Context UriInfo uriInfo, byte[] input,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                String msg = sps.importTechnicalServices(input);
+                if (Strings.isEmpty(msg)) {
+                        return Response.noContent().build();
+                }
+                return Response.status(Status.BAD_REQUEST).entity(msg).build();
+        }
 }

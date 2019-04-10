@@ -12,56 +12,71 @@ import org.oscm.internal.intf.OperatorService;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountBackendTest {
-  // TODO: These tests should be in fact integration tests
+        // TODO: These tests should be in fact integration tests
 
-  @Mock private AccountService accountService;
-  @Mock private OperatorService operatorService;
-  @InjectMocks private AccountBackend backend;
+        @Mock
+        private AccountService accountService;
+        @Mock
+        private OperatorService operatorService;
+        @InjectMocks
+        private AccountBackend backend;
 
-  @BeforeEach
-  public void setUp() {}
+        @BeforeEach
+        public void setUp() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldPostBillingContact() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldPostBillingContact() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldGetBillingContactCollection() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldGetBillingContactCollection() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldGetBillingContact() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldGetBillingContact() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldPutBillingContact() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldPutBillingContact() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldDeleteBillingContact() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldDeleteBillingContact() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldGetPaymentInfoCollection() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldGetPaymentInfoCollection() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldPutPaymentInfo() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldPutPaymentInfo() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldGetPaymentInfo() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldGetPaymentInfo() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldDeletePaymentInfo() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldDeletePaymentInfo() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldPostOrganization() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldPostOrganization() {
+        }
 
-  @Test
-  @Disabled("Not implemented")
-  public void shouldGetOrganization() {}
+        @Test
+        @Disabled("Not implemented")
+        public void shouldGetOrganization() {
+        }
 }

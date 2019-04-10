@@ -27,19 +27,19 @@ import java.util.Set;
 @ApplicationPath("")
 public class ServiceResourceConfig extends Application {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    final Set<Class<?>> classes = new HashSet<Class<?>>();
+        @Override
+        public Set<Class<?>> getClasses() {
+                final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    classes.add(CompatibleServiceResource.class);
-    classes.add(PriceModelResource.class);
-    classes.add(ServiceImageResource.class);
-    classes.add(TechnicalServiceResource.class);
-    classes.add(TSSupplierResource.class);
-    classes.add(OSCMExceptionMapper.class);
-    classes.add(GsonMessageProvider.class);
-    classes.add(VersionFilter.class);
+                classes.add(CompatibleServiceResource.class);
+                classes.add(PriceModelResource.class);
+                classes.add(ServiceImageResource.class);
+                classes.add(TechnicalServiceResource.class);
+                classes.add(TSSupplierResource.class);
+                classes.add(OSCMExceptionMapper.class);
+                classes.add(GsonMessageProvider.class);
+                classes.add(VersionFilter.class);
 
-    return classes;
-  }
+                return classes;
+        }
 }

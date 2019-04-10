@@ -13,51 +13,55 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
+@Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID
+        + "/usagelicenses")
 @Stateless
 public class UsageLicenseResource extends RestResource {
 
-  @EJB UsageLicenseBackend ulb;
+        @EJB
+        UsageLicenseBackend ulb;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getLicenses(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
-      throws Exception {
-    return getCollection(uriInfo, ulb.getCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getLicenses(@Context UriInfo uriInfo,
+                @BeanParam SubscriptionParameters params)
+                throws Exception {
+                return getCollection(uriInfo, ulb.getCollection(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response createLicense(
-      @Context UriInfo uriInfo,
-      UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
-      throws Exception {
-    return post(uriInfo, ulb.post(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        @Consumes(MediaType.APPLICATION_JSON)
+        public Response createLicense(
+                @Context UriInfo uriInfo,
+                UsageLicenseRepresentation content,
+                @BeanParam SubscriptionParameters params)
+                throws Exception {
+                return post(uriInfo, ulb.post(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/{licKey}")
-  public Response updateLicense(
-      @Context UriInfo uriInfo,
-      UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
-      throws Exception {
-    return put(uriInfo, ulb.put(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Path("/{licKey}")
+        public Response updateLicense(
+                @Context UriInfo uriInfo,
+                UsageLicenseRepresentation content,
+                @BeanParam SubscriptionParameters params)
+                throws Exception {
+                return put(uriInfo, ulb.put(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path("/{licKey}")
-  public Response deleteLicense(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
-      throws Exception {
-    return delete(uriInfo, ulb.delete(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path("/{licKey}")
+        public Response deleteLicense(@Context UriInfo uriInfo,
+                @BeanParam SubscriptionParameters params)
+                throws Exception {
+                return delete(uriInfo, ulb.delete(), params);
+        }
 }

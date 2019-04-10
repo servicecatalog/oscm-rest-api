@@ -28,16 +28,16 @@ import java.util.Set;
 @ApplicationPath("")
 public class SubscriptionResourceConfig extends Application {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    final Set<Class<?>> classes = new HashSet<Class<?>>();
+        @Override
+        public Set<Class<?>> getClasses() {
+                final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    classes.add(SubscriptionResource.class);
-    classes.add(OSCMExceptionMapper.class);
-    classes.add(GsonMessageProvider.class);
-    classes.add(VersionFilter.class);
-    classes.add(UsageLicenseResource.class);
+                classes.add(SubscriptionResource.class);
+                classes.add(OSCMExceptionMapper.class);
+                classes.add(GsonMessageProvider.class);
+                classes.add(VersionFilter.class);
+                classes.add(UsageLicenseResource.class);
 
-    return classes;
-  }
+                return classes;
+        }
 }

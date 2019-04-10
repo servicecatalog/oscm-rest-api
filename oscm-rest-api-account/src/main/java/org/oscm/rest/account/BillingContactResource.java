@@ -17,54 +17,59 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class BillingContactResource extends RestResource {
 
-  @EJB AccountBackend ab;
+        @EJB
+        AccountBackend ab;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getBillingContacts(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-      throws Exception {
-    return getCollection(uriInfo, ab.getBillingContactCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getBillingContacts(@Context UriInfo uriInfo,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return getCollection(uriInfo, ab.getBillingContactCollection(),
+                        params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createBillingContact(
-      @Context UriInfo uriInfo,
-      BillingContactRepresentation content,
-      @BeanParam AccountParameters params)
-      throws Exception {
-    return post(uriInfo, ab.postBillingContact(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createBillingContact(
+                @Context UriInfo uriInfo,
+                BillingContactRepresentation content,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return post(uriInfo, ab.postBillingContact(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response getBillingContact(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-      throws Exception {
-    return get(uriInfo, ab.getBillingContact(), params, true);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response getBillingContact(@Context UriInfo uriInfo,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return get(uriInfo, ab.getBillingContact(), params, true);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response updateBillingContact(
-      @Context UriInfo uriInfo,
-      BillingContactRepresentation content,
-      @BeanParam AccountParameters params)
-      throws Exception {
-    return put(uriInfo, ab.putBillingContact(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response updateBillingContact(
+                @Context UriInfo uriInfo,
+                BillingContactRepresentation content,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return put(uriInfo, ab.putBillingContact(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response deleteBillingContact(
-      @Context UriInfo uriInfo, @BeanParam AccountParameters params) throws Exception {
-    return delete(uriInfo, ab.deleteBillingContact(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response deleteBillingContact(
+                @Context UriInfo uriInfo, @BeanParam AccountParameters params)
+                throws Exception {
+                return delete(uriInfo, ab.deleteBillingContact(), params);
+        }
 }

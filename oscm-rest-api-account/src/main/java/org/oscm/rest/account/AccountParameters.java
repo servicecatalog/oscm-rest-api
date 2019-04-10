@@ -10,38 +10,41 @@ import javax.ws.rs.WebApplicationException;
 
 public class AccountParameters extends RequestParameters {
 
-  @QueryParam("mId")
-  private String marketplaceId;
+        @QueryParam("mId")
+        private String marketplaceId;
 
-  @PathParam("orgId")
-  private String orgId;
+        @PathParam("orgId")
+        private String orgId;
 
-  @Override
-  public void validateParameters() throws WebApplicationException {}
+        @Override
+        public void validateParameters() throws WebApplicationException {
+        }
 
-  @Override
-  public void update() {}
+        @Override
+        public void update() {
+        }
 
-  public String getMarketplaceId() {
-    return marketplaceId;
-  }
+        public String getMarketplaceId() {
+                return marketplaceId;
+        }
 
-  public void setMarketplaceId(String marketplaceId) {
-    this.marketplaceId = marketplaceId;
-  }
+        public void setMarketplaceId(String marketplaceId) {
+                this.marketplaceId = marketplaceId;
+        }
 
-  public String getOrgId() {
-    return orgId;
-  }
+        public String getOrgId() {
+                return orgId;
+        }
 
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
+        public void setOrgId(String orgId) {
+                this.orgId = orgId;
+        }
 
-  @Override
-  public void validateId() throws WebApplicationException {
-    if (orgId == null) {
-      throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
-    }
-  }
+        @Override
+        public void validateId() throws WebApplicationException {
+                if (orgId == null) {
+                        throw WebException.notFound()
+                                .message(CommonParams.ERROR_INVALID_ID).build();
+                }
+        }
 }

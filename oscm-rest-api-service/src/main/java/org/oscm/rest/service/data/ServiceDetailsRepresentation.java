@@ -4,57 +4,59 @@ import org.oscm.internal.vo.VOServiceDetails;
 
 public class ServiceDetailsRepresentation extends ServiceRepresentation {
 
-  private TechnicalServiceRepresentation technicalService;
-  private boolean imageDefined;
+        private TechnicalServiceRepresentation technicalService;
+        private boolean imageDefined;
 
-  private transient VOServiceDetails vo;
+        private transient VOServiceDetails vo;
 
-  public ServiceDetailsRepresentation() {
-    this(new VOServiceDetails());
-  }
+        public ServiceDetailsRepresentation() {
+                this(new VOServiceDetails());
+        }
 
-  public ServiceDetailsRepresentation(VOServiceDetails sd) {
-    super(sd);
-    vo = sd;
-  }
+        public ServiceDetailsRepresentation(VOServiceDetails sd) {
+                super(sd);
+                vo = sd;
+        }
 
-  @Override
-  public void update() {
-    super.update();
-    vo.setImageDefined(isImageDefined());
-    if (technicalService != null) {
-      technicalService.update();
-      vo.setTechnicalService(technicalService.getVO());
-    }
-  }
+        @Override
+        public void update() {
+                super.update();
+                vo.setImageDefined(isImageDefined());
+                if (technicalService != null) {
+                        technicalService.update();
+                        vo.setTechnicalService(technicalService.getVO());
+                }
+        }
 
-  @Override
-  public void convert() {
-    super.convert();
-    setImageDefined(vo.isImageDefined());
-    TechnicalServiceRepresentation tsr =
-        new TechnicalServiceRepresentation(vo.getTechnicalService());
-    tsr.convert();
-    setTechnicalService(tsr);
-  }
+        @Override
+        public void convert() {
+                super.convert();
+                setImageDefined(vo.isImageDefined());
+                TechnicalServiceRepresentation tsr =
+                        new TechnicalServiceRepresentation(
+                                vo.getTechnicalService());
+                tsr.convert();
+                setTechnicalService(tsr);
+        }
 
-  public VOServiceDetails getVO() {
-    return vo;
-  }
+        public VOServiceDetails getVO() {
+                return vo;
+        }
 
-  public TechnicalServiceRepresentation getTechnicalService() {
-    return technicalService;
-  }
+        public TechnicalServiceRepresentation getTechnicalService() {
+                return technicalService;
+        }
 
-  public void setTechnicalService(TechnicalServiceRepresentation technicalService) {
-    this.technicalService = technicalService;
-  }
+        public void setTechnicalService(
+                TechnicalServiceRepresentation technicalService) {
+                this.technicalService = technicalService;
+        }
 
-  public boolean isImageDefined() {
-    return imageDefined;
-  }
+        public boolean isImageDefined() {
+                return imageDefined;
+        }
 
-  public void setImageDefined(boolean imageDefined) {
-    this.imageDefined = imageDefined;
-  }
+        public void setImageDefined(boolean imageDefined) {
+                this.imageDefined = imageDefined;
+        }
 }

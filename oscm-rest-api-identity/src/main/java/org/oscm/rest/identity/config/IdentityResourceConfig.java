@@ -30,18 +30,18 @@ import java.util.Set;
 @ApplicationPath("")
 public class IdentityResourceConfig extends Application {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    final Set<Class<?>> classes = new HashSet<Class<?>>();
+        @Override
+        public Set<Class<?>> getClasses() {
+                final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    classes.add(UserResource.class);
-    classes.add(RolesResource.class);
-    classes.add(OnBehalfUserResource.class);
-    classes.add(LdapUserResource.class);
-    classes.add(OSCMExceptionMapper.class);
-    classes.add(GsonMessageProvider.class);
-    classes.add(VersionFilter.class);
+                classes.add(UserResource.class);
+                classes.add(RolesResource.class);
+                classes.add(OnBehalfUserResource.class);
+                classes.add(LdapUserResource.class);
+                classes.add(OSCMExceptionMapper.class);
+                classes.add(GsonMessageProvider.class);
+                classes.add(VersionFilter.class);
 
-    return classes;
-  }
+                return classes;
+        }
 }

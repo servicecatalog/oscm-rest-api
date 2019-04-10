@@ -13,21 +13,23 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
+@Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID
+        + "/entries/{sKey}")
 @Stateless
 public class EntryResource extends RestResource {
 
-  @EJB EntryBackend eb;
+        @EJB
+        EntryBackend eb;
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response updateCatalogEntry(
-      @Context UriInfo uriInfo,
-      EntryRepresentation content,
-      @BeanParam MarketplaceParameters params)
-      throws Exception {
-    return put(uriInfo, eb.put(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response updateCatalogEntry(
+                @Context UriInfo uriInfo,
+                EntryRepresentation content,
+                @BeanParam MarketplaceParameters params)
+                throws Exception {
+                return put(uriInfo, eb.put(), content, params);
+        }
 }

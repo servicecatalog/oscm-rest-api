@@ -14,29 +14,32 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/compatibleservices")
+@Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID
+        + "/compatibleservices")
 @Stateless
 public class CompatibleServiceResource extends RestResource {
 
-  @EJB ServiceBackend sb;
+        @EJB
+        ServiceBackend sb;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getCompatibleServices(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
-    return getCollection(uriInfo, sb.getCompatibles(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getCompatibleServices(
+                @Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+                throws Exception {
+                return getCollection(uriInfo, sb.getCompatibles(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response setCompatibleServices(
-      @Context UriInfo uriInfo,
-      RepresentationCollection<ServiceRepresentation> content,
-      @BeanParam ServiceParameters params)
-      throws Exception {
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response setCompatibleServices(
+                @Context UriInfo uriInfo,
+                RepresentationCollection<ServiceRepresentation> content,
+                @BeanParam ServiceParameters params)
+                throws Exception {
 
-    return put(uriInfo, sb.putCompatibles(), content, params);
-  }
+                return put(uriInfo, sb.putCompatibles(), content, params);
+        }
 }

@@ -17,22 +17,25 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class LdapUserResource extends RestResource {
 
-  @EJB UserBackend ub;
+        @EJB
+        UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getLdapUsers(@Context UriInfo uriInfo, @BeanParam UserParameters params)
-      throws Exception {
-    return getCollection(uriInfo, ub.getLdapUsers(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getLdapUsers(@Context UriInfo uriInfo,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return getCollection(uriInfo, ub.getLdapUsers(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createLdapUser(
-      @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
-      throws Exception {
-    return post(uriInfo, ub.postLdapUser(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createLdapUser(
+                @Context UriInfo uriInfo, UserRepresentation content,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return post(uriInfo, ub.postLdapUser(), content, params);
+        }
 }

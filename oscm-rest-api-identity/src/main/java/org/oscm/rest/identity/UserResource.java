@@ -17,52 +17,58 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class UserResource extends RestResource {
 
-  private static final String PATH_USERID = "/{userId}";
+        private static final String PATH_USERID = "/{userId}";
 
-  @EJB UserBackend ub;
+        @EJB
+        UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getUsers(@Context UriInfo uriInfo, @BeanParam UserParameters params)
-      throws Exception {
-    return getCollection(uriInfo, ub.getUsers(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getUsers(@Context UriInfo uriInfo,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return getCollection(uriInfo, ub.getUsers(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createUser(
-      @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
-      throws Exception {
-    return post(uriInfo, ub.postUser(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createUser(
+                @Context UriInfo uriInfo, UserRepresentation content,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return post(uriInfo, ub.postUser(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(PATH_USERID)
-  public Response getUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
-      throws Exception {
-    return get(uriInfo, ub.getUser(), params, false);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(PATH_USERID)
+        public Response getUser(@Context UriInfo uriInfo,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return get(uriInfo, ub.getUser(), params, false);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(PATH_USERID)
-  public Response updateUser(
-      @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
-      throws Exception {
-    return put(uriInfo, ub.putUser(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(PATH_USERID)
+        public Response updateUser(
+                @Context UriInfo uriInfo, UserRepresentation content,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return put(uriInfo, ub.putUser(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(PATH_USERID)
-  public Response deleteUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
-      throws Exception {
-    return delete(uriInfo, ub.deleteUser(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(PATH_USERID)
+        public Response deleteUser(@Context UriInfo uriInfo,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return delete(uriInfo, ub.deleteUser(), params);
+        }
 }

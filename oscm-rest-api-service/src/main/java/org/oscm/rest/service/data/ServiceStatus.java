@@ -1,8 +1,8 @@
 package org.oscm.rest.service.data;
 
 public enum ServiceStatus {
-  ACTIVE,
-  INACTIVE,
-  RESUMED,
-  SUSPENDED
+        ACTIVE,
+        INACTIVE,
+        RESUMED,
+        SUSPENDED
 }

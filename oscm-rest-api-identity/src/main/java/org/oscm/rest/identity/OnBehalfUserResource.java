@@ -17,24 +17,26 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class OnBehalfUserResource extends RestResource {
 
-  @EJB UserBackend ub;
+        @EJB
+        UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createOnBehalfUser(
-      @Context UriInfo uriInfo,
-      OnBehalfUserRepresentation content,
-      @BeanParam UserParameters params)
-      throws Exception {
-    return post(uriInfo, ub.postOnBehalfUser(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createOnBehalfUser(
+                @Context UriInfo uriInfo,
+                OnBehalfUserRepresentation content,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return post(uriInfo, ub.postOnBehalfUser(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response deleteOnBehalfUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
-      throws Exception {
-    return delete(uriInfo, ub.deleteOBehalfUser(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response deleteOnBehalfUser(@Context UriInfo uriInfo,
+                @BeanParam UserParameters params)
+                throws Exception {
+                return delete(uriInfo, ub.deleteOBehalfUser(), params);
+        }
 }

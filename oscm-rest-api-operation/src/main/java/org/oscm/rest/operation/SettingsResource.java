@@ -17,54 +17,58 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class SettingsResource extends RestResource {
 
-  @EJB SettingsBackend sb;
+        @EJB
+        SettingsBackend sb;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getSettings(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
-      throws Exception {
-    return getCollection(uriInfo, sb.getCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getSettings(@Context UriInfo uriInfo,
+                @BeanParam OperationParameters params)
+                throws Exception {
+                return getCollection(uriInfo, sb.getCollection(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createSetting(
-      @Context UriInfo uriInfo,
-      SettingRepresentation content,
-      @BeanParam OperationParameters params)
-      throws Exception {
-    return post(uriInfo, sb.post(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createSetting(
+                @Context UriInfo uriInfo,
+                SettingRepresentation content,
+                @BeanParam OperationParameters params)
+                throws Exception {
+                return post(uriInfo, sb.post(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response getSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
-      throws Exception {
-    return get(uriInfo, sb.get(), params, true);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response getSetting(@Context UriInfo uriInfo,
+                @BeanParam OperationParameters params)
+                throws Exception {
+                return get(uriInfo, sb.get(), params, true);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response updateUser(
-      @Context UriInfo uriInfo,
-      SettingRepresentation content,
-      @BeanParam OperationParameters params)
-      throws Exception {
-    return put(uriInfo, sb.put(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response updateUser(
+                @Context UriInfo uriInfo,
+                SettingRepresentation content,
+                @BeanParam OperationParameters params)
+                throws Exception {
+                return put(uriInfo, sb.put(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response deleteSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
-      throws Exception {
-    return delete(uriInfo, sb.delete(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response deleteSetting(@Context UriInfo uriInfo,
+                @BeanParam OperationParameters params)
+                throws Exception {
+                return delete(uriInfo, sb.delete(), params);
+        }
 }

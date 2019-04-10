@@ -9,50 +9,52 @@ import javax.ws.rs.WebApplicationException;
 
 public class MarketplaceParameters extends RequestParameters {
 
-  @QueryParam("listType")
-  private MarketplaceListType listType = MarketplaceListType.OWNED;
+        @QueryParam("listType")
+        private MarketplaceListType listType = MarketplaceListType.OWNED;
 
-  @PathParam("mId")
-  private String marketplaceId;
+        @PathParam("mId")
+        private String marketplaceId;
 
-  @PathParam("sKey")
-  private Long serviceKey;
+        @PathParam("sKey")
+        private Long serviceKey;
 
-  @Override
-  public void validateParameters() throws WebApplicationException {}
+        @Override
+        public void validateParameters() throws WebApplicationException {
+        }
 
-  @Override
-  public void update() {}
+        @Override
+        public void update() {
+        }
 
-  public String getMarketplaceId() {
-    return marketplaceId;
-  }
+        public String getMarketplaceId() {
+                return marketplaceId;
+        }
 
-  public void setMarketplaceId(String marketplaceId) {
-    this.marketplaceId = marketplaceId;
-  }
+        public void setMarketplaceId(String marketplaceId) {
+                this.marketplaceId = marketplaceId;
+        }
 
-  public MarketplaceListType getListType() {
-    return listType;
-  }
+        public MarketplaceListType getListType() {
+                return listType;
+        }
 
-  public void setListType(MarketplaceListType listType) {
-    this.listType = listType;
-  }
+        public void setListType(MarketplaceListType listType) {
+                this.listType = listType;
+        }
 
-  public Long getServiceKey() {
-    return serviceKey;
-  }
+        public Long getServiceKey() {
+                return serviceKey;
+        }
 
-  public void setServiceKey(Long serviceKey) {
-    this.serviceKey = serviceKey;
-  }
+        public void setServiceKey(Long serviceKey) {
+                this.serviceKey = serviceKey;
+        }
 
-  public VOService getService() {
-    VOService svc = new VOService();
-    if (serviceKey != null) {
-      svc.setKey(serviceKey.longValue());
-    }
-    return svc;
-  }
+        public VOService getService() {
+                VOService svc = new VOService();
+                if (serviceKey != null) {
+                        svc.setKey(serviceKey.longValue());
+                }
+                return svc;
+        }
 }

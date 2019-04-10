@@ -17,43 +17,48 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class PaymentInfoResource extends RestResource {
 
-  @EJB AccountBackend ab;
+        @EJB
+        AccountBackend ab;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getPaymentInfos(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-      throws Exception {
-    return getCollection(uriInfo, ab.getPaymentInfoCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getPaymentInfos(@Context UriInfo uriInfo,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return getCollection(uriInfo, ab.getPaymentInfoCollection(),
+                        params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response getPaymentInfo(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-      throws Exception {
-    return get(uriInfo, ab.getPaymentInfo(), params, true);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response getPaymentInfo(@Context UriInfo uriInfo,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return get(uriInfo, ab.getPaymentInfo(), params, true);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response updatePaymentInfo(
-      @Context UriInfo uriInfo,
-      PaymentInfoRepresentation content,
-      @BeanParam AccountParameters params)
-      throws Exception {
-    return put(uriInfo, ab.putPaymentInfo(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response updatePaymentInfo(
+                @Context UriInfo uriInfo,
+                PaymentInfoRepresentation content,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return put(uriInfo, ab.putPaymentInfo(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response deletePaymentInfo(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-      throws Exception {
-    return delete(uriInfo, ab.deletePaymentInfo(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response deletePaymentInfo(@Context UriInfo uriInfo,
+                @BeanParam AccountParameters params)
+                throws Exception {
+                return delete(uriInfo, ab.deletePaymentInfo(), params);
+        }
 }

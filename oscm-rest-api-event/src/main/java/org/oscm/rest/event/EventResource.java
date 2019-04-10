@@ -20,14 +20,16 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class EventResource extends RestResource {
 
-  @EJB EventBackend eb;
+        @EJB
+        EventBackend eb;
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response recordEvent(
-      @Context UriInfo uriInfo, EventRepresentation content, @BeanParam EventParameters params)
-      throws Exception {
-    return post(uriInfo, eb.post(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response recordEvent(
+                @Context UriInfo uriInfo, EventRepresentation content,
+                @BeanParam EventParameters params)
+                throws Exception {
+                return post(uriInfo, eb.post(), content, params);
+        }
 }

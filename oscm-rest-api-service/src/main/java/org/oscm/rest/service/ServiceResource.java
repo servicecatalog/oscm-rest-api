@@ -18,64 +18,69 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class ServiceResource extends RestResource {
 
-  @EJB ServiceBackend sb;
+        @EJB
+        ServiceBackend sb;
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getServices(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
-      throws Exception {
-    return getCollection(uriInfo, sb.getCollection(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getServices(@Context UriInfo uriInfo,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return getCollection(uriInfo, sb.getCollection(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @POST
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response createService(
-      @Context UriInfo uriInfo,
-      ServiceDetailsRepresentation content,
-      @BeanParam ServiceParameters params)
-      throws Exception {
-    return post(uriInfo, sb.post(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @POST
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response createService(
+                @Context UriInfo uriInfo,
+                ServiceDetailsRepresentation content,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return post(uriInfo, sb.post(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response getService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
-      throws Exception {
-    return get(uriInfo, sb.get(), params, true);
-  }
+        @Since(CommonParams.VERSION_1)
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response getService(@Context UriInfo uriInfo,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return get(uriInfo, sb.get(), params, true);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response updateService(
-      @Context UriInfo uriInfo,
-      ServiceDetailsRepresentation content,
-      @BeanParam ServiceParameters params)
-      throws Exception {
-    return put(uriInfo, sb.put(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response updateService(
+                @Context UriInfo uriInfo,
+                ServiceDetailsRepresentation content,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return put(uriInfo, sb.put(), content, params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
-  public Response deleteService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
-      throws Exception {
-    return delete(uriInfo, sb.delete(), params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @DELETE
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID)
+        public Response deleteService(@Context UriInfo uriInfo,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return delete(uriInfo, sb.delete(), params);
+        }
 
-  @Since(CommonParams.VERSION_1)
-  @PUT
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID + "/status")
-  public Response setServiceState(
-      @Context UriInfo uriInfo, StatusRepresentation content, @BeanParam ServiceParameters params)
-      throws Exception {
-    return put(uriInfo, sb.putStatus(), content, params);
-  }
+        @Since(CommonParams.VERSION_1)
+        @PUT
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path(CommonParams.PATH_ID + "/status")
+        public Response setServiceState(
+                @Context UriInfo uriInfo, StatusRepresentation content,
+                @BeanParam ServiceParameters params)
+                throws Exception {
+                return put(uriInfo, sb.putStatus(), content, params);
+        }
 }

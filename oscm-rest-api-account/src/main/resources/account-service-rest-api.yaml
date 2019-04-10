@@ -54,11 +54,11 @@ paths:
             $ref: '#/definitions/Organization'
   /billingcontacts
   get: - description: Get existing billing contacts for the calling users organization.
-         responses:
-           200:
-             description: A collection of billing contacts
-             schema:
-               $ref: '#/definitions/CollectionBillingContact'
+           responses:
+             200:
+               description: A collection of billing contacts
+               schema:
+                 $ref: '#/definitions/CollectionBillingContact'
   post:
     description: Create a billing contact in the calling users organization.
     parameters:

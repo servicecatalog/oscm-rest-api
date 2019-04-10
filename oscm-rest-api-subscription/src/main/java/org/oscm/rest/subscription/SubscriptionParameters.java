@@ -8,31 +8,33 @@ import javax.ws.rs.WebApplicationException;
 
 public class SubscriptionParameters extends RequestParameters {
 
-  @QueryParam("userId")
-  private String userId;
+        @QueryParam("userId")
+        private String userId;
 
-  @PathParam("licKey")
-  private Long licKey;
+        @PathParam("licKey")
+        private Long licKey;
 
-  @Override
-  public void validateParameters() throws WebApplicationException {}
+        @Override
+        public void validateParameters() throws WebApplicationException {
+        }
 
-  @Override
-  public void update() {}
+        @Override
+        public void update() {
+        }
 
-  public String getUserId() {
-    return userId;
-  }
+        public String getUserId() {
+                return userId;
+        }
 
-  public void setUserId(String userId) {
-    this.userId = userId;
-  }
+        public void setUserId(String userId) {
+                this.userId = userId;
+        }
 
-  public Long getLicKey() {
-    return licKey;
-  }
+        public Long getLicKey() {
+                return licKey;
+        }
 
-  public void setLicKey(Long licKey) {
-    this.licKey = licKey;
-  }
+        public void setLicKey(Long licKey) {
+                this.licKey = licKey;
+        }
 }
