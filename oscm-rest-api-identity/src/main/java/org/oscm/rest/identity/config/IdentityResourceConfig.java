@@ -9,12 +9,6 @@
  */
 package org.oscm.rest.identity.config;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
@@ -22,6 +16,11 @@ import org.oscm.rest.identity.LdapUserResource;
 import org.oscm.rest.identity.OnBehalfUserResource;
 import org.oscm.rest.identity.RolesResource;
 import org.oscm.rest.identity.UserResource;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Registers resources and providers of the user component to the application.
