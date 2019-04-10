@@ -1,10 +1,17 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription.data;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.VOPriceModel;

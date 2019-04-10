@@ -1,11 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription.data;
 
+import java.util.List;
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
-import java.util.List;
 
 public class SubscriptionDetailsRepresentation extends Representation {
 

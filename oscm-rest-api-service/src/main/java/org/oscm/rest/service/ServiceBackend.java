@@ -1,5 +1,17 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service;
 
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
@@ -10,10 +22,6 @@ import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.service.data.ServiceDetailsRepresentation;
 import org.oscm.rest.service.data.ServiceRepresentation;
 import org.oscm.rest.service.data.StatusRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.List;
 
 @Stateless
 public class ServiceBackend {

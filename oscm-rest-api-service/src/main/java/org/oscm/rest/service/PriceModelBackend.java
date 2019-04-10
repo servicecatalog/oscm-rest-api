@@ -1,5 +1,16 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
@@ -8,9 +19,6 @@ import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.service.data.PriceModelRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 
 @Stateless
 public class PriceModelBackend {

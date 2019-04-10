@@ -1,11 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.event;
-
-import org.oscm.internal.intf.EventService;
-import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.event.data.EventRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import org.oscm.internal.intf.EventService;
+import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.event.data.EventRepresentation;
 
 @Stateless
 public class EventBackend {

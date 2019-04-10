@@ -1,9 +1,17 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOParameter;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
 
 public class ParameterRepresentation extends Representation {
 

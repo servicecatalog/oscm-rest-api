@@ -1,13 +1,20 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.account.data;
 
-import lombok.Generated;
-import org.oscm.internal.vo.VOBillingContact;
-import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import lombok.Generated;
+import org.oscm.internal.vo.VOBillingContact;
+import org.oscm.rest.common.Representation;
 
 public class BillingContactRepresentation extends Representation {
 

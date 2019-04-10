@@ -1,11 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
+import java.util.List;
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.Representation;
 import org.oscm.rest.common.RepresentationCollection;
-
-import javax.ws.rs.WebApplicationException;
-import java.util.List;
 
 public class OrganizationRepresentation extends Representation {
 

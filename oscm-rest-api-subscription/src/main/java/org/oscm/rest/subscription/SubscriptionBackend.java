@@ -1,5 +1,17 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription;
 
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
@@ -11,10 +23,6 @@ import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
 import org.oscm.rest.subscription.data.SubscriptionDetailsRepresentation;
 import org.oscm.rest.subscription.data.SubscriptionRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.List;
 
 @Stateless
 public class SubscriptionBackend {

@@ -1,15 +1,22 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.account.data;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
 import org.oscm.internal.vo.Setting;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 public class AccountRepresentation extends Representation {
 

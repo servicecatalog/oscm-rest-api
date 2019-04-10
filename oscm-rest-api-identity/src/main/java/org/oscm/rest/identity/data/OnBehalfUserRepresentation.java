@@ -1,10 +1,18 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.identity.data;
 
+import javax.ws.rs.WebApplicationException;
 import lombok.Generated;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
 
 public class OnBehalfUserRepresentation extends Representation {
 

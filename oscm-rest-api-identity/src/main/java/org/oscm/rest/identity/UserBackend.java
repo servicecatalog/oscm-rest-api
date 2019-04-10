@@ -1,5 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.identity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
@@ -8,12 +22,6 @@ import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
 import org.oscm.rest.identity.data.RolesRepresentation;
 import org.oscm.rest.identity.data.UserRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 @Stateless
 public class UserBackend {

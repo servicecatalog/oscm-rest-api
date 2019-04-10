@@ -1,11 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.account.data;
 
+import javax.ws.rs.WebApplicationException;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
 
 public class UserRepresentation extends Representation {
 

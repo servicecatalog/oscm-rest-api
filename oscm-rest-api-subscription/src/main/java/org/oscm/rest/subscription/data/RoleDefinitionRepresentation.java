@@ -1,7 +1,15 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription.data;
 
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
 

@@ -1,5 +1,18 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.types.enumtypes.OfferingType;
 import org.oscm.internal.types.enumtypes.ServiceAccessType;
 import org.oscm.internal.types.enumtypes.ServiceStatus;
@@ -8,11 +21,6 @@ import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOService;
 import org.oscm.rest.common.Representation;
 import org.oscm.rest.common.RepresentationCollection;
-
-import javax.ws.rs.WebApplicationException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ServiceRepresentation extends Representation {
 

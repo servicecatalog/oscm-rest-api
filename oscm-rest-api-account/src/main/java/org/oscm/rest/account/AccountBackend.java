@@ -1,5 +1,18 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.account;
 
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
@@ -13,11 +26,6 @@ import org.oscm.rest.account.data.OrganizationRepresentation;
 import org.oscm.rest.account.data.PaymentInfoRepresentation;
 import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.Collection;
-import java.util.List;
 
 @Stateless
 public class AccountBackend {

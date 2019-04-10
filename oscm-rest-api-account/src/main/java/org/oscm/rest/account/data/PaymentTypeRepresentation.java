@@ -1,11 +1,18 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.account.data;
 
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.PaymentCollectionType;
 import org.oscm.internal.vo.VOPaymentType;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
 
 public class PaymentTypeRepresentation extends Representation {
 

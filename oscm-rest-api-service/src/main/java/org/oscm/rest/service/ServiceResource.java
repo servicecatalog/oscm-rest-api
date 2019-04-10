@@ -1,10 +1,13 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service;
-
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.service.data.ServiceDetailsRepresentation;
-import org.oscm.rest.service.data.StatusRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -13,6 +16,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.service.data.ServiceDetailsRepresentation;
+import org.oscm.rest.service.data.StatusRepresentation;
 
 @Path(CommonParams.PATH_VERSION + "/services")
 @Stateless

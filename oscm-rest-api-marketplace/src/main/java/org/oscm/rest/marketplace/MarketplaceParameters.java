@@ -1,11 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.marketplace;
-
-import org.oscm.internal.vo.VOService;
-import org.oscm.rest.common.RequestParameters;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import org.oscm.internal.vo.VOService;
+import org.oscm.rest.common.RequestParameters;
 
 public class MarketplaceParameters extends RequestParameters {
 

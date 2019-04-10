@@ -1,12 +1,20 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
-import org.oscm.internal.vo.VOPricedRole;
-import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.WebApplicationException;
+import org.oscm.internal.vo.VOPricedRole;
+import org.oscm.rest.common.Representation;
 
 public class PricedRoleRepresentation extends Representation {
 

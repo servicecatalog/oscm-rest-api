@@ -1,10 +1,18 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription;
-
-import org.oscm.rest.common.RequestParameters;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import org.oscm.rest.common.RequestParameters;
 
 public class SubscriptionParameters extends RequestParameters {
 

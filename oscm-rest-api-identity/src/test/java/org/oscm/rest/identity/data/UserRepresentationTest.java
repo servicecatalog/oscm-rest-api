@@ -1,4 +1,15 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.identity.data;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Test;
@@ -7,8 +18,6 @@ import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserRepresentationTest {
 

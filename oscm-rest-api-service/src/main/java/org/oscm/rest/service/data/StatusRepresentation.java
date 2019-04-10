@@ -1,8 +1,16 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
-import org.oscm.rest.common.Representation;
-
 import javax.ws.rs.WebApplicationException;
+import org.oscm.rest.common.Representation;
 
 public class StatusRepresentation extends Representation {
 

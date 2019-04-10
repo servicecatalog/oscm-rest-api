@@ -1,15 +1,23 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.types.enumtypes.ParameterModificationType;
 import org.oscm.internal.types.enumtypes.ParameterType;
 import org.oscm.internal.types.enumtypes.ParameterValueType;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.internal.vo.VOParameterOption;
 import org.oscm.rest.common.Representation;
-
-import javax.ws.rs.WebApplicationException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParameterDefinitionRepresentation extends Representation {
 

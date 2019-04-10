@@ -1,16 +1,24 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription;
 
+import java.util.Collections;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.subscription.data.UsageLicenseRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.Collections;
-import java.util.List;
 
 @Stateless
 public class UsageLicenseBackend {
