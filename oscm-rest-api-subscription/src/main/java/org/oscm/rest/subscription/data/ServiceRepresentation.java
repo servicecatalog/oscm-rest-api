@@ -1,94 +1,100 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription.data;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOService;
 import org.oscm.rest.common.Representation;
 
-import javax.ws.rs.WebApplicationException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ServiceRepresentation extends Representation {
 
-        // TODO price model
-        private String serviceId;
+  // TODO price model
+  private String serviceId;
 
-        private List<ParameterRepresentation> parameters = new ArrayList<ParameterRepresentation>();
+  private List<ParameterRepresentation> parameters = new ArrayList<ParameterRepresentation>();
 
-        private transient VOService vo;
+  private transient VOService vo;
 
-        public ServiceRepresentation() {
-                this(new VOService());
-        }
+  public ServiceRepresentation() {
+    this(new VOService());
+  }
 
-        public ServiceRepresentation(VOService svc) {
-                vo = svc;
-        }
+  public ServiceRepresentation(VOService svc) {
+    vo = svc;
+  }
 
-        @Override
-        public void validateContent() throws WebApplicationException {
-        }
+  @Override
+  public void validateContent() throws WebApplicationException {}
 
-        @Override
-        public void update() {
-                vo.setKey(convertIdToKey());
-                vo.setServiceId(serviceId);
-                vo.setVersion(convertETagToVersion());
-                if (parameters != null) {
-                        for (ParameterRepresentation pr : parameters) {
-                                pr.update();
-                                vo.getParameters().add(pr.getVO());
-                        }
-                }
-        }
+  @Override
+  public void update() {
+    vo.setKey(convertIdToKey());
+    vo.setServiceId(serviceId);
+    vo.setVersion(convertETagToVersion());
+    if (parameters != null) {
+      for (ParameterRepresentation pr : parameters) {
+        pr.update();
+        vo.getParameters().add(pr.getVO());
+      }
+    }
+  }
 
-        @Override
-        public void convert() {
-                setId(Long.valueOf(vo.getKey()));
-                setServiceId(vo.getServiceId());
-                setETag(Long.valueOf(vo.getVersion()));
-                List<VOParameter> params = vo.getParameters();
-                for (VOParameter p : params) {
-                        ParameterRepresentation pr = new ParameterRepresentation(
-                                p);
-                        pr.convert();
-                        parameters.add(pr);
-                }
-        }
+  @Override
+  public void convert() {
+    setId(Long.valueOf(vo.getKey()));
+    setServiceId(vo.getServiceId());
+    setETag(Long.valueOf(vo.getVersion()));
+    List<VOParameter> params = vo.getParameters();
+    for (VOParameter p : params) {
+      ParameterRepresentation pr = new ParameterRepresentation(p);
+      pr.convert();
+      parameters.add(pr);
+    }
+  }
 
-        public VOService getVO() {
-                return vo;
-        }
+  public VOService getVO() {
+    return vo;
+  }
 
-        public List<ParameterRepresentation> getParameters() {
-                return parameters;
-        }
+  public List<ParameterRepresentation> getParameters() {
+    return parameters;
+  }
 
-        public void setParameters(List<ParameterRepresentation> parameters) {
-                this.parameters = parameters;
-        }
+  public void setParameters(List<ParameterRepresentation> parameters) {
+    this.parameters = parameters;
+  }
 
-        public String getServiceId() {
-                return serviceId;
-        }
+  public String getServiceId() {
+    return serviceId;
+  }
 
-        public void setServiceId(String serviceId) {
-                this.serviceId = serviceId;
-        }
+  public void setServiceId(String serviceId) {
+    this.serviceId = serviceId;
+  }
 
-        // FIXME move to super class
-        protected long convertIdToKey() {
-                if (getId() == null) {
-                        return 0L;
-                }
-                return getId().longValue();
-        }
+  // FIXME move to super class
+  protected long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
+    }
+    return getId().longValue();
+  }
 
-        // FIXME move to super class
-        protected int convertETagToVersion() {
-                if (getETag() == null) {
-                        return 0;
-                }
-                return getETag().intValue();
-        }
+  // FIXME move to super class
+  protected int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
+    }
+    return getETag().intValue();
+  }
 }

@@ -1,3 +1,12 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.identity;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,72 +19,57 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.IdentityService;
 
-@ExtendWith({ MockitoExtension.class })
+@ExtendWith({MockitoExtension.class})
 public class UserBackendTest {
-        // TODO: These tests should be in fact integration tests
+  // TODO: These tests should be in fact integration tests
 
-        @Mock
-        private IdentityService identityService;
-        @InjectMocks
-        @Spy
-        private UserBackend userBackend;
+  @Mock private IdentityService identityService;
+  @InjectMocks @Spy private UserBackend userBackend;
 
-        @BeforeEach
-        public void setUp() {
-        }
+  @BeforeEach
+  public void setUp() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldGetLdapUsers() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldGetLdapUsers() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldPostLdapUsers() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldPostLdapUsers() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldGetUsers() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldGetUsers() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldPostUser() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldPostUser() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldGetUser() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldGetUser() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldPutUser() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldPutUser() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldDeleteUser() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldDeleteUser() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldGetRoles() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldGetRoles() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldPutRoles() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldPutRoles() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldPutOnBehalfUser() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldPutOnBehalfUser() {}
 
-        @Test
-        @Disabled("Not implemented")
-        public void shouldDeleteOnBehalfUser() {
-        }
+  @Test
+  @Disabled("Not implemented")
+  public void shouldDeleteOnBehalfUser() {}
 }
