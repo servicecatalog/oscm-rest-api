@@ -1,11 +1,18 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.types.enumtypes.OfferingType;
 import org.oscm.internal.types.enumtypes.ServiceAccessType;
 import org.oscm.internal.types.enumtypes.ServiceStatus;
@@ -17,229 +24,225 @@ import org.oscm.rest.common.RepresentationCollection;
 
 public class ServiceRepresentation extends Representation {
 
-    private List<ParameterRepresentation> parameters = new ArrayList<ParameterRepresentation>();
-    private String description;
-    private String name;
-    private String serviceId;
-    private String technicalId;
-    private ServiceStatus status;
-    private ServiceAccessType accessType;
-    private String shortDescription;
-    private OfferingType offeringType;
-    private String configuratorUrl;
-    private String billingIdentifier;
-    private ServiceType serviceType;
+  private List<ParameterRepresentation> parameters = new ArrayList<ParameterRepresentation>();
+  private String description;
+  private String name;
+  private String serviceId;
+  private String technicalId;
+  private ServiceStatus status;
+  private ServiceAccessType accessType;
+  private String shortDescription;
+  private OfferingType offeringType;
+  private String configuratorUrl;
+  private String billingIdentifier;
+  private ServiceType serviceType;
 
-    private transient VOService vo;
+  private transient VOService vo;
 
-    public ServiceRepresentation() {
-        this(new VOService());
+  public ServiceRepresentation() {
+    this(new VOService());
+  }
+
+  public ServiceRepresentation(VOService svc) {
+    vo = svc;
+  }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
+
+  @Override
+  public void update() {
+    vo.setAccessType(getAccessType());
+    vo.setBillingIdentifier(getBillingIdentifier());
+    vo.setConfiguratorUrl(getConfiguratorUrl());
+    vo.setDescription(getDescription());
+    vo.setKey(convertIdToKey());
+    vo.setName(getName());
+    vo.setOfferingType(getOfferingType());
+    vo.setParameters(updateParameters());
+    vo.setServiceId(getServiceId());
+    vo.setServiceType(getServiceType());
+    vo.setShortDescription(getShortDescription());
+    vo.setStatus(getStatus());
+    vo.setTechnicalId(getTechnicalId());
+    vo.setVersion(convertETagToVersion());
+  }
+
+  private List<VOParameter> updateParameters() {
+    List<VOParameter> result = new ArrayList<VOParameter>();
+    if (parameters == null) {
+      return result;
     }
-
-    public ServiceRepresentation(VOService svc) {
-        vo = svc;
+    for (ParameterRepresentation p : parameters) {
+      p.update();
+      result.add(p.getVO());
     }
+    return result;
+  }
 
-    @Override
-    public void validateContent() throws WebApplicationException {
+  @Override
+  public void convert() {
+    setAccessType(vo.getAccessType());
+    setBillingIdentifier(vo.getBillingIdentifier());
+    setConfiguratorUrl(vo.getConfiguratorUrl());
+    setDescription(vo.getDescription());
+    setId(Long.valueOf(vo.getKey()));
+    setName(vo.getName());
+    setOfferingType(vo.getOfferingType());
+    setParameters(convertParameters());
+    setServiceId(vo.getServiceId());
+    setServiceType(vo.getServiceType());
+    setShortDescription(vo.getShortDescription());
+    setStatus(vo.getStatus());
+    setETag(Long.valueOf(vo.getVersion()));
+    setTechnicalId(vo.getTechnicalId());
+  }
 
+  private List<ParameterRepresentation> convertParameters() {
+    List<ParameterRepresentation> result = new ArrayList<ParameterRepresentation>();
+    if (vo == null || vo.getParameters() == null) {
+      return result;
     }
-
-    @Override
-    public void update() {
-        vo.setAccessType(getAccessType());
-        vo.setBillingIdentifier(getBillingIdentifier());
-        vo.setConfiguratorUrl(getConfiguratorUrl());
-        vo.setDescription(getDescription());
-        vo.setKey(convertIdToKey());
-        vo.setName(getName());
-        vo.setOfferingType(getOfferingType());
-        vo.setParameters(updateParameters());
-        vo.setServiceId(getServiceId());
-        vo.setServiceType(getServiceType());
-        vo.setShortDescription(getShortDescription());
-        vo.setStatus(getStatus());
-        vo.setTechnicalId(getTechnicalId());
-        vo.setVersion(convertETagToVersion());
+    for (VOParameter p : vo.getParameters()) {
+      ParameterRepresentation pr = new ParameterRepresentation(p);
+      pr.convert();
+      result.add(pr);
     }
+    return result;
+  }
 
-    private List<VOParameter> updateParameters() {
-        List<VOParameter> result = new ArrayList<VOParameter>();
-        if (parameters == null) {
-            return result;
-        }
-        for (ParameterRepresentation p : parameters) {
-            p.update();
-            result.add(p.getVO());
-        }
-        return result;
-    }
+  public VOService getVO() {
+    return vo;
+  }
 
-    @Override
-    public void convert() {
-        setAccessType(vo.getAccessType());
-        setBillingIdentifier(vo.getBillingIdentifier());
-        setConfiguratorUrl(vo.getConfiguratorUrl());
-        setDescription(vo.getDescription());
-        setId(Long.valueOf(vo.getKey()));
-        setName(vo.getName());
-        setOfferingType(vo.getOfferingType());
-        setParameters(convertParameters());
-        setServiceId(vo.getServiceId());
-        setServiceType(vo.getServiceType());
-        setShortDescription(vo.getShortDescription());
-        setStatus(vo.getStatus());
-        setETag(Long.valueOf(vo.getVersion()));
-        setTechnicalId(vo.getTechnicalId());
-    }
+  public List<ParameterRepresentation> getParameters() {
+    return parameters;
+  }
 
-    private List<ParameterRepresentation> convertParameters() {
-        List<ParameterRepresentation> result = new ArrayList<ParameterRepresentation>();
-        if (vo == null || vo.getParameters() == null) {
-            return result;
-        }
-        for (VOParameter p : vo.getParameters()) {
-            ParameterRepresentation pr = new ParameterRepresentation(p);
-            pr.convert();
-            result.add(pr);
-        }
-        return result;
-    }
+  public void setParameters(List<ParameterRepresentation> parameters) {
+    this.parameters = parameters;
+  }
 
-    public VOService getVO() {
-        return vo;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public List<ParameterRepresentation> getParameters() {
-        return parameters;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setParameters(List<ParameterRepresentation> parameters) {
-        this.parameters = parameters;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getServiceId() {
+    return serviceId;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setServiceId(String serviceId) {
+    this.serviceId = serviceId;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getTechnicalId() {
+    return technicalId;
+  }
 
-    public String getServiceId() {
-        return serviceId;
-    }
+  public void setTechnicalId(String technicalId) {
+    this.technicalId = technicalId;
+  }
 
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
-    }
+  public ServiceStatus getStatus() {
+    return status;
+  }
 
-    public String getTechnicalId() {
-        return technicalId;
-    }
+  public void setStatus(ServiceStatus status) {
+    this.status = status;
+  }
 
-    public void setTechnicalId(String technicalId) {
-        this.technicalId = technicalId;
-    }
+  public ServiceAccessType getAccessType() {
+    return accessType;
+  }
 
-    public ServiceStatus getStatus() {
-        return status;
-    }
+  public void setAccessType(ServiceAccessType accessType) {
+    this.accessType = accessType;
+  }
 
-    public void setStatus(ServiceStatus status) {
-        this.status = status;
-    }
+  public String getShortDescription() {
+    return shortDescription;
+  }
 
-    public ServiceAccessType getAccessType() {
-        return accessType;
-    }
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
+  }
 
-    public void setAccessType(ServiceAccessType accessType) {
-        this.accessType = accessType;
-    }
+  public OfferingType getOfferingType() {
+    return offeringType;
+  }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
+  public void setOfferingType(OfferingType offeringType) {
+    this.offeringType = offeringType;
+  }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
+  public String getConfiguratorUrl() {
+    return configuratorUrl;
+  }
 
-    public OfferingType getOfferingType() {
-        return offeringType;
-    }
+  public void setConfiguratorUrl(String configuratorUrl) {
+    this.configuratorUrl = configuratorUrl;
+  }
 
-    public void setOfferingType(OfferingType offeringType) {
-        this.offeringType = offeringType;
-    }
+  public String getBillingIdentifier() {
+    return billingIdentifier;
+  }
 
-    public String getConfiguratorUrl() {
-        return configuratorUrl;
-    }
+  public void setBillingIdentifier(String billingIdentifier) {
+    this.billingIdentifier = billingIdentifier;
+  }
 
-    public void setConfiguratorUrl(String configuratorUrl) {
-        this.configuratorUrl = configuratorUrl;
-    }
+  public ServiceType getServiceType() {
+    return serviceType;
+  }
 
-    public String getBillingIdentifier() {
-        return billingIdentifier;
-    }
+  public void setServiceType(ServiceType serviceType) {
+    this.serviceType = serviceType;
+  }
 
-    public void setBillingIdentifier(String billingIdentifier) {
-        this.billingIdentifier = billingIdentifier;
+  public static Collection<ServiceRepresentation> toCollection(Collection<VOService> list) {
+    Collection<ServiceRepresentation> result = new ArrayList<ServiceRepresentation>();
+    for (VOService vo : list) {
+      result.add(new ServiceRepresentation(vo));
     }
+    return result;
+  }
 
-    public ServiceType getServiceType() {
-        return serviceType;
+  public static List<VOService> toList(RepresentationCollection<ServiceRepresentation> content) {
+    if (content == null || content.getItems() == null) {
+      return null;
     }
+    List<VOService> result = new ArrayList<VOService>();
+    for (ServiceRepresentation sr : content.getItems()) {
+      result.add(sr.getVO());
+    }
+    return result;
+  }
 
-    public void setServiceType(ServiceType serviceType) {
-        this.serviceType = serviceType;
+  // FIXME move to super class
+  protected long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
     }
+    return getId().longValue();
+  }
 
-    public static Collection<ServiceRepresentation> toCollection(
-            Collection<VOService> list) {
-        Collection<ServiceRepresentation> result = new ArrayList<ServiceRepresentation>();
-        for (VOService vo : list) {
-            result.add(new ServiceRepresentation(vo));
-        }
-        return result;
+  // FIXME move to super class
+  protected int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
     }
-
-    public static List<VOService> toList(
-            RepresentationCollection<ServiceRepresentation> content) {
-        if (content == null || content.getItems() == null) {
-            return null;
-        }
-        List<VOService> result = new ArrayList<VOService>();
-        for (ServiceRepresentation sr : content.getItems()) {
-            result.add(sr.getVO());
-        }
-        return result;
-    }
-
-    // FIXME move to super class
-    protected long convertIdToKey() {
-        if (getId() == null) {
-            return 0L;
-        }
-        return getId().longValue();
-    }
-
-    // FIXME move to super class
-    protected int convertETagToVersion() {
-        if (getETag() == null) {
-            return 0;
-        }
-        return getETag().intValue();
-    }
+    return getETag().intValue();
+  }
 }

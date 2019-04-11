@@ -16,7 +16,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 securityDefinitions:
   authentication:
     type: basic
@@ -24,121 +24,121 @@ securityDefinitions:
 
 security:
   - authentication: []
-  
+
 paths:
 
   /marketplaces
-    get:
-      description: Get marketplaces according to specified list type
-      parameters:
-        - name: listType
-          in: query
-          description: the list type
-          type: string
-            enum:
-              - OWNED
-              - ALL
-              - PUBLISH
-              - ACCESSIBLE
-      responses:
-        200:
-          description: the marketplace list
-          schema:
-              $ref: '#/definitions/CollectionMarketplace'
-    post:
-      description: Create a marketplace
-      parameters:
-        - name: marketplace
-          in: body
-          description: The marketplace to create
-          required: true
-          schema:
-            $ref: '#/definitions/Marketplace'
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The ID of the new marketplace
-              type: number
-              format: long
+  get:
+    description: Get marketplaces according to specified list type
+    parameters:
+      - name: listType
+        in: query
+        description: the list type
+        type: string
+          enum:
+            - OWNED
+            - ALL
+            - PUBLISH
+            - ACCESSIBLE
+    responses:
+      200:
+        description: the marketplace list
+        schema:
+          $ref: '#/definitions/CollectionMarketplace'
+  post:
+    description: Create a marketplace
+    parameters:
+      - name: marketplace
+        in: body
+        description: The marketplace to create
+        required: true
+        schema:
+          $ref: '#/definitions/Marketplace'
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The ID of the new marketplace
+            type: number
+            format: long
 
   /marketplaces/{id}
-    get:
-      description: get the marketplace with the specified ID
-      parameters:
-        - name: id
-          in: path
-          description: The ID of the marketplace
-          required: true
-          type: number
-          format: long
-      responses:
-        200:
-          description: the marketplace list
-          schema:
-              $ref: '#/definitions/Marketplace'
-    put:
-      description: Update the specified marketplace
-      parameters:
-        - name: id
-          in: path
-          description: The marketplace id
-          required: true
-          type: number
-          format: long
-        - name: marketplace
-          in: body
-          description: The marketplace with the new values 
-          required: true
-          schema:
-            $ref: '#/definitions/Marketplace'
-        - name: If-Match
-          in: header
-          description: The ETag of the user for concurrency checks. If not present or '*',  concurrency is ignored.
-          required: false
-          type: string
-      responses:
-        204:
-          description: No content
-    delete:
-      description: Delete the specified marketplace
-      parameters:
-        - name: id
-          in: path
-          description: The marketplace ID
-          required: true
-          type: number
-          format: long
-      responses:
-        204:
-          description: No content
+  get:
+    description: get the marketplace with the specified ID
+    parameters:
+      - name: id
+        in: path
+        description: The ID of the marketplace
+        required: true
+        type: number
+        format: long
+    responses:
+      200:
+        description: the marketplace list
+        schema:
+          $ref: '#/definitions/Marketplace'
+  put:
+    description: Update the specified marketplace
+    parameters:
+      - name: id
+        in: path
+        description: The marketplace id
+        required: true
+        type: number
+        format: long
+      - name: marketplace
+        in: body
+        description: The marketplace with the new values
+        required: true
+        schema:
+          $ref: '#/definitions/Marketplace'
+      - name: If-Match
+        in: header
+        description: The ETag of the user for concurrency checks. If not present or '*',  concurrency is ignored.
+        required: false
+        type: string
+    responses:
+      204:
+        description: No content
+  delete:
+    description: Delete the specified marketplace
+    parameters:
+      - name: id
+        in: path
+        description: The marketplace ID
+        required: true
+        type: number
+        format: long
+    responses:
+      204:
+        description: No content
 
   /marketplaces/{id}/entries/{sKey}
-    put: - set/update the catalog entry for the service ('sKey')
-      description: Set/update the catalog entry for the service specified path parameter 'sKey'
-      parameters:
-        - name: id
-          in: path
-          description: The marketplace id
-          required: true
-          type: number
-          format: long
-        - name: sKey
-          in: path
-          description: The service id
-          required: true
-          type: number
-          format: long
-        - name: catalog entry
-          in: body
-          description: The catalog entry with the new values 
-          required: true
-          schema:
-            $ref: '#/definitions/Entry'
-      responses:
-        204:
-          description: No content
+  put: - set/update the catalog entry for the service ('sKey')
+         description: Set/update the catalog entry for the service specified path parameter 'sKey'
+         parameters:
+           - name: id
+             in: path
+             description: The marketplace id
+             required: true
+             type: number
+             format: long
+           - name: sKey
+             in: path
+             description: The service id
+             required: true
+             type: number
+             format: long
+           - name: catalog entry
+             in: body
+             description: The catalog entry with the new values
+             required: true
+             schema:
+               $ref: '#/definitions/Entry'
+         responses:
+           204:
+             description: No content
 
 definitions:
 
@@ -152,29 +152,29 @@ definitions:
         type: integer
         format: int64
       marketplaceId;
-        type: string
+      type: string
       name;
-        type: string
+      type: string
       open;
-        type: boolean
+      type: boolean
       tenantId;
-        type: string
+      type: string
       taggingEnabled;
-        type: boolean
+      type: boolean
       reviewEnabled;
-        type: boolean
+      type: boolean
       socialBookmarkEnabled;
-        type: boolean
+      type: boolean
       categoriesEnabled;
-        type: boolean
+      type: boolean
       restricted;
-        type: boolean
+      type: boolean
       hasPublicLandingPage;
-        type: boolean
+      type: boolean
       owningOrganizationName;
-        type: string
+      type: string
       owningOrganizationId;
-        type: string
+      type: string
 
   Category:
     type: object
@@ -186,8 +186,8 @@ definitions:
         type: integer
         format: int64
       categoryId;
-        type: string
-  
+      type: string
+
   Entry:
     type: object
     properties:
@@ -198,13 +198,13 @@ definitions:
         type: integer
         format: int64
       anonymousVisible;
-        type: boolean
+      type: boolean
       categories;
-        type: array
-        items: 
-          $ref: '#/definitions/Category'
+      type: array
+      items:
+        $ref: '#/definitions/Category'
       visibleInCatalog;
-        type: boolean
+      type: boolean
 
   CollectionMarketplace:
     type: object
@@ -212,7 +212,7 @@ definitions:
     properties:
       items:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/Marketplace'
 
   Error:

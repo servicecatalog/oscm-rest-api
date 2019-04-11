@@ -1,14 +1,20 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.identity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
 import org.oscm.internal.intf.IdentityService;
-import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.RepresentationCollection;
@@ -20,158 +26,95 @@ import org.oscm.rest.identity.data.UserRepresentation;
 @Stateless
 public class UserBackend {
 
-    @EJB
-    IdentityService is;
+  @EJB IdentityService is;
 
-    public RestBackend.GetCollection<UserRepresentation, UserParameters> getLdapUsers() {
-        return new RestBackend.GetCollection<UserRepresentation, UserParameters>() {
+  public RestBackend.GetCollection<UserRepresentation, UserParameters> getLdapUsers() {
+    return params -> {
+      Collection<UserRepresentation> list =
+          UserRepresentation.convert(is.searchLdapUsers(params.getPattern()));
+      return new RepresentationCollection<>(list);
+    };
+  }
 
-            @Override
-            public RepresentationCollection<UserRepresentation> getCollection(
-                    UserParameters params) throws Exception {
-                Collection<UserRepresentation> list = UserRepresentation
-                        .convert(is.searchLdapUsers(params.getPattern()));
-                return new RepresentationCollection<UserRepresentation>(list);
-            }
-        };
-    }
+  public RestBackend.Post<UserRepresentation, UserParameters> postLdapUser() {
+    return (content, params) -> {
+      VOUserDetails vo = content.getVO();
+      is.importLdapUsers(Collections.singletonList(vo), params.getMarketplaceId());
+      return vo.getUserId();
+    };
+  }
 
-    public RestBackend.Post<UserRepresentation, UserParameters> postLdapUser() {
-        return new RestBackend.Post<UserRepresentation, UserParameters>() {
+  public RestBackend.GetCollection<UserRepresentation, UserParameters> getUsers() {
+    return params -> {
+      Collection<UserRepresentation> list =
+          UserRepresentation.convert(is.getUsersForOrganization());
+      return new RepresentationCollection<>(list);
+    };
+  }
 
-            @Override
-            public Object post(UserRepresentation content, UserParameters params)
-                    throws Exception {
-                VOUserDetails vo = content.getVO();
-                is.importLdapUsers(Collections.singletonList(vo),
-                        params.getMarketplaceId());
-                return vo.getUserId();
-            }
-        };
-    }
+  public RestBackend.Post<UserRepresentation, UserParameters> postUser() {
+    return (content, params) -> {
+      VOUserDetails vo = content.getVO();
+      vo = is.createUser(vo, new ArrayList<>(vo.getUserRoles()), params.getMarketplaceId());
+      if (vo == null) {
+        return null;
+      }
+      return vo.getUserId();
+    };
+  }
 
-    public RestBackend.GetCollection<UserRepresentation, UserParameters> getUsers() {
-        return new RestBackend.GetCollection<UserRepresentation, UserParameters>() {
+  public RestBackend.Get<UserRepresentation, UserParameters> getUser() {
+    return params -> {
+      VOUser vo = new VOUser();
+      vo.setUserId(params.getUserId());
+      return new UserRepresentation(is.getUserDetails(vo));
+    };
+  }
 
-            @Override
-            public RepresentationCollection<UserRepresentation> getCollection(
-                    UserParameters params) throws Exception {
-                Collection<UserRepresentation> list = UserRepresentation
-                        .convert(is.getUsersForOrganization());
-                return new RepresentationCollection<UserRepresentation>(list);
-            }
+  public RestBackend.Put<UserRepresentation, UserParameters> putUser() {
+    return (content, params) -> {
+      // TODO: handle id change?
+      is.updateUser(content.getVO());
+      return true;
+    };
+  }
 
-        };
-    }
+  public RestBackend.Delete<UserParameters> deleteUser() {
+    return params -> {
+      VOUser vo = new VOUser();
+      vo.setUserId(params.getUserId());
+      vo.setVersion(params.convertETagToVersion());
+      is.deleteUser(vo, params.getMarketplaceId());
+      return true;
+    };
+  }
 
-    public RestBackend.Post<UserRepresentation, UserParameters> postUser() {
-        return new RestBackend.Post<UserRepresentation, UserParameters>() {
+  public RestBackend.Get<RolesRepresentation, UserParameters> getRoles() {
+    return params -> {
+      VOUser vo = new VOUser();
+      vo.setUserId(params.getUserId());
+      return new RolesRepresentation(is.getUserDetails(vo));
+    };
+  }
 
-            @Override
-            public Object post(UserRepresentation content, UserParameters params)
-                    throws Exception {
-                VOUserDetails vo = content.getVO();
-                vo = is.createUser(vo,
-                        new ArrayList<UserRoleType>(vo.getUserRoles()),
-                        params.getMarketplaceId());
-                if (vo == null) {
-                    return null;
-                }
-                return vo.getUserId();
-            }
-        };
-    }
+  public RestBackend.Put<RolesRepresentation, UserParameters> putRoles() {
+    return (content, params) -> {
+      VOUserDetails vo = content.getVO();
+      vo.setUserId(params.getUserId());
+      is.setUserRoles(vo, new ArrayList<>(content.getUserRoles()));
+      return true;
+    };
+  }
 
-    public RestBackend.Get<UserRepresentation, UserParameters> getUser() {
-        return new RestBackend.Get<UserRepresentation, UserParameters>() {
+  public RestBackend.Post<OnBehalfUserRepresentation, UserParameters> postOnBehalfUser() {
+    return (content, params) ->
+        is.createOnBehalfUser(content.getOrganizationId(), content.getPassword()).getUserId();
+  }
 
-            @Override
-            public UserRepresentation get(UserParameters params)
-                    throws Exception {
-                VOUser vo = new VOUser();
-                vo.setUserId(params.getUserId());
-                return new UserRepresentation(is.getUserDetails(vo));
-            }
-
-        };
-    }
-
-    public RestBackend.Put<UserRepresentation, UserParameters> putUser() {
-        return new RestBackend.Put<UserRepresentation, UserParameters>() {
-
-            @Override
-            public boolean put(UserRepresentation content, UserParameters params)
-                    throws Exception {
-                // TODO: handle id change?
-                is.updateUser(content.getVO());
-                return true;
-            }
-
-        };
-    }
-
-    public RestBackend.Delete<UserParameters> deleteUser() {
-        return new RestBackend.Delete<UserParameters>() {
-
-            @Override
-            public boolean delete(UserParameters params) throws Exception {
-                VOUser vo = new VOUser();
-                vo.setUserId(params.getUserId());
-                vo.setVersion(params.convertETagToVersion());
-                is.deleteUser(vo, params.getMarketplaceId());
-                return true;
-            }
-        };
-    }
-
-    public RestBackend.Get<RolesRepresentation, UserParameters> getRoles() {
-        return new RestBackend.Get<RolesRepresentation, UserParameters>() {
-
-            @Override
-            public RolesRepresentation get(UserParameters params)
-                    throws Exception {
-                VOUser vo = new VOUser();
-                vo.setUserId(params.getUserId());
-                return new RolesRepresentation(is.getUserDetails(vo));
-            }
-        };
-    }
-
-    public RestBackend.Put<RolesRepresentation, UserParameters> putRoles() {
-        return new RestBackend.Put<RolesRepresentation, UserParameters>() {
-
-            @Override
-            public boolean put(RolesRepresentation content,
-                    UserParameters params) throws Exception {
-                VOUserDetails vo = content.getVO();
-                vo.setUserId(params.getUserId());
-                is.setUserRoles(vo,
-                        new ArrayList<UserRoleType>(content.getUserRoles()));
-                return true;
-            }
-        };
-    }
-
-    public RestBackend.Post<OnBehalfUserRepresentation, UserParameters> postOnBehalfUser() {
-        return new RestBackend.Post<OnBehalfUserRepresentation, UserParameters>() {
-
-            @Override
-            public Object post(OnBehalfUserRepresentation content,
-                    UserParameters params) throws Exception {
-                return is.createOnBehalfUser(content.getOrganizationId(),
-                        content.getPassword()).getUserId();
-            }
-        };
-    }
-
-    public RestBackend.Delete<UserParameters> deleteOBehalfUser() {
-        return new RestBackend.Delete<UserParameters>() {
-
-            @Override
-            public boolean delete(UserParameters params) throws Exception {
-                is.cleanUpCurrentUser();
-                return true;
-            }
-        };
-    }
+  public RestBackend.Delete<UserParameters> deleteOBehalfUser() {
+    return params -> {
+      is.cleanUpCurrentUser();
+      return true;
+    };
+  }
 }

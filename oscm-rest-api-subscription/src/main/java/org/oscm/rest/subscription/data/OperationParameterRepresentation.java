@@ -1,102 +1,107 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription.data;
 
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.types.enumtypes.OperationParameterType;
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.rest.common.Representation;
 
 public class OperationParameterRepresentation extends Representation {
 
-    private String parameterId;
-    private String parameterName;
-    private boolean mandatory;
-    private OperationParameterType type;
-    private String parameterValue;
+  private String parameterId;
+  private String parameterName;
+  private boolean mandatory;
+  private OperationParameterType type;
+  private String parameterValue;
 
-    private transient VOServiceOperationParameter vo;
+  private transient VOServiceOperationParameter vo;
 
-    public OperationParameterRepresentation() {
-        this(new VOServiceOperationParameter());
+  public OperationParameterRepresentation() {
+    this(new VOServiceOperationParameter());
+  }
+
+  public OperationParameterRepresentation(VOServiceOperationParameter op) {
+    vo = op;
+  }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
+
+  @Override
+  public void update() {
+    if (getId() != null) {
+      vo.setKey(getId().longValue());
     }
-
-    public OperationParameterRepresentation(VOServiceOperationParameter op) {
-        vo = op;
+    vo.setMandatory(mandatory);
+    vo.setParameterId(parameterId);
+    vo.setParameterName(parameterName);
+    vo.setParameterValue(parameterValue);
+    vo.setType(type);
+    if (getETag() != null) {
+      vo.setVersion(getETag().intValue());
     }
+  }
 
-    @Override
-    public void validateContent() throws WebApplicationException {
+  @Override
+  public void convert() {
+    setId(Long.valueOf(vo.getKey()));
+    setMandatory(vo.isMandatory());
+    setParameterId(vo.getParameterId());
+    setParameterName(vo.getParameterName());
+    setParameterValue(vo.getParameterValue());
+    setETag(Long.valueOf(vo.getVersion()));
+    setType(vo.getType());
+  }
 
-    }
+  public VOServiceOperationParameter getVO() {
+    return vo;
+  }
 
-    @Override
-    public void update() {
-        if (getId() != null) {
-            vo.setKey(getId().longValue());
-        }
-        vo.setMandatory(mandatory);
-        vo.setParameterId(parameterId);
-        vo.setParameterName(parameterName);
-        vo.setParameterValue(parameterValue);
-        vo.setType(type);
-        if (getETag() != null) {
-            vo.setVersion(getETag().intValue());
-        }
-    }
+  public String getParameterId() {
+    return parameterId;
+  }
 
-    @Override
-    public void convert() {
-        setId(Long.valueOf(vo.getKey()));
-        setMandatory(vo.isMandatory());
-        setParameterId(vo.getParameterId());
-        setParameterName(vo.getParameterName());
-        setParameterValue(vo.getParameterValue());
-        setETag(Long.valueOf(vo.getVersion()));
-        setType(vo.getType());
-    }
+  public void setParameterId(String parameterId) {
+    this.parameterId = parameterId;
+  }
 
-    public VOServiceOperationParameter getVO() {
-        return vo;
-    }
+  public String getParameterName() {
+    return parameterName;
+  }
 
-    public String getParameterId() {
-        return parameterId;
-    }
+  public void setParameterName(String parameterName) {
+    this.parameterName = parameterName;
+  }
 
-    public void setParameterId(String parameterId) {
-        this.parameterId = parameterId;
-    }
+  public boolean isMandatory() {
+    return mandatory;
+  }
 
-    public String getParameterName() {
-        return parameterName;
-    }
+  public void setMandatory(boolean mandatory) {
+    this.mandatory = mandatory;
+  }
 
-    public void setParameterName(String parameterName) {
-        this.parameterName = parameterName;
-    }
+  public OperationParameterType getType() {
+    return type;
+  }
 
-    public boolean isMandatory() {
-        return mandatory;
-    }
+  public void setType(OperationParameterType type) {
+    this.type = type;
+  }
 
-    public void setMandatory(boolean mandatory) {
-        this.mandatory = mandatory;
-    }
+  public String getParameterValue() {
+    return parameterValue;
+  }
 
-    public OperationParameterType getType() {
-        return type;
-    }
-
-    public void setType(OperationParameterType type) {
-        this.type = type;
-    }
-
-    public String getParameterValue() {
-        return parameterValue;
-    }
-
-    public void setParameterValue(String parameterValue) {
-        this.parameterValue = parameterValue;
-    }
-
+  public void setParameterValue(String parameterValue) {
+    this.parameterValue = parameterValue;
+  }
 }

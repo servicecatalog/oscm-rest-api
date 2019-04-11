@@ -1,10 +1,17 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.types.enumtypes.ParameterModificationType;
 import org.oscm.internal.types.enumtypes.ParameterType;
 import org.oscm.internal.types.enumtypes.ParameterValueType;
@@ -14,199 +21,196 @@ import org.oscm.rest.common.Representation;
 
 public class ParameterDefinitionRepresentation extends Representation {
 
-    private List<ParameterOptionRepresentation> parameterOptions = new ArrayList<ParameterOptionRepresentation>();
-    private String defaultValue;
-    private Long minValue;
-    private Long maxValue;
-    private boolean mandatory;
-    private boolean configurable;
-    private ParameterType parameterType;
-    private String parameterId;
-    private ParameterValueType valueType;
-    private ParameterModificationType modificationType;
-    private String description;
+  private List<ParameterOptionRepresentation> parameterOptions =
+      new ArrayList<ParameterOptionRepresentation>();
+  private String defaultValue;
+  private Long minValue;
+  private Long maxValue;
+  private boolean mandatory;
+  private boolean configurable;
+  private ParameterType parameterType;
+  private String parameterId;
+  private ParameterValueType valueType;
+  private ParameterModificationType modificationType;
+  private String description;
 
-    private transient VOParameterDefinition vo;
+  private transient VOParameterDefinition vo;
 
-    public ParameterDefinitionRepresentation() {
-        this(new VOParameterDefinition());
+  public ParameterDefinitionRepresentation() {
+    this(new VOParameterDefinition());
+  }
+
+  public ParameterDefinitionRepresentation(VOParameterDefinition def) {
+    vo = def;
+  }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
+
+  @Override
+  public void update() {
+    vo.setConfigurable(isConfigurable());
+    vo.setDefaultValue(getDefaultValue());
+    vo.setDescription(getDescription());
+    vo.setKey(convertIdToKey());
+    vo.setMandatory(isMandatory());
+    vo.setMaxValue(getMaxValue());
+    vo.setMinValue(getMinValue());
+    vo.setModificationType(getModificationType());
+    vo.setParameterId(getParameterId());
+    vo.setParameterOptions(updateOptions());
+    vo.setParameterType(getParameterType());
+    vo.setValueType(getValueType());
+    vo.setVersion(convertETagToVersion());
+  }
+
+  private List<VOParameterOption> updateOptions() {
+    List<VOParameterOption> result = new ArrayList<VOParameterOption>();
+    if (parameterOptions == null) {
+      return result;
     }
-
-    public ParameterDefinitionRepresentation(VOParameterDefinition def) {
-        vo = def;
+    for (ParameterOptionRepresentation po : parameterOptions) {
+      po.update();
+      result.add(po.getVO());
     }
+    return result;
+  }
 
-    @Override
-    public void validateContent() throws WebApplicationException {
+  @Override
+  public void convert() {
+    setConfigurable(vo.isConfigurable());
+    setDefaultValue(vo.getDefaultValue());
+    setDescription(vo.getDescription());
+    setId(Long.valueOf(vo.getKey()));
+    setMandatory(vo.isMandatory());
+    setMaxValue(vo.getMaxValue());
+    setMinValue(vo.getMinValue());
+    setModificationType(vo.getModificationType());
+    setParameterId(vo.getParameterId());
+    setParameterOptions(convertOptions());
+    setParameterType(vo.getParameterType());
+    setETag(Long.valueOf(vo.getVersion()));
+    setValueType(vo.getValueType());
+  }
 
+  private List<ParameterOptionRepresentation> convertOptions() {
+    List<ParameterOptionRepresentation> result = new ArrayList<ParameterOptionRepresentation>();
+    if (vo == null || vo.getParameterOptions() == null) {
+      return result;
     }
-
-    @Override
-    public void update() {
-        vo.setConfigurable(isConfigurable());
-        vo.setDefaultValue(getDefaultValue());
-        vo.setDescription(getDescription());
-        vo.setKey(convertIdToKey());
-        vo.setMandatory(isMandatory());
-        vo.setMaxValue(getMaxValue());
-        vo.setMinValue(getMinValue());
-        vo.setModificationType(getModificationType());
-        vo.setParameterId(getParameterId());
-        vo.setParameterOptions(updateOptions());
-        vo.setParameterType(getParameterType());
-        vo.setValueType(getValueType());
-        vo.setVersion(convertETagToVersion());
+    for (VOParameterOption po : vo.getParameterOptions()) {
+      ParameterOptionRepresentation rep = new ParameterOptionRepresentation(po);
+      rep.convert();
+      result.add(rep);
     }
+    return result;
+  }
 
-    private List<VOParameterOption> updateOptions() {
-        List<VOParameterOption> result = new ArrayList<VOParameterOption>();
-        if (parameterOptions == null) {
-            return result;
-        }
-        for (ParameterOptionRepresentation po : parameterOptions) {
-            po.update();
-            result.add(po.getVO());
-        }
-        return result;
-    }
+  public List<ParameterOptionRepresentation> getParameterOptions() {
+    return parameterOptions;
+  }
 
-    @Override
-    public void convert() {
-        setConfigurable(vo.isConfigurable());
-        setDefaultValue(vo.getDefaultValue());
-        setDescription(vo.getDescription());
-        setId(Long.valueOf(vo.getKey()));
-        setMandatory(vo.isMandatory());
-        setMaxValue(vo.getMaxValue());
-        setMinValue(vo.getMinValue());
-        setModificationType(vo.getModificationType());
-        setParameterId(vo.getParameterId());
-        setParameterOptions(convertOptions());
-        setParameterType(vo.getParameterType());
-        setETag(Long.valueOf(vo.getVersion()));
-        setValueType(vo.getValueType());
-    }
+  public void setParameterOptions(List<ParameterOptionRepresentation> parameterOptions) {
+    this.parameterOptions = parameterOptions;
+  }
 
-    private List<ParameterOptionRepresentation> convertOptions() {
-        List<ParameterOptionRepresentation> result = new ArrayList<ParameterOptionRepresentation>();
-        if (vo == null || vo.getParameterOptions() == null) {
-            return result;
-        }
-        for (VOParameterOption po : vo.getParameterOptions()) {
-            ParameterOptionRepresentation rep = new ParameterOptionRepresentation(
-                    po);
-            rep.convert();
-            result.add(rep);
-        }
-        return result;
-    }
+  public String getDefaultValue() {
+    return defaultValue;
+  }
 
-    public List<ParameterOptionRepresentation> getParameterOptions() {
-        return parameterOptions;
-    }
+  public void setDefaultValue(String defaultValue) {
+    this.defaultValue = defaultValue;
+  }
 
-    public void setParameterOptions(
-            List<ParameterOptionRepresentation> parameterOptions) {
-        this.parameterOptions = parameterOptions;
-    }
+  public Long getMinValue() {
+    return minValue;
+  }
 
-    public String getDefaultValue() {
-        return defaultValue;
-    }
+  public void setMinValue(Long minValue) {
+    this.minValue = minValue;
+  }
 
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
+  public Long getMaxValue() {
+    return maxValue;
+  }
 
-    public Long getMinValue() {
-        return minValue;
-    }
+  public void setMaxValue(Long maxValue) {
+    this.maxValue = maxValue;
+  }
 
-    public void setMinValue(Long minValue) {
-        this.minValue = minValue;
-    }
+  public boolean isMandatory() {
+    return mandatory;
+  }
 
-    public Long getMaxValue() {
-        return maxValue;
-    }
+  public void setMandatory(boolean mandatory) {
+    this.mandatory = mandatory;
+  }
 
-    public void setMaxValue(Long maxValue) {
-        this.maxValue = maxValue;
-    }
+  public boolean isConfigurable() {
+    return configurable;
+  }
 
-    public boolean isMandatory() {
-        return mandatory;
-    }
+  public void setConfigurable(boolean configurable) {
+    this.configurable = configurable;
+  }
 
-    public void setMandatory(boolean mandatory) {
-        this.mandatory = mandatory;
-    }
+  public ParameterType getParameterType() {
+    return parameterType;
+  }
 
-    public boolean isConfigurable() {
-        return configurable;
-    }
+  public void setParameterType(ParameterType parameterType) {
+    this.parameterType = parameterType;
+  }
 
-    public void setConfigurable(boolean configurable) {
-        this.configurable = configurable;
-    }
+  public String getParameterId() {
+    return parameterId;
+  }
 
-    public ParameterType getParameterType() {
-        return parameterType;
-    }
+  public void setParameterId(String parameterId) {
+    this.parameterId = parameterId;
+  }
 
-    public void setParameterType(ParameterType parameterType) {
-        this.parameterType = parameterType;
-    }
+  public ParameterValueType getValueType() {
+    return valueType;
+  }
 
-    public String getParameterId() {
-        return parameterId;
-    }
+  public void setValueType(ParameterValueType valueType) {
+    this.valueType = valueType;
+  }
 
-    public void setParameterId(String parameterId) {
-        this.parameterId = parameterId;
-    }
+  public ParameterModificationType getModificationType() {
+    return modificationType;
+  }
 
-    public ParameterValueType getValueType() {
-        return valueType;
-    }
+  public void setModificationType(ParameterModificationType modificationType) {
+    this.modificationType = modificationType;
+  }
 
-    public void setValueType(ParameterValueType valueType) {
-        this.valueType = valueType;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public ParameterModificationType getModificationType() {
-        return modificationType;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setModificationType(ParameterModificationType modificationType) {
-        this.modificationType = modificationType;
-    }
+  public VOParameterDefinition getVO() {
+    return vo;
+  }
 
-    public String getDescription() {
-        return description;
+  // FIXME move to super class
+  protected long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
     }
+    return getId().longValue();
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
+  // FIXME move to super class
+  protected int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
     }
-
-    public VOParameterDefinition getVO() {
-        return vo;
-    }
-
-    // FIXME move to super class
-    protected long convertIdToKey() {
-        if (getId() == null) {
-            return 0L;
-        }
-        return getId().longValue();
-    }
-
-    // FIXME move to super class
-    protected int convertETagToVersion() {
-        if (getETag() == null) {
-            return 0;
-        }
-        return getETag().intValue();
-    }
+    return getETag().intValue();
+  }
 }

@@ -1,132 +1,137 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 10-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.internal.vo.VOTechnicalServiceOperation;
 import org.oscm.rest.common.Representation;
 
 public class OperationRepresentation extends Representation {
 
-    private String operationId;
-    private String operationName;
-    private String operationDescription;
-    private List<OperationParameterRepresentation> operationParameters = new ArrayList<OperationParameterRepresentation>();
+  private String operationId;
+  private String operationName;
+  private String operationDescription;
+  private List<OperationParameterRepresentation> operationParameters =
+      new ArrayList<OperationParameterRepresentation>();
 
-    private transient VOTechnicalServiceOperation vo;
+  private transient VOTechnicalServiceOperation vo;
 
-    public OperationRepresentation() {
-        this(new VOTechnicalServiceOperation());
+  public OperationRepresentation() {
+    this(new VOTechnicalServiceOperation());
+  }
+
+  public OperationRepresentation(VOTechnicalServiceOperation o) {
+    vo = o;
+  }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
+
+  @Override
+  public void update() {
+    vo.setKey(convertIdToKey());
+    vo.setOperationDescription(getOperationDescription());
+    vo.setOperationId(getOperationId());
+    vo.setOperationName(getOperationName());
+    vo.setOperationParameters(updateParameters());
+    vo.setVersion(convertETagToVersion());
+  }
+
+  private List<VOServiceOperationParameter> updateParameters() {
+    List<VOServiceOperationParameter> result = new ArrayList<VOServiceOperationParameter>();
+    if (operationParameters == null) {
+      return result;
     }
-
-    public OperationRepresentation(VOTechnicalServiceOperation o) {
-        vo = o;
+    for (OperationParameterRepresentation op : operationParameters) {
+      op.update();
+      result.add(op.getVO());
     }
+    return result;
+  }
 
-    @Override
-    public void validateContent() throws WebApplicationException {
+  @Override
+  public void convert() {
+    setId(Long.valueOf(vo.getKey()));
+    setOperationDescription(vo.getOperationDescription());
+    setOperationId(vo.getOperationId());
+    setOperationName(vo.getOperationName());
+    setOperationParameters(convertParameters());
+    setETag(Long.valueOf(vo.getVersion()));
+  }
 
+  private List<OperationParameterRepresentation> convertParameters() {
+    List<OperationParameterRepresentation> result =
+        new ArrayList<OperationParameterRepresentation>();
+    if (vo.getOperationParameters() == null) {
+      return result;
     }
-
-    @Override
-    public void update() {
-        vo.setKey(convertIdToKey());
-        vo.setOperationDescription(getOperationDescription());
-        vo.setOperationId(getOperationId());
-        vo.setOperationName(getOperationName());
-        vo.setOperationParameters(updateParameters());
-        vo.setVersion(convertETagToVersion());
+    for (VOServiceOperationParameter op : vo.getOperationParameters()) {
+      OperationParameterRepresentation opr = new OperationParameterRepresentation(op);
+      opr.convert();
+      result.add(opr);
     }
+    return result;
+  }
 
-    private List<VOServiceOperationParameter> updateParameters() {
-        List<VOServiceOperationParameter> result = new ArrayList<VOServiceOperationParameter>();
-        if (operationParameters == null) {
-            return result;
-        }
-        for (OperationParameterRepresentation op : operationParameters) {
-            op.update();
-            result.add(op.getVO());
-        }
-        return result;
-    }
+  public VOTechnicalServiceOperation getVO() {
+    return vo;
+  }
 
-    @Override
-    public void convert() {
-        setId(Long.valueOf(vo.getKey()));
-        setOperationDescription(vo.getOperationDescription());
-        setOperationId(vo.getOperationId());
-        setOperationName(vo.getOperationName());
-        setOperationParameters(convertParameters());
-        setETag(Long.valueOf(vo.getVersion()));
-    }
+  public String getOperationId() {
+    return operationId;
+  }
 
-    private List<OperationParameterRepresentation> convertParameters() {
-        List<OperationParameterRepresentation> result = new ArrayList<OperationParameterRepresentation>();
-        if (vo.getOperationParameters() == null) {
-            return result;
-        }
-        for (VOServiceOperationParameter op : vo.getOperationParameters()) {
-            OperationParameterRepresentation opr = new OperationParameterRepresentation(
-                    op);
-            opr.convert();
-            result.add(opr);
-        }
-        return result;
-    }
+  public void setOperationId(String operationId) {
+    this.operationId = operationId;
+  }
 
-    public VOTechnicalServiceOperation getVO() {
-        return vo;
-    }
+  public String getOperationName() {
+    return operationName;
+  }
 
-    public String getOperationId() {
-        return operationId;
-    }
+  public void setOperationName(String operationName) {
+    this.operationName = operationName;
+  }
 
-    public void setOperationId(String operationId) {
-        this.operationId = operationId;
-    }
+  public String getOperationDescription() {
+    return operationDescription;
+  }
 
-    public String getOperationName() {
-        return operationName;
-    }
+  public void setOperationDescription(String operationDescription) {
+    this.operationDescription = operationDescription;
+  }
 
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
-    }
+  public List<OperationParameterRepresentation> getOperationParameters() {
+    return operationParameters;
+  }
 
-    public String getOperationDescription() {
-        return operationDescription;
-    }
+  public void setOperationParameters(List<OperationParameterRepresentation> operationParameters) {
+    this.operationParameters = operationParameters;
+  }
 
-    public void setOperationDescription(String operationDescription) {
-        this.operationDescription = operationDescription;
+  // FIXME move to super class
+  protected long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
     }
+    return getId().longValue();
+  }
 
-    public List<OperationParameterRepresentation> getOperationParameters() {
-        return operationParameters;
+  // FIXME move to super class
+  protected int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
     }
-
-    public void setOperationParameters(
-            List<OperationParameterRepresentation> operationParameters) {
-        this.operationParameters = operationParameters;
-    }
-
-    // FIXME move to super class
-    protected long convertIdToKey() {
-        if (getId() == null) {
-            return 0L;
-        }
-        return getId().longValue();
-    }
-
-    // FIXME move to super class
-    protected int convertETagToVersion() {
-        if (getETag() == null) {
-            return 0;
-        }
-        return getETag().intValue();
-    }
+    return getETag().intValue();
+  }
 }

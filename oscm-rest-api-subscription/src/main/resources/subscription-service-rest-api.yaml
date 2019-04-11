@@ -16,7 +16,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 securityDefinitions:
   authentication:
     type: basic
@@ -24,265 +24,265 @@ securityDefinitions:
 
 security:
   - authentication: []
-  
+
 paths:
 
   /subscriptions
 
-    post:
-      description: Subscribe to a service
-      parameters:
-        - name: subscription
-          in: body
-          description: The input needed to subscribe to a service
-          required: true
-          schema:
-            $ref: '#/definitions/SubscriptionCreation'
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The id of the new subscription
-              type: number
-              format: long
-        202:
-          description: Accepted - in case of an active suspending trigger for subscribing to a service
+  post:
+    description: Subscribe to a service
+    parameters:
+      - name: subscription
+        in: body
+        description: The input needed to subscribe to a service
+        required: true
+        schema:
+          $ref: '#/definitions/SubscriptionCreation'
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The id of the new subscription
+            type: number
+            format: long
+      202:
+        description: Accepted - in case of an active suspending trigger for subscribing to a service
 
-    get:
-      description: Get all subscriptions of the organization or for a user
-      parameters:
-        - name: userId
-          in: query
-          description: the id of the user to get the subscriptions for
-          type: string
-      responses:
-        200:
-          description: the subscription list
-          schema:
-              $ref: '#/definitions/CollectionSubscription'
+  get:
+    description: Get all subscriptions of the organization or for a user
+    parameters:
+      - name: userId
+        in: query
+        description: the id of the user to get the subscriptions for
+        type: string
+    responses:
+      200:
+        description: the subscription list
+        schema:
+          $ref: '#/definitions/CollectionSubscription'
 
   /subscriptions/{id}
 
-    get:
-      description: Get the details of the subscription specified by the id
-      parameters:
-        - name: id
-          in: path
-          description: the id of the subscription
-          type: number
-          format: long
-      responses:
-        200:
-          description: the subscription details
-          schema:
-              $ref: '#/definitions/SubscriptionDetails'
+  get:
+    description: Get the details of the subscription specified by the id
+    parameters:
+      - name: id
+        in: path
+        description: the id of the subscription
+        type: number
+        format: long
+    responses:
+      200:
+        description: the subscription details
+        schema:
+          $ref: '#/definitions/SubscriptionDetails'
 
-    put:
-      description: Update the subscription specified by the id
-      parameters:
-        - name: id
-          in: path
-          description: The subscription id
-          required: true
-          type: number
-          format: long
-        - name: subscription
-          in: body
-          description: The new subscription and parameter values
-          required: true
-          schema:
-            $ref: '#/definitions/SubscriptionCreation'
-      responses:
-        202:
-          description: Accepted - in case of an active suspending trigger for modify subscription
-        204:
-          description: No content
+  put:
+    description: Update the subscription specified by the id
+    parameters:
+      - name: id
+        in: path
+        description: The subscription id
+        required: true
+        type: number
+        format: long
+      - name: subscription
+        in: body
+        description: The new subscription and parameter values
+        required: true
+        schema:
+          $ref: '#/definitions/SubscriptionCreation'
+    responses:
+      202:
+        description: Accepted - in case of an active suspending trigger for modify subscription
+      204:
+        description: No content
 
-    delete:
-      description: Delete/unsubscribe from the subscription specified by the id
-      parameters:
-        - name: id
-          in: path
-          description: The subscription id
-          required: true
-          type: number
-          format: long
-      responses:
-        202:
-          description: Accepted - in case of an active suspending trigger for unsubscribing
-        204:
-          description: No content
+  delete:
+    description: Delete/unsubscribe from the subscription specified by the id
+    parameters:
+      - name: id
+        in: path
+        description: The subscription id
+        required: true
+        type: number
+        format: long
+    responses:
+      202:
+        description: Accepted - in case of an active suspending trigger for unsubscribing
+      204:
+        description: No content
 
   /subscriptions/{id}/usagelicenses
 
-    get:
-      description: Get the usage licenses for the subscription specified by the id
-      parameters:
-        - name: id
-          in: path
-          description: The id of the subscription
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: the usage license list
-          schema:
-              $ref: '#/definitions/CollectionUsageLicense'
+  get:
+    description: Get the usage licenses for the subscription specified by the id
+    parameters:
+      - name: id
+        in: path
+        description: The id of the subscription
+        required: true
+        type: integer
+        format: int64
+    responses:
+      200:
+        description: the usage license list
+        schema:
+          $ref: '#/definitions/CollectionUsageLicense'
 
-    post:
-      description: Create a usage license for the specified subscription
-      parameters:
-        - name: id
-          in: path
-          description: The subscription id
-          required: true
-          type: number
-          format: long
-        - name: usage license
-          in: body
-          description: The usage license
-          required: true
-          schema:
-            $ref: '#/definitions/UsageLicense'
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The id of the new usage license
-              type: number
-              format: long
-        202:
-          description: Accepted - in case of an active suspending trigger for add/revoke user
+  post:
+    description: Create a usage license for the specified subscription
+    parameters:
+      - name: id
+        in: path
+        description: The subscription id
+        required: true
+        type: number
+        format: long
+      - name: usage license
+        in: body
+        description: The usage license
+        required: true
+        schema:
+          $ref: '#/definitions/UsageLicense'
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The id of the new usage license
+            type: number
+            format: long
+      202:
+        description: Accepted - in case of an active suspending trigger for add/revoke user
 
   /subscriptions/{id}/usagelicenses/{licKey}
 
-    put:
-      description: Modify the specified usage license
-      parameters:
-        - name: id
-          in: path
-          description: The subscription id
-          required: true
-          type: number
-          format: long
-        - name: licKey
-          in: path
-          description: The usage license id
-          required: true
-          type: number
-          format: long
-        - name: usage license
-          in: body
-          description: The usage license with the new value
-          required: true
-          schema:
-            $ref: '#/definitions/UsageLicense'
-      responses:
-        202:
-          description: Accepted - in case of an active suspending trigger for add/revoke user
-        204:
-          description: No content
+  put:
+    description: Modify the specified usage license
+    parameters:
+      - name: id
+        in: path
+        description: The subscription id
+        required: true
+        type: number
+        format: long
+      - name: licKey
+        in: path
+        description: The usage license id
+        required: true
+        type: number
+        format: long
+      - name: usage license
+        in: body
+        description: The usage license with the new value
+        required: true
+        schema:
+          $ref: '#/definitions/UsageLicense'
+    responses:
+      202:
+        description: Accepted - in case of an active suspending trigger for add/revoke user
+      204:
+        description: No content
 
-    delete: - delete the specified usage license 
-      description: Delete the usage license (revoke the user form the subscription)
-      parameters:
-        - name: id
-          in: path
-          description: The subscription id
-          required: true
-          type: number
-          format: long
-        - name: licKey
-          in: path
-          description: The usage license id
-          required: true
-          type: number
-          format: long
-      responses:
-        202:
-          description: Accepted - in case of an active suspending trigger for add/revoke user
-        204:
-          description: No content
+  delete: - delete the specified usage license
+            description: Delete the usage license (revoke the user form the subscription)
+            parameters:
+              - name: id
+                in: path
+                description: The subscription id
+                required: true
+                type: number
+                format: long
+              - name: licKey
+                in: path
+                description: The usage license id
+                required: true
+                type: number
+                format: long
+            responses:
+              202:
+                description: Accepted - in case of an active suspending trigger for add/revoke user
+              204:
+                description: No content
 
 definitions:
 
   BillingContact
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      etag:
-        type: integer
-        format: int64
-      contactId:
-        type: string
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+    etag:
+      type: integer
+      format: int64
+    contactId:
+      type: string
 
   EventDefinition
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      etag:
-        type: integer
-        format: int64
-      eventType:
-        type: string
-        enum:
-          - PLATFORM_EVENT
-          - SERVICE_EVENT
-      eventId:
-        type: string
-      eventDescription:
-        type: string
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+    etag:
+      type: integer
+      format: int64
+    eventType:
+      type: string
+      enum:
+        - PLATFORM_EVENT
+        - SERVICE_EVENT
+    eventId:
+      type: string
+    eventDescription:
+      type: string
 
   OperationParameter
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      etag:
-        type: integer
-        format: int64
-      parameterId:
-        type: string
-      parameterName:
-        type: string
-      mandatory:
-        type: boolean
-      type:
-        type: string
-        enum:
-          - INPUT_STRING
-          - REQUEST_SELECT
-      parameterValue:
-        type: string
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+    etag:
+      type: integer
+      format: int64
+    parameterId:
+      type: string
+    parameterName:
+      type: string
+    mandatory:
+      type: boolean
+    type:
+      type: string
+      enum:
+        - INPUT_STRING
+        - REQUEST_SELECT
+    parameterValue:
+      type: string
 
   Operation
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      etag:
-        type: integer
-        format: int64
-      operationId:
-        type: string
-      operationName:
-        type: string
-      operationDescription:
-        type: string
-      operationParameters:
-        type: array
-        items: 
-          type: object
-          $ref: '#/definitions/OperationParameter'
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+    etag:
+      type: integer
+      format: int64
+    operationId:
+      type: string
+    operationName:
+      type: string
+    operationDescription:
+      type: string
+    operationParameters:
+      type: array
+      items:
+        type: object
+        $ref: '#/definitions/OperationParameter'
 
   ParameterDefinition:
     type: object
@@ -334,7 +334,7 @@ definitions:
         format: int64
       steppedPrices:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/SteppedPrice'
       eventDefinition:
@@ -363,7 +363,7 @@ definitions:
         type: string
       roleSpecificUserPrices:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/PricedRole'
 
@@ -388,17 +388,17 @@ definitions:
         format: int64
       roleSpecificUserPrices:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/PricedRole'
       steppedPrices:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/SteppedPrice'
       pricedOptions:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/PricedOption'
 
@@ -448,7 +448,7 @@ definitions:
         type: string
       parameters:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/Parameter'
 
@@ -468,42 +468,42 @@ definitions:
         type: number
 
   SubscriptionCreation
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      etag:
-        type: integer
-        format: int64
-      billingContactKey:
-        type: integer
-        format: int64
-      paymentInfoKey:
-        type: integer
-        format: int64
-      users:
-        type: array
-        items: 
-          type: object
-          $ref: '#/definitions/UsageLicense'
-      udas:
-        type: array
-        items: 
-          type: object
-          $ref: '#/definitions/Uda'
-      service:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+    etag:
+      type: integer
+      format: int64
+    billingContactKey:
+      type: integer
+      format: int64
+    paymentInfoKey:
+      type: integer
+      format: int64
+    users:
+      type: array
+      items:
         type: object
-        $ref: '#/definitions/Service'
-      purchaseOrderNumber:
-        type: string
-      subscriptionId:
-        type: string
-      unitKey:
-        type: integer
-        format: int64
-      unitName:
-        type: string
+        $ref: '#/definitions/UsageLicense'
+    udas:
+      type: array
+      items:
+        type: object
+        $ref: '#/definitions/Uda'
+    service:
+      type: object
+      $ref: '#/definitions/Service'
+    purchaseOrderNumber:
+      type: string
+    subscriptionId:
+      type: string
+    unitKey:
+      type: integer
+      format: int64
+    unitName:
+      type: string
 
   SubscriptionDetails:
     type: object
@@ -522,7 +522,7 @@ definitions:
         $ref: '#/definitions/PaymentInfo'
       usageLicenses:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/UsageLicense'
       service:
@@ -530,7 +530,7 @@ definitions:
         $ref: '#/definitions/Service'
       operations:
         type: array
-        items: 
+        items:
           type: object
           $ref: '#/definitions/Operation'
       priceModel:
@@ -631,18 +631,18 @@ definitions:
         type: integer
         format: int64
     private String udaId:
-        type: string
+      type: string
     private String targetType:
-        type: string
+      type: string
     private String defaultValue:
-        type: string
+      type: string
     private UdaConfigurationType configurationType:
-        type: string
-        enum:
-          - SUPPLIER
-          - USER_OPTION_MANDATORY
-          - USER_OPTION_OPTIONAL
-  
+      type: string
+      enum:
+        - SUPPLIER
+        - USER_OPTION_MANDATORY
+        - USER_OPTION_OPTIONAL
+
   Uda:
     type: object
     properties:
@@ -695,7 +695,7 @@ definitions:
     properties:
       items:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/Subscription'
 
   CollectionUsageLicense:
@@ -704,7 +704,7 @@ definitions:
     properties:
       items:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/UsageLicense'
 
   Error:

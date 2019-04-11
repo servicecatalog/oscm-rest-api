@@ -16,7 +16,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 securityDefinitions:
   authentication:
     type: basic
@@ -24,7 +24,7 @@ securityDefinitions:
 
 security:
   - authentication: []
-  
+
 paths:
   /organizations:
     post:
@@ -51,125 +51,124 @@ paths:
         200:
           description: An organization
           schema:
-              $ref: '#/definitions/Organization'
+            $ref: '#/definitions/Organization'
   /billingcontacts
-    get: - 
-      description: Get existing billing contacts for the calling users organization.
-      responses:
-        200:
-          description: A collection of billing contacts
-          schema:
-              $ref: '#/definitions/CollectionBillingContact'
-    post:
-      description: Create a billing contact in the calling users organization.
-      parameters:
-        - name: billing contact
-          in: body
-          description: The billing contact to create
-          required: true
-          schema:
-            $ref: '#/definitions/BillingContact'
-      responses:
-        201:
-          description: Created
-          headers:
-            location:
-              description: The ID of the new billing contact
-              type: integer
-   /billingcontacts/{id}
-    get:
-      description: Get the specified billing contact.
-      responses:
-        200:
-          description: A billing contact
-          schema:
-              $ref: '#/definitions/BillingContact'
-    put:
-      description: Updates the billing contact with the specified id.
-      parameters:
-        - name: id
-          in: path
-          description: The ID of the billing contact
-          required: true
-          type: number
-          format: long
-        - name: billing contact
-          in: body
-          description: The billing contact with the new values 
-          required: true
-          schema:
-            $ref: '#/definitions/BillingContact'
-        - name: If-Match
-          in: header
-          description: The ETag of the billing contact for concurrency checks. If not present or '*',  concurrency is ignored.
-          required: false
-          type: string
-      responses:
-        204:
-          description: No content
-    delete: - delete the billing contact with the specified id (key)
-      description: Deletes the billing contact with the specified id.
-      parameters:
-        - name: id
-          in: path
-          description: The ID of the billing contact
-          required: true
-          type: number
-          format: long
-      responses:
-        204:
-          description: No content
+  get: - description: Get existing billing contacts for the calling users organization.
+           responses:
+             200:
+               description: A collection of billing contacts
+               schema:
+                 $ref: '#/definitions/CollectionBillingContact'
+  post:
+    description: Create a billing contact in the calling users organization.
+    parameters:
+      - name: billing contact
+        in: body
+        description: The billing contact to create
+        required: true
+        schema:
+          $ref: '#/definitions/BillingContact'
+    responses:
+      201:
+        description: Created
+        headers:
+          location:
+            description: The ID of the new billing contact
+            type: integer
+  /billingcontacts/{id}
+  get:
+    description: Get the specified billing contact.
+    responses:
+      200:
+        description: A billing contact
+        schema:
+          $ref: '#/definitions/BillingContact'
+  put:
+    description: Updates the billing contact with the specified id.
+    parameters:
+      - name: id
+        in: path
+        description: The ID of the billing contact
+        required: true
+        type: number
+        format: long
+      - name: billing contact
+        in: body
+        description: The billing contact with the new values
+        required: true
+        schema:
+          $ref: '#/definitions/BillingContact'
+      - name: If-Match
+        in: header
+        description: The ETag of the billing contact for concurrency checks. If not present or '*',  concurrency is ignored.
+        required: false
+        type: string
+    responses:
+      204:
+        description: No content
+  delete: - delete the billing contact with the specified id (key)
+            description: Deletes the billing contact with the specified id.
+            parameters:
+              - name: id
+                in: path
+                description: The ID of the billing contact
+                required: true
+                type: number
+                format: long
+            responses:
+              204:
+                description: No content
   /paymentinfos
-    get:
-      description: Get the existing payment infos for the calling users organization.
-      responses:
-        200:
-          description: A collection of payment infos
-          schema:
-              $ref: '#/definitions/CollectionPaymentInfo'
+  get:
+    description: Get the existing payment infos for the calling users organization.
+    responses:
+      200:
+        description: A collection of payment infos
+        schema:
+          $ref: '#/definitions/CollectionPaymentInfo'
   /paymentinfos/{id}
-    get:
-      description: Get the specified payment info.
-      responses:
-        200:
-          description: A payment info
-          schema:
-              $ref: '#/definitions/PaymentInfo'
-    put: - update the payment info with the specified id (key)
-      description: Updates the payment info with the specified id.
-      parameters:
-        - name: id
-          in: path
-          description: The ID of the payment info
-          required: true
-          type: number
-          format: long
-        - name: payment info
-          in: body
-          description: The payment info with the new values 
-          required: true
-          schema:
-            $ref: '#/definitions/PaymentInfo'
-        - name: If-Match
-          in: header
-          description: The ETag of the payment info for concurrency checks. If not present or '*',  concurrency is ignored.
-          required: false
-          type: string
-      responses:
-        204:
-          description: No content
-    delete:
-      description: Deletes the payment info with the specified id.
-      parameters:
-        - name: id
-          in: path
-          description: The ID of the payment info
-          required: true
-          type: number
-          format: long
-      responses:
-        204:
-          description: No content
+  get:
+    description: Get the specified payment info.
+    responses:
+      200:
+        description: A payment info
+        schema:
+          $ref: '#/definitions/PaymentInfo'
+  put: - update the payment info with the specified id (key)
+         description: Updates the payment info with the specified id.
+         parameters:
+           - name: id
+             in: path
+             description: The ID of the payment info
+             required: true
+             type: number
+             format: long
+           - name: payment info
+             in: body
+             description: The payment info with the new values
+             required: true
+             schema:
+               $ref: '#/definitions/PaymentInfo'
+           - name: If-Match
+             in: header
+             description: The ETag of the payment info for concurrency checks. If not present or '*',  concurrency is ignored.
+             required: false
+             type: string
+         responses:
+           204:
+             description: No content
+  delete:
+    description: Deletes the payment info with the specified id.
+    parameters:
+      - name: id
+        in: path
+        description: The ID of the payment info
+        required: true
+        type: number
+        format: long
+    responses:
+      204:
+        description: No content
 
 definitions:
   Account:
@@ -195,7 +194,7 @@ definitions:
           type: string
       organizationRoles:
         type: array
-        items: 
+        items:
           type: string
           enum:
             - MARKETPLACE_OWNER
@@ -339,7 +338,7 @@ definitions:
     properties:
       items:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/BillingContact'
 
   CollectionPaymentInfo:
@@ -348,7 +347,7 @@ definitions:
     properties:
       items:
         type: array
-        items: 
+        items:
           $ref: '#/definitions/PaymentInfo'
 
   Error:

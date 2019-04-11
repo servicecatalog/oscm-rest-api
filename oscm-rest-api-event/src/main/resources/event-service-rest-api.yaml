@@ -16,7 +16,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 securityDefinitions:
   authentication:
     type: basic
@@ -24,7 +24,7 @@ securityDefinitions:
 
 security:
   - authentication: []
-  
+
 paths:
   /events:
     post:
@@ -47,7 +47,7 @@ definitions:
   Event:
     type: object
     properties:
-    
+
       occurrenceTime:
         type: integer
         format: int64
