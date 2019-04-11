@@ -18,7 +18,6 @@ import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUser;
-import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
 import org.oscm.rest.subscription.data.SubscriptionDetailsRepresentation;
