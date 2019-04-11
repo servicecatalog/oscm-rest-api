@@ -8,10 +8,13 @@
         <artifactId>oscm-rest-api</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>oscm-rest-api-subscription</artifactId>
+    <description>Subscription module of OSCM REST API</description>
     <packaging>war</packaging>
 
     <build>
+        <finalName>oscm-rest-api-subscription</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>

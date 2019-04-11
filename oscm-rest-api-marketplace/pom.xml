@@ -8,10 +8,13 @@
         <artifactId>oscm-rest-api</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>oscm-rest-api-marketplace</artifactId>
+    <description>Marketplace module of OSCM REST API</description>
     <packaging>war</packaging>
 
     <build>
+        <finalName>oscm-rest-api-marketplace</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
