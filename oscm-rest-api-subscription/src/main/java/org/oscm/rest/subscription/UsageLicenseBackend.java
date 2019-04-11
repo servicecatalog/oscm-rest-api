@@ -26,43 +26,33 @@ public class UsageLicenseBackend {
   @EJB SubscriptionService ss;
 
   public RestBackend.Post<UsageLicenseRepresentation, SubscriptionParameters> post() {
-    return new RestBackend.Post<UsageLicenseRepresentation, SubscriptionParameters>() {
-
-      @Override
-      public Object post(UsageLicenseRepresentation content, SubscriptionParameters params)
-          throws Exception {
-        VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
-        boolean added =
-            ss.addRevokeUser(
-                sub.getSubscriptionId(), Collections.singletonList(content.getVO()), null);
-        Long licKey = null;
-        if (added) {
-          List<VOUsageLicense> lics =
-              ss.getSubscriptionDetails(params.getId().longValue()).getUsageLicenses();
-          for (VOUsageLicense lic : lics) {
-            if (lic.getUser().getUserId().equals(content.getUser().getUserId())) {
-              licKey = Long.valueOf(lic.getKey());
-              break;
-            }
+    return (content, params) -> {
+      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
+      boolean added =
+          ss.addRevokeUser(
+              sub.getSubscriptionId(), Collections.singletonList(content.getVO()), null);
+      Long licKey = null;
+      if (added) {
+        List<VOUsageLicense> lics =
+            ss.getSubscriptionDetails(params.getId().longValue()).getUsageLicenses();
+        for (VOUsageLicense lic : lics) {
+          if (lic.getUser().getUserId().equals(content.getUser().getUserId())) {
+            licKey = Long.valueOf(lic.getKey());
+            break;
           }
         }
-        return licKey;
       }
+      return licKey;
     };
   }
 
   public RestBackend.GetCollection<UsageLicenseRepresentation, SubscriptionParameters>
       getCollection() {
-    return new RestBackend.GetCollection<UsageLicenseRepresentation, SubscriptionParameters>() {
-
-      @Override
-      public RepresentationCollection<UsageLicenseRepresentation> getCollection(
-          SubscriptionParameters params) throws Exception {
-        VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
-        List<UsageLicenseRepresentation> lics =
-            UsageLicenseRepresentation.convert(sub.getUsageLicenses());
-        return new RepresentationCollection<UsageLicenseRepresentation>(lics);
-      }
+    return params -> {
+      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
+      List<UsageLicenseRepresentation> lics =
+          UsageLicenseRepresentation.convert(sub.getUsageLicenses());
+      return new RepresentationCollection<UsageLicenseRepresentation>(lics);
     };
   }
 
@@ -81,24 +71,20 @@ public class UsageLicenseBackend {
   }
 
   public RestBackend.Delete<SubscriptionParameters> delete() {
-    return new RestBackend.Delete<SubscriptionParameters>() {
-
-      @Override
-      public boolean delete(SubscriptionParameters params) throws Exception {
-        VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
-        List<VOUsageLicense> lics = sub.getUsageLicenses();
-        long licKey = params.getLicKey().longValue();
-        boolean result = true;
-        for (VOUsageLicense lic : lics) {
-          if (lic.getKey() == licKey) {
-            result =
-                ss.addRevokeUser(
-                    sub.getSubscriptionId(), null, Collections.singletonList(lic.getUser()));
-            break;
-          }
+    return params -> {
+      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
+      List<VOUsageLicense> lics = sub.getUsageLicenses();
+      long licKey = params.getLicKey().longValue();
+      boolean result = true;
+      for (VOUsageLicense lic : lics) {
+        if (lic.getKey() == licKey) {
+          result =
+              ss.addRevokeUser(
+                  sub.getSubscriptionId(), null, Collections.singletonList(lic.getUser()));
+          break;
         }
-        return result;
       }
+      return result;
     };
   }
 }

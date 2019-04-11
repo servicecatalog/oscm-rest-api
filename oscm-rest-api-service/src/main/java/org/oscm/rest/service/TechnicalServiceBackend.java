@@ -27,41 +27,27 @@ public class TechnicalServiceBackend {
 
   public RestBackend.GetCollection<TechnicalServiceRepresentation, ServiceParameters>
       getCollection() {
-    return new RestBackend.GetCollection<TechnicalServiceRepresentation, ServiceParameters>() {
-
-      @Override
-      public RepresentationCollection<TechnicalServiceRepresentation> getCollection(
-          ServiceParameters params) throws Exception {
-        // TODO: role by query parameter?
-        List<VOTechnicalService> technicalServices =
-            sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
-        Collection<TechnicalServiceRepresentation> list =
-            TechnicalServiceRepresentation.toCollection(technicalServices);
-        return new RepresentationCollection<>(list);
-      }
+    return params -> {
+      // TODO: role by query parameter?
+      List<VOTechnicalService> technicalServices =
+          sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+      Collection<TechnicalServiceRepresentation> list =
+          TechnicalServiceRepresentation.toCollection(technicalServices);
+      return new RepresentationCollection<>(list);
     };
   }
 
   public RestBackend.Delete<ServiceParameters> delete() {
-    return new RestBackend.Delete<ServiceParameters>() {
-
-      @Override
-      public boolean delete(ServiceParameters params) throws Exception {
-        sps.deleteTechnicalService(params.getId());
-        return true;
-      }
+    return params -> {
+      sps.deleteTechnicalService(params.getId());
+      return true;
     };
   }
 
   public RestBackend.Post<TechnicalServiceRepresentation, ServiceParameters> post() {
-    return new RestBackend.Post<TechnicalServiceRepresentation, ServiceParameters>() {
-
-      @Override
-      public Object post(TechnicalServiceRepresentation content, ServiceParameters params)
-          throws Exception {
-        VOTechnicalService ts = sps.createTechnicalService(content.getVO());
-        return Long.valueOf(ts.getKey());
-      }
+    return (content, params) -> {
+      VOTechnicalService ts = sps.createTechnicalService(content.getVO());
+      return Long.valueOf(ts.getKey());
     };
   }
 }
