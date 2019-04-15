@@ -51,7 +51,7 @@ public class SettingsResource extends RestResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response getSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
-      throws Exception {
+          throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
 
@@ -59,7 +59,7 @@ public class SettingsResource extends RestResource {
   @PUT
   @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
-  public Response updateUser(
+  public Response updateSetting(
       @Context UriInfo uriInfo,
       SettingRepresentation content,
       @BeanParam OperationParameters params)
