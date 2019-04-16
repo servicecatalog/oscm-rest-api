@@ -59,7 +59,7 @@ public class SettingsResource extends RestResource {
   @PUT
   @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
-  public Response updateUser(
+  public Response updateSetting(
       @Context UriInfo uriInfo,
       SettingRepresentation content,
       @BeanParam OperationParameters params)
