@@ -9,7 +9,15 @@
  */
 package org.oscm.rest.operation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
 import com.google.common.collect.Lists;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
+import javax.ws.rs.core.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,15 +28,6 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.operation.data.SettingRepresentation;
-
-import javax.ws.rs.core.*;
-import java.net.URI;
-import java.util.Collections;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SettingsResourceTest {
