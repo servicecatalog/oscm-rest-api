@@ -12,8 +12,6 @@ package org.oscm.rest.operation;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
-import lombok.Generated;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
@@ -44,10 +42,10 @@ public class SettingsBackend {
 
       @Override
       public Object post(SettingRepresentation content, OperationParameters params)
-              throws Exception {
+          throws Exception {
         os.saveConfigurationSetting(content.getVO());
         VOConfigurationSetting vo =
-                cs.getVOConfigurationSetting(content.getInformationId(), content.getContextId());
+            cs.getVOConfigurationSetting(content.getInformationId(), content.getContextId());
         return Long.valueOf(vo.getKey());
       }
     };
@@ -58,7 +56,7 @@ public class SettingsBackend {
 
       @Override
       public boolean put(SettingRepresentation content, OperationParameters params)
-              throws Exception {
+          throws Exception {
         os.saveConfigurationSetting(content.getVO());
         return true;
       }
@@ -81,13 +79,10 @@ public class SettingsBackend {
 
       @Override
       public RepresentationCollection<SettingRepresentation> getCollection(
-              OperationParameters params) throws Exception {
+          OperationParameters params) throws Exception {
         List<VOConfigurationSetting> settings = os.getConfigurationSettings();
         return SettingRepresentation.toCollection(settings);
       }
     };
   }
 }
-
-
-
