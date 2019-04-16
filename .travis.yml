@@ -8,6 +8,8 @@ cache:
   directories:
     - $HOME/.m2
     - $TRAVIS_BUILD_DIR/libraries
+env:
+  - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info mvn org.jacoco:jacoco-maven-plugin:prepare-agent $MVN_GOAL -q -fae -Dmaven.javadoc.skip=true -DfailIfNoTests=false -B -P travis
 
 jobs:
   include:
@@ -21,4 +23,5 @@ jobs:
       name: Run Tests
       script:
         - git pull
-        - mvn clean test
+        - mvn clean test jacoco:report
+        - bash <(curl -s https://codecov.io/bash)
