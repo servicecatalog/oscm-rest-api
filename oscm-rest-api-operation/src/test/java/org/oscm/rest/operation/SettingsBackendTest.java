@@ -1,3 +1,12 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 16-04-2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.operation;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,33 +18,30 @@ import org.oscm.internal.intf.OperatorService;
 
 class SettingsBackendTest {
 
-    @Mock
-    ConfigurationService cs;
+  @Mock ConfigurationService cs;
 
-    @Mock
-    OperatorService os;
+  @Mock OperatorService os;
 
-    @BeforeEach
-    public void setUp() {}
+  @BeforeEach
+  public void setUp() {}
 
-    @Test
-    @Disabled("Not implemented")
-    public void delete() {}
+  @Test
+  @Disabled("Not implemented")
+  public void delete() {}
 
-    @Test
-    @Disabled("Not implemented")
-    public void post() {}
+  @Test
+  @Disabled("Not implemented")
+  public void post() {}
 
-    @Test
-    @Disabled("Not implemented")
-    public void put() {}
+  @Test
+  @Disabled("Not implemented")
+  public void put() {}
 
-    @Test
-    @Disabled("Not implemented")
-    public void get() {}
+  @Test
+  @Disabled("Not implemented")
+  public void get() {}
 
-    @Test
-    @Disabled("Not implemented")
-    public void getCollection() {}
-
+  @Test
+  @Disabled("Not implemented")
+  public void getCollection() {}
 }
