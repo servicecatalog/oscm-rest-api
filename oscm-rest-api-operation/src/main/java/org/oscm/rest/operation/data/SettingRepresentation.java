@@ -12,7 +12,6 @@ package org.oscm.rest.operation.data;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.WebApplicationException;
-
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
 import org.oscm.internal.vo.VOConfigurationSetting;
