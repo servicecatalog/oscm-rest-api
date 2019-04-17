@@ -95,7 +95,12 @@ class SettingRepresentationTest {
         .extracting(r -> representationCollection.getItems().size())
         .isEqualTo(settings.size());
     assertThat(representationCollection)
-        .extracting(r -> representationCollection.getItems().iterator().next().getVO().getValue())
+        .extracting(
+            r -> {
+              SettingRepresentation settingRepresentation =
+                  (SettingRepresentation) representationCollection.getItems().toArray()[0];
+              return settingRepresentation.getVO().getValue();
+            })
         .isEqualTo(voConfigurationSetting.getValue());
   }
 }
