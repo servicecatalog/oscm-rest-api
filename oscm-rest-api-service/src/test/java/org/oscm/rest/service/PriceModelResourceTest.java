@@ -17,6 +17,8 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,7 +58,85 @@ class PriceModelResourceTest {
                 .thenReturn(
                         serviceParameters1 -> priceModelRepresentation);
 
+        try {
+            response = priceModelResource.get(uriInfo, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
 
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.OK.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(true);
+        assertThat(response)
+                .extracting(Response::getEntity)
+                .isEqualTo(priceModelRepresentation);
+    }
+
+    @Test
+    public void shouldUpdate() {
+        when(priceModelBackend.put())
+                .thenReturn((priceModelRepresentation1, serviceParameters1) -> true);
+
+        try {
+            response = priceModelResource.update(uriInfo, priceModelRepresentation, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(false);
+    }
+
+    @Test
+    public void shouldGetForCustomer() {
+        when(priceModelBackend.getForCustomer())
+                .thenReturn(serviceParameters1 -> priceModelRepresentation);
+
+        try {
+            response = priceModelResource.getForCustomer(uriInfo, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.OK.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(true);
+        assertThat(response)
+                .extracting(Response::getEntity)
+                .isEqualTo(priceModelRepresentation);
+    }
+
+    @Test
+    public void shouldUpdateForCustomer() {
+        when(priceModelBackend.putForCustomer())
+                .thenReturn((priceModelRepresentation1, serviceParameters1) -> true);
+
+        try {
+            response = priceModelResource.updateForCustomer(uriInfo, priceModelRepresentation, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(false);
     }
 
     private UriInfo createUriInfo() {

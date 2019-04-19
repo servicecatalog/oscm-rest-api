@@ -9,8 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.internal.types.enumtypes.ServiceAccessType;
+import org.oscm.internal.vo.VOServiceDetails;
+import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.service.data.ServiceDetailsRepresentation;
 import org.oscm.rest.service.data.ServiceRepresentation;
+import org.oscm.rest.service.data.StatusRepresentation;
 
 import javax.ws.rs.core.*;
 import java.net.URI;
@@ -19,28 +24,41 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CompatibleServiceResourceTest {
+class ServiceResourceTest {
 
     @Mock
     private ServiceBackend serviceBackend;
 
     @InjectMocks
     @Spy
-    private CompatibleServiceResource compatibleServiceResource;
+    private ServiceResource serviceResource;
 
     private Response response;
     private ServiceRepresentation serviceRepresentation;
+    private ServiceDetailsRepresentation serviceDetailsRepresentation;
     private UriInfo uriInfo;
     private ServiceParameters serviceParameters;
+    private StatusRepresentation statusRepresentation;
+    private VOServiceDetails voServiceDetails;
 
     @BeforeEach
     public void setUp() {
+        voServiceDetails = setUpServiceDetails();
         serviceRepresentation = new ServiceRepresentation();
+        serviceDetailsRepresentation = new ServiceDetailsRepresentation(voServiceDetails);
+        statusRepresentation = new StatusRepresentation();
         uriInfo = createUriInfo();
         serviceParameters = createParameters();
+    }
+    private VOServiceDetails setUpServiceDetails() {
+        VOServiceDetails voServiceDetails = new VOServiceDetails();
+        VOTechnicalService voTechnicalService = new VOTechnicalService();
+        voServiceDetails.setTechnicalService(voTechnicalService);
+        return voServiceDetails;
     }
 
     @AfterEach
@@ -49,15 +67,13 @@ class CompatibleServiceResourceTest {
     }
 
     @Test
-    public void shouldGetCompatibleServices() {
-        when(serviceBackend.getCompatibles())
-                .thenReturn(
-                        serviceParameters ->
-                                new RepresentationCollection<>(
-                                        Lists.newArrayList(serviceRepresentation)));
+    public void shouldGetServices() {
+        when(serviceBackend.getCollection())
+                .thenReturn(serviceParameters1 ->
+                        new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation)));
 
         try {
-            response = compatibleServiceResource.getCompatibleServices(uriInfo, serviceParameters);
+            response = serviceResource.getServices(uriInfo, serviceParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -67,24 +83,68 @@ class CompatibleServiceResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.OK.getStatusCode());
         assertThat(response)
-                .extracting(Response::hasEntity).isEqualTo(true);
+                .extracting(Response::hasEntity)
+                .isEqualTo(true);
         assertThat(response)
                 .extracting(
                         r -> {
                             RepresentationCollection<ServiceRepresentation> representationCollection =
                                     (RepresentationCollection<ServiceRepresentation>) r.getEntity();
                             return representationCollection.getItems().toArray()[0];
-                        })
+                        }
+                )
                 .isEqualTo(serviceRepresentation);
     }
 
     @Test
-    public void shouldSetCompatibleServices() {
-        when(serviceBackend.putCompatibles())
-                .thenReturn((serviceRepresentation, serviceParameters) -> true);
+    public void shouldCreateService() {
+        when(serviceBackend.post())
+                .thenReturn((serviceDetailsRepresentation1, serviceParameters1) -> true);
 
         try {
-            response = compatibleServiceResource.setCompatibleServices(uriInfo, getContent(), serviceParameters);
+            response = serviceResource.createService(uriInfo, serviceDetailsRepresentation, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.CREATED.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(false);
+    }
+
+    @Test
+    public void shouldGetService() {
+        when(serviceBackend.get()).thenReturn(serviceParameters1 -> serviceDetailsRepresentation);
+
+        try {
+            response = serviceResource.getService(uriInfo, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.OK.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(true);
+        assertThat(response)
+                .extracting(Response::getEntity)
+                .isEqualTo(serviceDetailsRepresentation);
+    }
+
+    @Test
+    public void shouldUpdateService() {
+        when(serviceBackend.put())
+                .thenReturn((serviceDetailsRepresentation1, serviceParameters1) -> true);
+
+        try {
+            response = serviceResource.updateService(uriInfo, serviceDetailsRepresentation, serviceParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -94,11 +154,48 @@ class CompatibleServiceResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response)
-                .extracting(Response::hasEntity).isEqualTo(false);
+                .extracting(Response::hasEntity)
+                .isEqualTo(false);
     }
 
-    private RepresentationCollection<ServiceRepresentation> getContent() {
-        return new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation));
+    @Test
+    public void shouldDeleteService() {
+        when(serviceBackend.delete())
+                .thenReturn(serviceParameters1 -> true);
+
+        try {
+            response = serviceResource.deleteService(uriInfo, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(false);
+    }
+
+    @Test
+    public void setServiceState() {
+        when(serviceBackend.putStatus())
+                .thenReturn((statusRepresentation1, serviceParameters1) -> true);
+
+        try {
+            response = serviceResource.setServiceState(uriInfo, statusRepresentation, serviceParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+        assertThat(response)
+                .extracting(Response::hasEntity)
+                .isEqualTo(false);
     }
 
     private UriInfo createUriInfo() {
