@@ -9,11 +9,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.internal.intf.ServiceProvisioningService;
-import org.oscm.internal.types.exception.*;
+import org.oscm.internal.vo.VOOrganization;
+import org.oscm.internal.vo.VOServiceDetails;
+import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.service.data.OrganizationRepresentation;
 import org.oscm.rest.service.data.ServiceRepresentation;
-import org.oscm.rest.service.data.TechnicalServiceRepresentation;
 
 import javax.ws.rs.core.*;
 import java.net.URI;
@@ -24,28 +25,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class TechnicalServiceResourceTest {
+class TSSupplierResourceTest {
 
     @Mock
-    private TechnicalServiceBackend technicalServiceBackend;
+    private TSSupplierBackend tsSupplierBackend;
 
-    @Mock
-    private ServiceProvisioningService serviceProvisioningService;
-
-    @InjectMocks
-    @Spy
-    TechnicalServiceResource technicalServiceResource;
+    @InjectMocks @Spy private TSSupplierResource tsSupplierResource;
 
     private Response response;
-    private TechnicalServiceRepresentation technicalServiceRepresentation;
+    private OrganizationRepresentation organizationRepresentation;
     private UriInfo uriInfo;
     private ServiceParameters serviceParameters;
 
     @BeforeEach
     public void setUp() {
-        technicalServiceRepresentation = new TechnicalServiceRepresentation();
+        organizationRepresentation = new OrganizationRepresentation();
         uriInfo = createUriInfo();
         serviceParameters = createParameters();
     }
@@ -56,13 +53,13 @@ class TechnicalServiceResourceTest {
     }
 
     @Test
-    public void shouldGetTechnicalServices() {
-        when(technicalServiceBackend.getCollection())
+    public void shouldGetSuppliers() {
+        when(tsSupplierBackend.getCollection())
                 .thenReturn(serviceParameters1 ->
-                        new RepresentationCollection<>(Lists.newArrayList(technicalServiceRepresentation)));
+                        new RepresentationCollection<>(Lists.newArrayList(organizationRepresentation)));
 
         try {
-            response = technicalServiceResource.getTechnicalServices(uriInfo, serviceParameters);
+            response = tsSupplierResource.getSuppliers(uriInfo, serviceParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -82,16 +79,16 @@ class TechnicalServiceResourceTest {
                             return representationCollection.getItems().toArray()[0];
                         }
                 )
-                .isEqualTo(technicalServiceRepresentation);
+                .isEqualTo(organizationRepresentation);
     }
 
     @Test
-    public void shouldCreateTechnicalService() {
-        when(technicalServiceBackend.post())
-                .thenReturn((serviceDetailsRepresentation1, serviceParameters1) -> true);
+    public void shouldAddSupplier() {
+        when(tsSupplierBackend.post())
+                .thenReturn((organizationRepresentation1, serviceParameters1) -> true);
 
         try {
-            response = technicalServiceResource.createTechnicalService(uriInfo, technicalServiceRepresentation, serviceParameters);
+            response = tsSupplierResource.addSupplier(uriInfo, organizationRepresentation, serviceParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -106,96 +103,12 @@ class TechnicalServiceResourceTest {
     }
 
     @Test
-    public void shouldDeleteTechnicalService() {
-        when(technicalServiceBackend.delete())
+    public void shouldDeleteSupplier() {
+        when(tsSupplierBackend.delete())
                 .thenReturn(serviceParameters1 -> true);
 
         try {
-            response = technicalServiceResource.deleteTechnicalService(uriInfo, serviceParameters);
-        } catch (Exception e) {
-            fail(e);
-        }
-
-        assertThat(response).isNotNull();
-        assertThat(response)
-                .extracting(Response::getStatus)
-                .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-        assertThat(response)
-                .extracting(Response::hasEntity)
-                .isEqualTo(false);
-    }
-
-    @Test
-    public void shouldExportTechnicalService() {
-        try {
-            when(serviceProvisioningService.exportTechnicalServices(any()))
-                    .thenReturn(new byte[]{1});
-        } catch (OrganizationAuthoritiesException | ObjectNotFoundException | OperationNotPermittedException e) {
-            fail(e);
-        }
-
-        try {
-            response = technicalServiceResource.exportTechnicalService(uriInfo, serviceParameters);
-        } catch (Exception e) {
-            fail(e);
-        }
-
-        assertThat(response).isNotNull();
-        assertThat(response)
-                .extracting(Response::getStatus)
-                .isEqualTo(Response.Status.OK.getStatusCode());
-        assertThat(response)
-                .extracting(Response::hasEntity)
-                .isEqualTo(true);
-        assertThat(response)
-                .extracting(Response::getMediaType)
-                .isEqualTo(MediaType.APPLICATION_XML_TYPE);
-    }
-
-    @Test
-    public void shouldImportTechnicalService_returnBadRequestWhenInputNotEmpty() {
-        String message = "msg";
-        try {
-            when(serviceProvisioningService.importTechnicalServices(any()))
-                    .thenReturn(message);
-        } catch (ImportException | OperationNotPermittedException | UpdateConstraintException |
-                TechnicalServiceActiveException | BillingAdapterNotFoundException |
-                TechnicalServiceMultiSubscriptions | UnchangeableAllowingOnBehalfActingException e) {
-            fail(e);
-        }
-
-        try {
-            response = technicalServiceResource.importTechnicalServices(uriInfo, new byte[]{1}, serviceParameters);
-        } catch (Exception e) {
-            fail(e);
-        }
-
-        assertThat(response).isNotNull();
-        assertThat(response)
-                .extracting(Response::getStatus)
-                .isEqualTo(Response.Status.BAD_REQUEST.getStatusCode());
-        assertThat(response)
-                .extracting(Response::hasEntity)
-                .isEqualTo(true);
-        assertThat(response)
-                .extracting(r -> r.getEntity().toString())
-                .isEqualTo(message);
-    }
-
-    @Test
-    public void shouldImportTechnicalService_returnNoContentWhenInputEmpty() {
-        String message = "";
-        try {
-            when(serviceProvisioningService.importTechnicalServices(any()))
-                    .thenReturn(message);
-        } catch (ImportException | OperationNotPermittedException | UpdateConstraintException |
-                TechnicalServiceActiveException | BillingAdapterNotFoundException |
-                TechnicalServiceMultiSubscriptions | UnchangeableAllowingOnBehalfActingException e) {
-            fail(e);
-        }
-
-        try {
-            response = technicalServiceResource.importTechnicalServices(uriInfo, new byte[]{1}, serviceParameters);
+            response = tsSupplierResource.removeSupplier(uriInfo, serviceParameters);
         } catch (Exception e) {
             fail(e);
         }
