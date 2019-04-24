@@ -10,7 +10,6 @@
 package org.oscm.rest.service.data;
 
 import javax.ws.rs.WebApplicationException;
-
 import lombok.Generated;
 import org.oscm.internal.vo.VOParameterOption;
 import org.oscm.rest.common.Representation;

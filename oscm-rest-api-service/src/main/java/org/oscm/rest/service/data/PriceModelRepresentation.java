@@ -12,7 +12,6 @@ package org.oscm.rest.service.data;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.ws.rs.WebApplicationException;
-
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;

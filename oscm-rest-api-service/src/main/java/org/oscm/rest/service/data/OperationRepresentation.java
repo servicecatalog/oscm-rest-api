@@ -12,7 +12,6 @@ package org.oscm.rest.service.data;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.WebApplicationException;
-
 import lombok.Generated;
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.internal.vo.VOTechnicalServiceOperation;
