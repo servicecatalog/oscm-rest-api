@@ -22,6 +22,7 @@ jobs:
     - stage: run_tests
       name: Run Tests
       script:
+        - git branch
         - git pull
         - mvn clean test jacoco:report
         - bash <(curl -s https://codecov.io/bash)
