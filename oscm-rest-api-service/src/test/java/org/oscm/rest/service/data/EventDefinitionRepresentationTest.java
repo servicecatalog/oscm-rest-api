@@ -42,7 +42,7 @@ class EventDefinitionRepresentationTest {
     }
 
     @Test
-    public void shouldUpdateVOEventDefinition_evenIfIdAndVersionIsNull() {
+    public void shouldUpdateVOEventDefinition_evenIfIdAndETagIsNull() {
         EventDefinitionRepresentation eventDefinitionRepresentation = new EventDefinitionRepresentation();
         eventDefinitionRepresentation.setEventDescription("description");
         eventDefinitionRepresentation.setEventType(EventType.PLATFORM_EVENT);
@@ -69,7 +69,7 @@ class EventDefinitionRepresentationTest {
     }
 
     @Test
-    public void shouldCOnvertToEventDefinition() {
+    public void shouldConvertToEventDefinition() {
         VOEventDefinition voEventDefinition = new VOEventDefinition();
         voEventDefinition.setEventDescription("description");
         voEventDefinition.setEventId("100");

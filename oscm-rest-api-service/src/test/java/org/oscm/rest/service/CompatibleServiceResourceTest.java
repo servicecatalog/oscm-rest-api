@@ -64,7 +64,6 @@ class CompatibleServiceResourceTest {
       response = compatibleServiceResource.getCompatibleServices(uriInfo, serviceParameters);
     } catch (Exception e) {
       fail(e);
->>>>>>> 8499d363d4cc705f5b3169bfa26dfb677594d3a7
     }
 
     assertThat(response).isNotNull();

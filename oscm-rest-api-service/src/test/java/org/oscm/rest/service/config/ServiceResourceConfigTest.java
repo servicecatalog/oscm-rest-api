@@ -26,20 +26,7 @@ class ServiceResourceConfigTest {
 
     Set<Class<?>> classes = resourceConfig.getClasses();
 
-<<<<<<< HEAD
-        assertThat(classes.size()).isEqualTo(8);
-        assertThat(classes.contains(CompatibleServiceResource.class)).isEqualTo(true);
-        assertThat(classes.contains(PriceModelResource.class)).isEqualTo(true);
-        assertThat(classes.contains(ServiceImageResource.class)).isEqualTo(true);
-        assertThat(classes.contains(TechnicalServiceResource.class)).isEqualTo(true);
-        assertThat(classes.contains(TSSupplierResource.class)).isEqualTo(true);
-        assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
-        assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
-        assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
-    }
-}
-=======
-    assertThat(classes.size()).isEqualTo(4);
+    assertThat(classes.size()).isEqualTo(8);
     assertThat(classes.contains(CompatibleServiceResource.class)).isEqualTo(true);
     assertThat(classes.contains(PriceModelResource.class)).isEqualTo(true);
     assertThat(classes.contains(ServiceImageResource.class)).isEqualTo(true);
@@ -50,4 +37,3 @@ class ServiceResourceConfigTest {
     assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
   }
 }
->>>>>>> 8499d363d4cc705f5b3169bfa26dfb677594d3a7
