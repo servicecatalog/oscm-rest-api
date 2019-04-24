@@ -9,18 +9,21 @@ cache:
     - $HOME/.m2
     - $TRAVIS_BUILD_DIR/libraries
 env:
+  - TRAVIS_BOT_USERNAME=Travis CI
   - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info mvn org.jacoco:jacoco-maven-plugin:prepare-agent $MVN_GOAL -q -fae -Dmaven.javadoc.skip=true -DfailIfNoTests=false -B -P travis
 
 jobs:
   include:
     - stage: verify_code
       name: Verify Code
+      if: sender != "$TRAVIS_BOT_USERNAME"
       script:
         - bash scripts/check_copyrights.sh
         - bash scripts/format_code.sh
         - bash scripts/repush_formatted_code.sh
     - stage: run_tests
       name: Run Tests
+      if: sender != "$TRAVIS_BOT_USERNAME"
       script:
         - git pull
         - mvn clean test jacoco:report
