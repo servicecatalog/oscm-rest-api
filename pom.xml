@@ -111,6 +111,7 @@
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
             <version>${jersey.common.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.servicecatalog.oscm-commons</groupId>
