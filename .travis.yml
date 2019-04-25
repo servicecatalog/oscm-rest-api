@@ -16,12 +16,14 @@ jobs:
     - stage: verify_code
       name: Verify Code
       script:
-        - bash scripts/check_copyrights.sh
-        - bash scripts/format_code.sh
-        - bash scripts/repush_formatted_code.sh
+        # FIXME: Temporarily disabled
+        # - bash scripts/check_copyrights.sh
+        # - bash scripts/format_code.sh
+        # - bash scripts/repush_formatted_code.sh
     - stage: run_tests
       name: Run Tests
       script:
-        - git pull
+        # FIXME: Temporarily disabled
+        # - git pull
         - mvn clean test jacoco:report
         - bash <(curl -s https://codecov.io/bash)
