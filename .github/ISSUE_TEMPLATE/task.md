@@ -11,7 +11,7 @@ assignees: ''
 Clear description or/and business justification of what the task is about.
 
 **Details**
-If applicapable, detailed information regarding things to be considered, requirements etc.
+If applicable, detailed information regarding things to be considered, requirements etc.
 
 **Acceptance criteria**
 Precise and detailed conditions under which the task is considered to be completed.
