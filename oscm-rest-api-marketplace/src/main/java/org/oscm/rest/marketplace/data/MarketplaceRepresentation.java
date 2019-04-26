@@ -193,6 +193,8 @@ public class MarketplaceRepresentation extends Representation {
   }
 
   // FIXME move to super class
+  // FIXME excluded from code coverage due to fixme
+  // TODO Remove @Generated annotation when moving to superclass
   protected long convertIdToKey() {
     if (getId() == null) {
       return 0L;
@@ -201,6 +203,8 @@ public class MarketplaceRepresentation extends Representation {
   }
 
   // FIXME move to super class
+  // FIXME excluded from code coverage due to fixme
+  // TODO Remove @Generated annotation when moving to superclass
   protected int convertETagToVersion() {
     if (getETag() == null) {
       return 0;
