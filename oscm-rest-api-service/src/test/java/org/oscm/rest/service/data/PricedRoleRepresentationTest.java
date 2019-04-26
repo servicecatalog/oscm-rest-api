@@ -19,16 +19,12 @@ import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
 
-class PricedRoleRepresentationTest {
+public class PricedRoleRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedRole() {
-    PricedRoleRepresentation representation = new PricedRoleRepresentation();
+    PricedRoleRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setPricePerUser(BigDecimal.TEN);
-    RoleDefinitionRepresentation roleDefinitionRepresentation = new RoleDefinitionRepresentation();
-    roleDefinitionRepresentation.setRoleId("Role100");
-    representation.setRole(roleDefinitionRepresentation);
     representation.setETag(100L);
 
     representation.update();
@@ -47,11 +43,7 @@ class PricedRoleRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedRole_evenIfIdAndETagIsNull() {
-    PricedRoleRepresentation representation = new PricedRoleRepresentation();
-    representation.setPricePerUser(BigDecimal.TEN);
-    RoleDefinitionRepresentation roleDefinitionRepresentation = new RoleDefinitionRepresentation();
-    roleDefinitionRepresentation.setRoleId("Role100");
-    representation.setRole(roleDefinitionRepresentation);
+    PricedRoleRepresentation representation = createRepresentation();
 
     representation.update();
     VOPricedRole result = representation.getVO();
@@ -89,5 +81,14 @@ class PricedRoleRepresentationTest {
         .isEqualTo(voPricedRole.getPricePerUser());
     assertThat(representation.getRole().getDescription())
         .isEqualTo(voPricedRole.getRole().getDescription());
+  }
+
+  private PricedRoleRepresentation createRepresentation() {
+    PricedRoleRepresentation representation = new PricedRoleRepresentation();
+    representation.setPricePerUser(BigDecimal.TEN);
+    RoleDefinitionRepresentation roleDefinitionRepresentation = new RoleDefinitionRepresentation();
+    roleDefinitionRepresentation.setRoleId("Role100");
+    representation.setRole(roleDefinitionRepresentation);
+    return representation;
   }
 }

@@ -30,7 +30,7 @@ import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.service.data.ServiceRepresentation;
 
 @ExtendWith(MockitoExtension.class)
-class CompatibleServiceResourceTest {
+public class CompatibleServiceResourceTest {
 
   @Mock private ServiceBackend serviceBackend;
 

@@ -22,21 +22,12 @@ import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
 
-class PricedOptionRepresentationTest {
+public class PricedOptionRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedOption() {
-    PricedOptionRepresentation representation = new PricedOptionRepresentation();
+    PricedOptionRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setOptionId("100");
-    representation.setParameterOptionKey(100L);
-    representation.setPricePerSubscription(BigDecimal.TEN);
-    representation.setPricePerUser(BigDecimal.TEN);
-    List<PricedRoleRepresentation> list = new ArrayList<>();
-    PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
-    pricedRoleRepresentation.setPricePerUser(BigDecimal.ONE);
-    list.add(pricedRoleRepresentation);
-    representation.setRoleSpecificUserPrices(list);
     representation.setETag(100L);
 
     representation.update();
@@ -57,7 +48,7 @@ class PricedOptionRepresentationTest {
         .extracting(VOPricedOption::getPricePerUser)
         .isEqualTo(representation.getPricePerUser());
     assertThat(((VOPricedRole) result.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser())
-        .isEqualTo(pricedRoleRepresentation.getPricePerUser());
+        .isEqualTo(((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -65,16 +56,7 @@ class PricedOptionRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedOption_evenIfIdAndETagIsNull() {
-    PricedOptionRepresentation representation = new PricedOptionRepresentation();
-    representation.setOptionId("100");
-    representation.setParameterOptionKey(100L);
-    representation.setPricePerSubscription(BigDecimal.TEN);
-    representation.setPricePerUser(BigDecimal.TEN);
-    List<PricedRoleRepresentation> list = new ArrayList<>();
-    PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
-    pricedRoleRepresentation.setPricePerUser(BigDecimal.ONE);
-    list.add(pricedRoleRepresentation);
-    representation.setRoleSpecificUserPrices(list);
+    PricedOptionRepresentation representation = createRepresentation();
 
     representation.update();
     VOPricedOption result = representation.getVO();
@@ -94,7 +76,7 @@ class PricedOptionRepresentationTest {
         .extracting(VOPricedOption::getPricePerUser)
         .isEqualTo(representation.getPricePerUser());
     assertThat(((VOPricedRole) result.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser())
-        .isEqualTo(pricedRoleRepresentation.getPricePerUser());
+        .isEqualTo(((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -140,5 +122,19 @@ class PricedOptionRepresentationTest {
             ((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0])
                 .getPricePerUser())
         .isEqualTo(voPricedRole.getPricePerUser());
+  }
+
+  private PricedOptionRepresentation createRepresentation() {
+    PricedOptionRepresentation representation = new PricedOptionRepresentation();
+    representation.setOptionId("100");
+    representation.setParameterOptionKey(100L);
+    representation.setPricePerSubscription(BigDecimal.TEN);
+    representation.setPricePerUser(BigDecimal.TEN);
+    List<PricedRoleRepresentation> list = new ArrayList<>();
+    PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
+    pricedRoleRepresentation.setPricePerUser(BigDecimal.ONE);
+    list.add(pricedRoleRepresentation);
+    representation.setRoleSpecificUserPrices(list);
+    return representation;
   }
 }

@@ -17,36 +17,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.*;
 
-class PricedParameterRepresentationTest {
+public class PricedParameterRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedParameter() {
-    PricedParameterRepresentation representation = new PricedParameterRepresentation();
-    representation.setId(100L);
-    representation.setParameterKey(100L);
-    List<PricedOptionRepresentation> list = new ArrayList<>();
-    PricedOptionRepresentation pricedOptionRepresentation = new PricedOptionRepresentation();
-    pricedOptionRepresentation.setParameterOptionKey(123L);
-    list.add(pricedOptionRepresentation);
-    List<PricedRoleRepresentation> list2 = new ArrayList<>();
-    PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
-    pricedRoleRepresentation.setPricePerUser(BigDecimal.ONE);
-    list2.add(pricedRoleRepresentation);
-    pricedOptionRepresentation.setRoleSpecificUserPrices(list2);
-    representation.setPricedOptions(list);
-    representation.setPricePerSubscription(BigDecimal.TEN);
-    representation.setPricePerUser(BigDecimal.TEN);
-    representation.setRoleSpecificUserPrices(list2);
-    List<SteppedPriceRepresentation> list3 = new ArrayList<>();
-    SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-    steppedPriceRepresentation.setLimit(456L);
-    list3.add(steppedPriceRepresentation);
-    representation.setSteppedPrices(list3);
+    PricedParameterRepresentation representation = createRepresentation();
     representation.setETag(100L);
-    ParameterDefinitionRepresentation parameterDefinitionRepresentation =
-        new ParameterDefinitionRepresentation();
-    parameterDefinitionRepresentation.setDescription("Description789");
-    representation.setParameterDef(parameterDefinitionRepresentation);
+    representation.setId(100L);
 
     representation.update();
     VOPricedParameter result = representation.getVO();
@@ -86,30 +63,7 @@ class PricedParameterRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedParameter_evenIfIdAndETagIsNull() {
-    PricedParameterRepresentation representation = new PricedParameterRepresentation();
-    representation.setParameterKey(100L);
-    List<PricedOptionRepresentation> list = new ArrayList<>();
-    PricedOptionRepresentation pricedOptionRepresentation = new PricedOptionRepresentation();
-    pricedOptionRepresentation.setParameterOptionKey(123L);
-    list.add(pricedOptionRepresentation);
-    List<PricedRoleRepresentation> list2 = new ArrayList<>();
-    PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
-    pricedRoleRepresentation.setPricePerUser(BigDecimal.ONE);
-    list2.add(pricedRoleRepresentation);
-    pricedOptionRepresentation.setRoleSpecificUserPrices(list2);
-    representation.setPricedOptions(list);
-    representation.setPricePerSubscription(BigDecimal.TEN);
-    representation.setPricePerUser(BigDecimal.TEN);
-    representation.setRoleSpecificUserPrices(list2);
-    List<SteppedPriceRepresentation> list3 = new ArrayList<>();
-    SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-    steppedPriceRepresentation.setLimit(456L);
-    list3.add(steppedPriceRepresentation);
-    representation.setSteppedPrices(list3);
-    ParameterDefinitionRepresentation parameterDefinitionRepresentation =
-        new ParameterDefinitionRepresentation();
-    parameterDefinitionRepresentation.setDescription("Description789");
-    representation.setParameterDef(parameterDefinitionRepresentation);
+    PricedParameterRepresentation representation = createRepresentation();
 
     representation.update();
     VOPricedParameter result = representation.getVO();
@@ -145,5 +99,33 @@ class PricedParameterRepresentationTest {
         .isEqualTo(representation.convertETagToVersion());
     assertThat(result.getVoParameterDef().getDescription())
         .isEqualTo(representation.getParameterDef().getDescription());
+  }
+
+  private PricedParameterRepresentation createRepresentation() {
+    PricedParameterRepresentation representation = new PricedParameterRepresentation();
+    representation.setParameterKey(100L);
+    List<PricedOptionRepresentation> list = new ArrayList<>();
+    PricedOptionRepresentation pricedOptionRepresentation = new PricedOptionRepresentation();
+    pricedOptionRepresentation.setParameterOptionKey(123L);
+    list.add(pricedOptionRepresentation);
+    List<PricedRoleRepresentation> list2 = new ArrayList<>();
+    PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
+    pricedRoleRepresentation.setPricePerUser(BigDecimal.ONE);
+    list2.add(pricedRoleRepresentation);
+    pricedOptionRepresentation.setRoleSpecificUserPrices(list2);
+    representation.setPricedOptions(list);
+    representation.setPricePerSubscription(BigDecimal.TEN);
+    representation.setPricePerUser(BigDecimal.TEN);
+    representation.setRoleSpecificUserPrices(list2);
+    List<SteppedPriceRepresentation> list3 = new ArrayList<>();
+    SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
+    steppedPriceRepresentation.setLimit(456L);
+    list3.add(steppedPriceRepresentation);
+    representation.setSteppedPrices(list3);
+    ParameterDefinitionRepresentation parameterDefinitionRepresentation =
+            new ParameterDefinitionRepresentation();
+    parameterDefinitionRepresentation.setDescription("Description789");
+    representation.setParameterDef(parameterDefinitionRepresentation);
+    return representation;
   }
 }

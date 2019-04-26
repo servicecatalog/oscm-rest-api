@@ -22,7 +22,7 @@ import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.internal.vo.VOParameterOption;
 import org.oscm.rest.common.Representation;
 
-class ParameterDefinitionRepresentationTest {
+public class ParameterDefinitionRepresentationTest {
 
   @Test
   public void shouldUpdateVOParameterDefinition() {

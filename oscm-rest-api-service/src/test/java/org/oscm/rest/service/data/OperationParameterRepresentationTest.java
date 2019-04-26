@@ -18,17 +18,12 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.rest.common.Representation;
 
-class OperationParameterRepresentationTest {
+public class OperationParameterRepresentationTest {
 
   @Test
   public void shouldUpdateVOServiceOperationParameter() {
-    OperationParameterRepresentation representation = new OperationParameterRepresentation();
+    OperationParameterRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setMandatory(true);
-    representation.setParameterId("100");
-    representation.setParameterName("ParameterName");
-    representation.setParameterValue("Value");
-    representation.setType(OperationParameterType.INPUT_STRING);
     representation.setETag(100L);
 
     representation.update();
@@ -58,12 +53,7 @@ class OperationParameterRepresentationTest {
 
   @Test
   public void shouldUpdateVOServiceOperationParameter_evenIfIdAndETagIsNull() {
-    OperationParameterRepresentation representation = new OperationParameterRepresentation();
-    representation.setMandatory(true);
-    representation.setParameterId("100");
-    representation.setParameterName("ParameterName");
-    representation.setParameterValue("Value");
-    representation.setType(OperationParameterType.INPUT_STRING);
+    OperationParameterRepresentation representation = createRepresentation();
 
     representation.update();
     VOServiceOperationParameter result = representation.getVO();
@@ -125,5 +115,15 @@ class OperationParameterRepresentationTest {
     assertThat(representation)
         .extracting(OperationParameterRepresentation::getType)
         .isEqualTo(voServiceOperationParameter.getType());
+  }
+
+  private OperationParameterRepresentation createRepresentation() {
+    OperationParameterRepresentation representation = new OperationParameterRepresentation();
+    representation.setMandatory(true);
+    representation.setParameterId("100");
+    representation.setParameterName("ParameterName");
+    representation.setParameterValue("Value");
+    representation.setType(OperationParameterType.INPUT_STRING);
+    return representation;
   }
 }

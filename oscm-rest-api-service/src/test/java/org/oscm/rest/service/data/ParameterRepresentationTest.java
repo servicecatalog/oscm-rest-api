@@ -18,17 +18,12 @@ import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.rest.common.Representation;
 
-class ParameterRepresentationTest {
+public class ParameterRepresentationTest {
 
   @Test
   public void shouldUpdateVOParameter() {
-    ParameterRepresentation representation = new ParameterRepresentation();
-    representation.setConfigurable(true);
+    ParameterRepresentation representation = createRepresentation();
     representation.setId(100L);
-    ParameterDefinitionRepresentation parameterDefinitionRepresentation =
-        new ParameterDefinitionRepresentation();
-    representation.setParameterDefinition(parameterDefinitionRepresentation);
-    representation.setValue("Value");
     representation.setETag(100L);
 
     representation.update();
@@ -50,12 +45,7 @@ class ParameterRepresentationTest {
 
   @Test
   public void shouldUpdateVOParameter_evenIfIdAndETagIsNull() {
-    ParameterRepresentation representation = new ParameterRepresentation();
-    representation.setConfigurable(true);
-    ParameterDefinitionRepresentation parameterDefinitionRepresentation =
-        new ParameterDefinitionRepresentation();
-    representation.setParameterDefinition(parameterDefinitionRepresentation);
-    representation.setValue("Value");
+    ParameterRepresentation representation = createRepresentation();
 
     representation.update();
     VOParameter result = representation.getVO();
@@ -100,5 +90,15 @@ class ParameterRepresentationTest {
     assertThat(representation)
         .extracting(ParameterRepresentation::getValue)
         .isEqualTo(voParameter.getValue());
+  }
+
+  private ParameterRepresentation createRepresentation() {
+    ParameterRepresentation representation = new ParameterRepresentation();
+    representation.setConfigurable(true);
+    ParameterDefinitionRepresentation parameterDefinitionRepresentation =
+            new ParameterDefinitionRepresentation();
+    representation.setParameterDefinition(parameterDefinitionRepresentation);
+    representation.setValue("Value");
+    return representation;
   }
 }

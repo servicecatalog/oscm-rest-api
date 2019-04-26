@@ -29,7 +29,7 @@ import org.oscm.rest.service.data.PriceModelRepresentation;
 import org.oscm.rest.service.data.ServiceRepresentation;
 
 @ExtendWith(MockitoExtension.class)
-class PriceModelResourceTest {
+public class PriceModelResourceTest {
 
   @Mock private PriceModelBackend priceModelBackend;
 

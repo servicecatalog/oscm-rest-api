@@ -20,21 +20,12 @@ import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.internal.vo.VOTechnicalServiceOperation;
 import org.oscm.rest.common.Representation;
 
-class OperationRepresentationTest {
+public class OperationRepresentationTest {
 
   @Test
   public void shouldUpdateVOTechnicalServiceOperation() {
-    OperationRepresentation representation = new OperationRepresentation();
+    OperationRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setOperationDescription("Description");
-    representation.setOperationId("100");
-    representation.setOperationName("Name");
-    List<OperationParameterRepresentation> list = new ArrayList<>();
-    OperationParameterRepresentation operationParameterRepresentation =
-        new OperationParameterRepresentation();
-    operationParameterRepresentation.setParameterName("abc123");
-    list.add(operationParameterRepresentation);
-    representation.setOperationParameters(list);
     representation.setETag(100L);
 
     representation.update();
@@ -55,7 +46,7 @@ class OperationRepresentationTest {
             ((OperationParameterRepresentation)
                     representation.getOperationParameters().toArray()[0])
                 .getParameterName())
-        .isEqualTo(operationParameterRepresentation.getParameterName());
+        .isEqualTo(((VOServiceOperationParameter)result.getOperationParameters().toArray()[0]).getParameterName());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -63,12 +54,7 @@ class OperationRepresentationTest {
 
   @Test
   public void shouldUpdateVOTechnicalServiceOperation_evenIfIdAndETagIsNull() {
-    OperationRepresentation representation = new OperationRepresentation();
-    representation.setOperationDescription("Description");
-    representation.setOperationId("100");
-    representation.setOperationName("Name");
-    List<OperationParameterRepresentation> list = new ArrayList<>();
-    representation.setOperationParameters(list);
+    OperationRepresentation representation = createRepresentation();
 
     representation.update();
     VOTechnicalServiceOperation result = representation.getVO();
@@ -84,9 +70,11 @@ class OperationRepresentationTest {
     assertThat(result)
         .extracting(VOTechnicalServiceOperation::getOperationName)
         .isEqualTo(representation.getOperationName());
-    assertThat(result)
-        .extracting(VOTechnicalServiceOperation::getOperationParameters)
-        .isEqualTo(representation.getOperationParameters());
+    assertThat(
+            ((OperationParameterRepresentation)
+                    representation.getOperationParameters().toArray()[0])
+                    .getParameterName())
+            .isEqualTo(((VOServiceOperationParameter)result.getOperationParameters().toArray()[0]).getParameterName());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -130,5 +118,19 @@ class OperationRepresentationTest {
     assertThat(representation)
         .extracting(OperationRepresentation::convertETagToVersion)
         .isEqualTo(voTechnicalServiceOperation.getVersion());
+  }
+
+  private OperationRepresentation createRepresentation() {
+    OperationRepresentation representation = new OperationRepresentation();
+    representation.setOperationDescription("Description");
+    representation.setOperationId("100");
+    representation.setOperationName("Name");
+    List<OperationParameterRepresentation> list = new ArrayList<>();
+    OperationParameterRepresentation operationParameterRepresentation =
+            new OperationParameterRepresentation();
+    operationParameterRepresentation.setParameterName("abc123");
+    list.add(operationParameterRepresentation);
+    representation.setOperationParameters(list);
+    return representation;
   }
 }

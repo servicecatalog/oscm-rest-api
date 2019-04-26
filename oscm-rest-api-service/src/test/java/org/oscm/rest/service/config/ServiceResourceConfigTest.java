@@ -18,7 +18,7 @@ import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.service.*;
 
-class ServiceResourceConfigTest {
+public class ServiceResourceConfigTest {
 
   @Test
   public void shouldGetClasses() {

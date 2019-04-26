@@ -19,24 +19,15 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOEventDefinition;
 import org.oscm.internal.vo.VOPricedEvent;
+import org.oscm.internal.vo.VOSteppedPrice;
 import org.oscm.rest.common.Representation;
 
-class PricedEventRepresentationTest {
+public class PricedEventRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedEvent() {
-    PricedEventRepresentation representation = new PricedEventRepresentation();
-    EventDefinitionRepresentation eventDefinitionRepresentation =
-        new EventDefinitionRepresentation();
-    eventDefinitionRepresentation.setEventId("Event123");
-    representation.setEventDefinition(eventDefinitionRepresentation);
-    representation.setEventPrice(BigDecimal.TEN);
+    PricedEventRepresentation representation = createRepresentation();
     representation.setId(100L);
-    List<SteppedPriceRepresentation> list = new ArrayList<>();
-    SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-    steppedPriceRepresentation.setLimit(123L);
-    list.add(steppedPriceRepresentation);
-    representation.setSteppedPrices(list);
     representation.setETag(100L);
 
     representation.update();
@@ -52,7 +43,7 @@ class PricedEventRepresentationTest {
     assertThat(
             ((SteppedPriceRepresentation) representation.getSteppedPrices().toArray()[0])
                 .getLimit())
-        .isEqualTo(steppedPriceRepresentation.getLimit());
+        .isEqualTo(((VOSteppedPrice)result.getSteppedPrices().toArray()[0]).getLimit());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -60,17 +51,7 @@ class PricedEventRepresentationTest {
 
   @Test
   public void shouldUpdateVOPricedEvent_evenIfIdAndETagIsNull() {
-    PricedEventRepresentation representation = new PricedEventRepresentation();
-    EventDefinitionRepresentation eventDefinitionRepresentation =
-        new EventDefinitionRepresentation();
-    eventDefinitionRepresentation.setEventId("Event123");
-    representation.setEventDefinition(eventDefinitionRepresentation);
-    representation.setEventPrice(BigDecimal.TEN);
-    List<SteppedPriceRepresentation> list = new ArrayList<>();
-    SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-    steppedPriceRepresentation.setLimit(123L);
-    list.add(steppedPriceRepresentation);
-    representation.setSteppedPrices(list);
+    PricedEventRepresentation representation = createRepresentation();
 
     representation.update();
     VOPricedEvent result = representation.getVO();
@@ -85,7 +66,7 @@ class PricedEventRepresentationTest {
     assertThat(
             ((SteppedPriceRepresentation) representation.getSteppedPrices().toArray()[0])
                 .getLimit())
-        .isEqualTo(steppedPriceRepresentation.getLimit());
+        .isEqualTo(((VOSteppedPrice)result.getSteppedPrices().toArray()[0]).getLimit());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -114,5 +95,20 @@ class PricedEventRepresentationTest {
     assertThat(representation)
         .extracting(PricedEventRepresentation::convertETagToVersion)
         .isEqualTo(voPricedEvent.getVersion());
+  }
+
+  private PricedEventRepresentation createRepresentation() {
+    PricedEventRepresentation representation = new PricedEventRepresentation();
+    EventDefinitionRepresentation eventDefinitionRepresentation =
+            new EventDefinitionRepresentation();
+    eventDefinitionRepresentation.setEventId("Event123");
+    representation.setEventDefinition(eventDefinitionRepresentation);
+    representation.setEventPrice(BigDecimal.TEN);
+    List<SteppedPriceRepresentation> list = new ArrayList<>();
+    SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
+    steppedPriceRepresentation.setLimit(123L);
+    list.add(steppedPriceRepresentation);
+    representation.setSteppedPrices(list);
+    return representation;
   }
 }

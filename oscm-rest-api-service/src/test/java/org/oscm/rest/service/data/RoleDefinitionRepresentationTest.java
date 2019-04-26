@@ -17,15 +17,12 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
 
-class RoleDefinitionRepresentationTest {
+public class RoleDefinitionRepresentationTest {
 
   @Test
   public void shouldUpdateVORoleDefinition() {
-    RoleDefinitionRepresentation representation = new RoleDefinitionRepresentation();
-    representation.setDescription("Description");
+    RoleDefinitionRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setName("Name");
-    representation.setRoleId("100");
     representation.setETag(100L);
 
     representation.update();
@@ -47,10 +44,7 @@ class RoleDefinitionRepresentationTest {
 
   @Test
   public void shouldUpdateVORoleDefinition_evenIfIdAndETagIsNull() {
-    RoleDefinitionRepresentation representation = new RoleDefinitionRepresentation();
-    representation.setDescription("Description");
-    representation.setName("Name");
-    representation.setRoleId("100");
+    RoleDefinitionRepresentation representation = createRepresentation();
 
     representation.update();
     VORoleDefinition result = representation.getVO();
@@ -97,5 +91,13 @@ class RoleDefinitionRepresentationTest {
     assertThat(representation)
         .extracting(Representation::getETag)
         .isEqualTo((long) voRoleDefinition.getVersion());
+  }
+
+  private RoleDefinitionRepresentation createRepresentation() {
+    RoleDefinitionRepresentation representation = new RoleDefinitionRepresentation();
+    representation.setDescription("Description");
+    representation.setName("Name");
+    representation.setRoleId("100");
+    return representation;
   }
 }

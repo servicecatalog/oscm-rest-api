@@ -28,7 +28,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ServiceResourceTest {
+public class ServiceResourceTest {
 
     @Mock
     private ServiceBackend serviceBackend;

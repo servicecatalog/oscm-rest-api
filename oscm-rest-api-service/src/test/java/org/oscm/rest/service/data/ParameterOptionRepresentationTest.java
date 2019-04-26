@@ -17,15 +17,12 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOParameterOption;
 import org.oscm.rest.common.Representation;
 
-class ParameterOptionRepresentationTest {
+public class ParameterOptionRepresentationTest {
 
   @Test
   public void shouldUpdateVOParameterOption() {
-    ParameterOptionRepresentation representation = new ParameterOptionRepresentation();
+    ParameterOptionRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setOptionDescription("Description");
-    representation.setOptionId("100");
-    representation.setParamDefId("100");
     representation.setETag(100L);
 
     representation.update();
@@ -49,10 +46,7 @@ class ParameterOptionRepresentationTest {
 
   @Test
   public void shouldUpdateVOParameterOption_evenIfIdAndETagIsNull() {
-    ParameterOptionRepresentation representation = new ParameterOptionRepresentation();
-    representation.setOptionDescription("Description");
-    representation.setOptionId("100");
-    representation.setParamDefId("100");
+    ParameterOptionRepresentation representation = createRepresentation();
 
     representation.update();
     VOParameterOption result = representation.getVO();
@@ -101,5 +95,13 @@ class ParameterOptionRepresentationTest {
     assertThat(representation)
         .extracting(ParameterOptionRepresentation::convertETagToVersion)
         .isEqualTo(voParameterOption.getVersion());
+  }
+
+  private ParameterOptionRepresentation createRepresentation() {
+    ParameterOptionRepresentation representation = new ParameterOptionRepresentation();
+    representation.setOptionDescription("Description");
+    representation.setOptionId("100");
+    representation.setParamDefId("100");
+    return representation;
   }
 }

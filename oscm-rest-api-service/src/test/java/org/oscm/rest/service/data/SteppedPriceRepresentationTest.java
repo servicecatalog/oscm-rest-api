@@ -18,14 +18,12 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSteppedPrice;
 import org.oscm.rest.common.Representation;
 
-class SteppedPriceRepresentationTest {
+public class SteppedPriceRepresentationTest {
 
   @Test
   public void shouldUpdateVOSteppedPrice() {
-    SteppedPriceRepresentation representation = new SteppedPriceRepresentation();
+    SteppedPriceRepresentation representation = createRepresentation();
     representation.setId(100L);
-    representation.setLimit(100L);
-    representation.setPrice(BigDecimal.TEN);
     representation.setETag(100L);
 
     representation.update();
@@ -42,9 +40,7 @@ class SteppedPriceRepresentationTest {
 
   @Test
   public void shouldUpdateVOSteppedPrice_evenIfIdAndETagIsNull() {
-    SteppedPriceRepresentation representation = new SteppedPriceRepresentation();
-    representation.setLimit(100L);
-    representation.setPrice(BigDecimal.TEN);
+    SteppedPriceRepresentation representation = createRepresentation();
 
     representation.update();
     VOSteppedPrice result = representation.getVO();
@@ -79,5 +75,12 @@ class SteppedPriceRepresentationTest {
     assertThat(representation)
         .extracting(SteppedPriceRepresentation::getPrice)
         .isEqualTo(voSteppedPrice.getPrice());
+  }
+
+  private SteppedPriceRepresentation createRepresentation() {
+    SteppedPriceRepresentation representation = new SteppedPriceRepresentation();
+    representation.setLimit(100L);
+    representation.setPrice(BigDecimal.TEN);
+    return representation;
   }
 }

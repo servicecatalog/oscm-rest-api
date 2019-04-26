@@ -17,16 +17,11 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOEventDefinition;
 import org.oscm.rest.common.Representation;
 
-class EventDefinitionRepresentationTest {
+public class EventDefinitionRepresentationTest {
 
   @Test
   public void shouldUpdateVOEventDefinition() {
-    EventDefinitionRepresentation eventDefinitionRepresentation =
-        new EventDefinitionRepresentation();
-    eventDefinitionRepresentation.setEventDescription("description");
-    eventDefinitionRepresentation.setEventId("100");
-    eventDefinitionRepresentation.setEventType(EventType.PLATFORM_EVENT);
-    eventDefinitionRepresentation.setVersion(100);
+    EventDefinitionRepresentation eventDefinitionRepresentation = createRepresentation();
     eventDefinitionRepresentation.setETag(100L);
     eventDefinitionRepresentation.setId(100L);
 
@@ -45,10 +40,7 @@ class EventDefinitionRepresentationTest {
 
   @Test
   public void shouldUpdateVOEventDefinition_evenIfIdAndETagIsNull() {
-    EventDefinitionRepresentation eventDefinitionRepresentation =
-        new EventDefinitionRepresentation();
-    eventDefinitionRepresentation.setEventDescription("description");
-    eventDefinitionRepresentation.setEventType(EventType.PLATFORM_EVENT);
+    EventDefinitionRepresentation eventDefinitionRepresentation = createRepresentation();
 
     eventDefinitionRepresentation.update();
     VOEventDefinition result = eventDefinitionRepresentation.getVO();
@@ -90,5 +82,15 @@ class EventDefinitionRepresentationTest {
     assertThat(representation)
         .extracting(Representation::getETag)
         .isEqualTo((long) voEventDefinition.getVersion());
+  }
+
+  private EventDefinitionRepresentation createRepresentation() {
+    EventDefinitionRepresentation eventDefinitionRepresentation
+            = new EventDefinitionRepresentation();
+    eventDefinitionRepresentation.setEventDescription("description");
+    eventDefinitionRepresentation.setEventId("100");
+    eventDefinitionRepresentation.setEventType(EventType.PLATFORM_EVENT);
+    eventDefinitionRepresentation.setVersion(100);
+    return eventDefinitionRepresentation;
   }
 }
