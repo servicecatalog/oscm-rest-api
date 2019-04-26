@@ -123,7 +123,7 @@ public class PricedParameterRepresentationTest {
     list3.add(steppedPriceRepresentation);
     representation.setSteppedPrices(list3);
     ParameterDefinitionRepresentation parameterDefinitionRepresentation =
-            new ParameterDefinitionRepresentation();
+        new ParameterDefinitionRepresentation();
     parameterDefinitionRepresentation.setDescription("Description789");
     representation.setParameterDef(parameterDefinitionRepresentation);
     return representation;

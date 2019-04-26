@@ -48,7 +48,9 @@ public class PricedOptionRepresentationTest {
         .extracting(VOPricedOption::getPricePerUser)
         .isEqualTo(representation.getPricePerUser());
     assertThat(((VOPricedRole) result.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser())
-        .isEqualTo(((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser());
+        .isEqualTo(
+            ((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0])
+                .getPricePerUser());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -76,7 +78,9 @@ public class PricedOptionRepresentationTest {
         .extracting(VOPricedOption::getPricePerUser)
         .isEqualTo(representation.getPricePerUser());
     assertThat(((VOPricedRole) result.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser())
-        .isEqualTo(((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0]).getPricePerUser());
+        .isEqualTo(
+            ((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0])
+                .getPricePerUser());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());

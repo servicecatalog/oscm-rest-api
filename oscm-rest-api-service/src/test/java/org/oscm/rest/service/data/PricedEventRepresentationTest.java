@@ -43,7 +43,7 @@ public class PricedEventRepresentationTest {
     assertThat(
             ((SteppedPriceRepresentation) representation.getSteppedPrices().toArray()[0])
                 .getLimit())
-        .isEqualTo(((VOSteppedPrice)result.getSteppedPrices().toArray()[0]).getLimit());
+        .isEqualTo(((VOSteppedPrice) result.getSteppedPrices().toArray()[0]).getLimit());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -66,7 +66,7 @@ public class PricedEventRepresentationTest {
     assertThat(
             ((SteppedPriceRepresentation) representation.getSteppedPrices().toArray()[0])
                 .getLimit())
-        .isEqualTo(((VOSteppedPrice)result.getSteppedPrices().toArray()[0]).getLimit());
+        .isEqualTo(((VOSteppedPrice) result.getSteppedPrices().toArray()[0]).getLimit());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -100,7 +100,7 @@ public class PricedEventRepresentationTest {
   private PricedEventRepresentation createRepresentation() {
     PricedEventRepresentation representation = new PricedEventRepresentation();
     EventDefinitionRepresentation eventDefinitionRepresentation =
-            new EventDefinitionRepresentation();
+        new EventDefinitionRepresentation();
     eventDefinitionRepresentation.setEventId("Event123");
     representation.setEventDefinition(eventDefinitionRepresentation);
     representation.setEventPrice(BigDecimal.TEN);

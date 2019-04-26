@@ -46,7 +46,9 @@ public class OperationRepresentationTest {
             ((OperationParameterRepresentation)
                     representation.getOperationParameters().toArray()[0])
                 .getParameterName())
-        .isEqualTo(((VOServiceOperationParameter)result.getOperationParameters().toArray()[0]).getParameterName());
+        .isEqualTo(
+            ((VOServiceOperationParameter) result.getOperationParameters().toArray()[0])
+                .getParameterName());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -73,8 +75,10 @@ public class OperationRepresentationTest {
     assertThat(
             ((OperationParameterRepresentation)
                     representation.getOperationParameters().toArray()[0])
-                    .getParameterName())
-            .isEqualTo(((VOServiceOperationParameter)result.getOperationParameters().toArray()[0]).getParameterName());
+                .getParameterName())
+        .isEqualTo(
+            ((VOServiceOperationParameter) result.getOperationParameters().toArray()[0])
+                .getParameterName());
     assertThat(result)
         .extracting(BaseVO::getVersion)
         .isEqualTo(representation.convertETagToVersion());
@@ -127,7 +131,7 @@ public class OperationRepresentationTest {
     representation.setOperationName("Name");
     List<OperationParameterRepresentation> list = new ArrayList<>();
     OperationParameterRepresentation operationParameterRepresentation =
-            new OperationParameterRepresentation();
+        new OperationParameterRepresentation();
     operationParameterRepresentation.setParameterName("abc123");
     list.add(operationParameterRepresentation);
     representation.setOperationParameters(list);

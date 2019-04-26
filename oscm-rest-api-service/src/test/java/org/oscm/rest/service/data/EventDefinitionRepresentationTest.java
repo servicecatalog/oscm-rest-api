@@ -85,8 +85,8 @@ public class EventDefinitionRepresentationTest {
   }
 
   private EventDefinitionRepresentation createRepresentation() {
-    EventDefinitionRepresentation eventDefinitionRepresentation
-            = new EventDefinitionRepresentation();
+    EventDefinitionRepresentation eventDefinitionRepresentation =
+        new EventDefinitionRepresentation();
     eventDefinitionRepresentation.setEventDescription("description");
     eventDefinitionRepresentation.setEventId("100");
     eventDefinitionRepresentation.setEventType(EventType.PLATFORM_EVENT);

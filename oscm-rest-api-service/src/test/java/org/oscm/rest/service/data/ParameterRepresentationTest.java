@@ -96,7 +96,7 @@ public class ParameterRepresentationTest {
     ParameterRepresentation representation = new ParameterRepresentation();
     representation.setConfigurable(true);
     ParameterDefinitionRepresentation parameterDefinitionRepresentation =
-            new ParameterDefinitionRepresentation();
+        new ParameterDefinitionRepresentation();
     representation.setParameterDefinition(parameterDefinitionRepresentation);
     representation.setValue("Value");
     return representation;
