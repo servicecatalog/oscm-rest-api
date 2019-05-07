@@ -1,11 +1,12 @@
-/*******************************************************************************
- *                                                                              
- *  Copyright FUJITSU LIMITED 2017
- *                                                                                                                                 
- *  Creation Date: May 19, 2016                                                      
- *                                                                              
- *******************************************************************************/
-
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2017
+ *
+ * <p>Creation Date: May 19, 2016
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common;
 
 import org.junit.jupiter.api.Test;
@@ -19,56 +20,50 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit test for RepresentationCollection
- * 
+ *
  * @author miethaner
  */
 public class RepresentationCollectionTest {
 
-    private class RepTest extends Representation {
+  private class RepTest extends Representation {
 
-        @Override
-        public void validateContent() throws WebApplicationException {
-        }
+    @Override
+    public void validateContent() throws WebApplicationException {}
 
-        @Override
-        public void update() {
-        }
+    @Override
+    public void update() {}
 
-        @Override
-        public void convert() {
-        }
+    @Override
+    public void convert() {}
+  }
 
-    }
+  @Test
+  public void testCreate() {
 
-    @Test
-    public void testCreate() {
+    RepTest rep = Mockito.spy(new RepTest());
 
-        RepTest rep = Mockito.spy(new RepTest());
+    RepresentationCollection<RepTest> coll =
+        new RepresentationCollection<RepresentationCollectionTest.RepTest>();
+    coll.setItems(Arrays.asList(rep));
 
-        RepresentationCollection<RepTest> coll = new RepresentationCollection<RepresentationCollectionTest.RepTest>();
-        coll.setItems(Arrays.asList(rep));
+    coll.setVersion(new Integer(1));
 
-        coll.setVersion(new Integer(1));
+    assertEquals(1, rep.getVersion().intValue());
 
-        assertEquals(1, rep.getVersion().intValue());
+    coll.convert();
 
-        coll.convert();
+    Mockito.verify(rep).convert();
 
-        Mockito.verify(rep).convert();
+    coll.update();
 
-        coll.update();
+    Mockito.verify(rep).update();
 
-        Mockito.verify(rep).update();
+    coll.validateContent();
 
-        coll.validateContent();
+    Mockito.verify(rep).validateContent();
 
-        Mockito.verify(rep).validateContent();
+    coll = new RepresentationCollection<RepresentationCollectionTest.RepTest>(Arrays.asList(rep));
 
-        coll = new RepresentationCollection<RepresentationCollectionTest.RepTest>(
-                Arrays.asList(rep));
-
-        assertTrue(coll.getItems().contains(rep));
-
-    }
-
+    assertTrue(coll.getItems().contains(rep));
+  }
 }

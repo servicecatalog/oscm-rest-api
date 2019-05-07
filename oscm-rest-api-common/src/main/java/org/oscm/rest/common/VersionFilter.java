@@ -1,11 +1,12 @@
-/*******************************************************************************
- *                                                                              
- *  Copyright FUJITSU LIMITED 2017
- *                                                                                                                                 
- *  Creation Date: May 9, 2016                                                      
- *                                                                              
- *******************************************************************************/
-
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2017
+ *
+ * <p>Creation Date: May 9, 2016
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common;
 
 import javax.ws.rs.WebApplicationException;
@@ -19,62 +20,56 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
- * Request filter for validating the requested version and comparing with
- * endpoint annotations (Since and Until).
- * 
+ * Request filter for validating the requested version and comparing with endpoint annotations
+ * (Since and Until).
+ *
  * @author miethaner
  */
 @Provider
 public class VersionFilter implements ContainerRequestFilter {
 
-    @Context
-    private ResourceInfo resourceInfo;
+  @Context private ResourceInfo resourceInfo;
 
-    private VersionValidator versionValidator = new VersionValidator();
+  private VersionValidator versionValidator = new VersionValidator();
 
-    @Override
-    public void filter(ContainerRequestContext request)
-            throws WebApplicationException {
+  @Override
+  public void filter(ContainerRequestContext request) throws WebApplicationException {
 
-        MultivaluedMap<String, String> params = request.getUriInfo()
-                .getPathParameters();
+    MultivaluedMap<String, String> params = request.getUriInfo().getPathParameters();
 
-        if (params.containsKey(CommonParams.PARAM_VERSION)
-                && !params.get(CommonParams.PARAM_VERSION).isEmpty()) {
+    if (params.containsKey(CommonParams.PARAM_VERSION)
+        && !params.get(CommonParams.PARAM_VERSION).isEmpty()) {
 
-            String version = params.get(CommonParams.PARAM_VERSION).get(0);
+      String version = params.get(CommonParams.PARAM_VERSION).get(0);
 
-            int vnr = versionValidator.doIt(version);
+      int vnr = versionValidator.doIt(version);
 
-            Method method = getResourceInfo().getResourceMethod();
+      Method method = getResourceInfo().getResourceMethod();
 
-            if (method.isAnnotationPresent(Since.class)) {
+      if (method.isAnnotationPresent(Since.class)) {
 
-                Annotation annotation = method.getAnnotation(Since.class);
-                Since since = (Since) annotation;
+        Annotation annotation = method.getAnnotation(Since.class);
+        Since since = (Since) annotation;
 
-                if (vnr < since.value()) {
-                    throw WebException.notFound()
-                            .message(CommonParams.ERROR_METHOD_VERSION).build();
-                }
-            }
-            if (method.isAnnotationPresent(Until.class)) {
-
-                Annotation annotation = method.getAnnotation(Until.class);
-                Until until = (Until) annotation;
-
-                if (vnr >= until.value()) {
-                    throw WebException.notFound()
-                            .message(CommonParams.ERROR_METHOD_VERSION).build();
-                }
-            }
-        } else {
-            throw WebException.notFound()
-                    .message(CommonParams.ERROR_INVALID_VERSION).build();
+        if (vnr < since.value()) {
+          throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
         }
-    }
+      }
+      if (method.isAnnotationPresent(Until.class)) {
 
-    public ResourceInfo getResourceInfo() {
-        return resourceInfo;
+        Annotation annotation = method.getAnnotation(Until.class);
+        Until until = (Until) annotation;
+
+        if (vnr >= until.value()) {
+          throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
+        }
+      }
+    } else {
+      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
+  }
+
+  public ResourceInfo getResourceInfo() {
+    return resourceInfo;
+  }
 }

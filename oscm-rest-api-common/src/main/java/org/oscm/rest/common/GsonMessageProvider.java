@@ -1,11 +1,12 @@
-/*******************************************************************************
- *                                                                              
- *  Copyright FUJITSU LIMITED 2017
- *                                                                                                                                 
- *  Creation Date: May 9, 2016                                                      
- *                                                                              
- *******************************************************************************/
-
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2017
+ *
+ * <p>Creation Date: May 9, 2016
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common;
 
 import com.google.gson.Gson;
@@ -26,77 +27,83 @@ import java.lang.reflect.Type;
 
 /**
  * Provider class for message body writer and reader with gson.
- * 
+ *
  * @author miethaner
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class GsonMessageProvider implements MessageBodyWriter<Representation>,
-        MessageBodyReader<Representation> {
+public class GsonMessageProvider
+    implements MessageBodyWriter<Representation>, MessageBodyReader<Representation> {
 
-    @Override
-    public boolean isReadable(Class<?> type, Type genericType,
-            Annotation[] annotations, MediaType mediaType) {
-        return true;
+  @Override
+  public boolean isReadable(
+      Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+    return true;
+  }
+
+  @Override
+  public Representation readFrom(
+      Class<Representation> type,
+      Type genericType,
+      Annotation[] annotations,
+      MediaType mediaType,
+      MultivaluedMap<String, String> httpHeaders,
+      InputStream entityStream)
+      throws IOException, WebApplicationException {
+
+    try (InputStreamReader reader = new InputStreamReader(entityStream, CommonParams.CHARSET)) {
+      Gson gson = new GsonBuilder().setDateFormat(CommonParams.FORMAT_DATE).create();
+      return gson.fromJson(reader, genericType);
+
+    } catch (JsonSyntaxException e) {
+      throw WebException.badRequest()
+          .message(CommonParams.ERROR_JSON_FORMAT)
+          .moreInfo(e.getMessage())
+          .build();
     }
+  }
 
-    @Override
-    public Representation readFrom(Class<Representation> type,
-            Type genericType, Annotation[] annotations, MediaType mediaType,
-            MultivaluedMap<String, String> httpHeaders, InputStream entityStream)
-            throws IOException, WebApplicationException {
+  @Override
+  public long getSize(
+      Representation rep,
+      Class<?> type,
+      Type genericType,
+      Annotation[] annotations,
+      MediaType mediaType) {
+    return -1;
+  }
 
-        try (InputStreamReader reader = new InputStreamReader(entityStream,
-                CommonParams.CHARSET)) {
-            Gson gson = new GsonBuilder().setDateFormat(
-                    CommonParams.FORMAT_DATE).create();
-            return gson.fromJson(reader, genericType);
+  @Override
+  public boolean isWriteable(
+      Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+    return true;
+  }
 
-        } catch (JsonSyntaxException e) {
-            throw WebException.badRequest()
-                    .message(CommonParams.ERROR_JSON_FORMAT)
-                    .moreInfo(e.getMessage()).build();
+  @Override
+  public void writeTo(
+      Representation rep,
+      Class<?> type,
+      Type genericType,
+      Annotation[] annotations,
+      MediaType mediaType,
+      MultivaluedMap<String, Object> httpHeaders,
+      OutputStream entityStream)
+      throws IOException, WebApplicationException {
 
-        }
+    try (OutputStreamWriter writer = new OutputStreamWriter(entityStream, CommonParams.CHARSET)) {
+      GsonBuilder builder = new GsonBuilder();
+      builder.setDateFormat(CommonParams.FORMAT_DATE);
+
+      if (rep.getVersion() != null) {
+        builder.setVersion(rep.getVersion());
+      }
+
+      Gson gson = builder.create();
+      gson.toJson(rep, genericType, writer);
+
+    } catch (JsonSyntaxException e) {
+      throw WebException.internalServerError().message(CommonParams.ERROR_JSON_FORMAT).build();
     }
-
-    @Override
-    public long getSize(Representation rep, Class<?> type, Type genericType,
-            Annotation[] annotations, MediaType mediaType) {
-        return -1;
-    }
-
-    @Override
-    public boolean isWriteable(Class<?> type, Type genericType,
-            Annotation[] annotations, MediaType mediaType) {
-        return true;
-    }
-
-    @Override
-    public void writeTo(Representation rep, Class<?> type, Type genericType,
-            Annotation[] annotations, MediaType mediaType,
-            MultivaluedMap<String, Object> httpHeaders,
-            OutputStream entityStream) throws IOException,
-            WebApplicationException {
-
-        try (OutputStreamWriter writer = new OutputStreamWriter(entityStream,
-                CommonParams.CHARSET)) {
-            GsonBuilder builder = new GsonBuilder();
-            builder.setDateFormat(CommonParams.FORMAT_DATE);
-
-            if (rep.getVersion() != null) {
-                builder.setVersion(rep.getVersion());
-            }
-
-            Gson gson = builder.create();
-            gson.toJson(rep, genericType, writer);
-
-        } catch (JsonSyntaxException e) {
-            throw WebException.internalServerError()
-                    .message(CommonParams.ERROR_JSON_FORMAT).build();
-        }
-
-    }
-
+  }
 }

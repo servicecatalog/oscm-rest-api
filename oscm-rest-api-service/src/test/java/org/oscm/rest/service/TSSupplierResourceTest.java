@@ -118,7 +118,6 @@ public class TSSupplierResourceTest {
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
   }
 
-
   private ServiceParameters createParameters() {
     ServiceParameters parameters = new ServiceParameters();
     parameters.setId(100L);

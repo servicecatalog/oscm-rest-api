@@ -1,13 +1,13 @@
-/*******************************************************************************
- *                                                                              
- *  Copyright FUJITSU LIMITED 2017
- *                                                                                                                                 
- *  Creation Date: May 19, 2016                                                      
- *                                                                              
- *******************************************************************************/
-
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2017
+ *
+ * <p>Creation Date: May 19, 2016
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common;
-
 
 import org.junit.jupiter.api.Test;
 
@@ -25,168 +25,154 @@ import static org.mockito.Mockito.*;
 
 /**
  * Unit test for VersionFilter
- * 
+ *
  * @author miethaner
  */
 public class VersionFilterTest {
 
-    @SuppressWarnings("boxing")
-    private MultivaluedMap<String, String> testVersionFilter(String version) throws WebApplicationException, NoSuchMethodException {
+  @SuppressWarnings("boxing")
+  private MultivaluedMap<String, String> testVersionFilter(String version)
+      throws WebApplicationException, NoSuchMethodException {
 
-        ResourceInfo resourceInfo = mock(ResourceInfo.class);
-        ContainerRequestContext request = mock(ContainerRequestContext.class);
-        UriInfo uriInfo = mock(UriInfo.class);
-        when(request.getUriInfo()).thenReturn(uriInfo);
+    ResourceInfo resourceInfo = mock(ResourceInfo.class);
+    ContainerRequestContext request = mock(ContainerRequestContext.class);
+    UriInfo uriInfo = mock(UriInfo.class);
+    when(request.getUriInfo()).thenReturn(uriInfo);
 
-        Method method = SinceClass.class.getMethod("dummy");
+    Method method = SinceClass.class.getMethod("dummy");
 
-        MultivaluedMap<String, String> prop = new MultivaluedHashMap<>();
-        prop.putSingle(CommonParams.PARAM_VERSION, version);
-        when(uriInfo.getPathParameters()).thenReturn(prop);
+    MultivaluedMap<String, String> prop = new MultivaluedHashMap<>();
+    prop.putSingle(CommonParams.PARAM_VERSION, version);
+    when(uriInfo.getPathParameters()).thenReturn(prop);
 
-        VersionFilter filter = spy(new VersionFilter());
-        when(filter.getResourceInfo()).thenReturn(resourceInfo);
-        when(resourceInfo.getResourceMethod()).thenReturn(method);
-        filter.filter(request);
+    VersionFilter filter = spy(new VersionFilter());
+    when(filter.getResourceInfo()).thenReturn(resourceInfo);
+    when(resourceInfo.getResourceMethod()).thenReturn(method);
+    filter.filter(request);
 
-        return prop;
+    return prop;
+  }
+
+  @SuppressWarnings("boxing")
+  @Test
+  public void testVersionFilterVersionPositive() throws NoSuchMethodException {
+
+    String version = "v" + CommonParams.VERSION_1;
+
+    MultivaluedMap<String, String> prop = testVersionFilter(version);
+
+    assertNotNull(prop.get(CommonParams.PARAM_VERSION));
+    assertEquals(version, prop.get(CommonParams.PARAM_VERSION).get(0));
+  }
+
+  @Test
+  public void testVersionFilterVersionNegativePrefix() throws NoSuchMethodException {
+
+    String version = "n42";
+
+    try {
+      testVersionFilter(version);
+      fail();
+    } catch (WebApplicationException e) {
+      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
     }
+  }
 
-    @SuppressWarnings("boxing")
-    @Test
-    public void testVersionFilterVersionPositive() throws NoSuchMethodException {
+  @Test
+  public void testVersionFilterVersionNegativeNumber() throws NoSuchMethodException {
 
-        String version = "v" + CommonParams.VERSION_1;
+    String version = "v22";
 
-        MultivaluedMap<String, String> prop = testVersionFilter(version
-        );
-
-        assertNotNull(
-                prop.get(CommonParams.PARAM_VERSION));
-        assertEquals(version,
-                prop.get(CommonParams.PARAM_VERSION).get(0));
+    try {
+      testVersionFilter(version);
+      fail();
+    } catch (WebApplicationException e) {
+      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
     }
+  }
 
-    @Test
-    public void testVersionFilterVersionNegativePrefix() throws NoSuchMethodException {
+  @SuppressWarnings("boxing")
+  @Test
+  public void testVersionFilterVersionNotExisting() {
 
-        String version = "n42";
+    try {
+      UriInfo info = mock(UriInfo.class);
+      MultivaluedMap<String, String> map = new MultivaluedHashMap<>();
+      ContainerRequestContext request = mock(ContainerRequestContext.class);
+      when(info.getPathParameters()).thenReturn(map);
+      when(request.getUriInfo()).thenReturn(info);
 
-        try {
-            testVersionFilter(version);
-            fail();
-        } catch (WebApplicationException e) {
-            assertEquals(Status.NOT_FOUND.getStatusCode(),
-                    e.getResponse().getStatus());
-        }
+      VersionFilter filter = new VersionFilter();
+      filter.filter(request);
+    } catch (WebApplicationException e) {
+      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
     }
+  }
 
-    @Test
-    public void testVersionFilterVersionNegativeNumber() throws NoSuchMethodException {
+  @Test
+  public void testVersionFilterVersionNull() throws NoSuchMethodException {
 
-        String version = "v22";
-
-        try {
-            testVersionFilter(version);
-            fail();
-        } catch (WebApplicationException e) {
-            assertEquals(Status.NOT_FOUND.getStatusCode(),
-                    e.getResponse().getStatus());
-        }
+    try {
+      testVersionFilter(null);
+      fail();
+    } catch (WebApplicationException e) {
+      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
     }
+  }
 
-    @SuppressWarnings("boxing")
-    @Test
-    public void testVersionFilterVersionNotExisting() {
+  @SuppressWarnings("boxing")
+  @Test
+  public void testVersionFilterSincePositive() throws NoSuchMethodException {
 
-        try {
-            UriInfo info = mock(UriInfo.class);
-            MultivaluedMap<String, String> map = new MultivaluedHashMap<>();
-            ContainerRequestContext request = mock(
-                    ContainerRequestContext.class);
-            when(info.getPathParameters()).thenReturn(map);
-            when(request.getUriInfo()).thenReturn(info);
+    String version = "v" + CommonParams.VERSION_1;
 
-            VersionFilter filter = new VersionFilter();
-            filter.filter(request);
-        } catch (WebApplicationException e) {
-            assertEquals(Status.NOT_FOUND.getStatusCode(),
-                    e.getResponse().getStatus());
-        }
+    MultivaluedMap<String, String> prop = testVersionFilter(version);
+
+    assertNotNull(prop.get(CommonParams.PARAM_VERSION));
+    assertEquals(version, prop.get(CommonParams.PARAM_VERSION).get(0));
+  }
+
+  @Test
+  public void testVersionFilterSinceNegative() throws NoSuchMethodException {
+
+    String version = "v-1";
+
+    try {
+      testVersionFilter(version);
+      fail();
+    } catch (WebApplicationException e) {
+      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
     }
+  }
 
-    @Test
-    public void testVersionFilterVersionNull() throws NoSuchMethodException {
+  @SuppressWarnings("boxing")
+  @Test
+  public void testVersionFilterUntilPositive() throws NoSuchMethodException {
 
-        try {
-            testVersionFilter(null);
-            fail();
-        } catch (WebApplicationException e) {
-            assertEquals(Status.NOT_FOUND.getStatusCode(),
-                    e.getResponse().getStatus());
-        }
+    String version = "v" + CommonParams.VERSION_1;
+
+    MultivaluedMap<String, String> prop = testVersionFilter(version);
+
+    assertNotNull(prop.get(CommonParams.PARAM_VERSION));
+    assertEquals(version, prop.get(CommonParams.PARAM_VERSION).get(0));
+  }
+
+  @Test
+  public void testVersionFilterUntilNegative() throws NoSuchMethodException {
+
+    String version = "v3";
+
+    try {
+      testVersionFilter(version);
+      fail();
+    } catch (WebApplicationException e) {
+      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
     }
+  }
 
-    @SuppressWarnings("boxing")
-    @Test
-    public void testVersionFilterSincePositive() throws NoSuchMethodException {
-
-        String version = "v" + CommonParams.VERSION_1;
-
-        MultivaluedMap<String, String> prop = testVersionFilter(version
-        );
-
-        assertNotNull(prop.get(CommonParams.PARAM_VERSION));
-        assertEquals(version,
-                prop.get(CommonParams.PARAM_VERSION).get(0));
-    }
-
-    @Test
-    public void testVersionFilterSinceNegative() throws NoSuchMethodException {
-
-        String version = "v-1";
-
-        try {
-            testVersionFilter(version
-            );
-            fail();
-        } catch (WebApplicationException e) {
-            assertEquals(Status.NOT_FOUND.getStatusCode(),
-                    e.getResponse().getStatus());
-        }
-    }
-
-    @SuppressWarnings("boxing")
-    @Test
-    public void testVersionFilterUntilPositive() throws NoSuchMethodException {
-
-        String version = "v" + CommonParams.VERSION_1;
-
-        MultivaluedMap<String, String> prop = testVersionFilter(version
-        );
-
-        assertNotNull(prop.get(CommonParams.PARAM_VERSION));
-        assertEquals(version,
-                prop.get(CommonParams.PARAM_VERSION).get(0));
-    }
-
-    @Test
-    public void testVersionFilterUntilNegative() throws NoSuchMethodException {
-
-        String version = "v3";
-
-        try {
-            testVersionFilter(version);
-            fail();
-        } catch (WebApplicationException e) {
-            assertEquals(Status.NOT_FOUND.getStatusCode(),
-                    e.getResponse().getStatus());
-        }
-    }
-
-    public static class SinceClass {
-        @Since(1)
-        @Until(2)
-        public void dummy() {}
-    }
+  public static class SinceClass {
+    @Since(1)
+    @Until(2)
+    public void dummy() {}
+  }
 }
