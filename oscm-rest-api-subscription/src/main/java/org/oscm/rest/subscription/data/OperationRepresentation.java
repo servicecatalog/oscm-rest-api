@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.subscription.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.internal.vo.VOTechnicalServiceOperation;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OperationRepresentation extends Representation {
 

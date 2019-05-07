@@ -22,4 +22,11 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.oscm.rest</groupId>
+            <artifactId>oscm-rest-api-common</artifactId>
+        </dependency>
+    </dependencies>
 </project>

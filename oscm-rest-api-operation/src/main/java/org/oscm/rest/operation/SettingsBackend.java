@@ -9,15 +9,16 @@
  */
 package org.oscm.rest.operation;
 
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.operation.data.SettingRepresentation;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.List;
 
 @Stateless
 public class SettingsBackend {

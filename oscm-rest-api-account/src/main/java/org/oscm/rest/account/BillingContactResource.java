@@ -9,6 +9,11 @@
  */
 package org.oscm.rest.account;
 
+import org.oscm.rest.account.data.BillingContactRepresentation;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.print.attribute.standard.Media;
@@ -17,10 +22,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import org.oscm.rest.account.data.BillingContactRepresentation;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
 
 //TODO: Verify and align endpoints
 @Path(CommonParams.PATH_VERSION + "/billingcontacts")

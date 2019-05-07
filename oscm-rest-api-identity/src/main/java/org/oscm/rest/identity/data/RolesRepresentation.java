@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.identity.data;
 
-import java.util.HashSet;
-import java.util.Set;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.Representation;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class RolesRepresentation extends Representation {
 

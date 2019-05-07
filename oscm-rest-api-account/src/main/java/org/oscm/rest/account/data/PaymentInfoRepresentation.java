@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.account.data;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import lombok.Generated;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.Representation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class PaymentInfoRepresentation extends Representation {
 

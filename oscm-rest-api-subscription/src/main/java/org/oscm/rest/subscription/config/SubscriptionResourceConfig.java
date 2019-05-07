@@ -9,15 +9,16 @@
  */
 package org.oscm.rest.subscription.config;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.subscription.SubscriptionResource;
 import org.oscm.rest.subscription.UsageLicenseResource;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Registers resources and providers of the operation component to the application.

@@ -9,14 +9,15 @@
  */
 package org.oscm.rest.subscription.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.internal.vo.VOUserSubscription;
 import org.oscm.rest.common.Representation;
 import org.oscm.rest.common.RepresentationCollection;
+
+import javax.ws.rs.WebApplicationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubscriptionRepresentation extends Representation {
 
