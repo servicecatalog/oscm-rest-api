@@ -21,7 +21,7 @@ public class AccountParameters extends RequestParameters {
   @QueryParam("mId")
   private String marketplaceId;
 
-  @PathParam("orgId")
+  @QueryParam("orgId")
   private String orgId;
 
   @Override
@@ -48,6 +48,7 @@ public class AccountParameters extends RequestParameters {
 
   @Override
   public void validateId() throws WebApplicationException {
+    // WHAT THE ACTUAL FUCK
     if (orgId == null) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
     }

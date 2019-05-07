@@ -11,6 +11,7 @@ package org.oscm.rest.account;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +22,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 
+//TODO: Verify and align endpoints
 @Path(CommonParams.PATH_VERSION + "/billingcontacts")
 @Stateless
 public class BillingContactResource extends RestResource {
@@ -38,10 +40,11 @@ public class BillingContactResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @POST
   @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response createBillingContact(
       @Context UriInfo uriInfo,
       BillingContactRepresentation content,
-      @BeanParam AccountParameters params)
+      AccountParameters params)
       throws Exception {
     return post(uriInfo, ab.postBillingContact(), content, params);
   }
