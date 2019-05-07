@@ -9,13 +9,12 @@
  */
 package org.oscm.rest.service.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOParameterOption;
 import org.oscm.rest.common.Representation;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParameterOptionRepresentationTest {
 

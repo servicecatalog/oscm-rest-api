@@ -9,7 +9,14 @@
  */
 package org.oscm.rest.service;
 
-import java.util.Collections;
+import com.google.common.base.Strings;
+import org.oscm.internal.intf.ServiceProvisioningService;
+import org.oscm.internal.vo.VOTechnicalService;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.service.data.TechnicalServiceRepresentation;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -18,13 +25,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
-import org.oscm.internal.intf.ServiceProvisioningService;
-import org.oscm.internal.vo.VOTechnicalService;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.service.data.TechnicalServiceRepresentation;
-import org.oscm.string.Strings;
+import java.util.Collections;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
@@ -83,7 +84,7 @@ public class TechnicalServiceResource extends RestResource {
       @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
       throws Exception {
     String msg = sps.importTechnicalServices(input);
-    if (Strings.isEmpty(msg)) {
+    if (Strings.isNullOrEmpty(msg)) {
       return Response.noContent().build();
     }
     return Response.status(Status.BAD_REQUEST).entity(msg).build();

@@ -9,14 +9,14 @@
  */
 package org.oscm.rest.service.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSteppedPrice;
 import org.oscm.rest.common.Representation;
+
+import java.math.BigDecimal;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SteppedPriceRepresentationTest {
 

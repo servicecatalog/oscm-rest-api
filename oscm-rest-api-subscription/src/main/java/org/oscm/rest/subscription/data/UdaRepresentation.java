@@ -9,9 +9,10 @@
  */
 package org.oscm.rest.subscription.data;
 
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOUda;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class UdaRepresentation extends Representation {
 

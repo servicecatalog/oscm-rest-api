@@ -9,8 +9,6 @@
  */
 package org.oscm.rest.account.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
@@ -18,6 +16,8 @@ import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserRepresentationTest {
 

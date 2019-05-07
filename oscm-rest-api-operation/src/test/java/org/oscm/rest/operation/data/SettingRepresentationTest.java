@@ -9,10 +9,6 @@
  */
 package org.oscm.rest.operation.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
@@ -20,6 +16,11 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.Representation;
 import org.oscm.rest.common.RepresentationCollection;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SettingRepresentationTest {
 

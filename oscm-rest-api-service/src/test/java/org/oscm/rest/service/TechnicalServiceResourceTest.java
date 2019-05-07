@@ -9,16 +9,7 @@
  */
 package org.oscm.rest.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.Lists;
-import java.net.URI;
-import java.util.Collections;
-import java.util.List;
-import javax.ws.rs.core.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +23,16 @@ import org.oscm.internal.types.exception.*;
 import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.service.data.ServiceRepresentation;
 import org.oscm.rest.service.data.TechnicalServiceRepresentation;
+
+import javax.ws.rs.core.*;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TechnicalServiceResourceTest {

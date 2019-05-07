@@ -9,9 +9,10 @@
  */
 package org.oscm.rest.subscription.data;
 
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class ParameterDefinitionRepresentation extends Representation {
 

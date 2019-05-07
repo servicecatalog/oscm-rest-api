@@ -9,8 +9,9 @@
  */
 package org.oscm.rest.service.data;
 
-import javax.ws.rs.WebApplicationException;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class StatusRepresentation extends Representation {
 
