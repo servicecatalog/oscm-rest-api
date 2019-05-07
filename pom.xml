@@ -168,7 +168,7 @@
             <dependency>
                 <groupId>com.github.servicecatalog.oscm-interfaces</groupId>
                 <artifactId>oscm-extsvc-internal</artifactId>
-                <version>${oscm.interfaces.internal.version}</version>
+                <version>${oscm.intf.internal.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.oscm.rest</groupId>
