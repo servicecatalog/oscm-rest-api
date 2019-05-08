@@ -163,7 +163,6 @@
 
     <dependencyManagement>
         <!-- Internal dependencies -->
-
         <dependencies>
             <dependency>
                 <groupId>com.github.servicecatalog.oscm-interfaces</groupId>
