@@ -9,10 +9,11 @@
  */
 package org.oscm.rest.marketplace.data;
 
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOCatalogEntry;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
+import java.util.List;
 
 public class EntryRepresentation extends Representation {
 

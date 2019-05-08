@@ -9,13 +9,14 @@
  */
 package org.oscm.rest.subscription.data;
 
-import java.math.BigDecimal;
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.VOPriceModel;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class PriceModelRepresentation extends Representation {
 

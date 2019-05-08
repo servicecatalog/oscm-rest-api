@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.identity;
 
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RequestParameters;
 import org.oscm.rest.common.WebException;
+
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 
 public class UserParameters extends RequestParameters {
 

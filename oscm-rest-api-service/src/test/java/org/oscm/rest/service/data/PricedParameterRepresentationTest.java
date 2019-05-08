@@ -9,13 +9,14 @@
  */
 package org.oscm.rest.service.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.oscm.internal.vo.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
-import org.oscm.internal.vo.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PricedParameterRepresentationTest {
 

@@ -9,10 +9,10 @@
  */
 package org.oscm.rest.identity.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOUserDetails;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OnBehalfUserRepresentationTest {
 

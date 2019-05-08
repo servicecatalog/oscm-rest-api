@@ -9,12 +9,12 @@
  */
 package org.oscm.rest.service.data;
 
-import javax.ws.rs.WebApplicationException;
-
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.EventType;
 import org.oscm.internal.vo.VOEventDefinition;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class EventDefinitionRepresentation extends Representation {
 

@@ -9,18 +9,18 @@
  */
 package org.oscm.rest.service.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOPricedOption;
 import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PricedOptionRepresentationTest {
 

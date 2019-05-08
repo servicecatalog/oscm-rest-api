@@ -9,10 +9,11 @@
  */
 package org.oscm.rest.service.data;
 
-import javax.ws.rs.WebApplicationException;
 import lombok.Generated;
 import org.oscm.internal.vo.VOParameter;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class ParameterRepresentation extends Representation {
 

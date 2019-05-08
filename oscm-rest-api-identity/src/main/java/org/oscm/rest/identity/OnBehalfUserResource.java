@@ -9,6 +9,11 @@
  */
 package org.oscm.rest.identity;
 
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -16,10 +21,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
 
 @Path(CommonParams.PATH_VERSION + "/onbehalfusers")
 @Stateless

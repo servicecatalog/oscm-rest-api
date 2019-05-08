@@ -9,9 +9,10 @@
  */
 package org.oscm.rest.service;
 
+import org.oscm.rest.common.RequestParameters;
+
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
-import org.oscm.rest.common.RequestParameters;
 
 public class ServiceParameters extends RequestParameters {
 

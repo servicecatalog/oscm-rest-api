@@ -9,11 +9,12 @@
  */
 package org.oscm.rest.event;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.EventService;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.event.data.EventRepresentation;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 @Stateless
 public class EventBackend {

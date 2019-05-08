@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.subscription.data;
 
+import org.oscm.internal.vo.VOPaymentInfo;
+import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.ws.rs.WebApplicationException;
-import org.oscm.internal.vo.VOPaymentInfo;
-import org.oscm.rest.common.Representation;
 
 public class PaymentInfoRepresentation extends Representation {
 
