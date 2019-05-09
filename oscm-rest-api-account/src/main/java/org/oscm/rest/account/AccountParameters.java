@@ -19,7 +19,7 @@ import javax.ws.rs.WebApplicationException;
 
 public class AccountParameters extends RequestParameters {
 
-  @QueryParam("mId")
+  @QueryParam("marketplaceId")
   private String marketplaceId;
 
   @QueryParam("orgId")
@@ -48,10 +48,5 @@ public class AccountParameters extends RequestParameters {
   }
 
   @Override
-  public void validateId() throws WebApplicationException {
-    // WHAT THE ACTUAL FUCK
-    if (orgId == null) {
-      throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
-    }
-  }
+  public void validateId() throws WebApplicationException {}
 }

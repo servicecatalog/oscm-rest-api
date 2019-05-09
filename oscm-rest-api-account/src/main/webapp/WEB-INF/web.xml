@@ -3,8 +3,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- TODO: Check if it is possible to use Annotation config instead of xml -->
-    <!-- TODO: Constrain endpoints with appropriate roles so 403 is returned instead of 500-->
+    <!-- FIXME: Move this config to Java class (in scope od oscm-rest-api#44 -->
     <login-config>
            <auth-method>BASIC</auth-method>
            <realm-name>bss-realm</realm-name>
