@@ -28,10 +28,10 @@ class EntryResourceTest {
     @Spy
     private EntryResource entryResource;
 
-    Response response;
-    MarketplaceParameters marketplaceParameters;
-    UriInfo uriInfo;
-    EntryRepresentation entryRepresentation;
+    private Response response;
+    private MarketplaceParameters marketplaceParameters;
+    private UriInfo uriInfo;
+    private EntryRepresentation entryRepresentation;
 
     @BeforeEach
     public void setUp() {
