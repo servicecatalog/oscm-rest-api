@@ -9,9 +9,10 @@
  */
 package org.oscm.rest.event.data;
 
-import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.vo.VOGatheredEvent;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class EventRepresentation extends Representation {
 

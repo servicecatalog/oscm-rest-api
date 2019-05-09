@@ -9,10 +9,11 @@
  */
 package org.oscm.rest.account.data;
 
-import javax.ws.rs.WebApplicationException;
 import lombok.Generated;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class OrganizationRepresentation extends Representation {
 

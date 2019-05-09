@@ -9,10 +9,11 @@
  */
 package org.oscm.rest.service.data;
 
-import javax.ws.rs.WebApplicationException;
 import lombok.Generated;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 
 public class RoleDefinitionRepresentation extends Representation {
 

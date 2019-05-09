@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>oscm-rest-api</artifactId>
+        <groupId>org.oscm.rest</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>oscm-rest-api-common</artifactId>
+    <description>Items used commonly in OSCM REST API modules</description>
+    <packaging>jar</packaging>
+
+    <build>
+        <finalName>oscm-rest-api-operation</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.servicecatalog.oscm-interfaces</groupId>
+            <artifactId>oscm-extsvc-internal</artifactId>
+        </dependency>
+    </dependencies>
+</project>

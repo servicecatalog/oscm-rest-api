@@ -9,11 +9,11 @@
  */
 package org.oscm.rest.account.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.internal.vo.VOPaymentType;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaymentInfoRepresentationTest {
 

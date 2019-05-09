@@ -9,14 +9,15 @@
  */
 package org.oscm.rest.service.config;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.service.*;
+
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ServiceResourceConfigTest {
 

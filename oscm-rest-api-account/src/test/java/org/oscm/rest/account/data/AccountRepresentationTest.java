@@ -9,14 +9,15 @@
  */
 package org.oscm.rest.account.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountRepresentationTest {
 

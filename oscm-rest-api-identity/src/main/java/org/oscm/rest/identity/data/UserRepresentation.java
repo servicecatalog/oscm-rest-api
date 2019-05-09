@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.identity.data;
 
-import java.util.*;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.enumtypes.Salutation;
@@ -17,6 +16,8 @@ import org.oscm.internal.types.enumtypes.UserAccountStatus;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.Representation;
+
+import java.util.*;
 
 public class UserRepresentation extends Representation {
 

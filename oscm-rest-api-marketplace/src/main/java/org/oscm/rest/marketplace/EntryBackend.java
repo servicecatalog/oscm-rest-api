@@ -9,14 +9,15 @@
  */
 package org.oscm.rest.marketplace;
 
-import java.util.Collections;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.vo.VOCatalogEntry;
 import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.marketplace.data.EntryRepresentation;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.Collections;
 
 @Stateless
 public class EntryBackend {

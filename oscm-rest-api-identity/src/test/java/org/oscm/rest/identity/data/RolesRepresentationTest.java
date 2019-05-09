@@ -9,15 +9,15 @@
  */
 package org.oscm.rest.identity.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.google.common.collect.Sets;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.Representation;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RolesRepresentationTest {
 

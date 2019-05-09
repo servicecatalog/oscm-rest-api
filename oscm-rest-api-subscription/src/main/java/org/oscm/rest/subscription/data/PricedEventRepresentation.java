@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.subscription.data;
 
+import org.oscm.internal.vo.VOPricedEvent;
+import org.oscm.rest.common.Representation;
+
+import javax.ws.rs.WebApplicationException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.WebApplicationException;
-import org.oscm.internal.vo.VOPricedEvent;
-import org.oscm.rest.common.Representation;
 
 public class PricedEventRepresentation extends Representation {
 

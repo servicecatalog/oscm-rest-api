@@ -9,14 +9,15 @@
  */
 package org.oscm.rest.operation.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.Representation;
 import org.oscm.rest.common.RepresentationCollection;
+
+import javax.ws.rs.WebApplicationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingRepresentation extends Representation {
 
