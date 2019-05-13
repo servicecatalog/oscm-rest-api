@@ -64,6 +64,8 @@ public class BillingContactResource extends RestResource {
       BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
+    //FIXME: Move investigate why the same command doesn't work from RestResource#128
+    content.setId(params.getId());
     return put(uriInfo, ab.putBillingContact(), content, params);
   }
 
