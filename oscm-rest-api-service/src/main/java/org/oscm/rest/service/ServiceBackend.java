@@ -137,7 +137,7 @@ public class ServiceBackend {
       public boolean put(StatusRepresentation content, ServiceParameters params) throws Exception {
         VOService vo = new VOService();
         vo.setKey(params.getId().longValue());
-        vo.setVersion(eTagToVersion(params));
+        vo.setVersion(params.eTagToVersion());
         switch (content.getStatus()) {
           case ACTIVE:
             sps.activateService(vo);
@@ -157,13 +157,5 @@ public class ServiceBackend {
         return true;
       }
     };
-  }
-
-  // FIXME move to ServiceParameters
-  protected int eTagToVersion(ServiceParameters params) {
-    if (params.getETag() == null) {
-      return 0;
-    }
-    return params.getETag().intValue();
   }
 }

@@ -56,26 +56,4 @@ public class OnBehalfUserRepresentation extends Representation {
   public void setUserId(String userId) {
     this.userId = userId;
   }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected int convertETagToVersion() {
-    if (getETag() == null) {
-      return 0;
-    }
-    return getETag().intValue();
-  }
 }
