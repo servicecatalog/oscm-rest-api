@@ -159,6 +159,13 @@
             <version>${mockito.junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JitPack Specific -->
+        <dependency>
+            <groupId>com.github.servicecatalog</groupId>
+            <artifactId>oscm-rest-api</artifactId>
+            <version>master-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
