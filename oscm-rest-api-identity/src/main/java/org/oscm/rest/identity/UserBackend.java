@@ -84,7 +84,8 @@ public class UserBackend {
     return params -> {
       VOUser vo = new VOUser();
       vo.setUserId(params.getUserId());
-      vo.setVersion(params.convertETagToVersion());
+      vo.setKey(Long.valueOf(params.getUserId()));
+      vo.setVersion(Integer.MAX_VALUE);
       is.deleteUser(vo, params.getMarketplaceId());
       return true;
     };
