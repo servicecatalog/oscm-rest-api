@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.account.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.PaymentCollectionType;
 import org.oscm.internal.vo.VOPaymentType;
 import org.oscm.rest.common.Representation;

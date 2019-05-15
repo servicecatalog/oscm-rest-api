@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OfferingType;
 import org.oscm.internal.types.enumtypes.ServiceAccessType;
 import org.oscm.internal.types.enumtypes.ServiceStatus;

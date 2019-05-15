@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.ParameterModificationType;
 import org.oscm.internal.types.enumtypes.ParameterType;
 import org.oscm.internal.types.enumtypes.ParameterValueType;

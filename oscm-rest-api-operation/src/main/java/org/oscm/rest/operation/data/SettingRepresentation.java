@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.operation.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.Representation;

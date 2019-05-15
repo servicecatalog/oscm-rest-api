@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.account.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
 import org.oscm.internal.vo.Setting;

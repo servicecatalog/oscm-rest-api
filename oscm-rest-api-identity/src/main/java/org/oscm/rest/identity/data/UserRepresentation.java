@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.identity.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;

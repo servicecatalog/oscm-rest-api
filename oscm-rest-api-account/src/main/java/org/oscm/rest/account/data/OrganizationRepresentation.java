@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.account.data;
 
-import lombok.Generated;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.Representation;
 

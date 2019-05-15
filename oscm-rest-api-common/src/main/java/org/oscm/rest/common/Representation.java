@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.common;
 
-import lombok.Generated;
 import org.oscm.internal.vo.BaseVO;
 
 import javax.ws.rs.WebApplicationException;

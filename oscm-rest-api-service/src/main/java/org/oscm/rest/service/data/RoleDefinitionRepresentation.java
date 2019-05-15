@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service.data;
 
-import lombok.Generated;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.Representation;
 
