@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.identity.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;
@@ -219,27 +218,5 @@ public class UserRepresentation extends Representation {
       result.add(new UserRepresentation(vo));
     }
     return result;
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected int convertETagToVersion() {
-    if (getETag() == null) {
-      return 0;
-    }
-    return getETag().intValue();
   }
 }

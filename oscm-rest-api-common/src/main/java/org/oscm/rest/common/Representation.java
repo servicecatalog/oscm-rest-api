@@ -72,4 +72,18 @@ public class Representation {
 
   /** Converts the format and fields of the current version to the internal old one */
   public void convert() {}
+
+  public long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
+    }
+    return getId().longValue();
+  }
+
+  public int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
+    }
+    return getETag().intValue();
+  }
 }

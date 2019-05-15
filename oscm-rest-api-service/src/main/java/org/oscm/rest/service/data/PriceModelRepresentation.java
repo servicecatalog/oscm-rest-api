@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.VOPriceModel;
@@ -170,27 +169,5 @@ public class PriceModelRepresentation extends Representation {
 
   public VOPriceModel getVO() {
     return vo;
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected int convertETagToVersion() {
-    if (getETag() == null) {
-      return 0;
-    }
-    return getETag().intValue();
   }
 }
