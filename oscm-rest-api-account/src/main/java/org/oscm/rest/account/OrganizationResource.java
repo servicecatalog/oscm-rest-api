@@ -39,7 +39,6 @@ public class OrganizationResource extends RestResource {
 
   @Since(CommonParams.VERSION_1)
   @GET
-  @Path("/{orgId}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getOrganization(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
       throws Exception {
