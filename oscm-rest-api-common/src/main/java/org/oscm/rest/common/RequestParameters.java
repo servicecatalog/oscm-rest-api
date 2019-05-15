@@ -112,4 +112,18 @@ public class RequestParameters {
   public void setNoneMatch(String noneMatch) {
     this.noneMatch = noneMatch;
   }
+
+  public long convertIdToKey() {
+    if (getId() == null) {
+      return 0L;
+    }
+    return getId().longValue();
+  }
+
+  public int convertETagToVersion() {
+    if (getETag() == null) {
+      return 0;
+    }
+    return getETag().intValue();
+  }
 }

@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service.data;
 
-import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OperationParameterType;
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.rest.common.Representation;
@@ -36,27 +35,6 @@ public class OperationParameterRepresentation extends Representation {
 
   @Override
   public void validateContent() throws WebApplicationException {}
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  protected long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected int convertETagToVersion() {
-    if (getETag() == null) {
-      return 0;
-    }
-    return getETag().intValue();
-  }
 
   @Override
   public void update() {

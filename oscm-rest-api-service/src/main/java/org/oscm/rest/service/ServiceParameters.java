@@ -43,4 +43,11 @@ public class ServiceParameters extends RequestParameters {
   public void setOrgId(String orgId) {
     this.orgId = orgId;
   }
+
+  public int eTagToVersion() {
+    if (getETag() == null) {
+      return 0;
+    }
+    return getETag().intValue();
+  }
 }
