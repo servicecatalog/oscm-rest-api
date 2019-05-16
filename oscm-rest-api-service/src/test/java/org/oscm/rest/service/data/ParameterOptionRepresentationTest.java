@@ -68,12 +68,7 @@ public class ParameterOptionRepresentationTest {
 
   @Test
   public void shouldConvertToParameterOptionRepresentation() {
-    VOParameterOption voParameterOption = new VOParameterOption();
-    voParameterOption.setKey(100L);
-    voParameterOption.setOptionDescription("Description");
-    voParameterOption.setOptionId("100");
-    voParameterOption.setVersion(100);
-    voParameterOption.setParamDefId("100");
+    VOParameterOption voParameterOption = createVO();
 
     ParameterOptionRepresentation representation =
         new ParameterOptionRepresentation(voParameterOption);
@@ -102,5 +97,15 @@ public class ParameterOptionRepresentationTest {
     representation.setOptionId("100");
     representation.setParamDefId("100");
     return representation;
+  }
+
+  private VOParameterOption createVO() {
+    VOParameterOption voParameterOption = new VOParameterOption();
+    voParameterOption.setKey(100L);
+    voParameterOption.setOptionDescription("Description");
+    voParameterOption.setOptionId("100");
+    voParameterOption.setVersion(100);
+    voParameterOption.setParamDefId("100");
+    return voParameterOption;
   }
 }

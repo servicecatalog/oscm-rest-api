@@ -54,12 +54,7 @@ class SettingRepresentationTest {
 
   @Test
   public void shouldConvertToSettingsRepresentation() {
-    VOConfigurationSetting configurationSetting = new VOConfigurationSetting();
-    configurationSetting.setContextId("12345");
-    configurationSetting.setInformationId(configurationKey);
-    configurationSetting.setKey(12345L);
-    configurationSetting.setValue("value");
-    configurationSetting.setVersion(6789);
+    VOConfigurationSetting configurationSetting = createVO();
 
     SettingRepresentation representation = new SettingRepresentation(configurationSetting);
     representation.convert();
@@ -103,5 +98,15 @@ class SettingRepresentationTest {
               return settingRepresentation.getVO().getValue();
             })
         .isEqualTo(voConfigurationSetting.getValue());
+  }
+
+  private VOConfigurationSetting createVO() {
+    VOConfigurationSetting configurationSetting = new VOConfigurationSetting();
+    configurationSetting.setContextId("12345");
+    configurationSetting.setInformationId(configurationKey);
+    configurationSetting.setKey(12345L);
+    configurationSetting.setValue("value");
+    configurationSetting.setVersion(6789);
+    return configurationSetting;
   }
 }

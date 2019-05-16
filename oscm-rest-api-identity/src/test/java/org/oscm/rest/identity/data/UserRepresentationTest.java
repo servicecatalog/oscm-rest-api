@@ -23,24 +23,7 @@ public class UserRepresentationTest {
 
   @Test
   public void shouldUpdateVOUserDetails() {
-    UserRepresentation representation = new UserRepresentation();
-    representation.setAdditionalName("additionalName");
-    representation.setAddress("address");
-    representation.setEmail("email");
-    representation.setFirstName("fName");
-    representation.setId(1234L);
-    representation.setLastName("lName");
-    representation.setLocale("en_US");
-    representation.setOrganizationId("orgId");
-    representation.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
-    representation.setPhone("111111111");
-    representation.setRealmUserId("realmUserId");
-    representation.setRemoteLdapActive(true);
-    representation.setSalutation(Salutation.MR);
-    representation.setStatus(UserAccountStatus.ACTIVE);
-    representation.setUserId("userId");
-    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
-    representation.setETag(4567L);
+    UserRepresentation representation = createRepresentation();
 
     representation.update();
     VOUserDetails result = representation.getVO();
@@ -91,77 +74,104 @@ public class UserRepresentationTest {
 
   @Test
   public void shouldConvertVOToRepresentation() {
-    VOUserDetails userDetails = new VOUserDetails();
-    userDetails.setAdditionalName("additionalName");
-    userDetails.setAddress("address");
-    userDetails.setEMail("email");
-    userDetails.setFirstName("fName");
-    userDetails.setKey(1234L);
-    userDetails.setLastName("lName");
-    userDetails.setLocale("en_US");
-    userDetails.setOrganizationId("orgId");
-    userDetails.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
-    userDetails.setPhone("111111111");
-    userDetails.setRealmUserId("rUserId");
-    userDetails.setRemoteLdapActive(true);
-    userDetails.setSalutation(Salutation.MR);
-    userDetails.setStatus(UserAccountStatus.ACTIVE);
-    userDetails.setVersion(456);
-    userDetails.setUserId("userId");
-    userDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    VOUserDetails voUserDetails = createVO();
 
-    UserRepresentation representation = new UserRepresentation(userDetails);
+    UserRepresentation representation = new UserRepresentation(voUserDetails);
     representation.convert();
     assertThat(representation)
         .extracting(UserRepresentation::getAdditionalName)
-        .isEqualTo(userDetails.getAdditionalName());
+        .isEqualTo(voUserDetails.getAdditionalName());
     assertThat(representation)
         .extracting(UserRepresentation::getAddress)
-        .isEqualTo(userDetails.getAddress());
+        .isEqualTo(voUserDetails.getAddress());
     assertThat(representation)
         .extracting(UserRepresentation::getEmail)
-        .isEqualTo(userDetails.getEMail());
+        .isEqualTo(voUserDetails.getEMail());
     assertThat(representation)
         .extracting(UserRepresentation::getFirstName)
-        .isEqualTo(userDetails.getFirstName());
+        .isEqualTo(voUserDetails.getFirstName());
     assertThat(representation)
         .extracting(UserRepresentation::getId)
-        .isEqualTo((long) userDetails.getKey());
+        .isEqualTo((long) voUserDetails.getKey());
     assertThat(representation)
         .extracting(UserRepresentation::getLastName)
-        .isEqualTo(userDetails.getLastName());
+        .isEqualTo(voUserDetails.getLastName());
     assertThat(representation)
         .extracting(UserRepresentation::getLocale)
-        .isEqualTo(userDetails.getLocale());
+        .isEqualTo(voUserDetails.getLocale());
     assertThat(representation)
         .extracting(UserRepresentation::getOrganizationId)
-        .isEqualTo(userDetails.getOrganizationId());
+        .isEqualTo(voUserDetails.getOrganizationId());
     assertThat(representation)
         .extracting(UserRepresentation::getOrganizationRoles)
-        .isEqualTo(userDetails.getOrganizationRoles());
+        .isEqualTo(voUserDetails.getOrganizationRoles());
     assertThat(representation)
         .extracting(UserRepresentation::getPhone)
-        .isEqualTo(userDetails.getPhone());
+        .isEqualTo(voUserDetails.getPhone());
     assertThat(representation)
         .extracting(UserRepresentation::getRealmUserId)
-        .isEqualTo(userDetails.getRealmUserId());
+        .isEqualTo(voUserDetails.getRealmUserId());
     assertThat(representation)
         .extracting(UserRepresentation::isRemoteLdapActive)
-        .isEqualTo(userDetails.isRemoteLdapActive());
+        .isEqualTo(voUserDetails.isRemoteLdapActive());
     assertThat(representation)
         .extracting(UserRepresentation::getSalutation)
-        .isEqualTo(userDetails.getSalutation());
+        .isEqualTo(voUserDetails.getSalutation());
     assertThat(representation)
         .extracting(UserRepresentation::getStatus)
-        .isEqualTo(userDetails.getStatus());
+        .isEqualTo(voUserDetails.getStatus());
     assertThat(representation)
         .extracting(UserRepresentation::getETag)
-        .isEqualTo((long) userDetails.getVersion());
+        .isEqualTo((long) voUserDetails.getVersion());
     assertThat(representation)
         .extracting(UserRepresentation::getUserId)
-        .isEqualTo(userDetails.getUserId());
+        .isEqualTo(voUserDetails.getUserId());
     assertThat(representation)
         .extracting(UserRepresentation::getUserRoles)
-        .isEqualTo(userDetails.getUserRoles());
+        .isEqualTo(voUserDetails.getUserRoles());
+  }
+
+  private UserRepresentation createRepresentation() {
+    UserRepresentation representation = new UserRepresentation();
+    representation.setAdditionalName("additionalName");
+    representation.setAddress("address");
+    representation.setEmail("email");
+    representation.setFirstName("fName");
+    representation.setId(1234L);
+    representation.setLastName("lName");
+    representation.setLocale("en_US");
+    representation.setOrganizationId("orgId");
+    representation.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
+    representation.setPhone("111111111");
+    representation.setRealmUserId("realmUserId");
+    representation.setRemoteLdapActive(true);
+    representation.setSalutation(Salutation.MR);
+    representation.setStatus(UserAccountStatus.ACTIVE);
+    representation.setUserId("userId");
+    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    representation.setETag(4567L);
+    return representation;
+  }
+
+  private VOUserDetails createVO() {
+    VOUserDetails voUserDetails = new VOUserDetails();
+    voUserDetails.setAdditionalName("additionalName");
+    voUserDetails.setAddress("address");
+    voUserDetails.setEMail("email");
+    voUserDetails.setFirstName("fName");
+    voUserDetails.setKey(1234L);
+    voUserDetails.setLastName("lName");
+    voUserDetails.setLocale("en_US");
+    voUserDetails.setOrganizationId("orgId");
+    voUserDetails.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
+    voUserDetails.setPhone("111111111");
+    voUserDetails.setRealmUserId("rUserId");
+    voUserDetails.setRemoteLdapActive(true);
+    voUserDetails.setSalutation(Salutation.MR);
+    voUserDetails.setStatus(UserAccountStatus.ACTIVE);
+    voUserDetails.setVersion(456);
+    voUserDetails.setUserId("userId");
+    voUserDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    return voUserDetails;
   }
 }

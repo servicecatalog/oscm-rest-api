@@ -86,17 +86,7 @@ public class OperationRepresentationTest {
 
   @Test
   public void shouldConvertToOperationRepresentation() {
-    VOTechnicalServiceOperation voTechnicalServiceOperation = new VOTechnicalServiceOperation();
-    voTechnicalServiceOperation.setKey(100L);
-    voTechnicalServiceOperation.setOperationDescription("Description");
-    voTechnicalServiceOperation.setOperationId("100");
-    voTechnicalServiceOperation.setOperationName("Name");
-    List<VOServiceOperationParameter> list = new ArrayList<>();
-    VOServiceOperationParameter voServiceOperationParameter = new VOServiceOperationParameter();
-    voServiceOperationParameter.setParameterName("abc123");
-    list.add(voServiceOperationParameter);
-    voTechnicalServiceOperation.setOperationParameters(list);
-    voServiceOperationParameter.setVersion(100);
+    VOTechnicalServiceOperation voTechnicalServiceOperation = createVO();
 
     OperationRepresentation representation =
         new OperationRepresentation(voTechnicalServiceOperation);
@@ -114,11 +104,6 @@ public class OperationRepresentationTest {
     assertThat(representation)
         .extracting(OperationRepresentation::getOperationName)
         .isEqualTo(voTechnicalServiceOperation.getOperationName());
-    assertThat(
-            ((OperationParameterRepresentation)
-                    representation.getOperationParameters().toArray()[0])
-                .getParameterName())
-        .isEqualTo(voServiceOperationParameter.getParameterName());
     assertThat(representation)
         .extracting(OperationRepresentation::convertETagToVersion)
         .isEqualTo(voTechnicalServiceOperation.getVersion());
@@ -136,5 +121,20 @@ public class OperationRepresentationTest {
     list.add(operationParameterRepresentation);
     representation.setOperationParameters(list);
     return representation;
+  }
+
+  private VOTechnicalServiceOperation createVO() {
+    VOTechnicalServiceOperation voTechnicalServiceOperation = new VOTechnicalServiceOperation();
+    voTechnicalServiceOperation.setKey(100L);
+    voTechnicalServiceOperation.setOperationDescription("Description");
+    voTechnicalServiceOperation.setOperationId("100");
+    voTechnicalServiceOperation.setOperationName("Name");
+    List<VOServiceOperationParameter> list = new ArrayList<>();
+    VOServiceOperationParameter voServiceOperationParameter = new VOServiceOperationParameter();
+    voServiceOperationParameter.setParameterName("abc123");
+    list.add(voServiceOperationParameter);
+    voTechnicalServiceOperation.setOperationParameters(list);
+    voServiceOperationParameter.setVersion(100);
+    return voTechnicalServiceOperation;
   }
 }

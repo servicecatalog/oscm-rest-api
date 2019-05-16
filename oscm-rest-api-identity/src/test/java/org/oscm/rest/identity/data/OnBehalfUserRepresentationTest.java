@@ -18,19 +18,15 @@ public class OnBehalfUserRepresentationTest {
 
   @Test
   public void shouldCreateOnBehalfUserRepresentation_givenVOUserDetails() {
-    VOUserDetails input = new VOUserDetails();
-    input.setKey(1234567L);
-    input.setOrganizationId("orgId");
-    input.setVersion(7654321);
-    input.setUserId("userId");
+    VOUserDetails voUserDetails = createVO();
 
-    OnBehalfUserRepresentation result = new OnBehalfUserRepresentation(input);
+    OnBehalfUserRepresentation result = new OnBehalfUserRepresentation(voUserDetails);
 
     assertThat(result).isNotNull();
-    assertThat(result).extracting(r -> r.getId()).isEqualTo(input.getKey());
-    assertThat(result).extracting(r -> r.getOrganizationId()).isEqualTo(input.getOrganizationId());
-    assertThat(result).extracting(r -> r.getETag()).isEqualTo((long) input.getVersion());
-    assertThat(result).extracting(r -> r.getUserId()).isEqualTo(input.getUserId());
+    assertThat(result).extracting(r -> r.getId()).isEqualTo(voUserDetails.getKey());
+    assertThat(result).extracting(r -> r.getOrganizationId()).isEqualTo(voUserDetails.getOrganizationId());
+    assertThat(result).extracting(r -> r.getETag()).isEqualTo((long) voUserDetails.getVersion());
+    assertThat(result).extracting(r -> r.getUserId()).isEqualTo(voUserDetails.getUserId());
   }
 
   @Test
@@ -39,6 +35,15 @@ public class OnBehalfUserRepresentationTest {
     OnBehalfUserRepresentation result = new OnBehalfUserRepresentation();
     result.setPassword(passwordToSet);
 
-    assertThat(result).extracting(r -> r.getPassword()).isEqualTo(passwordToSet);
+    assertThat(result).extracting(OnBehalfUserRepresentation::getPassword).isEqualTo(passwordToSet);
+  }
+
+  private VOUserDetails createVO(){
+    VOUserDetails voUserDetails = new VOUserDetails();
+    voUserDetails.setKey(1234567L);
+    voUserDetails.setOrganizationId("orgId");
+    voUserDetails.setVersion(7654321);
+    voUserDetails.setUserId("userId");
+    return voUserDetails;
   }
 }

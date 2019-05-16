@@ -57,11 +57,7 @@ public class EventDefinitionRepresentationTest {
 
   @Test
   public void shouldConvertToEventDefinition() {
-    VOEventDefinition voEventDefinition = new VOEventDefinition();
-    voEventDefinition.setEventDescription("description");
-    voEventDefinition.setEventId("100");
-    voEventDefinition.setEventType(EventType.PLATFORM_EVENT);
-    voEventDefinition.setVersion(100);
+    VOEventDefinition voEventDefinition = createVO();
 
     EventDefinitionRepresentation representation =
         new EventDefinitionRepresentation(voEventDefinition);
@@ -82,6 +78,15 @@ public class EventDefinitionRepresentationTest {
     assertThat(representation)
         .extracting(Representation::getETag)
         .isEqualTo((long) voEventDefinition.getVersion());
+  }
+
+  private VOEventDefinition createVO() {
+    VOEventDefinition voEventDefinition = new VOEventDefinition();
+    voEventDefinition.setEventDescription("description");
+    voEventDefinition.setEventId("100");
+    voEventDefinition.setEventType(EventType.PLATFORM_EVENT);
+    voEventDefinition.setVersion(100);
+    return voEventDefinition;
   }
 
   private EventDefinitionRepresentation createRepresentation() {

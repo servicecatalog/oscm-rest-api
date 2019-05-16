@@ -60,16 +60,7 @@ class EntryRepresentationTest {
 
     @Test
     public void shouldCOnvertToVoCatalogEntry() {
-        VOCatalogEntry voCatalogEntry = new VOCatalogEntry();
-        voCatalogEntry.setAnonymousVisible(true);
-        voCatalogEntry.setVisibleInCatalog(true);
-        voCatalogEntry.setKey(100L);
-        voCatalogEntry.setVersion(100);
-        List<VOCategory> list = new ArrayList<>();
-        VOCategory voCategory = new VOCategory();
-        voCategory.setCategoryId("Category100");
-        list.add(voCategory);
-        voCatalogEntry.setCategories(list);
+        VOCatalogEntry voCatalogEntry = createVO();
 
         EntryRepresentation representation = new EntryRepresentation(voCatalogEntry);
         representation.convert();
@@ -90,7 +81,6 @@ class EntryRepresentationTest {
                 .isEqualTo(voCatalogEntry.getVersion());
     }
 
-
     private EntryRepresentation createRepresentation() {
         EntryRepresentation representation = new EntryRepresentation();
         representation.setAnonymousVisible(true);
@@ -101,5 +91,19 @@ class EntryRepresentationTest {
         list.add(categoryRepresentation);
         representation.setCategories(list);
         return representation;
+    }
+
+    private VOCatalogEntry createVO() {
+        VOCatalogEntry voCatalogEntry = new VOCatalogEntry();
+        voCatalogEntry.setAnonymousVisible(true);
+        voCatalogEntry.setVisibleInCatalog(true);
+        voCatalogEntry.setKey(100L);
+        voCatalogEntry.setVersion(100);
+        List<VOCategory> list = new ArrayList<>();
+        VOCategory voCategory = new VOCategory();
+        voCategory.setCategoryId("Category100");
+        list.add(voCategory);
+        voCatalogEntry.setCategories(list);
+        return voCatalogEntry;
     }
 }

@@ -88,20 +88,7 @@ public class PricedOptionRepresentationTest {
 
   @Test
   public void shouldConvertToPricedOptionRepresentation() {
-    VOPricedOption voPricedOption = new VOPricedOption();
-    voPricedOption.setKey(100L);
-    voPricedOption.setOptionId("Option100");
-    voPricedOption.setParameterOptionKey(100L);
-    voPricedOption.setPricePerSubscription(BigDecimal.TEN);
-    voPricedOption.setPricePerUser(BigDecimal.TEN);
-    List<VOPricedRole> list = new ArrayList<>();
-    VOPricedRole voPricedRole = new VOPricedRole();
-    voPricedRole.setPricePerUser(BigDecimal.ZERO);
-    VORoleDefinition voRoleDefinition = new VORoleDefinition();
-    voPricedRole.setRole(voRoleDefinition);
-    list.add(voPricedRole);
-    voPricedOption.setRoleSpecificUserPrices(list);
-    voPricedOption.setVersion(100);
+    VOPricedOption voPricedOption = createVO();
 
     PricedOptionRepresentation representation = new PricedOptionRepresentation(voPricedOption);
     representation.convert();
@@ -125,7 +112,7 @@ public class PricedOptionRepresentationTest {
     assertThat(
             ((PricedRoleRepresentation) representation.getRoleSpecificUserPrices().toArray()[0])
                 .getPricePerUser())
-        .isEqualTo(voPricedRole.getPricePerUser());
+        .isEqualTo(voPricedOption.getPricePerUser());
   }
 
   private PricedOptionRepresentation createRepresentation() {
@@ -140,5 +127,23 @@ public class PricedOptionRepresentationTest {
     list.add(pricedRoleRepresentation);
     representation.setRoleSpecificUserPrices(list);
     return representation;
+  }
+
+  private VOPricedOption createVO() {
+    VOPricedOption voPricedOption = new VOPricedOption();
+    voPricedOption.setKey(100L);
+    voPricedOption.setOptionId("Option100");
+    voPricedOption.setParameterOptionKey(100L);
+    voPricedOption.setPricePerSubscription(BigDecimal.TEN);
+    voPricedOption.setPricePerUser(BigDecimal.TEN);
+    List<VOPricedRole> list = new ArrayList<>();
+    VOPricedRole voPricedRole = new VOPricedRole();
+    voPricedRole.setPricePerUser(BigDecimal.ZERO);
+    VORoleDefinition voRoleDefinition = new VORoleDefinition();
+    voPricedRole.setRole(voRoleDefinition);
+    list.add(voPricedRole);
+    voPricedOption.setRoleSpecificUserPrices(list);
+    voPricedOption.setVersion(100);
+    return voPricedOption;
   }
 }
