@@ -102,6 +102,7 @@ public class AccountBackend {
       public boolean delete(AccountParameters params) throws Exception {
         VOBillingContact bc = new VOBillingContact();
         bc.setKey(params.getId().longValue());
+        bc.setVersion(Integer.MAX_VALUE);
         as.deleteBillingContact(bc);
         return true;
       }
@@ -163,6 +164,7 @@ public class AccountBackend {
       public boolean delete(AccountParameters params) throws Exception {
         VOPaymentInfo pi = new VOPaymentInfo();
         pi.setKey(params.getId().longValue());
+        pi.setVersion(Integer.MAX_VALUE);
         as.deletePaymentInfo(pi);
         return true;
       }
