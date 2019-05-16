@@ -56,11 +56,7 @@ public class SteppedPriceRepresentationTest {
 
   @Test
   public void shouldConvertToSteppedPriceRepresentation() {
-    VOSteppedPrice voSteppedPrice = new VOSteppedPrice();
-    voSteppedPrice.setVersion(100);
-    voSteppedPrice.setKey(100L);
-    voSteppedPrice.setLimit(100L);
-    voSteppedPrice.setPrice(BigDecimal.TEN);
+    VOSteppedPrice voSteppedPrice = createVO();
 
     SteppedPriceRepresentation representation = new SteppedPriceRepresentation(voSteppedPrice);
     representation.convert();
@@ -82,5 +78,14 @@ public class SteppedPriceRepresentationTest {
     representation.setLimit(100L);
     representation.setPrice(BigDecimal.TEN);
     return representation;
+  }
+
+  private VOSteppedPrice createVO() {
+    VOSteppedPrice voSteppedPrice = new VOSteppedPrice();
+    voSteppedPrice.setVersion(100);
+    voSteppedPrice.setKey(100L);
+    voSteppedPrice.setLimit(100L);
+    voSteppedPrice.setPrice(BigDecimal.TEN);
+    return voSteppedPrice;
   }
 }

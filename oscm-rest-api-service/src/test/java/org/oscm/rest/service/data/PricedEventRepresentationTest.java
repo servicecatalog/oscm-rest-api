@@ -74,14 +74,7 @@ public class PricedEventRepresentationTest {
 
   @Test
   public void shouldConvertToPricedEventRepresentation() {
-    VOPricedEvent voPricedEvent = new VOPricedEvent();
-    voPricedEvent.setVersion(100);
-    VOEventDefinition voEventDefinition = new VOEventDefinition();
-    voEventDefinition.setEventId("Event123");
-    voEventDefinition.setEventDescription("Description");
-    voPricedEvent.setEventDefinition(voEventDefinition);
-    voPricedEvent.setEventPrice(BigDecimal.TEN);
-    voPricedEvent.setKey(100L);
+    VOPricedEvent voPricedEvent = createVO();
 
     PricedEventRepresentation representation = new PricedEventRepresentation(voPricedEvent);
     representation.convert();
@@ -110,5 +103,17 @@ public class PricedEventRepresentationTest {
     list.add(steppedPriceRepresentation);
     representation.setSteppedPrices(list);
     return representation;
+  }
+
+  private VOPricedEvent createVO() {
+    VOPricedEvent voPricedEvent = new VOPricedEvent();
+    voPricedEvent.setVersion(100);
+    VOEventDefinition voEventDefinition = new VOEventDefinition();
+    voEventDefinition.setEventId("Event123");
+    voEventDefinition.setEventDescription("Description");
+    voPricedEvent.setEventDefinition(voEventDefinition);
+    voPricedEvent.setEventPrice(BigDecimal.TEN);
+    voPricedEvent.setKey(100L);
+    return voPricedEvent;
   }
 }

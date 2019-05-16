@@ -157,24 +157,7 @@ public class ParameterDefinitionRepresentationTest {
 
   @Test
   public void shouldConvertToParameterDefinitionRepresentation() {
-    VOParameterDefinition voParameterDefinition = new VOParameterDefinition();
-    voParameterDefinition.setConfigurable(true);
-    voParameterDefinition.setDefaultValue("DefaultValue");
-    voParameterDefinition.setDescription("Description");
-    voParameterDefinition.setKey(100L);
-    voParameterDefinition.setMandatory(true);
-    voParameterDefinition.setMaxValue(100L);
-    voParameterDefinition.setMinValue(0L);
-    voParameterDefinition.setModificationType(ParameterModificationType.ONE_TIME);
-    voParameterDefinition.setParameterId("100");
-    List<VOParameterOption> list = new ArrayList<>();
-    VOParameterOption voParameterOption = new VOParameterOption();
-    voParameterOption.setOptionId("123");
-    list.add(voParameterOption);
-    voParameterDefinition.setParameterOptions(list);
-    voParameterDefinition.setParameterType(ParameterType.PLATFORM_PARAMETER);
-    voParameterDefinition.setVersion(100);
-    voParameterDefinition.setValueType(ParameterValueType.STRING);
+    VOParameterDefinition voParameterDefinition = createVO();
 
     ParameterDefinitionRepresentation representation =
         new ParameterDefinitionRepresentation(voParameterDefinition);
@@ -207,10 +190,6 @@ public class ParameterDefinitionRepresentationTest {
     assertThat(representation)
         .extracting(ParameterDefinitionRepresentation::getParameterId)
         .isEqualTo(voParameterDefinition.getParameterId());
-    assertThat(
-            ((ParameterOptionRepresentation) representation.getParameterOptions().toArray()[0])
-                .getOptionId())
-        .isEqualTo(voParameterOption.getOptionId());
     assertThat(representation)
         .extracting(ParameterDefinitionRepresentation::getParameterType)
         .isEqualTo(voParameterDefinition.getParameterType());
@@ -220,5 +199,27 @@ public class ParameterDefinitionRepresentationTest {
     assertThat(representation)
         .extracting(ParameterDefinitionRepresentation::getValueType)
         .isEqualTo(voParameterDefinition.getValueType());
+  }
+
+  private VOParameterDefinition createVO() {
+    VOParameterDefinition voParameterDefinition = new VOParameterDefinition();
+    voParameterDefinition.setConfigurable(true);
+    voParameterDefinition.setDefaultValue("DefaultValue");
+    voParameterDefinition.setDescription("Description");
+    voParameterDefinition.setKey(100L);
+    voParameterDefinition.setMandatory(true);
+    voParameterDefinition.setMaxValue(100L);
+    voParameterDefinition.setMinValue(0L);
+    voParameterDefinition.setModificationType(ParameterModificationType.ONE_TIME);
+    voParameterDefinition.setParameterId("100");
+    List<VOParameterOption> list = new ArrayList<>();
+    VOParameterOption voParameterOption = new VOParameterOption();
+    voParameterOption.setOptionId("123");
+    list.add(voParameterOption);
+    voParameterDefinition.setParameterOptions(list);
+    voParameterDefinition.setParameterType(ParameterType.PLATFORM_PARAMETER);
+    voParameterDefinition.setVersion(100);
+    voParameterDefinition.setValueType(ParameterValueType.STRING);
+    return voParameterDefinition;
   }
 }

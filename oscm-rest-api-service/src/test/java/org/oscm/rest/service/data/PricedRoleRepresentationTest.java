@@ -61,13 +61,7 @@ public class PricedRoleRepresentationTest {
 
   @Test
   public void shouldConvertToPricedRoleRepresentation() {
-    VOPricedRole voPricedRole = new VOPricedRole();
-    voPricedRole.setVersion(100);
-    voPricedRole.setKey(100L);
-    voPricedRole.setPricePerUser(BigDecimal.TEN);
-    VORoleDefinition voRoleDefinition = new VORoleDefinition();
-    voRoleDefinition.setDescription("Description100");
-    voPricedRole.setRole(voRoleDefinition);
+    VOPricedRole voPricedRole = createVO();
 
     PricedRoleRepresentation representation = new PricedRoleRepresentation(voPricedRole);
     representation.convert();
@@ -90,5 +84,16 @@ public class PricedRoleRepresentationTest {
     roleDefinitionRepresentation.setRoleId("Role100");
     representation.setRole(roleDefinitionRepresentation);
     return representation;
+  }
+
+  private VOPricedRole createVO() {
+    VOPricedRole voPricedRole = new VOPricedRole();
+    voPricedRole.setVersion(100);
+    voPricedRole.setKey(100L);
+    voPricedRole.setPricePerUser(BigDecimal.TEN);
+    VORoleDefinition voRoleDefinition = new VORoleDefinition();
+    voRoleDefinition.setDescription("Description100");
+    voPricedRole.setRole(voRoleDefinition);
+    return voPricedRole;
   }
 }

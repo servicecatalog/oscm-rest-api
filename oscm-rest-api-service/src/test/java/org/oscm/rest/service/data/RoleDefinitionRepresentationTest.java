@@ -64,12 +64,7 @@ public class RoleDefinitionRepresentationTest {
 
   @Test
   public void shouldConvertToRoleDefinitionRepresentation() {
-    VORoleDefinition voRoleDefinition = new VORoleDefinition();
-    voRoleDefinition.setDescription("Description");
-    voRoleDefinition.setKey(100L);
-    voRoleDefinition.setName("Name");
-    voRoleDefinition.setRoleId("100");
-    voRoleDefinition.setVersion(100);
+    VORoleDefinition voRoleDefinition = createVO();
 
     RoleDefinitionRepresentation representation =
         new RoleDefinitionRepresentation(voRoleDefinition);
@@ -90,6 +85,16 @@ public class RoleDefinitionRepresentationTest {
     assertThat(representation)
         .extracting(Representation::getETag)
         .isEqualTo((long) voRoleDefinition.getVersion());
+  }
+
+  private VORoleDefinition createVO() {
+    VORoleDefinition voRoleDefinition = new VORoleDefinition();
+    voRoleDefinition.setDescription("Description");
+    voRoleDefinition.setKey(100L);
+    voRoleDefinition.setName("Name");
+    voRoleDefinition.setRoleId("100");
+    voRoleDefinition.setVersion(100);
+    return voRoleDefinition;
   }
 
   private RoleDefinitionRepresentation createRepresentation() {
