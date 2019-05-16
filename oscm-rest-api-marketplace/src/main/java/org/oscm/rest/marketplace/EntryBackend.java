@@ -25,21 +25,16 @@ public class EntryBackend {
   @EJB MarketplaceService ms;
 
   public RestBackend.Put<EntryRepresentation, MarketplaceParameters> put() {
-    return new RestBackend.Put<EntryRepresentation, MarketplaceParameters>() {
+    return (content, params) -> {
+      VOCatalogEntry ce = content.getVO();
+      String mId = ms.getMarketplaceIdForKey(params.getId());
+      VOMarketplace mp = new VOMarketplace();
+      mp.setKey(params.getId().longValue());
+      mp.setMarketplaceId(mId);
+      ce.setMarketplace(mp);
 
-      @Override
-      public boolean put(EntryRepresentation content, MarketplaceParameters params)
-          throws Exception {
-        VOCatalogEntry ce = content.getVO();
-        String mId = ms.getMarketplaceIdForKey(params.getId());
-        VOMarketplace mp = new VOMarketplace();
-        mp.setKey(params.getId().longValue());
-        mp.setMarketplaceId(mId);
-        ce.setMarketplace(mp);
-
-        ms.publishService(params.getService(), Collections.singletonList(ce));
-        return true;
-      }
+      ms.publishService(params.getService(), Collections.singletonList(ce));
+      return true;
     };
   }
 }

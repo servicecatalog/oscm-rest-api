@@ -27,43 +27,29 @@ public class TSSupplierBackend {
   @EJB AccountService as;
 
   public RestBackend.GetCollection<OrganizationRepresentation, ServiceParameters> getCollection() {
-    return new RestBackend.GetCollection<OrganizationRepresentation, ServiceParameters>() {
-
-      @Override
-      public RepresentationCollection<OrganizationRepresentation> getCollection(
-          ServiceParameters params) throws Exception {
-        VOTechnicalService vo = new VOTechnicalService();
-        vo.setKey(params.getId().longValue());
-        List<VOOrganization> list = as.getSuppliersForTechnicalService(vo);
-        return OrganizationRepresentation.toCollection(list);
-      }
+    return params -> {
+      VOTechnicalService vo = new VOTechnicalService();
+      vo.setKey(params.getId().longValue());
+      List<VOOrganization> list = as.getSuppliersForTechnicalService(vo);
+      return OrganizationRepresentation.toCollection(list);
     };
   }
 
   public RestBackend.Post<OrganizationRepresentation, ServiceParameters> post() {
-    return new RestBackend.Post<OrganizationRepresentation, ServiceParameters>() {
-
-      @Override
-      public Object post(OrganizationRepresentation content, ServiceParameters params)
-          throws Exception {
-        VOTechnicalService vo = new VOTechnicalService();
-        vo.setKey(params.getId().longValue());
-        as.addSuppliersForTechnicalService(vo, Arrays.asList(content.getOrganizationId()));
-        return content.getOrganizationId();
-      }
+    return (content, params) -> {
+      VOTechnicalService vo = new VOTechnicalService();
+      vo.setKey(params.getId().longValue());
+      as.addSuppliersForTechnicalService(vo, Arrays.asList(content.getOrganizationId()));
+      return content.getOrganizationId();
     };
   }
 
   public RestBackend.Delete<ServiceParameters> delete() {
-    return new RestBackend.Delete<ServiceParameters>() {
-
-      @Override
-      public boolean delete(ServiceParameters params) throws Exception {
-        VOTechnicalService vo = new VOTechnicalService();
-        vo.setKey(params.getId().longValue());
-        as.removeSuppliersFromTechnicalService(vo, Arrays.asList(params.getOrgId()));
-        return true;
-      }
+    return params -> {
+      VOTechnicalService vo = new VOTechnicalService();
+      vo.setKey(params.getId().longValue());
+      as.removeSuppliersFromTechnicalService(vo, Arrays.asList(params.getOrgId()));
+      return true;
     };
   }
 }
