@@ -13,6 +13,7 @@ import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.marketplace.EntryResource;
+import org.oscm.rest.marketplace.MarketplaceResource;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -32,6 +33,7 @@ public class MarketplaceResourceConfig extends Application {
     final Set<Class<?>> classes = new HashSet<Class<?>>();
 
     classes.add(EntryResource.class);
+    classes.add(MarketplaceResource.class);
     classes.add(OSCMExceptionMapper.class);
     classes.add(GsonMessageProvider.class);
     classes.add(VersionFilter.class);
