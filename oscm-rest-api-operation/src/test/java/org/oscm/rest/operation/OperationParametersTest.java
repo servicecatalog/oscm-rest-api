@@ -12,7 +12,7 @@ package org.oscm.rest.operation;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class OperationParametersTest {
+public class OperationParametersTest {
 
   @Test
   @Disabled("Not implemented yet")
