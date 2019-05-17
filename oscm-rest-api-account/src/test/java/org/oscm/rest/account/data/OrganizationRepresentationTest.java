@@ -18,7 +18,7 @@ public class OrganizationRepresentationTest {
 
   @Test
   public void shouldUpdateVOOrganization() {
-    OrganizationRepresentation orgRepresentation = createOrganizationRepresentation();
+    OrganizationRepresentation orgRepresentation = createRepresentation();
     VOOrganization voOrganization = null;
 
     orgRepresentation.update();
@@ -65,7 +65,7 @@ public class OrganizationRepresentationTest {
 
   @Test
   public void shouldConvertToOrganizationRepresentation() {
-    VOOrganization voOrganization = createVOOrganization();
+    VOOrganization voOrganization = createVO();
     OrganizationRepresentation orgRepresentation = new OrganizationRepresentation(voOrganization);
 
     orgRepresentation.convert();
@@ -108,7 +108,7 @@ public class OrganizationRepresentationTest {
         .isEqualTo(voOrganization.getUrl());
   }
 
-  private OrganizationRepresentation createOrganizationRepresentation() {
+  private OrganizationRepresentation createRepresentation() {
     OrganizationRepresentation orgRepresentation = new OrganizationRepresentation();
     orgRepresentation.setAddress("address");
     orgRepresentation.setDescription("desc");
@@ -125,7 +125,7 @@ public class OrganizationRepresentationTest {
     return orgRepresentation;
   }
 
-  private VOOrganization createVOOrganization() {
+  private VOOrganization createVO() {
     VOOrganization voOrganization = new VOOrganization();
     voOrganization.setAddress("address");
     voOrganization.setDescription("desc");

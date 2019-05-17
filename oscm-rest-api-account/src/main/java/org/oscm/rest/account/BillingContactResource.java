@@ -9,11 +9,6 @@
  */
 package org.oscm.rest.account;
 
-import org.oscm.rest.account.data.BillingContactRepresentation;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -21,6 +16,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.oscm.rest.account.data.BillingContactRepresentation;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
 
 @Path(CommonParams.PATH_VERSION + "/billingcontacts")
 @Stateless
@@ -65,6 +64,8 @@ public class BillingContactResource extends RestResource {
       BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
+    //FIXME: Move investigate why the same command doesn't work from RestResource#128
+    content.setId(params.getId());
     return put(uriInfo, ab.putBillingContact(), content, params);
   }
 

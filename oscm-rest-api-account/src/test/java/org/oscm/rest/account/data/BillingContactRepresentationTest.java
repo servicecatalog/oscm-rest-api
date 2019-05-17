@@ -18,7 +18,7 @@ public class BillingContactRepresentationTest {
 
   @Test
   public void shouldUpdateVOBillingContact() {
-    BillingContactRepresentation representation = createBillingContactRepresentation();
+    BillingContactRepresentation representation = createRepresentation();
     VOBillingContact billingContact = null;
 
     representation.update();
@@ -50,7 +50,7 @@ public class BillingContactRepresentationTest {
 
   @Test
   public void shouldConvertToBillingContact() {
-    VOBillingContact voBillingContact = createVOBillingContact();
+    VOBillingContact voBillingContact = createVO();
 
     BillingContactRepresentation contactRepresentation =
         new BillingContactRepresentation(voBillingContact);
@@ -79,7 +79,7 @@ public class BillingContactRepresentationTest {
         .isEqualTo((long) voBillingContact.getVersion());
   }
 
-  private BillingContactRepresentation createBillingContactRepresentation() {
+  private BillingContactRepresentation createRepresentation() {
     BillingContactRepresentation contactRepresentation = new BillingContactRepresentation();
     contactRepresentation.setAddress("address");
     contactRepresentation.setCompanyName("companyName");
@@ -91,7 +91,7 @@ public class BillingContactRepresentationTest {
     return contactRepresentation;
   }
 
-  private VOBillingContact createVOBillingContact() {
+  private VOBillingContact createVO() {
     VOBillingContact billingContact = new VOBillingContact();
     billingContact.setAddress("address");
     billingContact.setCompanyName("companyName");

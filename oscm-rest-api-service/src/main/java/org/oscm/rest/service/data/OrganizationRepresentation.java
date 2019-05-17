@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service.data;
 
-import lombok.Generated;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.Representation;
 import org.oscm.rest.common.RepresentationCollection;
@@ -62,29 +61,6 @@ public class OrganizationRepresentation extends Representation {
 
   public static RepresentationCollection<OrganizationRepresentation> toCollection(
       List<VOOrganization> list) {
-    // TODO Auto-generated method stub
     return null;
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
-  }
-
-  // FIXME move to super class
-  // FIXME excluded from code coverage due to fixme
-  // TODO Remove @Generated annotation when moving to superclass
-  @Generated
-  protected int convertETagToVersion() {
-    if (getETag() == null) {
-      return 0;
-    }
-    return getETag().intValue();
   }
 }
