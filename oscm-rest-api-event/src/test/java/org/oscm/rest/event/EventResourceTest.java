@@ -1,0 +1,71 @@
+package org.oscm.rest.event;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.event.data.EventRepresentation;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+class EventResourceTest {
+
+    @Mock
+    private EventBackend eventBackend;
+
+    @InjectMocks
+    @Spy
+    private EventResource eventResource;
+
+    Response response;
+    EventRepresentation eventRepresentation;
+    UriInfo uriInfo;
+    EventParameters eventParameters;
+
+    @BeforeEach
+    public void setUp() {
+        eventRepresentation = new EventRepresentation();
+        uriInfo = SampleTestDataUtility.createUriInfo();
+        eventParameters = createParameters();
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        response = null;
+    }
+
+    @Test
+    public void shouldRecordEvent() {
+        when(eventBackend.post())
+                .thenReturn((content, params) -> true);
+
+        try {
+            response = eventResource.recordEvent(uriInfo, eventRepresentation, eventParameters);
+        } catch (Exception e) {
+            fail(e);
+        }
+
+        assertThat(response).isNotNull();
+        assertThat(response)
+                .extracting(Response::getStatus)
+                .isEqualTo(Response.Status.CREATED.getStatusCode());
+        assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
+    }
+
+    private EventParameters createParameters() {
+        EventParameters parameters = new EventParameters();
+        parameters.setId(100L);
+        return parameters;
+    }
+}
