@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class EventResourceTest {
+public class EventResourceTest {
 
     @Mock
     private EventBackend eventBackend;
@@ -28,10 +28,10 @@ class EventResourceTest {
     @Spy
     private EventResource eventResource;
 
-    Response response;
-    EventRepresentation eventRepresentation;
-    UriInfo uriInfo;
-    EventParameters eventParameters;
+    private Response response;
+    private EventRepresentation eventRepresentation;
+    private UriInfo uriInfo;
+    private EventParameters eventParameters;
 
     @BeforeEach
     public void setUp() {

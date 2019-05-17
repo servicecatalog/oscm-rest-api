@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class EventResourceConfigTest {
+public class EventResourceConfigTest {
 
     @Test
     public void shouldGetClasses() {

@@ -36,10 +36,10 @@ class SettingsResourceTest {
 
   @InjectMocks @Spy private SettingsResource settingsResource;
 
-  Response response;
-  SettingRepresentation settingRepresentation;
-  UriInfo uriInfo;
-  OperationParameters operationParameters;
+  private Response response;
+  private SettingRepresentation settingRepresentation;
+  private UriInfo uriInfo;
+  private OperationParameters operationParameters;
 
   @BeforeEach
   public void setUp() {
