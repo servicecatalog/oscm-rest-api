@@ -23,20 +23,7 @@ public class UserRepresentationTest {
 
   @Test
   public void shouldUpdateVOUserDetails() {
-    UserRepresentation representation = new UserRepresentation();
-    representation.setAdditionalName("additionalName");
-    representation.setAddress("address");
-    representation.setEmail("email");
-    representation.setFirstName("fName");
-    representation.setId(1234L);
-    representation.setLastName("lName");
-    representation.setLocale("en_US");
-    representation.setOrganizationId("orgId");
-    representation.setPhone("111111111");
-    representation.setRealmUserId("realmUserId");
-    representation.setSalutation(Salutation.MR);
-    representation.setUserId("userId");
-    representation.setETag(4567L);
+    UserRepresentation representation = createRepresentation();
 
     representation.update();
     VOUserDetails result = representation.getVO();
@@ -77,27 +64,11 @@ public class UserRepresentationTest {
 
   @Test
   public void shouldConvertVOToRepresentation() {
-    VOUserDetails userDetails = new VOUserDetails();
-    userDetails.setAdditionalName("additionalName");
-    userDetails.setAddress("address");
-    userDetails.setEMail("email");
-    userDetails.setFirstName("fName");
-    userDetails.setKey(1234L);
-    userDetails.setLastName("lName");
-    userDetails.setLocale("en_US");
-    userDetails.setOrganizationId("orgId");
-    userDetails.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
-    userDetails.setPhone("111111111");
-    userDetails.setRealmUserId("rUserId");
-    userDetails.setRemoteLdapActive(true);
-    userDetails.setSalutation(Salutation.MR);
-    userDetails.setStatus(UserAccountStatus.ACTIVE);
-    userDetails.setVersion(456);
-    userDetails.setUserId("userId");
-    userDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    VOUserDetails userDetails = createVO();
 
     UserRepresentation representation = new UserRepresentation(userDetails);
     representation.convert();
+
     assertThat(representation)
         .extracting(UserRepresentation::getAdditionalName)
         .isEqualTo(userDetails.getAdditionalName());
@@ -137,5 +108,45 @@ public class UserRepresentationTest {
     assertThat(representation)
         .extracting(UserRepresentation::getUserId)
         .isEqualTo(userDetails.getUserId());
+  }
+
+  private UserRepresentation createRepresentation() {
+    UserRepresentation representation = new UserRepresentation();
+    representation.setAdditionalName("additionalName");
+    representation.setAddress("address");
+    representation.setEmail("email");
+    representation.setFirstName("fName");
+    representation.setId(1234L);
+    representation.setLastName("lName");
+    representation.setLocale("en_US");
+    representation.setOrganizationId("orgId");
+    representation.setPhone("111111111");
+    representation.setRealmUserId("realmUserId");
+    representation.setSalutation(Salutation.MR);
+    representation.setUserId("userId");
+    representation.setETag(4567L);
+    return representation;
+  }
+
+  private VOUserDetails createVO() {
+    VOUserDetails voUserDetails = new VOUserDetails();
+    voUserDetails.setAdditionalName("additionalName");
+    voUserDetails.setAddress("address");
+    voUserDetails.setEMail("email");
+    voUserDetails.setFirstName("fName");
+    voUserDetails.setKey(1234L);
+    voUserDetails.setLastName("lName");
+    voUserDetails.setLocale("en_US");
+    voUserDetails.setOrganizationId("orgId");
+    voUserDetails.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
+    voUserDetails.setPhone("111111111");
+    voUserDetails.setRealmUserId("rUserId");
+    voUserDetails.setRemoteLdapActive(true);
+    voUserDetails.setSalutation(Salutation.MR);
+    voUserDetails.setStatus(UserAccountStatus.ACTIVE);
+    voUserDetails.setVersion(456);
+    voUserDetails.setUserId("userId");
+    voUserDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    return voUserDetails;
   }
 }

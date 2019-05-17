@@ -19,7 +19,7 @@ public class PaymentInfoRepresentationTest {
 
   @Test
   public void shouldUpdateVOPaymentInfo() {
-    PaymentInfoRepresentation representation = createPaymentInfoRepresentation();
+    PaymentInfoRepresentation representation = createRepresentation();
     VOPaymentInfo paymentInfo = null;
 
     representation.update();
@@ -44,7 +44,7 @@ public class PaymentInfoRepresentationTest {
 
   @Test
   public void shouldConvertToPaymentRepresentation() {
-    VOPaymentInfo voPaymentInfo = createVoPaymentInfo();
+    VOPaymentInfo voPaymentInfo = createVO();
     PaymentInfoRepresentation representation = new PaymentInfoRepresentation(voPaymentInfo);
 
     representation.convert();
@@ -66,7 +66,7 @@ public class PaymentInfoRepresentationTest {
         .isEqualTo((long) voPaymentInfo.getVersion());
   }
 
-  private PaymentInfoRepresentation createPaymentInfoRepresentation() {
+  private PaymentInfoRepresentation createRepresentation() {
     PaymentInfoRepresentation representation = new PaymentInfoRepresentation();
     representation.setAccountNumber("accountNr");
     representation.setId(123L);
@@ -76,7 +76,7 @@ public class PaymentInfoRepresentationTest {
     return representation;
   }
 
-  private VOPaymentInfo createVoPaymentInfo() {
+  private VOPaymentInfo createVO() {
     VOPaymentInfo paymentInfo = new VOPaymentInfo();
     paymentInfo.setAccountNumber("accountNr");
     paymentInfo.setId("id");

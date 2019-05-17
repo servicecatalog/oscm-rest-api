@@ -46,66 +46,46 @@ public class RestResourceTest extends RestResource {
   }
 
   private RestBackend.Get<MockRepresentation, MockRequestParameters> backendGet =
-      new RestBackend.Get<MockRepresentation, MockRequestParameters>() {
+          params -> {
 
-        @Override
-        public MockRepresentation get(MockRequestParameters params) {
+            assertNotNull(params);
 
-          assertNotNull(params);
-
-          return new MockRepresentation();
-        }
-      };
+            return new MockRepresentation();
+          };
 
   private RestBackend.Post<MockRepresentation, MockRequestParameters> backendPost =
-      new RestBackend.Post<MockRepresentation, MockRequestParameters>() {
+          (content, params) -> {
 
-        @Override
-        public Object post(MockRepresentation content, MockRequestParameters params) {
+            assertNotNull(content);
+            assertNotNull(params);
 
-          assertNotNull(content);
-          assertNotNull(params);
-
-          return UUID.randomUUID();
-        }
-      };
+            return UUID.randomUUID();
+          };
 
   private RestBackend.Put<MockRepresentation, MockRequestParameters> backendPut =
-      new RestBackend.Put<MockRepresentation, MockRequestParameters>() {
+          (content, params) -> {
 
-        @Override
-        public boolean put(MockRepresentation content, MockRequestParameters params) {
-
-          assertNotNull(content);
-          assertNull(content.getETag());
-          assertNotNull(params);
-          return true;
-        }
-      };
+            assertNotNull(content);
+            assertNull(content.getETag());
+            assertNotNull(params);
+            return true;
+          };
 
   private RestBackend.Put<MockRepresentation, MockRequestParameters> backendPutETag =
-      new RestBackend.Put<MockRepresentation, MockRequestParameters>() {
+          (content, params) -> {
 
-        @Override
-        public boolean put(MockRepresentation content, MockRequestParameters params) {
-
-          assertNotNull(content);
-          assertNotNull(content.getETag());
-          assertNotNull(params);
-          return true;
-        }
-      };
+            assertNotNull(content);
+            assertNotNull(content.getETag());
+            assertNotNull(params);
+            return true;
+          };
 
   private RestBackend.Delete<MockRequestParameters> backendDelete =
-      new RestBackend.Delete<MockRequestParameters>() {
+          params -> {
 
-        @Override
-        public boolean delete(MockRequestParameters params) {
-
-          assertNotNull(params);
-          return true;
-        }
-      };
+            assertNotNull(params);
+            return true;
+          };
 
   @Test
   public void testGet() throws Exception {

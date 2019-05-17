@@ -23,10 +23,7 @@ public class RolesRepresentationTest {
 
   @Test
   public void shouldUpdateVOUserDetails() {
-    RolesRepresentation representation = new RolesRepresentation();
-    representation.setId(12345L);
-    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
-    representation.setETag(6789L);
+    RolesRepresentation representation = createRepresentation();
 
     representation.update();
     VOUserDetails result = representation.getVO();
@@ -39,22 +36,35 @@ public class RolesRepresentationTest {
 
   @Test
   public void shouldConvertToRolesRepresentation() {
-    VOUserDetails userDetails = new VOUserDetails();
-    userDetails.setKey(1234L);
-    userDetails.setVersion(5678);
-    userDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    VOUserDetails voUserDetails = createVO();
 
-    RolesRepresentation representation = new RolesRepresentation(userDetails);
+    RolesRepresentation representation = new RolesRepresentation(voUserDetails);
     representation.convert();
 
     assertThat(representation)
         .extracting(Representation::getId)
-        .isEqualTo((long) userDetails.getKey());
+        .isEqualTo((long) voUserDetails.getKey());
     assertThat(representation)
         .extracting(Representation::getETag)
-        .isEqualTo((long) userDetails.getVersion());
+        .isEqualTo((long) voUserDetails.getVersion());
     assertThat(representation)
         .extracting(RolesRepresentation::getUserRoles)
-        .isEqualTo(userDetails.getUserRoles());
+        .isEqualTo(voUserDetails.getUserRoles());
+  }
+
+  private RolesRepresentation createRepresentation() {
+    RolesRepresentation representation = new RolesRepresentation();
+    representation.setId(12345L);
+    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    representation.setETag(6789L);
+    return representation;
+  }
+
+  private VOUserDetails createVO(){
+    VOUserDetails voUserDetails = new VOUserDetails();
+    voUserDetails.setKey(1234L);
+    voUserDetails.setVersion(5678);
+    voUserDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+return voUserDetails;
   }
 }

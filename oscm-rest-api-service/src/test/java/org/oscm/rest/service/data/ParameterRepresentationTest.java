@@ -65,14 +65,7 @@ public class ParameterRepresentationTest {
 
   @Test
   public void shouldConvertToParameterRepresentation() {
-    VOParameter voParameter = new VOParameter();
-    voParameter.setConfigurable(true);
-    voParameter.setKey(100L);
-    VOParameterDefinition voParameterDefinition = new VOParameterDefinition();
-    voParameterDefinition.setParameterId("123");
-    voParameter.setParameterDefinition(voParameterDefinition);
-    voParameter.setVersion(100);
-    voParameter.setValue("Value");
+    VOParameter voParameter = createVO();
 
     ParameterRepresentation representation = new ParameterRepresentation(voParameter);
     representation.convert();
@@ -99,5 +92,17 @@ public class ParameterRepresentationTest {
     representation.setParameterDefinition(parameterDefinitionRepresentation);
     representation.setValue("Value");
     return representation;
+  }
+
+  private VOParameter createVO() {
+    VOParameter voParameter = new VOParameter();
+    voParameter.setConfigurable(true);
+    voParameter.setKey(100L);
+    VOParameterDefinition voParameterDefinition = new VOParameterDefinition();
+    voParameterDefinition.setParameterId("123");
+    voParameter.setParameterDefinition(voParameterDefinition);
+    voParameter.setVersion(100);
+    voParameter.setValue("Value");
+    return voParameter;
   }
 }

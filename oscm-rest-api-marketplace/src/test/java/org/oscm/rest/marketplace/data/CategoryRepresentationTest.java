@@ -49,10 +49,7 @@ class CategoryRepresentationTest {
 
     @Test
     public void shouldConvertToCategoryRepresentation() {
-        VOCategory voCategory = new VOCategory();
-        voCategory.setCategoryId("Category100");
-        voCategory.setKey(100L);
-        voCategory.setVersion(100);
+        VOCategory voCategory = createVO();
 
         CategoryRepresentation representation = new CategoryRepresentation(voCategory);
         representation.convert();
@@ -100,5 +97,13 @@ class CategoryRepresentationTest {
         CategoryRepresentation representation = new CategoryRepresentation();
         representation.setCategoryId("Category100");
         return representation;
+    }
+
+    private VOCategory createVO() {
+        VOCategory voCategory = new VOCategory();
+        voCategory.setCategoryId("Category100");
+        voCategory.setKey(100L);
+        voCategory.setVersion(100);
+        return voCategory;
     }
 }
