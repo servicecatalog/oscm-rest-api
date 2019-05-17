@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 
-class SettingsBackendTest {
+public class SettingsBackendTest {
 
   @Mock ConfigurationService cs;
 

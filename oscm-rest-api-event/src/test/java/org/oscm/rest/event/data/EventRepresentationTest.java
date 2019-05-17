@@ -1,12 +1,11 @@
 package org.oscm.rest.event.data;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.oscm.internal.vo.VOGatheredEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class EventRepresentationTest {
+public class EventRepresentationTest {
 
     @Test
     public void shouldUpdateVOGatheredEvent() {
