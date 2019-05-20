@@ -27,6 +27,7 @@ public class UserParameters extends RequestParameters {
 
   @QueryParam("pattern")
   private String pattern;
+  private boolean isUserIdRequired;
 
   @Override
   public void validateParameters() throws WebApplicationException {}
@@ -60,8 +61,16 @@ public class UserParameters extends RequestParameters {
 
   @Override
   public void validateId() throws WebApplicationException {
-    if (userId == null) {
+    if (isUserIdRequired && userId == null) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
     }
+  }
+
+  public void setUserIdRequired(boolean userIdRequired) {
+    this.isUserIdRequired = userIdRequired;
+  }
+
+  public boolean getUserIdRequired() {
+    return isUserIdRequired;
   }
 }

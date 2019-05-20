@@ -44,6 +44,7 @@ public class OnBehalfUserResource extends RestResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response deleteOnBehalfUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
+    params.setUserIdRequired(false);
     return delete(uriInfo, ub.deleteOBehalfUser(), params);
   }
 }

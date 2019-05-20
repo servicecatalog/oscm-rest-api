@@ -54,11 +54,6 @@ public class LdapUserResourceTest {
 
   @Test
   public void shouldGetLdapUsers() {
-    when(userBackend.getLdapUsers())
-        .thenReturn(
-            userParameters ->
-                new RepresentationCollection<>(Lists.newArrayList(userRepresentation)));
-
     try {
       result = userResource.getLdapUsers(uriInfo, parameters);
     } catch (Exception e) {
@@ -70,22 +65,12 @@ public class LdapUserResourceTest {
     assertThat(result).isNotNull();
     assertThat(result)
         .extracting(Response::getStatus)
-        .isEqualTo(Response.Status.OK.getStatusCode());
-    assertThat(result).extracting(Response::hasEntity).isEqualTo(true);
-    assertThat(result)
-        .extracting(
-            r -> {
-              RepresentationCollection<UserRepresentation> representationCollection =
-                  (RepresentationCollection<UserRepresentation>) r.getEntity();
-              return representationCollection.getItems().toArray()[0];
-            })
-        .isEqualTo(userRepresentation);
+        .isEqualTo(Response.Status.NOT_IMPLEMENTED.getStatusCode());
+    assertThat(result).extracting(Response::hasEntity).isEqualTo(false);
   }
 
   @Test
   public void shouldCreateLdapUser() {
-    when(userBackend.postLdapUser()).thenReturn((userRepresentation1, userParameters) -> "newId");
-
     try {
       result = userResource.createLdapUser(uriInfo, userRepresentation, parameters);
     } catch (Exception e) {
@@ -95,7 +80,7 @@ public class LdapUserResourceTest {
     assertThat(result).isNotNull();
     assertThat(result)
         .extracting(Response::getStatus)
-        .isEqualTo(Response.Status.CREATED.getStatusCode());
+        .isEqualTo(Response.Status.NOT_IMPLEMENTED.getStatusCode());
   }
 
   private UserRepresentation createUserRepresentation() {
