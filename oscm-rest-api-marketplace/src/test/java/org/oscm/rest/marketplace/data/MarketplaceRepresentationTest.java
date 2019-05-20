@@ -106,21 +106,7 @@ class MarketplaceRepresentationTest {
 
     @Test
     public void shouldConvertToMarketplaceRepresentation() {
-        VOMarketplace voMarketplace = new VOMarketplace();
-        voMarketplace.setKey(100L);
-        voMarketplace.setVersion(100);
-        voMarketplace.setCategoriesEnabled(true);
-        voMarketplace.setHasPublicLandingPage(true);
-        voMarketplace.setMarketplaceId("Marketplace100");
-        voMarketplace.setName("Name");
-        voMarketplace.setOpen(true);
-        voMarketplace.setOwningOrganizationId("OwnerId100");
-        voMarketplace.setOwningOrganizationName("OwnerName100");
-        voMarketplace.setRestricted(true);
-        voMarketplace.setReviewEnabled(true);
-        voMarketplace.setSocialBookmarkEnabled(true);
-        voMarketplace.setTaggingEnabled(true);
-        voMarketplace.setTenantId("Tenant100");
+        VOMarketplace voMarketplace = createVO();
 
         MarketplaceRepresentation representation = new MarketplaceRepresentation(voMarketplace);
         representation.convert();
@@ -184,6 +170,25 @@ class MarketplaceRepresentationTest {
         representation.setTaggingEnabled(true);
         representation.setTenantId("Tenant100");
         return representation;
+    }
+
+    private VOMarketplace createVO() {
+        VOMarketplace voMarketplace = new VOMarketplace();
+        voMarketplace.setKey(100L);
+        voMarketplace.setVersion(100);
+        voMarketplace.setCategoriesEnabled(true);
+        voMarketplace.setHasPublicLandingPage(true);
+        voMarketplace.setMarketplaceId("Marketplace100");
+        voMarketplace.setName("Name");
+        voMarketplace.setOpen(true);
+        voMarketplace.setOwningOrganizationId("OwnerId100");
+        voMarketplace.setOwningOrganizationName("OwnerName100");
+        voMarketplace.setRestricted(true);
+        voMarketplace.setReviewEnabled(true);
+        voMarketplace.setSocialBookmarkEnabled(true);
+        voMarketplace.setTaggingEnabled(true);
+        voMarketplace.setTenantId("Tenant100");
+        return voMarketplace;
     }
 
 }
