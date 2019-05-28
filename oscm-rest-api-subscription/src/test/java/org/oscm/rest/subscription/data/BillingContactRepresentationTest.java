@@ -19,20 +19,20 @@ class BillingContactRepresentationTest {
         VOBillingContact result = billingContactRepresentation.getVO();
 
         assertThat(result).isNotNull();
-        assertThat(result).extracting(BaseVO::getKey).isEqualTo(result.getKey());
-        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(result.getVersion());
+        assertThat(result).extracting(BaseVO::getKey).isEqualTo(billingContactRepresentation.convertIdToKey());
+        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(billingContactRepresentation.convertETagToVersion());
     }
 
     @Test
-    public void shouldUpdateVOBillingContact_evenIfIdandETagIsNull() {
+    public void shouldUpdateVOBillingContact_evenIfIdAndETagIsNull() {
         BillingContactRepresentation billingContactRepresentation = createRepresentation();
 
         billingContactRepresentation.update();
         VOBillingContact result = billingContactRepresentation.getVO();
 
         assertThat(result).isNotNull();
-        assertThat(result).extracting(BaseVO::getKey).isEqualTo(result.getKey());
-        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(result.getVersion());
+        assertThat(result).extracting(BaseVO::getKey).isEqualTo(billingContactRepresentation.convertIdToKey());
+        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(billingContactRepresentation.getVersion());
     }
 
     @Test

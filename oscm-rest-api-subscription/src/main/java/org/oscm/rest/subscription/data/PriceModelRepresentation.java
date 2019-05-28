@@ -23,6 +23,7 @@ public class PriceModelRepresentation extends Representation {
   private transient VOPriceModel vo;
 
   private String description;
+
   private PricingPeriod period;
   private BigDecimal pricePerPeriod = BigDecimal.ZERO;
   private BigDecimal pricePerUserAssignment = BigDecimal.ZERO;
@@ -33,7 +34,6 @@ public class PriceModelRepresentation extends Representation {
   private List<PricedRoleRepresentation> roleSpecificUserPrices;
   private List<SteppedPriceRepresentation> steppedPrices;
   private List<PricedEventRepresentation> consideredEvents;
-
   public PriceModelRepresentation() {
     this(new VOPriceModel());
   }
@@ -165,5 +165,9 @@ public class PriceModelRepresentation extends Representation {
 
   public void setConsideredEvents(List<PricedEventRepresentation> consideredEvents) {
     this.consideredEvents = consideredEvents;
+  }
+
+  public VOPriceModel getVO() {
+    return vo;
   }
 }

@@ -22,11 +22,11 @@ public class EventDefinitionRepresentationTest {
         assertThat(result).isNotNull();
         assertThat(result)
                 .extracting(VOEventDefinition::getEventDescription)
-                .isEqualTo(result.getEventDescription());
-        assertThat(result).extracting(VOEventDefinition::getEventId).isEqualTo(result.getEventId());
-        assertThat(result).extracting(VOEventDefinition::getEventType).isEqualTo(result.getEventType());
-        assertThat(result).extracting(BaseVO::getKey).isEqualTo(result.getKey());
-        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(result.getVersion());
+                .isEqualTo(eventDefinitionRepresentation.getEventDescription());
+        assertThat(result).extracting(VOEventDefinition::getEventId).isEqualTo(eventDefinitionRepresentation.getEventId());
+        assertThat(result).extracting(VOEventDefinition::getEventType).isEqualTo(eventDefinitionRepresentation.getEventType());
+        assertThat(result).extracting(BaseVO::getKey).isEqualTo(eventDefinitionRepresentation.convertIdToKey());
+        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(eventDefinitionRepresentation.convertETagToVersion());
     }
 
     @Test
@@ -39,11 +39,11 @@ public class EventDefinitionRepresentationTest {
         assertThat(result).isNotNull();
         assertThat(result)
                 .extracting(VOEventDefinition::getEventDescription)
-                .isEqualTo(result.getEventDescription());
-        assertThat(result).extracting(VOEventDefinition::getEventId).isEqualTo(result.getEventId());
-        assertThat(result).extracting(VOEventDefinition::getEventType).isEqualTo(result.getEventType());
-        assertThat(result).extracting(BaseVO::getKey).isEqualTo(result.getKey());
-        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(result.getVersion());
+                .isEqualTo(eventDefinitionRepresentation.getEventDescription());
+        assertThat(result).extracting(VOEventDefinition::getEventId).isEqualTo(eventDefinitionRepresentation.getEventId());
+        assertThat(result).extracting(VOEventDefinition::getEventType).isEqualTo(eventDefinitionRepresentation.getEventType());
+        assertThat(result).extracting(BaseVO::getKey).isEqualTo(eventDefinitionRepresentation.convertIdToKey());
+        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(eventDefinitionRepresentation.convertETagToVersion());
     }
 
     @Test

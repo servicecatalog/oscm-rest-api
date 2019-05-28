@@ -1,4 +1,4 @@
-package org.oscm.rest.subscription.data;
+package org.oscm.rest.service.data;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.PriceModelType;
