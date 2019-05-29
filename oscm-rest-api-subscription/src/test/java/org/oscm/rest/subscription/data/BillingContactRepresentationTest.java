@@ -32,7 +32,7 @@ class BillingContactRepresentationTest {
 
         assertThat(result).isNotNull();
         assertThat(result).extracting(BaseVO::getKey).isEqualTo(billingContactRepresentation.convertIdToKey());
-        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(billingContactRepresentation.getVersion());
+        assertThat(result).extracting(BaseVO::getVersion).isEqualTo(billingContactRepresentation.convertETagToVersion());
     }
 
     @Test
