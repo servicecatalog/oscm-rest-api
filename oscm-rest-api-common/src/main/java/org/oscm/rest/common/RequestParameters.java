@@ -57,6 +57,10 @@ public class RequestParameters {
     return etag;
   }
 
+  public void setEtag(Long etag) {
+    this.etag = etag;
+  }
+
   /**
    * Validates the id string if it matches basic UUID format. Throws NotFoundException if not valid.
    *
