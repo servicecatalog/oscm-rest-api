@@ -18,7 +18,7 @@ class MarketplaceResourceConfigTest {
 
         Set<Class<?>> classes = resourceConfig.getClasses();
 
-        assertThat(classes.size()).isEqualTo(4);
+        assertThat(classes.size()).isEqualTo(5);
         assertThat(classes.contains(EntryResource.class)).isEqualTo(true);
         assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
         assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
