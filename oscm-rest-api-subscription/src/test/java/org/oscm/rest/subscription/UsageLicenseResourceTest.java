@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UsageLicenseResourceTest {
+public class UsageLicenseResourceTest {
 
     @Mock
     private UsageLicenseBackend usageLicenseBackend;

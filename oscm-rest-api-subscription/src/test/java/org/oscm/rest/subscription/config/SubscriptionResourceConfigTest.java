@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SubscriptionResourceConfigTest {
+public class SubscriptionResourceConfigTest {
 
     @Test
     public void shouldGetClasses() {

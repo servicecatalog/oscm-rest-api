@@ -7,7 +7,7 @@ import org.oscm.rest.common.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BillingContactRepresentationTest {
+public class BillingContactRepresentationTest {
 
     @Test
     public void shouldUpdateVOBillingContact() {

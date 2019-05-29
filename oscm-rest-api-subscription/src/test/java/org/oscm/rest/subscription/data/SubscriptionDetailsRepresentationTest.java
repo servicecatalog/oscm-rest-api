@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SubscriptionDetailsRepresentationTest {
+public class SubscriptionDetailsRepresentationTest {
 
     @Test
     public void shouldConvertToVOSubscriptionDetails() {

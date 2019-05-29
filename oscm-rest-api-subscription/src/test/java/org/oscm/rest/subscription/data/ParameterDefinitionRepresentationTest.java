@@ -7,7 +7,7 @@ import org.oscm.rest.common.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ParameterDefinitionRepresentationTest {
+public class ParameterDefinitionRepresentationTest {
 
     @Test
     public void shouldUpdateVOParameterDefinition() {

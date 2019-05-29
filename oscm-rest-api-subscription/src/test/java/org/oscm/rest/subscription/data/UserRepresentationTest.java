@@ -7,7 +7,7 @@ import org.oscm.rest.common.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserRepresentationTest {
+public class UserRepresentationTest {
 
     @Test
     public void shouldUpdateVOUser() {

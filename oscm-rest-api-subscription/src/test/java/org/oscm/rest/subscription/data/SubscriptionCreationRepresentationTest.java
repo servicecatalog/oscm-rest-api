@@ -6,7 +6,7 @@ import org.oscm.internal.vo.VOSubscription;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SubscriptionCreationRepresentationTest {
+public class SubscriptionCreationRepresentationTest {
 
     @Test
     public void shouldUpdateVOSubscription() {

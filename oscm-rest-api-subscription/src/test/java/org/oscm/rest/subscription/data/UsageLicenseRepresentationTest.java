@@ -7,7 +7,7 @@ import org.oscm.internal.vo.VOUser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UsageLicenseRepresentationTest {
+public class UsageLicenseRepresentationTest {
 
     @Test
     public void shouldUpdateVOUsageLicense() {

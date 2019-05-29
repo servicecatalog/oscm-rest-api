@@ -8,7 +8,7 @@ import org.oscm.rest.common.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SubscriptionRepresentationTest {
+public class SubscriptionRepresentationTest {
 
     @Test
     public void shouldUpdateVOSubscription() {
