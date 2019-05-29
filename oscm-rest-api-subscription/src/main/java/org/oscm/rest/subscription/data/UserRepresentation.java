@@ -52,4 +52,8 @@ public class UserRepresentation extends Representation {
   public void setUserId(String userId) {
     this.userId = userId;
   }
+
+  public VOUser getVO() {
+    return vo;
+  }
 }
