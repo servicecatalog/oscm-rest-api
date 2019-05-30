@@ -22,6 +22,8 @@ public class CategoryRepresentation extends Representation {
 
   private String categoryId;
 
+  private String marketplaceId;
+
   public CategoryRepresentation() {
     this(new VOCategory());
   }
@@ -38,6 +40,7 @@ public class CategoryRepresentation extends Representation {
     vo.setCategoryId(getCategoryId());
     vo.setKey(convertIdToKey());
     vo.setVersion(convertETagToVersion());
+    vo.setMarketplaceId(getMarketplaceId());
   }
 
   @Override
@@ -45,6 +48,7 @@ public class CategoryRepresentation extends Representation {
     setCategoryId(vo.getCategoryId());
     setETag(Long.valueOf(vo.getVersion()));
     setId(Long.valueOf(vo.getKey()));
+    setMarketplaceId(vo.getMarketplaceId());
   }
 
   public String getCategoryId() {
@@ -57,6 +61,14 @@ public class CategoryRepresentation extends Representation {
 
   public VOCategory getVO() {
     return vo;
+  }
+
+  public String getMarketplaceId() {
+    return marketplaceId;
+  }
+
+  public void setMarketplaceId(String marketplaceId) {
+    this.marketplaceId = marketplaceId;
   }
 
   public static List<VOCategory> update(List<CategoryRepresentation> cats) {

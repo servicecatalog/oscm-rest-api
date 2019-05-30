@@ -24,6 +24,7 @@ public class SubscriptionRepresentation extends Representation {
   private transient VOSubscription vo;
 
   private Long activationDate;
+
   private Long creationDate;
   private Long deactivationDate;
   private SubscriptionStatus status;
@@ -31,7 +32,6 @@ public class SubscriptionRepresentation extends Representation {
   private Long unitKey;
   private String unitName;
   private UsageLicenseRepresentation usageLicense;
-
   public SubscriptionRepresentation() {
     this(new VOSubscription());
   }
@@ -150,5 +150,9 @@ public class SubscriptionRepresentation extends Representation {
 
   public void setUsageLicense(UsageLicenseRepresentation usageLicense) {
     this.usageLicense = usageLicense;
+  }
+
+  public VOSubscription getVO() {
+    return vo;
   }
 }
