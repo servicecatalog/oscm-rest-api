@@ -85,6 +85,10 @@ public class SubscriptionCreationRepresentation extends Representation {
     return result;
   }
 
+  public List<UdaRepresentation> getUdaRepresentations() {
+    return this.udas;
+  }
+
   public VOBillingContact getBillingContact() {
     if (billingContactKey == null) {
       return null;

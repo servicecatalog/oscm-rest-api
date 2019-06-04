@@ -20,6 +20,7 @@ import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
 import org.oscm.rest.subscription.data.SubscriptionDetailsRepresentation;
 import org.oscm.rest.subscription.data.SubscriptionRepresentation;
+import org.oscm.rest.subscription.data.UdaRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -60,6 +61,9 @@ public class SubscriptionBackend {
 
   public RestBackend.Post<SubscriptionCreationRepresentation, SubscriptionParameters> post() {
     return (content, params) -> {
+      content.getService().update();
+      content.getUdaRepresentations().forEach(UdaRepresentation::update);
+
       VOSubscription sub =
           ss.subscribeToService(
               content.getVO(),
