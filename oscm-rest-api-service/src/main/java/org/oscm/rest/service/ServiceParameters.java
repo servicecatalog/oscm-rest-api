@@ -26,6 +26,9 @@ public class ServiceParameters extends RequestParameters {
   public void validateParameters() throws WebApplicationException {}
 
   @Override
+  public void validateETag() throws WebApplicationException {}
+
+  @Override
   public void update() {}
 
   public Long getOrgKey() {
