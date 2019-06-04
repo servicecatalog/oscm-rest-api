@@ -19,37 +19,16 @@
         </auth-constraint>
     </security-constraint>
 
-
-    <security-role>
-        <role-name>ORGANIZATION_ADMIN</role-name>
-    </security-role>
     <security-role>
         <role-name>PLATFORM_OPERATOR</role-name>
     </security-role>
     <security-role>
-        <role-name>UNIT_ADMINISTRATOR</role-name>
+        <role-name>ORGANIZATION_ADMIN</role-name>
     </security-role>
     <security-role>
         <role-name>SUBSCRIPTION_MANAGER</role-name>
     </security-role>
     <security-role>
-        <role-name>SERVICE_MANAGER</role-name>
+        <role-name>UNIT_ADMINISTRATOR</role-name>
     </security-role>
-    <security-role>
-        <role-name>TECHNOLOGY_MANAGER</role-name>
-    </security-role>
-    <!---->
-    <!--<security-role>-->
-        <!--<role-name>PLATFORM_OPERATOR</role-name>-->
-    <!--</security-role>-->
-    <!--<security-role>-->
-        <!--<role-name>ORGANIZATION_ADMIN</role-name>-->
-    <!--</security-role>-->
-    <!--<security-role>-->
-        <!--<role-name>SUBSCRIPTION_MANAGER</role-name>-->
-    <!--</security-role>-->
-    <!--<security-role>-->
-        <!--<role-name>UNIT_ADMINISTRATOR</role-name>-->
-    <!--</security-role>-->
-
 </web-app>

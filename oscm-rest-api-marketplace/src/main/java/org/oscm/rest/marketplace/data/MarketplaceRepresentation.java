@@ -57,7 +57,6 @@ public class MarketplaceRepresentation extends Representation {
     vo.setOwningOrganizationName(getOwningOrganizationName());
     vo.setRestricted(isRestricted());
     vo.setReviewEnabled(isReviewEnabled());
-    vo.setSocialBookmarkEnabled(isSocialBookmarkEnabled());
     vo.setTaggingEnabled(isTaggingEnabled());
     vo.setTenantId(getTenantId());
     vo.setVersion(convertETagToVersion());
@@ -76,7 +75,6 @@ public class MarketplaceRepresentation extends Representation {
     setOwningOrganizationName(vo.getOwningOrganizationName());
     setRestricted(vo.isRestricted());
     setReviewEnabled(vo.isReviewEnabled());
-    setSocialBookmarkEnabled(vo.isSocialBookmarkEnabled());
     setTaggingEnabled(vo.isTaggingEnabled());
     setTenantId(vo.getTenantId());
   }
