@@ -10,6 +10,7 @@
 package org.oscm.rest.event;
 
 import org.oscm.internal.intf.EventService;
+import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.event.data.EventRepresentation;
 
@@ -29,7 +30,7 @@ public class EventBackend {
         es.recordEventForInstance(
             content.getTechnicalServiceId(), content.getInstanceId(), content.getVO());
       }
-      return null;
+      return CommonParams.DUMMY_ID;
     };
   }
 }

@@ -57,5 +57,8 @@ public class CommonParams {
   public static final String ERROR_MANDATORY_PROPERTIES =
       "One or more mandatory properties are missing";
 
+  // general purpose constants
+  public static final String DUMMY_ID = "DummyIdentifier";
+
   private CommonParams() {}
 }
