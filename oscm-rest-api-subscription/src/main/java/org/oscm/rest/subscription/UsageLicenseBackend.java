@@ -28,6 +28,8 @@ public class UsageLicenseBackend {
 
   public RestBackend.Post<UsageLicenseRepresentation, SubscriptionParameters> post() {
     return (content, params) -> {
+      content.update();
+
       VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
       boolean added =
           ss.addRevokeUser(
@@ -59,6 +61,8 @@ public class UsageLicenseBackend {
 
   public RestBackend.Put<UsageLicenseRepresentation, SubscriptionParameters> put() {
     return (content, params) -> {
+      content.update();
+
       VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
       VOUsageLicense vo = content.getVO();
       vo.setKey(params.getLicKey().longValue());
