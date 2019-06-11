@@ -81,6 +81,9 @@ public class SubscriptionBackend {
 
   public RestBackend.Put<SubscriptionCreationRepresentation, SubscriptionParameters> put() {
     return (content, params) -> {
+      content.getService().update();
+      content.getUdaRepresentations().forEach(UdaRepresentation::update);
+
       VOSubscription result =
           ss.modifySubscription(
               content.getVO(), content.getVOService().getParameters(), content.getUdas());
