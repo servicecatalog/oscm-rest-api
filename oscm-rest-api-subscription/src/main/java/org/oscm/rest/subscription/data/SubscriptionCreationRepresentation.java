@@ -50,7 +50,7 @@ public class SubscriptionCreationRepresentation extends Representation {
       vo.setUnitKey(getUnitKey().longValue());
     }
     vo.setUnitName(getUnitName());
-    vo.setKey(getId());
+    vo.setKey(convertIdToKey());
   }
 
   @Override
