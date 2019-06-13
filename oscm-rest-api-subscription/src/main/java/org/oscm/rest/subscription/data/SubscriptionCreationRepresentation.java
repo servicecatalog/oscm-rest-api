@@ -51,6 +51,7 @@ public class SubscriptionCreationRepresentation extends Representation {
     }
     vo.setUnitName(getUnitName());
     vo.setKey(convertIdToKey());
+    vo.setVersion(convertETagToVersion());
   }
 
   @Override
