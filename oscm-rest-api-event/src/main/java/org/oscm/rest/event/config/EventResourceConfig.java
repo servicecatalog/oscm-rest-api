@@ -32,9 +32,7 @@ public class EventResourceConfig extends Application {
     final Set<Class<?>> classes = new HashSet<Class<?>>();
 
     classes.add(EventResource.class);
-
     classes.add(GsonMessageProvider.class);
-
     classes.add(OSCMExceptionMapper.class);
     classes.add(VersionFilter.class);
 

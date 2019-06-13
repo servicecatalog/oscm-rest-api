@@ -27,7 +27,7 @@ public class ServiceResourceConfigTest {
 
     Set<Class<?>> classes = resourceConfig.getClasses();
 
-    assertThat(classes.size()).isEqualTo(8);
+    assertThat(classes.size()).isEqualTo(9);
     assertThat(classes.contains(CompatibleServiceResource.class)).isEqualTo(true);
     assertThat(classes.contains(PriceModelResource.class)).isEqualTo(true);
     assertThat(classes.contains(ServiceImageResource.class)).isEqualTo(true);

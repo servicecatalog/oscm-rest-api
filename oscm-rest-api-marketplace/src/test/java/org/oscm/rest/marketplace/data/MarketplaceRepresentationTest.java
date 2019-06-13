@@ -47,9 +47,6 @@ class MarketplaceRepresentationTest {
                 .extracting(VOMarketplace::isReviewEnabled)
                 .isEqualTo(representation.isReviewEnabled());
         assertThat(result)
-                .extracting(VOMarketplace::isSocialBookmarkEnabled)
-                .isEqualTo(representation.isSocialBookmarkEnabled());
-        assertThat(result)
                 .extracting(VOMarketplace::isTaggingEnabled)
                 .isEqualTo(representation.isTaggingEnabled());
         assertThat(result)
@@ -93,9 +90,6 @@ class MarketplaceRepresentationTest {
         assertThat(result)
                 .extracting(VOMarketplace::isReviewEnabled)
                 .isEqualTo(representation.isReviewEnabled());
-        assertThat(result)
-                .extracting(VOMarketplace::isSocialBookmarkEnabled)
-                .isEqualTo(representation.isSocialBookmarkEnabled());
         assertThat(result)
                 .extracting(VOMarketplace::isTaggingEnabled)
                 .isEqualTo(representation.isTaggingEnabled());
@@ -145,9 +139,6 @@ class MarketplaceRepresentationTest {
                 .extracting(MarketplaceRepresentation::isReviewEnabled)
                 .isEqualTo(voMarketplace.isReviewEnabled());
         assertThat(representation)
-                .extracting(MarketplaceRepresentation::isSocialBookmarkEnabled)
-                .isEqualTo(voMarketplace.isSocialBookmarkEnabled());
-        assertThat(representation)
                 .extracting(MarketplaceRepresentation::isTaggingEnabled)
                 .isEqualTo(voMarketplace.isTaggingEnabled());
         assertThat(representation)
@@ -185,7 +176,6 @@ class MarketplaceRepresentationTest {
         voMarketplace.setOwningOrganizationName("OwnerName100");
         voMarketplace.setRestricted(true);
         voMarketplace.setReviewEnabled(true);
-        voMarketplace.setSocialBookmarkEnabled(true);
         voMarketplace.setTaggingEnabled(true);
         voMarketplace.setTenantId("Tenant100");
         return voMarketplace;

@@ -31,7 +31,7 @@
         <jacoco.maven.plugin.version>0.8.3</jacoco.maven.plugin.version>
         <mockito.junit.version>2.26.0</mockito.junit.version>
 
-        <oscm.intf.internal.version>1.4.3</oscm.intf.internal.version>
+        <oscm.intf.internal.version>master-SNAPSHOT</oscm.intf.internal.version>
     </properties>
 
     <modules>

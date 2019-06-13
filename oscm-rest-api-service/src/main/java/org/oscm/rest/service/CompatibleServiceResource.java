@@ -46,6 +46,7 @@ public class CompatibleServiceResource extends RestResource {
       @BeanParam ServiceParameters params)
       throws Exception {
 
+    params.setEtag(content.getETag());
     return put(uriInfo, sb.putCompatibles(), content, params);
   }
 }

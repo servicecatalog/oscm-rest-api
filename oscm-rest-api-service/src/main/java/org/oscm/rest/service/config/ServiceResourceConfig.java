@@ -34,6 +34,7 @@ public class ServiceResourceConfig extends Application {
     classes.add(CompatibleServiceResource.class);
     classes.add(PriceModelResource.class);
     classes.add(ServiceImageResource.class);
+    classes.add(ServiceResource.class);
     classes.add(TechnicalServiceResource.class);
     classes.add(TSSupplierResource.class);
     classes.add(OSCMExceptionMapper.class);
