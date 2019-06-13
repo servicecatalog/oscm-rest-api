@@ -9,6 +9,7 @@
  */
 package org.oscm.rest.subscription;
 
+import com.google.common.collect.Lists;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
@@ -24,7 +25,9 @@ import org.oscm.rest.subscription.data.UdaRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class SubscriptionBackend {
@@ -44,7 +47,18 @@ public class SubscriptionBackend {
       } else {
         subs = ssi.getSubscriptionsForOrganization(PerformanceHint.ONLY_FIELDS_FOR_LISTINGS);
       }
-      return SubscriptionRepresentation.toCollection(subs);
+
+      Collection<SubscriptionRepresentation> subscriptionRepresentations =
+              Lists.newArrayList(subs
+                      .stream()
+                      .map(s -> {
+                        return new SubscriptionRepresentation(s);
+                        })
+                      .collect(Collectors.toList()));
+
+      RepresentationCollection<SubscriptionRepresentation> list =
+              new RepresentationCollection<>(subscriptionRepresentations);
+      return list;
     };
   }
 
