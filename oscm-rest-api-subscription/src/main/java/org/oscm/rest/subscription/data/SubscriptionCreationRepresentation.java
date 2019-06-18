@@ -50,6 +50,8 @@ public class SubscriptionCreationRepresentation extends Representation {
       vo.setUnitKey(getUnitKey().longValue());
     }
     vo.setUnitName(getUnitName());
+    vo.setKey(convertIdToKey());
+    vo.setVersion(convertETagToVersion());
   }
 
   @Override
@@ -83,6 +85,10 @@ public class SubscriptionCreationRepresentation extends Representation {
       result.add(uda.getVO());
     }
     return result;
+  }
+
+  public List<UdaRepresentation> getUdaRepresentations() {
+    return this.udas;
   }
 
   public VOBillingContact getBillingContact() {

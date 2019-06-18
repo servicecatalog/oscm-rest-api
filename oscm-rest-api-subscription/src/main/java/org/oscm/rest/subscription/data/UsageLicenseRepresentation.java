@@ -38,11 +38,13 @@ public class UsageLicenseRepresentation extends Representation {
   public void update() {
     if (role != null) {
       role.update();
+      vo.setKey(role.convertIdToKey());
       vo.setRoleDefinition(role.getVO());
     }
     if (user != null) {
       user.update();
-      vo.setUser(vo.getUser());
+      vo.setKey(user.convertIdToKey());
+      vo.setUser(user.getVO());
     }
   }
 
