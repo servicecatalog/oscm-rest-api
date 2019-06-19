@@ -16,6 +16,7 @@
 
         <maven.complier.plugin.version>3.6.2</maven.complier.plugin.version>
         <maven.war.plugin.version>3.2.0</maven.war.plugin.version>
+        <maven.cargo.plugin.version>1.7.4</maven.cargo.plugin.version>
 
         <javaee.version>7.0</javaee.version>
         <jersey.common.version>2.28</jersey.common.version>
@@ -43,6 +44,7 @@
         <module>oscm-rest-api-service</module>
         <module>oscm-rest-api-subscription</module>
         <module>oscm-rest-api-common</module>
+        <module>oscm-rest-api-uberwar</module>
     </modules>
 
     <build>
@@ -52,18 +54,23 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.complier.plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
         </plugins>
 
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven.complier.plugin.version}</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>${maven.cargo.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

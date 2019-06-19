@@ -11,6 +11,7 @@ package org.oscm.rest.event.config;
 
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
+import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.event.EventResource;
 
@@ -20,15 +21,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Registers resources and providers of the event component to the application.
+ * Lists out resources and providers of the event component that will be registered to the application.
  *
  * @author Weiser
  */
-@ApplicationPath("")
-public class EventResourceConfig extends Application {
+public class EventResourceConfig implements ResourceConfiguration {
 
   @Override
-  public Set<Class<?>> getClasses() {
+  public Set<Class<?>> getClassesToRegister() {
     final Set<Class<?>> classes = new HashSet<Class<?>>();
 
     classes.add(EventResource.class);
