@@ -14,17 +14,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MarketplaceResourceConfigTest {
 
     @Test
-    @Disabled("Not implemented")
     public void shouldGetClasses() {
         MarketplaceResourceConfig resourceConfig = new MarketplaceResourceConfig();
-//
-//        Set<Class<?>> classes = resourceConfig.getClasses();
-//
-//        assertThat(classes.size()).isEqualTo(5);
-//        assertThat(classes.contains(EntryResource.class)).isEqualTo(true);
-//        assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
-//        assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
-//        assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
+
+        Set<Class<?>> classes = resourceConfig.getClassesToRegister();
+
+        assertThat(classes.size()).isEqualTo(5);
+        assertThat(classes.contains(EntryResource.class)).isEqualTo(true);
+        assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
+        assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
+        assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
     }
 
 }

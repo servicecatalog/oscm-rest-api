@@ -23,20 +23,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ServiceResourceConfigTest {
 
   @Test
-  @Disabled("Not implemented")
   public void shouldGetClasses() {
     ServiceResourceConfig resourceConfig = new ServiceResourceConfig();
 
-//    Set<Class<?>> classes = resourceConfig.getClasses();
-//
-//    assertThat(classes.size()).isEqualTo(9);
-//    assertThat(classes.contains(CompatibleServiceResource.class)).isEqualTo(true);
-//    assertThat(classes.contains(PriceModelResource.class)).isEqualTo(true);
-//    assertThat(classes.contains(ServiceImageResource.class)).isEqualTo(true);
-//    assertThat(classes.contains(TechnicalServiceResource.class)).isEqualTo(true);
-//    assertThat(classes.contains(TSSupplierResource.class)).isEqualTo(true);
-//    assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
-//    assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
-//    assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
+    Set<Class<?>> classes = resourceConfig.getClassesToRegister();
+
+    assertThat(classes.size()).isEqualTo(9);
+    assertThat(classes.contains(CompatibleServiceResource.class)).isEqualTo(true);
+    assertThat(classes.contains(PriceModelResource.class)).isEqualTo(true);
+    assertThat(classes.contains(ServiceImageResource.class)).isEqualTo(true);
+    assertThat(classes.contains(TechnicalServiceResource.class)).isEqualTo(true);
+    assertThat(classes.contains(TSSupplierResource.class)).isEqualTo(true);
+    assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
+    assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
+    assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
   }
 }

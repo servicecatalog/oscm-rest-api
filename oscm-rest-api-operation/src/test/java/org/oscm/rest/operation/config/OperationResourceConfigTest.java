@@ -23,16 +23,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class OperationResourceConfigTest {
 
   @Test
-  @Disabled("Not implemented")
   public void shouldGetClasses() {
     OperationResourceConfig resourceConfig = new OperationResourceConfig();
 
-//    Set<Class<?>> classes = resourceConfig.getClasses();
-//
-//    assertThat(classes.size()).isEqualTo(4);
-//    assertThat(classes.contains(SettingsResource.class)).isEqualTo(true);
-//    assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
-//    assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
-//    assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
+    Set<Class<?>> classes = resourceConfig.getClassesToRegister();
+
+    assertThat(classes.size()).isEqualTo(4);
+    assertThat(classes.contains(SettingsResource.class)).isEqualTo(true);
+    assertThat(classes.contains(OSCMExceptionMapper.class)).isEqualTo(true);
+    assertThat(classes.contains(GsonMessageProvider.class)).isEqualTo(true);
+    assertThat(classes.contains(VersionFilter.class)).isEqualTo(true);
   }
 }
