@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.config;
 
-import com.google.common.collect.Sets;
 import org.oscm.rest.account.config.AccountResourceConfig;
 import org.oscm.rest.event.config.EventResourceConfig;
 import org.oscm.rest.identity.config.IdentityResourceConfig;

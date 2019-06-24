@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VOPriceModel;
-import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.rest.common.RepresentationCollection;

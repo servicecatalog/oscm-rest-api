@@ -17,7 +17,6 @@ import org.oscm.rest.subscription.SubscriptionResource;
 import org.oscm.rest.subscription.UsageLicenseResource;
 
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 

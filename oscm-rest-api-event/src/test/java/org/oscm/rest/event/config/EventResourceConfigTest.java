@@ -1,6 +1,5 @@
 package org.oscm.rest.event.config;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;

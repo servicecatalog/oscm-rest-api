@@ -18,8 +18,6 @@ import org.oscm.rest.identity.OnBehalfUserResource;
 import org.oscm.rest.identity.RolesResource;
 import org.oscm.rest.identity.UserResource;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 

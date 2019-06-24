@@ -16,9 +16,6 @@ import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.marketplace.EntryResource;
 import org.oscm.rest.marketplace.MarketplaceResource;
 
-import javax.annotation.Resource;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 

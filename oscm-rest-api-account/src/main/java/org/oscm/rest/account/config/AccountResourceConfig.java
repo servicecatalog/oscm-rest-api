@@ -17,8 +17,6 @@ import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 

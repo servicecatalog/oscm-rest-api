@@ -11,7 +11,6 @@ import org.oscm.rest.service.config.ServiceResourceConfig;
 import org.oscm.rest.subscription.config.SubscriptionResourceConfig;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class GlobalResourceConfigTest {
 

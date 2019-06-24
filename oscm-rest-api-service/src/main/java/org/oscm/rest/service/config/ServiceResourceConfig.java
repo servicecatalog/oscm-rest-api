@@ -15,8 +15,6 @@ import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.service.*;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
