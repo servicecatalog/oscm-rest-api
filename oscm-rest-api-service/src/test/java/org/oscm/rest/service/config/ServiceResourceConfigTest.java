@@ -25,7 +25,7 @@ public class ServiceResourceConfigTest {
   public void shouldGetClasses() {
     ServiceResourceConfig resourceConfig = new ServiceResourceConfig();
 
-    Set<Class<?>> classes = resourceConfig.getClasses();
+    Set<Class<?>> classes = resourceConfig.getClassesToRegister();
 
     assertThat(classes.size()).isEqualTo(9);
     assertThat(classes.contains(CompatibleServiceResource.class)).isEqualTo(true);

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<uberwar>
+    <wars>
+        <war>org.oscm.rest:oscm-rest-api-account</war>
+        <war>org.oscm.rest:oscm-rest-api-event</war>
+        <war>org.oscm.rest:oscm-rest-api-identity</war>
+        <war>org.oscm.rest:oscm-rest-api-marketplace</war>
+        <war>org.oscm.rest:oscm-rest-api-operation</war>
+        <war>org.oscm.rest:oscm-rest-api-service</war>
+        <war>org.oscm.rest:oscm-rest-api-subscription</war>
+    </wars>
+
+    <merges>
+        <merge>
+            <type>web.xml</type>
+            <parameters>
+                <default>
+                    <tag name="login-config">
+                        <strategy name="Preserve"/>
+                    </tag>
+                    <tag name="security-constraint">
+                        <strategy name="Preserve"/>
+                    </tag>
+                    <tag name="security-role">
+                        <strategy name="Preserve"/>
+                    </tag>
+                </default>
+            </parameters>
+        </merge>
+    </merges>
+</uberwar>
