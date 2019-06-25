@@ -25,7 +25,7 @@ class OperationResourceConfigTest {
   public void shouldGetClasses() {
     OperationResourceConfig resourceConfig = new OperationResourceConfig();
 
-    Set<Class<?>> classes = resourceConfig.getClasses();
+    Set<Class<?>> classes = resourceConfig.getClassesToRegister();
 
     assertThat(classes.size()).isEqualTo(4);
     assertThat(classes.contains(SettingsResource.class)).isEqualTo(true);

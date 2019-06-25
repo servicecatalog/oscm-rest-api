@@ -9,28 +9,31 @@
  */
 package org.oscm.rest.account.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import org.oscm.rest.account.BillingContactResource;
 import org.oscm.rest.account.OrganizationResource;
 import org.oscm.rest.account.PaymentInfoResource;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
+import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Registers resources and providers of the account component to the application.
+ * Lists out resources and providers of the account component that will be registered to the application.
  *
  * @author Weiser
  */
-@ApplicationPath("")
-public class AccountResourceConfig extends Application {
+
+public class AccountResourceConfig extends ResourceConfiguration {
 
   @Override
-  public Set<Class<?>> getClasses() {
+  public Set<Class<?>> getClassesToRegister() {
     final Set<Class<?>> classes = new HashSet<Class<?>>();
 
     classes.add(OrganizationResource.class);

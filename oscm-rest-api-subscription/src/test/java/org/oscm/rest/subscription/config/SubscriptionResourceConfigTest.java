@@ -17,7 +17,7 @@ public class SubscriptionResourceConfigTest {
     public void shouldGetClasses() {
         SubscriptionResourceConfig resourceConfig = new SubscriptionResourceConfig();
 
-        Set<Class<?>> classes = resourceConfig.getClasses();
+        Set<Class<?>> classes = resourceConfig.getClassesToRegister();
 
         assertThat(classes.size()).isEqualTo(5);
         assertThat(classes.contains(SubscriptionResource.class)).isEqualTo(true);
