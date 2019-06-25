@@ -16,7 +16,7 @@ public class EventResourceConfigTest {
     public void shouldGetClasses() {
         EventResourceConfig resourceConfig = new EventResourceConfig();
 
-        Set<Class<?>> classes = resourceConfig.getClasses();
+        Set<Class<?>> classes = resourceConfig.getClassesToRegister();
 
         assertThat(classes.size()).isEqualTo(4);
         assertThat(classes.contains(EventResource.class)).isEqualTo(true);
