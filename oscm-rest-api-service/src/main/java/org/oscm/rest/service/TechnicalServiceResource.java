@@ -10,6 +10,8 @@
 package org.oscm.rest.service;
 
 import com.google.common.base.Strings;
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.CommonParams;
@@ -31,7 +33,7 @@ import java.util.Collections;
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 
-  @EJB TechnicalServiceBackend tsb;
+  @EJB @Setter(value = AccessLevel.PROTECTED) TechnicalServiceBackend tsb;
 
   @EJB ServiceProvisioningService sps;
 
