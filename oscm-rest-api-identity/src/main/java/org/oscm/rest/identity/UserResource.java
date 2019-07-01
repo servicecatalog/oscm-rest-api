@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.identity;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -28,7 +30,7 @@ public class UserResource extends RestResource {
 
   private static final String PATH_USERID = "/{userId}";
 
-  @EJB UserBackend ub;
+  @EJB @Setter(value = AccessLevel.PROTECTED) UserBackend ub;
 
   @Since(CommonParams.VERSION_1)
   @GET
