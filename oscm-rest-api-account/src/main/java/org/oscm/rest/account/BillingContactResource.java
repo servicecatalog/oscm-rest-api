@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.account;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.account.data.BillingContactRepresentation;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -26,7 +28,7 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class BillingContactResource extends RestResource {
 
-  @EJB AccountBackend ab;
+  @EJB @Setter(value = AccessLevel.PROTECTED) AccountBackend ab;
 
   @Since(CommonParams.VERSION_1)
   @GET
