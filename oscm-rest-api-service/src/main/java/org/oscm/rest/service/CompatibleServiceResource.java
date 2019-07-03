@@ -29,7 +29,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class CompatibleServiceResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) ServiceBackend sb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  ServiceBackend sb;
 
   @Since(CommonParams.VERSION_1)
   @GET
