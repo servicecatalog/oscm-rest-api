@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.marketplace;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -26,7 +28,7 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class MarketplaceResource extends RestResource {
 
-  @EJB MarketplaceBackend mb;
+  @EJB @Setter(value = AccessLevel.PROTECTED) MarketplaceBackend mb;
 
   @Since(CommonParams.VERSION_1)
   @GET
