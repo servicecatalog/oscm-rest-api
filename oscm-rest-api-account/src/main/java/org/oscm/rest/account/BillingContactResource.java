@@ -28,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class BillingContactResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) AccountBackend ab;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  AccountBackend ab;
 
   @Since(CommonParams.VERSION_1)
   @GET
@@ -67,7 +69,7 @@ public class BillingContactResource extends RestResource {
       BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
-    //FIXME: Move investigate why the same command doesn't work from RestResource#128
+    // FIXME: Move investigate why the same command doesn't work from RestResource#128
     content.setId(params.getId());
     return put(uriInfo, ab.putBillingContact(), content, params);
   }

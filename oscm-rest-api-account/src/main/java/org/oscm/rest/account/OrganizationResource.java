@@ -28,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class OrganizationResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) AccountBackend ab;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  AccountBackend ab;
 
   @Since(CommonParams.VERSION_1)
   @POST
