@@ -28,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class EntryResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) EntryBackend eb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  EntryBackend eb;
 
   @Since(CommonParams.VERSION_1)
   @PUT

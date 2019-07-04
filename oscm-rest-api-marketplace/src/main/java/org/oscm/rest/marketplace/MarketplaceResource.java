@@ -28,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class MarketplaceResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) MarketplaceBackend mb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  MarketplaceBackend mb;
 
   @Since(CommonParams.VERSION_1)
   @GET
