@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.service.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.rest.common.representation.Representation;

@@ -12,7 +12,8 @@ import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

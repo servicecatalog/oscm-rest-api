@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.service.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.EventType;
 import org.oscm.internal.vo.VOEventDefinition;

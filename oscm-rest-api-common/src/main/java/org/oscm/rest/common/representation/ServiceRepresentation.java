@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.service.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.OfferingType;
 import org.oscm.internal.types.enumtypes.ServiceAccessType;
@@ -15,8 +15,6 @@ import org.oscm.internal.types.enumtypes.ServiceStatus;
 import org.oscm.internal.types.enumtypes.ServiceType;
 import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOService;
-import org.oscm.rest.common.representation.Representation;
-import org.oscm.rest.common.representation.RepresentationCollection;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;

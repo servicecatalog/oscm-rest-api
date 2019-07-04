@@ -14,8 +14,9 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.service.data.ServiceDetailsRepresentation;
-import org.oscm.rest.service.data.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
+import org.oscm.rest.common.representation.StatusRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -14,7 +14,8 @@ import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.service.data.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

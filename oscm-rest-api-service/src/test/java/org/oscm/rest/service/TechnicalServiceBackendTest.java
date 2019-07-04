@@ -13,7 +13,8 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

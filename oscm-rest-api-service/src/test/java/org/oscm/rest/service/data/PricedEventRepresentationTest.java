@@ -14,7 +14,10 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOEventDefinition;
 import org.oscm.internal.vo.VOPricedEvent;
 import org.oscm.internal.vo.VOSteppedPrice;
+import org.oscm.rest.common.representation.EventDefinitionRepresentation;
+import org.oscm.rest.common.representation.PricedEventRepresentation;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.SteppedPriceRepresentation;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

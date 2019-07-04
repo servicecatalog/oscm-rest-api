@@ -7,8 +7,9 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.service.data;
+package org.oscm.rest.common.representation;
 
+import org.oscm.rest.common.ServiceStatus;
 import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;

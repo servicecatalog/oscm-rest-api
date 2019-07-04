@@ -22,9 +22,10 @@ import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.ServiceDetailsRepresentation;
-import org.oscm.rest.service.data.ServiceRepresentation;
-import org.oscm.rest.service.data.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.StatusRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

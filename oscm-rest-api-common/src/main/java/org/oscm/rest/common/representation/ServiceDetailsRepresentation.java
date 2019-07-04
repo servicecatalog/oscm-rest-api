@@ -7,9 +7,11 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.service.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOServiceDetails;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 
 public class ServiceDetailsRepresentation extends ServiceRepresentation {
 

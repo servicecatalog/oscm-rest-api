@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.OperationParameterType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOServiceOperationParameter;
+import org.oscm.rest.common.representation.OperationParameterRepresentation;
 import org.oscm.rest.common.representation.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -7,12 +7,12 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.service.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.VOPriceModel;
-import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.*;
 
 import javax.ws.rs.WebApplicationException;
 import java.math.BigDecimal;

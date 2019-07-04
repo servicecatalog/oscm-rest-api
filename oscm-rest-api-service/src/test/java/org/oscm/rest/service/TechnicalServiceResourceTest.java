@@ -22,8 +22,9 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.exception.*;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.ServiceRepresentation;
-import org.oscm.rest.service.data.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

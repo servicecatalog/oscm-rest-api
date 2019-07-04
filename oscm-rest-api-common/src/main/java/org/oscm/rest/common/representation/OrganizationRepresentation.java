@@ -10,9 +10,10 @@
 package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOOrganization;
-import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrganizationRepresentation extends Representation {
 
@@ -154,5 +155,18 @@ public class OrganizationRepresentation extends Representation {
 
   public VOOrganization getVO() {
     return voOrg;
+  }
+
+  public static RepresentationCollection<OrganizationRepresentation> toCollection(
+      List<VOOrganization> list) {
+    List<OrganizationRepresentation> representationList = new ArrayList<>();
+
+    for (VOOrganization organizationVO : list) {
+      OrganizationRepresentation representation = new OrganizationRepresentation(organizationVO);
+      representation.convert();
+      representationList.add(representation);
+    }
+
+    return new RepresentationCollection<>(representationList);
   }
 }

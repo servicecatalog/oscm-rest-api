@@ -14,6 +14,8 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOPricedOption;
 import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
+import org.oscm.rest.common.representation.PricedOptionRepresentation;
+import org.oscm.rest.common.representation.PricedRoleRepresentation;
 import org.oscm.rest.common.representation.Representation;
 
 import java.math.BigDecimal;
