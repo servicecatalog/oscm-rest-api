@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.event.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOGatheredEvent;
 import org.oscm.rest.common.representation.Representation;

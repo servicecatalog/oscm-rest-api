@@ -12,7 +12,8 @@ package org.oscm.rest.event;
 import org.oscm.internal.intf.EventService;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.event.data.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
+import org.oscm.rest.common.representation.EventRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

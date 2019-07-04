@@ -2,6 +2,7 @@ package org.oscm.rest.event.data;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOGatheredEvent;
+import org.oscm.rest.common.representation.EventRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

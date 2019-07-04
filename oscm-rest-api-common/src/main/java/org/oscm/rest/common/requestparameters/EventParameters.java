@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.event;
+package org.oscm.rest.common.requestparameters;
 
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.requestparameters.RequestParameters;
