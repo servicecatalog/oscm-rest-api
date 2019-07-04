@@ -11,6 +11,7 @@ package org.oscm.rest.identity.data;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOUserDetails;
+import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

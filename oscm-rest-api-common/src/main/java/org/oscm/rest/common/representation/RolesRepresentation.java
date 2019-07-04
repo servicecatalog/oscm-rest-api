@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.identity.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;

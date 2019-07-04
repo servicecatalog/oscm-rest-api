@@ -10,7 +10,8 @@
 package org.oscm.rest.identity;
 
 import org.oscm.rest.common.*;
-import org.oscm.rest.identity.data.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -14,9 +14,10 @@ import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
-import org.oscm.rest.identity.data.RolesRepresentation;
-import org.oscm.rest.identity.data.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
+import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
+import org.oscm.rest.common.representation.RolesRepresentation;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
