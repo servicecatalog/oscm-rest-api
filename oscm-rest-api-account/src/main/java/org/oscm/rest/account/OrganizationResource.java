@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.account;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.account.data.AccountRepresentation;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -26,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class OrganizationResource extends RestResource {
 
-  @EJB AccountBackend ab;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  AccountBackend ab;
 
   @Since(CommonParams.VERSION_1)
   @POST
