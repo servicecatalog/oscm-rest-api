@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOCatalogEntry;
 import org.oscm.internal.vo.VOCategory;
+import org.oscm.rest.common.representation.CategoryRepresentation;
+import org.oscm.rest.common.representation.EntryRepresentation;
 
 import java.util.ArrayList;
 import java.util.List;

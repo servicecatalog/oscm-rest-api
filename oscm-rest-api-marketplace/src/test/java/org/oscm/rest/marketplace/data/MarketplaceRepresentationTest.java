@@ -3,6 +3,7 @@ package org.oscm.rest.marketplace.data;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOMarketplace;
+import org.oscm.rest.common.representation.MarketplaceRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

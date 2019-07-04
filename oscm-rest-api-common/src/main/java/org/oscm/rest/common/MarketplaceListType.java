@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.marketplace;
+package org.oscm.rest.common;
 
 public enum MarketplaceListType {
   OWNED,

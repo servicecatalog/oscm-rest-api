@@ -7,9 +7,10 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.marketplace;
+package org.oscm.rest.common.requestparameters;
 
 import org.oscm.internal.vo.VOService;
+import org.oscm.rest.common.MarketplaceListType;
 import org.oscm.rest.common.requestparameters.RequestParameters;
 
 import javax.ws.rs.PathParam;
