@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.subscription;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -26,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class UsageLicenseResource extends RestResource {
 
-  @EJB UsageLicenseBackend ulb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  UsageLicenseBackend ulb;
 
   @Since(CommonParams.VERSION_1)
   @GET
