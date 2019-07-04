@@ -9,39 +9,138 @@
  */
 package org.oscm.rest.operation;
 
+import com.google.common.collect.Lists;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
+import org.oscm.internal.vo.VOConfigurationSetting;
+import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.operation.data.SettingRepresentation;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 public class SettingsBackendTest {
 
-  @Mock ConfigurationService cs;
+  @Mock private OperatorService operatorService;
+  @Mock private ConfigurationService configurationService;
+  @InjectMocks private SettingsBackend backend;
+  private SettingsResource resource;
 
-  @Mock OperatorService os;
+  private UriInfo uriInfo;
+  private OperationParameters parameters;
+  private SettingRepresentation representation;
+  private VOConfigurationSetting vo;
 
   @BeforeEach
-  public void setUp() {}
+  public void setUp() {
+    resource = new SettingsResource();
+    resource.setSb(backend);
+
+    uriInfo = SampleTestDataUtility.createUriInfo();
+    parameters = createParameters();
+    representation = createRepresentation();
+    vo = createVO();
+  }
 
   @Test
-  @Disabled("Not implemented")
-  public void delete() {}
+  @SneakyThrows
+  public void shouldGetSettings() {
+    when(operatorService.getConfigurationSettings()).thenReturn(Lists.newArrayList(vo));
+
+    Response response = resource.getSettings(uriInfo, parameters);
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat(response)
+        .extracting(
+            r -> {
+              return ((RepresentationCollection) r.getEntity()).getItems().size();
+            })
+        .isEqualTo(1);
+  }
 
   @Test
-  @Disabled("Not implemented")
-  public void post() {}
+  @SneakyThrows
+  public void shouldGetSettingById() {
+    when(operatorService.getConfigurationSetting(any())).thenReturn(vo);
+
+    Response response = resource.getSetting(uriInfo, parameters);
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
+  }
 
   @Test
-  @Disabled("Not implemented")
-  public void put() {}
+  @SneakyThrows
+  public void shouldCreateSetting() {
+    doNothing().when(operatorService).saveConfigurationSetting(any());
+    when(configurationService.getVOConfigurationSetting(any(), any())).thenReturn(vo);
+
+    Response response = resource.createSetting(uriInfo, representation, parameters);
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.CREATED.getStatusCode());
+  }
 
   @Test
-  @Disabled("Not implemented")
-  public void get() {}
+  @SneakyThrows
+  public void shouldUpdateSetting() {
+    doNothing().when(operatorService).saveConfigurationSetting(any());
+
+    Response response = resource.updateSetting(uriInfo, representation, parameters);
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+  }
 
   @Test
-  @Disabled("Not implemented")
-  public void getCollection() {}
+  @SneakyThrows
+  public void shouldDeleteSetting() {
+    doNothing().when(operatorService).deleteConfigurationSetting(any());
+
+    Response response = resource.deleteSetting(uriInfo, parameters);
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+  }
+
+  private OperationParameters createParameters() {
+    OperationParameters parameters = new OperationParameters();
+    parameters.setId(123L);
+    return parameters;
+  }
+
+  private SettingRepresentation createRepresentation() {
+    return new SettingRepresentation();
+  }
+
+  private VOConfigurationSetting createVO() {
+    return new VOConfigurationSetting();
+  }
 }
