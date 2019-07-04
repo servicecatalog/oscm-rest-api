@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.service;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -26,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class PriceModelResource extends RestResource {
 
-  @EJB PriceModelBackend pmb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  PriceModelBackend pmb;
 
   @Since(CommonParams.VERSION_1)
   @GET

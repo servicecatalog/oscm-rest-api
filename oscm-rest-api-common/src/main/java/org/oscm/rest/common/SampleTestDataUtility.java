@@ -1,3 +1,12 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: June 28, 2019
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common;
 
 import javax.ws.rs.core.*;
@@ -5,8 +14,14 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
+/** Utility class to create some sample data for testing purposes */
 public class SampleTestDataUtility {
 
+  /**
+   * Creates sample URIInfo object
+   *
+   * @return sample URIInfo
+   */
   public static UriInfo createUriInfo() {
     return new UriInfo() {
       @Override
