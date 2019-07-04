@@ -30,7 +30,9 @@ public class UserResource extends RestResource {
 
   private static final String PATH_USERID = "/{userId}";
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) UserBackend ub;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  UserBackend ub;
 
   @Since(CommonParams.VERSION_1)
   @GET

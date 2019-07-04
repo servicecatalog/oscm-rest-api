@@ -28,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class RolesResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) UserBackend ub;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  UserBackend ub;
 
   @Since(CommonParams.VERSION_1)
   @GET
