@@ -11,7 +11,7 @@ package org.oscm.rest.identity.data;
 
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import java.util.HashSet;
 import java.util.Set;

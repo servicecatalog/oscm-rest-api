@@ -16,7 +16,7 @@ import org.oscm.internal.types.enumtypes.ParameterValueType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.internal.vo.VOParameterOption;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import java.util.ArrayList;
 import java.util.List;

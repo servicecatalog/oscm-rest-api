@@ -7,7 +7,10 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.common;
+package org.oscm.rest.common.requestparameters;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.WebException;
 
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;

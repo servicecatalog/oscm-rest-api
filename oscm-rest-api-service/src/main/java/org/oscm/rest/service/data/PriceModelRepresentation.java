@@ -12,7 +12,7 @@ package org.oscm.rest.service.data;
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.VOPriceModel;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 import java.math.BigDecimal;

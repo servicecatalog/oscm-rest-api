@@ -12,7 +12,7 @@ package org.oscm.rest.identity;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
 import org.oscm.rest.identity.data.RolesRepresentation;

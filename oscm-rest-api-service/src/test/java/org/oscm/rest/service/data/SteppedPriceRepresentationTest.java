@@ -12,7 +12,7 @@ package org.oscm.rest.service.data;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSteppedPrice;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import java.math.BigDecimal;
 

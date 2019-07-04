@@ -14,7 +14,7 @@ import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import java.util.*;
 

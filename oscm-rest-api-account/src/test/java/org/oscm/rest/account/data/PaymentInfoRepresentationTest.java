@@ -12,6 +12,7 @@ package org.oscm.rest.account.data;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.internal.vo.VOPaymentType;
+import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

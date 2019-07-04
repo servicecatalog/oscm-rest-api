@@ -11,8 +11,8 @@ package org.oscm.rest.operation.data;
 
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
 import org.oscm.internal.vo.VOConfigurationSetting;
-import org.oscm.rest.common.Representation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;

@@ -16,12 +16,13 @@ import org.oscm.internal.types.exception.ObjectNotFoundException;
 import org.oscm.internal.vo.VOBillingContact;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOPaymentInfo;
-import org.oscm.rest.account.data.AccountRepresentation;
-import org.oscm.rest.account.data.BillingContactRepresentation;
-import org.oscm.rest.account.data.OrganizationRepresentation;
-import org.oscm.rest.account.data.PaymentInfoRepresentation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.AccountRepresentation;
+import org.oscm.rest.common.representation.BillingContactRepresentation;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.representation.PaymentInfoRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

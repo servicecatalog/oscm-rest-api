@@ -12,6 +12,7 @@ package org.oscm.rest.common;
 import com.google.gson.annotations.Since;
 import com.google.gson.annotations.Until;
 import org.junit.jupiter.api.Test;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;

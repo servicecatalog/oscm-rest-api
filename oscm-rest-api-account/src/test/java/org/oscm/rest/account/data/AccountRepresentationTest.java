@@ -13,6 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
+import org.oscm.rest.common.representation.AccountRepresentation;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import java.util.HashMap;
 import java.util.Map;

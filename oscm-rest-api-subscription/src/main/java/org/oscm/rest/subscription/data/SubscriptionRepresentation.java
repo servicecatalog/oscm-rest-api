@@ -12,8 +12,8 @@ package org.oscm.rest.subscription.data;
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.internal.vo.VOUserSubscription;
-import org.oscm.rest.common.Representation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;

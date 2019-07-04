@@ -10,7 +10,7 @@
 package org.oscm.rest.marketplace.data;
 
 import org.oscm.internal.vo.VOMarketplace;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;

@@ -12,7 +12,7 @@ package org.oscm.rest.subscription;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUsageLicense;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.subscription.data.UsageLicenseRepresentation;
 

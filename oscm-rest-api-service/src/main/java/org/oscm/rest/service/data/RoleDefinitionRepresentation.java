@@ -10,7 +10,7 @@
 package org.oscm.rest.service.data;
 
 import org.oscm.internal.vo.VORoleDefinition;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 

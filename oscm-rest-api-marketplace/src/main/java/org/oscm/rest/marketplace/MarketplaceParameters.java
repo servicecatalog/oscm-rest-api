@@ -10,7 +10,7 @@
 package org.oscm.rest.marketplace;
 
 import org.oscm.internal.vo.VOService;
-import org.oscm.rest.common.RequestParameters;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;

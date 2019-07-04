@@ -7,12 +7,11 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.account.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
 import org.oscm.internal.vo.Setting;
-import org.oscm.rest.common.Representation;
 
 import java.util.HashMap;
 import java.util.Map;

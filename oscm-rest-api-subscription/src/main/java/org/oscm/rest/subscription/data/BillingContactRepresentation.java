@@ -10,7 +10,7 @@
 package org.oscm.rest.subscription.data;
 
 import org.oscm.internal.vo.VOBillingContact;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 

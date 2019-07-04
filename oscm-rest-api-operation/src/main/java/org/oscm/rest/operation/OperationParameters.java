@@ -9,7 +9,7 @@
  */
 package org.oscm.rest.operation;
 
-import org.oscm.rest.common.RequestParameters;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 import javax.ws.rs.WebApplicationException;
 

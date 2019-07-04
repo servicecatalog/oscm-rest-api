@@ -14,8 +14,8 @@ import org.mockito.Mock;
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOConfigurationSetting;
-import org.oscm.rest.common.Representation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 
 import java.util.ArrayList;
 import java.util.List;

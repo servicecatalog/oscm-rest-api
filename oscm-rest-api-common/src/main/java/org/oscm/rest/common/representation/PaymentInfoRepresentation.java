@@ -7,10 +7,9 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.account.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOPaymentInfo;
-import org.oscm.rest.common.Representation;
 
 import java.util.ArrayList;
 import java.util.Collection;

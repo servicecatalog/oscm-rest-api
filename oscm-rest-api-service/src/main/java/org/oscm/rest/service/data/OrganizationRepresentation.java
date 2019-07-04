@@ -10,8 +10,8 @@
 package org.oscm.rest.service.data;
 
 import org.oscm.internal.vo.VOOrganization;
-import org.oscm.rest.common.Representation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;

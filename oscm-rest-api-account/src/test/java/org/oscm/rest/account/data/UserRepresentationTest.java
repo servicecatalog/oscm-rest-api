@@ -16,6 +16,7 @@ import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

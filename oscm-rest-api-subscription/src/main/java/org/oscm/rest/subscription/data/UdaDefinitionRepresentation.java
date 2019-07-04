@@ -11,7 +11,7 @@ package org.oscm.rest.subscription.data;
 
 import org.oscm.internal.types.enumtypes.UdaConfigurationType;
 import org.oscm.internal.vo.VOUdaDefinition;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 

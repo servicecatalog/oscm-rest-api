@@ -11,6 +11,7 @@ package org.oscm.rest.account.data;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOOrganization;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

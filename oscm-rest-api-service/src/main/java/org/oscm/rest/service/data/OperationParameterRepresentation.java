@@ -11,7 +11,7 @@ package org.oscm.rest.service.data;
 
 import org.oscm.internal.types.enumtypes.OperationParameterType;
 import org.oscm.internal.vo.VOServiceOperationParameter;
-import org.oscm.rest.common.Representation;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 

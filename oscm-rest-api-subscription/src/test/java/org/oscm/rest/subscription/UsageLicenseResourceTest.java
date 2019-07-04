@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.internal.vo.VOUser;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.subscription.data.SubscriptionRepresentation;
 import org.oscm.rest.subscription.data.UsageLicenseRepresentation;

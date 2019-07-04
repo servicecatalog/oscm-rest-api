@@ -9,7 +9,7 @@
  */
 package org.oscm.rest.service;
 
-import org.oscm.rest.common.RequestParameters;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
