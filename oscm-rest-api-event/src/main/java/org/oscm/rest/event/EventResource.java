@@ -31,7 +31,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class EventResource extends RestResource {
 
-  @EJB @Setter(value = AccessLevel.PROTECTED) EventBackend eb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  EventBackend eb;
 
   @Since(CommonParams.VERSION_1)
   @POST
