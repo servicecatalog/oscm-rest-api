@@ -16,6 +16,7 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.representation.Representation;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.SettingRepresentation;
 
 import java.util.ArrayList;
 import java.util.List;

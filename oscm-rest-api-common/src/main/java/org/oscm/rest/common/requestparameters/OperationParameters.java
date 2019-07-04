@@ -7,7 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.operation;
+package org.oscm.rest.common.requestparameters;
 
 import org.oscm.rest.common.requestparameters.RequestParameters;
 
