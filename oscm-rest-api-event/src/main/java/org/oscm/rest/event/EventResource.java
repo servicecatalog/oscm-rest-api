@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.event;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -29,7 +31,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class EventResource extends RestResource {
 
-  @EJB EventBackend eb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  EventBackend eb;
 
   @Since(CommonParams.VERSION_1)
   @POST

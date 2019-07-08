@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.account.data.BillingContactRepresentation;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -33,7 +35,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class BillingContactResource extends RestResource {
 
-  @EJB AccountBackend ab;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  AccountBackend ab;
 
   @GET
   @Operation(summary = "Get all billing contacts for the organizations.",
@@ -96,7 +100,7 @@ public class BillingContactResource extends RestResource {
                       schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
-    //FIXME: Move investigate why the same command doesn't work from RestResource#128
+    // FIXME: Move investigate why the same command doesn't work from RestResource#128
     content.setId(params.getId());
     return put(uriInfo, ab.putBillingContact(), content, params);
   }

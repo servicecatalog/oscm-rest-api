@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.service;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestResource;
@@ -27,7 +29,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class CompatibleServiceResource extends RestResource {
 
-  @EJB ServiceBackend sb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  ServiceBackend sb;
 
   @Since(CommonParams.VERSION_1)
   @GET

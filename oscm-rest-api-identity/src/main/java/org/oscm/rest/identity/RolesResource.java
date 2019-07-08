@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.identity;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -26,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class RolesResource extends RestResource {
 
-  @EJB UserBackend ub;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  UserBackend ub;
 
   @Since(CommonParams.VERSION_1)
   @GET
