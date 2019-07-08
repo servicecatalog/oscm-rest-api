@@ -10,12 +10,12 @@
 package org.oscm.rest.account;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.oscm.rest.account.data.BillingContactRepresentation;
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.account.data.PaymentInfoRepresentation;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -35,7 +35,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class PaymentInfoResource extends RestResource {
 
-  @EJB AccountBackend ab;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  AccountBackend ab;
 
   @GET
   @Operation(summary = "Get all payment info.",
@@ -76,7 +78,7 @@ public class PaymentInfoResource extends RestResource {
           })
   public Response updatePaymentInfo(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object that needs to be updated.", required = true,
+      @RequestBody(description = "BillingContactRepresentation object to be updated.", required = true,
               content = @Content(
                       schema = @Schema(implementation = PaymentInfoRepresentation.class))) PaymentInfoRepresentation content, @BeanParam AccountParameters params)
       throws Exception {

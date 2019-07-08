@@ -10,6 +10,8 @@
 package org.oscm.rest.service;
 
 import com.google.common.base.Strings;
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.CommonParams;
@@ -31,7 +33,9 @@ import java.util.Collections;
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 
-  @EJB TechnicalServiceBackend tsb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  TechnicalServiceBackend tsb;
 
   @EJB ServiceProvisioningService sps;
 
@@ -70,7 +74,7 @@ public class TechnicalServiceResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   public Response exportTechnicalService(
       @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
-    //FIXME: Implement this endpoint properly. Use get() from interface
+    // FIXME: Implement this endpoint properly. Use get() from interface
     // key needed
     VOTechnicalService ts = new VOTechnicalService();
     ts.setKey(params.getId().longValue());
@@ -84,8 +88,9 @@ public class TechnicalServiceResource extends RestResource {
   public Response importTechnicalServices(
       @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
       throws Exception {
-    //FIXME: Implement this endpoint properly. Use put() from interface
-    //FIXME: This endpoint should accept TSRepresentation instead of byte array (just like every other  PUT endpoint)
+    // FIXME: Implement this endpoint properly. Use put() from interface
+    // FIXME: This endpoint should accept TSRepresentation instead of byte array (just like every
+    // other  PUT endpoint)
     String msg = sps.importTechnicalServices(input);
     if (Strings.isNullOrEmpty(msg)) {
       return Response.noContent().build();

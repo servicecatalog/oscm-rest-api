@@ -21,11 +21,11 @@ import java.util.Set;
  */
 @OpenAPIDefinition(info =
 @Info(
-        title = "OSCM Rest API",
-        version = "667.0",
-        description = "Rest API description",
-        license = @License(name = "Apache 2.0", url = "http://example.com"),
-        contact = @Contact(url = "http://localhost.com", name = "Contact TEST ON INTERFACE", email = "email@adress.com")
+        title = "OSCM Rest API Sample Title",
+        version = "1.0",
+        description = "Rest API Sample Description",
+        license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0"),
+        contact = @Contact(url = "https://example.com", name = "Sample Contact Details", email = "example@email.com")
 )
 )
 public abstract class ResourceConfiguration {

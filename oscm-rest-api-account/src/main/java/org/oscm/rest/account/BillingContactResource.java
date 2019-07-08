@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.account.data.BillingContactRepresentation;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
@@ -33,7 +35,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class BillingContactResource extends RestResource {
 
-  @EJB AccountBackend ab;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  AccountBackend ab;
 
   @GET
   @Operation(summary = "Get all billing contacts for the organizations.",
@@ -47,23 +51,6 @@ public class BillingContactResource extends RestResource {
   public Response getBillingContacts(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
       throws Exception {
     return getCollection(uriInfo, ab.getBillingContactCollection(), params);
-  }
-
-  @POST
-  @Operation(summary = "Create a billing contact.",
-          tags = {"billingcontacts"},
-          description = "Creates a billing contact.",
-          responses = {
-                  @ApiResponse(responseCode = "201", description = "Billing contact created successfully.")
-          })
-  public Response createBillingContact(
-      @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object that needs to be added.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
-      @BeanParam AccountParameters params)
-      throws Exception {
-    return post(uriInfo, ab.postBillingContact(), content, params);
   }
 
   @GET
@@ -81,6 +68,23 @@ public class BillingContactResource extends RestResource {
     return get(uriInfo, ab.getBillingContact(), params, true);
   }
 
+  @POST
+  @Operation(summary = "Create a billing contact.",
+          tags = {"billingcontacts"},
+          description = "Creates a billing contact.",
+          responses = {
+                  @ApiResponse(responseCode = "201", description = "Billing contact created successfully.")
+          })
+  public Response createBillingContact(
+      @Context UriInfo uriInfo,
+      @RequestBody(description = "BillingContactRepresentation object to be created.", required = true,
+              content = @Content(
+                      schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
+      @BeanParam AccountParameters params)
+      throws Exception {
+    return post(uriInfo, ab.postBillingContact(), content, params);
+  }
+
   @PUT
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Update a single billing contact.",
@@ -91,12 +95,12 @@ public class BillingContactResource extends RestResource {
           })
   public Response updateBillingContact(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object that needs to be updated.", required = true,
+      @RequestBody(description = "BillingContactRepresentation object to be updated.", required = true,
               content = @Content(
                       schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
-    //FIXME: Move investigate why the same command doesn't work from RestResource#128
+    // FIXME: Move investigate why the same command doesn't work from RestResource#128
     content.setId(params.getId());
     return put(uriInfo, ab.putBillingContact(), content, params);
   }

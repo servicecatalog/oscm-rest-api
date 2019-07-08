@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.service;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -26,7 +28,9 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 public class TSSupplierResource extends RestResource {
 
-  @EJB TSSupplierBackend sb;
+  @EJB
+  @Setter(value = AccessLevel.PROTECTED)
+  TSSupplierBackend sb;
 
   @Since(CommonParams.VERSION_1)
   @GET
