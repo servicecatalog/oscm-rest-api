@@ -14,8 +14,6 @@ import org.oscm.internal.types.enumtypes.ParameterType;
 import org.oscm.internal.types.enumtypes.ParameterValueType;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.internal.vo.VOParameterOption;
-import org.oscm.rest.common.representation.ParameterOptionRepresentation;
-import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;

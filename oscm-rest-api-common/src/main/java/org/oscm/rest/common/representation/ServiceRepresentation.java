@@ -65,6 +65,7 @@ public class ServiceRepresentation extends Representation {
     vo.setStatus(getStatus());
     vo.setTechnicalId(getTechnicalId());
     vo.setVersion(convertETagToVersion());
+    updateParameters();
   }
 
   private List<VOParameter> updateParameters() {
@@ -95,6 +96,7 @@ public class ServiceRepresentation extends Representation {
     setStatus(vo.getStatus());
     setETag(Long.valueOf(vo.getVersion()));
     setTechnicalId(vo.getTechnicalId());
+    convertParameters();
   }
 
   private List<ParameterRepresentation> convertParameters() {

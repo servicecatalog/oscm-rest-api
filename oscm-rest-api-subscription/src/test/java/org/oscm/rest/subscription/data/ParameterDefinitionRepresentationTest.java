@@ -3,6 +3,7 @@ package org.oscm.rest.subscription.data;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOParameterDefinition;
+import org.oscm.rest.common.representation.ParameterDefinitionRepresentation;
 import org.oscm.rest.common.representation.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;

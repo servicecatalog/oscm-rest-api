@@ -39,12 +39,16 @@ public class OperationRepresentation extends Representation {
 
   @Override
   public void update() {
-    vo.setKey(convertIdToKey());
+    if (getId() != null) {
+      vo.setKey(convertIdToKey());
+    }
+    if (getETag() != null) {
+      vo.setVersion(convertETagToVersion());
+    }
     vo.setOperationDescription(getOperationDescription());
     vo.setOperationId(getOperationId());
     vo.setOperationName(getOperationName());
     vo.setOperationParameters(updateParameters());
-    vo.setVersion(convertETagToVersion());
   }
 
   private List<VOServiceOperationParameter> updateParameters() {
@@ -69,7 +73,7 @@ public class OperationRepresentation extends Representation {
     setETag(Long.valueOf(vo.getVersion()));
   }
 
-  protected List<OperationParameterRepresentation> convertParameters() {
+  private List<OperationParameterRepresentation> convertParameters() {
     List<OperationParameterRepresentation> result =
         new ArrayList<OperationParameterRepresentation>();
     if (vo.getOperationParameters() == null) {
@@ -117,5 +121,18 @@ public class OperationRepresentation extends Representation {
 
   public void setOperationParameters(List<OperationParameterRepresentation> operationParameters) {
     this.operationParameters = operationParameters;
+  }
+
+  public static List<OperationRepresentation> convert(List<VOTechnicalServiceOperation> ops) {
+    if (ops == null || ops.isEmpty()) {
+      return null;
+    }
+    List<OperationRepresentation> result = new ArrayList<OperationRepresentation>();
+    for (VOTechnicalServiceOperation op : ops) {
+      OperationRepresentation or = new OperationRepresentation(op);
+      or.convert();
+      result.add(or);
+    }
+    return result;
   }
 }

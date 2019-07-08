@@ -9,8 +9,6 @@
  */
 package org.oscm.rest.common.representation;
 
-import org.oscm.rest.common.representation.Representation;
-
 import javax.ws.rs.WebApplicationException;
 import java.util.Collection;
 

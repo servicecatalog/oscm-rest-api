@@ -3,6 +3,8 @@ package org.oscm.rest.subscription.data;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.representation.SubscriptionDetailsRepresentation;
+import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 
 import java.util.ArrayList;
 import java.util.List;

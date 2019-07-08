@@ -11,17 +11,16 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.EventType;
 import org.oscm.internal.vo.VOEventDefinition;
-import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 
 public class EventDefinitionRepresentation extends Representation {
 
+  private transient VOEventDefinition vo;
+
   private EventType eventType;
   private String eventId;
   private String eventDescription;
-
-  private transient VOEventDefinition vo;
 
   public EventDefinitionRepresentation() {
     this(new VOEventDefinition());

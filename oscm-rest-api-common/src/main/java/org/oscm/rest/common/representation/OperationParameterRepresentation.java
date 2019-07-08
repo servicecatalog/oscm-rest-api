@@ -11,7 +11,6 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.OperationParameterType;
 import org.oscm.internal.vo.VOServiceOperationParameter;
-import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 
@@ -38,13 +37,17 @@ public class OperationParameterRepresentation extends Representation {
 
   @Override
   public void update() {
-    vo.setKey(convertIdToKey());
+    if (getId() != null) {
+      vo.setKey(convertIdToKey());
+    }
+    if (getETag() != null) {
+      vo.setVersion(convertETagToVersion());
+    }
     vo.setMandatory(isMandatory());
     vo.setParameterId(getParameterId());
     vo.setParameterName(getParameterName());
     vo.setParameterValue(getParameterValue());
     vo.setType(getType());
-    vo.setVersion(convertETagToVersion());
   }
 
   @Override

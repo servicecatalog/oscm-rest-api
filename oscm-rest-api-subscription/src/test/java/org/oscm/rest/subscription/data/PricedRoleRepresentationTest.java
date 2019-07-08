@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
+import org.oscm.rest.common.representation.PricedRoleRepresentation;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.RoleDefinitionRepresentation;
 
 import java.math.BigDecimal;
 

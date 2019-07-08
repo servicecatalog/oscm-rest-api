@@ -7,9 +7,7 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.subscription;
-
-import org.oscm.rest.common.requestparameters.RequestParameters;
+package org.oscm.rest.common.requestparameters;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;

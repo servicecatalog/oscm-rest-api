@@ -10,8 +10,6 @@
 package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOParameter;
-import org.oscm.rest.common.representation.ParameterDefinitionRepresentation;
-import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 

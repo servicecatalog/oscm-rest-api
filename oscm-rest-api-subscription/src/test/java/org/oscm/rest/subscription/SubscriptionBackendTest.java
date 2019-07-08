@@ -13,9 +13,10 @@ import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.vo.*;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.subscription.data.ServiceRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
-import org.oscm.rest.subscription.data.UdaRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.UdaRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

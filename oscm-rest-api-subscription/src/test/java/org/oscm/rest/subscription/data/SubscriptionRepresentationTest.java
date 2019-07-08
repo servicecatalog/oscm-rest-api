@@ -5,6 +5,7 @@ import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.SubscriptionRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

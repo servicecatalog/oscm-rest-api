@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOBillingContact;
 
+import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +33,9 @@ public class BillingContactRepresentation extends Representation {
   public BillingContactRepresentation(VOBillingContact bc) {
     vo = bc;
   }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
 
   @Override
   public void update() {

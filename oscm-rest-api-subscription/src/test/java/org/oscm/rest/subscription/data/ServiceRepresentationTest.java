@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOService;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

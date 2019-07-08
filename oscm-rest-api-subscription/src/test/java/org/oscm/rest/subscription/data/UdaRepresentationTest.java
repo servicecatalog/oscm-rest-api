@@ -5,6 +5,8 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOUda;
 import org.oscm.internal.vo.VOUdaDefinition;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.UdaDefinitionRepresentation;
+import org.oscm.rest.common.representation.UdaRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

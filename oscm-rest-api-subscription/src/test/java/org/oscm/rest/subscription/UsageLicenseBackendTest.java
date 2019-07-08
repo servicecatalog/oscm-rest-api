@@ -15,8 +15,9 @@ import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.subscription.data.UsageLicenseRepresentation;
-import org.oscm.rest.subscription.data.UserRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.UsageLicenseRepresentation;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

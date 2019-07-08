@@ -7,11 +7,10 @@
  *
  * <p>*****************************************************************************
  */
-package org.oscm.rest.subscription.data;
+package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.VOSubscriptionDetails;
-import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.List;
@@ -56,7 +55,6 @@ public class SubscriptionDetailsRepresentation extends Representation {
 
   @Override
   public void update() {
-    // not needed, just used for GET
     vo.setKey(convertIdToKey());
     vo.setVersion(convertETagToVersion());
   }

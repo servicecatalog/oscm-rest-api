@@ -3,6 +3,8 @@ package org.oscm.rest.subscription.data;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOPaymentInfo;
+import org.oscm.internal.vo.VOPaymentType;
+import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 import org.oscm.rest.common.representation.Representation;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,6 +60,7 @@ public class PaymentInfoRepresentationTest {
         VOPaymentInfo voPaymentInfo = new VOPaymentInfo();
         voPaymentInfo.setKey(100L);
         voPaymentInfo.setVersion(100);
+        voPaymentInfo.setPaymentType(new VOPaymentType());
 
         return voPaymentInfo;
     }

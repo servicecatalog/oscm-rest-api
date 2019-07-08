@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSteppedPrice;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.SteppedPriceRepresentation;
 
 import java.math.BigDecimal;
 

@@ -2,6 +2,7 @@ package org.oscm.rest.subscription.data;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.representation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

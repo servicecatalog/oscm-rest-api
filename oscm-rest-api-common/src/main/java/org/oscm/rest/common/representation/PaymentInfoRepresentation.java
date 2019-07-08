@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOPaymentInfo;
 
+import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,6 +34,9 @@ public class PaymentInfoRepresentation extends Representation {
     vo = pi;
     setPaymentType(new PaymentTypeRepresentation(pi.getPaymentType()));
   }
+
+  @Override
+  public void validateContent() throws WebApplicationException {}
 
   @Override
   public void update() {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.representation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

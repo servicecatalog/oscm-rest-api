@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.internal.vo.VOUser;
+import org.oscm.rest.common.representation.RoleDefinitionRepresentation;
+import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

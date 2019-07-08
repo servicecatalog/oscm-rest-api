@@ -9,8 +9,6 @@
  */
 package org.oscm.rest.common.requestparameters;
 
-import org.oscm.rest.common.requestparameters.RequestParameters;
-
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 

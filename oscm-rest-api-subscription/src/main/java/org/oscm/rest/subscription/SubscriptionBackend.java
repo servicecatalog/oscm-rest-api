@@ -18,10 +18,11 @@ import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionDetailsRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionRepresentation;
-import org.oscm.rest.subscription.data.UdaRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.SubscriptionDetailsRepresentation;
+import org.oscm.rest.common.representation.SubscriptionRepresentation;
+import org.oscm.rest.common.representation.UdaRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

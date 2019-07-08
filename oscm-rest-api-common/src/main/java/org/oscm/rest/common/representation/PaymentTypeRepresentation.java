@@ -11,7 +11,6 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.PaymentCollectionType;
 import org.oscm.internal.vo.VOPaymentType;
-import org.oscm.rest.common.representation.Representation;
 
 public class PaymentTypeRepresentation extends Representation {
 

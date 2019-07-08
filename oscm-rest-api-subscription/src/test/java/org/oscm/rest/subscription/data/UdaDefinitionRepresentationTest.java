@@ -5,6 +5,7 @@ import org.oscm.internal.types.enumtypes.UdaConfigurationType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOUdaDefinition;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.UdaDefinitionRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
