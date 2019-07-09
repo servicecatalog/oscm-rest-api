@@ -46,6 +46,11 @@ public class EventResource extends RestResource {
   @Operation(summary = "Get a single event.",
           tags = {"event"},
           description = "Returns a single event.",
+          requestBody = @RequestBody(
+                  description = "EventRepresentation object to be created.",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = EventRepresentation.class))),
           responses = {
                   @ApiResponse(responseCode = "200", description = "A single event", content = @Content(
                           schema = @Schema(implementation = EventRepresentation.class)
@@ -53,9 +58,7 @@ public class EventResource extends RestResource {
           })
   public Response recordEvent(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "EventRepresentation object to be created.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = EventRepresentation.class))) EventRepresentation content,
+      EventRepresentation content,
       @BeanParam EventParameters params)
       throws Exception {
     return post(uriInfo, eb.post(), content, params);
