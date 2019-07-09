@@ -26,15 +26,15 @@ import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/onbehalfusers")
 @Stateless
+@Produces(MediaType.APPLICATION_JSON)
+@Since(CommonParams.VERSION_1)
 public class OnBehalfUserResource extends RestResource {
 
   @EJB
   @Setter(value = AccessLevel.PROTECTED)
   UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
   public Response createOnBehalfUser(
       @Context UriInfo uriInfo,
       OnBehalfUserRepresentation content,
@@ -43,9 +43,7 @@ public class OnBehalfUserResource extends RestResource {
     return post(uriInfo, ub.postOnBehalfUser(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   public Response deleteOnBehalfUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     params.setUserIdRequired(false);

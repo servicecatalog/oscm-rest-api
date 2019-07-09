@@ -26,23 +26,21 @@ import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
 @Stateless
+@Produces(MediaType.APPLICATION_JSON)
+@Since(CommonParams.VERSION_1)
 public class RolesResource extends RestResource {
 
   @EJB
   @Setter(value = AccessLevel.PROTECTED)
   UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getUserRoles(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     return get(uriInfo, ub.getRoles(), params, false);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
   public Response setUserRoles(
       @Context UriInfo uriInfo, RolesRepresentation content, @BeanParam UserParameters params)
       throws Exception {
