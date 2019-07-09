@@ -11,6 +11,7 @@ package org.oscm.rest.account;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -44,7 +45,10 @@ public class BillingContactResource extends RestResource {
           tags = {"billingcontacts"},
           description = "Returns all billing contacts for the organizations.",
           responses = {
-                  @ApiResponse(responseCode = "200", description = "Billing contacts list", content = @Content(
+                  @ApiResponse(responseCode = "200",
+                          description = "Billing contacts list",
+                          content = @Content(
+                                  mediaType = "application/json",
                                   schema = @Schema(implementation = BillingContactRepresentation.class)
                   ))
           })
@@ -76,7 +80,14 @@ public class BillingContactResource extends RestResource {
                   description = "BillingContactRepresentation object to be created.",
                   required = true,
                   content = @Content(
-                          schema = @Schema(implementation = BillingContactRepresentation.class))),
+                          schema = @Schema(implementation = BillingContactRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = "example description of the object",
+                                          value= "example value - json in this case",
+                                          summary = "example summary - example name in fact")
+                          }
+                  )),
           responses = {
                   @ApiResponse(responseCode = "201", description = "Billing contact created successfully.")
           })
