@@ -60,15 +60,19 @@ public class OrganizationResource extends RestResource {
   @Operation(summary = "Create an organization.",
           tags = {"organization"},
           description = "Creates an organization.",
+          requestBody = @RequestBody(
+                  description = "OrganizationRepresentation object to be created.",
+                  required = true,
+                  content = @Content(
+                  schema = @Schema(implementation = OrganizationRepresentation.class))),
           responses = {
                   @ApiResponse(responseCode = "201", description = "Organization successfully created.")
           })
   public Response createOrganization(
           //FIXME Why is AccountRepresentation expected in body of creating organization method?
           @Context UriInfo uriInfo,
-          @RequestBody(description = "OrganizationRepresentation object to be created.",
-                  required = true, content = @Content(
-                      schema = @Schema(implementation = OrganizationRepresentation.class))) AccountRepresentation content, @BeanParam AccountParameters params)
+          AccountRepresentation content,
+          @BeanParam AccountParameters params)
       throws Exception {
     return post(uriInfo, ab.postOrganization(), content, params);
   }

@@ -25,7 +25,7 @@ public class RequestParameters {
   private int version;
 
   @PathParam(CommonParams.PARAM_ID)
-  @Parameter(description = "ID of a single resource.")
+  @Parameter(description = "ID of a single resource")
   private Long id;
 
   @HeaderParam(CommonParams.PARAM_MATCH)
