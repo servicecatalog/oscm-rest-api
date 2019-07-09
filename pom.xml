@@ -32,6 +32,9 @@
         <jacoco.maven.plugin.version>0.8.3</jacoco.maven.plugin.version>
         <mockito.junit.version>2.26.0</mockito.junit.version>
 
+        <maven.swager.plugin.version>2.0.8</maven.swager.plugin.version>
+        <swagger.jaxrs2.version>2.0.8</swagger.jaxrs2.version>
+
         <oscm.intf.internal.version>master-SNAPSHOT</oscm.intf.internal.version>
     </properties>
 
@@ -105,6 +108,34 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-maven-plugin</artifactId>
+                    <version>${maven.swager.plugin.version}</version>
+                    <configuration>
+                        <outputFileName>swagger</outputFileName>
+                        <outputPath>${project.build.directory}/swagger-api-docs</outputPath>
+                        <outputFormat>JSON</outputFormat>
+                        <resourcePackages>
+                            <package>org.oscm.rest.account</package>
+                            <package>org.oscm.rest.event</package>
+                            <package>org.oscm.rest.identity</package>
+                            <package>org.oscm.rest.marketplace</package>
+                            <package>org.oscm.rest.operation</package>
+                            <package>org.oscm.rest.service</package>
+                            <package>org.oscm.rest.subscription</package>
+                        </resourcePackages>
+                        <prettyPrint>true</prettyPrint>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>resolve</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -173,6 +204,13 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>${mockito.junit.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>${swagger.jaxrs2.version}</version>
         </dependency>
     </dependencies>
 

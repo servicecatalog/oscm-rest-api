@@ -9,6 +9,11 @@
  */
 package org.oscm.rest.event;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -29,17 +34,29 @@ import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/events")
 @Stateless
+@Produces(MediaType.APPLICATION_JSON)
+@Since(CommonParams.VERSION_1)
 public class EventResource extends RestResource {
 
   @EJB
   @Setter(value = AccessLevel.PROTECTED)
   EventBackend eb;
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
+  @Operation(summary = "Get a single event.",
+          tags = {"event"},
+          description = "Returns a single event.",
+          responses = {
+                  @ApiResponse(responseCode = "200", description = "A single event", content = @Content(
+                          schema = @Schema(implementation = EventRepresentation.class)
+                  ))
+          })
   public Response recordEvent(
-      @Context UriInfo uriInfo, EventRepresentation content, @BeanParam EventParameters params)
+      @Context UriInfo uriInfo,
+      @RequestBody(description = "EventRepresentation object to be created.", required = true,
+              content = @Content(
+                      schema = @Schema(implementation = EventRepresentation.class))) EventRepresentation content,
+      @BeanParam EventParameters params)
       throws Exception {
     return post(uriInfo, eb.post(), content, params);
   }

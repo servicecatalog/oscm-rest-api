@@ -9,6 +9,7 @@
  */
 package org.oscm.rest.event;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RequestParameters;
 import org.oscm.rest.common.WebException;
@@ -23,9 +24,11 @@ public class EventParameters extends RequestParameters {
   private String userId;
 
   @QueryParam("mId")
+  @Parameter(description = "Marketplace ID.")
   private String marketplaceId;
 
   @QueryParam("pattern")
+  @Parameter(description = "The pattern.")
   private String pattern;
 
   @Override
