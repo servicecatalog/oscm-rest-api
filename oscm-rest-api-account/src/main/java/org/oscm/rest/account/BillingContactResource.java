@@ -72,14 +72,17 @@ public class BillingContactResource extends RestResource {
   @Operation(summary = "Create a billing contact.",
           tags = {"billingcontacts"},
           description = "Creates a billing contact.",
+          requestBody = @RequestBody(
+                  description = "BillingContactRepresentation object to be created.",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = BillingContactRepresentation.class))),
           responses = {
                   @ApiResponse(responseCode = "201", description = "Billing contact created successfully.")
           })
   public Response createBillingContact(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object to be created.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
+      BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
     return post(uriInfo, ab.postBillingContact(), content, params);
@@ -90,14 +93,17 @@ public class BillingContactResource extends RestResource {
   @Operation(summary = "Update a single billing contact.",
           tags = {"billingcontacts"},
           description = "Updates a single billing contact.",
+          requestBody = @RequestBody(
+                  description = "BillingContactRepresentation object to be updated.",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = BillingContactRepresentation.class))),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Billing contact updated successfully.")
           })
   public Response updateBillingContact(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object to be updated.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
+      BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
     // FIXME: Move investigate why the same command doesn't work from RestResource#128

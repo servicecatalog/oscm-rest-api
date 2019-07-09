@@ -73,14 +73,18 @@ public class PaymentInfoResource extends RestResource {
   @Operation(summary = "Update a single payment info.",
           tags = {"paymentinfo"},
           description = "Updates a single payment info.",
+          requestBody = @RequestBody(
+                  description = "BillingContactRepresentation object to be updated.",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = PaymentInfoRepresentation.class))),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Payment info updated successfully.")
           })
   public Response updatePaymentInfo(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object to be updated.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = PaymentInfoRepresentation.class))) PaymentInfoRepresentation content, @BeanParam AccountParameters params)
+      PaymentInfoRepresentation content,
+      @BeanParam AccountParameters params)
       throws Exception {
     return put(uriInfo, ab.putPaymentInfo(), content, params);
   }
