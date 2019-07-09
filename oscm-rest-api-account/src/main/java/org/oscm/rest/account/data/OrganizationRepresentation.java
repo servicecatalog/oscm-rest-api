@@ -12,6 +12,7 @@ package org.oscm.rest.account.data;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.Representation;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.WebApplicationException;
 
 public class OrganizationRepresentation extends Representation {

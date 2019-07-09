@@ -26,7 +26,7 @@ import java.util.Set;
  *
  * @author Weiser
  */
-public class IdentityResourceConfig implements ResourceConfiguration {
+public class IdentityResourceConfig extends ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {
