@@ -106,8 +106,8 @@ public class RequestParameters {
   /**
    * Validates the content and format of the parameters. Throws BadRequestException if not valid.
    *
-   * <p>Subclasses also need to validate fields of the base class (except resource id) that
-   * they are using.
+   * <p>Subclasses also need to validate fields of the base class (except resource id) that they are
+   * using.
    *
    * @throws WebApplicationException
    */

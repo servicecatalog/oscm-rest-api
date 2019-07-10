@@ -54,7 +54,7 @@ public class UserRepresentation extends Representation {
   @Override
   public void validateContent() throws WebApplicationException {}
 
-  //TODO: Check if there is no nullpointer
+  // TODO: Check if there is no nullpointer
   private VOUserDetails convertVOUserToVOUserDetails(VOUser voUser) {
     VOUserDetails userDetails = new VOUserDetails();
     userDetails.setUserId(voUser.getUserId());
@@ -237,8 +237,7 @@ public class UserRepresentation extends Representation {
     return vo;
   }
 
-  public static final Collection<UserRepresentation> convert(
-          List<VOUserDetails> list) {
+  public static final Collection<UserRepresentation> convert(List<VOUserDetails> list) {
     Collection<UserRepresentation> result = new ArrayList<UserRepresentation>();
     for (VOUserDetails vo : list) {
       result.add(new UserRepresentation(vo));

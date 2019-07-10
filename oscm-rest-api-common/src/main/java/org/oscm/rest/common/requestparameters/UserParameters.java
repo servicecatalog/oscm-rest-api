@@ -26,6 +26,7 @@ public class UserParameters extends RequestParameters {
 
   @QueryParam("pattern")
   private String pattern;
+
   private boolean isUserIdRequired;
 
   @Override

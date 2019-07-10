@@ -30,6 +30,7 @@ public class SubscriptionRepresentation extends Representation {
   private Long unitKey;
   private String unitName;
   private UsageLicenseRepresentation usageLicense;
+
   public SubscriptionRepresentation() {
     this(new VOSubscription());
   }
