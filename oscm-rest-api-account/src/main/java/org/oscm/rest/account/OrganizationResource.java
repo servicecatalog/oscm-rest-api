@@ -11,6 +11,7 @@ package org.oscm.rest.account;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -64,7 +65,24 @@ public class OrganizationResource extends RestResource {
                   description = "OrganizationRepresentation object to be created.",
                   required = true,
                   content = @Content(
-                  schema = @Schema(implementation = OrganizationRepresentation.class))),
+                  schema = @Schema(implementation = OrganizationRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = "Only required parameters.",
+                                          value= "{\n" +
+                                                  "\"organization\": {\n" +
+                                                  "\t\"email\": \"asupplier@escm.org\",\n" +
+                                                  "\t\"locale\": \"en\",\n" +
+                                                  "\t\"domicileCountry\": \"PL\"\n" +
+                                                  "},\n" +
+                                                  "\"user\": {\n" +
+                                                  "\t\"email\": \"other@email.com\",\n" +
+                                                  "\t\"locale\": \"en\",\n" +
+                                                  "\t\"userId\": \"1003\"\n" +
+                                                  "}\n" +
+                                                  "}\n",
+                                          summary = "Minimum body example."),
+                          })),
           responses = {
                   @ApiResponse(responseCode = "201", description = "Organization successfully created.")
           })

@@ -83,9 +83,14 @@ public class BillingContactResource extends RestResource {
                           schema = @Schema(implementation = BillingContactRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = "example description of the object",
-                                          value= "example value - json in this case",
-                                          summary = "example summary - example name in fact")
+                                          name = "Only required parameters.",
+                                          value= "{\n" +
+                                                  "\"email\": \"sample.email@escm.com\",\n" +
+                                                  "\"companyName\": \"Sample Company Name\",\n" +
+                                                  "\"address\": \"Sample addresss\",\n" +
+                                                  "\"contactId\": \"Sample contact ID.\"\n" +
+                                                  "}",
+                                          summary = "Minimum body example.")
                           }
                   )),
           responses = {
