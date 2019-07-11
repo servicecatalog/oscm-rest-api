@@ -14,7 +14,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
+import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

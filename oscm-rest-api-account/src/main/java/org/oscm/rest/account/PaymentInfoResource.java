@@ -11,10 +11,11 @@ package org.oscm.rest.account;
 
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.rest.account.data.PaymentInfoRepresentation;
+import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
+import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

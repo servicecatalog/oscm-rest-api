@@ -11,7 +11,8 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOPriceModel;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.PriceModelRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.PriceModelRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

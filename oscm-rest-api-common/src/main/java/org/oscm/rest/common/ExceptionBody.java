@@ -10,6 +10,7 @@
 package org.oscm.rest.common;
 
 import org.oscm.internal.types.exception.SaaSApplicationException;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;

@@ -20,9 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.operation.data.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
+import org.oscm.rest.common.representation.SettingRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

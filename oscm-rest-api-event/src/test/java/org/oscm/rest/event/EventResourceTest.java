@@ -9,7 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.event.data.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
+import org.oscm.rest.common.representation.EventRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

@@ -27,9 +27,9 @@ import org.oscm.internal.vo.VOBillingContact;
 import org.oscm.internal.vo.VOOperatorOrganization;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.internal.vo.VOPaymentType;
-import org.oscm.rest.account.data.*;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;

@@ -14,7 +14,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.operation.data.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
+import org.oscm.rest.common.representation.SettingRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
