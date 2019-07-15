@@ -51,9 +51,9 @@ public class MarketplaceBackendTest {
     resource = new MarketplaceResource();
     resource.setMb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    representation = createRepresentation();
-    parameters = createParameters();
-    vo = createVO();
+    representation = SampleTestDataUtility.createMarketplaceRepresentation();
+    parameters = SampleTestDataUtility.createMarketplaceParameters();
+    vo = SampleTestDataUtility.createVOMarketplace();
   }
 
   @ParameterizedTest
@@ -134,21 +134,5 @@ public class MarketplaceBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private MarketplaceRepresentation createRepresentation() {
-    MarketplaceRepresentation marketplaceRepresentation = new MarketplaceRepresentation();
-    marketplaceRepresentation.setMarketplaceId("marketplaceId");
-    return marketplaceRepresentation;
-  }
-
-  private MarketplaceParameters createParameters() {
-    MarketplaceParameters parameters = new MarketplaceParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private VOMarketplace createVO() {
-    return new VOMarketplace();
   }
 }

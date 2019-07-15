@@ -44,11 +44,11 @@ public class ServiceBackendTest {
     resource = new ServiceResource();
     compatiblesResource = new CompatibleServiceResource();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    statusRepresentation = createStatusRepresentation();
+    parameters = SampleTestDataUtility.createServiceParameters();
+    representation = SampleTestDataUtility.createServiceDetailsRepresentation(null);
+    statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     compatiblesCollection = createCompatiblesCollection();
-    vo = createVO();
+    vo = SampleTestDataUtility.createVOServiceDetails();
     resource.setSb(backend);
     compatiblesResource.setSb(backend);
   }
@@ -169,36 +169,8 @@ public class ServiceBackendTest {
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
   }
 
-  private ServiceDetailsRepresentation createRepresentation() {
-    ServiceDetailsRepresentation representation = new ServiceDetailsRepresentation();
-    representation.setTechnicalService(new TechnicalServiceRepresentation());
-    return representation;
-  }
-
-  private StatusRepresentation createStatusRepresentation() {
-    StatusRepresentation representation = new StatusRepresentation();
-    return representation;
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(1000L);
-    parameters.setEtag(1100L);
-    parameters.setVersion(1234);
-    return parameters;
-  }
-
-  private VOServiceDetails createVO() {
-    VOServiceDetails vo = new VOServiceDetails();
-    vo.setKey(1000L);
-    vo.setTechnicalService(new VOTechnicalService());
-    return vo;
-  }
-
   private RepresentationCollection<ServiceRepresentation> createCompatiblesCollection() {
-    ServiceRepresentation serviceRepresentation = new ServiceRepresentation();
-    serviceRepresentation.setVersion(1234);
-    serviceRepresentation.setETag(1234L);
+    ServiceRepresentation serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
 
     RepresentationCollection<ServiceRepresentation> collection =
         new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation));

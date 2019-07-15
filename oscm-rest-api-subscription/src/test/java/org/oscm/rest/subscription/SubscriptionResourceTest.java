@@ -46,11 +46,11 @@ public class SubscriptionResourceTest {
 
     @BeforeEach
     public void setUp() {
-        voSubscriptionDetails = setUpSubscriptionDetails();
-        subscriptionRepresentation = new SubscriptionRepresentation();
-        subscriptionDetailsRepresentation = new SubscriptionDetailsRepresentation(voSubscriptionDetails);
-        subscriptionCreationRepresentation = new SubscriptionCreationRepresentation();
-        subscriptionParameters = createParameters();
+        voSubscriptionDetails = SampleTestDataUtility.createVOSubscriptionDetails();
+        subscriptionRepresentation = SampleTestDataUtility.createSubscriptionRepresentation();
+        subscriptionDetailsRepresentation = SampleTestDataUtility.createSubscriptionDetailsRepresentation(voSubscriptionDetails);
+        subscriptionCreationRepresentation = SampleTestDataUtility.createSubscriptionCreationRepresentation();
+        subscriptionParameters = SampleTestDataUtility.createSubscriptionParameters();
         uriInfo = SampleTestDataUtility.createUriInfo();
     }
 
@@ -165,11 +165,5 @@ public class SubscriptionResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-    }
-
-    private SubscriptionParameters createParameters() {
-        SubscriptionParameters parameters = new SubscriptionParameters();
-        parameters.setId(100L);
-        return parameters;
     }
 }

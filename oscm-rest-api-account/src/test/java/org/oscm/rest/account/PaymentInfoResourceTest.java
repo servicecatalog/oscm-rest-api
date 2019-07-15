@@ -43,8 +43,8 @@ public class PaymentInfoResourceTest {
 
   @BeforeEach
   public void setUp() {
-    paymentInfoRepresentation = createPIRepresentation();
-    parameters = createAccountParameters();
+    paymentInfoRepresentation = SampleTestDataUtility.createPIRepresentation();
+    parameters = SampleTestDataUtility.createAccountParameters();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -128,16 +128,5 @@ public class PaymentInfoResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private PaymentInfoRepresentation createPIRepresentation() {
-    PaymentInfoRepresentation representation = new PaymentInfoRepresentation();
-    return representation;
-  }
-
-  private AccountParameters createAccountParameters() {
-    AccountParameters parameters = new AccountParameters();
-    parameters.setOrgId("orgId");
-    return parameters;
   }
 }

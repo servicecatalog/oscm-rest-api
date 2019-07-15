@@ -51,19 +51,12 @@ public class ServiceResourceTest {
 
   @BeforeEach
   public void setUp() {
-    voServiceDetails = setUpServiceDetails();
-    serviceRepresentation = new ServiceRepresentation();
-    serviceDetailsRepresentation = new ServiceDetailsRepresentation(voServiceDetails);
-    statusRepresentation = new StatusRepresentation();
+    voServiceDetails = SampleTestDataUtility.createVOServiceDetails();
+    serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
+    serviceDetailsRepresentation = SampleTestDataUtility.createServiceDetailsRepresentation(voServiceDetails);
+    statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
-  }
-
-  private VOServiceDetails setUpServiceDetails() {
-    VOServiceDetails voServiceDetails = new VOServiceDetails();
-    VOTechnicalService voTechnicalService = new VOTechnicalService();
-    voServiceDetails.setTechnicalService(voTechnicalService);
-    return voServiceDetails;
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -188,11 +181,5 @@ public class ServiceResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

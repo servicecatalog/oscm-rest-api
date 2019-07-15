@@ -26,6 +26,8 @@ import org.oscm.rest.common.requestparameters.AccountParameters;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
@@ -44,10 +46,10 @@ public class OrganizationResourceTest {
 
   @BeforeEach
   public void setUp() {
-    accountRepresentation = createAccountRepresentation();
-    orgRepresentation = createOrgRepresentation();
+    accountRepresentation = SampleTestDataUtility.createAccountRepresentation(Optional.empty());
+    orgRepresentation = SampleTestDataUtility.createOrgRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createAccountParameters();
   }
 
   @AfterEach
@@ -87,22 +89,5 @@ public class OrganizationResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.OK.getStatusCode());
     assertThat(result).extracting(Response::getEntity).isEqualTo(orgRepresentation);
-  }
-
-  private AccountRepresentation createAccountRepresentation() {
-    AccountRepresentation representation = new AccountRepresentation();
-    representation.setOrganization(createOrgRepresentation());
-    representation.setUser(new UserRepresentation());
-    return representation;
-  }
-
-  private OrganizationRepresentation createOrgRepresentation() {
-    return new OrganizationRepresentation();
-  }
-
-  private AccountParameters createParameters() {
-    AccountParameters parameters = new AccountParameters();
-    parameters.setOrgId("orgId");
-    return parameters;
   }
 }

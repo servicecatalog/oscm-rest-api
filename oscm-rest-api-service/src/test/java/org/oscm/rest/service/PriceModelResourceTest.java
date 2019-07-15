@@ -44,10 +44,10 @@ public class PriceModelResourceTest {
 
   @BeforeEach
   public void setUp() {
-    serviceRepresentation = new ServiceRepresentation();
-    priceModelRepresentation = new PriceModelRepresentation();
+    serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
+    priceModelRepresentation = SampleTestDataUtility.createPriceModelRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -128,11 +128,5 @@ public class PriceModelResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

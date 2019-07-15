@@ -38,8 +38,8 @@ public class TechnicalServiceBackendTest {
   public void setUp() {
     resource = new TechnicalServiceResource();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
+    parameters = SampleTestDataUtility.createServiceParameters();
+    representation = SampleTestDataUtility.createTSRepresentation();
     resource.setTsb(backend);
   }
 
@@ -94,16 +94,5 @@ public class TechnicalServiceBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private TechnicalServiceRepresentation createRepresentation() {
-    TechnicalServiceRepresentation representation = new TechnicalServiceRepresentation();
-    return representation;
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(1000L);
-    return parameters;
   }
 }

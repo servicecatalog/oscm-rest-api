@@ -49,8 +49,8 @@ public class OnBehalfUserResourceTest {
 
   @Test
   public void shouldCreateOnBehalfUser() {
-    OnBehalfUserRepresentation userRepresentation = createOBUserRepresentation();
-    UserParameters parameters = createParameters();
+    OnBehalfUserRepresentation userRepresentation = SampleTestDataUtility.createOBUserRepresentation();
+    UserParameters parameters = SampleTestDataUtility.createUserParameters();
 
     when(userBackend.postOnBehalfUser())
         .thenReturn((onBehalfUserRepresentation, userParameters) -> "newId");
@@ -69,7 +69,7 @@ public class OnBehalfUserResourceTest {
 
   @Test
   public void shouldDeleteOnBehalfUser() {
-    UserParameters parameters = createParametersForDeletion();
+    UserParameters parameters = SampleTestDataUtility.createUserParameters();
 
     when(userBackend.deleteOBehalfUser()).thenReturn(userParameters -> true);
 
@@ -82,21 +82,5 @@ public class OnBehalfUserResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private OnBehalfUserRepresentation createOBUserRepresentation() {
-    OnBehalfUserRepresentation userRepresentation = new OnBehalfUserRepresentation();
-    userRepresentation.setUserId("userId");
-    return userRepresentation;
-  }
-
-  private UserParameters createParameters() {
-    return new UserParameters();
-  }
-
-  private UserParameters createParametersForDeletion() {
-    UserParameters parameters = new UserParameters();
-    parameters.setUserId("userId");
-    return parameters;
   }
 }

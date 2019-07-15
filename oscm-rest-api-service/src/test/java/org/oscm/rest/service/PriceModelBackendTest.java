@@ -37,9 +37,9 @@ public class PriceModelBackendTest {
   public void setUp() {
     resource = new PriceModelResource();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createServiceParameters();
+    representation = SampleTestDataUtility.createPriceModelRepresentation();
+    vo = SampleTestDataUtility.createVOServiceDetails();
     resource.setPmb(backend);
   }
 
@@ -93,22 +93,5 @@ public class PriceModelBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(1000L);
-    parameters.setOrgKey(11000L);
-    return parameters;
-  }
-
-  private PriceModelRepresentation createRepresentation() {
-    return new PriceModelRepresentation();
-  }
-
-  private VOServiceDetails createVO() {
-    VOServiceDetails vo = new VOServiceDetails();
-    vo.setPriceModel(new VOPriceModel());
-    return vo;
   }
 }

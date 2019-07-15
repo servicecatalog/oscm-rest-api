@@ -61,11 +61,11 @@ public class UserBackendTest {
     rolesResource.setUb(backend);
 
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    userRepresentation = createUserRepresentation();
-    onBehalfUserRepresentation = createOnBehalfUserRepresentation();
-    rolesRepresentation = createRolesRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createUserParameters();
+    userRepresentation = SampleTestDataUtility.createUserRepresentation();
+    onBehalfUserRepresentation = SampleTestDataUtility.createOBUserRepresentation();
+    rolesRepresentation = SampleTestDataUtility.createRolesRepresentation();
+    vo = SampleTestDataUtility.createVOUserDetails();
   }
 
   @Test
@@ -202,28 +202,4 @@ public class UserBackendTest {
   @Test
   @Disabled("LDAP Functionality is disabled for now")
   public void shouldPostLdapUsers() {}
-
-  private UserParameters createParameters() {
-    UserParameters parameters = new UserParameters();
-    parameters.setUserId("123");
-    return parameters;
-  }
-
-  private UserRepresentation createUserRepresentation() {
-    return new UserRepresentation();
-  }
-
-  private OnBehalfUserRepresentation createOnBehalfUserRepresentation() {
-    return new OnBehalfUserRepresentation();
-  }
-
-  private RolesRepresentation createRolesRepresentation() {
-    return new RolesRepresentation();
-  }
-
-  private VOUserDetails createVO() {
-    VOUserDetails voUserDetails = new VOUserDetails();
-    voUserDetails.setUserId("userId");
-    return voUserDetails;
-  }
 }

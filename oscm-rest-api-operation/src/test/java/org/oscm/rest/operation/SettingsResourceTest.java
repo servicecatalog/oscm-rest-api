@@ -44,9 +44,9 @@ class SettingsResourceTest {
 
   @BeforeEach
   public void setUp() {
-    settingRepresentation = new SettingRepresentation();
+    settingRepresentation = SampleTestDataUtility.createSettingRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    operationParameters = createParameters();
+    operationParameters = SampleTestDataUtility.createOperationParameters();
   }
 
   @AfterEach
@@ -168,11 +168,5 @@ class SettingsResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private OperationParameters createParameters() {
-    OperationParameters parameters = new OperationParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

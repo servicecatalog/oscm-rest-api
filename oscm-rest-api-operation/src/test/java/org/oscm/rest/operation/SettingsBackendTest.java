@@ -52,9 +52,9 @@ public class SettingsBackendTest {
     resource.setSb(backend);
 
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createOperationParameters();
+    representation = SampleTestDataUtility.createSettingRepresentation();
+    vo = SampleTestDataUtility.createVOConfigurationSetting();
   }
 
   @Test
@@ -129,19 +129,5 @@ public class SettingsBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private OperationParameters createParameters() {
-    OperationParameters parameters = new OperationParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private SettingRepresentation createRepresentation() {
-    return new SettingRepresentation();
-  }
-
-  private VOConfigurationSetting createVO() {
-    return new VOConfigurationSetting();
   }
 }

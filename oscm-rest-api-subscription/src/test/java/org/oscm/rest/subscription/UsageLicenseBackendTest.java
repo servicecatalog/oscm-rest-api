@@ -13,11 +13,11 @@ import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.internal.vo.VOUser;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -45,9 +45,9 @@ public class UsageLicenseBackendTest {
     resource = new UsageLicenseResource();
     resource.setUlb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createSubscriptionParameters();
+    representation = SampleTestDataUtility.createUsageLicenseRepresentation(null);
+    vo = SampleTestDataUtility.createVOSubscriptionDetails();
   }
 
   @Test
@@ -109,37 +109,5 @@ public class UsageLicenseBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private SubscriptionParameters createParameters() {
-    SubscriptionParameters subscriptionParameters = new SubscriptionParameters();
-    subscriptionParameters.setId(123L);
-    subscriptionParameters.setLicKey(123L);
-    return subscriptionParameters;
-  }
-
-  private UsageLicenseRepresentation createRepresentation() {
-    UsageLicenseRepresentation usageLicenseRepresentation = new UsageLicenseRepresentation();
-
-    UserRepresentation userRepresentation = new UserRepresentation();
-    userRepresentation.setUserId("uid");
-    usageLicenseRepresentation.setUser(userRepresentation);
-
-    return usageLicenseRepresentation;
-  }
-
-  private VOSubscriptionDetails createVO() {
-    VOUsageLicense voUsageLicense = new VOUsageLicense();
-    voUsageLicense.setRoleDefinition(new VORoleDefinition());
-
-    VOUser voUser = new VOUser();
-    voUser.setUserId("uid");
-    voUsageLicense.setUser(voUser);
-
-    voUsageLicense.setKey(123L);
-
-    VOSubscriptionDetails voSubscriptionDetails = new VOSubscriptionDetails();
-    voSubscriptionDetails.setUsageLicenses(Lists.newArrayList(voUsageLicense));
-    return voSubscriptionDetails;
   }
 }

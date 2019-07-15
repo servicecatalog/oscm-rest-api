@@ -41,9 +41,9 @@ public class RolesResourceTest {
 
   @BeforeEach
   public void setUp() {
-    rolesRepresentation = createRolesRepresentation();
+    rolesRepresentation = SampleTestDataUtility.createRolesRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -83,15 +83,5 @@ public class RolesResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private RolesRepresentation createRolesRepresentation() {
-    return new RolesRepresentation();
-  }
-
-  private UserParameters createParameters() {
-    UserParameters parameters = new UserParameters();
-    parameters.setUserId("userId");
-    return parameters;
   }
 }

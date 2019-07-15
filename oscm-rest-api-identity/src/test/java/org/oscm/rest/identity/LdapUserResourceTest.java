@@ -40,9 +40,9 @@ public class LdapUserResourceTest {
 
   @BeforeEach
   public void setUp() {
-    userRepresentation = createUserRepresentation();
+    userRepresentation = SampleTestDataUtility.createUserRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -79,15 +79,5 @@ public class LdapUserResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NOT_IMPLEMENTED.getStatusCode());
-  }
-
-  private UserRepresentation createUserRepresentation() {
-    UserRepresentation userRepresentation = new UserRepresentation();
-    userRepresentation.setUserId("userId");
-    return userRepresentation;
-  }
-
-  private UserParameters createParameters() {
-    return new UserParameters();
   }
 }

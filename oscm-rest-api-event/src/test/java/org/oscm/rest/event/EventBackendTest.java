@@ -20,8 +20,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.EventService;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.EventParameters;
 import org.oscm.rest.common.representation.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -44,7 +44,7 @@ public class EventBackendTest {
     resource = new EventResource();
     resource.setEb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createEventParameters();
   }
 
   @ParameterizedTest
@@ -61,17 +61,7 @@ public class EventBackendTest {
 
   public static Stream<Arguments> provideRepresentationObjectsAsArugments() {
     return Stream.of(
-        Arguments.of(createRepresentation(true)), Arguments.of(createRepresentation(false)));
-  }
-
-  private EventParameters createParameters() {
-    return new EventParameters();
-  }
-
-  private static EventRepresentation createRepresentation(boolean hasSubscriptionKeySet) {
-    EventRepresentation representation = new EventRepresentation();
-    representation.setETag(12L);
-    if (hasSubscriptionKeySet) representation.setSubscriptionKey(1L);
-    return representation;
+        Arguments.of(SampleTestDataUtility.createEventRepresentation(true)),
+        Arguments.of(SampleTestDataUtility.createEventRepresentation(false)));
   }
 }

@@ -36,9 +36,9 @@ public class EventResourceTest {
 
     @BeforeEach
     public void setUp() {
-        eventRepresentation = new EventRepresentation();
+        eventRepresentation = SampleTestDataUtility.createEventRepresentation(true);
         uriInfo = SampleTestDataUtility.createUriInfo();
-        eventParameters = createParameters();
+        eventParameters = SampleTestDataUtility.createEventParameters();
     }
 
     @AfterEach
@@ -62,11 +62,5 @@ public class EventResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.CREATED.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-    }
-
-    private EventParameters createParameters() {
-        EventParameters parameters = new EventParameters();
-        parameters.setId(100L);
-        return parameters;
     }
 }
