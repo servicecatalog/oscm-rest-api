@@ -14,6 +14,7 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOPricedOption;
 import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
+import org.oscm.rest.common.TestContants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class PricedOptionRepresentationTest {
   @Test
   public void shouldUpdateVOPricedOption() {
     PricedOptionRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOPricedOption result = representation.getVO();
@@ -109,8 +110,8 @@ public class PricedOptionRepresentationTest {
 
   private PricedOptionRepresentation createRepresentation() {
     PricedOptionRepresentation representation = new PricedOptionRepresentation();
-    representation.setOptionId("100");
-    representation.setParameterOptionKey(100L);
+    representation.setOptionId(TestContants.STRING_NUM_VALUE);
+    representation.setParameterOptionKey(TestContants.LONG_VALUE);
     representation.setPricePerSubscription(BigDecimal.TEN);
     representation.setPricePerUser(BigDecimal.TEN);
     List<PricedRoleRepresentation> list = new ArrayList<>();
@@ -123,9 +124,9 @@ public class PricedOptionRepresentationTest {
 
   private VOPricedOption createVO() {
     VOPricedOption voPricedOption = new VOPricedOption();
-    voPricedOption.setKey(100L);
-    voPricedOption.setOptionId("Option100");
-    voPricedOption.setParameterOptionKey(100L);
+    voPricedOption.setKey(TestContants.LONG_VALUE);
+    voPricedOption.setOptionId(TestContants.STRING_VALUE);
+    voPricedOption.setParameterOptionKey(TestContants.LONG_VALUE);
     voPricedOption.setPricePerSubscription(BigDecimal.TEN);
     voPricedOption.setPricePerUser(BigDecimal.TEN);
     List<VOPricedRole> list = new ArrayList<>();
@@ -135,7 +136,7 @@ public class PricedOptionRepresentationTest {
     voPricedRole.setRole(voRoleDefinition);
     list.add(voPricedRole);
     voPricedOption.setRoleSpecificUserPrices(list);
-    voPricedOption.setVersion(100);
+    voPricedOption.setVersion(TestContants.INTEGER_VALUE);
     return voPricedOption;
   }
 }

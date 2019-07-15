@@ -12,6 +12,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOParameterOption;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,8 +21,8 @@ public class ParameterOptionRepresentationTest {
   @Test
   public void shouldUpdateVOParameterOption() {
     ParameterOptionRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOParameterOption result = representation.getVO();
@@ -92,19 +93,19 @@ public class ParameterOptionRepresentationTest {
 
   private ParameterOptionRepresentation createRepresentation() {
     ParameterOptionRepresentation representation = new ParameterOptionRepresentation();
-    representation.setOptionDescription("Description");
-    representation.setOptionId("100");
-    representation.setParamDefId("100");
+    representation.setOptionDescription(TestContants.STRING_VALUE);
+    representation.setOptionId(TestContants.STRING_NUM_VALUE);
+    representation.setParamDefId(TestContants.STRING_NUM_VALUE);
     return representation;
   }
 
   private VOParameterOption createVO() {
     VOParameterOption voParameterOption = new VOParameterOption();
-    voParameterOption.setKey(100L);
-    voParameterOption.setOptionDescription("Description");
-    voParameterOption.setOptionId("100");
-    voParameterOption.setVersion(100);
-    voParameterOption.setParamDefId("100");
+    voParameterOption.setKey(TestContants.LONG_VALUE);
+    voParameterOption.setOptionDescription(TestContants.STRING_VALUE);
+    voParameterOption.setOptionId(TestContants.STRING_NUM_VALUE);
+    voParameterOption.setVersion(TestContants.INTEGER_VALUE);
+    voParameterOption.setParamDefId(TestContants.STRING_NUM_VALUE);
     return voParameterOption;
   }
 }

@@ -14,6 +14,7 @@ import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOEventDefinition;
 import org.oscm.internal.vo.VOPricedEvent;
 import org.oscm.internal.vo.VOSteppedPrice;
+import org.oscm.rest.common.TestContants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class PricedEventRepresentationTest {
   @Test
   public void shouldUpdateVOPricedEvent() {
     PricedEventRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOPricedEvent result = representation.getVO();
@@ -93,12 +94,12 @@ public class PricedEventRepresentationTest {
     PricedEventRepresentation representation = new PricedEventRepresentation();
     EventDefinitionRepresentation eventDefinitionRepresentation =
         new EventDefinitionRepresentation();
-    eventDefinitionRepresentation.setEventId("Event123");
+    eventDefinitionRepresentation.setEventId(TestContants.STRING_VALUE);
     representation.setEventDefinition(eventDefinitionRepresentation);
     representation.setEventPrice(BigDecimal.TEN);
     List<SteppedPriceRepresentation> list = new ArrayList<>();
     SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-    steppedPriceRepresentation.setLimit(123L);
+    steppedPriceRepresentation.setLimit(TestContants.LONG_VALUE);
     list.add(steppedPriceRepresentation);
     representation.setSteppedPrices(list);
     return representation;
@@ -106,13 +107,13 @@ public class PricedEventRepresentationTest {
 
   private VOPricedEvent createVO() {
     VOPricedEvent voPricedEvent = new VOPricedEvent();
-    voPricedEvent.setVersion(100);
+    voPricedEvent.setVersion(TestContants.INTEGER_VALUE);
     VOEventDefinition voEventDefinition = new VOEventDefinition();
-    voEventDefinition.setEventId("Event123");
-    voEventDefinition.setEventDescription("Description");
+    voEventDefinition.setEventId(TestContants.STRING_VALUE);
+    voEventDefinition.setEventDescription(TestContants.STRING_VALUE);
     voPricedEvent.setEventDefinition(voEventDefinition);
     voPricedEvent.setEventPrice(BigDecimal.TEN);
-    voPricedEvent.setKey(100L);
+    voPricedEvent.setKey(TestContants.LONG_VALUE);
     return voPricedEvent;
   }
 }

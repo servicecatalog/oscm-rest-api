@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.OperationParameterType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOServiceOperationParameter;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,8 +22,8 @@ public class OperationParameterRepresentationTest {
   @Test
   public void shouldUpdateVOServiceOperationParameter() {
     OperationParameterRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOServiceOperationParameter result = representation.getVO();
@@ -81,11 +82,11 @@ public class OperationParameterRepresentationTest {
   @Test
   public void shouldConvertToOperationParameterRepresentation() {
     VOServiceOperationParameter voServiceOperationParameter = new VOServiceOperationParameter();
-    voServiceOperationParameter.setKey(100L);
-    voServiceOperationParameter.setParameterId("100");
-    voServiceOperationParameter.setParameterName("ParameterName");
-    voServiceOperationParameter.setParameterValue("Value");
-    voServiceOperationParameter.setVersion(100);
+    voServiceOperationParameter.setKey(TestContants.LONG_VALUE);
+    voServiceOperationParameter.setParameterId(TestContants.STRING_NUM_VALUE);
+    voServiceOperationParameter.setParameterName(TestContants.STRING_VALUE);
+    voServiceOperationParameter.setParameterValue(TestContants.STRING_VALUE);
+    voServiceOperationParameter.setVersion(TestContants.INTEGER_VALUE);
     voServiceOperationParameter.setType(OperationParameterType.INPUT_STRING);
 
     OperationParameterRepresentation representation =
@@ -118,9 +119,9 @@ public class OperationParameterRepresentationTest {
   private OperationParameterRepresentation createRepresentation() {
     OperationParameterRepresentation representation = new OperationParameterRepresentation();
     representation.setMandatory(true);
-    representation.setParameterId("100");
-    representation.setParameterName("ParameterName");
-    representation.setParameterValue("Value");
+    representation.setParameterId(TestContants.STRING_NUM_VALUE);
+    representation.setParameterName(TestContants.STRING_VALUE);
+    representation.setParameterValue(TestContants.STRING_VALUE);
     representation.setType(OperationParameterType.INPUT_STRING);
     return representation;
   }

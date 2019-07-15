@@ -15,6 +15,7 @@ import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,17 +54,17 @@ public class RolesRepresentationTest {
 
   private RolesRepresentation createRepresentation() {
     RolesRepresentation representation = new RolesRepresentation();
-    representation.setId(12345L);
+    representation.setId(TestContants.LONG_VALUE);
     representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
-    representation.setETag(6789L);
+    representation.setETag(TestContants.LONG_VALUE);
     return representation;
   }
 
-  private VOUserDetails createVO(){
+  private VOUserDetails createVO() {
     VOUserDetails voUserDetails = new VOUserDetails();
-    voUserDetails.setKey(1234L);
-    voUserDetails.setVersion(5678);
+    voUserDetails.setKey(TestContants.LONG_VALUE);
+    voUserDetails.setVersion(TestContants.INTEGER_VALUE);
     voUserDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
-return voUserDetails;
+    return voUserDetails;
   }
 }

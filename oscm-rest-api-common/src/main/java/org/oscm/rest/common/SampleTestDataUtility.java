@@ -10,7 +10,12 @@
 package org.oscm.rest.common;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
+import org.oscm.internal.types.enumtypes.Salutation;
+import org.oscm.internal.types.enumtypes.UserAccountStatus;
+import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.*;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.*;
@@ -21,8 +26,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-//TODO: Move constants to constant class
 /** Utility class to create some sample data for testing purposes */
+@Generated
 public class SampleTestDataUtility {
 
   /**
@@ -211,9 +216,25 @@ public class SampleTestDataUtility {
 
 
   public static UserRepresentation createUserRepresentation() {
-    UserRepresentation userRepresentation = new UserRepresentation();
-    userRepresentation.setUserId(TestContants.STRING_NUM_VALUE);
-    return userRepresentation;
+    UserRepresentation representation = new UserRepresentation();
+    representation.setAdditionalName(TestContants.STRING_VALUE);
+    representation.setAddress(TestContants.STRING_VALUE);
+    representation.setEmail(TestContants.STRING_VALUE);
+    representation.setFirstName(TestContants.STRING_VALUE);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setLastName(TestContants.STRING_VALUE);
+    representation.setLocale(TestContants.STRING_VALUE);
+    representation.setOrganizationId(TestContants.STRING_VALUE);
+    representation.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
+    representation.setPhone(TestContants.STRING_NUM_VALUE);
+    representation.setRealmUserId(TestContants.STRING_VALUE);
+    representation.setRemoteLdapActive(true);
+    representation.setSalutation(Salutation.MR);
+    representation.setStatus(UserAccountStatus.ACTIVE);
+    representation.setUserId(TestContants.STRING_VALUE);
+    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    representation.setETag(TestContants.LONG_VALUE);
+    return representation;
   }
 
   public static UserParameters createUserParameters() {
@@ -234,7 +255,23 @@ public class SampleTestDataUtility {
 
   public static VOUserDetails createVOUserDetails() {
     VOUserDetails voUserDetails = new VOUserDetails();
+    voUserDetails.setAdditionalName(TestContants.STRING_VALUE);
+    voUserDetails.setAddress(TestContants.STRING_VALUE);
+    voUserDetails.setEMail(TestContants.STRING_VALUE);
+    voUserDetails.setFirstName(TestContants.STRING_VALUE);
+    voUserDetails.setKey(TestContants.LONG_VALUE);
+    voUserDetails.setLastName(TestContants.STRING_VALUE);
+    voUserDetails.setLocale(TestContants.STRING_VALUE);
+    voUserDetails.setOrganizationId(TestContants.STRING_VALUE);
+    voUserDetails.setOrganizationRoles(Sets.newHashSet(OrganizationRoleType.SUPPLIER));
+    voUserDetails.setPhone(TestContants.STRING_NUM_VALUE);
+    voUserDetails.setRealmUserId(TestContants.STRING_VALUE);
+    voUserDetails.setRemoteLdapActive(true);
+    voUserDetails.setSalutation(Salutation.MR);
+    voUserDetails.setStatus(UserAccountStatus.ACTIVE);
+    voUserDetails.setVersion(TestContants.INTEGER_VALUE);
     voUserDetails.setUserId(TestContants.STRING_VALUE);
+    voUserDetails.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
     return voUserDetails;
   }
 

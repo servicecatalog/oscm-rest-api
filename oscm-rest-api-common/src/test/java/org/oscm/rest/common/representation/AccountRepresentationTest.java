@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
+import org.oscm.rest.common.TestContants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +35,9 @@ public class AccountRepresentationTest {
   public void setUp() {
     organization = new OrganizationRepresentation();
     user = new UserRepresentation();
-    password = "password";
-    serviceKey = 1234L;
-    sellerId = "sellerId";
+    password = TestContants.STRING_VALUE;
+    serviceKey = TestContants.LONG_VALUE;
+    sellerId = TestContants.STRING_VALUE;
     ldapProperties = new HashMap<>();
     voLdapProperties = new LdapProperties();
     organizationRoles = new OrganizationRoleType[] {OrganizationRoleType.BROKER};

@@ -3,6 +3,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.TestContants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,38 +55,37 @@ public class SubscriptionDetailsRepresentationTest {
 
     private VOSubscriptionDetails createVO() {
         VOSubscriptionDetails voSubscriptionDetails = new VOSubscriptionDetails();
-        voSubscriptionDetails.setKey(100L);
-        voSubscriptionDetails.setVersion(100);
-        voSubscriptionDetails.setActivationDate(100L);
-        voSubscriptionDetails.setCreationDate(105L);
-        voSubscriptionDetails.setDeactivationDate(110L);
-        voSubscriptionDetails.setNumberOfAssignedUsers(100);
+        voSubscriptionDetails.setKey(TestContants.LONG_VALUE);
+        voSubscriptionDetails.setVersion(TestContants.INTEGER_VALUE);
+        voSubscriptionDetails.setActivationDate(TestContants.LONG_VALUE);
+        voSubscriptionDetails.setCreationDate(TestContants.LONG_VALUE);
+        voSubscriptionDetails.setDeactivationDate(TestContants.LONG_VALUE);
+        voSubscriptionDetails.setNumberOfAssignedUsers(TestContants.INTEGER_VALUE);
         VOPriceModel voPriceModel = new VOPriceModel();
-        voPriceModel.setKey(100L);
-        voPriceModel.setVersion(100);
+        voPriceModel.setKey(TestContants.LONG_VALUE);
+        voPriceModel.setVersion(TestContants.INTEGER_VALUE);
         VOService voService = new VOService();
-        voService.setKey(100L);
+        voService.setKey(TestContants.LONG_VALUE);
         voSubscriptionDetails.setSubscribedService(voService);
         voSubscriptionDetails.setPriceModel(voPriceModel);
-        voSubscriptionDetails.setProvisioningProgress("100Progress");
+        voSubscriptionDetails.setProvisioningProgress(TestContants.STRING_VALUE);
         voSubscriptionDetails.setStatus(SubscriptionStatus.ACTIVE);
-        voSubscriptionDetails.setSubscriptionId("100ID");
-        voSubscriptionDetails.setSuccessInfo("Info100");
+        voSubscriptionDetails.setSubscriptionId(TestContants.STRING_VALUE);
+        voSubscriptionDetails.setSuccessInfo(TestContants.STRING_VALUE);
         voSubscriptionDetails.setTimeoutMailSent(true);
-        voSubscriptionDetails.setUnitKey(100L);
-        voSubscriptionDetails.setUnitName("Unit100");
+        voSubscriptionDetails.setUnitKey(TestContants.LONG_VALUE);
+        voSubscriptionDetails.setUnitName(TestContants.STRING_VALUE);
         List<VOUsageLicense> licenses = new ArrayList<>();
         VOUsageLicense voUsageLicense = new VOUsageLicense();
         VORoleDefinition voRoleDefinition = new VORoleDefinition();
-        voRoleDefinition.setDescription("Description100");
+        voRoleDefinition.setDescription(TestContants.STRING_VALUE);
         voUsageLicense.setRoleDefinition(voRoleDefinition);
         VOUser voUser = new VOUser();
-        voUser.setUserId("100U");
+        voUser.setUserId(TestContants.STRING_VALUE);
         voUsageLicense.setUser(voUser);
         licenses.add(voUsageLicense);
         voSubscriptionDetails.setUsageLicenses(licenses);
 
         return voSubscriptionDetails;
     }
-
 }

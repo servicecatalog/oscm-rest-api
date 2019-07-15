@@ -12,6 +12,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.internal.vo.VOPaymentType;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,21 +69,21 @@ public class PaymentInfoRepresentationTest {
 
   private PaymentInfoRepresentation createRepresentation() {
     PaymentInfoRepresentation representation = new PaymentInfoRepresentation();
-    representation.setAccountNumber("accountNr");
-    representation.setId(123L);
-    representation.setInfoId("infoId");
-    representation.setProviderName("providerName");
-    representation.setETag(456L);
+    representation.setAccountNumber(TestContants.STRING_VALUE);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setInfoId(TestContants.STRING_VALUE);
+    representation.setProviderName(TestContants.STRING_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
     return representation;
   }
 
   private VOPaymentInfo createVO() {
     VOPaymentInfo paymentInfo = new VOPaymentInfo();
-    paymentInfo.setAccountNumber("accountNr");
-    paymentInfo.setId("id");
+    paymentInfo.setAccountNumber(TestContants.STRING_VALUE);
+    paymentInfo.setId(TestContants.STRING_VALUE);
     paymentInfo.setPaymentType(new VOPaymentType());
-    paymentInfo.setProviderName("providerName");
-    paymentInfo.setVersion(456);
+    paymentInfo.setProviderName(TestContants.STRING_VALUE);
+    paymentInfo.setVersion(TestContants.INTEGER_VALUE);
     return paymentInfo;
   }
 }

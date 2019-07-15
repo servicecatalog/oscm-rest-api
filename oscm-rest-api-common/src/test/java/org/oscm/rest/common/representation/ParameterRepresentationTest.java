@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOParameterDefinition;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,8 +22,8 @@ public class ParameterRepresentationTest {
   @Test
   public void shouldUpdateVOParameter() {
     ParameterRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOParameter result = representation.getVO();
@@ -89,19 +90,19 @@ public class ParameterRepresentationTest {
     ParameterDefinitionRepresentation parameterDefinitionRepresentation =
         new ParameterDefinitionRepresentation();
     representation.setParameterDefinition(parameterDefinitionRepresentation);
-    representation.setValue("Value");
+    representation.setValue(TestContants.STRING_VALUE);
     return representation;
   }
 
   private VOParameter createVO() {
     VOParameter voParameter = new VOParameter();
     voParameter.setConfigurable(true);
-    voParameter.setKey(100L);
+    voParameter.setKey(TestContants.LONG_VALUE);
     VOParameterDefinition voParameterDefinition = new VOParameterDefinition();
-    voParameterDefinition.setParameterId("123");
+    voParameterDefinition.setParameterId(TestContants.STRING_NUM_VALUE);
     voParameter.setParameterDefinition(voParameterDefinition);
-    voParameter.setVersion(100);
-    voParameter.setValue("Value");
+    voParameter.setVersion(TestContants.INTEGER_VALUE);
+    voParameter.setValue(TestContants.STRING_VALUE);
     return voParameter;
   }
 }

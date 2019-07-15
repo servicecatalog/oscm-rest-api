@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOCatalogEntry;
 import org.oscm.internal.vo.VOCategory;
+import org.oscm.rest.common.TestContants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,8 @@ class EntryRepresentationTest {
     @Test
     public void shouldUpdateVOCatalogEntry() {
         EntryRepresentation representation = createRepresentation();
-        representation.setId(100L);
-        representation.setETag(100L);
+        representation.setId(TestContants.LONG_VALUE);
+        representation.setETag(TestContants.LONG_VALUE);
 
         representation.update();
         VOCatalogEntry result = representation.getVO();
@@ -87,7 +88,7 @@ class EntryRepresentationTest {
         representation.setVisibleInCatalog(true);
         List<CategoryRepresentation> list = new ArrayList<>();
         CategoryRepresentation categoryRepresentation = new CategoryRepresentation();
-        categoryRepresentation.setCategoryId("Category100");
+        categoryRepresentation.setCategoryId(TestContants.STRING_VALUE);
         list.add(categoryRepresentation);
         representation.setCategories(list);
         return representation;
@@ -97,11 +98,11 @@ class EntryRepresentationTest {
         VOCatalogEntry voCatalogEntry = new VOCatalogEntry();
         voCatalogEntry.setAnonymousVisible(true);
         voCatalogEntry.setVisibleInCatalog(true);
-        voCatalogEntry.setKey(100L);
-        voCatalogEntry.setVersion(100);
+        voCatalogEntry.setKey(TestContants.LONG_VALUE);
+        voCatalogEntry.setVersion(TestContants.INTEGER_VALUE);
         List<VOCategory> list = new ArrayList<>();
         VOCategory voCategory = new VOCategory();
-        voCategory.setCategoryId("Category100");
+        voCategory.setCategoryId(TestContants.STRING_VALUE);
         list.add(voCategory);
         voCatalogEntry.setCategories(list);
         return voCatalogEntry;

@@ -3,6 +3,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOCategory;
+import org.oscm.rest.common.TestContants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,8 @@ class CategoryRepresentationTest {
     @Test
     public void shouldUpdateVOCategory() {
         CategoryRepresentation representation = createRepresentation();
-        representation.setId(100L);
-        representation.setETag(100L);
+        representation.setId(TestContants.LONG_VALUE);
+        representation.setETag(TestContants.LONG_VALUE);
 
         representation.update();
         VOCategory result = representation.getVO();
@@ -69,7 +70,7 @@ class CategoryRepresentationTest {
     public void shouldUpdateAndReturnListOfVoCategory() {
         List<CategoryRepresentation> representationList = new ArrayList<>();
         CategoryRepresentation categoryRepresentation = new CategoryRepresentation();
-        categoryRepresentation.setCategoryId("Category100");
+        categoryRepresentation.setCategoryId(TestContants.STRING_VALUE);
         representationList.add(categoryRepresentation);
 
         List<VOCategory> result = CategoryRepresentation.update(representationList);
@@ -83,7 +84,7 @@ class CategoryRepresentationTest {
     public void shouldConvertAndReturnListOfCategoryRepresentation() {
         List<VOCategory> voList = new ArrayList<>();
         VOCategory voCategory = new VOCategory();
-        voCategory.setCategoryId("Category200");
+        voCategory.setCategoryId(TestContants.STRING_VALUE);
         voList.add(voCategory);
 
         List<CategoryRepresentation> result = CategoryRepresentation.convert(voList);
@@ -95,15 +96,15 @@ class CategoryRepresentationTest {
 
     private CategoryRepresentation createRepresentation() {
         CategoryRepresentation representation = new CategoryRepresentation();
-        representation.setCategoryId("Category100");
+        representation.setCategoryId(TestContants.STRING_VALUE);
         return representation;
     }
 
     private VOCategory createVO() {
         VOCategory voCategory = new VOCategory();
-        voCategory.setCategoryId("Category100");
-        voCategory.setKey(100L);
-        voCategory.setVersion(100);
+        voCategory.setCategoryId(TestContants.STRING_VALUE);
+        voCategory.setKey(TestContants.LONG_VALUE);
+        voCategory.setVersion(TestContants.INTEGER_VALUE);
         return voCategory;
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.SubscriptionStatus;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSubscription;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,8 +13,8 @@ public class SubscriptionRepresentationTest {
     @Test
     public void shouldUpdateVOSubscription() {
         SubscriptionRepresentation subscriptionRepresentation = createRepresentation();
-        subscriptionRepresentation.setId(100L);
-        subscriptionRepresentation.setETag(100L);
+        subscriptionRepresentation.setId(TestContants.LONG_VALUE);
+        subscriptionRepresentation.setETag(TestContants.LONG_VALUE);
 
         subscriptionRepresentation.update();
         VOSubscription result = subscriptionRepresentation.getVO();
@@ -123,30 +124,29 @@ public class SubscriptionRepresentationTest {
 
     private VOSubscription createVO() {
         VOSubscription voSubscription = new VOSubscription();
-        voSubscription.setVersion(100);
-        voSubscription.setKey(100L);
-        voSubscription.setActivationDate(100L);
-        voSubscription.setCreationDate(200L);
-        voSubscription.setDeactivationDate(300L);
+        voSubscription.setVersion(TestContants.INTEGER_VALUE);
+        voSubscription.setKey(TestContants.LONG_VALUE);
+        voSubscription.setActivationDate(TestContants.LONG_VALUE);
+        voSubscription.setCreationDate(TestContants.LONG_VALUE);
+        voSubscription.setDeactivationDate(TestContants.LONG_VALUE);
         voSubscription.setStatus(SubscriptionStatus.ACTIVE);
-        voSubscription.setSubscriptionId("100Sub");
-        voSubscription.setUnitName("Unit100");
-        voSubscription.setUnitKey(100L);
+        voSubscription.setSubscriptionId(TestContants.STRING_VALUE);
+        voSubscription.setUnitName(TestContants.STRING_VALUE);
+        voSubscription.setUnitKey(TestContants.LONG_VALUE);
 
         return voSubscription;
     }
 
     private SubscriptionRepresentation createRepresentation() {
         SubscriptionRepresentation subscriptionRepresentation = new SubscriptionRepresentation();
-        subscriptionRepresentation.setActivationDate(100L);
-        subscriptionRepresentation.setCreationDate(200L);
-        subscriptionRepresentation.setDeactivationDate(300L);
+        subscriptionRepresentation.setActivationDate(TestContants.LONG_VALUE);
+        subscriptionRepresentation.setCreationDate(TestContants.LONG_VALUE);
+        subscriptionRepresentation.setDeactivationDate(TestContants.LONG_VALUE);
         subscriptionRepresentation.setStatus(SubscriptionStatus.ACTIVE);
-        subscriptionRepresentation.setSubscriptionId("SubID");
-        subscriptionRepresentation.setUnitName("Unit100");
-        subscriptionRepresentation.setUnitKey(100L);
+        subscriptionRepresentation.setSubscriptionId(TestContants.STRING_VALUE);
+        subscriptionRepresentation.setUnitName(TestContants.STRING_VALUE);
+        subscriptionRepresentation.setUnitKey(TestContants.LONG_VALUE);
 
         return subscriptionRepresentation;
     }
-
 }

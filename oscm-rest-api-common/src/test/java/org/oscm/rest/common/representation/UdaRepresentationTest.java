@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOUda;
 import org.oscm.internal.vo.VOUdaDefinition;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,8 +13,8 @@ public class UdaRepresentationTest {
     @Test
     public void shouldUpdateVOUda() {
         UdaRepresentation udaRepresentation = createRepresentation();
-        udaRepresentation.setId(100L);
-        udaRepresentation.setETag(100L);
+    udaRepresentation.setId(TestContants.LONG_VALUE);
+        udaRepresentation.setETag(TestContants.LONG_VALUE);
 
         udaRepresentation.update();
         VOUda result = udaRepresentation.getVO();
@@ -84,28 +85,27 @@ public class UdaRepresentationTest {
 
     private VOUda createVO() {
         VOUda voUda = new VOUda();
-        voUda.setTargetObjectKey(200L);
-        voUda.setUdaValue("Uda100");
+        voUda.setTargetObjectKey(TestContants.LONG_VALUE);
+        voUda.setUdaValue(TestContants.STRING_VALUE);
         VOUdaDefinition voUdaDefinition = new VOUdaDefinition();
-        voUdaDefinition.setKey(100L);
-        voUdaDefinition.setDefaultValue("Default");
+        voUdaDefinition.setKey(TestContants.LONG_VALUE);
+        voUdaDefinition.setDefaultValue(TestContants.STRING_VALUE);
         voUda.setUdaDefinition(voUdaDefinition);
-        voUda.setKey(100);
-        voUda.setVersion(100);
+        voUda.setKey(TestContants.INTEGER_VALUE);
+        voUda.setVersion(TestContants.INTEGER_VALUE);
 
         return voUda;
     }
 
     private UdaRepresentation createRepresentation() {
         UdaRepresentation udaRepresentation = new UdaRepresentation();
-        udaRepresentation.setTargetObjectKey(200L);
-        udaRepresentation.setUdaValue("Uda100");
+        udaRepresentation.setTargetObjectKey(TestContants.LONG_VALUE);
+        udaRepresentation.setUdaValue(TestContants.STRING_VALUE);
         UdaDefinitionRepresentation udaDefinitionRepresentation = new UdaDefinitionRepresentation();
-        udaDefinitionRepresentation.setId(100L);
-        udaDefinitionRepresentation.setDefaultValue("Default");
+        udaDefinitionRepresentation.setId(TestContants.LONG_VALUE);
+        udaDefinitionRepresentation.setDefaultValue(TestContants.STRING_VALUE);
         udaRepresentation.setUdaDefinition(udaDefinitionRepresentation);
 
         return udaRepresentation;
     }
-
 }

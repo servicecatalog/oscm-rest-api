@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOUserDetails;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +32,7 @@ public class OnBehalfUserRepresentationTest {
 
   @Test
   public void shouldSetPassword() {
-    String passwordToSet = "password";
+    String passwordToSet = TestContants.STRING_VALUE;
     OnBehalfUserRepresentation result = new OnBehalfUserRepresentation();
     result.setPassword(passwordToSet);
 
@@ -40,10 +41,10 @@ public class OnBehalfUserRepresentationTest {
 
   private VOUserDetails createVO(){
     VOUserDetails voUserDetails = new VOUserDetails();
-    voUserDetails.setKey(1234567L);
-    voUserDetails.setOrganizationId("orgId");
-    voUserDetails.setVersion(7654321);
-    voUserDetails.setUserId("userId");
+    voUserDetails.setKey(TestContants.LONG_VALUE);
+    voUserDetails.setOrganizationId(TestContants.STRING_VALUE);
+    voUserDetails.setVersion(TestContants.INTEGER_VALUE);
+    voUserDetails.setUserId(TestContants.STRING_VALUE);
     return voUserDetails;
   }
 }

@@ -3,6 +3,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOMarketplace;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,8 +12,8 @@ class MarketplaceRepresentationTest {
     @Test
     public void shouldUpdateVOMarketplace() {
         MarketplaceRepresentation representation = createRepresentation();
-        representation.setId(100L);
-        representation.setETag(100L);
+        representation.setId(TestContants.LONG_VALUE);
+        representation.setETag(TestContants.LONG_VALUE);
 
         representation.update();
         VOMarketplace result = representation.getVO();
@@ -150,35 +151,34 @@ class MarketplaceRepresentationTest {
         MarketplaceRepresentation representation = new MarketplaceRepresentation();
         representation.setCategoriesEnabled(true);
         representation.setHasPublicLandingPage(true);
-        representation.setMarketplaceId("Marketplace100");
-        representation.setName("Name");
+        representation.setMarketplaceId(TestContants.STRING_VALUE);
+        representation.setName(TestContants.STRING_VALUE);
         representation.setOpen(true);
-        representation.setOwningOrganizationId("OwnerId100");
-        representation.setOwningOrganizationName("OwnerName100");
+        representation.setOwningOrganizationId(TestContants.STRING_VALUE);
+        representation.setOwningOrganizationName(TestContants.STRING_VALUE);
         representation.setRestricted(true);
         representation.setReviewEnabled(true);
         representation.setSocialBookmarkEnabled(true);
         representation.setTaggingEnabled(true);
-        representation.setTenantId("Tenant100");
+        representation.setTenantId(TestContants.STRING_VALUE);
         return representation;
     }
 
     private VOMarketplace createVO() {
         VOMarketplace voMarketplace = new VOMarketplace();
-        voMarketplace.setKey(100L);
-        voMarketplace.setVersion(100);
+        voMarketplace.setKey(TestContants.LONG_VALUE);
+        voMarketplace.setVersion(TestContants.INTEGER_VALUE);
         voMarketplace.setCategoriesEnabled(true);
         voMarketplace.setHasPublicLandingPage(true);
-        voMarketplace.setMarketplaceId("Marketplace100");
-        voMarketplace.setName("Name");
+        voMarketplace.setMarketplaceId(TestContants.STRING_VALUE);
+        voMarketplace.setName(TestContants.STRING_VALUE);
         voMarketplace.setOpen(true);
-        voMarketplace.setOwningOrganizationId("OwnerId100");
-        voMarketplace.setOwningOrganizationName("OwnerName100");
+        voMarketplace.setOwningOrganizationId(TestContants.STRING_VALUE);
+        voMarketplace.setOwningOrganizationName(TestContants.STRING_VALUE);
         voMarketplace.setRestricted(true);
         voMarketplace.setReviewEnabled(true);
         voMarketplace.setTaggingEnabled(true);
-        voMarketplace.setTenantId("Tenant100");
+        voMarketplace.setTenantId(TestContants.STRING_VALUE);
         return voMarketplace;
     }
-
 }

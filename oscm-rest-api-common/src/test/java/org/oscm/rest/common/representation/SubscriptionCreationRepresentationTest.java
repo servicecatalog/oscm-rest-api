@@ -3,6 +3,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSubscription;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,8 +12,8 @@ public class SubscriptionCreationRepresentationTest {
     @Test
     public void shouldUpdateVOSubscription() {
         SubscriptionCreationRepresentation subscriptionCreationRepresentation = createRepresentation();
-        subscriptionCreationRepresentation.setETag(100L);
-        subscriptionCreationRepresentation.setId(100L);
+        subscriptionCreationRepresentation.setETag(TestContants.LONG_VALUE);
+        subscriptionCreationRepresentation.setId(TestContants.LONG_VALUE);
 
         subscriptionCreationRepresentation.update();
         VOSubscription result = subscriptionCreationRepresentation.getVO();
@@ -69,17 +70,16 @@ public class SubscriptionCreationRepresentationTest {
 
     private VOSubscription createVO() {
         VOSubscription voSubscription = new VOSubscription();
-        voSubscription.setPurchaseOrderNumber("Number10");
-        voSubscription.setSubscriptionId("Sub100");
+        voSubscription.setPurchaseOrderNumber(TestContants.STRING_VALUE);
+        voSubscription.setSubscriptionId(TestContants.STRING_VALUE);
         return voSubscription;
     }
 
     private SubscriptionCreationRepresentation createRepresentation() {
         SubscriptionCreationRepresentation subscriptionCreationRepresentation = new SubscriptionCreationRepresentation();
-        subscriptionCreationRepresentation.setPurchaseOrderNumber("100Purchase");
-        subscriptionCreationRepresentation.setSubscriptionId("100ID");
-        subscriptionCreationRepresentation.setUnitName("100Unit");
+        subscriptionCreationRepresentation.setPurchaseOrderNumber(TestContants.STRING_VALUE);
+        subscriptionCreationRepresentation.setSubscriptionId(TestContants.STRING_VALUE);
+        subscriptionCreationRepresentation.setUnitName(TestContants.STRING_VALUE);
         return subscriptionCreationRepresentation;
     }
-
 }

@@ -2,6 +2,7 @@ package org.oscm.rest.common.representation;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOGatheredEvent;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,29 +40,26 @@ public class EventRepresentationTest {
         representation.validateContent();
         representation.convert();
 
-        assertThat(representation).extracting(EventRepresentation::getActor).isEqualTo("Actor100");
-        assertThat(representation).extracting(EventRepresentation::getEventId).isEqualTo("Event100");
-        assertThat(representation).extracting(EventRepresentation::getMultiplier).isEqualTo(100L);
-        assertThat(representation).extracting(EventRepresentation::getOccurrenceTime).isEqualTo(200L);
-        assertThat(representation).extracting(EventRepresentation::getUniqueId).isEqualTo("Unique100");
-        assertThat(representation).extracting(EventRepresentation::getSubscriptionKey).isEqualTo(123L);
-        assertThat(representation).extracting(EventRepresentation::getInstanceId).isEqualTo("instanceId");
-        assertThat(representation).extracting(EventRepresentation::getTechnicalServiceId).isEqualTo("tsId");
-
-
+        assertThat(representation).extracting(EventRepresentation::getActor).isEqualTo(TestContants.STRING_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getEventId).isEqualTo(TestContants.STRING_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getMultiplier).isEqualTo(TestContants.LONG_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getOccurrenceTime).isEqualTo(TestContants.LONG_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getUniqueId).isEqualTo(TestContants.STRING_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getSubscriptionKey).isEqualTo(TestContants.LONG_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getInstanceId).isEqualTo(TestContants.STRING_VALUE);
+        assertThat(representation).extracting(EventRepresentation::getTechnicalServiceId).isEqualTo(TestContants.STRING_VALUE);
     }
 
     private EventRepresentation createRepresentation() {
         EventRepresentation representation = new EventRepresentation();
-        representation.setActor("Actor100");
-        representation.setEventId("Event100");
-        representation.setMultiplier(100L);
-        representation.setOccurrenceTime(200L);
-        representation.setUniqueId("Unique100");
-        representation.setSubscriptionKey(123L);
-        representation.setInstanceId("instanceId");
-        representation.setTechnicalServiceId("tsId");
+        representation.setActor(TestContants.STRING_VALUE);
+        representation.setEventId(TestContants.STRING_VALUE);
+        representation.setMultiplier(TestContants.LONG_VALUE);
+        representation.setOccurrenceTime(TestContants.LONG_VALUE);
+        representation.setUniqueId(TestContants.STRING_VALUE);
+        representation.setSubscriptionKey(TestContants.LONG_VALUE);
+        representation.setInstanceId(TestContants.STRING_VALUE);
+        representation.setTechnicalServiceId(TestContants.STRING_VALUE);
         return representation;
     }
-
 }
