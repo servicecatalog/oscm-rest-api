@@ -85,13 +85,13 @@ public class BillingContactResource extends RestResource {
                           schema = @Schema(implementation = BillingContactRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.exampleMinimumBodyName,
-                                          value= AccountConstants.billingContactMinimumBody,
-                                          summary = CommonConstants.exampleMinimumBodySummary),
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          value= AccountConstants.BILLING_CONTACT_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.exampleMaximumBodyName,
-                                          value= AccountConstants.billingContactMaximumBody,
-                                          summary = CommonConstants.exampleMaximumBodySummary)
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          value= AccountConstants.BILLING_CONTACT_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           }
                   )),
           responses = {
@@ -118,11 +118,11 @@ public class BillingContactResource extends RestResource {
                           examples = {
                                   @ExampleObject(
                                           name = "Only required parameters",
-                                          value= AccountConstants.billingContactMinimumBody,
+                                          value= AccountConstants.BILLING_CONTACT_MINIMUM_BODY,
                                           summary = "Minimum body example"),
                                   @ExampleObject(
                                           name = "All possible parameters",
-                                          value= AccountConstants.billingContactMaximumBody,
+                                          value= AccountConstants.BILLING_CONTACT_MAXIMUM_BODY,
                                           summary = "Maximum body example")
                           })),
           responses = {

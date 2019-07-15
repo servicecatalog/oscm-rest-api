@@ -1,15 +1,30 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: Jul 15, 2019
+ *
+ * <p>*****************************************************************************
+ */
 package constants;
+
+/**
+ * Class for account api module constants
+ *
+ * @author crystalzord
+ */
 
 public class AccountConstants {
 
-    public static final String billingContactMinimumBody = "{\n" +
+    public static final String BILLING_CONTACT_MINIMUM_BODY = "{\n" +
             "\"email\": \"sample.email@escm.com\",\n" +
             "\"companyName\": \"Sample Company Name\",\n" +
             "\"address\": \"Sample addresss\",\n" +
             "\"contactId\": \"Sample contact ID.\"\n" +
             "}";
 
-    public static final String billingContactMaximumBody = "{\n" +
+    public static final String BILLING_CONTACT_MAXIMUM_BODY = "{\n" +
             "\"email\": \"sample.email@escm.com\",\n" +
             "\"companyName\": \"Sample Company Name\",\n" +
             "\"address\": \"Sample addresss\",\n" +
@@ -17,7 +32,7 @@ public class AccountConstants {
             "\"contactId\": \"Sample contact ID.\"\n" +
             "}";
 
-    public static final String organizationMinimumBody = "{\n" +
+    public static final String ORGANIZATION_MINIMUM_BODY = "{\n" +
             "\"organization\": {\n" +
             "\t\"email\": \"asupplier@escm.org\",\n" +
             "\t\"locale\": \"en\",\n" +
@@ -30,7 +45,7 @@ public class AccountConstants {
             "}\n" +
             "}\n";
 
-    public static final String organizationMaximumBody = "{\n" +
+    public static final String ORGANIZATION_MAXIMUM_BODY = "{\n" +
             "\"props\": {},\n" +
             "\"organization\": {\n" +
             "\"organizationId\": \"\",\n" +
@@ -59,17 +74,17 @@ public class AccountConstants {
             "}\n" +
             "}\n";
 
-    public static final String paymentinfosMinimumBody = "{\n" +
-            "  \"paymentType\": {\n" +
-            "    \"paymentTypeId\": \"INVOICE\",\n" +
-            "    \"collectionType\": \"ORGANIZATION\"\n" +
-            "  },\n" +
-            "  \"infoId\": \"INVOICE\",\n" +
-            "  \"etag\": 5,\n" +
-            "  \"id\": 10000\n" +
+    public static final String PAYMENTINFOS_MINIMUM_BODY = "{\n" +
+            "\"paymentType\": {\n" +
+            "\t\"paymentTypeId\": \"INVOICE\",\n" +
+            "\t\"collectionType\": \"ORGANIZATION\"\n" +
+            "},\n" +
+            "\"infoId\": \"INVOICE\",\n" +
+            "\"etag\": 5,\n" +
+            "\"id\": 10000\n" +
             "}\n";
 
-    public static final String paymentinfosMaximumBody = "{\n" +
+    public static final String PAYMENTINFOS_MAXIMUM_BODY = "{\n" +
             "\"paymentType\": {\n" +
             "\"name\": \"UpdatedInvoice\",\n" +
             "\"paymentTypeId\": \"DIRECT_DEBIT\",\n" +
@@ -82,5 +97,5 @@ public class AccountConstants {
             "\"etag\": 2 \n" +
             "}";
 
-    public static final String paymentinfosAdditionalInfo = "Field \\\"etag\\\" is required. It's a version number. Must be greater that existing one. otherwise, 500 SC will be returned";
+    public static final String PAYMENTINFOS_ADDITIONAL_INFO = "Field \\\"etag\\\" is required. It's a version number. Must be greater that existing one. otherwise, 500 SC will be returned";
 }

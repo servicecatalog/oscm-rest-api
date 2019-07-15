@@ -83,15 +83,15 @@ public class PaymentInfoResource extends RestResource {
                           schema = @Schema(implementation = PaymentInfoRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.exampleMinimumBodyName + ". "
-                                                  + AccountConstants.paymentinfosAdditionalInfo,
-                                          value= AccountConstants.paymentinfosMinimumBody,
-                                          summary = CommonConstants.exampleMaximumBodySummary),
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". "
+                                                  + AccountConstants.PAYMENTINFOS_ADDITIONAL_INFO,
+                                          value= AccountConstants.PAYMENTINFOS_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.exampleMaximumBodyName + ". "
-                                                  + AccountConstants.paymentinfosAdditionalInfo,
-                                          value= AccountConstants.paymentinfosMaximumBody,
-                                          summary = CommonConstants.exampleMaximumBodySummary)
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". "
+                                                  + AccountConstants.PAYMENTINFOS_ADDITIONAL_INFO,
+                                          value= AccountConstants.PAYMENTINFOS_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           })),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Payment info updated successfully")

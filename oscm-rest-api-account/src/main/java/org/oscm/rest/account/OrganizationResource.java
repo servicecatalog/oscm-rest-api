@@ -70,13 +70,13 @@ public class OrganizationResource extends RestResource {
                   schema = @Schema(implementation = OrganizationRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.exampleMinimumBodyName,
-                                          value= AccountConstants.organizationMinimumBody,
-                                          summary = CommonConstants.exampleMinimumBodySummary),
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          value= AccountConstants.ORGANIZATION_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.exampleMaximumBodyName,
-                                          value= AccountConstants.organizationMaximumBody,
-                                          summary = CommonConstants.exampleMaximumBodySummary)
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          value= AccountConstants.ORGANIZATION_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           })),
           responses = {
                   @ApiResponse(responseCode = "201", description = "Organization successfully created")
