@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.account;
 
+import constants.AccountConstants;
+import constants.CommonConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -43,9 +45,9 @@ public class OrganizationResource extends RestResource {
 
   @GET
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Get a single organization.",
+  @Operation(summary = "Get a single organization",
           tags = {"organization"},
-          description = "Returns a single organization.",
+          description = "Returns a single organization",
           responses = {
                   @ApiResponse(responseCode = "200", description = "The organization", content = @Content(
                           schema = @Schema(implementation = OrganizationRepresentation.class)
@@ -58,33 +60,26 @@ public class OrganizationResource extends RestResource {
   }
 
   @POST
-  @Operation(summary = "Create an organization.",
+  @Operation(summary = "Create an organization",
           tags = {"organization"},
-          description = "Creates an organization.",
+          description = "Creates an organization",
           requestBody = @RequestBody(
-                  description = "OrganizationRepresentation object to be created.",
+                  description = "OrganizationRepresentation object to be created",
                   required = true,
                   content = @Content(
                   schema = @Schema(implementation = OrganizationRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = "Only required parameters.",
-                                          value= "{\n" +
-                                                  "\"organization\": {\n" +
-                                                  "\t\"email\": \"asupplier@escm.org\",\n" +
-                                                  "\t\"locale\": \"en\",\n" +
-                                                  "\t\"domicileCountry\": \"PL\"\n" +
-                                                  "},\n" +
-                                                  "\"user\": {\n" +
-                                                  "\t\"email\": \"other@email.com\",\n" +
-                                                  "\t\"locale\": \"en\",\n" +
-                                                  "\t\"userId\": \"1003\"\n" +
-                                                  "}\n" +
-                                                  "}\n",
-                                          summary = "Minimum body example."),
+                                          name = CommonConstants.exampleMinimumBodyName,
+                                          value= AccountConstants.organizationMinimumBody,
+                                          summary = CommonConstants.exampleMinimumBodySummary),
+                                  @ExampleObject(
+                                          name = CommonConstants.exampleMaximumBodyName,
+                                          value= AccountConstants.organizationMaximumBody,
+                                          summary = CommonConstants.exampleMaximumBodySummary)
                           })),
           responses = {
-                  @ApiResponse(responseCode = "201", description = "Organization successfully created.")
+                  @ApiResponse(responseCode = "201", description = "Organization successfully created")
           })
   public Response createOrganization(
           //FIXME Why is AccountRepresentation expected in body of creating organization method?
