@@ -25,18 +25,18 @@ import java.util.Set;
 @ApplicationPath("")
 public class GlobalResourceConfig extends Application {
 
-        @Override
-        public Set<Class<?>> getClasses() {
-                final Set<Class<?>> classesToRegister = new HashSet<Class<?>>();
+    @Override
+    public Set<Class<?>> getClasses() {
+        final Set<Class<?>> classesToRegister = new HashSet<Class<?>>();
 
-                new AccountResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
-                new EventResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
-                new IdentityResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
-                new MarketplaceResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
-                new OperationResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
-                new ServiceResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
-                new SubscriptionResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new AccountResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new EventResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new IdentityResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new MarketplaceResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new OperationResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new ServiceResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
+        new SubscriptionResourceConfig().getClassesToRegister().forEach(c -> classesToRegister.add(c));
 
-                return classesToRegister;
-        }
+        return classesToRegister;
+    }
 }

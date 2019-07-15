@@ -23,7 +23,7 @@ import java.util.Set;
  *
  * @author Weiser
  */
-public class OperationResourceConfig implements ResourceConfiguration {
+public class OperationResourceConfig extends ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {

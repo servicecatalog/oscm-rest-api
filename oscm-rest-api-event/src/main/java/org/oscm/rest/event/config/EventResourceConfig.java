@@ -23,7 +23,7 @@ import java.util.Set;
  *
  * @author Weiser
  */
-public class EventResourceConfig implements ResourceConfiguration {
+public class EventResourceConfig extends ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {

@@ -24,7 +24,7 @@ import java.util.Set;
  *
  * @author Weiser
  */
-public class MarketplaceResourceConfig implements ResourceConfiguration {
+public class MarketplaceResourceConfig extends ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {

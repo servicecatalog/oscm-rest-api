@@ -26,7 +26,7 @@ import java.util.Set;
  * @author Weiser
  */
 @ApplicationPath("")
-public class SubscriptionResourceConfig implements ResourceConfiguration {
+public class SubscriptionResourceConfig extends ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {

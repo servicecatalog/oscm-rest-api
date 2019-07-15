@@ -9,8 +9,10 @@
  */
 package org.oscm.rest.common;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.oscm.internal.vo.BaseVO;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.WebApplicationException;
 
 /**
