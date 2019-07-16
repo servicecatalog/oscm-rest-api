@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOPricedRole;
 import org.oscm.internal.vo.VORoleDefinition;
+import org.oscm.rest.common.TestContants;
 
 import java.math.BigDecimal;
 
@@ -23,8 +24,8 @@ public class PricedRoleRepresentationTest {
   @Test
   public void shouldUpdateVOPricedRole() {
     PricedRoleRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOPricedRole result = representation.getVO();
@@ -80,18 +81,18 @@ public class PricedRoleRepresentationTest {
     PricedRoleRepresentation representation = new PricedRoleRepresentation();
     representation.setPricePerUser(BigDecimal.TEN);
     RoleDefinitionRepresentation roleDefinitionRepresentation = new RoleDefinitionRepresentation();
-    roleDefinitionRepresentation.setRoleId("Role100");
+    roleDefinitionRepresentation.setRoleId(TestContants.STRING_VALUE);
     representation.setRole(roleDefinitionRepresentation);
     return representation;
   }
 
   private VOPricedRole createVO() {
     VOPricedRole voPricedRole = new VOPricedRole();
-    voPricedRole.setVersion(100);
-    voPricedRole.setKey(100L);
+    voPricedRole.setVersion(TestContants.INTEGER_VALUE);
+    voPricedRole.setKey(TestContants.LONG_VALUE);
     voPricedRole.setPricePerUser(BigDecimal.TEN);
     VORoleDefinition voRoleDefinition = new VORoleDefinition();
-    voRoleDefinition.setDescription("Description100");
+    voRoleDefinition.setDescription(TestContants.STRING_VALUE);
     voPricedRole.setRole(voRoleDefinition);
     return voPricedRole;
   }

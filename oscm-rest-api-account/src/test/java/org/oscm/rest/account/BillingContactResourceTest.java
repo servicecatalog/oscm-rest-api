@@ -44,9 +44,9 @@ public class BillingContactResourceTest {
 
   @BeforeEach
   public void setUp() {
-    representation = createBillingContactRepresentation();
+    representation = SampleTestDataUtility.createBillingContactRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createAccountParameters();
   }
 
   @AfterEach
@@ -146,17 +146,5 @@ public class BillingContactResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private BillingContactRepresentation createBillingContactRepresentation() {
-    BillingContactRepresentation representation = new BillingContactRepresentation();
-    representation.setId(123L);
-    return representation;
-  }
-
-  private AccountParameters createParameters() {
-    AccountParameters parameters = new AccountParameters();
-    parameters.setOrgId("orgId");
-    return parameters;
   }
 }

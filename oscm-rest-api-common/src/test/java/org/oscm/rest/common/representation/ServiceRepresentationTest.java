@@ -3,6 +3,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOService;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,8 +12,8 @@ public class ServiceRepresentationTest {
     @Test
     public void shouldUpdateVOService() {
         ServiceRepresentation serviceRepresentation = createRepresentation();
-        serviceRepresentation.setETag(100L);
-        serviceRepresentation.setId(100L);
+        serviceRepresentation.setETag(TestContants.LONG_VALUE);
+        serviceRepresentation.setId(TestContants.LONG_VALUE);
 
         serviceRepresentation.update();
         VOService result = serviceRepresentation.getVO();
@@ -51,8 +52,8 @@ public class ServiceRepresentationTest {
 
     private VOService createVO() {
         VOService voService = new VOService();
-        voService.setServiceId("100ID");
-        voService.setVersion(100);
+        voService.setServiceId(TestContants.STRING_VALUE);
+        voService.setVersion(TestContants.INTEGER_VALUE);
         return voService;
     }
 
@@ -60,5 +61,4 @@ public class ServiceRepresentationTest {
         ServiceRepresentation serviceRepresentation = new ServiceRepresentation();
         return serviceRepresentation;
     }
-
 }

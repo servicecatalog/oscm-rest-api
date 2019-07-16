@@ -51,9 +51,9 @@ public class TechnicalServiceResourceTest {
 
   @BeforeEach
   public void setUp() {
-    technicalServiceRepresentation = new TechnicalServiceRepresentation();
+    technicalServiceRepresentation = SampleTestDataUtility.createTSRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -211,11 +211,5 @@ public class TechnicalServiceResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

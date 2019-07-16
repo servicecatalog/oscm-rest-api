@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.oscm.internal.types.enumtypes.ConfigurationKey;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOConfigurationSetting;
+import org.oscm.rest.common.TestContants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,11 @@ class SettingRepresentationTest {
   @Test
   public void shouldUpdateVOConfigurationSetting() {
     SettingRepresentation representation = new SettingRepresentation();
-    representation.setContextId("12345");
+    representation.setContextId(TestContants.STRING_NUM_VALUE);
     representation.setInformationId(configurationKey);
-    representation.setId(12345L);
-    representation.setValue("value");
-    representation.setETag(6789L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setValue(TestContants.STRING_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOConfigurationSetting result = representation.getVO();
@@ -77,7 +78,7 @@ class SettingRepresentationTest {
   @Test
   public void shouldConvertSettingsRepresentationToCollection() {
     VOConfigurationSetting voConfigurationSetting = new VOConfigurationSetting();
-    voConfigurationSetting.setValue("value123");
+    voConfigurationSetting.setValue(TestContants.STRING_VALUE);
 
     List<VOConfigurationSetting> settings = new ArrayList<>();
     settings.add(voConfigurationSetting);
@@ -100,11 +101,11 @@ class SettingRepresentationTest {
 
   private VOConfigurationSetting createVO() {
     VOConfigurationSetting configurationSetting = new VOConfigurationSetting();
-    configurationSetting.setContextId("12345");
+    configurationSetting.setContextId(TestContants.STRING_NUM_VALUE);
     configurationSetting.setInformationId(configurationKey);
-    configurationSetting.setKey(12345L);
-    configurationSetting.setValue("value");
-    configurationSetting.setVersion(6789);
+    configurationSetting.setKey(TestContants.LONG_VALUE);
+    configurationSetting.setValue(TestContants.STRING_VALUE);
+    configurationSetting.setVersion(TestContants.INTEGER_VALUE);
     return configurationSetting;
   }
 }

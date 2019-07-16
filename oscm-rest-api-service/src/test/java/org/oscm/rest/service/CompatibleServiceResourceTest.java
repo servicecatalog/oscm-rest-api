@@ -44,9 +44,9 @@ public class CompatibleServiceResourceTest {
 
   @BeforeEach
   public void setUp() {
-    serviceRepresentation = new ServiceRepresentation();
+    serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -103,11 +103,5 @@ public class CompatibleServiceResourceTest {
 
   private RepresentationCollection<ServiceRepresentation> getContent() {
     return new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation));
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

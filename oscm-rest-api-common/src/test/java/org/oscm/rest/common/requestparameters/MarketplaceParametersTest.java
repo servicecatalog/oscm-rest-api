@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VOService;
 import org.oscm.rest.common.MarketplaceListType;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,15 +19,15 @@ public class MarketplaceParametersTest {
         public void shouldCreate() {
                 MarketplaceParameters parameters = new MarketplaceParameters();
              parameters.setListType(MarketplaceListType.OWNED);
-             parameters.setMarketplaceId("mId");
-             parameters.setServiceKey(123L);
+             parameters.setMarketplaceId(TestContants.STRING_VALUE);
+             parameters.setServiceKey(TestContants.LONG_VALUE);
 
              parameters.validateParameters();
              parameters.update();
 
              assertThat(parameters).extracting(MarketplaceParameters::getListType).isEqualTo(MarketplaceListType.OWNED);
-             assertThat(parameters).extracting(MarketplaceParameters::getMarketplaceId).isEqualTo("mId");
-             assertThat(parameters).extracting(MarketplaceParameters::getServiceKey).isEqualTo(123L);
+             assertThat(parameters).extracting(MarketplaceParameters::getMarketplaceId).isEqualTo(TestContants.STRING_VALUE);
+             assertThat(parameters).extracting(MarketplaceParameters::getServiceKey).isEqualTo(TestContants.LONG_VALUE);
         }
 
         @Test

@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOOrganization;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -110,35 +111,35 @@ public class OrganizationRepresentationTest {
 
   private OrganizationRepresentation createRepresentation() {
     OrganizationRepresentation orgRepresentation = new OrganizationRepresentation();
-    orgRepresentation.setAddress("address");
-    orgRepresentation.setDescription("desc");
-    orgRepresentation.setDomicileCountry("dCountry");
-    orgRepresentation.setEmail("email");
-    orgRepresentation.setId(123L);
-    orgRepresentation.setLocale("en_US");
-    orgRepresentation.setName("name");
-    orgRepresentation.setOrganizationId("orgId");
-    orgRepresentation.setPhone("111111111");
-    orgRepresentation.setSupportEmail("a@a.com");
-    orgRepresentation.setETag(456L);
-    orgRepresentation.setUrl("url");
+    orgRepresentation.setAddress(TestContants.STRING_VALUE);
+    orgRepresentation.setDescription(TestContants.STRING_VALUE);
+    orgRepresentation.setDomicileCountry(TestContants.STRING_VALUE);
+    orgRepresentation.setEmail(TestContants.STRING_VALUE);
+    orgRepresentation.setId(TestContants.LONG_VALUE);
+    orgRepresentation.setLocale(TestContants.STRING_VALUE);
+    orgRepresentation.setName(TestContants.STRING_VALUE);
+    orgRepresentation.setOrganizationId(TestContants.STRING_VALUE);
+    orgRepresentation.setPhone(TestContants.STRING_NUM_VALUE);
+    orgRepresentation.setSupportEmail(TestContants.STRING_VALUE);
+    orgRepresentation.setETag(TestContants.LONG_VALUE);
+    orgRepresentation.setUrl(TestContants.STRING_VALUE);
     return orgRepresentation;
   }
 
   private VOOrganization createVO() {
     VOOrganization voOrganization = new VOOrganization();
-    voOrganization.setAddress("address");
-    voOrganization.setDescription("desc");
-    voOrganization.setDomicileCountry("dCountry");
-    voOrganization.setEmail("email");
-    voOrganization.setKey(123L);
-    voOrganization.setLocale("en_US");
-    voOrganization.setName("name");
-    voOrganization.setOrganizationId("orgId");
-    voOrganization.setPhone("111111111");
-    voOrganization.setSupportEmail("a@a.com");
-    voOrganization.setVersion(456);
-    voOrganization.setUrl("url");
+    voOrganization.setAddress(TestContants.STRING_VALUE);
+    voOrganization.setDescription(TestContants.STRING_VALUE);
+    voOrganization.setDomicileCountry(TestContants.STRING_VALUE);
+    voOrganization.setEmail(TestContants.STRING_VALUE);
+    voOrganization.setKey(TestContants.LONG_VALUE);
+    voOrganization.setLocale(TestContants.STRING_VALUE);
+    voOrganization.setName(TestContants.STRING_VALUE);
+    voOrganization.setOrganizationId(TestContants.STRING_VALUE);
+    voOrganization.setPhone(TestContants.STRING_NUM_VALUE);
+    voOrganization.setSupportEmail(TestContants.STRING_VALUE);
+    voOrganization.setVersion(TestContants.INTEGER_VALUE);
+    voOrganization.setUrl(TestContants.STRING_VALUE);
     return voOrganization;
   }
 }

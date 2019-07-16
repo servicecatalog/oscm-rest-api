@@ -38,9 +38,9 @@ class MarketplaceResourceTest {
 
     @BeforeEach
     public void setUp() {
-        marketplaceRepresentation = new MarketplaceRepresentation();
+        marketplaceRepresentation = SampleTestDataUtility.createMarketplaceRepresentation();
         uriInfo = SampleTestDataUtility.createUriInfo();
-        marketplaceParameters = createParameters();
+        marketplaceParameters = SampleTestDataUtility.createMarketplaceParameters();
     }
 
     @AfterEach
@@ -144,13 +144,5 @@ class MarketplaceResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-    }
-
-    private MarketplaceParameters createParameters() {
-        MarketplaceParameters parameters = new MarketplaceParameters();
-        parameters.setId(100L);
-        parameters.setVersion(100);
-        parameters.validateETag();
-        return parameters;
     }
 }

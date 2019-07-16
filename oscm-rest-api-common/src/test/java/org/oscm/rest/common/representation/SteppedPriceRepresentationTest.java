@@ -12,6 +12,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSteppedPrice;
+import org.oscm.rest.common.TestContants;
 
 import java.math.BigDecimal;
 
@@ -22,8 +23,8 @@ public class SteppedPriceRepresentationTest {
   @Test
   public void shouldUpdateVOSteppedPrice() {
     SteppedPriceRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOSteppedPrice result = representation.getVO();
@@ -74,16 +75,16 @@ public class SteppedPriceRepresentationTest {
 
   private SteppedPriceRepresentation createRepresentation() {
     SteppedPriceRepresentation representation = new SteppedPriceRepresentation();
-    representation.setLimit(100L);
+    representation.setLimit(TestContants.LONG_VALUE);
     representation.setPrice(BigDecimal.TEN);
     return representation;
   }
 
   private VOSteppedPrice createVO() {
     VOSteppedPrice voSteppedPrice = new VOSteppedPrice();
-    voSteppedPrice.setVersion(100);
-    voSteppedPrice.setKey(100L);
-    voSteppedPrice.setLimit(100L);
+    voSteppedPrice.setVersion(TestContants.INTEGER_VALUE);
+    voSteppedPrice.setKey(TestContants.LONG_VALUE);
+    voSteppedPrice.setLimit(TestContants.LONG_VALUE);
     voSteppedPrice.setPrice(BigDecimal.TEN);
     return voSteppedPrice;
   }

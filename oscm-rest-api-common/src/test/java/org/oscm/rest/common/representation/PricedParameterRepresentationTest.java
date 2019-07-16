@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.TestContants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class PricedParameterRepresentationTest {
   @Test
   public void shouldUpdateVOPricedParameter() {
     PricedParameterRepresentation representation = createRepresentation();
-    representation.setETag(100L);
-    representation.setId(100L);
+    representation.setETag(TestContants.LONG_VALUE);
+    representation.setId(TestContants.LONG_VALUE);
 
     representation.update();
     VOPricedParameter result = representation.getVO();
@@ -104,10 +105,10 @@ public class PricedParameterRepresentationTest {
 
   private PricedParameterRepresentation createRepresentation() {
     PricedParameterRepresentation representation = new PricedParameterRepresentation();
-    representation.setParameterKey(100L);
+    representation.setParameterKey(TestContants.LONG_VALUE);
     List<PricedOptionRepresentation> list = new ArrayList<>();
     PricedOptionRepresentation pricedOptionRepresentation = new PricedOptionRepresentation();
-    pricedOptionRepresentation.setParameterOptionKey(123L);
+    pricedOptionRepresentation.setParameterOptionKey(TestContants.LONG_VALUE);
     list.add(pricedOptionRepresentation);
     List<PricedRoleRepresentation> list2 = new ArrayList<>();
     PricedRoleRepresentation pricedRoleRepresentation = new PricedRoleRepresentation();
@@ -120,12 +121,12 @@ public class PricedParameterRepresentationTest {
     representation.setRoleSpecificUserPrices(list2);
     List<SteppedPriceRepresentation> list3 = new ArrayList<>();
     SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-    steppedPriceRepresentation.setLimit(456L);
+    steppedPriceRepresentation.setLimit(TestContants.LONG_VALUE);
     list3.add(steppedPriceRepresentation);
     representation.setSteppedPrices(list3);
     ParameterDefinitionRepresentation parameterDefinitionRepresentation =
         new ParameterDefinitionRepresentation();
-    parameterDefinitionRepresentation.setDescription("Description789");
+    parameterDefinitionRepresentation.setDescription(TestContants.STRING_VALUE);
     representation.setParameterDef(parameterDefinitionRepresentation);
     return representation;
   }

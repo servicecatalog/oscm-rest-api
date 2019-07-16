@@ -12,6 +12,7 @@ package org.oscm.rest.common.representation;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VORoleDefinition;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,8 +21,8 @@ public class RoleDefinitionRepresentationTest {
   @Test
   public void shouldUpdateVORoleDefinition() {
     RoleDefinitionRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VORoleDefinition result = representation.getVO();
@@ -88,19 +89,19 @@ public class RoleDefinitionRepresentationTest {
 
   private VORoleDefinition createVO() {
     VORoleDefinition voRoleDefinition = new VORoleDefinition();
-    voRoleDefinition.setDescription("Description");
-    voRoleDefinition.setKey(100L);
-    voRoleDefinition.setName("Name");
-    voRoleDefinition.setRoleId("100");
-    voRoleDefinition.setVersion(100);
+    voRoleDefinition.setDescription(TestContants.STRING_VALUE);
+    voRoleDefinition.setKey(TestContants.LONG_VALUE);
+    voRoleDefinition.setName(TestContants.STRING_VALUE);
+    voRoleDefinition.setRoleId(TestContants.STRING_VALUE);
+    voRoleDefinition.setVersion(TestContants.INTEGER_VALUE);
     return voRoleDefinition;
   }
 
   private RoleDefinitionRepresentation createRepresentation() {
     RoleDefinitionRepresentation representation = new RoleDefinitionRepresentation();
-    representation.setDescription("Description");
-    representation.setName("Name");
-    representation.setRoleId("100");
+    representation.setDescription(TestContants.STRING_VALUE);
+    representation.setName(TestContants.STRING_VALUE);
+    representation.setRoleId(TestContants.STRING_NUM_VALUE);
     return representation;
   }
 }

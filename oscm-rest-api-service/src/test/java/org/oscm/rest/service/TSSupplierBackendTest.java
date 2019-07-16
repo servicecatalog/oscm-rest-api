@@ -39,9 +39,9 @@ public class TSSupplierBackendTest {
   public void setUp() {
     resource = new TSSupplierResource();
     resource.setSb(backend);
-    vo = createVO();
-    representation = createRepresentation();
-    parameters = createParameters();
+    vo = SampleTestDataUtility.createVOOrganization();
+    representation = SampleTestDataUtility.createOrgRepresentation();
+    parameters = SampleTestDataUtility.createServiceParameters();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -92,22 +92,5 @@ public class TSSupplierBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(1000L);
-    return parameters;
-  }
-
-  private OrganizationRepresentation createRepresentation() {
-    OrganizationRepresentation representation = new OrganizationRepresentation(vo);
-    representation.setOrganizationId("orgId");
-    return representation;
-  }
-
-  private VOOrganization createVO() {
-    VOOrganization vo = new VOOrganization();
-    return vo;
   }
 }

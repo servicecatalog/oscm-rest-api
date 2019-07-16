@@ -45,9 +45,9 @@ public class TSSupplierResourceTest {
 
   @BeforeEach
   public void setUp() {
-    organizationRepresentation = new OrganizationRepresentation();
+    organizationRepresentation = SampleTestDataUtility.createOrgRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -117,11 +117,5 @@ public class TSSupplierResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

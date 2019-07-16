@@ -43,20 +43,11 @@ public class UsageLicenseResourceTest {
 
     @BeforeEach
     public void setUp() {
-        subscriptionParameters = createParameters();
+        subscriptionParameters = SampleTestDataUtility.createSubscriptionParameters();
         uriInfo = SampleTestDataUtility.createUriInfo();
-        subscriptionRepresentation = new SubscriptionRepresentation();
-        VOUsageLicense voUsageLicense = setUpUsageLicense();
-        usageLicenseRepresentation = new UsageLicenseRepresentation(voUsageLicense);
-    }
-
-    private VOUsageLicense setUpUsageLicense() {
-        VOUsageLicense voUsageLicense = new VOUsageLicense();
-        VORoleDefinition voRoleDefinition = new VORoleDefinition();
-        voUsageLicense.setRoleDefinition(voRoleDefinition);
-        VOUser voUser = new VOUser();
-        voUsageLicense.setUser(voUser);
-        return voUsageLicense;
+        subscriptionRepresentation = SampleTestDataUtility.createSubscriptionRepresentation();
+        VOUsageLicense voUsageLicense = SampleTestDataUtility.createVOUsageLicense();
+        usageLicenseRepresentation = SampleTestDataUtility.createUsageLicenseRepresentation(voUsageLicense);
     }
 
     @AfterEach
@@ -143,11 +134,4 @@ public class UsageLicenseResourceTest {
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
     }
-
-    private SubscriptionParameters createParameters() {
-        SubscriptionParameters parameters = new SubscriptionParameters();
-        parameters.setId(100L);
-        return parameters;
-    }
-
 }

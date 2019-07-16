@@ -22,17 +22,17 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.OperatorService;
-import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.VOBillingContact;
 import org.oscm.internal.vo.VOOperatorOrganization;
 import org.oscm.internal.vo.VOPaymentInfo;
-import org.oscm.internal.vo.VOPaymentType;
+import org.oscm.rest.common.TestContants;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,12 +67,12 @@ public class AccountBackendTest {
     paymentInfoResource.setAb(backend);
 
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    billingContactRepresentation = createBilingContactRepresentation();
-    paymentInfoRepresentation = createPaymentInfoRepresentation();
-    billingContactVO = createBillingContactVO();
-    paymentInfoVO = createPaymentInfoVO();
-    operatorOrgVO = createOperatorOrgVO();
+    parameters = SampleTestDataUtility.createAccountParameters();
+    billingContactRepresentation = SampleTestDataUtility.createBillingContactRepresentation();
+    paymentInfoRepresentation = SampleTestDataUtility.createPaymentInfoRepresentation();
+    billingContactVO = SampleTestDataUtility.createBillingContactVO();
+    paymentInfoVO = SampleTestDataUtility.createPaymentInfoVO();
+    operatorOrgVO = SampleTestDataUtility.createOperatorOrgVO();
   }
 
   @Test
@@ -257,63 +257,13 @@ public class AccountBackendTest {
     representation.setUser(new UserRepresentation());
 
     return Stream.of(
-        Arguments.of(createAccountRepresentation(OrganizationRegistrationMode.DEFAULT)),
-        Arguments.of(createAccountRepresentation(OrganizationRegistrationMode.SELF_REGISTRATION)),
-        Arguments.of(createAccountRepresentation(OrganizationRegistrationMode.KNOWN_CUSTOMER)));
-  }
-
-  private static AccountRepresentation createAccountRepresentation(
-      OrganizationRegistrationMode mode) {
-    AccountRepresentation representation = new AccountRepresentation();
-    representation.setOrganization(new OrganizationRepresentation());
-    representation.setUser(new UserRepresentation());
-
-    if (!OrganizationRegistrationMode.KNOWN_CUSTOMER.equals(mode)) {
-      representation.setOrganizationRoles(
-          new OrganizationRoleType[] {OrganizationRoleType.SUPPLIER});
-    }
-    if (OrganizationRegistrationMode.SELF_REGISTRATION.equals(mode))
-      representation.setPassword("password");
-
-    return representation;
-  }
-
-  private AccountParameters createParameters() {
-    AccountParameters parameters = new AccountParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private BillingContactRepresentation createBilingContactRepresentation() {
-    return new BillingContactRepresentation();
-  }
-
-  private PaymentInfoRepresentation createPaymentInfoRepresentation() {
-    return new PaymentInfoRepresentation();
-  }
-
-  private VOBillingContact createBillingContactVO() {
-    VOBillingContact vo = new VOBillingContact();
-    vo.setKey(123L);
-    return vo;
-  }
-
-  private VOPaymentInfo createPaymentInfoVO() {
-    VOPaymentInfo vo = new VOPaymentInfo();
-    vo.setKey(123L);
-    vo.setPaymentType(new VOPaymentType());
-    return vo;
-  }
-
-  private VOOperatorOrganization createOperatorOrgVO() {
-    VOOperatorOrganization vo = new VOOperatorOrganization();
-    vo.setOrganizationId("orgid");
-    return vo;
-  }
-
-  private enum OrganizationRegistrationMode {
-    DEFAULT,
-    SELF_REGISTRATION,
-    KNOWN_CUSTOMER
+        Arguments.of(SampleTestDataUtility.createAccountRepresentation(
+                Optional.of(TestContants.OrganizationRegistrationMode.DEFAULT))),
+        Arguments.of(SampleTestDataUtility.createAccountRepresentation(
+                Optional.of(
+                        TestContants.OrganizationRegistrationMode.SELF_REGISTRATION))),
+        Arguments.of(SampleTestDataUtility.createAccountRepresentation(
+                Optional
+                        .of(TestContants.OrganizationRegistrationMode.KNOWN_CUSTOMER))));
   }
 }

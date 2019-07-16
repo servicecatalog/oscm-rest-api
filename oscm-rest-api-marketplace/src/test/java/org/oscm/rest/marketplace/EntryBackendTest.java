@@ -46,9 +46,9 @@ public class EntryBackendTest {
     resource = new EntryResource();
     resource.setEb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createMarketplaceParameters();
+    representation = SampleTestDataUtility.createEntryRepresentation();
+    vo = SampleTestDataUtility.createVOServiceDetails();
   }
 
   @Test
@@ -63,21 +63,5 @@ public class EntryBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private MarketplaceParameters createParameters() {
-    MarketplaceParameters parameters = new MarketplaceParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private EntryRepresentation createRepresentation() {
-    EntryRepresentation representation = new EntryRepresentation();
-    representation.setId(123L);
-    return representation;
-  }
-
-  private VOServiceDetails createVO() {
-    return new VOServiceDetails();
   }
 }

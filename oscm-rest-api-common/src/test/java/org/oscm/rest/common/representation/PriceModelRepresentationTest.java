@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.PriceModelType;
 import org.oscm.internal.types.enumtypes.PricingPeriod;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.TestContants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ class PriceModelRepresentationTest {
     @Test
     public void shouldUpdateVOPriceModel() {
         PriceModelRepresentation representation = createRepresentation();
-        representation.setId(100L);
-        representation.setETag(100L);
+        representation.setId(TestContants.LONG_VALUE);
+        representation.setETag(TestContants.LONG_VALUE);
 
         representation.update();
         VOPriceModel result = representation.getVO();
@@ -143,10 +144,10 @@ class PriceModelRepresentationTest {
         consideredEvents.add(voPricedEvent);
         voPriceModel.setConsideredEvents(consideredEvents);
 
-        voPriceModel.setCurrencyISOCode("ISO100");
-        voPriceModel.setDescription("Description");
-        voPriceModel.setVersion(100);
-        voPriceModel.setKey(100L);
+        voPriceModel.setCurrencyISOCode(TestContants.STRING_VALUE);
+        voPriceModel.setDescription(TestContants.STRING_VALUE);
+        voPriceModel.setVersion(TestContants.INTEGER_VALUE);
+        voPriceModel.setKey(TestContants.LONG_VALUE);
         voPriceModel.setOneTimeFee(BigDecimal.TEN);
         voPriceModel.setPeriod(PricingPeriod.MONTH);
         voPriceModel.setPricePerUserAssignment(BigDecimal.ONE);
@@ -155,23 +156,23 @@ class PriceModelRepresentationTest {
         VOPricedRole voPricedRole = new VOPricedRole();
         voPricedRole.setPricePerUser(BigDecimal.ONE);
         VORoleDefinition voRoleDefinition = new VORoleDefinition();
-        voRoleDefinition.setDescription("Description");
+        voRoleDefinition.setDescription(TestContants.STRING_VALUE);
         voPricedRole.setRole(voRoleDefinition);
         roleSpecificUserPrices.add(voPricedRole);
         voPriceModel.setRoleSpecificUserPrices(roleSpecificUserPrices);
 
         List<VOPricedParameter> selectedParameters = new ArrayList<>();
         VOPricedParameter voPricedParameter = new VOPricedParameter();
-        voPricedParameter.setParameterKey(105L);
+        voPricedParameter.setParameterKey(TestContants.LONG_VALUE);
         VOParameterDefinition voParameterDefinition = new VOParameterDefinition();
-        voParameterDefinition.setKey(100L);
+        voParameterDefinition.setKey(TestContants.LONG_VALUE);
         voPricedParameter.setVoParameterDef(voParameterDefinition);
         selectedParameters.add(voPricedParameter);
         voPriceModel.setSelectedParameters(selectedParameters);
 
         List<VOSteppedPrice> steppedPrices = new ArrayList<>();
         VOSteppedPrice voSteppedPrice = new VOSteppedPrice();
-        voSteppedPrice.setLimit(110L);
+        voSteppedPrice.setLimit(TestContants.LONG_VALUE);
         steppedPrices.add(voSteppedPrice);
         voPriceModel.setSteppedPrices(steppedPrices);
 
@@ -188,7 +189,7 @@ class PriceModelRepresentationTest {
         consideredEvents.add(pricedEventRepresentation);
         priceModelRepresentation.setConsideredEvents(consideredEvents);
 
-        priceModelRepresentation.setCurrencyISOCode("100ISO");
+        priceModelRepresentation.setCurrencyISOCode(TestContants.STRING_VALUE);
         priceModelRepresentation.setOneTimeFee(BigDecimal.TEN);
         priceModelRepresentation.setPeriod(PricingPeriod.HOUR);
         priceModelRepresentation.setPricePerPeriod(BigDecimal.ONE);
@@ -202,18 +203,17 @@ class PriceModelRepresentationTest {
 
         List<PricedParameterRepresentation> selectedParameters = new ArrayList<>();
         PricedParameterRepresentation pricedParameterRepresentation = new PricedParameterRepresentation();
-        pricedParameterRepresentation.setParameterKey(100L);
+        pricedParameterRepresentation.setParameterKey(TestContants.LONG_VALUE);
         selectedParameters.add(pricedParameterRepresentation);
         priceModelRepresentation.setSelectedParameters(selectedParameters);
 
         List<SteppedPriceRepresentation> steppedPrices = new ArrayList<>();
         SteppedPriceRepresentation steppedPriceRepresentation = new SteppedPriceRepresentation();
-        steppedPriceRepresentation.setLimit(100L);
+        steppedPriceRepresentation.setLimit(TestContants.LONG_VALUE);
         steppedPrices.add(steppedPriceRepresentation);
         priceModelRepresentation.setSteppedPrices(steppedPrices);
 
         priceModelRepresentation.setType(PriceModelType.FREE_OF_CHARGE);
         return priceModelRepresentation;
     }
-
 }

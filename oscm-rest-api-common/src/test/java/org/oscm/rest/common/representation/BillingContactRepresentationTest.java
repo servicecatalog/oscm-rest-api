@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.VOBillingContact;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -81,25 +82,25 @@ public class BillingContactRepresentationTest {
 
   private BillingContactRepresentation createRepresentation() {
     BillingContactRepresentation contactRepresentation = new BillingContactRepresentation();
-    contactRepresentation.setAddress("address");
-    contactRepresentation.setCompanyName("companyName");
-    contactRepresentation.setContactId("contactId");
-    contactRepresentation.setEmail("email");
-    contactRepresentation.setId(123L);
+    contactRepresentation.setAddress(TestContants.STRING_VALUE);
+    contactRepresentation.setCompanyName(TestContants.STRING_VALUE);
+    contactRepresentation.setContactId(TestContants.STRING_VALUE);
+    contactRepresentation.setEmail(TestContants.STRING_VALUE);
+    contactRepresentation.setId(TestContants.LONG_VALUE);
     contactRepresentation.setOrgAddressUsed(true);
-    contactRepresentation.setETag(456L);
+    contactRepresentation.setETag(TestContants.LONG_VALUE);
     return contactRepresentation;
   }
 
   private VOBillingContact createVO() {
     VOBillingContact billingContact = new VOBillingContact();
-    billingContact.setAddress("address");
-    billingContact.setCompanyName("companyName");
-    billingContact.setId("contactId");
-    billingContact.setEmail("email");
-    billingContact.setKey(123);
+    billingContact.setAddress(TestContants.STRING_VALUE);
+    billingContact.setCompanyName(TestContants.STRING_VALUE);
+    billingContact.setId(TestContants.STRING_VALUE);
+    billingContact.setEmail(TestContants.STRING_VALUE);
+    billingContact.setKey(TestContants.INTEGER_VALUE);
     billingContact.setOrgAddressUsed(true);
-    billingContact.setVersion(456);
+    billingContact.setVersion(TestContants.INTEGER_VALUE);
     return billingContact;
   }
 }

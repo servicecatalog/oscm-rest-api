@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.EventType;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOEventDefinition;
+import org.oscm.rest.common.TestContants;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,8 +22,8 @@ public class EventDefinitionRepresentationTest {
   @Test
   public void shouldUpdateVOEventDefinition() {
     EventDefinitionRepresentation eventDefinitionRepresentation = createRepresentation();
-    eventDefinitionRepresentation.setETag(100L);
-    eventDefinitionRepresentation.setId(100L);
+    eventDefinitionRepresentation.setETag(TestContants.LONG_VALUE);
+    eventDefinitionRepresentation.setId(TestContants.LONG_VALUE);
 
     eventDefinitionRepresentation.update();
     VOEventDefinition result = eventDefinitionRepresentation.getVO();
@@ -81,20 +82,20 @@ public class EventDefinitionRepresentationTest {
 
   private VOEventDefinition createVO() {
     VOEventDefinition voEventDefinition = new VOEventDefinition();
-    voEventDefinition.setEventDescription("description");
-    voEventDefinition.setEventId("100");
+    voEventDefinition.setEventDescription(TestContants.STRING_VALUE);
+    voEventDefinition.setEventId(TestContants.STRING_NUM_VALUE);
     voEventDefinition.setEventType(EventType.PLATFORM_EVENT);
-    voEventDefinition.setVersion(100);
+    voEventDefinition.setVersion(TestContants.INTEGER_VALUE);
     return voEventDefinition;
   }
 
   private EventDefinitionRepresentation createRepresentation() {
     EventDefinitionRepresentation eventDefinitionRepresentation =
         new EventDefinitionRepresentation();
-    eventDefinitionRepresentation.setEventDescription("description");
-    eventDefinitionRepresentation.setEventId("100");
+    eventDefinitionRepresentation.setEventDescription(TestContants.STRING_VALUE);
+    eventDefinitionRepresentation.setEventId(TestContants.STRING_NUM_VALUE);
     eventDefinitionRepresentation.setEventType(EventType.PLATFORM_EVENT);
-    eventDefinitionRepresentation.setVersion(100);
+    eventDefinitionRepresentation.setVersion(TestContants.INTEGER_VALUE);
     return eventDefinitionRepresentation;
   }
 }

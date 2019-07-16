@@ -43,9 +43,9 @@ public class UserResourceTest {
 
   @BeforeEach
   public void setUp() {
-    userRepresentation = createUserRepresentation();
+    userRepresentation = SampleTestDataUtility.createUserRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -143,15 +143,5 @@ public class UserResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private UserRepresentation createUserRepresentation() {
-    return new UserRepresentation();
-  }
-
-  private UserParameters createParameters() {
-    UserParameters userParameters = new UserParameters();
-    userParameters.setUserId("userId");
-    return userParameters;
   }
 }

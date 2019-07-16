@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOServiceOperationParameter;
 import org.oscm.internal.vo.VOTechnicalServiceOperation;
+import org.oscm.rest.common.TestContants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,8 @@ public class OperationRepresentationTest {
   @Test
   public void shouldUpdateVOTechnicalServiceOperation() {
     OperationRepresentation representation = createRepresentation();
-    representation.setId(100L);
-    representation.setETag(100L);
+    representation.setId(TestContants.LONG_VALUE);
+    representation.setETag(TestContants.LONG_VALUE);
 
     representation.update();
     VOTechnicalServiceOperation result = representation.getVO();
@@ -110,13 +111,13 @@ public class OperationRepresentationTest {
 
   private OperationRepresentation createRepresentation() {
     OperationRepresentation representation = new OperationRepresentation();
-    representation.setOperationDescription("Description");
-    representation.setOperationId("100");
-    representation.setOperationName("Name");
+    representation.setOperationDescription(TestContants.STRING_VALUE);
+    representation.setOperationId(TestContants.STRING_NUM_VALUE);
+    representation.setOperationName(TestContants.STRING_VALUE);
     List<OperationParameterRepresentation> list = new ArrayList<>();
     OperationParameterRepresentation operationParameterRepresentation =
         new OperationParameterRepresentation();
-    operationParameterRepresentation.setParameterName("abc123");
+    operationParameterRepresentation.setParameterName(TestContants.STRING_VALUE);
     list.add(operationParameterRepresentation);
     representation.setOperationParameters(list);
     return representation;
@@ -124,16 +125,16 @@ public class OperationRepresentationTest {
 
   private VOTechnicalServiceOperation createVO() {
     VOTechnicalServiceOperation voTechnicalServiceOperation = new VOTechnicalServiceOperation();
-    voTechnicalServiceOperation.setKey(100L);
-    voTechnicalServiceOperation.setOperationDescription("Description");
-    voTechnicalServiceOperation.setOperationId("100");
-    voTechnicalServiceOperation.setOperationName("Name");
+    voTechnicalServiceOperation.setKey(TestContants.LONG_VALUE);
+    voTechnicalServiceOperation.setOperationDescription(TestContants.STRING_VALUE);
+    voTechnicalServiceOperation.setOperationId(TestContants.STRING_NUM_VALUE);
+    voTechnicalServiceOperation.setOperationName(TestContants.STRING_VALUE);
     List<VOServiceOperationParameter> list = new ArrayList<>();
     VOServiceOperationParameter voServiceOperationParameter = new VOServiceOperationParameter();
-    voServiceOperationParameter.setParameterName("abc123");
+    voServiceOperationParameter.setParameterName(TestContants.STRING_VALUE);
     list.add(voServiceOperationParameter);
     voTechnicalServiceOperation.setOperationParameters(list);
-    voServiceOperationParameter.setVersion(100);
+    voServiceOperationParameter.setVersion(TestContants.INTEGER_VALUE);
     return voTechnicalServiceOperation;
   }
 }
