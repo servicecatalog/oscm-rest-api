@@ -9,8 +9,11 @@
  */
 package org.oscm.rest.event;
 
+import constants.CommonConstants;
+import constants.EventConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,14 +46,38 @@ public class EventResource extends RestResource {
   EventBackend eb;
 
   @POST
-  @Operation(summary = "Get a single event.",
+  @Operation(summary = "Create a single event.",
           tags = {"event"},
-          description = "Returns a single event.",
+          description = "Creates a single event.",
           requestBody = @RequestBody(
                   description = "EventRepresentation object to be created.",
                   required = true,
                   content = @Content(
-                          schema = @Schema(implementation = EventRepresentation.class))),
+                          schema = @Schema(implementation = EventRepresentation.class),
+                  examples = {
+                          @ExampleObject(
+                                  name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                  value = EventConstants.EVENT_MINIMUM_SUBSCRIPTION_EVENT_BODY,
+                                  summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY + " "
+                                          + EventConstants.SUBSCRIPTION_EVENT_SUMMARY),
+                          @ExampleObject(
+                                  name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                  value = EventConstants.EVENT_MAXIMUM_SUBSCRIPTION_EVENT_BODY,
+                                  summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY + " "
+                                          + EventConstants.SUBSCRIPTION_EVENT_SUMMARY),
+                          @ExampleObject(
+                                  name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
+                                          EventConstants.INSTANCE_EVENT_ADDITIONAL_INFO,
+                                  value = EventConstants.EVENT_MINIMUM_INSTANCE_EVENT_BODY,
+                                  summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY + " " +
+                                          EventConstants.INSTANCE_EVENT_SUMMARY),
+                          @ExampleObject(
+                                  name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
+                                          EventConstants.INSTANCE_EVENT_ADDITIONAL_INFO,
+                                  value = EventConstants.EVENT_MAXIMUM_INSTANCE_EVENT_BODY,
+                                  summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY + " " +
+                                          EventConstants.INSTANCE_EVENT_SUMMARY)
+                  })),
           responses = {
                   @ApiResponse(responseCode = "200", description = "A single event", content = @Content(
                           schema = @Schema(implementation = EventRepresentation.class)
