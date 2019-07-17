@@ -9,8 +9,11 @@
  */
 package org.oscm.rest.account;
 
+import constants.AccountConstants;
+import constants.CommonConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,9 +43,9 @@ public class PaymentInfoResource extends RestResource {
   AccountBackend ab;
 
   @GET
-  @Operation(summary = "Get all payment info.",
+  @Operation(summary = "Get all payment info",
           tags = {"paymentinfo"},
-          description = "Returns all payment info.",
+          description = "Returns all payment info",
           responses = {
                   @ApiResponse(responseCode = "200", description = "Payment info list", content = @Content(
                           schema = @Schema(implementation = PaymentInfoRepresentation.class)
@@ -55,9 +58,9 @@ public class PaymentInfoResource extends RestResource {
 
   @GET
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Get a single payment info.",
+  @Operation(summary = "Get a single payment info",
           tags = {"paymentinfo"},
-          description = "Returns a single payment info.",
+          description = "Returns a single payment info",
           responses = {
                   @ApiResponse(responseCode = "200", description = "A single payment info", content = @Content(
                           schema = @Schema(implementation = PaymentInfoRepresentation.class)
@@ -70,28 +73,44 @@ public class PaymentInfoResource extends RestResource {
 
   @PUT
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Update a single payment info.",
+  @Operation(summary = "Update a single payment info",
           tags = {"paymentinfo"},
-          description = "Updates a single payment info.",
+          description = "Updates a single payment info",
+          requestBody = @RequestBody(
+                  description = "BillingContactRepresentation object to be updated",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = PaymentInfoRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". "
+                                                  + AccountConstants.PAYMENTINFOS_ADDITIONAL_INFO,
+                                          value= AccountConstants.PAYMENTINFOS_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY),
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". "
+                                                  + AccountConstants.PAYMENTINFOS_ADDITIONAL_INFO,
+                                          value= AccountConstants.PAYMENTINFOS_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                          })),
           responses = {
-                  @ApiResponse(responseCode = "204", description = "Payment info updated successfully.")
+                  @ApiResponse(responseCode = "204", description = "Payment info updated successfully")
           })
   public Response updatePaymentInfo(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object to be updated.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = PaymentInfoRepresentation.class))) PaymentInfoRepresentation content, @BeanParam AccountParameters params)
+      PaymentInfoRepresentation content,
+      @BeanParam AccountParameters params)
       throws Exception {
     return put(uriInfo, ab.putPaymentInfo(), content, params);
   }
 
   @DELETE
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Delete a single payment info.",
+  @Operation(summary = "Delete a single payment info",
           tags = {"paymentinfo"},
-          description = "Deletes a single payment info.",
+          description = "Deletes a single payment info",
           responses = {
-                  @ApiResponse(responseCode = "204", description = "Payment info deleted successfully.")
+                  @ApiResponse(responseCode = "204", description = "Payment info deleted successfully")
           })
   public Response deletePaymentInfo(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
       throws Exception {

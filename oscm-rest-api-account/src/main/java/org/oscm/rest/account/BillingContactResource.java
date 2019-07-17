@@ -9,8 +9,11 @@
  */
 package org.oscm.rest.account;
 
+import constants.AccountConstants;
+import constants.CommonConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,11 +43,14 @@ public class BillingContactResource extends RestResource {
   AccountBackend ab;
 
   @GET
-  @Operation(summary = "Get all billing contacts for the organizations.",
+  @Operation(summary = "Get all billing contacts for the organizations",
           tags = {"billingcontacts"},
-          description = "Returns all billing contacts for the organizations.",
+          description = "Returns all billing contacts for the organizations",
           responses = {
-                  @ApiResponse(responseCode = "200", description = "Billing contacts list", content = @Content(
+                  @ApiResponse(responseCode = "200",
+                          description = "Billing contacts list",
+                          content = @Content(
+                                  mediaType = "application/json",
                                   schema = @Schema(implementation = BillingContactRepresentation.class)
                   ))
           })
@@ -55,9 +61,9 @@ public class BillingContactResource extends RestResource {
 
   @GET
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Get a single billing contact.",
+  @Operation(summary = "Get a single billing contact",
           tags = {"billingcontacts"},
-          description = "Returns a single billing contact.",
+          description = "Returns a single billing contact",
           responses = {
                   @ApiResponse(responseCode = "200", description = "A single billing contact", content = @Content(
                           schema = @Schema(implementation = BillingContactRepresentation.class)
@@ -69,17 +75,31 @@ public class BillingContactResource extends RestResource {
   }
 
   @POST
-  @Operation(summary = "Create a billing contact.",
+  @Operation(summary = "Create a billing contact",
           tags = {"billingcontacts"},
-          description = "Creates a billing contact.",
+          description = "Creates a billing contact",
+          requestBody = @RequestBody(
+                  description = "BillingContactRepresentation object to be created",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = BillingContactRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          value= AccountConstants.BILLING_CONTACT_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          value= AccountConstants.BILLING_CONTACT_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                          }
+                  )),
           responses = {
-                  @ApiResponse(responseCode = "201", description = "Billing contact created successfully.")
+                  @ApiResponse(responseCode = "201", description = "Billing contact created successfully")
           })
   public Response createBillingContact(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object to be created.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
+      BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
     return post(uriInfo, ab.postBillingContact(), content, params);
@@ -87,17 +107,30 @@ public class BillingContactResource extends RestResource {
 
   @PUT
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Update a single billing contact.",
+  @Operation(summary = "Update a single billing contact",
           tags = {"billingcontacts"},
-          description = "Updates a single billing contact.",
+          description = "Updates a single billing contact",
+          requestBody = @RequestBody(
+                  description = "BillingContactRepresentation object to be updated",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = BillingContactRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = "Only required parameters",
+                                          value= AccountConstants.BILLING_CONTACT_MINIMUM_BODY,
+                                          summary = "Minimum body example"),
+                                  @ExampleObject(
+                                          name = "All possible parameters",
+                                          value= AccountConstants.BILLING_CONTACT_MAXIMUM_BODY,
+                                          summary = "Maximum body example")
+                          })),
           responses = {
-                  @ApiResponse(responseCode = "204", description = "Billing contact updated successfully.")
+                  @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
           })
   public Response updateBillingContact(
       @Context UriInfo uriInfo,
-      @RequestBody(description = "BillingContactRepresentation object to be updated.", required = true,
-              content = @Content(
-                      schema = @Schema(implementation = BillingContactRepresentation.class))) BillingContactRepresentation content,
+      BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {
     // FIXME: Move investigate why the same command doesn't work from RestResource#128
@@ -107,11 +140,11 @@ public class BillingContactResource extends RestResource {
 
   @DELETE
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Delete a single billing contact.",
+  @Operation(summary = "Delete a single billing contact",
           tags = {"billingcontacts"},
-          description = "Deletes a single billing contact.",
+          description = "Deletes a single billing contact",
           responses = {
-                  @ApiResponse(responseCode = "204", description = "Billing contact deleted successfully.")
+                  @ApiResponse(responseCode = "204", description = "Billing contact deleted successfully")
           })
   public Response deleteBillingContact(
       @Context UriInfo uriInfo, @BeanParam AccountParameters params)
