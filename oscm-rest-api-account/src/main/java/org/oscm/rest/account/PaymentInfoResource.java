@@ -85,12 +85,12 @@ public class PaymentInfoResource extends RestResource {
                                   @ExampleObject(
                                           name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". "
                                                   + AccountConstants.PAYMENTINFOS_ADDITIONAL_INFO,
-                                          value= AccountConstants.PAYMENTINFOS_MINIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY),
+                                          value = AccountConstants.PAYMENTINFOS_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
                                           name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". "
                                                   + AccountConstants.PAYMENTINFOS_ADDITIONAL_INFO,
-                                          value= AccountConstants.PAYMENTINFOS_MAXIMUM_BODY,
+                                          value = AccountConstants.PAYMENTINFOS_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           })),
           responses = {
