@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class RolesResource extends RestResource {
 
@@ -32,17 +34,14 @@ public class RolesResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getUserRoles(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     return get(uriInfo, ub.getRoles(), params, false);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response setUserRoles(
       @Context UriInfo uriInfo, RolesRepresentation content, @BeanParam UserParameters params)
       throws Exception {

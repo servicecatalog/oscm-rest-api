@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/users")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class UserResource extends RestResource {
 
@@ -34,35 +36,29 @@ public class UserResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getUsers(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     return getCollection(uriInfo, ub.getUsers(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response createUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {
     return post(uriInfo, ub.postUser(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(PATH_USERID)
   public Response getUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     return get(uriInfo, ub.getUser(), params, false);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   @Path(PATH_USERID)
   public Response updateUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
@@ -70,9 +66,7 @@ public class UserResource extends RestResource {
     return put(uriInfo, ub.putUser(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(PATH_USERID)
   public Response deleteUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {

@@ -33,9 +33,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/organizations")
 @Produces(MediaType.APPLICATION_JSON)
-@Since(CommonParams.VERSION_1)
 @Stateless
 public class OrganizationResource extends RestResource {
 
@@ -60,6 +60,7 @@ public class OrganizationResource extends RestResource {
   }
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create an organization",
           tags = {"organization"},
           description = "Creates an organization",

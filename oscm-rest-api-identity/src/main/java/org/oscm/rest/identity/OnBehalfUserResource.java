@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/onbehalfusers")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class OnBehalfUserResource extends RestResource {
 
@@ -32,9 +34,8 @@ public class OnBehalfUserResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response createOnBehalfUser(
       @Context UriInfo uriInfo,
       OnBehalfUserRepresentation content,
@@ -43,9 +44,7 @@ public class OnBehalfUserResource extends RestResource {
     return post(uriInfo, ub.postOnBehalfUser(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   public Response deleteOnBehalfUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     params.setUserIdRequired(false);

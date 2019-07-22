@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID + "/suppliers")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class TSSupplierResource extends RestResource {
 
@@ -32,17 +34,13 @@ public class TSSupplierResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   TSSupplierBackend sb;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getSuppliers(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
       throws Exception {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response addSupplier(
       @Context UriInfo uriInfo,
@@ -52,9 +50,7 @@ public class TSSupplierResource extends RestResource {
     return post(uriInfo, sb.post(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   @Path("/{orgId}")
   public Response removeSupplier(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
       throws Exception {

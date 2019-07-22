@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class SubscriptionResource extends RestResource {
 
@@ -32,17 +34,13 @@ public class SubscriptionResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   SubscriptionBackend sb;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getSubscriptions(
       @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createSubscription(
       @Context UriInfo uriInfo,
@@ -52,18 +50,14 @@ public class SubscriptionResource extends RestResource {
     return post(uriInfo, sb.post(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response getSubscription(
       @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response updateSubscription(
@@ -74,10 +68,7 @@ public class SubscriptionResource extends RestResource {
     return put(uriInfo, sb.put(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path(CommonParams.PATH_ID)
   public Response deleteSubscription(
       @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
     return delete(uriInfo, sb.delete(), params);

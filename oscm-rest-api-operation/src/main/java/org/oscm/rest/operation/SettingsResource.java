@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/settings")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class SettingsResource extends RestResource {
 
@@ -32,17 +34,15 @@ public class SettingsResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   SettingsBackend sb;
 
-  @Since(CommonParams.VERSION_1)
+
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getSettings(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
       throws Exception {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response createSetting(
       @Context UriInfo uriInfo,
       SettingRepresentation content,
@@ -51,18 +51,15 @@ public class SettingsResource extends RestResource {
     return post(uriInfo, sb.post(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response getSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
       throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response updateSetting(
       @Context UriInfo uriInfo,
@@ -72,9 +69,7 @@ public class SettingsResource extends RestResource {
     return put(uriInfo, sb.put(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response deleteSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
       throws Exception {

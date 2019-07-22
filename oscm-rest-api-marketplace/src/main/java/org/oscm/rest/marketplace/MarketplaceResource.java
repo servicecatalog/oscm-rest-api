@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class MarketplaceResource extends RestResource {
 
@@ -32,18 +34,14 @@ public class MarketplaceResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   MarketplaceBackend mb;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getMarketplaces(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
       throws Exception {
     return getCollection(uriInfo, mb.getCollection(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
   public Response createMarketplace(
       @Context UriInfo uriInfo,
       MarketplaceRepresentation content,
@@ -52,19 +50,15 @@ public class MarketplaceResource extends RestResource {
     return post(uriInfo, mb.post(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response getMarketplace(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
       throws Exception {
     return get(uriInfo, mb.get(), params, true);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response updateMarketplace(
       @Context UriInfo uriInfo,
@@ -74,9 +68,7 @@ public class MarketplaceResource extends RestResource {
     return put(uriInfo, mb.put(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response deleteMarketplace(
       @Context UriInfo uriInfo, @BeanParam MarketplaceParameters params) throws Exception {
