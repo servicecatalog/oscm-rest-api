@@ -9,6 +9,7 @@
  */
 package org.oscm.rest.identity;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RequestParameters;
 import org.oscm.rest.common.WebException;
@@ -20,13 +21,17 @@ import javax.ws.rs.WebApplicationException;
 public class UserParameters extends RequestParameters {
 
   @PathParam("userId")
+  @Parameter(description = "User ID")
   private String userId;
 
   @QueryParam("mId")
+  @Parameter(description = "Marketplace ID")
   private String marketplaceId;
 
   @QueryParam("pattern")
+  @Parameter(description = "Pattern")
   private String pattern;
+
   private boolean isUserIdRequired;
 
   @Override
