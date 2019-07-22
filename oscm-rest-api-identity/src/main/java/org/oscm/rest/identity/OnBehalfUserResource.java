@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.identity;
 
-import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.IdentityConstants;
 import io.swagger.v3.oas.annotations.Operation;
