@@ -56,23 +56,12 @@ public class EventResource extends RestResource {
                           schema = @Schema(implementation = EventRepresentation.class),
                   examples = {
                           @ExampleObject(
-                                  name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                                  value = EventConstants.EVENT_MINIMUM_SUBSCRIPTION_EVENT_BODY,
-                                  summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY + " "
-                                          + EventConstants.SUBSCRIPTION_EVENT_SUMMARY),
-                          @ExampleObject(
                                   name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
                                   value = EventConstants.EVENT_MAXIMUM_SUBSCRIPTION_EVENT_BODY,
                                   summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY + " "
                                           + EventConstants.SUBSCRIPTION_EVENT_SUMMARY),
                           @ExampleObject(
-                                  name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
-                                          EventConstants.INSTANCE_EVENT_ADDITIONAL_INFO,
-                                  value = EventConstants.EVENT_MINIMUM_INSTANCE_EVENT_BODY,
-                                  summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY + " " +
-                                          EventConstants.INSTANCE_EVENT_SUMMARY),
-                          @ExampleObject(
-                                  name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
+                                  name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". " +
                                           EventConstants.INSTANCE_EVENT_ADDITIONAL_INFO,
                                   value = EventConstants.EVENT_MAXIMUM_INSTANCE_EVENT_BODY,
                                   summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY + " " +
@@ -83,11 +72,8 @@ public class EventResource extends RestResource {
                           schema = @Schema(implementation = EventRepresentation.class)
                   ))
           })
-  public Response recordEvent(
-      @Context UriInfo uriInfo,
-      EventRepresentation content,
-      @BeanParam EventParameters params)
-      throws Exception {
+  public Response recordEvent(@Context UriInfo uriInfo, EventRepresentation content,
+                              @BeanParam EventParameters params) throws Exception {
     return post(uriInfo, eb.post(), content, params);
   }
 }
