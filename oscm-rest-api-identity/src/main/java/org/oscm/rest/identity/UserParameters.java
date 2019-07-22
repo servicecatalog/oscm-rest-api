@@ -21,15 +21,15 @@ import javax.ws.rs.WebApplicationException;
 public class UserParameters extends RequestParameters {
 
   @PathParam("userId")
-  @Parameter(description = "User ID.")
+  @Parameter(description = "User ID")
   private String userId;
 
   @QueryParam("mId")
-  @Parameter(description = "Marketplace ID.")
+  @Parameter(description = "Marketplace ID")
   private String marketplaceId;
 
   @QueryParam("pattern")
-  @Parameter(description = "Pattern.")
+  @Parameter(description = "Pattern")
   private String pattern;
 
   private boolean isUserIdRequired;
