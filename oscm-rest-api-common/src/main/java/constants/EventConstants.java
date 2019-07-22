@@ -1,4 +1,20 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: Jul 23, 2019
+ *
+ * <p>*****************************************************************************
+ */
+
 package constants;
+
+/**
+ * Class for event api module constants
+ *
+ * @author crystalzord
+ */
 
 public class EventConstants {
 
