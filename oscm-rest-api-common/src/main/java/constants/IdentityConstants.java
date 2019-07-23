@@ -1,4 +1,20 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: Jul 23, 2019
+ *
+ * <p>*****************************************************************************
+ */
+
 package constants;
+
+/**
+ * Class for identity api module constants
+ *
+ * @author crystalzord
+ */
 
 public class IdentityConstants {
 
@@ -45,6 +61,7 @@ public class IdentityConstants {
             "\"etag\": 1\n" +
             "}";
 
+    //FIXME: TMP values shall be removed after fixing problem with redundant id.
     public static final String TMP_USER_MIN_PUT_BODY = "{\n" +
             "\"email\": \"test@email.com\",\n" +
             "\"locale\": \"ja\",\n" +
