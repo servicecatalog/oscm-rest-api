@@ -33,7 +33,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/billingcontacts")
-@Produces(MediaType.APPLICATION_JSON)
 @Since(CommonParams.VERSION_1)
 @Stateless
 public class BillingContactResource extends RestResource {
@@ -128,8 +127,7 @@ public class BillingContactResource extends RestResource {
           responses = {
                   @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
           })
-  public Response updateBillingContact(
-      @Context UriInfo uriInfo,
+  public Response updateBillingContact(@Context UriInfo uriInfo,
       BillingContactRepresentation content,
       @BeanParam AccountParameters params)
       throws Exception {

@@ -9,7 +9,10 @@
  */
 package org.oscm.rest.common;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
@@ -36,6 +39,7 @@ public abstract class RestResource {
    * @param id true if id needs to be validated
    * @return the response with representation or -collection
    */
+  @Produces(MediaType.APPLICATION_JSON)
   protected <R extends Representation, P extends RequestParameters> Response get(
       UriInfo uriInfo, RestBackend.Get<R, P> backend, P params, boolean id) throws Exception {
 
@@ -65,6 +69,7 @@ public abstract class RestResource {
    * @return the response with representation collection
    * @throws Exception
    */
+  @Produces(MediaType.APPLICATION_JSON)
   protected <R extends Representation, P extends RequestParameters> Response getCollection(
       UriInfo uriInfo, RestBackend.GetCollection<R, P> backend, P params) throws Exception {
 
@@ -94,6 +99,8 @@ public abstract class RestResource {
    * @param params the request parameters
    * @return the response with the new location
    */
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   protected <R extends Representation, P extends RequestParameters> Response post(
       UriInfo uriInfo, RestBackend.Post<R, P> backend, R content, P params) throws Exception {
 
@@ -117,6 +124,8 @@ public abstract class RestResource {
    * @param params the request parameters
    * @return the response without content
    */
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   protected <R extends Representation, P extends RequestParameters> Response put(
       UriInfo uriInfo, RestBackend.Put<R, P> backend, R content, P params) throws Exception {
 
@@ -143,6 +152,7 @@ public abstract class RestResource {
    * @param params the request parameters
    * @return the response without content
    */
+  @Produces(MediaType.APPLICATION_JSON)
   protected <P extends RequestParameters> Response delete(
       UriInfo uriInfo, RestBackend.Delete<P> backend, P params) throws Exception {
 

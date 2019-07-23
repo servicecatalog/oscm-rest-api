@@ -20,13 +20,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class UsageLicenseResource extends RestResource {
 
@@ -35,14 +33,12 @@ public class UsageLicenseResource extends RestResource {
   UsageLicenseBackend ulb;
 
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getLicenses(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
       throws Exception {
     return getCollection(uriInfo, ulb.getCollection(), params);
   }
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createLicense(
       @Context UriInfo uriInfo,
       UsageLicenseRepresentation content,
@@ -52,7 +48,6 @@ public class UsageLicenseResource extends RestResource {
   }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("/{licKey}")
   public Response updateLicense(
       @Context UriInfo uriInfo,

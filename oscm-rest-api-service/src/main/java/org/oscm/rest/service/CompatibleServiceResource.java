@@ -19,15 +19,16 @@ import org.oscm.rest.service.data.ServiceRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/compatibleservices")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class CompatibleServiceResource extends RestResource {
 
@@ -43,7 +44,6 @@ public class CompatibleServiceResource extends RestResource {
   }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response setCompatibleServices(
       @Context UriInfo uriInfo,
       RepresentationCollection<ServiceRepresentation> content,
