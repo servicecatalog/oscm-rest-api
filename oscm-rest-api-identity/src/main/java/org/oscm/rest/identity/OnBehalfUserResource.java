@@ -26,15 +26,16 @@ import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/onbehalfusers")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class OnBehalfUserResource extends RestResource {
 
@@ -43,7 +44,6 @@ public class OnBehalfUserResource extends RestResource {
   UserBackend ub;
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a single on behalf user",
           tags = {"onbehalfusers"},
           description = "Creates a single on behalf user",

@@ -31,7 +31,6 @@ import java.util.Collections;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 
@@ -47,27 +46,10 @@ public class TechnicalServiceResource extends RestResource {
     return getCollection(uriInfo, tsb.getCollection(), params);
   }
 
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response createTechnicalService(
-      @Context UriInfo uriInfo,
-      TechnicalServiceRepresentation content,
-      @BeanParam ServiceParameters params)
-      throws Exception {
-    return post(uriInfo, tsb.post(), content, params);
-  }
-
-  @DELETE
-  @Path(CommonParams.PATH_ID)
-  public Response deleteTechnicalService(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
-    return delete(uriInfo, tsb.delete(), params);
-  }
-
   @GET
   @Path(CommonParams.PATH_ID)
   public Response exportTechnicalService(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
+          @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
     // FIXME: Implement this endpoint properly. Use get() from interface
     // key needed
     VOTechnicalService ts = new VOTechnicalService();
@@ -76,11 +58,19 @@ public class TechnicalServiceResource extends RestResource {
     return Response.ok(export, MediaType.APPLICATION_XML_TYPE).build();
   }
 
-  @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response importTechnicalServices(
-      @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
+  @POST
+  public Response createTechnicalService(
+      @Context UriInfo uriInfo,
+      TechnicalServiceRepresentation content,
+      @BeanParam ServiceParameters params)
       throws Exception {
+    return post(uriInfo, tsb.post(), content, params);
+  }
+
+  @PUT
+  public Response importTechnicalServices(
+          @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
+          throws Exception {
     // FIXME: Implement this endpoint properly. Use put() from interface
     // FIXME: This endpoint should accept TSRepresentation instead of byte array (just like every
     // other  PUT endpoint)
@@ -89,5 +79,12 @@ public class TechnicalServiceResource extends RestResource {
       return Response.noContent().build();
     }
     return Response.status(Status.BAD_REQUEST).entity(msg).build();
+  }
+
+  @DELETE
+  @Path(CommonParams.PATH_ID)
+  public Response deleteTechnicalService(
+      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
+    return delete(uriInfo, tsb.delete(), params);
   }
 }

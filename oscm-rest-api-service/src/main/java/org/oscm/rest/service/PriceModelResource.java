@@ -18,15 +18,16 @@ import org.oscm.rest.service.data.PriceModelRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/pricemodel")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class PriceModelResource extends RestResource {
 
@@ -40,8 +41,14 @@ public class PriceModelResource extends RestResource {
     return get(uriInfo, pmb.get(), params, true);
   }
 
+  @GET
+  @Path("/customer/{orgKey}")
+  public Response getForCustomer(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+          throws Exception {
+    return get(uriInfo, pmb.getForCustomer(), params, true);
+  }
+
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response update(
       @Context UriInfo uriInfo,
       PriceModelRepresentation content,
@@ -50,15 +57,7 @@ public class PriceModelResource extends RestResource {
     return put(uriInfo, pmb.put(), content, params);
   }
 
-  @GET
-  @Path("/customer/{orgKey}")
-  public Response getForCustomer(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
-      throws Exception {
-    return get(uriInfo, pmb.getForCustomer(), params, true);
-  }
-
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("/customer/{orgKey}")
   public Response updateForCustomer(
       @Context UriInfo uriInfo,

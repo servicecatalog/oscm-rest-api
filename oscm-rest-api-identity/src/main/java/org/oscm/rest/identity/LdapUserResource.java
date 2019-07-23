@@ -14,15 +14,16 @@ import org.oscm.rest.identity.data.UserRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/ldapusers")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class LdapUserResource extends RestResource {
 
@@ -37,7 +38,6 @@ public class LdapUserResource extends RestResource {
   }
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createLdapUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {

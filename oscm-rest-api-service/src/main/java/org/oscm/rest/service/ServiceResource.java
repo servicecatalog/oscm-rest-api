@@ -21,13 +21,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class ServiceResource extends RestResource {
 
@@ -41,8 +39,14 @@ public class ServiceResource extends RestResource {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
+  @GET
+  @Path(CommonParams.PATH_ID)
+  public Response getService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+          throws Exception {
+    return get(uriInfo, sb.get(), params, true);
+  }
+
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createService(
       @Context UriInfo uriInfo,
       ServiceDetailsRepresentation content,
@@ -51,15 +55,7 @@ public class ServiceResource extends RestResource {
     return post(uriInfo, sb.post(), content, params);
   }
 
-  @GET
-  @Path(CommonParams.PATH_ID)
-  public Response getService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
-      throws Exception {
-    return get(uriInfo, sb.get(), params, true);
-  }
-
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response updateService(
       @Context UriInfo uriInfo,
@@ -77,7 +73,6 @@ public class ServiceResource extends RestResource {
   }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID + "/status")
   public Response setServiceState(
       @Context UriInfo uriInfo, StatusRepresentation content, @BeanParam ServiceParameters params)

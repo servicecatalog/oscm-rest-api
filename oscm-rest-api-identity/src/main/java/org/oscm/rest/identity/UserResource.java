@@ -28,13 +28,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/users")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class UserResource extends RestResource {
 
@@ -58,23 +56,22 @@ public class UserResource extends RestResource {
     return getCollection(uriInfo, ub.getUsers(), params);
   }
 
-    @GET
-    @Path(PATH_USERID)
-    @Operation(summary = "Get a single user",
-            tags = {"users"},
-            description = "Returns a single user",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "A single user", content = @Content(
-                            schema = @Schema(implementation = UserRepresentation.class)
-                    ))
-            })
-    public Response getUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
-            throws Exception {
-        return get(uriInfo, ub.getUser(), params, false);
-    }
+   @GET
+   @Path(PATH_USERID)
+   @Operation(summary = "Get a single user",
+           tags = {"users"},
+           description = "Returns a single user",
+           responses = {
+                   @ApiResponse(responseCode = "200", description = "A single user", content = @Content(
+                           schema = @Schema(implementation = UserRepresentation.class)
+                   ))
+           })
+   public Response getUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
+           throws Exception {
+       return get(uriInfo, ub.getUser(), params, false);
+   }
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a user",
           tags = {"users"},
           description = "Creates a user",

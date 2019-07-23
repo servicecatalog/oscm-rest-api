@@ -20,13 +20,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/settings")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class SettingsResource extends RestResource {
 
@@ -41,8 +39,14 @@ public class SettingsResource extends RestResource {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
+  @GET
+  @Path(CommonParams.PATH_ID)
+  public Response getSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
+          throws Exception {
+    return get(uriInfo, sb.get(), params, true);
+  }
+
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createSetting(
       @Context UriInfo uriInfo,
       SettingRepresentation content,
@@ -51,15 +55,8 @@ public class SettingsResource extends RestResource {
     return post(uriInfo, sb.post(), content, params);
   }
 
-  @GET
-  @Path(CommonParams.PATH_ID)
-  public Response getSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
-      throws Exception {
-    return get(uriInfo, sb.get(), params, true);
-  }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response updateSetting(
       @Context UriInfo uriInfo,

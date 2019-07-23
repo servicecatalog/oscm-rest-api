@@ -26,15 +26,15 @@ import org.oscm.rest.event.data.EventRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/events")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class EventResource extends RestResource {
 
@@ -43,7 +43,6 @@ public class EventResource extends RestResource {
   EventBackend eb;
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a single event.",
           tags = {"event"},
           description = "Creates a single event.",
