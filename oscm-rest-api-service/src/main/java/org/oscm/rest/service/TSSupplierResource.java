@@ -25,6 +25,7 @@ import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID + "/suppliers")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class TSSupplierResource extends RestResource {
 

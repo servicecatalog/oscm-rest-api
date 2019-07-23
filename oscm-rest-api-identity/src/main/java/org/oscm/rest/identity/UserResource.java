@@ -72,6 +72,7 @@ public class UserResource extends RestResource {
    }
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a user",
           tags = {"users"},
           description = "Creates a user",

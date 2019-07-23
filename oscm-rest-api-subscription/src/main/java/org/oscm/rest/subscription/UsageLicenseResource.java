@@ -25,6 +25,7 @@ import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class UsageLicenseResource extends RestResource {
 

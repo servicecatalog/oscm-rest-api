@@ -44,6 +44,7 @@ public class OnBehalfUserResource extends RestResource {
   UserBackend ub;
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a single on behalf user",
           tags = {"onbehalfusers"},
           description = "Creates a single on behalf user",

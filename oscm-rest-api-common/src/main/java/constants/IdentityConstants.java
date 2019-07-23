@@ -61,7 +61,6 @@ public class IdentityConstants {
             "\"etag\": 1\n" +
             "}";
 
-
     //FIXME: TMP values shall be removed after fixing problem with redundant id.
     public static final String TMP_USER_MIN_PUT_BODY = "{\n" +
             "\"email\": \"test@email.com\",\n" +

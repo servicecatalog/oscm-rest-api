@@ -26,6 +26,7 @@ import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class SubscriptionResource extends RestResource {
 
