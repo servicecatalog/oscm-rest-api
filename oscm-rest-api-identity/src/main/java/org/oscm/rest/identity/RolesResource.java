@@ -31,10 +31,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
 @Since(CommonParams.VERSION_1)
+@Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
+@Produces(MediaType.APPLICATION_JSON)
+@Stateless
 public class RolesResource extends RestResource {
 
   @EJB
@@ -59,6 +59,7 @@ public class RolesResource extends RestResource {
   }
 
   @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Update a single role of user",
           tags = {"roles"},
           description = "Updates a single role of user",

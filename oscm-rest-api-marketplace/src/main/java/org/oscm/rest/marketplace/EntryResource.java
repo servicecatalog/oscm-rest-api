@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class EntryResource extends RestResource {
 
@@ -32,15 +34,14 @@ public class EntryResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   EntryBackend eb;
 
-  @Since(CommonParams.VERSION_1)
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
   public Response updateCatalogEntry(
-      @Context UriInfo uriInfo,
-      EntryRepresentation content,
-      @BeanParam MarketplaceParameters params)
-      throws Exception {
+          @Context UriInfo uriInfo,
+          EntryRepresentation content,
+          @BeanParam MarketplaceParameters params)
+          throws Exception {
     return put(uriInfo, eb.put(), content, params);
   }
 }
+

@@ -24,7 +24,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class UsageLicenseResource extends RestResource {
 
@@ -32,7 +34,6 @@ public class UsageLicenseResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   UsageLicenseBackend ulb;
 
-  @Since(CommonParams.VERSION_1)
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response getLicenses(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
@@ -40,9 +41,7 @@ public class UsageLicenseResource extends RestResource {
     return getCollection(uriInfo, ulb.getCollection(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createLicense(
       @Context UriInfo uriInfo,
@@ -52,9 +51,7 @@ public class UsageLicenseResource extends RestResource {
     return post(uriInfo, ulb.post(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/{licKey}")
   public Response updateLicense(
@@ -65,9 +62,7 @@ public class UsageLicenseResource extends RestResource {
     return put(uriInfo, ulb.put(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   @Path("/{licKey}")
   public Response deleteLicense(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
       throws Exception {

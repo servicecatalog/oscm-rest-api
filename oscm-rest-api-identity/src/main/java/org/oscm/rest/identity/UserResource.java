@@ -32,10 +32,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/users")
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
 @Since(CommonParams.VERSION_1)
+@Path(CommonParams.PATH_VERSION + "/users")
+@Produces(MediaType.APPLICATION_JSON)
+@Stateless
 public class UserResource extends RestResource {
 
   private static final String PATH_USERID = "/{userId}";
@@ -74,6 +74,7 @@ public class UserResource extends RestResource {
   }
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a user",
           tags = {"users"},
           description = "Creates a user",
@@ -103,6 +104,8 @@ public class UserResource extends RestResource {
   }
 
   @PUT //FIXME: Remove PUT_TMP_WARNING and change body values to the same that are used in POST after fixing the redundant "id" issue.
+  @Path(PATH_USERID)
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Update a user",
           tags = {"users"},
           description = "Updates a user",
@@ -127,7 +130,6 @@ public class UserResource extends RestResource {
           responses = {
                   @ApiResponse(responseCode = "201", description = "User created successfully")
           })
-  @Path(PATH_USERID)
   public Response updateUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {

@@ -32,10 +32,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/onbehalfusers")
-@Stateless
-@Produces(MediaType.APPLICATION_JSON)
 @Since(CommonParams.VERSION_1)
+@Path(CommonParams.PATH_VERSION + "/onbehalfusers")
+@Produces(MediaType.APPLICATION_JSON)
+@Stateless
 public class OnBehalfUserResource extends RestResource {
 
   @EJB
@@ -43,6 +43,7 @@ public class OnBehalfUserResource extends RestResource {
   UserBackend ub;
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a single on behalf user",
           tags = {"onbehalfusers"},
           description = "Creates a single on behalf user",

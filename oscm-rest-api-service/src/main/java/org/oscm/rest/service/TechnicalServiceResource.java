@@ -29,7 +29,9 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 import java.util.Collections;
 
+@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
+@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 
@@ -39,17 +41,13 @@ public class TechnicalServiceResource extends RestResource {
 
   @EJB ServiceProvisioningService sps;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getTechnicalServices(
       @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
     return getCollection(uriInfo, tsb.getCollection(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @POST
-  @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createTechnicalService(
       @Context UriInfo uriInfo,
@@ -59,18 +57,14 @@ public class TechnicalServiceResource extends RestResource {
     return post(uriInfo, tsb.post(), content, params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @DELETE
-  @Produces(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response deleteTechnicalService(
       @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
     return delete(uriInfo, tsb.delete(), params);
   }
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_XML)
   @Path(CommonParams.PATH_ID)
   public Response exportTechnicalService(
       @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
@@ -82,9 +76,8 @@ public class TechnicalServiceResource extends RestResource {
     return Response.ok(export, MediaType.APPLICATION_XML_TYPE).build();
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Consumes(MediaType.APPLICATION_XML)
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response importTechnicalServices(
       @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
       throws Exception {
