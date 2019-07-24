@@ -43,6 +43,7 @@ public class EventResource extends RestResource {
   EventBackend eb;
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a single event.",
           tags = {"event"},
           description = "Creates a single event.",

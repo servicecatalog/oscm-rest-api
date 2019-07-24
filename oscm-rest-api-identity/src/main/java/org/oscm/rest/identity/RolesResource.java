@@ -60,6 +60,7 @@ public class RolesResource extends RestResource {
   }
 
   @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Update a single role of user",
           tags = {"roles"},
           description = "Updates a single role of user",

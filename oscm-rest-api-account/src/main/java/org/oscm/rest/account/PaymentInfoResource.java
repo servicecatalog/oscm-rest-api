@@ -70,6 +70,7 @@ public class PaymentInfoResource extends RestResource {
   }
 
   @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Update a single payment info",
           tags = {"paymentinfo"},

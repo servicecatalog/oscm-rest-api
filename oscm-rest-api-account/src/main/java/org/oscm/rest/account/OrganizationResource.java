@@ -60,6 +60,7 @@ public class OrganizationResource extends RestResource {
   }
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create an organization",
           tags = {"organization"},
           description = "Creates an organization",
