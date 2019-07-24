@@ -38,7 +38,6 @@ public class LdapUserResource extends RestResource {
   }
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createLdapUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {

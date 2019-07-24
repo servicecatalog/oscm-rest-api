@@ -31,7 +31,6 @@ import java.util.Collections;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 

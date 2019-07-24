@@ -27,7 +27,6 @@ import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class EntryResource extends RestResource {
 

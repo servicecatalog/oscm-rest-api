@@ -26,7 +26,6 @@ import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class ServiceResource extends RestResource {
 
