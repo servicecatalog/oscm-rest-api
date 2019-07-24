@@ -28,13 +28,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/settings")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class SettingsResource extends RestResource {
 
@@ -75,7 +73,6 @@ public class SettingsResource extends RestResource {
   }
 
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Create a setting",
           tags = {"settings"},
           description = "Creates a setting",
@@ -100,7 +97,6 @@ public class SettingsResource extends RestResource {
   }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Update a single setting",
           tags = {"settings"},

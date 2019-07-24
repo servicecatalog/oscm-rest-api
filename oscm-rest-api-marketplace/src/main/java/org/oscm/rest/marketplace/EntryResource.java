@@ -18,15 +18,15 @@ import org.oscm.rest.marketplace.data.EntryRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class EntryResource extends RestResource {
 
@@ -35,7 +35,6 @@ public class EntryResource extends RestResource {
   EntryBackend eb;
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response updateCatalogEntry(
           @Context UriInfo uriInfo,
           EntryRepresentation content,

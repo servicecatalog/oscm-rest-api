@@ -25,15 +25,16 @@ import org.oscm.rest.identity.data.RolesRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class RolesResource extends RestResource {
 
@@ -59,7 +60,6 @@ public class RolesResource extends RestResource {
   }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Update a single role of user",
           tags = {"roles"},
           description = "Updates a single role of user",

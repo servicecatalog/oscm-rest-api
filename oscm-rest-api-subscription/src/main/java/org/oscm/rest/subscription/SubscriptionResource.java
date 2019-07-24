@@ -26,7 +26,6 @@ import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class SubscriptionResource extends RestResource {
 
@@ -40,8 +39,14 @@ public class SubscriptionResource extends RestResource {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
+  @GET
+  @Path(CommonParams.PATH_ID)
+  public Response getSubscription(
+          @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
+    return get(uriInfo, sb.get(), params, true);
+  }
+
   @POST
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createSubscription(
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
@@ -50,15 +55,7 @@ public class SubscriptionResource extends RestResource {
     return post(uriInfo, sb.post(), content, params);
   }
 
-  @GET
-  @Path(CommonParams.PATH_ID)
-  public Response getSubscription(
-      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
-    return get(uriInfo, sb.get(), params, true);
-  }
-
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   public Response updateSubscription(
       @Context UriInfo uriInfo,

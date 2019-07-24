@@ -28,13 +28,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/paymentinfos")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class PaymentInfoResource extends RestResource {
 
@@ -72,7 +70,6 @@ public class PaymentInfoResource extends RestResource {
   }
 
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Update a single payment info",
           tags = {"paymentinfo"},
