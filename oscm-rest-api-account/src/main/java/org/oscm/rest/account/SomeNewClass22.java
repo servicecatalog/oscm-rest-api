@@ -1,6 +1,6 @@
 package org.oscm.rest.account;
 
-public class SomeNewClass22                      {
+        public class SomeNewClass22                      {
 
 
 
