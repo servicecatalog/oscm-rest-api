@@ -60,9 +60,9 @@ public class RolesResource extends RestResource {
   }
 
   @PUT
-  @Operation(summary = "Update a single role of user",
+  @Operation(summary = "Update a single role of a user",
           tags = {"roles"},
-          description = "Updates a single role of user",
+          description = "Updates a single role of a user",
           requestBody = @RequestBody(
                   description = "RolesRepresentation object to be updated",
                   required = true,
