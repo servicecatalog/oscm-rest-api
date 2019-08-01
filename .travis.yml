@@ -13,21 +13,16 @@ env:
 
 jobs:
   include:
-    # - stage: run_tests
-    #   name: Run Tests
-    #   script:
-    #     - mvn clean test jacoco:report
-    #     - bash <(curl -s https://codecov.io/bash)
-    # - stage: format_code
-    #   name: Format Code
-    #   script:
-    #     - bash scripts/check_copyrights.sh
-    #     - bash scripts/format_code.sh
-    #     - mvn clean test
-    #     - bash scripts/repush_formatted_code.sh
-    #   if: branch = fake-master AND env(TRAVIS_PULL_REQUEST) = false
-    - stage: always_running
-      name: Always Running
-    - stage: running_after_merge
-      name: Running After Merge
+    - stage: run_tests
+      name: Run Tests
+      script:
+        - mvn clean test jacoco:report
+        - bash <(curl -s https://codecov.io/bash)
+    - stage: format_code
+      name: Format Code
+      script:
+        - bash scripts/check_copyrights.sh
+        - bash scripts/format_code.sh
+        - mvn clean test
+        - bash scripts/repush_formatted_code.sh
       if: branch = fake-master AND env(TRAVIS_PULL_REQUEST) = false
