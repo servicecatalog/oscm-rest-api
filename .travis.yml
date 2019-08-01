@@ -25,8 +25,7 @@ jobs:
         - bash scripts/format_code.sh
         - mvn clean test
         - bash scripts/repush_formatted_code.sh
-      only:
-        - fake-master
+      if: branch = fake-master
     
 
 # TODO: create GitHub machine user
