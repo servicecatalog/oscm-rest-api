@@ -204,8 +204,12 @@ public abstract class RestResource {
       }
 
       rep.validateContent();
-
       rep.setVersion(version);
+
+      if (withId) {
+        rep.setId(params.getId());
+      }
+
       rep.update();
     }
   }
