@@ -1,8 +1,7 @@
 package org.oscm.rest.account;
 
         public class SomeNewClass22                      {
-
-
+                
 
 
 
