@@ -13,17 +13,23 @@ env:
 
 jobs:
   include:
-    - stage: verify_code
-      name: Verify Code
-      script:
-      # FIXME: Temporarily disabled
-      # - bash scripts/check_copyrights.sh
-      # - bash scripts/format_code.sh
-      # - bash scripts/repush_formatted_code.sh
-    - stage: run_tests
+  - stage: run_tests
       name: Run Tests
       script:
-        # FIXME: Temporarily disabled
-        # - git pull
         - mvn clean test jacoco:report
         - bash <(curl -s https://codecov.io/bash)
+    - stage: format_code
+      name: Format Code
+      script:
+        - bash scripts/check_copyrights.sh
+        - bash scripts/format_code.sh
+        - mvn clean test
+        - bash scripts/repush_formatted_code.sh
+      only:
+        - fake-master
+    
+
+# TODO: create GitHub machine user
+# TODO: Figure out how to trigger formatter only AFTER merge to master
+# TODO: Verify wether everything works as expected
+# TODO: Gather tips&tricks for developers of how to use the formater
