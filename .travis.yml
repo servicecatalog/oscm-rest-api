@@ -25,5 +25,4 @@ jobs:
         - bash scripts/format_code.sh
         - mvn clean test
         - bash scripts/repush_formatted_code.sh
-      if: branch = fake-master
-      if: "$TRAVIS_PULL_REQUEST" == "false"
+      if: branch = fake-master AND env(TRAVIS_PULL_REQUEST) = true
