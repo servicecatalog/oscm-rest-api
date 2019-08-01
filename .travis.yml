@@ -13,17 +13,16 @@ env:
 
 jobs:
   include:
-    - stage: verify_code
-      name: Verify Code
-      script:
-      # FIXME: Temporarily disabled
-      # - bash scripts/check_copyrights.sh
-      # - bash scripts/format_code.sh
-      # - bash scripts/repush_formatted_code.sh
     - stage: run_tests
       name: Run Tests
       script:
-        # FIXME: Temporarily disabled
-        # - git pull
         - mvn clean test jacoco:report
         - bash <(curl -s https://codecov.io/bash)
+    - stage: format_code
+      name: Format Code
+      script:
+        - bash scripts/check_copyrights.sh
+        - bash scripts/format_code.sh
+        - mvn clean test
+        - bash scripts/repush_formatted_code.sh
+      if: branch = master AND type != pull_request
