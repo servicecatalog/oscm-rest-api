@@ -25,4 +25,4 @@ jobs:
         - bash scripts/format_code.sh
         - mvn clean test
         - bash scripts/repush_formatted_code.sh
-      if: branch = fake-master AND sender = "oscm-automaton"
+      if: branch = fake-master AND sender = "oscm-automaton" AND env(TRAVIS_PULL_REQUEST) = false
