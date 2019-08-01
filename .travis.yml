@@ -13,7 +13,7 @@ env:
 
 jobs:
   include:
-  - stage: run_tests
+    - stage: run_tests
       name: Run Tests
       script:
         - mvn clean test jacoco:report
