@@ -93,7 +93,6 @@ public class AccountConstants {
             "\"infoId\": \"DIRECT_DEBIT\",\n" +
             "\"providerName\": \"provname\",\n" +
             "\"accountNumer\": 12345,\n" +
-            "\"id\": 10000,\n" +
             "\"etag\": 2 \n" +
             "}";
 

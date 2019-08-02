@@ -28,7 +28,6 @@ public class OperationConstants {
             "\"informationId\": \"MP_ERROR_REDIRECT_HTTPS\",\n" +
             "\"contextId\": \"global\",\n" +
             "\"value\": \"https://redirect.com\",\n" +
-            "\"etag\": 0,\n" +
-            "\"id\": 15\n" +
+            "\"etag\": 0\n" +
             "}";
 }

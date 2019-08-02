@@ -35,6 +35,7 @@ public class IdentityConstants {
             "\"etag\": 0,\n" +
             "\"id\": 13010\n" +
             "}";
+
     public static final String USER_MINIMUM_BODY = "{\n" +
             "\"email\": \"test@email.com\",\n" +
             "\"locale\": \"ja\",\n" +
