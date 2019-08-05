@@ -9,6 +9,7 @@
  */
 package org.oscm.rest.identity;
 
+import constants.CommonConstants;
 import constants.IdentityConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -70,13 +71,13 @@ public class RolesResource extends RestResource {
                           schema = @Schema(implementation = RolesRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = "Only required parameters",
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
                                           value= IdentityConstants.ROLE_EXAMPLE_BODY,
-                                          summary = "Minimum body example"),
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = "All possible parameters",
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
                                           value= IdentityConstants.ROLE_EXAMPLE_BODY,
-                                          summary = "Maximum body example")
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           })),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Role updated successfully")
