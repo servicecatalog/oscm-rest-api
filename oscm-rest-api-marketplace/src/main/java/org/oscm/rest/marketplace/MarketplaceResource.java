@@ -42,7 +42,7 @@ public class MarketplaceResource extends RestResource {
 
   @GET
   @Operation(summary = "Get all marketplaces",
-          tags = {"marketplace"},
+          tags = {"marketplaces"},
           description = "Returns all marketplaces",
           responses = {
                   @ApiResponse(responseCode = "200",
@@ -60,7 +60,7 @@ public class MarketplaceResource extends RestResource {
   @GET
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Get a single marketplace",
-          tags = {"marketplace"},
+          tags = {"marketplaces"},
           description = "Returns a single marketplace",
           responses = {
                   @ApiResponse(responseCode = "200", description = "A single marketplace", content = @Content(
@@ -74,7 +74,7 @@ public class MarketplaceResource extends RestResource {
 
   @POST
   @Operation(summary = "Create a marketplace",
-          tags = {"marketplace"},
+          tags = {"marketplaces"},
           description = "Creates a marketplace",
           requestBody = @RequestBody(
                   description = "MarketplaceRepresentation object to be created",
@@ -106,7 +106,7 @@ public class MarketplaceResource extends RestResource {
   @PUT
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Update a single marketplace",
-          tags = {"marketplace"},
+          tags = {"marketplaces"},
           description = "Updates a single marketplace",
           requestBody = @RequestBody(
                   description = "MarketplaceRepresentation object to be updated",
@@ -137,7 +137,7 @@ public class MarketplaceResource extends RestResource {
   @DELETE
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Delete a single marketplace",
-          tags = {"marketplace"},
+          tags = {"marketplaces"},
           description = "Deletes a single marketplace",
           responses = {
                   @ApiResponse(responseCode = "204", description = "Marketplace deleted successfully")

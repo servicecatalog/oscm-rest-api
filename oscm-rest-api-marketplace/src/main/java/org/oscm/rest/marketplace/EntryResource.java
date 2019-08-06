@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.marketplace;
 
-import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.MarketplaceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +44,7 @@ public class EntryResource extends RestResource {
 
   @PUT
   @Operation(summary = "Update a single marketplace entry",
-          tags = {"marketplace"},
+          tags = {"marketplaces"},
           description = "Updates a single marketplace entry",
           requestBody = @RequestBody(
                   description = "EntryRepresentation object to be updated",
