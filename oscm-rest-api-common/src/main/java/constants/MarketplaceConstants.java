@@ -21,17 +21,17 @@ public class MarketplaceConstants {
     public static final String ENTRY_MINIMUM_BODY = "{}";
 
     public static final String ENTRY_MAXIMUM_BODY = "{\n" +
-            "\t\"anonymousVisible\": true,\n" +
-            "\t\"visibleInCatalog\": true,\n" +
-            "\t\"categories\": [\n" +
-            "\t\t{\n" +
-            "\t\t\t\"categoryId\": \"sampleCategory2\",\n" +
-            "\t\t\t\"marketplaceId\": \"959c9bf7\",\n" +
-            "\t\t\t\"id\": 10000,\n" +
-            "\t\t\t\"etag\": 1\n" +
-            "\t\t}\n" +
-            "\t],\n" +
-            "\t\"etag\": 1\n" +
+            "\"anonymousVisible\": true,\n" +
+            "\"visibleInCatalog\": true,\n" +
+            "\"categories\": [\n" +
+            "{\n" +
+            "\"categoryId\": \"sampleCategory2\",\n" +
+            "\"marketplaceId\": \"959c9bf7\",\n" +
+            "\"id\": 10000,\n" +
+            "\"etag\": 1\n" +
+            "}\n" +
+            "],\n" +
+            "\"etag\": 1\n" +
             "}\n";
 
     public static final String MARKETPLACE_MINIMUM_BODY = "{\n" +
