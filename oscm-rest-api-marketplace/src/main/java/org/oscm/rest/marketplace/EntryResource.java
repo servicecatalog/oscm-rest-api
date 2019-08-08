@@ -9,6 +9,14 @@
  */
 package org.oscm.rest.marketplace;
 
+import constants.CommonConstants;
+import constants.MarketplaceConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -35,6 +43,27 @@ public class EntryResource extends RestResource {
   EntryBackend eb;
 
   @PUT
+  @Operation(summary = "Update a single marketplace entry",
+          tags = {"marketplaces"},
+          description = "Updates a single marketplace entry",
+          requestBody = @RequestBody(
+                  description = "EntryRepresentation object to be updated",
+                  required = true,
+                  content = @Content(
+                          schema = @Schema(implementation = EntryRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          value= MarketplaceConstants.ENTRY_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          value= MarketplaceConstants.ENTRY_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                          })),
+          responses = {
+                  @ApiResponse(responseCode = "204", description = "Marketplace entry updated successfully")
+          })
   public Response updateCatalogEntry(
           @Context UriInfo uriInfo,
           EntryRepresentation content,
