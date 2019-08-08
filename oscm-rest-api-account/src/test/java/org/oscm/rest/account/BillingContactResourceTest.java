@@ -18,9 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.account.data.BillingContactRepresentation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.BillingContactRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -43,9 +44,9 @@ public class BillingContactResourceTest {
 
   @BeforeEach
   public void setUp() {
-    representation = createBillingContactRepresentation();
+    representation = SampleTestDataUtility.createBillingContactRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createAccountParameters();
   }
 
   @AfterEach
@@ -145,17 +146,5 @@ public class BillingContactResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private BillingContactRepresentation createBillingContactRepresentation() {
-    BillingContactRepresentation representation = new BillingContactRepresentation();
-    representation.setId(123L);
-    return representation;
-  }
-
-  private AccountParameters createParameters() {
-    AccountParameters parameters = new AccountParameters();
-    parameters.setOrgId("orgId");
-    return parameters;
   }
 }

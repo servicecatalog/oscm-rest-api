@@ -18,9 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.identity.data.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -42,9 +43,9 @@ public class UserResourceTest {
 
   @BeforeEach
   public void setUp() {
-    userRepresentation = createUserRepresentation();
+    userRepresentation = SampleTestDataUtility.createUserRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -142,15 +143,5 @@ public class UserResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private UserRepresentation createUserRepresentation() {
-    return new UserRepresentation();
-  }
-
-  private UserParameters createParameters() {
-    UserParameters userParameters = new UserParameters();
-    userParameters.setUserId("userId");
-    return userParameters;
   }
 }

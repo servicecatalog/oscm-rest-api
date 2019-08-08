@@ -18,10 +18,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.OrganizationRepresentation;
-import org.oscm.rest.service.data.ServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -44,9 +45,9 @@ public class TSSupplierResourceTest {
 
   @BeforeEach
   public void setUp() {
-    organizationRepresentation = new OrganizationRepresentation();
+    organizationRepresentation = SampleTestDataUtility.createOrgRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -116,11 +117,5 @@ public class TSSupplierResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

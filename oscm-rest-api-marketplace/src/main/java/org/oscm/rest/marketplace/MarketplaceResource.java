@@ -14,7 +14,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.marketplace.data.MarketplaceRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+import org.oscm.rest.common.representation.MarketplaceRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

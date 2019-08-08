@@ -14,7 +14,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

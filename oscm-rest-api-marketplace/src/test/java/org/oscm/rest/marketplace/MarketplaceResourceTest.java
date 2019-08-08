@@ -9,9 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.marketplace.data.MarketplaceRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+import org.oscm.rest.common.representation.MarketplaceRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -37,9 +38,9 @@ class MarketplaceResourceTest {
 
     @BeforeEach
     public void setUp() {
-        marketplaceRepresentation = new MarketplaceRepresentation();
+        marketplaceRepresentation = SampleTestDataUtility.createMarketplaceRepresentation();
         uriInfo = SampleTestDataUtility.createUriInfo();
-        marketplaceParameters = createParameters();
+        marketplaceParameters = SampleTestDataUtility.createMarketplaceParameters();
     }
 
     @AfterEach
@@ -143,13 +144,5 @@ class MarketplaceResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-    }
-
-    private MarketplaceParameters createParameters() {
-        MarketplaceParameters parameters = new MarketplaceParameters();
-        parameters.setId(100L);
-        parameters.setVersion(100);
-        parameters.validateETag();
-        return parameters;
     }
 }

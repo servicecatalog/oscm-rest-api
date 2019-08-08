@@ -13,7 +13,8 @@ import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.operation.data.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
+import org.oscm.rest.common.representation.SettingRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

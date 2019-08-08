@@ -18,8 +18,9 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.PriceModelRepresentation;
-import org.oscm.rest.service.data.ServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.PriceModelRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -43,10 +44,10 @@ public class PriceModelResourceTest {
 
   @BeforeEach
   public void setUp() {
-    serviceRepresentation = new ServiceRepresentation();
-    priceModelRepresentation = new PriceModelRepresentation();
+    serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
+    priceModelRepresentation = SampleTestDataUtility.createPriceModelRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -127,11 +128,5 @@ public class PriceModelResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

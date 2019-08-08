@@ -13,7 +13,8 @@ import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.vo.VOCatalogEntry;
 import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.marketplace.data.EntryRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+import org.oscm.rest.common.representation.EntryRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -12,6 +12,7 @@ package org.oscm.rest.common;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import org.oscm.rest.common.representation.Representation;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;

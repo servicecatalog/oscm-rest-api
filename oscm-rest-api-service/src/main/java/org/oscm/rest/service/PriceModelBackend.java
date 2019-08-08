@@ -16,7 +16,8 @@ import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.service.data.PriceModelRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.PriceModelRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

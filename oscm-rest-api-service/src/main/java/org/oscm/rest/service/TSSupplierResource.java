@@ -23,7 +23,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.service.data.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

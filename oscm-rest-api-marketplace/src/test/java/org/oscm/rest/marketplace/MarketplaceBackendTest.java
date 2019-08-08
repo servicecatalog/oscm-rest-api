@@ -21,9 +21,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.vo.VOMarketplace;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.MarketplaceListType;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.marketplace.data.MarketplaceRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+import org.oscm.rest.common.representation.MarketplaceRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -49,9 +51,9 @@ public class MarketplaceBackendTest {
     resource = new MarketplaceResource();
     resource.setMb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    representation = createRepresentation();
-    parameters = createParameters();
-    vo = createVO();
+    representation = SampleTestDataUtility.createMarketplaceRepresentation();
+    parameters = SampleTestDataUtility.createMarketplaceParameters();
+    vo = SampleTestDataUtility.createVOMarketplace();
   }
 
   @ParameterizedTest
@@ -132,21 +134,5 @@ public class MarketplaceBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private MarketplaceRepresentation createRepresentation() {
-    MarketplaceRepresentation marketplaceRepresentation = new MarketplaceRepresentation();
-    marketplaceRepresentation.setMarketplaceId("marketplaceId");
-    return marketplaceRepresentation;
-  }
-
-  private MarketplaceParameters createParameters() {
-    MarketplaceParameters parameters = new MarketplaceParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private VOMarketplace createVO() {
-    return new VOMarketplace();
   }
 }

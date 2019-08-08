@@ -1,0 +1,81 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2017
+ *
+ * <p>Creation Date: May 9, 2016
+ *
+ * <p>*****************************************************************************
+ */
+package org.oscm.rest.common.representation;
+
+import javax.ws.rs.WebApplicationException;
+import java.util.Collection;
+
+/**
+ * Generic representation class for collections of representation items
+ *
+ * @author miethaner
+ */
+public class RepresentationCollection<T extends Representation> extends Representation {
+
+  private Collection<T> items;
+
+  public Collection<T> getItems() {
+    return items;
+  }
+
+  public void setItems(Collection<T> items) {
+    this.items = items;
+  }
+
+  /** Creates a new representative collection */
+  public RepresentationCollection() {
+    super(null);
+  }
+
+  /**
+   * Creates a new representative collection of items
+   *
+   * @param items the representation items
+   */
+  public RepresentationCollection(Collection<T> items) {
+    super(null);
+    this.items = items;
+  }
+
+  @Override
+  public void validateContent() throws WebApplicationException {
+
+    if (items != null) {
+      for (T item : items) {
+        item.validateContent();
+      }
+    }
+  }
+
+  @Override
+  public void setVersion(Integer version) {
+    super.setVersion(version);
+
+    for (T item : items) {
+      item.setVersion(version);
+    }
+  }
+
+  @Override
+  public void update() {
+
+    for (T item : items) {
+      item.update();
+    }
+  }
+
+  @Override
+  public void convert() {
+
+    for (T item : items) {
+      item.convert();
+    }
+  }
+}

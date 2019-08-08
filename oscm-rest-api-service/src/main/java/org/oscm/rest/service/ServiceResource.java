@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service;
 
-import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,9 +22,10 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.service.data.ServiceDetailsRepresentation;
-import org.oscm.rest.service.data.ServiceRepresentation;
-import org.oscm.rest.service.data.StatusRepresentation;
+import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -11,6 +11,9 @@ package org.oscm.rest.common;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.RequestParameters;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -211,8 +214,12 @@ public abstract class RestResource {
       }
 
       rep.validateContent();
-
       rep.setVersion(version);
+
+      if (withId) {
+        rep.setId(params.getId());
+      }
+
       rep.update();
     }
   }

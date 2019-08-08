@@ -19,7 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.marketplace.data.EntryRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+import org.oscm.rest.common.representation.EntryRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -45,9 +46,9 @@ public class EntryBackendTest {
     resource = new EntryResource();
     resource.setEb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createMarketplaceParameters();
+    representation = SampleTestDataUtility.createEntryRepresentation();
+    vo = SampleTestDataUtility.createVOServiceDetails();
   }
 
   @Test
@@ -62,21 +63,5 @@ public class EntryBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private MarketplaceParameters createParameters() {
-    MarketplaceParameters parameters = new MarketplaceParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private EntryRepresentation createRepresentation() {
-    EntryRepresentation representation = new EntryRepresentation();
-    representation.setId(123L);
-    return representation;
-  }
-
-  private VOServiceDetails createVO() {
-    return new VOServiceDetails();
   }
 }

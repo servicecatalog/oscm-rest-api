@@ -22,7 +22,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.event.data.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
+import org.oscm.rest.common.representation.EventRepresentation;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

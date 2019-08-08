@@ -10,9 +10,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.vo.VOOrganization;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -38,9 +39,9 @@ public class TSSupplierBackendTest {
   public void setUp() {
     resource = new TSSupplierResource();
     resource.setSb(backend);
-    vo = createVO();
-    representation = createRepresentation();
-    parameters = createParameters();
+    vo = SampleTestDataUtility.createVOOrganization();
+    representation = SampleTestDataUtility.createOrgRepresentation();
+    parameters = SampleTestDataUtility.createServiceParameters();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -91,22 +92,5 @@ public class TSSupplierBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(1000L);
-    return parameters;
-  }
-
-  private OrganizationRepresentation createRepresentation() {
-    OrganizationRepresentation representation = new OrganizationRepresentation(vo);
-    representation.setOrganizationId("orgId");
-    return representation;
-  }
-
-  private VOOrganization createVO() {
-    VOOrganization vo = new VOOrganization();
-    return vo;
   }
 }
