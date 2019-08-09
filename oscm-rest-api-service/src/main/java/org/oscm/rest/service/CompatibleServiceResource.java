@@ -9,6 +9,7 @@
  */
 package org.oscm.rest.service;
 
+import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -47,7 +48,7 @@ public class CompatibleServiceResource extends RestResource {
   @GET
   @Operation(summary = "Get all services compatible to selected service",
           tags = {"services"},
-          description = "Get all services compatible to selected service",
+          description = "Returns all services compatible to selected service",
           responses = {
                   @ApiResponse(responseCode = "200",
                           description = "Services list",
@@ -62,23 +63,23 @@ public class CompatibleServiceResource extends RestResource {
   }
 
   @PUT
-  @Operation(summary = "Update a single billing contact",
-          tags = {"billingcontacts"},
-          description = "Updates a single billing contact",
+  @Operation(summary = "Update service's compatiblity relation",
+          tags = {"services"},
+          description = "Updates service's compatiblity relation",
           requestBody = @RequestBody(
-                  description = "BillingContactRepresentation object to be updated",
+                  description = "ServiceRepresentation object to be updated",
                   required = true,
                   content = @Content(
                           schema = @Schema(implementation = ServiceRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = "Only required parameters",
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
                                           value= ServiceConstants.COMPATIBLE_SERVICE_MINIMUM_BODY,
-                                          summary = "Minimum body example"),
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = "All possible parameters",
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
                                           value= ServiceConstants.COMPATIBLE_SERVICE_MAXIMUM_BODY,
-                                          summary = "Maximum body example")
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           })),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
