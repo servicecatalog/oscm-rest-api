@@ -41,7 +41,7 @@ import java.util.Set;
         servers = {
                 @Server(
                         description = "Enter your own OSCM REST API instance",
-                        url = "{server}",
+                        url = "{server}/oscm-rest-api",
                         variables = {
                                 @ServerVariable(
                                         name = "server",
