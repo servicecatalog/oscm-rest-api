@@ -38,26 +38,19 @@ import java.util.Set;
                         name = "Sample Contact Details",
                         email = "example@email.com")
         ),
-        security = {
-                @SecurityRequirement(
-                        name = "Requirement 1", scopes = {"req scope a", "req scope b"}
-                )
-
-        },
         servers = {
                 @Server(
-                        description = "OSCM REST API server",
+                        description = "Enter your own OSCM REST API instance",
                         url = "{server}",
                         variables = {
                                 @ServerVariable(
                                         name = "server",
                                         description = "IP address and port",
-                                        defaultValue = "var2"
+                                        defaultValue = "protocol://ip:port"
                                 )
                         }
                 )
         }
-
 )
 
 public abstract class ResourceConfiguration {
