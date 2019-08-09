@@ -10,9 +10,12 @@
 package org.oscm.rest.common;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.servers.ServerVariable;
@@ -35,16 +38,21 @@ import java.util.Set;
                         name = "Sample Contact Details",
                         email = "example@email.com")
         ),
+        security = {
+                @SecurityRequirement(
+                        name = "Requirement 1", scopes = {"req scope a", "req scope b"}
+                )
+
+        },
         servers = {
                 @Server(
                         description = "OSCM REST API server",
-                        url = "https://10.140.18.99:8081",
+                        url = "{server}",
                         variables = {
                                 @ServerVariable(
-                                        name = "var1",
-                                        description = "description",
-                                        defaultValue = "var2",
-                                        allowableValues = {"1", "2"}
+                                        name = "server",
+                                        description = "IP address and port",
+                                        defaultValue = "var2"
                                 )
                         }
                 )
