@@ -40,25 +40,4 @@
     <security-role>
            <role-name>TECHNOLOGY_MANAGER</role-name>
     </security-role>
-
-    <servlet>
-        <servlet-name>swagger</servlet-name>
-        <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.classnames</param-name>
-        </init-param>
-        <init-param>
-            <param-name>swagger.api.basepath</param-name>
-            <param-value>https://localhost:8081/oscm-rest-api</param-value>
-        </init-param>
-        <init-param>
-            <param-name>swagger.api.basepath</param-name>
-            <param-value>https://localhost:8081/swagger</param-value>
-        </init-param>
-        <init-param>
-            <param-name>swagger.api.title</param-name>
-            <param-value>OSCM REST API</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
 </web-app>
