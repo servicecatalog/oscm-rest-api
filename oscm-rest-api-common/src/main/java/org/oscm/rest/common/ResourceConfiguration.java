@@ -41,12 +41,12 @@ import java.util.Set;
         servers = {
                 @Server(
                         description = "Enter your own OSCM REST API instance",
-                        url = "{server}/oscm-rest-api",
+                        url = "{server}",
                         variables = {
                                 @ServerVariable(
                                         name = "server",
                                         description = "IP address and port",
-                                        defaultValue = "protocol://ip:port"
+                                        defaultValue = "http://localhost:8080/oscm-rest-api"
                                 )
                         }
                 )
