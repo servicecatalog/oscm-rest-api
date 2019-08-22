@@ -122,7 +122,8 @@ public class BillingContactResource extends RestResource {
                                           name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
                                           value= AccountConstants.BILLING_CONTACT_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                          })),
+                          }
+                  )),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
           })
