@@ -11,15 +11,15 @@ package org.oscm.rest.service;
 
 import org.oscm.rest.common.RequestParameters;
 
-import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
 public class ServiceParameters extends RequestParameters {
 
-  @PathParam("orgKey")
+  @QueryParam("orgKey")
   private Long orgKey;
 
-  @PathParam("orgId")
+  @QueryParam("orgId")
   private String orgId;
 
   @Override

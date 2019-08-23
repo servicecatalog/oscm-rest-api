@@ -11,7 +11,6 @@ package org.oscm.rest.subscription;
 
 import org.oscm.rest.common.RequestParameters;
 
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
@@ -20,7 +19,7 @@ public class SubscriptionParameters extends RequestParameters {
   @QueryParam("userId")
   private String userId;
 
-  @PathParam("licKey")
+  @QueryParam("licKey")
   private Long licKey;
 
   @Override
