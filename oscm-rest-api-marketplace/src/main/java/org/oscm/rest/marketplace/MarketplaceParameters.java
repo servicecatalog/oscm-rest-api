@@ -21,10 +21,10 @@ public class MarketplaceParameters extends RequestParameters {
   @QueryParam("listType")
   private MarketplaceListType listType = MarketplaceListType.OWNED;
 
-  @PathParam("mId")
+  @QueryParam("mId")
   private String marketplaceId;
 
-  @PathParam("sKey")
+  @QueryParam("sKey")
   private Long serviceKey;
 
   @Override

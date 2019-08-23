@@ -12,7 +12,7 @@ package org.oscm.rest.common;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -24,7 +24,7 @@ public class RequestParameters {
 
   private int version;
 
-  @PathParam(CommonParams.PARAM_ID)
+  @QueryParam(CommonParams.PARAM_ID)
   @Parameter(description = "ID of a single resource")
   private Long id;
 
