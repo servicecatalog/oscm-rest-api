@@ -54,4 +54,13 @@ public class MarketplaceConstants {
             "\"owningOrganizationId\": \"959c9bf7\",\n" +
             "\"etag\": 1\n" +
             "}\n";
+
+    public static final String ENTRY_RESOURCE_PUT_PRE_STEPS = "\nPre-steps: " +
+            "\n - Login as supplier" +
+            "\n - Register a technical service definition" +
+            "\n - Register marketable service" +
+            "\n - Verify if appropriate catalog entry record exists in the product table in the database." +
+            "\nAdditional info: " +
+            "\nCatalog entry record is created when marketable service is created. " +
+            "\nCatalog entry gains marketplaceId when PUT request is performed.";
 }

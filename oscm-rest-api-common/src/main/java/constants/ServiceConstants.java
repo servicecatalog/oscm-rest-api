@@ -427,7 +427,7 @@ public class ServiceConstants {
           + "}\n";
 
   public static final String COMPATIBLE_SERVICE_MINIMUM_BODY =
-      "{\n"
+          "{\n"
           + "\"items\": [\n"
           + "{\n"
           + "\"etag\": 1,\n"
@@ -462,7 +462,7 @@ public class ServiceConstants {
           + "}\n";
 
   public static final String SERVICE_PRICE_MODEL_MINIMUM_BODY =
-      "{\n"
+          "{\n"
           + "\"period\": \"MONTH\",\n"
           + "\"currencyISOCode\": \"EUR\",\n"
           + "\"etag\": 3,\n"
@@ -470,7 +470,7 @@ public class ServiceConstants {
           + "}\n";
 
   public static final String SERVICE_PRICE_MODEL_MAXIMUM_BODY =
-      "{\n"
+          "{\n"
           + "    \"description\": \"\",\n"
           + "    \"period\": \"MONTH\",\n"
           + "    \"pricePerPeriod\": 0,\n"
@@ -485,7 +485,7 @@ public class ServiceConstants {
   public static final String CUSTOMER_PRICE_MODEL_MINIMUM_BODY = "{ }";
 
   public static final String CUSTOMER_PRICE_MODEL_MAXIMUM_BODY =
-      "{\n"
+          "{\n"
           + "   \"description\": \"\",\n"
           + "    \"period\": \"MONTH\",\n"
           + "    \"pricePerPeriod\": 0,\n"
@@ -497,15 +497,14 @@ public class ServiceConstants {
           + "    \"id\": 12001\n"
           + "}\n";
   public static final String TECHNICAL_SERVICE_MINIMUM_BODY =
-      "{\n"
+          "{\n"
           + "\"technicalServiceId\": \"newTSRESTID\",\n"
           + "\"accessType\": \"EXTERNAL\",\n"
           + "\"baseUrl\": \"http://some-random-url-from-rest-api.com\"\n"
           + "}\n";
 
   public static final String TECHNICAL_SERVICE_MAXIMUM_BODY =
-      ""
-          + "{\n"
+          "{\n"
           + "\"technicalServiceId\": \"newTSRESTID\",\n"
           + "\"technicalServiceBuildId\": \"tsBuildIdRest\",\n"
           + "\"accessType\": \"EXTERNAL\",\n"
@@ -519,8 +518,24 @@ public class ServiceConstants {
           + "\"billingIdentifier\": \"billing id\",\n"
           + "\"externalBilling\": false\n"
           + "}\n";
+
   public static final String TS_SUPPLIER_MINIMUM_BODY =
       "{\n" + "\"organizationId\": \"dummyorgid\"\n" + "}\n";;
+
   public static final String TS_SUPPLIER_MAXIMUM_BODY =
       "{\n" + "\"organizationId\": \"dummyorgid\"\n" + "}\n";
+
+    public static final String SERVICE_PUT_PRE_STEPS = "\nPre-steps: " +
+            "\n - Assign service to a marketplace";
+
+    public static final String PRICE_MODEL_GET_PRE_STEPS = "\nPre-steps: " +
+            "\n - Authenticate as a supplier of issued customer" +
+            "\n - Define price model for customer";
+
+    public static final String PRICE_MODEL_PUT_PRE_STEPS = "\nPre-steps: " +
+            "\n - Ensure that there is no virutal service or customer template set for particular customer";
+
+    public static final String TS_SUPPLIER_POST_PRE_STEPS = "\nPre-steps: " +
+            "\n - Create new organization dummyOrg" +
+            "\n - Assign SUPPLIER role to this organization";
 }

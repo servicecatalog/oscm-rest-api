@@ -91,5 +91,6 @@ public class IdentityConstants {
             "\"id\": 13000\n" +
             "}";
 
-    public static final String PUT_TMP_WARNING = "the \"id\" field at the bottom of PUT's body is required but it is not expected behaviour. It is redundant and will be removed after it is fixed in the code.";
+    public static final String ON_BEHALF_USER_RESOURCE_POST_PRE_STEPS = "\nPre-steps: " +
+            "\n - Add following record into organizationreference table: (6, 10004, 0, 10000, 10000, 'ON_BEHALF_ACTING')";
 }

@@ -53,14 +53,17 @@ public class EntryResource extends RestResource {
                           schema = @Schema(implementation = EntryRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
+                                                  MarketplaceConstants.ENTRY_RESOURCE_PUT_PRE_STEPS,
                                           value= MarketplaceConstants.ENTRY_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". " +
+                                                  MarketplaceConstants.ENTRY_RESOURCE_PUT_PRE_STEPS,
                                           value= MarketplaceConstants.ENTRY_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                          })),
+                          }
+                  )),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Marketplace entry updated successfully")
           })

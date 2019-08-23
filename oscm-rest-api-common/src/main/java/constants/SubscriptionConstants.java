@@ -119,4 +119,19 @@ public class SubscriptionConstants {
             "\"id\": 10000\n" +
             "}\n" +
             "}";
+
+    public static final String SUBSCRIPTION_POST_PRE_STEPS = "\nPre-steps: " +
+            "\n - Create BillingContact for current user" +
+            "\n - Verify if etag param that you are passing with service JSON is the same with the version of that service in the database" +
+            "\n - Ensure that there is no existing subscriptions for the service that you are referring to";
+
+    public static final String SUBSCRIPTION_PUT_PRE_STEPS = "\nPre-steps: " +
+            "\n - Go to ServiceInstance table in the bssapp database." +
+            "\n - Set provisioningstatus to COMPLETED" +
+            "\n - Copy instanceid value" +
+            "\n - Paste copied instanceid value into productinstancefield in the subscription table" +
+            "\n - Set subscription status to ACTIVE";
+
+    public static final String USAGE_LICENSE_POST_PRE_STEPS = "\nPre-steps: " +
+            "\n - Create a new Role Definition. For example (10000, 'SAMPLE ROLE', 0, 10000)";
 }

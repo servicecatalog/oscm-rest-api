@@ -69,11 +69,13 @@ public class UsageLicenseResource extends RestResource {
                           schema = @Schema(implementation = UsageLicenseRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". "
+                                                  + SubscriptionConstants.USAGE_LICENSE_POST_PRE_STEPS,
                                           value= SubscriptionConstants.LICENSE_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". "
+                                                  + SubscriptionConstants.USAGE_LICENSE_POST_PRE_STEPS,
                                           value= SubscriptionConstants.LICENSE_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           }

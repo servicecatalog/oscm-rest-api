@@ -53,13 +53,14 @@ public class EventResource extends RestResource {
                           schema = @Schema(implementation = EventRepresentation.class),
                   examples = {
                           @ExampleObject(
-                                  name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                  name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". " +
+                                          EventConstants.EVENT_RESOURCE_POST_PRE_STEPS,
                                   value = EventConstants.EVENT_MAXIMUM_SUBSCRIPTION_EVENT_BODY,
                                   summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY + " "
                                           + EventConstants.SUBSCRIPTION_EVENT_SUMMARY),
                           @ExampleObject(
                                   name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". " +
-                                          EventConstants.INSTANCE_EVENT_ADDITIONAL_INFO,
+                                          EventConstants.EVENT_RESOURCE_POST_PRE_STEPS,
                                   value = EventConstants.EVENT_MAXIMUM_INSTANCE_EVENT_BODY,
                                   summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY + " " +
                                           EventConstants.INSTANCE_EVENT_SUMMARY)

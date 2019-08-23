@@ -41,9 +41,9 @@ public class SubscriptionResource extends RestResource {
   SubscriptionBackend sb;
 
   @GET
-  @Operation(summary = "Get all subscriptions for the service",
+  @Operation(summary = "Get all subscriptions to the service for a user",
           tags = {"subscriptions"},
-          description = "Returns all subscriptions for the service",
+          description = "Returns all subscriptions to the service for a user",
           responses = {
                   @ApiResponse(responseCode = "200",
                           description = "Subscriptions list",
@@ -59,9 +59,9 @@ public class SubscriptionResource extends RestResource {
 
   @GET
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Get a single subscription for a service",
+  @Operation(summary = "Get a single subscription to the service for a user",
           tags = {"subscriptions"},
-          description = "Returns a single subscription",
+          description = "Returns a single subscription to the service for a user",
           responses = {
                   @ApiResponse(responseCode = "200", description = "A single subscription", content = @Content(
                           schema = @Schema(implementation = SubscriptionCreationRepresentation.class)
@@ -83,11 +83,13 @@ public class SubscriptionResource extends RestResource {
                           schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME
+                                                  + SubscriptionConstants.SUBSCRIPTION_POST_PRE_STEPS,
                                           value= SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME
+                                                  + SubscriptionConstants.SUBSCRIPTION_POST_PRE_STEPS,
                                           value= SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           }
@@ -115,11 +117,13 @@ public class SubscriptionResource extends RestResource {
                           schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
+                                                  SubscriptionConstants.SUBSCRIPTION_PUT_PRE_STEPS,
                                           value= SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". " +
+                                                  SubscriptionConstants.SUBSCRIPTION_PUT_PRE_STEPS,
                                           value= SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           }

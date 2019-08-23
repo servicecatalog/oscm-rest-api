@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service;
 
-import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -69,7 +68,7 @@ public class TSSupplierResource extends RestResource {
                           schema = @Schema(implementation = OrganizationRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " + ServiceConstants.TS_SUPPLIER_POST_PRE_STEPS,
                                           value= ServiceConstants.TS_SUPPLIER_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(

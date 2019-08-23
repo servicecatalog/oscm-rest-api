@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service;
 
-import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -120,7 +119,8 @@ public class ServiceResource extends RestResource {
                           schema = @Schema(implementation = ServiceRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". "
+                                                  + ServiceConstants.SERVICE_PUT_PRE_STEPS,
                                           value= ServiceConstants.SERVICE_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
@@ -172,7 +172,7 @@ public class ServiceResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   @Operation(summary = "Delete a single service",
           tags = {"services"},
-          description = "Deletes a single service",
+          description = "Deletes a single service. Remember to deactivate the service first.",
           responses = {
                   @ApiResponse(responseCode = "204", description = "Service deleted successfully")
           })

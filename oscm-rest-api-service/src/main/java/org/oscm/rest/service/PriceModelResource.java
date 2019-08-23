@@ -9,7 +9,6 @@
  */
 package org.oscm.rest.service;
 
-import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +46,7 @@ public class PriceModelResource extends RestResource {
   @GET
   @Operation(summary = "Get generic price model for the service",
           tags = {"services"},
-          description = "Returns price model for the service",
+          description = "Returns generic price model for the service",
           responses = {
                   @ApiResponse(responseCode = "200",
                           description = "Price model item",
@@ -95,7 +94,8 @@ public class PriceModelResource extends RestResource {
   @Path("/customer/{orgKey}")
   @Operation(summary = "Get customer-specific price model for service",
           tags = {"services"},
-          description = "Returns price model for the service",
+          description = "Returns customer-specific price model for the service"
+                  + ServiceConstants.PRICE_MODEL_GET_PRE_STEPS,
           responses = {
                   @ApiResponse(responseCode = "200", description = "Price model for the service", content = @Content(
                           schema = @Schema(implementation = PriceModelRepresentation.class)
@@ -118,11 +118,13 @@ public class PriceModelResource extends RestResource {
                           schema = @Schema(implementation = PriceModelRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". "
+                                                  + ServiceConstants.PRICE_MODEL_PUT_PRE_STEPS,
                                           value= ServiceConstants.CUSTOMER_PRICE_MODEL_MINIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". "
+                                                  + ServiceConstants.PRICE_MODEL_PUT_PRE_STEPS,
                                           value= ServiceConstants.CUSTOMER_PRICE_MODEL_MAXIMUM_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           })),

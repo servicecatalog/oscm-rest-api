@@ -100,7 +100,7 @@ public class UserResource extends RestResource {
     return post(uriInfo, ub.postUser(), content, params);
   }
 
-  @PUT //FIXME: Remove PUT_TMP_WARNING and change body values to the same that are used in POST after fixing the redundant "id" issue.
+  @PUT
   @Path(PATH_USERID)
   @Operation(summary = "Update a user",
           tags = {"users"},
@@ -112,13 +112,11 @@ public class UserResource extends RestResource {
                           schema = @Schema(implementation = UserRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME + ". " +
-                                                  IdentityConstants.PUT_TMP_WARNING,
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
                                           value= IdentityConstants.TMP_USER_MIN_PUT_BODY,
                                           summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME + ". " +
-                                                  IdentityConstants.PUT_TMP_WARNING,
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
                                           value= IdentityConstants.TMP_USER_MAX_PUT_BODY,
                                           summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                           }
