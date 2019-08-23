@@ -115,14 +115,15 @@ public class BillingContactResource extends RestResource {
                           schema = @Schema(implementation = BillingContactRepresentation.class),
                           examples = {
                                   @ExampleObject(
-                                          name = "Only required parameters",
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
                                           value= AccountConstants.BILLING_CONTACT_MINIMUM_BODY,
-                                          summary = "Minimum body example"),
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                                   @ExampleObject(
-                                          name = "All possible parameters",
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
                                           value= AccountConstants.BILLING_CONTACT_MAXIMUM_BODY,
-                                          summary = "Maximum body example")
-                          })),
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                          }
+                  )),
           responses = {
                   @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
           })
