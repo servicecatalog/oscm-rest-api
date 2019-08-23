@@ -122,7 +122,7 @@ public class SubscriptionConstants {
 
     public static final String SUBSCRIPTION_POST_PRE_STEPS = "\nPre-steps: " +
             "\n - Create BillingContact for current user" +
-            "\n - Verify if etag param that you are passing with service JSON is the same with the version of that service in the database" +
+            "\n - Verify if etag parameter that you are passing in the request body is the same with the version of that service in the database" +
             "\n - Ensure that there is no existing subscriptions for the service that you are referring to";
 
     public static final String SUBSCRIPTION_PUT_PRE_STEPS = "\nPre-steps: " +

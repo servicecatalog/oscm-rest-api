@@ -17,7 +17,8 @@ package constants;
 
 public class AccountConstants {
 
-    public static final String BILLING_CONTACT_MINIMUM_BODY = "{\n" +
+    public static final String BILLING_CONTACT_MINIMUM_BODY =
+            "{\n" +
             "\"email\": \"sample.email@escm.com\",\n" +
             "\"companyName\": \"Sample Company Name\",\n" +
             "\"address\": \"Sample addresss\",\n" +

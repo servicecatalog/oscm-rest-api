@@ -43,5 +43,5 @@ public class EventConstants {
 
     public final static String EVENT_RESOURCE_POST_PRE_STEPS = "\nPre-steps: " +
             "\n - For subscription event: Make sure that Technical Product for which you are creating the event is bound to that event's type." +
-            "\n - For instance event make sure that the is a subscription that is bound to a technical service instance that you are referencing to.";
+            "\n - For instance event: Make sure that there is a subscription that is bound to a technical service instance that you are referencing to.";
 }
