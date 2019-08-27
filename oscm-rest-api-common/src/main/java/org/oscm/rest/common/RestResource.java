@@ -106,8 +106,9 @@ public abstract class RestResource {
 
     Object newId = backend.post(content, params);
 
-    URI uri = URI.create(newId.toString());
-    return Response.created(uri).build();
+    return Response.status(Response.Status.CREATED).entity(newId.toString()).build();
+//    URI uri = URI.create(newId.toString());
+//    return Response.created(uri).build();
   }
 
   /**
