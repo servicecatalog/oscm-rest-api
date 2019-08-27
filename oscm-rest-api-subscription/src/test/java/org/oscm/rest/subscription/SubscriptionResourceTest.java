@@ -110,7 +110,7 @@ public class SubscriptionResourceTest {
         assertThat(response)
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.CREATED.getStatusCode());
-        assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
+        assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
     }
 
     @Test
