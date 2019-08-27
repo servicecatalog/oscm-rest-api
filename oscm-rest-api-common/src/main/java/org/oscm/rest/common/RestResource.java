@@ -15,7 +15,6 @@ import org.oscm.rest.common.requestparameters.RequestParameters;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 import java.util.List;
 
 import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
@@ -106,8 +105,9 @@ public abstract class RestResource {
 
     Object newId = backend.post(content, params);
 
-    URI uri = URI.create(newId.toString());
-    return Response.created(uri).build();
+    return Response.status(Response.Status.CREATED)
+        .entity(PostResponseBody.of().createdObjectId(newId.toString()).build())
+        .build();
   }
 
   /**
