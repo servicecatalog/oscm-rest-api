@@ -14,8 +14,9 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.common.requestparameters.EventParameters;
+import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -40,8 +41,11 @@ public class EventResource extends RestResource {
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   public Response recordEvent(
-      @Context UriInfo uriInfo, EventRepresentation content, @BeanParam EventParameters params)
-      throws Exception {
-    return post(uriInfo, eb.post(), content, params);
+      @Context UriInfo uriInfo, EventRepresentation content, @BeanParam EventParameters params) {
+    try {
+      return post(uriInfo, eb.post(), content, params);
+    } catch (Exception e) {
+      return RestErrorResponseFactory.getResponse(e);
+    }
   }
 }
