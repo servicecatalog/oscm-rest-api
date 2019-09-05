@@ -9,15 +9,6 @@
  */
 package org.oscm.rest.event;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
-
-import java.util.stream.Stream;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +25,16 @@ import org.oscm.internal.types.exception.*;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.EventRepresentation;
 import org.oscm.rest.common.requestparameters.EventParameters;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class EventResourceTest {
@@ -95,7 +96,8 @@ public class EventResourceTest {
         Arguments.of(new OrganizationAuthoritiesException(), Response.Status.FORBIDDEN),
         Arguments.of(new ObjectNotFoundException(), Response.Status.NOT_FOUND),
         Arguments.of(new ValidationException(), Response.Status.BAD_REQUEST),
-        Arguments.of(new IllegalArgumentException(), Response.Status.BAD_REQUEST),
+        // FIXME: Explicit package name should be removed in scope of oscm#419
+        Arguments.of(new java.lang.IllegalArgumentException(), Response.Status.BAD_REQUEST),
         Arguments.of(new SaaSSystemException(), Response.Status.INTERNAL_SERVER_ERROR),
         Arguments.of(new WebApplicationException(), Response.Status.INTERNAL_SERVER_ERROR));
   }
