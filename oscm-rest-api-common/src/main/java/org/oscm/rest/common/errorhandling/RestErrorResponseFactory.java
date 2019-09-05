@@ -9,17 +9,13 @@
  */
 package org.oscm.rest.common.errorhandling;
 
+import java.util.HashMap;
+import java.util.Map;
+import javax.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.oscm.internal.types.exception.*;
 
-import javax.ws.rs.core.Response;
-import java.lang.IllegalArgumentException;
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- * This class created error Response object, depending on passed exception instance
- */
+/** This class created error Response object, depending on passed exception instance */
 @Slf4j
 public class RestErrorResponseFactory {
   private static final String NO_RESPONSE_DEFINITON_FOUND_ERROR_MESSAGE =
