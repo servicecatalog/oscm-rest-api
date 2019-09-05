@@ -30,7 +30,8 @@ public class RestErrorResponseFactory {
     errorResponseStatusMap.put(OrganizationAuthoritiesException.class, Response.Status.FORBIDDEN);
     errorResponseStatusMap.put(ObjectNotFoundException.class, Response.Status.NOT_FOUND);
     errorResponseStatusMap.put(ValidationException.class, Response.Status.BAD_REQUEST);
-    errorResponseStatusMap.put(IllegalArgumentException.class, Response.Status.BAD_REQUEST);
+    //FIXME: Explicit package name should be removed in scope of oscm#419
+    errorResponseStatusMap.put(java.lang.IllegalArgumentException.class, Response.Status.BAD_REQUEST);
   }
 
   /**

@@ -24,9 +24,10 @@ public class EventBackend {
   @EJB EventService es;
   private Response restResponse;
 
+  //FIXME: Explicit package name should be removed in scope of oscm#419
   public RestBackend.Post<EventRepresentation, EventParameters> post()
       throws DuplicateEventException, OrganizationAuthoritiesException, ObjectNotFoundException,
-          ValidationException, IllegalArgumentException, SaaSSystemException {
+          ValidationException, java.lang.IllegalArgumentException, SaaSSystemException {
     return (content, params) -> {
       if (content.isSubcriptionKeySet()) {
         es.recordEventForSubscription(content.getSubscriptionKey(), content.getVO());
