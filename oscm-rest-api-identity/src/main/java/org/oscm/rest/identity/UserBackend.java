@@ -75,7 +75,7 @@ public class UserBackend {
 
   public RestBackend.Put<UserRepresentation, UserParameters> putUser() {
     return (content, params) -> {
-      // TODO: handle id change?
+      // TODO: createResponse id change?
       is.updateUser(content.getVO());
       return true;
     };
