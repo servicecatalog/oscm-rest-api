@@ -10,14 +10,17 @@
 package org.oscm.rest.marketplace;
 
 import org.oscm.internal.intf.MarketplaceService;
+import org.oscm.internal.types.exception.*;
 import org.oscm.internal.vo.VOMarketplace;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
+import javax.ejb.ConcurrentAccessException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 
 @Stateless
@@ -56,7 +59,9 @@ public class MarketplaceBackend {
     };
   }
 
-  public RestBackend.Put<MarketplaceRepresentation, MarketplaceParameters> put() {
+  public RestBackend.Put<MarketplaceRepresentation, MarketplaceParameters> put()
+      throws ObjectNotFoundException, OperationNotPermittedException, ConcurrentAccessException,
+          ValidationException, UserRoleAssignmentException, IllegalArgumentException {
     return (content, params) -> {
       String mId = ms.getMarketplaceIdForKey(params.getId());
       VOMarketplace vo = content.getVO();
@@ -66,7 +71,8 @@ public class MarketplaceBackend {
     };
   }
 
-  public RestBackend.Delete<MarketplaceParameters> delete() {
+  public RestBackend.Delete<MarketplaceParameters> delete()
+      throws IllegalArgumentException, ObjectNotFoundException, NonUniqueBusinessKeyException {
     return params -> {
       String mId = ms.getMarketplaceIdForKey(params.getId());
       ms.deleteMarketplace(mId);
@@ -74,7 +80,7 @@ public class MarketplaceBackend {
     };
   }
 
-  public RestBackend.Get<MarketplaceRepresentation, MarketplaceParameters> get() {
+  public RestBackend.Get<MarketplaceRepresentation, MarketplaceParameters> get() throws ObjectNotFoundException {
     return params -> {
       String mId = ms.getMarketplaceIdForKey(params.getId());
       VOMarketplace mp = ms.getMarketplaceById(mId);

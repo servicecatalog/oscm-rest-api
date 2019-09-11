@@ -1,6 +1,7 @@
 package org.oscm.rest.marketplace;
 
 import com.google.common.collect.Lists;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -94,6 +95,7 @@ class MarketplaceResourceTest {
     }
 
     @Test
+    @SneakyThrows
     public void shouldGetMarketplace() {
         when(marketplaceBackend.get()).thenReturn(params -> marketplaceRepresentation);
 
@@ -112,6 +114,7 @@ class MarketplaceResourceTest {
     }
 
     @Test
+    @SneakyThrows
     public void shouldUpdateMarketplace() {
         when(marketplaceBackend.put())
                 .thenReturn((content, params) -> true);
@@ -130,6 +133,7 @@ class MarketplaceResourceTest {
     }
 
     @Test
+    @SneakyThrows
     public void shouldDeleteMarketplace() {
         when(marketplaceBackend.delete()).thenReturn(params -> true);
 

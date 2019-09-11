@@ -14,6 +14,7 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
+import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 
@@ -38,7 +39,11 @@ public class MarketplaceResource extends RestResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getMarketplaces(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
       throws Exception {
-    return getCollection(uriInfo, mb.getCollection(), params);
+    try {
+      return getCollection(uriInfo, mb.getCollection(), params);
+    } catch (Exception e) {
+      return RestErrorResponseFactory.getResponse(e);
+    }
   }
 
   @Since(CommonParams.VERSION_1)
@@ -50,7 +55,11 @@ public class MarketplaceResource extends RestResource {
       MarketplaceRepresentation content,
       @BeanParam MarketplaceParameters params)
       throws Exception {
-    return post(uriInfo, mb.post(), content, params);
+    try {
+      return post(uriInfo, mb.post(), content, params);
+    } catch (Exception e) {
+      return RestErrorResponseFactory.getResponse(e);
+    }
   }
 
   @Since(CommonParams.VERSION_1)
@@ -59,7 +68,11 @@ public class MarketplaceResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   public Response getMarketplace(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
       throws Exception {
-    return get(uriInfo, mb.get(), params, true);
+    try {
+      return get(uriInfo, mb.get(), params, true);
+    } catch (Exception e) {
+      return RestErrorResponseFactory.getResponse(e);
+    }
   }
 
   @Since(CommonParams.VERSION_1)
@@ -72,7 +85,11 @@ public class MarketplaceResource extends RestResource {
       MarketplaceRepresentation content,
       @BeanParam MarketplaceParameters params)
       throws Exception {
-    return put(uriInfo, mb.put(), content, params);
+    try {
+      return put(uriInfo, mb.put(), content, params);
+    } catch (Exception e) {
+      return RestErrorResponseFactory.getResponse(e);
+    }
   }
 
   @Since(CommonParams.VERSION_1)
@@ -81,6 +98,10 @@ public class MarketplaceResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   public Response deleteMarketplace(
       @Context UriInfo uriInfo, @BeanParam MarketplaceParameters params) throws Exception {
-    return delete(uriInfo, mb.delete(), params);
+    try {
+      return delete(uriInfo, mb.delete(), params);
+    } catch (Exception e) {
+      return RestErrorResponseFactory.getResponse(e);
+    }
   }
 }
