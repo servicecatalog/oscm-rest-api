@@ -9,15 +9,6 @@
  */
 package org.oscm.rest.marketplace;
 
-import lombok.AccessLevel;
-import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
-import org.oscm.rest.common.requestparameters.MarketplaceParameters;
-import org.oscm.rest.common.representation.EntryRepresentation;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -25,6 +16,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import lombok.AccessLevel;
+import lombok.Setter;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
+import org.oscm.rest.common.representation.EntryRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
 @Stateless
