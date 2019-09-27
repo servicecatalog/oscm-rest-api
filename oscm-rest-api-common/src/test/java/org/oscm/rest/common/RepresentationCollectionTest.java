@@ -11,6 +11,8 @@ package org.oscm.rest.common;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.Arrays;

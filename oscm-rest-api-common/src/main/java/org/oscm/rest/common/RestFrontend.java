@@ -9,6 +9,9 @@
  */
 package org.oscm.rest.common;
 
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.RequestParameters;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 

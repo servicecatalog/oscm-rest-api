@@ -16,12 +16,9 @@ import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUser;
-import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionDetailsRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionRepresentation;
-import org.oscm.rest.subscription.data.UdaRepresentation;
+import org.oscm.rest.common.representation.*;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -49,15 +46,16 @@ public class SubscriptionBackend {
       }
 
       Collection<SubscriptionRepresentation> subscriptionRepresentations =
-              Lists.newArrayList(subs
-                      .stream()
-                      .map(s -> {
+          Lists.newArrayList(
+              subs.stream()
+                  .map(
+                      s -> {
                         return new SubscriptionRepresentation(s);
-                        })
-                      .collect(Collectors.toList()));
+                      })
+                  .collect(Collectors.toList()));
 
       RepresentationCollection<SubscriptionRepresentation> list =
-              new RepresentationCollection<>(subscriptionRepresentations);
+          new RepresentationCollection<>(subscriptionRepresentations);
       return list;
     };
   }

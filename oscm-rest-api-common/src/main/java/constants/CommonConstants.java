@@ -14,13 +14,11 @@ package constants;
  *
  * @author crystalzord
  */
-
 public class CommonConstants {
 
-    public static final String EXAMPLE_MINIMUM_BODY_NAME = "Only required parameters";
-    public static final String EXAMPLE_MINIMUM_BODY_SUMMARY = "Minimum body example";
+  public static final String EXAMPLE_MINIMUM_BODY_NAME = "Only required parameters";
+  public static final String EXAMPLE_MINIMUM_BODY_SUMMARY = "Minimum body example";
 
-    public static final String EXAMPLE_MAXIMUM_BODY_NAME = "All possible parameters";
-    public static final String EXAMPLE_MAXIMUM_BODY_SUMMARY = "Maximum body example";
-
+  public static final String EXAMPLE_MAXIMUM_BODY_NAME = "All possible parameters";
+  public static final String EXAMPLE_MAXIMUM_BODY_SUMMARY = "Maximum body example";
 }

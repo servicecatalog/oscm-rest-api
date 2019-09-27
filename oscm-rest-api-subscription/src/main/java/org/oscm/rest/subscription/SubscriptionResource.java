@@ -22,7 +22,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -41,17 +42,19 @@ public class SubscriptionResource extends RestResource {
   SubscriptionBackend sb;
 
   @GET
-  @Operation(summary = "Get all subscriptions for the service",
-          tags = {"subscriptions"},
-          description = "Returns all subscriptions for the service",
-          responses = {
-                  @ApiResponse(responseCode = "200",
-                          description = "Subscriptions list",
-                          content = @Content(
-                                  mediaType = "application/json",
-                                  schema = @Schema(implementation = SubscriptionCreationRepresentation.class)
-                          ))
-          })
+  @Operation(
+      summary = "Get all subscriptions for the service",
+      tags = {"subscriptions"},
+      description = "Returns all subscriptions for the service",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Subscriptions list",
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = SubscriptionCreationRepresentation.class)))
+      })
   public Response getSubscriptions(
       @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
     return getCollection(uriInfo, sb.getCollection(), params);
@@ -59,42 +62,48 @@ public class SubscriptionResource extends RestResource {
 
   @GET
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Get a single subscription for a service",
-          tags = {"subscriptions"},
-          description = "Returns a single subscription",
-          responses = {
-                  @ApiResponse(responseCode = "200", description = "A single subscription", content = @Content(
-                          schema = @Schema(implementation = SubscriptionCreationRepresentation.class)
-                  ))
-          })
+  @Operation(
+      summary = "Get a single subscription for a service",
+      tags = {"subscriptions"},
+      description = "Returns a single subscription",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "A single subscription",
+            content =
+                @Content(
+                    schema = @Schema(implementation = SubscriptionCreationRepresentation.class)))
+      })
   public Response getSubscription(
-          @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
 
   @POST
-  @Operation(summary = "Create a subscription",
-          tags = {"subscriptions"},
-          description = "Creates a subscription",
-          requestBody = @RequestBody(
-                  description = "SubscriptionCreationRepresentation object to be created",
-                  required = true,
-                  content = @Content(
-                          schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
-                          examples = {
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                                          value= SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                                          value= SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                          }
-                  )),
-          responses = {
-                  @ApiResponse(responseCode = "201", description = "Subscription created successfully")
-          })
+  @Operation(
+      summary = "Create a subscription",
+      tags = {"subscriptions"},
+      description = "Creates a subscription",
+      requestBody =
+          @RequestBody(
+              description = "SubscriptionCreationRepresentation object to be created",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {
+        @ApiResponse(responseCode = "201", description = "Subscription created successfully")
+      })
   public Response createSubscription(
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
@@ -105,28 +114,30 @@ public class SubscriptionResource extends RestResource {
 
   @PUT
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Update a single subscription",
-          tags = {"subscriptions"},
-          description = "Updates a single subscription",
-          requestBody = @RequestBody(
-                  description = "SubscriptionCreationRepresentation object to be updated",
-                  required = true,
-                  content = @Content(
-                          schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
-                          examples = {
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                                          value= SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                                          value= SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                          }
-                  )),
-          responses = {
-                  @ApiResponse(responseCode = "204", description = "Subscription updated successfully")
-          })
+  @Operation(
+      summary = "Update a single subscription",
+      tags = {"subscriptions"},
+      description = "Updates a single subscription",
+      requestBody =
+          @RequestBody(
+              description = "SubscriptionCreationRepresentation object to be updated",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {
+        @ApiResponse(responseCode = "204", description = "Subscription updated successfully")
+      })
   public Response updateSubscription(
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
@@ -137,12 +148,13 @@ public class SubscriptionResource extends RestResource {
 
   @DELETE
   @Path(CommonParams.PATH_ID)
-  @Operation(summary = "Delete a single subscription",
-          tags = {"subscriptions"},
-          description = "Deletes a single subscription",
-          responses = {
-                  @ApiResponse(responseCode = "204", description = "Subscription deleted successfully")
-          })
+  @Operation(
+      summary = "Delete a single subscription",
+      tags = {"subscriptions"},
+      description = "Deletes a single subscription",
+      responses = {
+        @ApiResponse(responseCode = "204", description = "Subscription deleted successfully")
+      })
   public Response deleteSubscription(
       @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
     return delete(uriInfo, sb.delete(), params);

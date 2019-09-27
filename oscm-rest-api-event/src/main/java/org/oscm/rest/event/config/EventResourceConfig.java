@@ -19,11 +19,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Lists out resources and providers of the event component that will be registered to the application.
+ * Lists out resources and providers of the event component that will be registered to the
+ * application.
  *
  * @author Weiser
  */
-public class EventResourceConfig extends ResourceConfiguration {
+public class EventResourceConfig implements ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {

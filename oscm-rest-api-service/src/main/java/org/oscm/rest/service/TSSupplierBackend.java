@@ -13,7 +13,8 @@ import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.service.data.OrganizationRepresentation;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

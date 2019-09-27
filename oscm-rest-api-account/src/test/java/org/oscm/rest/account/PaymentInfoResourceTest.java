@@ -18,9 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.account.data.PaymentInfoRepresentation;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.PaymentInfoRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -42,8 +43,8 @@ public class PaymentInfoResourceTest {
 
   @BeforeEach
   public void setUp() {
-    paymentInfoRepresentation = createPIRepresentation();
-    parameters = createAccountParameters();
+    paymentInfoRepresentation = SampleTestDataUtility.createPIRepresentation();
+    parameters = SampleTestDataUtility.createAccountParameters();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -127,16 +128,5 @@ public class PaymentInfoResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private PaymentInfoRepresentation createPIRepresentation() {
-    PaymentInfoRepresentation representation = new PaymentInfoRepresentation();
-    return representation;
-  }
-
-  private AccountParameters createAccountParameters() {
-    AccountParameters parameters = new AccountParameters();
-    parameters.setOrgId("orgId");
-    return parameters;
   }
 }

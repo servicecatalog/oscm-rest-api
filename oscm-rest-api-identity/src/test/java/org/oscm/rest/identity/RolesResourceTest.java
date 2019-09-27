@@ -18,7 +18,8 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.identity.data.RolesRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
+import org.oscm.rest.common.representation.RolesRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -40,9 +41,9 @@ public class RolesResourceTest {
 
   @BeforeEach
   public void setUp() {
-    rolesRepresentation = createRolesRepresentation();
+    rolesRepresentation = SampleTestDataUtility.createRolesRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -82,15 +83,5 @@ public class RolesResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private RolesRepresentation createRolesRepresentation() {
-    return new RolesRepresentation();
-  }
-
-  private UserParameters createParameters() {
-    UserParameters parameters = new UserParameters();
-    parameters.setUserId("userId");
-    return parameters;
   }
 }

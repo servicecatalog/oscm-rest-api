@@ -12,10 +12,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.internal.vo.VOUser;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.subscription.data.SubscriptionRepresentation;
-import org.oscm.rest.subscription.data.UsageLicenseRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.SubscriptionRepresentation;
+import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -42,20 +43,11 @@ public class UsageLicenseResourceTest {
 
     @BeforeEach
     public void setUp() {
-        subscriptionParameters = createParameters();
+        subscriptionParameters = SampleTestDataUtility.createSubscriptionParameters();
         uriInfo = SampleTestDataUtility.createUriInfo();
-        subscriptionRepresentation = new SubscriptionRepresentation();
-        VOUsageLicense voUsageLicense = setUpUsageLicense();
-        usageLicenseRepresentation = new UsageLicenseRepresentation(voUsageLicense);
-    }
-
-    private VOUsageLicense setUpUsageLicense() {
-        VOUsageLicense voUsageLicense = new VOUsageLicense();
-        VORoleDefinition voRoleDefinition = new VORoleDefinition();
-        voUsageLicense.setRoleDefinition(voRoleDefinition);
-        VOUser voUser = new VOUser();
-        voUsageLicense.setUser(voUser);
-        return voUsageLicense;
+        subscriptionRepresentation = SampleTestDataUtility.createSubscriptionRepresentation();
+        VOUsageLicense voUsageLicense = SampleTestDataUtility.createVOUsageLicense();
+        usageLicenseRepresentation = SampleTestDataUtility.createUsageLicenseRepresentation(voUsageLicense);
     }
 
     @AfterEach
@@ -104,7 +96,7 @@ public class UsageLicenseResourceTest {
         assertThat(response)
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.CREATED.getStatusCode());
-        assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
+        assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
     }
 
     @Test
@@ -142,11 +134,4 @@ public class UsageLicenseResourceTest {
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
     }
-
-    private SubscriptionParameters createParameters() {
-        SubscriptionParameters parameters = new SubscriptionParameters();
-        parameters.setId(100L);
-        return parameters;
-    }
-
 }

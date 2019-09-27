@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.security.SecuritySchemes;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -20,7 +22,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 import java.util.List;
 
 import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
@@ -31,13 +32,11 @@ import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
  * @author miethaner
  */
 @SecuritySchemes(
-        @SecurityScheme(
-                name = "BasicAuthSecurity",
-                description = "Basic Auth for API resources",
-                type = SecuritySchemeType.HTTP,
-                scheme = "basic"
-        )
-)
+    @SecurityScheme(
+        name = "BasicAuthSecurity",
+        description = "Basic Auth for API resources",
+        type = SecuritySchemeType.HTTP,
+        scheme = "basic"))
 @SecurityRequirement(name = "BasicAuthSecurity")
 public abstract class RestResource {
 
@@ -124,8 +123,9 @@ public abstract class RestResource {
 
     Object newId = backend.post(content, params);
 
-    URI uri = URI.create(newId.toString());
-    return Response.created(uri).build();
+    return Response.status(Response.Status.CREATED)
+        .entity(PostResponseBody.of().createdObjectId(newId.toString()).build())
+        .build();
   }
 
   /**
@@ -225,8 +225,12 @@ public abstract class RestResource {
       }
 
       rep.validateContent();
-
       rep.setVersion(version);
+
+      if (withId) {
+        rep.setId(params.getId());
+      }
+
       rep.update();
     }
   }

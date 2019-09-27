@@ -10,19 +10,25 @@
 package org.oscm.rest.event;
 
 import org.oscm.internal.intf.EventService;
-import org.oscm.rest.common.CommonParams;
+import org.oscm.internal.types.exception.*;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.event.data.EventRepresentation;
+import org.oscm.rest.common.representation.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.Response;
 
 @Stateless
 public class EventBackend {
 
   @EJB EventService es;
+  private Response restResponse;
 
-  public RestBackend.Post<EventRepresentation, EventParameters> post() {
+  // FIXME: Explicit package name should be removed in scope of oscm#419
+  public RestBackend.Post<EventRepresentation, EventParameters> post()
+      throws DuplicateEventException, OrganizationAuthoritiesException, ObjectNotFoundException,
+          ValidationException, java.lang.IllegalArgumentException, SaaSSystemException {
     return (content, params) -> {
       if (content.isSubcriptionKeySet()) {
         es.recordEventForSubscription(content.getSubscriptionKey(), content.getVO());
@@ -30,7 +36,7 @@ public class EventBackend {
         es.recordEventForInstance(
             content.getTechnicalServiceId(), content.getInstanceId(), content.getVO());
       }
-      return CommonParams.DUMMY_ID;
+      return Response.noContent().build();
     };
   }
 }

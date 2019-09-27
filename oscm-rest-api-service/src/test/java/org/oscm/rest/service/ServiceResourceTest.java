@@ -20,11 +20,12 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.internal.vo.VOTechnicalService;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.service.data.ServiceDetailsRepresentation;
-import org.oscm.rest.service.data.ServiceRepresentation;
-import org.oscm.rest.service.data.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.StatusRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -50,19 +51,12 @@ public class ServiceResourceTest {
 
   @BeforeEach
   public void setUp() {
-    voServiceDetails = setUpServiceDetails();
-    serviceRepresentation = new ServiceRepresentation();
-    serviceDetailsRepresentation = new ServiceDetailsRepresentation(voServiceDetails);
-    statusRepresentation = new StatusRepresentation();
+    voServiceDetails = SampleTestDataUtility.createVOServiceDetails();
+    serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
+    serviceDetailsRepresentation = SampleTestDataUtility.createServiceDetailsRepresentation(voServiceDetails);
+    statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    serviceParameters = createParameters();
-  }
-
-  private VOServiceDetails setUpServiceDetails() {
-    VOServiceDetails voServiceDetails = new VOServiceDetails();
-    VOTechnicalService voTechnicalService = new VOTechnicalService();
-    voServiceDetails.setTechnicalService(voTechnicalService);
-    return voServiceDetails;
+    serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
 
   @AfterEach
@@ -114,7 +108,7 @@ public class ServiceResourceTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
-    assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
   }
 
   @Test
@@ -187,11 +181,5 @@ public class ServiceResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-  }
-
-  private ServiceParameters createParameters() {
-    ServiceParameters parameters = new ServiceParameters();
-    parameters.setId(100L);
-    return parameters;
   }
 }

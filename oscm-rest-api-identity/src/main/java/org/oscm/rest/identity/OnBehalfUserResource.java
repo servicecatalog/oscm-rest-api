@@ -22,7 +22,8 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
+import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -44,27 +45,30 @@ public class OnBehalfUserResource extends RestResource {
   UserBackend ub;
 
   @POST
-  @Operation(summary = "Create a single on behalf user",
-          tags = {"onbehalfusers"},
-          description = "Creates a single on behalf user",
-          requestBody = @RequestBody(
-                  description = "OnBehalfUserRepresentation object to be updated",
-                  required = true,
-                  content = @Content(
-                          schema = @Schema(implementation = OnBehalfUserRepresentation.class),
-                          examples = {
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                                          value = IdentityConstants.ONBEHALFUSERS_MINIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                                          value = IdentityConstants.ONBEHALFUSERS_MAXIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                          })),
-          responses = {
-                  @ApiResponse(responseCode = "204", description = "On behalf user created successfully")
-          })
+  @Operation(
+      summary = "Create a single on behalf user",
+      tags = {"onbehalfusers"},
+      description = "Creates a single on behalf user",
+      requestBody =
+          @RequestBody(
+              description = "OnBehalfUserRepresentation object to be updated",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = OnBehalfUserRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = IdentityConstants.ONBEHALFUSERS_MINIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = IdentityConstants.ONBEHALFUSERS_MAXIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {
+        @ApiResponse(responseCode = "204", description = "On behalf user created successfully")
+      })
   public Response createOnBehalfUser(
       @Context UriInfo uriInfo,
       OnBehalfUserRepresentation content,
@@ -74,12 +78,13 @@ public class OnBehalfUserResource extends RestResource {
   }
 
   @DELETE
-  @Operation(summary = "Delete a single on behalf user",
-          tags = {"onbehalfusers"},
-          description = "Deletes a single on behalf user",
-          responses = {
-                  @ApiResponse(responseCode = "204", description = "On behalf user deleted successfully")
-          })
+  @Operation(
+      summary = "Delete a single on behalf user",
+      tags = {"onbehalfusers"},
+      description = "Deletes a single on behalf user",
+      responses = {
+        @ApiResponse(responseCode = "204", description = "On behalf user deleted successfully")
+      })
   public Response deleteOnBehalfUser(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     params.setUserIdRequired(false);

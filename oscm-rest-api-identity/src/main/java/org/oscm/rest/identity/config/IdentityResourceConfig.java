@@ -22,11 +22,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Lists out resources and providers of the user component that will be registered to the application.
+ * Lists out resources and providers of the user component that will be registered to the
+ * application.
  *
  * @author Weiser
  */
-public class IdentityResourceConfig extends ResourceConfiguration {
+public class IdentityResourceConfig implements ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {

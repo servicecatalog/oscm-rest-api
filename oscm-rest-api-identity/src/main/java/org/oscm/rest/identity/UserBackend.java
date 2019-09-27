@@ -12,11 +12,12 @@ package org.oscm.rest.identity;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
-import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.identity.data.OnBehalfUserRepresentation;
-import org.oscm.rest.identity.data.RolesRepresentation;
-import org.oscm.rest.identity.data.UserRepresentation;
+import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.RolesRepresentation;
+import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -74,7 +75,7 @@ public class UserBackend {
 
   public RestBackend.Put<UserRepresentation, UserParameters> putUser() {
     return (content, params) -> {
-      // TODO: handle id change?
+      // TODO: createResponse id change?
       is.updateUser(content.getVO());
       return true;
     };

@@ -12,11 +12,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VOPriceModel;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionDetailsRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.SubscriptionDetailsRepresentation;
+import org.oscm.rest.common.representation.SubscriptionRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -45,11 +46,11 @@ public class SubscriptionResourceTest {
 
     @BeforeEach
     public void setUp() {
-        voSubscriptionDetails = setUpSubscriptionDetails();
-        subscriptionRepresentation = new SubscriptionRepresentation();
-        subscriptionDetailsRepresentation = new SubscriptionDetailsRepresentation(voSubscriptionDetails);
-        subscriptionCreationRepresentation = new SubscriptionCreationRepresentation();
-        subscriptionParameters = createParameters();
+        voSubscriptionDetails = SampleTestDataUtility.createVOSubscriptionDetails();
+        subscriptionRepresentation = SampleTestDataUtility.createSubscriptionRepresentation();
+        subscriptionDetailsRepresentation = SampleTestDataUtility.createSubscriptionDetailsRepresentation(voSubscriptionDetails);
+        subscriptionCreationRepresentation = SampleTestDataUtility.createSubscriptionCreationRepresentation();
+        subscriptionParameters = SampleTestDataUtility.createSubscriptionParameters();
         uriInfo = SampleTestDataUtility.createUriInfo();
     }
 
@@ -109,7 +110,7 @@ public class SubscriptionResourceTest {
         assertThat(response)
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.CREATED.getStatusCode());
-        assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
+        assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
     }
 
     @Test
@@ -164,11 +165,5 @@ public class SubscriptionResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-    }
-
-    private SubscriptionParameters createParameters() {
-        SubscriptionParameters parameters = new SubscriptionParameters();
-        parameters.setId(100L);
-        return parameters;
     }
 }

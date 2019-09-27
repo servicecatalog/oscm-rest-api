@@ -20,9 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.operation.data.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
+import org.oscm.rest.common.representation.SettingRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -51,9 +52,9 @@ public class SettingsBackendTest {
     resource.setSb(backend);
 
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
-    representation = createRepresentation();
-    vo = createVO();
+    parameters = SampleTestDataUtility.createOperationParameters();
+    representation = SampleTestDataUtility.createSettingRepresentation();
+    vo = SampleTestDataUtility.createVOConfigurationSetting();
   }
 
   @Test
@@ -128,19 +129,5 @@ public class SettingsBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private OperationParameters createParameters() {
-    OperationParameters parameters = new OperationParameters();
-    parameters.setId(123L);
-    return parameters;
-  }
-
-  private SettingRepresentation createRepresentation() {
-    return new SettingRepresentation();
-  }
-
-  private VOConfigurationSetting createVO() {
-    return new VOConfigurationSetting();
   }
 }

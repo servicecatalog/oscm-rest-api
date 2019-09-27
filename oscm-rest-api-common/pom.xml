@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <build>
-        <finalName>oscm-rest-api-operation</finalName>
+        <finalName>oscm-rest-api-common</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>

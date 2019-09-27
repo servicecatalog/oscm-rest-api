@@ -11,11 +11,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.vo.*;
-import org.oscm.rest.common.RepresentationCollection;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.subscription.data.ServiceRepresentation;
-import org.oscm.rest.subscription.data.SubscriptionCreationRepresentation;
-import org.oscm.rest.subscription.data.UdaRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.UdaRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -45,11 +46,11 @@ public class SubscriptionBackendTest {
     resource = new SubscriptionResource();
     resource.setSb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    representation = createRepresentation();
-    parameters = createParameters();
-    voUserSubscription = createVOUserSubscription();
-    voSubscriptionDetails = createVOSubscriptionDetails();
-    voSubscription = createVOSubscription();
+    representation = SampleTestDataUtility.createSubscriptionCreationRepresentation();
+    parameters = SampleTestDataUtility.createSubscriptionParameters();
+    voUserSubscription = SampleTestDataUtility.createVOUserSubscription();
+    voSubscriptionDetails = SampleTestDataUtility.createVOSubscriptionDetails();
+    voSubscription = SampleTestDataUtility.createVOSubscription();
   }
 
   @Test
@@ -147,42 +148,5 @@ public class SubscriptionBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
-  }
-
-  private SubscriptionCreationRepresentation createRepresentation() {
-    SubscriptionCreationRepresentation subscriptionCreationRepresentation =
-        new SubscriptionCreationRepresentation();
-    subscriptionCreationRepresentation.setService(new ServiceRepresentation());
-    subscriptionCreationRepresentation.setUdas(Lists.newArrayList(new UdaRepresentation()));
-    return subscriptionCreationRepresentation;
-  }
-
-  private SubscriptionParameters createParameters() {
-    SubscriptionParameters subscriptionParameters = new SubscriptionParameters();
-    subscriptionParameters.setId(123L);
-    return subscriptionParameters;
-  }
-
-  private VOUserSubscription createVOUserSubscription() {
-    VOUserSubscription voUserSubscription = new VOUserSubscription();
-
-    VOUsageLicense voUsageLicense = new VOUsageLicense();
-    voUsageLicense.setRoleDefinition(new VORoleDefinition());
-    voUserSubscription.setLicense(voUsageLicense);
-
-    voUsageLicense.setUser(new VOUser());
-
-    return voUserSubscription;
-  }
-
-  private VOSubscriptionDetails createVOSubscriptionDetails() {
-    VOSubscriptionDetails voSubscriptionDetails = new VOSubscriptionDetails();
-    voSubscriptionDetails.setPriceModel(new VOPriceModel());
-    voSubscriptionDetails.setSubscribedService(new VOService());
-    return voSubscriptionDetails;
-  }
-
-  private VOSubscription createVOSubscription() {
-    return new VOSubscription();
   }
 }

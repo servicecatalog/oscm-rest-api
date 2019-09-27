@@ -20,10 +20,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RepresentationCollection;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.service.data.ServiceRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -44,46 +45,52 @@ public class CompatibleServiceResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   ServiceBackend sb;
 
-
   @GET
-  @Operation(summary = "Get all services compatible to selected service",
-          tags = {"services"},
-          description = "Returns all services compatible to selected service",
-          responses = {
-                  @ApiResponse(responseCode = "200",
-                          description = "Services list",
-                          content = @Content(
-                                  mediaType = "application/json",
-                                  schema = @Schema(implementation = ServiceRepresentation.class)
-                          ))
-          })
+  @Operation(
+      summary = "Get all services compatible to selected service",
+      tags = {"services"},
+      description = "Returns all services compatible to selected service",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Services list",
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = ServiceRepresentation.class)))
+      })
   public Response getCompatibleServices(
       @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
     return getCollection(uriInfo, sb.getCompatibles(), params);
   }
 
   @PUT
-  @Operation(summary = "Update service's compatiblity relation",
-          tags = {"services"},
-          description = "Updates service's compatiblity relation",
-          requestBody = @RequestBody(
-                  description = "ServiceRepresentation object to be updated",
-                  required = true,
-                  content = @Content(
-                          schema = @Schema(implementation = ServiceRepresentation.class),
-                          examples = {
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                                          value= ServiceConstants.COMPATIBLE_SERVICE_MINIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                                  @ExampleObject(
-                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                                          value= ServiceConstants.COMPATIBLE_SERVICE_MAXIMUM_BODY,
-                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                          })),
-          responses = {
-                  @ApiResponse(responseCode = "204", description = "Service's compatiblity relation updated successfully")
-          })
+  @Operation(
+      summary = "Update service's compatiblity relation",
+      tags = {"services"},
+      description = "Updates service's compatiblity relation",
+      requestBody =
+          @RequestBody(
+              description = "ServiceRepresentation object to be updated",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = ServiceRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = ServiceConstants.COMPATIBLE_SERVICE_MINIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = ServiceConstants.COMPATIBLE_SERVICE_MAXIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {
+        @ApiResponse(
+            responseCode = "204",
+            description = "Service's compatiblity relation updated successfully")
+      })
   public Response setCompatibleServices(
       @Context UriInfo uriInfo,
       RepresentationCollection<ServiceRepresentation> content,

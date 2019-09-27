@@ -10,7 +10,8 @@
 package org.oscm.rest.identity;
 
 import org.oscm.rest.common.*;
-import org.oscm.rest.identity.data.UserRepresentation;
+import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,8 +33,8 @@ public class LdapUserResource extends RestResource {
   @GET
   public Response getLdapUsers(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
-    //FIXME: LDAP endpoints are disabled for now as the functionality is currently not supported
-    //return getCollection(uriInfo, ub.getLdapUsers(), params);
+    // FIXME: LDAP endpoints are disabled for now as the functionality is currently not supported
+    // return getCollection(uriInfo, ub.getLdapUsers(), params);
     return ResponseFactory.getInstance(ResponseType.NOT_IMPLEMENTED);
   }
 
@@ -41,8 +42,8 @@ public class LdapUserResource extends RestResource {
   public Response createLdapUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {
-    //FIXME: LDAP endpoints are disabled for now as the functionality is currently not supported
-//    return post(uriInfo, ub.postLdapUser(), content, params);
+    // FIXME: LDAP endpoints are disabled for now as the functionality is currently not supported
+    //    return post(uriInfo, ub.postLdapUser(), content, params);
     return ResponseFactory.getInstance(ResponseType.NOT_IMPLEMENTED);
   }
 }

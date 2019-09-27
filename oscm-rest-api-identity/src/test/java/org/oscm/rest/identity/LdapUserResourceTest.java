@@ -18,7 +18,8 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.identity.data.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
+import org.oscm.rest.common.representation.UserRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -39,9 +40,9 @@ public class LdapUserResourceTest {
 
   @BeforeEach
   public void setUp() {
-    userRepresentation = createUserRepresentation();
+    userRepresentation = SampleTestDataUtility.createUserRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = createParameters();
+    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -78,15 +79,5 @@ public class LdapUserResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NOT_IMPLEMENTED.getStatusCode());
-  }
-
-  private UserRepresentation createUserRepresentation() {
-    UserRepresentation userRepresentation = new UserRepresentation();
-    userRepresentation.setUserId("userId");
-    return userRepresentation;
-  }
-
-  private UserParameters createParameters() {
-    return new UserParameters();
   }
 }

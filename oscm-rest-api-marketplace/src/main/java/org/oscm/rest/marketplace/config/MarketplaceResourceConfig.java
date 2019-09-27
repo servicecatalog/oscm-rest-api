@@ -20,11 +20,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Lists out resources and providers of the marketplace component that will be registered to the application.
+ * Lists out resources and providers of the marketplace component that will be registered to the
+ * application.
  *
  * @author Weiser
  */
-public class MarketplaceResourceConfig extends ResourceConfiguration {
+public class MarketplaceResourceConfig implements ResourceConfiguration {
 
   @Override
   public Set<Class<?>> getClassesToRegister() {
