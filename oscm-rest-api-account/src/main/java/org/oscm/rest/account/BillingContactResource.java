@@ -32,7 +32,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/billingcontacts")
+@Path("/billingcontacts")
 @Since(CommonParams.VERSION_1)
 @Stateless
 public class BillingContactResource extends RestResource {
