@@ -8,6 +8,7 @@
         <war>org.oscm.rest:oscm-rest-api-operation</war>
         <war>org.oscm.rest:oscm-rest-api-service</war>
         <war>org.oscm.rest:oscm-rest-api-subscription</war>
+        <war>org.oscm.rest:oscm-rest-api-swagger</war>
     </wars>
 
     <merges>
@@ -22,6 +23,18 @@
                         <strategy name="Preserve"/>
                     </tag>
                     <tag name="security-role">
+                        <strategy name="Preserve"/>
+                    </tag>
+                    <tag name="servlet">
+                        <strategy name="Preserve"/>
+                    </tag>
+                    <tag name="servlet-mapping">
+                        <strategy name="Preserve"/>
+                    </tag>
+                    <tag name="filter">
+                        <strategy name="Preserve"/>
+                    </tag>
+                    <tag name="filter-mapping">
                         <strategy name="Preserve"/>
                     </tag>
                 </default>

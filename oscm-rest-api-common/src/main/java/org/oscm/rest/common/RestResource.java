@@ -9,10 +9,6 @@
  */
 package org.oscm.rest.common;
 
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.annotations.security.SecuritySchemes;
 import org.oscm.rest.common.representation.Representation;
 import org.oscm.rest.common.requestparameters.RequestParameters;
 
@@ -31,13 +27,6 @@ import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
  *
  * @author miethaner
  */
-@SecuritySchemes(
-    @SecurityScheme(
-        name = "BasicAuthSecurity",
-        description = "Basic Auth for API resources",
-        type = SecuritySchemeType.HTTP,
-        scheme = "basic"))
-@SecurityRequirement(name = "BasicAuthSecurity")
 public abstract class RestResource {
 
   private VersionValidator versionValidator = new VersionValidator();
