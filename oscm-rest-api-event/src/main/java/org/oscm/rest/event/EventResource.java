@@ -35,7 +35,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/events")
 @Stateless
 public class EventResource extends RestResource {
@@ -45,6 +44,7 @@ public class EventResource extends RestResource {
   EventBackend eb;
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a single event.",
       tags = {"event"},

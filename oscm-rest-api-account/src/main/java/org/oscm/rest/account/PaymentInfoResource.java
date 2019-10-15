@@ -32,7 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/paymentinfos")
 @Stateless
 public class PaymentInfoResource extends RestResource {
@@ -42,6 +41,7 @@ public class PaymentInfoResource extends RestResource {
   AccountBackend ab;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all payment info",
       tags = {"paymentinfo"},
@@ -58,6 +58,7 @@ public class PaymentInfoResource extends RestResource {
   }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single payment info",
@@ -75,6 +76,7 @@ public class PaymentInfoResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Update a single payment info",
@@ -115,6 +117,7 @@ public class PaymentInfoResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single payment info",

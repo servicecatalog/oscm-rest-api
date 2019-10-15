@@ -35,38 +35,38 @@ public class VersionFilter implements ContainerRequestFilter {
   @Override
   public void filter(ContainerRequestContext request) throws WebApplicationException {
 
-//    MultivaluedMap<String, String> params = request.getUriInfo().getPathParameters();
-//
-//    if (params.containsKey(CommonParams.PARAM_VERSION)
-//        && !params.get(CommonParams.PARAM_VERSION).isEmpty()) {
-//
-//      String version = params.get(CommonParams.PARAM_VERSION).get(0);
-//
-//      int vnr = versionValidator.doIt(version);
-//
-//      Method method = getResourceInfo().getResourceMethod();
-//
-//      if (method.isAnnotationPresent(Since.class)) {
-//
-//        Annotation annotation = method.getAnnotation(Since.class);
-//        Since since = (Since) annotation;
-//
-//        if (vnr < since.value()) {
-//          throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
-//        }
-//      }
-//      if (method.isAnnotationPresent(Until.class)) {
-//
-//        Annotation annotation = method.getAnnotation(Until.class);
-//        Until until = (Until) annotation;
-//
-//        if (vnr >= until.value()) {
-//          throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
-//        }
-//      }
-//    } else {
-//      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
-//    }
+    MultivaluedMap<String, String> params = request.getUriInfo().getPathParameters();
+
+    if (params.containsKey(CommonParams.PARAM_VERSION)
+        && !params.get(CommonParams.PARAM_VERSION).isEmpty()) {
+
+      String version = params.get(CommonParams.PARAM_VERSION).get(0);
+
+      int vnr = versionValidator.doIt(version);
+
+      Method method = getResourceInfo().getResourceMethod();
+
+      if (method.isAnnotationPresent(Since.class)) {
+
+        Annotation annotation = method.getAnnotation(Since.class);
+        Since since = (Since) annotation;
+
+        if (vnr < since.value()) {
+          throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
+        }
+      }
+      if (method.isAnnotationPresent(Until.class)) {
+
+        Annotation annotation = method.getAnnotation(Until.class);
+        Until until = (Until) annotation;
+
+        if (vnr >= until.value()) {
+          throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
+        }
+      }
+    } else {
+      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
+    }
   }
 
   public ResourceInfo getResourceInfo() {

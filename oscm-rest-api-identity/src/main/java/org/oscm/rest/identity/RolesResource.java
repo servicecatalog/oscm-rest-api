@@ -35,7 +35,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
 @Stateless
 public class RolesResource extends RestResource {
@@ -45,6 +44,7 @@ public class RolesResource extends RestResource {
   UserBackend ub;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all roles of user",
       tags = {"roles"},
@@ -64,6 +64,7 @@ public class RolesResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Update a single role of a user",
       tags = {"roles"},

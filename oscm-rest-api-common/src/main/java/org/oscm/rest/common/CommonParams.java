@@ -35,8 +35,8 @@ public class CommonParams {
   public static final String ETAG_WILDCARD = "*";
 
   // path params
-//  public static final String PATH_VERSION = "/{" + PARAM_VERSION + "}";
-  public static final String PATH_VERSION = "v1"; //TODO: this is temporary.
+  public static final String PATH_VERSION = "/{" + PARAM_VERSION + "}";
+//  public static final String PATH_VERSION = "v1"; //TODO: this is temporary.
 
   public static final String PATH_ID = "/{" + PARAM_ID + "}";
 

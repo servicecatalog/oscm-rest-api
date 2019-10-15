@@ -38,7 +38,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 import java.util.Collections;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
 public class TechnicalServiceResource extends RestResource {
@@ -50,6 +49,7 @@ public class TechnicalServiceResource extends RestResource {
   @EJB ServiceProvisioningService sps;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all available technical services",
       tags = {"services"},
@@ -80,6 +80,7 @@ public class TechnicalServiceResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a technical service",
       tags = {"services"},
@@ -113,6 +114,7 @@ public class TechnicalServiceResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   public Response importTechnicalServices(
       @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
       throws Exception {
@@ -128,6 +130,7 @@ public class TechnicalServiceResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single technical service",

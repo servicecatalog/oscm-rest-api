@@ -35,7 +35,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/onbehalfusers")
 @Stateless
 public class OnBehalfUserResource extends RestResource {
@@ -45,6 +44,7 @@ public class OnBehalfUserResource extends RestResource {
   UserBackend ub;
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a single on behalf user",
       tags = {"onbehalfusers"},
@@ -78,6 +78,7 @@ public class OnBehalfUserResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Delete a single on behalf user",
       tags = {"onbehalfusers"},

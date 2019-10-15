@@ -33,7 +33,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/billingcontacts")
-@Since(CommonParams.VERSION_1)
 @Stateless
 public class BillingContactResource extends RestResource {
 
@@ -41,26 +40,28 @@ public class BillingContactResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   AccountBackend ab;
 
-  @GET
-  @Operation(
-      summary = "Get all billing contacts for the organizations",
-      tags = {"billingcontacts"},
-      description = "Returns all billing contacts for the organizations",
-      responses = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Billing contacts list",
-            content =
-                @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = BillingContactRepresentation.class)))
-      })
-  public Response getBillingContacts(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-      throws Exception {
-    return getCollection(uriInfo, ab.getBillingContactCollection(), params);
-  }
+    @GET
+    @Since(CommonParams.VERSION_1)
+    @Operation(
+            summary = "Get all billing contacts for the organizations",
+            tags = {"billingcontacts"},
+            description = "Returns all billing contacts for the organizations",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Billing contacts list",
+                            content =
+                            @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = BillingContactRepresentation.class)))
+            })
+    public Response getBillingContacts(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
+            throws Exception {
+        return getCollection(uriInfo, ab.getBillingContactCollection(), params);
+    }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single billing contact",
@@ -79,6 +80,7 @@ public class BillingContactResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a billing contact",
       tags = {"billingcontacts"},
@@ -112,6 +114,7 @@ public class BillingContactResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Update a single billing contact",
@@ -148,6 +151,7 @@ public class BillingContactResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single billing contact",

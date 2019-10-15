@@ -36,7 +36,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/compatibleservices")
 @Stateless
 public class CompatibleServiceResource extends RestResource {
@@ -46,6 +45,7 @@ public class CompatibleServiceResource extends RestResource {
   ServiceBackend sb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all services compatible to selected service",
       tags = {"services"},
@@ -65,6 +65,7 @@ public class CompatibleServiceResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Update service's compatiblity relation",
       tags = {"services"},

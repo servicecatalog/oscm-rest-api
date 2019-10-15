@@ -35,7 +35,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
 @Stateless
 public class EntryResource extends RestResource {
@@ -45,6 +44,7 @@ public class EntryResource extends RestResource {
   EntryBackend eb;
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Update a single marketplace entry",
       tags = {"marketplaces"},

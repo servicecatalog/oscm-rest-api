@@ -32,7 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/users")
 @Stateless
 public class UserResource extends RestResource {
@@ -44,6 +43,7 @@ public class UserResource extends RestResource {
   UserBackend ub;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all users.",
       tags = {"users"},
@@ -60,6 +60,7 @@ public class UserResource extends RestResource {
   }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(PATH_USERID)
   @Operation(
       summary = "Get a single user",
@@ -77,6 +78,7 @@ public class UserResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a user",
       tags = {"users"},
@@ -105,8 +107,8 @@ public class UserResource extends RestResource {
     return post(uriInfo, ub.postUser(), content, params);
   }
 
-  @PUT // FIXME: Remove PUT_TMP_WARNING and change body values to the same that are used in POST
-       // after fixing the redundant "id" issue.
+  @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(PATH_USERID)
   @Operation(
       summary = "Update a user",
@@ -121,18 +123,12 @@ public class UserResource extends RestResource {
                       schema = @Schema(implementation = UserRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name =
-                                CommonConstants.EXAMPLE_MINIMUM_BODY_NAME
-                                    + ". "
-                                    + IdentityConstants.PUT_TMP_WARNING,
-                            value = IdentityConstants.TMP_USER_MIN_PUT_BODY,
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = IdentityConstants.USER_MIN_PUT_BODY,
                             summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                         @ExampleObject(
-                            name =
-                                CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME
-                                    + ". "
-                                    + IdentityConstants.PUT_TMP_WARNING,
-                            value = IdentityConstants.TMP_USER_MAX_PUT_BODY,
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = IdentityConstants.USER_MAX_PUT_BODY,
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
       responses = {@ApiResponse(responseCode = "201", description = "User created successfully")})
@@ -143,6 +139,7 @@ public class UserResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(PATH_USERID)
   @Operation(
       summary = "Delete a single user",
