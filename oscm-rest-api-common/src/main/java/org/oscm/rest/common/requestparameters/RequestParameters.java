@@ -9,12 +9,12 @@
  */
 package org.oscm.rest.common.requestparameters;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.WebException;
 
-import io.swagger.v3.oas.annotations.Parameter;
-
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
@@ -26,6 +26,10 @@ import javax.ws.rs.WebApplicationException;
 public class RequestParameters {
 
   private int version;
+
+  @PathParam(CommonParams.PATH_VERSION)
+  @Parameter(description = "Version of API")
+  private String pathVersion;
 
   @QueryParam(CommonParams.PARAM_ID)
   @Parameter(description = "ID of a single resource")
@@ -45,6 +49,10 @@ public class RequestParameters {
 
   public void setVersion(int version) {
     this.version = version;
+  }
+
+  public void setPathVersion(String pathVersion) {
+    this.pathVersion = pathVersion;
   }
 
   public Long getId() {

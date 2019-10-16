@@ -158,6 +158,7 @@ public class RestResourceTest extends RestResource {
     MockRequestParameters params = new MockRequestParameters();
     params.setId(1L);
     params.setMatch("1");
+    params.setPathVersion("v1");
 
     UriInfo uriinfo = mock(UriInfo.class);
     MultivaluedMap<String, String> map = new MultivaluedHashMap<>();
