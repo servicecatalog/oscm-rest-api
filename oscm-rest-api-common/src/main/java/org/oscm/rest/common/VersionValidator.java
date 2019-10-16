@@ -23,7 +23,6 @@ public class VersionValidator {
    * @throws WebApplicationException
    */
   public int doIt(String version) throws WebApplicationException {
-
     if (version == null) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }

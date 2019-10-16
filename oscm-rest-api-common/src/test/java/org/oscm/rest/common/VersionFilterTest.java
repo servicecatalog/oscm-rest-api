@@ -38,6 +38,7 @@ public class VersionFilterTest {
     ContainerRequestContext request = mock(ContainerRequestContext.class);
     UriInfo uriInfo = mock(UriInfo.class);
     when(request.getUriInfo()).thenReturn(uriInfo);
+    when(uriInfo.getPath()).thenReturn("dummyPath");
 
     Method method = SinceClass.class.getMethod("dummy");
 
@@ -101,6 +102,7 @@ public class VersionFilterTest {
       ContainerRequestContext request = mock(ContainerRequestContext.class);
       when(info.getPathParameters()).thenReturn(map);
       when(request.getUriInfo()).thenReturn(info);
+      when(info.getPath()).thenReturn("dummyPath");
 
       VersionFilter filter = new VersionFilter();
       filter.filter(request);
