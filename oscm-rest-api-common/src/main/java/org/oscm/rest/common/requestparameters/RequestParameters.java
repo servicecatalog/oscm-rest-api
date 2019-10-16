@@ -27,8 +27,8 @@ public class RequestParameters {
 
   private int version;
 
-  @PathParam(CommonParams.PATH_VERSION)
-  @Parameter(description = "Version of API")
+  @QueryParam(CommonParams.PARAM_VERSION)
+  @Parameter(required = true, description = "Version of API")
   private String pathVersion;
 
   @QueryParam(CommonParams.PARAM_ID)
