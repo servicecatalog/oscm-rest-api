@@ -36,7 +36,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/compatibleservices")
+@Path("/services" + CommonParams.PATH_ID + "/compatibleservices")
 @Stateless
 public class CompatibleServiceResource extends RestResource {
 

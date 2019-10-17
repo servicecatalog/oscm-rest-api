@@ -23,7 +23,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/ldapusers")
+@Path("/ldapusers")
 @Stateless
 public class LdapUserResource extends RestResource {
 

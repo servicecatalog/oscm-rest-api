@@ -64,7 +64,6 @@ public class RequestParametersTest {
     RequestParameters params = new TestParameters();
 
     params.setMatch("*");
-    params.setPathVersion("v1");
     params.setNoneMatch("*");
 
     try {
@@ -76,7 +75,6 @@ public class RequestParametersTest {
 
     params = new TestParameters();
     params.setMatch("1");
-    params.setPathVersion("v1");
 
     try {
       params.validateETag();
@@ -97,7 +95,6 @@ public class RequestParametersTest {
 
     params = new TestParameters();
     params.setMatch("abc");
-    params.setPathVersion("v1");
 
     try {
       params.validateETag();

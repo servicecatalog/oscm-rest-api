@@ -38,7 +38,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 import java.util.Collections;
 
-@Path(CommonParams.PATH_VERSION + "/technicalservices")
+@Path("/technicalservices")
 @Stateless
 public class TechnicalServiceResource extends RestResource {
 

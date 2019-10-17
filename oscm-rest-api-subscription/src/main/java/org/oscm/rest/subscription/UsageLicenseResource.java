@@ -32,7 +32,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
+@Path("/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
 @Stateless
 public class UsageLicenseResource extends RestResource {
 

@@ -33,9 +33,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-// TODO: Check all resource's swagger configs if constants classes are used
 
-@Path(CommonParams.PATH_VERSION + "/services")
+@Path("/services")
 @Stateless
 public class ServiceResource extends RestResource {
 

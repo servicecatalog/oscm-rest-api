@@ -10,6 +10,7 @@
 package org.oscm.rest.common.requestparameters;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import org.oscm.rest.common.CommonParams;
 
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
