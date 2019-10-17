@@ -35,8 +35,7 @@ public class CommonParams {
   public static final String ETAG_WILDCARD = "*";
 
   // path params
-  public static final String PATH_VERSION = "/{" + PARAM_VERSION + "}";
-//  public static final String PATH_VERSION = "v1"; //TODO: this is temporary.
+  public static final String PATH_VERSION = "v1"; //FIXME: This is temporary. Should be removed after we find solution to specify version in the Swagger UI.
 
   public static final String PATH_ID = "/{" + PARAM_ID + "}";
 

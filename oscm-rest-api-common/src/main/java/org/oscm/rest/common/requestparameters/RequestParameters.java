@@ -14,6 +14,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.WebException;
 
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
