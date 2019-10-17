@@ -35,7 +35,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/users/{userId}/userroles")
+@Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
 @Stateless
 public class RolesResource extends RestResource {
 

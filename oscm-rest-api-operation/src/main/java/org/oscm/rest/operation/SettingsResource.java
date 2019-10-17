@@ -32,7 +32,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/settings")
+@Path(CommonParams.PATH_VERSION + "/settings")
 @Stateless
 public class SettingsResource extends RestResource {
 

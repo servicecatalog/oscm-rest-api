@@ -35,7 +35,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/onbehalfusers")
+@Path(CommonParams.PATH_VERSION + "/onbehalfusers")
 @Stateless
 public class OnBehalfUserResource extends RestResource {
 

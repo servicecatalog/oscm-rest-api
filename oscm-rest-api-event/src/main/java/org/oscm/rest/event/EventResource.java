@@ -35,7 +35,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/events")
+@Path(CommonParams.PATH_VERSION + "/events")
 @Stateless
 public class EventResource extends RestResource {
 

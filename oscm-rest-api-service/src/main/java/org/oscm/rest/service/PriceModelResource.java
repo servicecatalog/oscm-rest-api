@@ -35,7 +35,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/services" + CommonParams.PATH_ID + "/pricemodel")
+@Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/pricemodel")
 @Stateless
 public class PriceModelResource extends RestResource {
 

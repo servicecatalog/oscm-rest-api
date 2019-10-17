@@ -35,7 +35,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
+@Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
 @Stateless
 public class EntryResource extends RestResource {
 

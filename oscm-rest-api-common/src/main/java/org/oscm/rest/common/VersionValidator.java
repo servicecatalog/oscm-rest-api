@@ -25,11 +25,11 @@ public class VersionValidator {
   public int doIt(String version) throws WebApplicationException {
     //TODO debug here to find why 404 is thrown even if URI is correct
     if (version == null) {
-//      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
+      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
 
     if (!version.matches(CommonParams.PATTERN_VERSION)) {
-//      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
+      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
     int vnr = Integer.parseInt(version.substring(CommonParams.PATTERN_VERSION_OFFSET));
 
@@ -42,7 +42,7 @@ public class VersionValidator {
     }
 
     if (!exists) {
-//      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
+      throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
 
     return vnr;

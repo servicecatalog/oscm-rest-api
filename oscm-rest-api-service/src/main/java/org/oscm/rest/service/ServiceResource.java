@@ -34,7 +34,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/services")
+@Path(CommonParams.PATH_VERSION + "/services")
 @Stateless
 public class ServiceResource extends RestResource {
 

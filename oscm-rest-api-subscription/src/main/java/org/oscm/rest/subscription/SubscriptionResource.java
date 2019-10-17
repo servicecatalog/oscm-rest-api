@@ -32,7 +32,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/subscriptions")
+@Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless
 public class SubscriptionResource extends RestResource {
 
