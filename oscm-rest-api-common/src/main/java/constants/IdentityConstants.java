@@ -63,17 +63,16 @@ public class IdentityConstants {
           + "}";
 
   // FIXME: TMP values shall be removed after fixing problem with redundant id.
-  public static final String TMP_USER_MIN_PUT_BODY =
+  public static final String USER_MIN_PUT_BODY =
       "{\n"
           + "\"email\": \"test@email.com\",\n"
           + "\"locale\": \"ja\",\n"
           + "\"organizationId\": \"10000\",\n"
           + "\"userId\": \"fdgdfg\",\n"
           + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"]\n"
-          + "\"id\": 13000\n"
           + "}";
 
-  public static final String TMP_USER_MAX_PUT_BODY =
+  public static final String USER_MAX_PUT_BODY =
       "{\n"
           + "\"email\": \"rest@user.com\",\n"
           + "\"firstName\": \"John\",\n"
@@ -90,9 +89,6 @@ public class IdentityConstants {
           + "\"organizationRoles\": [\"TECHNOLOGY_PROVIDER\", \"CUSTOMER\", \"SUPPLIER\", \"MARKETPLACE_OWNER\"],\n"
           + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"],\n"
           + "\"etag\": 4,\n"
-          + "\"id\": 13000\n"
           + "}";
 
-  public static final String PUT_TMP_WARNING =
-      "the \"id\" field at the bottom of PUT's body is required but it is not expected behaviour. It is redundant and will be removed after it is fixed in the code.";
 }

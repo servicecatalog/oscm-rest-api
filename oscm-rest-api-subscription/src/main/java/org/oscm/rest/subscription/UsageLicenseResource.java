@@ -32,7 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
 @Stateless
 public class UsageLicenseResource extends RestResource {
@@ -42,6 +41,7 @@ public class UsageLicenseResource extends RestResource {
   UsageLicenseBackend ulb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all usage licenses for the subscription",
       tags = {"usagelicenses"},
@@ -61,6 +61,7 @@ public class UsageLicenseResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a license for the subscription",
       tags = {"usagelicenses"},
@@ -94,6 +95,7 @@ public class UsageLicenseResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
       summary = "Update a single usage license",
@@ -128,6 +130,7 @@ public class UsageLicenseResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
       summary = "Delete a single usage license",

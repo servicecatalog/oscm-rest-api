@@ -35,7 +35,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/pricemodel")
 @Stateless
 public class PriceModelResource extends RestResource {
@@ -45,6 +44,7 @@ public class PriceModelResource extends RestResource {
   PriceModelBackend pmb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get generic price model for the service",
       tags = {"services"},
@@ -63,7 +63,26 @@ public class PriceModelResource extends RestResource {
     return get(uriInfo, pmb.get(), params, true);
   }
 
+  @GET
+  @Since(CommonParams.VERSION_1)
+  @Path("/customer/{orgKey}")
+  @Operation(
+      summary = "Get customer-specific price model for service",
+      tags = {"services"},
+      description = "Returns price model for the service",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Price model for the service",
+            content = @Content(schema = @Schema(implementation = PriceModelRepresentation.class)))
+      })
+  public Response getForCustomer(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+      throws Exception {
+    return get(uriInfo, pmb.getForCustomer(), params, true);
+  }
+
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Update generic price model for the service",
       tags = {"services"},
@@ -96,24 +115,8 @@ public class PriceModelResource extends RestResource {
     return put(uriInfo, pmb.put(), content, params);
   }
 
-  @GET
-  @Path("/customer/{orgKey}")
-  @Operation(
-      summary = "Get customer-specific price model for service",
-      tags = {"services"},
-      description = "Returns price model for the service",
-      responses = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Price model for the service",
-            content = @Content(schema = @Schema(implementation = PriceModelRepresentation.class)))
-      })
-  public Response getForCustomer(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
-      throws Exception {
-    return get(uriInfo, pmb.getForCustomer(), params, true);
-  }
-
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path("/customer/{orgKey}")
   @Operation(
       summary = "Update customer-specific price model for service",

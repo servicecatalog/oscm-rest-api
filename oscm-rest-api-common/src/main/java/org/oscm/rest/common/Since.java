@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * @author miethaner
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target(ElementType.METHOD)
 public @interface Since {
 
   int value();

@@ -32,7 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID + "/suppliers")
 @Stateless
 public class TSSupplierResource extends RestResource {
@@ -42,6 +41,7 @@ public class TSSupplierResource extends RestResource {
   TSSupplierBackend sb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all suppliers for technical service",
       tags = {"services"},
@@ -61,6 +61,7 @@ public class TSSupplierResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create supplier for the technical service",
       tags = {"services"},
@@ -96,6 +97,7 @@ public class TSSupplierResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path("/{orgId}")
   @Operation(
       summary = "Delete a single technical service supplier",

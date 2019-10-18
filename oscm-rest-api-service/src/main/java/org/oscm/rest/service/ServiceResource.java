@@ -33,9 +33,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-// TODO: Check all resource's swagger configs if constants classes are used
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/services")
 @Stateless
 public class ServiceResource extends RestResource {
@@ -45,6 +43,7 @@ public class ServiceResource extends RestResource {
   ServiceBackend sb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all services",
       tags = {"services"},
@@ -64,6 +63,7 @@ public class ServiceResource extends RestResource {
   }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single service",
@@ -81,6 +81,7 @@ public class ServiceResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a service",
       tags = {"services"},
@@ -114,6 +115,7 @@ public class ServiceResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Update a single service",
@@ -148,6 +150,7 @@ public class ServiceResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID + "/status")
   @Operation(
       summary = "Update service status",
@@ -180,6 +183,7 @@ public class ServiceResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single service",

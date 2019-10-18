@@ -36,7 +36,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/organizations")
 @Stateless
 public class OrganizationResource extends RestResource {
@@ -46,6 +45,7 @@ public class OrganizationResource extends RestResource {
   AccountBackend ab;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single organization",
@@ -63,6 +63,7 @@ public class OrganizationResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create an organization",
       tags = {"organization"},

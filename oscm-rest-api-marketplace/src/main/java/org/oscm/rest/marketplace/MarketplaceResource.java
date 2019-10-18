@@ -33,7 +33,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
 @Stateless
 public class MarketplaceResource extends RestResource {
@@ -43,6 +42,7 @@ public class MarketplaceResource extends RestResource {
   MarketplaceBackend mb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all marketplaces",
       tags = {"marketplaces"},
@@ -66,6 +66,7 @@ public class MarketplaceResource extends RestResource {
   }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single marketplace",
@@ -87,6 +88,7 @@ public class MarketplaceResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a marketplace",
       tags = {"marketplaces"},
@@ -123,37 +125,37 @@ public class MarketplaceResource extends RestResource {
     }
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
-      summary = "Update a single marketplace",
-      tags = {"marketplaces"},
-      description = "Updates a single marketplace",
-      requestBody =
+          summary = "Update a single marketplace",
+          tags = {"marketplaces"},
+          description = "Updates a single marketplace",
+          requestBody =
           @RequestBody(
-              description = "MarketplaceRepresentation object to be updated",
-              required = true,
-              content =
+                  description = "MarketplaceRepresentation object to be updated",
+                  required = true,
+                  content =
                   @Content(
-                      schema = @Schema(implementation = MarketplaceRepresentation.class),
-                      examples = {
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = MarketplaceConstants.MARKETPLACE_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = MarketplaceConstants.MARKETPLACE_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
-                      })),
-      responses = {
-        @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
-      })
+                          schema = @Schema(implementation = MarketplaceRepresentation.class),
+                          examples = {
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                                          value = MarketplaceConstants.MARKETPLACE_MINIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                                  @ExampleObject(
+                                          name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                                          value = MarketplaceConstants.MARKETPLACE_MAXIMUM_BODY,
+                                          summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                          })),
+          responses = {
+                  @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
+          })
   public Response updateMarketplace(
-      @Context UriInfo uriInfo,
-      MarketplaceRepresentation content,
-      @BeanParam MarketplaceParameters params) {
+          @Context UriInfo uriInfo,
+          MarketplaceRepresentation content,
+          @BeanParam MarketplaceParameters params) {
     try {
       return put(uriInfo, mb.put(), content, params);
     } catch (Exception e) {
@@ -162,6 +164,7 @@ public class MarketplaceResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single marketplace",

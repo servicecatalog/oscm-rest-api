@@ -64,7 +64,7 @@ public class VersionFilter implements ContainerRequestFilter {
           throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
         }
       }
-    } else {
+    } else if (!request.getUriInfo().getPath().contains("openapi")) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
   }

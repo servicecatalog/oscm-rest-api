@@ -32,7 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/settings")
 @Stateless
 public class SettingsResource extends RestResource {
@@ -42,6 +41,7 @@ public class SettingsResource extends RestResource {
   SettingsBackend sb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all settings",
       tags = {"settings"},
@@ -61,6 +61,7 @@ public class SettingsResource extends RestResource {
   }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single setting",
@@ -78,6 +79,7 @@ public class SettingsResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a setting",
       tags = {"settings"},
@@ -107,6 +109,7 @@ public class SettingsResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Update a single setting",
@@ -137,6 +140,7 @@ public class SettingsResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single setting",

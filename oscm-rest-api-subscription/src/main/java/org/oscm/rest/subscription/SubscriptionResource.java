@@ -32,7 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless
 public class SubscriptionResource extends RestResource {
@@ -42,6 +41,7 @@ public class SubscriptionResource extends RestResource {
   SubscriptionBackend sb;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Get all subscriptions for the service",
       tags = {"subscriptions"},
@@ -61,6 +61,7 @@ public class SubscriptionResource extends RestResource {
   }
 
   @GET
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Get a single subscription for a service",
@@ -80,6 +81,7 @@ public class SubscriptionResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Create a subscription",
       tags = {"subscriptions"},
@@ -113,6 +115,7 @@ public class SubscriptionResource extends RestResource {
   }
 
   @PUT
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Update a single subscription",
@@ -147,6 +150,7 @@ public class SubscriptionResource extends RestResource {
   }
 
   @DELETE
+  @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single subscription",

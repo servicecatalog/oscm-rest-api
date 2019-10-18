@@ -23,7 +23,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Since(CommonParams.VERSION_1)
 @Path(CommonParams.PATH_VERSION + "/ldapusers")
 @Stateless
 public class LdapUserResource extends RestResource {
@@ -31,6 +30,7 @@ public class LdapUserResource extends RestResource {
   @EJB UserBackend ub;
 
   @GET
+  @Since(CommonParams.VERSION_1)
   public Response getLdapUsers(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     // FIXME: LDAP endpoints are disabled for now as the functionality is currently not supported
@@ -39,6 +39,7 @@ public class LdapUserResource extends RestResource {
   }
 
   @POST
+  @Since(CommonParams.VERSION_1)
   public Response createLdapUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {
