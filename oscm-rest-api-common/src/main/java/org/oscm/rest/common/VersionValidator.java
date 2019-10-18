@@ -23,7 +23,6 @@ public class VersionValidator {
    * @throws WebApplicationException
    */
   public int doIt(String version) throws WebApplicationException {
-    //TODO debug here to find why 404 is thrown even if URI is correct
     if (version == null) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
