@@ -40,25 +40,25 @@ public class BillingContactResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   AccountBackend ab;
 
-    @GET
-    @Since(CommonParams.VERSION_1)
-    @Operation(
-            summary = "Get all billing contacts for the organizations",
-            tags = {"billingcontacts"},
-            description = "Returns all billing contacts for the organizations",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Billing contacts list",
-                            content =
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = BillingContactRepresentation.class)))
-            })
-    public Response getBillingContacts(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
-            throws Exception {
-        return getCollection(uriInfo, ab.getBillingContactCollection(), params);
-    }
+  @GET
+  @Since(CommonParams.VERSION_1)
+  @Operation(
+      summary = "Get all billing contacts for the organizations",
+      tags = {"billingcontacts"},
+      description = "Returns all billing contacts for the organizations",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Billing contacts list",
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = BillingContactRepresentation.class)))
+      })
+  public Response getBillingContacts(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
+      throws Exception {
+    return getCollection(uriInfo, ab.getBillingContactCollection(), params);
+  }
 
   @GET
   @Since(CommonParams.VERSION_1)
