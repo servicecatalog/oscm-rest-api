@@ -9,8 +9,17 @@
         <servlet-class>io.swagger.v3.jaxrs2.integration.OpenApiServlet</servlet-class>
 
         <init-param>
-            <param-name>openApi.configuration.resourceClasses</param-name>
-            <param-value>org.oscm.rest.account.BillingContactResource, org.oscm.rest.swagger.SwaggerBootstrap
+            <param-name>openApi.configuration.resourcePackages</param-name>
+            <param-value>
+                org.oscm.rest.account,
+                org.oscm.rest.common,
+                org.oscm.rest.event,
+                org.oscm.rest.identity,
+                org.oscm.rest.marketplace,
+                org.oscm.rest.operation,
+                org.oscm.rest.service,
+                org.oscm.rest.subscription,
+                org.oscm.rest.swagger
             </param-value>
         </init-param>
         <init-param>

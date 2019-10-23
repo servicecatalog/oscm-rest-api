@@ -63,6 +63,7 @@ public class RequestParametersTest {
 
     RequestParameters params = new TestParameters();
 
+    params.setEndpointVersion("v1");
     params.setMatch("*");
     params.setNoneMatch("*");
 
@@ -74,6 +75,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setMatch("1");
 
     try {
@@ -84,6 +86,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setNoneMatch("1");
 
     try {
@@ -94,6 +97,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setMatch("abc");
 
     try {
@@ -104,6 +108,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setNoneMatch("abc");
 
     try {

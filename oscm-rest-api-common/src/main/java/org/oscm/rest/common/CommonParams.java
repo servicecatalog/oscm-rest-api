@@ -36,7 +36,6 @@ public class CommonParams {
 
   // path params
   public static final String PATH_VERSION = "/{" + PARAM_VERSION + "}";
-
   public static final String PATH_ID = "/{" + PARAM_ID + "}";
 
   // pattern for version validation
