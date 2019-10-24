@@ -5,18 +5,18 @@
 
     <!-- FIXME: Move this config to Java class (in scope od oscm-rest-api#44)-->
     <login-config>
-           <auth-method>BASIC</auth-method>
-           <realm-name>bss-realm</realm-name>
+       <auth-method>BASIC</auth-method>
+       <realm-name>bss-realm</realm-name>
     </login-config>
 
     <security-constraint>
-           <web-resource-collection>
-              <web-resource-name>Secured REST Service with JAAS</web-resource-name>
-              <url-pattern>/</url-pattern>
-           </web-resource-collection>
-           <auth-constraint>
-              <role-name>*</role-name>
-           </auth-constraint>
+       <web-resource-collection>
+          <web-resource-name>Secured REST Service with JAAS</web-resource-name>
+          <url-pattern>/*</url-pattern>
+       </web-resource-collection>
+       <auth-constraint>
+          <role-name>*</role-name>
+       </auth-constraint>
     </security-constraint>
 
     <security-role>
