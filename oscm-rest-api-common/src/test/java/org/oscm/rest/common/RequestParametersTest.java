@@ -9,15 +9,14 @@
  */
 package org.oscm.rest.common;
 
-import org.junit.jupiter.api.Test;
-import org.oscm.rest.common.requestparameters.RequestParameters;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response.Status;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
+import org.junit.jupiter.api.Test;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 /**
  * Unit test for RequestParameters

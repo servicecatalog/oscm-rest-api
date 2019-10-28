@@ -1,4 +1,14 @@
 /**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2019
+ *
+ * <p>Creation Date: 28-10-2019
+ *
+ * <p>*****************************************************************************
+ */
+
+/**
  * Copyright 2016 SmartBear Software
  *
  * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
@@ -13,9 +23,9 @@
  */
 package org.oscm.rest.swagger;
 
+import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class ApiFilter implements Filter {
   @Override

@@ -10,12 +10,10 @@
 package org.oscm.rest.common.requestparameters;
 
 import io.swagger.v3.oas.annotations.Parameter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.WebException;
-
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.WebException;
 
 public class EventParameters extends RequestParameters {
 

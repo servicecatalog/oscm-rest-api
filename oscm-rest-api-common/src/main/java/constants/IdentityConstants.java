@@ -90,5 +90,4 @@ public class IdentityConstants {
           + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"],\n"
           + "\"etag\": 4,\n"
           + "}";
-
 }

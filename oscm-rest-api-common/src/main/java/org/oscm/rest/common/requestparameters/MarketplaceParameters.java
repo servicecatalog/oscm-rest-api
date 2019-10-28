@@ -9,12 +9,10 @@
  */
 package org.oscm.rest.common.requestparameters;
 
-import org.oscm.internal.vo.VOService;
-import org.oscm.rest.common.MarketplaceListType;
-
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import org.oscm.internal.vo.VOService;
+import org.oscm.rest.common.MarketplaceListType;
 
 public class MarketplaceParameters extends RequestParameters {
 

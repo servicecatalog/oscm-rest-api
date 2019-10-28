@@ -9,6 +9,10 @@
  */
 package org.oscm.rest.account;
 
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
@@ -19,11 +23,6 @@ import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.AccountParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.Collection;
-import java.util.List;
 
 @Stateless
 public class AccountBackend {

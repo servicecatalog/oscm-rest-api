@@ -9,6 +9,11 @@
  */
 package org.oscm.rest.identity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
@@ -18,12 +23,6 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.RolesRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 @Stateless
 public class UserBackend {

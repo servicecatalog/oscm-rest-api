@@ -9,10 +9,6 @@
  */
 package org.oscm.rest.identity;
 
-import org.oscm.rest.common.*;
-import org.oscm.rest.common.representation.UserRepresentation;
-import org.oscm.rest.common.requestparameters.UserParameters;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.BeanParam;
@@ -22,6 +18,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.oscm.rest.common.*;
+import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 @Path(CommonParams.PATH_VERSION + "/ldapusers")
 @Stateless

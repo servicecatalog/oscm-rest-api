@@ -9,11 +9,8 @@
  */
 package org.oscm.rest.common.representation;
 
-import io.swagger.v3.oas.annotations.Parameter;
-import org.oscm.internal.vo.BaseVO;
-
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.WebApplicationException;
+import org.oscm.internal.vo.BaseVO;
 
 /**
  * Base class for all representations

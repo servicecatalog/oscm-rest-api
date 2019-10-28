@@ -9,6 +9,10 @@
  */
 package org.oscm.rest.config;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 import org.oscm.rest.account.config.AccountResourceConfig;
 import org.oscm.rest.event.config.EventResourceConfig;
 import org.oscm.rest.identity.config.IdentityResourceConfig;
@@ -16,11 +20,6 @@ import org.oscm.rest.marketplace.config.MarketplaceResourceConfig;
 import org.oscm.rest.operation.config.OperationResourceConfig;
 import org.oscm.rest.service.config.ServiceResourceConfig;
 import org.oscm.rest.subscription.config.SubscriptionResourceConfig;
-
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-import java.util.HashSet;
-import java.util.Set;
 
 @ApplicationPath("")
 public class GlobalResourceConfig extends Application {
