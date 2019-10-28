@@ -11,6 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.VOOrganization;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.List;

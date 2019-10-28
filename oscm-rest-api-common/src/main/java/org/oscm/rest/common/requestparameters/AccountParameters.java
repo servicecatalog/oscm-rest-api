@@ -9,14 +9,18 @@
  */
 package org.oscm.rest.common.requestparameters;
 
+import io.swagger.v3.oas.annotations.Parameter;
+
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
 public class AccountParameters extends RequestParameters {
 
+  @Parameter(description = "Marketplace ID")
   @QueryParam("marketplaceId")
   private String marketplaceId;
 
+  @Parameter(description = "Organization ID")
   @QueryParam("orgId")
   private String orgId;
 

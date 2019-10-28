@@ -9,13 +9,14 @@
  */
 package org.oscm.rest.marketplace;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import constants.CommonConstants;
+import constants.MarketplaceConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -25,6 +26,15 @@ import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.EntryRepresentation;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
 @Stateless
 public class EntryResource extends RestResource {
@@ -33,10 +43,32 @@ public class EntryResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   EntryBackend eb;
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
+  @Since(CommonParams.VERSION_1)
+  @Operation(
+      summary = "Update a single marketplace entry",
+      tags = {"marketplaces"},
+      description = "Updates a single marketplace entry",
+      requestBody =
+          @RequestBody(
+              description = "EntryRepresentation object to be updated",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = EntryRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = MarketplaceConstants.ENTRY_MINIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = MarketplaceConstants.ENTRY_MAXIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {
+        @ApiResponse(responseCode = "204", description = "Marketplace entry updated successfully")
+      })
   public Response updateCatalogEntry(
       @Context UriInfo uriInfo,
       EntryRepresentation content,

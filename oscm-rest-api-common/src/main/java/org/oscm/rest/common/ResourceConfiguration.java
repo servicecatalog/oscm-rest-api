@@ -11,7 +11,7 @@ package org.oscm.rest.common;
 
 import java.util.Set;
 
-/** Provides interface for module enpoint/resource reigstration */
+/** Provides interface for module endpoint/resource registration */
 public interface ResourceConfiguration {
 
   public Set<Class<?>> getClassesToRegister();

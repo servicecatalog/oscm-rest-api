@@ -21,7 +21,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Lists out resources and providers of the account component that will be registered to the application.
+ * Lists out resources and providers of the account component that will be registered to the
+ * application.
  *
  * @author Weiser
  */

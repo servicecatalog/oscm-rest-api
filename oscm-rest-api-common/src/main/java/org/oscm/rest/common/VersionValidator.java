@@ -23,7 +23,6 @@ public class VersionValidator {
    * @throws WebApplicationException
    */
   public int doIt(String version) throws WebApplicationException {
-
     if (version == null) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
@@ -31,7 +30,6 @@ public class VersionValidator {
     if (!version.matches(CommonParams.PATTERN_VERSION)) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
-
     int vnr = Integer.parseInt(version.substring(CommonParams.PATTERN_VERSION_OFFSET));
 
     boolean exists = false;
