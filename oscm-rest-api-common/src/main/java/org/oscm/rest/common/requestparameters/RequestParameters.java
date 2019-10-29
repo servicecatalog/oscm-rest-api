@@ -9,12 +9,12 @@
  */
 package org.oscm.rest.common.requestparameters;
 
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.WebException;
-
+import io.swagger.v3.oas.annotations.Parameter;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.WebException;
 
 /**
  * Base class for BeanParams
@@ -25,8 +25,13 @@ public class RequestParameters {
 
   private int version;
 
+  @Parameter(description = "ID of a single resource", required = true)
   @PathParam(CommonParams.PARAM_ID)
   private Long id;
+
+  @Parameter(description = "Endpoint's version", required = true)
+  @PathParam(CommonParams.PARAM_VERSION)
+  private String endpointVersion;
 
   @HeaderParam(CommonParams.PARAM_MATCH)
   private String match;
@@ -50,6 +55,14 @@ public class RequestParameters {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getEndpointVersion() {
+    return endpointVersion;
+  }
+
+  public void setEndpointVersion(String endpointVersion) {
+    this.endpointVersion = endpointVersion;
   }
 
   public void setMatch(String match) {

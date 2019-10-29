@@ -9,15 +9,14 @@
  */
 package org.oscm.rest.common;
 
-import org.junit.jupiter.api.Test;
-import org.oscm.rest.common.requestparameters.RequestParameters;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response.Status;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
+import org.junit.jupiter.api.Test;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 /**
  * Unit test for RequestParameters
@@ -63,6 +62,7 @@ public class RequestParametersTest {
 
     RequestParameters params = new TestParameters();
 
+    params.setEndpointVersion("v1");
     params.setMatch("*");
     params.setNoneMatch("*");
 
@@ -74,6 +74,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setMatch("1");
 
     try {
@@ -84,6 +85,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setNoneMatch("1");
 
     try {
@@ -94,6 +96,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setMatch("abc");
 
     try {
@@ -104,6 +107,7 @@ public class RequestParametersTest {
     }
 
     params = new TestParameters();
+    params.setEndpointVersion("v1");
     params.setNoneMatch("abc");
 
     try {

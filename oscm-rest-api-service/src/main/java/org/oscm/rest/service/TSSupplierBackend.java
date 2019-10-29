@@ -9,17 +9,16 @@
  */
 package org.oscm.rest.service;
 
+import java.util.Arrays;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.Arrays;
-import java.util.List;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Stateless
 public class TSSupplierBackend {

@@ -70,5 +70,11 @@
             <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
         </dependency>
+        <dependency>
+            <groupId>org.oscm.rest</groupId>
+            <artifactId>oscm-rest-api-swagger</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
     </dependencies>
 </project>

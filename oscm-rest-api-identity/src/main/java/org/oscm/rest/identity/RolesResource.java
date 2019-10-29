@@ -9,21 +9,30 @@
  */
 package org.oscm.rest.identity;
 
+import constants.CommonConstants;
+import constants.IdentityConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.common.requestparameters.UserParameters;
 import org.oscm.rest.common.representation.RolesRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 @Path(CommonParams.PATH_VERSION + "/users/{userId}/userroles")
 @Stateless
@@ -33,17 +42,50 @@ public class RolesResource extends RestResource {
   @Setter(value = AccessLevel.PROTECTED)
   UserBackend ub;
 
-  @Since(CommonParams.VERSION_1)
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
+  @Since(CommonParams.VERSION_1)
+  @Operation(
+      summary = "Get all roles of user",
+      tags = {"roles"},
+      description = "Returns all roles of user",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Roles list",
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = RolesRepresentation.class)))
+      })
   public Response getUserRoles(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     return get(uriInfo, ub.getRoles(), params, false);
   }
 
-  @Since(CommonParams.VERSION_1)
   @PUT
-  @Produces(MediaType.APPLICATION_JSON)
+  @Since(CommonParams.VERSION_1)
+  @Operation(
+      summary = "Update a single role of a user",
+      tags = {"roles"},
+      description = "Updates a single role of a user",
+      requestBody =
+          @RequestBody(
+              description = "RolesRepresentation object to be updated",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = RolesRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = IdentityConstants.ROLE_EXAMPLE_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = IdentityConstants.ROLE_EXAMPLE_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {@ApiResponse(responseCode = "204", description = "Role updated successfully")})
   public Response setUserRoles(
       @Context UriInfo uriInfo, RolesRepresentation content, @BeanParam UserParameters params)
       throws Exception {

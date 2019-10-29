@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.identity.config;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
@@ -18,11 +20,9 @@ import org.oscm.rest.identity.OnBehalfUserResource;
 import org.oscm.rest.identity.RolesResource;
 import org.oscm.rest.identity.UserResource;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * Lists out resources and providers of the user component that will be registered to the application.
+ * Lists out resources and providers of the user component that will be registered to the
+ * application.
  *
  * @author Weiser
  */

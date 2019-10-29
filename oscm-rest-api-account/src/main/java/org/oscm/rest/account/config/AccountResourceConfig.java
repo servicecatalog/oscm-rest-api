@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.account.config;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.oscm.rest.account.BillingContactResource;
 import org.oscm.rest.account.OrganizationResource;
 import org.oscm.rest.account.PaymentInfoResource;
@@ -17,11 +19,9 @@ import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * Lists out resources and providers of the account component that will be registered to the application.
+ * Lists out resources and providers of the account component that will be registered to the
+ * application.
  *
  * @author Weiser
  */

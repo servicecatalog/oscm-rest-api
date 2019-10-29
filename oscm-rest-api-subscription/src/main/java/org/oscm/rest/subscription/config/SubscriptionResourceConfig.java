@@ -9,6 +9,9 @@
  */
 package org.oscm.rest.subscription.config;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.ws.rs.ApplicationPath;
 import org.oscm.rest.common.GsonMessageProvider;
 import org.oscm.rest.common.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
@@ -16,12 +19,9 @@ import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.subscription.SubscriptionResource;
 import org.oscm.rest.subscription.UsageLicenseResource;
 
-import javax.ws.rs.ApplicationPath;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * Lists out resources and providers of the event component that will be registered to the application.
+ * Lists out resources and providers of the event component that will be registered to the
+ * application.
  *
  * @author Weiser
  */

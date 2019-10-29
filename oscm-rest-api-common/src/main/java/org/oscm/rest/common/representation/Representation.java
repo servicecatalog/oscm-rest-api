@@ -9,9 +9,8 @@
  */
 package org.oscm.rest.common.representation;
 
-import org.oscm.internal.vo.BaseVO;
-
 import javax.ws.rs.WebApplicationException;
+import org.oscm.internal.vo.BaseVO;
 
 /**
  * Base class for all representations

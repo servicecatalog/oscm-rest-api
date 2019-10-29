@@ -10,25 +10,20 @@
 package org.oscm.rest.subscription;
 
 import com.google.common.collect.Lists;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUser;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
-import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
-import org.oscm.rest.common.representation.SubscriptionDetailsRepresentation;
-import org.oscm.rest.common.representation.SubscriptionRepresentation;
-import org.oscm.rest.common.representation.UdaRepresentation;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Stateless
 public class SubscriptionBackend {
@@ -50,15 +45,16 @@ public class SubscriptionBackend {
       }
 
       Collection<SubscriptionRepresentation> subscriptionRepresentations =
-              Lists.newArrayList(subs
-                      .stream()
-                      .map(s -> {
+          Lists.newArrayList(
+              subs.stream()
+                  .map(
+                      s -> {
                         return new SubscriptionRepresentation(s);
-                        })
-                      .collect(Collectors.toList()));
+                      })
+                  .collect(Collectors.toList()));
 
       RepresentationCollection<SubscriptionRepresentation> list =
-              new RepresentationCollection<>(subscriptionRepresentations);
+          new RepresentationCollection<>(subscriptionRepresentations);
       return list;
     };
   }

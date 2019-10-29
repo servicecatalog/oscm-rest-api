@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.common;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -16,8 +18,6 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 
 /**
  * Request filter for validating the requested version and comparing with endpoint annotations
@@ -64,7 +64,7 @@ public class VersionFilter implements ContainerRequestFilter {
           throw WebException.notFound().message(CommonParams.ERROR_METHOD_VERSION).build();
         }
       }
-    } else {
+    } else if (!request.getUriInfo().getPath().contains("openapi")) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
   }
