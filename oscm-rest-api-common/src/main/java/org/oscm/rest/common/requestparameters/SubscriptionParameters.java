@@ -9,6 +9,9 @@
  */
 package org.oscm.rest.common.requestparameters;
 
+import io.swagger.v3.oas.annotations.Parameter;
+
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
@@ -17,7 +20,8 @@ public class SubscriptionParameters extends RequestParameters {
   @QueryParam("userId")
   private String userId;
 
-  @QueryParam("licKey")
+  @Parameter(description = "Subscription's usage license key", required = true)
+  @PathParam("licKey")
   private Long licKey;
 
   @Override
