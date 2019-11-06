@@ -13,6 +13,7 @@ import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.requestparameters.IdentifiableOperationParameters;
 import org.oscm.rest.common.requestparameters.OperationParameters;
 import org.oscm.rest.common.representation.SettingRepresentation;
 
@@ -27,7 +28,7 @@ public class SettingsBackend {
 
   @EJB ConfigurationService cs;
 
-  public RestBackend.Delete<OperationParameters> delete() throws Exception {
+  public RestBackend.Delete<IdentifiableOperationParameters> delete() throws Exception {
     return params -> {
       os.deleteConfigurationSetting(params.getId());
       return true;
@@ -43,14 +44,14 @@ public class SettingsBackend {
     };
   }
 
-  public RestBackend.Put<SettingRepresentation, OperationParameters> put() throws Exception {
+  public RestBackend.Put<SettingRepresentation, IdentifiableOperationParameters> put() throws Exception {
     return (content, params) -> {
       os.saveConfigurationSetting(content.getVO());
       return true;
     };
   }
 
-  public RestBackend.Get<SettingRepresentation, OperationParameters> get() throws Exception {
+  public RestBackend.Get<SettingRepresentation, IdentifiableOperationParameters> get() throws Exception {
     return params -> {
       VOConfigurationSetting vo = os.getConfigurationSetting(params.getId());
       return new SettingRepresentation(vo);

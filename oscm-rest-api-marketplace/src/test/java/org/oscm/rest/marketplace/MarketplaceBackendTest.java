@@ -24,6 +24,7 @@ import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.rest.common.MarketplaceListType;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 
@@ -44,6 +45,7 @@ public class MarketplaceBackendTest {
   private UriInfo uriInfo;
   private MarketplaceRepresentation representation;
   private MarketplaceParameters parameters;
+  private IdentifiableMarketplaceParameters indentifiableParameters;
   private VOMarketplace vo;
 
   @BeforeEach
@@ -53,6 +55,7 @@ public class MarketplaceBackendTest {
     uriInfo = SampleTestDataUtility.createUriInfo();
     representation = SampleTestDataUtility.createMarketplaceRepresentation();
     parameters = SampleTestDataUtility.createMarketplaceParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableMarketplaceParameters();
     vo = SampleTestDataUtility.createVOMarketplace();
   }
 
@@ -88,7 +91,7 @@ public class MarketplaceBackendTest {
     when(service.getMarketplaceIdForKey(any())).thenReturn(representation.getMarketplaceId());
     when(service.getMarketplaceById(any())).thenReturn(vo);
 
-    Response response = resource.getMarketplace(uriInfo, parameters);
+    Response response = resource.getMarketplace(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -115,7 +118,7 @@ public class MarketplaceBackendTest {
   public void shouldUpdateMarketplace() {
     when(service.updateMarketplace(any())).thenReturn(vo);
 
-    Response response = resource.updateMarketplace(uriInfo, representation, parameters);
+    Response response = resource.updateMarketplace(uriInfo, representation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -128,7 +131,7 @@ public class MarketplaceBackendTest {
   public void shouldDeleteMarketplace() {
     doNothing().when(service).deleteMarketplace(any());
 
-    Response response = resource.deleteMarketplace(uriInfo, parameters);
+    Response response = resource.deleteMarketplace(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

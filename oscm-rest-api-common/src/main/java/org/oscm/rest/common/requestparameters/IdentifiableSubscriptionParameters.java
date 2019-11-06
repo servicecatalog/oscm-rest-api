@@ -10,26 +10,25 @@
 package org.oscm.rest.common.requestparameters;
 
 import io.swagger.v3.oas.annotations.Parameter;
+
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.WebException;
 
-public class EventParameters extends RequestParameters {
+public class IdentifiableSubscriptionParameters extends IdentifableRequestParameters {
 
   @QueryParam("userId")
   private String userId;
 
-  @QueryParam("mId")
-  @Parameter(description = "Marketplace ID.")
-  private String marketplaceId;
-
-  @QueryParam("pattern")
-  @Parameter(description = "The pattern.")
-  private String pattern;
+  @Parameter(description = "Subscription's usage license key", required = true)
+  @PathParam("licKey")
+  private Long licKey;
 
   @Override
   public void validateParameters() throws WebApplicationException {}
+
+  @Override
+  public void validateETag() throws WebApplicationException {}
 
   @Override
   public void update() {}
@@ -42,19 +41,11 @@ public class EventParameters extends RequestParameters {
     this.userId = userId;
   }
 
-  public String getMarketplaceId() {
-    return marketplaceId;
+  public Long getLicKey() {
+    return licKey;
   }
 
-  public void setMarketplaceId(String marketplaceId) {
-    this.marketplaceId = marketplaceId;
-  }
-
-  public String getPattern() {
-    return pattern;
-  }
-
-  public void setPattern(String pattern) {
-    this.pattern = pattern;
+  public void setLicKey(Long licKey) {
+    this.licKey = licKey;
   }
 }

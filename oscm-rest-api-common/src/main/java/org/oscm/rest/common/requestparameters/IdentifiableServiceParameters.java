@@ -9,17 +9,14 @@
  */
 package org.oscm.rest.common.requestparameters;
 
-import io.swagger.v3.oas.annotations.Parameter;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
-public class AccountParameters extends RequestParameters {
+public class IdentifiableServiceParameters extends IdentifableRequestParameters {
 
-  @Parameter(description = "Marketplace ID")
-  @QueryParam("marketplaceId")
-  private String marketplaceId;
+  @QueryParam("orgKey")
+  private Long orgKey;
 
-  @Parameter(description = "Organization ID")
   @QueryParam("orgId")
   private String orgId;
 
@@ -27,14 +24,17 @@ public class AccountParameters extends RequestParameters {
   public void validateParameters() throws WebApplicationException {}
 
   @Override
+  public void validateETag() throws WebApplicationException {}
+
+  @Override
   public void update() {}
 
-  public String getMarketplaceId() {
-    return marketplaceId;
+  public Long getOrgKey() {
+    return orgKey;
   }
 
-  public void setMarketplaceId(String marketplaceId) {
-    this.marketplaceId = marketplaceId;
+  public void setOrgKey(Long orgKey) {
+    this.orgKey = orgKey;
   }
 
   public String getOrgId() {
@@ -43,5 +43,12 @@ public class AccountParameters extends RequestParameters {
 
   public void setOrgId(String orgId) {
     this.orgId = orgId;
+  }
+
+  public int eTagToVersion() {
+    if (getETag() == null) {
+      return 0;
+    }
+    return getETag().intValue();
   }
 }

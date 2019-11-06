@@ -22,6 +22,7 @@ import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -39,12 +40,14 @@ public class PaymentInfoResourceTest {
   private PaymentInfoRepresentation paymentInfoRepresentation;
   private UriInfo uriInfo;
   private AccountParameters parameters;
+  private IdentifiableAccountParameters indentifiableParameters;
   private Response result;
 
   @BeforeEach
   public void setUp() {
     paymentInfoRepresentation = SampleTestDataUtility.createPIRepresentation();
     parameters = SampleTestDataUtility.createAccountParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableAccountParameters();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -85,7 +88,7 @@ public class PaymentInfoResourceTest {
     when(backend.getPaymentInfo()).thenReturn((accountParameters -> paymentInfoRepresentation));
 
     try {
-      result = resource.getPaymentInfo(uriInfo, parameters);
+      result = resource.getPaymentInfo(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -103,7 +106,7 @@ public class PaymentInfoResourceTest {
         .thenReturn(((paymentInfoRepresentation1, accountParameters) -> true));
 
     try {
-      result = resource.updatePaymentInfo(uriInfo, paymentInfoRepresentation, parameters);
+      result = resource.updatePaymentInfo(uriInfo, paymentInfoRepresentation, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -119,7 +122,7 @@ public class PaymentInfoResourceTest {
     when(backend.deletePaymentInfo()).thenReturn((accountParameters -> true));
 
     try {
-      result = resource.deletePaymentInfo(uriInfo, parameters);
+      result = resource.deletePaymentInfo(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }

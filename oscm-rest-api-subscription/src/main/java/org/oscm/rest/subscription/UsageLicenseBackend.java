@@ -19,6 +19,7 @@ import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 @Stateless
@@ -26,7 +27,7 @@ public class UsageLicenseBackend {
 
   @EJB SubscriptionService ss;
 
-  public RestBackend.Post<UsageLicenseRepresentation, SubscriptionParameters> post() {
+  public RestBackend.Post<UsageLicenseRepresentation, IdentifiableSubscriptionParameters> post() {
     return (content, params) -> {
       content.update();
 
@@ -49,7 +50,7 @@ public class UsageLicenseBackend {
     };
   }
 
-  public RestBackend.GetCollection<UsageLicenseRepresentation, SubscriptionParameters>
+  public RestBackend.GetCollection<UsageLicenseRepresentation, IdentifiableSubscriptionParameters>
       getCollection() {
     return params -> {
       VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
@@ -59,7 +60,7 @@ public class UsageLicenseBackend {
     };
   }
 
-  public RestBackend.Put<UsageLicenseRepresentation, SubscriptionParameters> put() {
+  public RestBackend.Put<UsageLicenseRepresentation, IdentifiableSubscriptionParameters> put() {
     return (content, params) -> {
       content.update();
 
@@ -70,7 +71,7 @@ public class UsageLicenseBackend {
     };
   }
 
-  public RestBackend.Delete<SubscriptionParameters> delete() {
+  public RestBackend.Delete<IdentifiableSubscriptionParameters> delete() {
     return params -> {
       VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
       List<VOUsageLicense> lics = sub.getUsageLicenses();

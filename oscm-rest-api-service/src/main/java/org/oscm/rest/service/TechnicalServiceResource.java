@@ -35,6 +35,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
@@ -68,7 +69,7 @@ public class TechnicalServiceResource extends RestResource {
   }
 
   public Response exportTechnicalService(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params) throws Exception {
     // FIXME: Implement this endpoint properly. Use get() from interface
     // FIXME: Document this endpoint using Swagger
     // key needed
@@ -139,7 +140,7 @@ public class TechnicalServiceResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Technical service deleted successfully")
       })
   public Response deleteTechnicalService(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params) throws Exception {
     return delete(uriInfo, tsb.delete(), params);
   }
 }

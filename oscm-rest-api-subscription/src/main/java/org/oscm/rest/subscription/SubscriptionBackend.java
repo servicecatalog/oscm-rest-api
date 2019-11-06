@@ -23,6 +23,7 @@ import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.*;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 @Stateless
@@ -59,11 +60,11 @@ public class SubscriptionBackend {
     };
   }
 
-  public RestBackend.Delete<SubscriptionParameters> delete() {
+  public RestBackend.Delete<IdentifiableSubscriptionParameters> delete() {
     return params -> ss.unsubscribeFromService(params.getId());
   }
 
-  public RestBackend.Get<SubscriptionDetailsRepresentation, SubscriptionParameters> get() {
+  public RestBackend.Get<SubscriptionDetailsRepresentation, IdentifiableSubscriptionParameters> get() {
     return params -> {
       VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
       return new SubscriptionDetailsRepresentation(sub);
@@ -90,7 +91,7 @@ public class SubscriptionBackend {
     };
   }
 
-  public RestBackend.Put<SubscriptionCreationRepresentation, SubscriptionParameters> put() {
+  public RestBackend.Put<SubscriptionCreationRepresentation, IdentifiableSubscriptionParameters> put() {
     return (content, params) -> {
       content.getService().update();
       content.getUdaRepresentations().forEach(UdaRepresentation::update);

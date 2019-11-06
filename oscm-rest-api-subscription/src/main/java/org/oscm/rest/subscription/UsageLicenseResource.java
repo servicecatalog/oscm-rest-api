@@ -29,6 +29,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
@@ -54,7 +55,7 @@ public class UsageLicenseResource extends RestResource {
                     mediaType = "application/json",
                     schema = @Schema(implementation = UsageLicenseRepresentation.class)))
       })
-  public Response getLicenses(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
+  public Response getLicenses(@Context UriInfo uriInfo, @BeanParam IdentifiableSubscriptionParameters params)
       throws Exception {
     return getCollection(uriInfo, ulb.getCollection(), params);
   }
@@ -88,7 +89,7 @@ public class UsageLicenseResource extends RestResource {
   public Response createLicense(
       @Context UriInfo uriInfo,
       UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
+      @BeanParam IdentifiableSubscriptionParameters params)
       throws Exception {
     return post(uriInfo, ulb.post(), content, params);
   }
@@ -123,7 +124,7 @@ public class UsageLicenseResource extends RestResource {
   public Response updateLicense(
       @Context UriInfo uriInfo,
       UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
+      @BeanParam IdentifiableSubscriptionParameters params)
       throws Exception {
     return put(uriInfo, ulb.put(), content, params);
   }
@@ -138,7 +139,7 @@ public class UsageLicenseResource extends RestResource {
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license deleted successfully")
       })
-  public Response deleteLicense(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
+  public Response deleteLicense(@Context UriInfo uriInfo, @BeanParam IdentifiableSubscriptionParameters params)
       throws Exception {
     return delete(uriInfo, ulb.delete(), params);
   }

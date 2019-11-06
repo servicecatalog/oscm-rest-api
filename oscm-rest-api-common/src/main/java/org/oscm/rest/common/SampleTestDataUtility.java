@@ -138,9 +138,14 @@ public class SampleTestDataUtility {
     };
   }
 
+  public static IdentifiableAccountParameters createIdentifiableAccountParameters() {
+    IdentifiableAccountParameters parameters = new IdentifiableAccountParameters();
+    parameters.setId(TestContants.LONG_VALUE);
+    return parameters;
+  }
+
   public static AccountParameters createAccountParameters() {
     AccountParameters parameters = new AccountParameters();
-    parameters.setId(TestContants.LONG_VALUE);
     return parameters;
   }
 
@@ -277,6 +282,13 @@ public class SampleTestDataUtility {
 
   public static MarketplaceParameters createMarketplaceParameters() {
     MarketplaceParameters parameters = new MarketplaceParameters();
+    parameters.setVersion(TestContants.INTEGER_VALUE);
+    parameters.validateETag();
+    return parameters;
+  }
+
+  public static IdentifiableMarketplaceParameters createIdentifiableMarketplaceParameters() {
+    IdentifiableMarketplaceParameters parameters = new IdentifiableMarketplaceParameters();
     parameters.setId(TestContants.LONG_VALUE);
     parameters.setVersion(TestContants.INTEGER_VALUE);
     parameters.validateETag();
@@ -309,6 +321,11 @@ public class SampleTestDataUtility {
 
   public static OperationParameters createOperationParameters() {
     OperationParameters parameters = new OperationParameters();
+    return parameters;
+  }
+
+  public static IdentifiableOperationParameters createIdentifiableOperationParameters() {
+    IdentifiableOperationParameters parameters = new IdentifiableOperationParameters();
     parameters.setId(TestContants.LONG_VALUE);
     return parameters;
   }
@@ -323,6 +340,12 @@ public class SampleTestDataUtility {
 
   public static ServiceParameters createServiceParameters() {
     ServiceParameters parameters = new ServiceParameters();
+    parameters.setOrgKey(TestContants.LONG_VALUE);
+    return parameters;
+  }
+
+  public static IdentifiableServiceParameters createIdentifiableServiceParameters() {
+    IdentifiableServiceParameters parameters = new IdentifiableServiceParameters();
     parameters.setId(TestContants.LONG_VALUE);
     parameters.setOrgKey(TestContants.LONG_VALUE);
     return parameters;
@@ -372,6 +395,12 @@ public class SampleTestDataUtility {
 
   public static SubscriptionParameters createSubscriptionParameters() {
     SubscriptionParameters parameters = new SubscriptionParameters();
+    parameters.setLicKey(TestContants.LONG_VALUE);
+    return parameters;
+  }
+
+  public static IdentifiableSubscriptionParameters createIdentifiableSubscriptionParameters() {
+    IdentifiableSubscriptionParameters parameters = new IdentifiableSubscriptionParameters();
     parameters.setId(TestContants.LONG_VALUE);
     parameters.setLicKey(TestContants.LONG_VALUE);
     return parameters;

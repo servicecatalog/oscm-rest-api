@@ -29,6 +29,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
@@ -75,7 +76,7 @@ public class SubscriptionResource extends RestResource {
                     schema = @Schema(implementation = SubscriptionCreationRepresentation.class)))
       })
   public Response getSubscription(
-      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableSubscriptionParameters params) throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
 
@@ -143,7 +144,7 @@ public class SubscriptionResource extends RestResource {
   public Response updateSubscription(
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
-      @BeanParam SubscriptionParameters params)
+      @BeanParam IdentifiableSubscriptionParameters params)
       throws Exception {
     return put(uriInfo, sb.put(), content, params);
   }
@@ -159,7 +160,7 @@ public class SubscriptionResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Subscription deleted successfully")
       })
   public Response deleteSubscription(
-      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableSubscriptionParameters params) throws Exception {
     return delete(uriInfo, sb.delete(), params);
   }
 }

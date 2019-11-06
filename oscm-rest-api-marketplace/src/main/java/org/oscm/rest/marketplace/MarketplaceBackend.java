@@ -20,6 +20,7 @@ import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @Stateless
@@ -58,7 +59,7 @@ public class MarketplaceBackend {
     };
   }
 
-  public RestBackend.Put<MarketplaceRepresentation, MarketplaceParameters> put()
+  public RestBackend.Put<MarketplaceRepresentation, IdentifiableMarketplaceParameters> put()
       throws ObjectNotFoundException, OperationNotPermittedException, ConcurrentAccessException,
           ValidationException, UserRoleAssignmentException, IllegalArgumentException {
     return (content, params) -> {
@@ -70,7 +71,7 @@ public class MarketplaceBackend {
     };
   }
 
-  public RestBackend.Delete<MarketplaceParameters> delete()
+  public RestBackend.Delete<IdentifiableMarketplaceParameters> delete()
       throws IllegalArgumentException, ObjectNotFoundException, NonUniqueBusinessKeyException {
     return params -> {
       String mId = ms.getMarketplaceIdForKey(params.getId());
@@ -79,7 +80,7 @@ public class MarketplaceBackend {
     };
   }
 
-  public RestBackend.Get<MarketplaceRepresentation, MarketplaceParameters> get()
+  public RestBackend.Get<MarketplaceRepresentation, IdentifiableMarketplaceParameters> get()
       throws ObjectNotFoundException {
     return params -> {
       String mId = ms.getMarketplaceIdForKey(params.getId());

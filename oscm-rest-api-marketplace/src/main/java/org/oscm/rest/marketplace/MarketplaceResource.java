@@ -30,6 +30,7 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
@@ -77,7 +78,7 @@ public class MarketplaceResource extends RestResource {
             description = "A single marketplace",
             content = @Content(schema = @Schema(implementation = MarketplaceRepresentation.class)))
       })
-  public Response getMarketplace(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
+  public Response getMarketplace(@Context UriInfo uriInfo, @BeanParam IdentifiableMarketplaceParameters params)
       throws Exception {
     try {
       return get(uriInfo, mb.get(), params, true);
@@ -154,7 +155,7 @@ public class MarketplaceResource extends RestResource {
   public Response updateMarketplace(
       @Context UriInfo uriInfo,
       MarketplaceRepresentation content,
-      @BeanParam MarketplaceParameters params) {
+      @BeanParam IdentifiableMarketplaceParameters params) {
     try {
       return put(uriInfo, mb.put(), content, params);
     } catch (Exception e) {
@@ -173,7 +174,7 @@ public class MarketplaceResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Marketplace deleted successfully")
       })
   public Response deleteMarketplace(
-      @Context UriInfo uriInfo, @BeanParam MarketplaceParameters params) {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableMarketplaceParameters params) {
     try {
       return delete(uriInfo, mb.delete(), params);
     } catch (Exception e) {

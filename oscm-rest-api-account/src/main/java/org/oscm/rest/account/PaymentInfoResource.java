@@ -30,6 +30,7 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 @Path(CommonParams.PATH_VERSION + "/paymentinfos")
 @Stateless
@@ -69,7 +70,7 @@ public class PaymentInfoResource extends RestResource {
             description = "A single payment info",
             content = @Content(schema = @Schema(implementation = PaymentInfoRepresentation.class)))
       })
-  public Response getPaymentInfo(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
+  public Response getPaymentInfo(@Context UriInfo uriInfo, @BeanParam IdentifiableAccountParameters params)
       throws Exception {
     return get(uriInfo, ab.getPaymentInfo(), params, true);
   }
@@ -110,7 +111,7 @@ public class PaymentInfoResource extends RestResource {
   public Response updatePaymentInfo(
       @Context UriInfo uriInfo,
       PaymentInfoRepresentation content,
-      @BeanParam AccountParameters params)
+      @BeanParam IdentifiableAccountParameters params)
       throws Exception {
     return put(uriInfo, ab.putPaymentInfo(), content, params);
   }
@@ -125,7 +126,7 @@ public class PaymentInfoResource extends RestResource {
       responses = {
         @ApiResponse(responseCode = "204", description = "Payment info deleted successfully")
       })
-  public Response deletePaymentInfo(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
+  public Response deletePaymentInfo(@Context UriInfo uriInfo, @BeanParam IdentifiableAccountParameters params)
       throws Exception {
     return delete(uriInfo, ab.deletePaymentInfo(), params);
   }

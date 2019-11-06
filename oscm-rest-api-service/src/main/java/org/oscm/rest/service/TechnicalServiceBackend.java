@@ -14,6 +14,7 @@ import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 
@@ -39,7 +40,7 @@ public class TechnicalServiceBackend {
     };
   }
 
-  public RestBackend.Delete<ServiceParameters> delete() {
+  public RestBackend.Delete<IdentifiableServiceParameters> delete() {
     return params -> {
       sps.deleteTechnicalService(params.getId());
       return true;

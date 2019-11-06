@@ -17,6 +17,7 @@ import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 import javax.ws.rs.core.Response;
@@ -37,6 +38,7 @@ public class UsageLicenseBackendTest {
 
   private UriInfo uriInfo;
   private SubscriptionParameters parameters;
+  private IdentifiableSubscriptionParameters identifiableParameters;
   private UsageLicenseRepresentation representation;
   private VOSubscriptionDetails vo;
 
@@ -46,6 +48,7 @@ public class UsageLicenseBackendTest {
     resource.setUlb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createSubscriptionParameters();
+    identifiableParameters = SampleTestDataUtility.createIdentifiableSubscriptionParameters();
     representation = SampleTestDataUtility.createUsageLicenseRepresentation(null);
     vo = SampleTestDataUtility.createVOSubscriptionDetails();
   }
@@ -55,7 +58,7 @@ public class UsageLicenseBackendTest {
   public void shouldGetLicenses() {
     doReturn(vo).when(service).getSubscriptionDetails(anyLong());
 
-    Response response = resource.getLicenses(uriInfo, parameters);
+    Response response = resource.getLicenses(uriInfo, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -76,7 +79,7 @@ public class UsageLicenseBackendTest {
     when(service.addRevokeUser(any(), any(), any())).thenReturn(true);
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.createLicense(uriInfo, representation, parameters);
+    Response response = resource.createLicense(uriInfo, representation, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -90,7 +93,7 @@ public class UsageLicenseBackendTest {
     when(service.addRevokeUser(any(), any(), any())).thenReturn(true);
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.updateLicense(uriInfo, representation, parameters);
+    Response response = resource.updateLicense(uriInfo, representation, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -103,7 +106,7 @@ public class UsageLicenseBackendTest {
   public void shouldDeleteLicesne() {
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.deleteLicense(uriInfo, parameters);
+    Response response = resource.deleteLicense(uriInfo, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

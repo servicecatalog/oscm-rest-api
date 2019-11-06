@@ -16,7 +16,6 @@ public class EventParametersTest {
                 parameters.setUserId(TestContants.STRING_VALUE);
 
                 parameters.validateParameters();
-                parameters.validateId();
                 parameters.update();
 
                 assertThat(parameters).extracting(EventParameters::getMarketplaceId).isEqualTo(TestContants.STRING_VALUE);

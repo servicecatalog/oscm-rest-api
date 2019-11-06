@@ -10,7 +10,7 @@ public class AccountParametersTest {
 
         @Test
         public void shouldCreate() {
-             AccountParameters parameters = new AccountParameters();
+             IdentifiableAccountParameters parameters = new IdentifiableAccountParameters();
              parameters.setOrgId(TestContants.STRING_VALUE);
              parameters.setMarketplaceId(TestContants.STRING_VALUE);
 
@@ -18,8 +18,8 @@ public class AccountParametersTest {
              parameters.validateParameters();
              parameters.update();
 
-             assertThat(parameters).extracting(AccountParameters::getOrgId).isEqualTo(TestContants.STRING_VALUE);
-             assertThat(parameters).extracting(AccountParameters::getMarketplaceId).isEqualTo(TestContants.STRING_VALUE);
+             assertThat(parameters).extracting(IdentifiableAccountParameters::getOrgId).isEqualTo(TestContants.STRING_VALUE);
+             assertThat(parameters).extracting(IdentifiableAccountParameters::getMarketplaceId).isEqualTo(TestContants.STRING_VALUE);
         }
 
 }

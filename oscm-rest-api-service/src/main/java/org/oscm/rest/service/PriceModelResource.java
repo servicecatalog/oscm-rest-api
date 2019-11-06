@@ -32,6 +32,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/pricemodel")
@@ -57,7 +58,7 @@ public class PriceModelResource extends RestResource {
                     mediaType = "application/json",
                     schema = @Schema(implementation = PriceModelRepresentation.class)))
       })
-  public Response get(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response get(@Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return get(uriInfo, pmb.get(), params, true);
   }
@@ -75,7 +76,7 @@ public class PriceModelResource extends RestResource {
             description = "Price model for the service",
             content = @Content(schema = @Schema(implementation = PriceModelRepresentation.class)))
       })
-  public Response getForCustomer(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response getForCustomer(@Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return get(uriInfo, pmb.getForCustomer(), params, true);
   }
@@ -109,7 +110,7 @@ public class PriceModelResource extends RestResource {
   public Response update(
       @Context UriInfo uriInfo,
       PriceModelRepresentation content,
-      @BeanParam ServiceParameters params)
+      @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return put(uriInfo, pmb.put(), content, params);
   }
@@ -144,7 +145,7 @@ public class PriceModelResource extends RestResource {
   public Response updateForCustomer(
       @Context UriInfo uriInfo,
       PriceModelRepresentation content,
-      @BeanParam ServiceParameters params)
+      @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return put(uriInfo, pmb.putForCustomer(), content, params);
   }

@@ -22,6 +22,7 @@ import org.oscm.rest.common.representation.BillingContactRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -39,6 +40,7 @@ public class BillingContactResourceTest {
   private BillingContactRepresentation representation;
   private UriInfo uriInfo;
   private AccountParameters parameters;
+  private IdentifiableAccountParameters indentifiableParameters;
 
   private Response result;
 
@@ -47,6 +49,7 @@ public class BillingContactResourceTest {
     representation = SampleTestDataUtility.createBillingContactRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createAccountParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableAccountParameters();
   }
 
   @AfterEach
@@ -103,7 +106,7 @@ public class BillingContactResourceTest {
     when(accountBackend.getBillingContact()).thenReturn((accountParameters -> representation));
 
     try {
-      result = resource.getBillingContact(uriInfo, parameters);
+      result = resource.getBillingContact(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -121,7 +124,7 @@ public class BillingContactResourceTest {
         .thenReturn(((billingContactRepresentation, accountParameters) -> true));
 
     try {
-      result = resource.updateBillingContact(uriInfo, representation, parameters);
+      result = resource.updateBillingContact(uriInfo, representation, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -137,7 +140,7 @@ public class BillingContactResourceTest {
     when(accountBackend.deleteBillingContact()).thenReturn((accountParameters -> true));
 
     try {
-      result = resource.deleteBillingContact(uriInfo, parameters);
+      result = resource.deleteBillingContact(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }

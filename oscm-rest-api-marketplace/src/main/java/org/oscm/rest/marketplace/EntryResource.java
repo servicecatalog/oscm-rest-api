@@ -32,6 +32,7 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.EntryRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
@@ -71,7 +72,7 @@ public class EntryResource extends RestResource {
   public Response updateCatalogEntry(
       @Context UriInfo uriInfo,
       EntryRepresentation content,
-      @BeanParam MarketplaceParameters params)
+      @BeanParam IdentifiableMarketplaceParameters params)
       throws Exception {
     try {
       return put(uriInfo, eb.put(), content, params);

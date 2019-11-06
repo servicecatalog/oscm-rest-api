@@ -29,6 +29,7 @@ import org.oscm.rest.common.TestContants;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -51,6 +52,7 @@ public class AccountBackendTest {
 
   private UriInfo uriInfo;
   private AccountParameters parameters;
+  private IdentifiableAccountParameters indentifiableParameters;
   private BillingContactRepresentation billingContactRepresentation;
   private PaymentInfoRepresentation paymentInfoRepresentation;
   private VOBillingContact billingContactVO;
@@ -68,6 +70,7 @@ public class AccountBackendTest {
 
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createAccountParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableAccountParameters();
     billingContactRepresentation = SampleTestDataUtility.createBillingContactRepresentation();
     paymentInfoRepresentation = SampleTestDataUtility.createPaymentInfoRepresentation();
     billingContactVO = SampleTestDataUtility.createBillingContactVO();
@@ -100,7 +103,7 @@ public class AccountBackendTest {
   public void shouldGetBillingContact() {
     when(accountService.getBillingContacts()).thenReturn(Lists.newArrayList(billingContactVO));
 
-    Response response = billingContactResource.getBillingContact(uriInfo, parameters);
+    Response response = billingContactResource.getBillingContact(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -131,7 +134,7 @@ public class AccountBackendTest {
 
     Response response =
         billingContactResource.updateBillingContact(
-            uriInfo, billingContactRepresentation, parameters);
+            uriInfo, billingContactRepresentation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -144,7 +147,7 @@ public class AccountBackendTest {
   public void shouldDeleteBillingContact() {
     doNothing().when(accountService).deleteBillingContact(any());
 
-    Response response = billingContactResource.deleteBillingContact(uriInfo, parameters);
+    Response response = billingContactResource.deleteBillingContact(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -177,7 +180,7 @@ public class AccountBackendTest {
   public void shouldGetPaymentInfo() {
     when(accountService.getPaymentInfos()).thenReturn(Lists.newArrayList(paymentInfoVO));
 
-    Response response = paymentInfoResource.getPaymentInfo(uriInfo, parameters);
+    Response response = paymentInfoResource.getPaymentInfo(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -192,7 +195,7 @@ public class AccountBackendTest {
     when(accountService.savePaymentInfo(any())).thenReturn(paymentInfoVO);
 
     Response response =
-        paymentInfoResource.updatePaymentInfo(uriInfo, paymentInfoRepresentation, parameters);
+        paymentInfoResource.updatePaymentInfo(uriInfo, paymentInfoRepresentation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -205,7 +208,7 @@ public class AccountBackendTest {
   public void shouldDeletePaymentInfo() {
     doNothing().when(accountService).deletePaymentInfo(any());
 
-    Response response = paymentInfoResource.deletePaymentInfo(uriInfo, parameters);
+    Response response = paymentInfoResource.deletePaymentInfo(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -219,7 +222,7 @@ public class AccountBackendTest {
     when(operatorService.getOrganization(any())).thenReturn(operatorOrgVO);
     when(accountService.getOrganizationData()).thenReturn(operatorOrgVO);
 
-    Response response = organizationResource.getOrganization(uriInfo, parameters);
+    Response response = organizationResource.getOrganization(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

@@ -28,6 +28,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,12 +42,14 @@ class MarketplaceResourceTest {
   private MarketplaceRepresentation marketplaceRepresentation;
   private UriInfo uriInfo;
   private MarketplaceParameters marketplaceParameters;
+  private IdentifiableMarketplaceParameters identifiableMarketplaceParameters;
 
   @BeforeEach
   public void setUp() {
     marketplaceRepresentation = SampleTestDataUtility.createMarketplaceRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     marketplaceParameters = SampleTestDataUtility.createMarketplaceParameters();
+    identifiableMarketplaceParameters = SampleTestDataUtility.createIdentifiableMarketplaceParameters();
   }
 
   @AfterEach
@@ -107,7 +110,7 @@ class MarketplaceResourceTest {
     when(marketplaceBackend.get()).thenReturn(params -> marketplaceRepresentation);
 
     try {
-      response = marketplaceResource.getMarketplace(uriInfo, marketplaceParameters);
+      response = marketplaceResource.getMarketplace(uriInfo, identifiableMarketplaceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -128,7 +131,7 @@ class MarketplaceResourceTest {
     try {
       response =
           marketplaceResource.updateMarketplace(
-              uriInfo, marketplaceRepresentation, marketplaceParameters);
+              uriInfo, marketplaceRepresentation, identifiableMarketplaceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -146,7 +149,7 @@ class MarketplaceResourceTest {
     when(marketplaceBackend.delete()).thenReturn(params -> true);
 
     try {
-      response = marketplaceResource.deleteMarketplace(uriInfo, marketplaceParameters);
+      response = marketplaceResource.deleteMarketplace(uriInfo, identifiableMarketplaceParameters);
     } catch (Exception e) {
       fail(e);
     }

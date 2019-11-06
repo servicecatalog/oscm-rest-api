@@ -17,7 +17,6 @@ public class UserParametersTest {
 
              parameters.update();
              parameters.validateParameters();
-             parameters.validateId();
 
              assertThat(parameters).extracting(UserParameters::getUserId).isEqualTo(TestContants.STRING_VALUE);
              assertThat(parameters).extracting(UserParameters::getMarketplaceId).isEqualTo(TestContants.STRING_VALUE);

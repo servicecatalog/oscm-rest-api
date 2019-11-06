@@ -12,6 +12,7 @@ package org.oscm.rest.common;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.IdentifableRequestParameters;
 import org.oscm.rest.common.requestparameters.RequestParameters;
 
 import javax.ws.rs.WebApplicationException;
@@ -38,7 +39,7 @@ public class RestResourceTest extends RestResource {
     public void validateContent() throws WebApplicationException {}
   }
 
-  private class MockRequestParameters extends RequestParameters {
+  private class MockRequestParameters extends IdentifableRequestParameters {
 
     @Override
     public void validateParameters() throws WebApplicationException {}

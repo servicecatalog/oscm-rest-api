@@ -22,6 +22,7 @@ import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -42,6 +43,7 @@ public class OrganizationResourceTest {
   private OrganizationRepresentation orgRepresentation;
   private UriInfo uriInfo;
   private AccountParameters parameters;
+  private IdentifiableAccountParameters indentifiableParameters;
   private Response result;
 
   @BeforeEach
@@ -50,6 +52,7 @@ public class OrganizationResourceTest {
     orgRepresentation = SampleTestDataUtility.createOrgRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createAccountParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableAccountParameters();
   }
 
   @AfterEach
@@ -79,7 +82,7 @@ public class OrganizationResourceTest {
     when(backend.getOrganization()).thenReturn((accountParameters -> orgRepresentation));
 
     try {
-      result = resource.getOrganization(uriInfo, parameters);
+      result = resource.getOrganization(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }

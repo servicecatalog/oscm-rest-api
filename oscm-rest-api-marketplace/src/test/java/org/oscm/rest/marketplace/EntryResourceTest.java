@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 import org.oscm.rest.common.representation.EntryRepresentation;
 
@@ -30,7 +31,7 @@ class EntryResourceTest {
     private EntryResource entryResource;
 
     private Response response;
-    private MarketplaceParameters marketplaceParameters;
+    private IdentifiableMarketplaceParameters marketplaceParameters;
     private UriInfo uriInfo;
     private EntryRepresentation entryRepresentation;
 
@@ -38,7 +39,7 @@ class EntryResourceTest {
     public void setUp() {
         entryRepresentation = SampleTestDataUtility.createEntryRepresentation();
         uriInfo = SampleTestDataUtility.createUriInfo();
-        marketplaceParameters = SampleTestDataUtility.createMarketplaceParameters();
+        marketplaceParameters = SampleTestDataUtility.createIdentifiableMarketplaceParameters();
     }
 
     @AfterEach

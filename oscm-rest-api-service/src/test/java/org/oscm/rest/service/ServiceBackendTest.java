@@ -16,6 +16,7 @@ import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.ServiceStatus;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ws.rs.core.Response;
@@ -34,6 +35,7 @@ public class ServiceBackendTest {
   private CompatibleServiceResource compatiblesResource;
   private UriInfo uriInfo;
   private ServiceParameters parameters;
+  private IdentifiableServiceParameters indentifiableParameters;
   private ServiceDetailsRepresentation representation;
   private StatusRepresentation statusRepresentation;
   private VOServiceDetails vo;
@@ -45,6 +47,7 @@ public class ServiceBackendTest {
     compatiblesResource = new CompatibleServiceResource();
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createServiceParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
     representation = SampleTestDataUtility.createServiceDetailsRepresentation(null);
     statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     compatiblesCollection = createCompatiblesCollection();
@@ -58,7 +61,7 @@ public class ServiceBackendTest {
   public void shouldGetService() {
     when(service.getServiceDetails(any())).thenReturn(vo);
 
-    Response response = resource.getService(uriInfo, parameters);
+    Response response = resource.getService(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -103,7 +106,7 @@ public class ServiceBackendTest {
   public void shouldUpdateService() {
     when(service.updateService(any(), any())).thenReturn(vo);
 
-    Response response = resource.updateService(uriInfo, representation, parameters);
+    Response response = resource.updateService(uriInfo, representation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -116,7 +119,7 @@ public class ServiceBackendTest {
   public void shouldDeleteService() {
     doNothing().when(service).deleteService(any(Long.class));
 
-    Response response = resource.deleteService(uriInfo, parameters);
+    Response response = resource.deleteService(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -134,7 +137,7 @@ public class ServiceBackendTest {
     lenient().when(service.suspendService(any(), any())).thenReturn(vo);
     statusRepresentation.setStatus(serviceStatus);
 
-    Response response = resource.setServiceState(uriInfo, statusRepresentation, parameters);
+    Response response = resource.setServiceState(uriInfo, statusRepresentation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -147,7 +150,7 @@ public class ServiceBackendTest {
   public void shouldGetCompatibleServices() {
     when(service.getCompatibleServices(any())).thenReturn(Lists.newArrayList(vo));
 
-    Response response = compatiblesResource.getCompatibleServices(uriInfo, parameters);
+    Response response = compatiblesResource.getCompatibleServices(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -161,7 +164,7 @@ public class ServiceBackendTest {
     doNothing().when(service).setCompatibleServices(any(), any());
 
     Response response =
-        compatiblesResource.setCompatibleServices(uriInfo, compatiblesCollection, parameters);
+        compatiblesResource.setCompatibleServices(uriInfo, compatiblesCollection, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

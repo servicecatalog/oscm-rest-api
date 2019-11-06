@@ -20,6 +20,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableOperationParameters;
 import org.oscm.rest.common.requestparameters.OperationParameters;
 import org.oscm.rest.common.representation.SettingRepresentation;
 
@@ -41,12 +42,14 @@ class SettingsResourceTest {
   private SettingRepresentation settingRepresentation;
   private UriInfo uriInfo;
   private OperationParameters operationParameters;
+  private IdentifiableOperationParameters identifiableOperationParameters;
 
   @BeforeEach
   public void setUp() {
     settingRepresentation = SampleTestDataUtility.createSettingRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     operationParameters = SampleTestDataUtility.createOperationParameters();
+    identifiableOperationParameters = SampleTestDataUtility.createIdentifiableOperationParameters();
   }
 
   @AfterEach
@@ -114,7 +117,7 @@ class SettingsResourceTest {
     }
 
     try {
-      response = settingsResource.getSetting(uriInfo, operationParameters);
+      response = settingsResource.getSetting(uriInfo, identifiableOperationParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -137,7 +140,7 @@ class SettingsResourceTest {
 
     try {
       response =
-          settingsResource.updateSetting(uriInfo, settingRepresentation, operationParameters);
+          settingsResource.updateSetting(uriInfo, settingRepresentation, identifiableOperationParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -158,7 +161,7 @@ class SettingsResourceTest {
     }
 
     try {
-      response = settingsResource.deleteSetting(uriInfo, operationParameters);
+      response = settingsResource.deleteSetting(uriInfo, identifiableOperationParameters);
     } catch (Exception e) {
       fail(e);
     }

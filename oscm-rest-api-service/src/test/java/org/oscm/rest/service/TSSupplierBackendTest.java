@@ -12,6 +12,7 @@ import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 
@@ -32,6 +33,7 @@ public class TSSupplierBackendTest {
 
   private OrganizationRepresentation representation;
   private ServiceParameters parameters;
+  private IdentifiableServiceParameters indentifiableParameters;
   private UriInfo uriInfo;
   private VOOrganization vo;
 
@@ -42,6 +44,7 @@ public class TSSupplierBackendTest {
     vo = SampleTestDataUtility.createVOOrganization();
     representation = SampleTestDataUtility.createOrgRepresentation();
     parameters = SampleTestDataUtility.createServiceParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -51,7 +54,7 @@ public class TSSupplierBackendTest {
     when(service.getSuppliersForTechnicalService(any()))
         .thenReturn(Lists.newArrayList(new VOOrganization()));
 
-    Response response = resource.getSuppliers(uriInfo, parameters);
+    Response response = resource.getSuppliers(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -73,7 +76,7 @@ public class TSSupplierBackendTest {
   public void shouldAddSupplier() {
     doNothing().when(service).addSuppliersForTechnicalService(any(), any());
 
-    Response response = resource.addSupplier(uriInfo, representation, parameters);
+    Response response = resource.addSupplier(uriInfo, representation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -86,7 +89,7 @@ public class TSSupplierBackendTest {
   public void shouldDeleteSupplier() {
     doNothing().when(service).removeSuppliersFromTechnicalService(any(), any());
 
-    Response response = resource.removeSupplier(uriInfo, parameters);
+    Response response = resource.removeSupplier(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

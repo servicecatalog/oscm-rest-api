@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
@@ -41,6 +42,7 @@ public class PriceModelResourceTest {
   private PriceModelRepresentation priceModelRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
+  private IdentifiableServiceParameters identifiableServiceParameters;
 
   @BeforeEach
   public void setUp() {
@@ -48,6 +50,7 @@ public class PriceModelResourceTest {
     priceModelRepresentation = SampleTestDataUtility.createPriceModelRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
+    identifiableServiceParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
   }
 
   @AfterEach
@@ -60,7 +63,7 @@ public class PriceModelResourceTest {
     when(priceModelBackend.get()).thenReturn(serviceParameters1 -> priceModelRepresentation);
 
     try {
-      response = priceModelResource.get(uriInfo, serviceParameters);
+      response = priceModelResource.get(uriInfo, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -79,7 +82,7 @@ public class PriceModelResourceTest {
         .thenReturn((priceModelRepresentation1, serviceParameters1) -> true);
 
     try {
-      response = priceModelResource.update(uriInfo, priceModelRepresentation, serviceParameters);
+      response = priceModelResource.update(uriInfo, priceModelRepresentation, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -97,7 +100,7 @@ public class PriceModelResourceTest {
         .thenReturn(serviceParameters1 -> priceModelRepresentation);
 
     try {
-      response = priceModelResource.getForCustomer(uriInfo, serviceParameters);
+      response = priceModelResource.getForCustomer(uriInfo, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -118,7 +121,7 @@ public class PriceModelResourceTest {
     try {
       response =
           priceModelResource.updateForCustomer(
-              uriInfo, priceModelRepresentation, serviceParameters);
+              uriInfo, priceModelRepresentation, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }

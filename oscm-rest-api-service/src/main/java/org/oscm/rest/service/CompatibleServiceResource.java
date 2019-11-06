@@ -33,6 +33,7 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/compatibleservices")
@@ -59,7 +60,7 @@ public class CompatibleServiceResource extends RestResource {
                     schema = @Schema(implementation = ServiceRepresentation.class)))
       })
   public Response getCompatibleServices(
-      @Context UriInfo uriInfo, @BeanParam ServiceParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params) throws Exception {
     return getCollection(uriInfo, sb.getCompatibles(), params);
   }
 
@@ -94,7 +95,7 @@ public class CompatibleServiceResource extends RestResource {
   public Response setCompatibleServices(
       @Context UriInfo uriInfo,
       RepresentationCollection<ServiceRepresentation> content,
-      @BeanParam ServiceParameters params)
+      @BeanParam IdentifiableServiceParameters params)
       throws Exception {
 
     params.setEtag(content.getETag());

@@ -34,6 +34,7 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.AccountRepresentation;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 @Path(CommonParams.PATH_VERSION + "/organizations")
 @Stateless
@@ -56,7 +57,7 @@ public class OrganizationResource extends RestResource {
             description = "The organization",
             content = @Content(schema = @Schema(implementation = OrganizationRepresentation.class)))
       })
-  public Response getOrganization(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
+  public Response getOrganization(@Context UriInfo uriInfo, @BeanParam IdentifiableAccountParameters params)
       throws Exception {
     return get(uriInfo, ab.getOrganization(), params, true);
   }

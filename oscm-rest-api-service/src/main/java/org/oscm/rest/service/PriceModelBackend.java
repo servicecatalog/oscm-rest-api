@@ -16,6 +16,7 @@ import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 
@@ -27,7 +28,7 @@ public class PriceModelBackend {
 
   @EJB ServiceProvisioningService sps;
 
-  public RestBackend.Put<PriceModelRepresentation, ServiceParameters> put() {
+  public RestBackend.Put<PriceModelRepresentation, IdentifiableServiceParameters> put() {
     return (content, params) -> {
       VOServiceDetails svc = new VOServiceDetails();
       svc.setKey(params.getId().longValue());
@@ -36,7 +37,7 @@ public class PriceModelBackend {
     };
   }
 
-  public RestBackend.Put<PriceModelRepresentation, ServiceParameters> putForCustomer() {
+  public RestBackend.Put<PriceModelRepresentation, IdentifiableServiceParameters> putForCustomer() {
     return (content, params) -> {
       VOServiceDetails svc = new VOServiceDetails();
       svc.setKey(params.getId().longValue());
@@ -47,7 +48,7 @@ public class PriceModelBackend {
     };
   }
 
-  public RestBackend.Get<PriceModelRepresentation, ServiceParameters> get() {
+  public RestBackend.Get<PriceModelRepresentation, IdentifiableServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
       vo.setKey(params.getId().longValue());
@@ -59,7 +60,7 @@ public class PriceModelBackend {
     };
   }
 
-  public RestBackend.Get<PriceModelRepresentation, ServiceParameters> getForCustomer() {
+  public RestBackend.Get<PriceModelRepresentation, IdentifiableServiceParameters> getForCustomer() {
     return params -> {
       VOService svc = new VOService();
       svc.setKey(params.getId().longValue());

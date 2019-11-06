@@ -31,6 +31,7 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/services")
@@ -74,7 +75,7 @@ public class ServiceResource extends RestResource {
             description = "A single service",
             content = @Content(schema = @Schema(implementation = ServiceRepresentation.class)))
       })
-  public Response getService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response getService(@Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
@@ -143,7 +144,7 @@ public class ServiceResource extends RestResource {
   public Response updateService(
       @Context UriInfo uriInfo,
       ServiceDetailsRepresentation content,
-      @BeanParam ServiceParameters params)
+      @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return put(uriInfo, sb.put(), content, params);
   }
@@ -176,7 +177,7 @@ public class ServiceResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Service status updated successfully")
       })
   public Response setServiceState(
-      @Context UriInfo uriInfo, StatusRepresentation content, @BeanParam ServiceParameters params)
+      @Context UriInfo uriInfo, StatusRepresentation content, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return put(uriInfo, sb.putStatus(), content, params);
   }
@@ -191,7 +192,7 @@ public class ServiceResource extends RestResource {
       responses = {
         @ApiResponse(responseCode = "204", description = "Service deleted successfully")
       })
-  public Response deleteService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response deleteService(@Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return delete(uriInfo, sb.delete(), params);
   }

@@ -10,11 +10,12 @@
 package org.oscm.rest.common.requestparameters;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.WebException;
+
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.WebException;
 
 /**
  * Base class for BeanParams
@@ -24,10 +25,6 @@ import org.oscm.rest.common.WebException;
 public class RequestParameters {
 
   private int version;
-
-  @Parameter(description = "ID of a single resource", required = true)
-  @PathParam(CommonParams.PARAM_ID)
-  private Long id;
 
   @Parameter(description = "Endpoint's version", required = true)
   @PathParam(CommonParams.PARAM_VERSION)
@@ -49,14 +46,6 @@ public class RequestParameters {
     this.version = version;
   }
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
   public String getEndpointVersion() {
     return endpointVersion;
   }
@@ -75,18 +64,6 @@ public class RequestParameters {
 
   public void setEtag(Long etag) {
     this.etag = etag;
-  }
-
-  /**
-   * Validates the id string if it matches basic UUID format. Throws NotFoundException if not valid.
-   *
-   * @throws WebApplicationException
-   */
-  public void validateId() throws WebApplicationException {
-
-    if (id == null) {
-      throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
-    }
   }
 
   /**
@@ -131,13 +108,6 @@ public class RequestParameters {
 
   public void setNoneMatch(String noneMatch) {
     this.noneMatch = noneMatch;
-  }
-
-  public long convertIdToKey() {
-    if (getId() == null) {
-      return 0L;
-    }
-    return getId().longValue();
   }
 
   public int convertETagToVersion() {

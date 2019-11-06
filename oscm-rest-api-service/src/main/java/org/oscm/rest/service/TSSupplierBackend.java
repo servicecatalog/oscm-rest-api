@@ -18,6 +18,7 @@ import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Stateless
@@ -25,7 +26,7 @@ public class TSSupplierBackend {
 
   @EJB AccountService as;
 
-  public RestBackend.GetCollection<OrganizationRepresentation, ServiceParameters> getCollection() {
+  public RestBackend.GetCollection<OrganizationRepresentation, IdentifiableServiceParameters> getCollection() {
     return params -> {
       VOTechnicalService vo = new VOTechnicalService();
       vo.setKey(params.getId().longValue());
@@ -34,7 +35,7 @@ public class TSSupplierBackend {
     };
   }
 
-  public RestBackend.Post<OrganizationRepresentation, ServiceParameters> post() {
+  public RestBackend.Post<OrganizationRepresentation, IdentifiableServiceParameters> post() {
     return (content, params) -> {
       VOTechnicalService vo = new VOTechnicalService();
       vo.setKey(params.getId().longValue());
@@ -43,7 +44,7 @@ public class TSSupplierBackend {
     };
   }
 
-  public RestBackend.Delete<ServiceParameters> delete() {
+  public RestBackend.Delete<IdentifiableServiceParameters> delete() {
     return params -> {
       VOTechnicalService vo = new VOTechnicalService();
       vo.setKey(params.getId().longValue());

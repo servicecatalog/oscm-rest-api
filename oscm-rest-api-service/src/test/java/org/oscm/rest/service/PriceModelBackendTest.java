@@ -11,6 +11,7 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOPriceModel;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 
@@ -30,6 +31,7 @@ public class PriceModelBackendTest {
 
   private UriInfo uriInfo;
   private ServiceParameters parameters;
+  private IdentifiableServiceParameters indentifiableParameters;
   private PriceModelRepresentation representation;
   private VOServiceDetails vo;
 
@@ -38,6 +40,7 @@ public class PriceModelBackendTest {
     resource = new PriceModelResource();
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createServiceParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
     representation = SampleTestDataUtility.createPriceModelRepresentation();
     vo = SampleTestDataUtility.createVOServiceDetails();
     resource.setPmb(backend);
@@ -48,7 +51,7 @@ public class PriceModelBackendTest {
   public void shouldGetPricemodel() {
     when(service.getServiceDetails(any())).thenReturn(vo);
 
-    Response response = resource.get(uriInfo, parameters);
+    Response response = resource.get(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -61,7 +64,7 @@ public class PriceModelBackendTest {
   public void shouldGetPricemodelForCustomer() {
     when(service.getServiceForCustomer(any(), any())).thenReturn(vo);
 
-    Response response = resource.getForCustomer(uriInfo, parameters);
+    Response response = resource.getForCustomer(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -74,7 +77,7 @@ public class PriceModelBackendTest {
   public void shouldUpdatePricemodel() {
     when(service.savePriceModel(any(), any())).thenReturn(vo);
 
-    Response response = resource.update(uriInfo, representation, parameters);
+    Response response = resource.update(uriInfo, representation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -87,7 +90,7 @@ public class PriceModelBackendTest {
   public void shouldUpdatePricemodelForCustomer() {
     when(service.savePriceModelForCustomer(any(), any(), any())).thenReturn(vo);
 
-    Response response = resource.updateForCustomer(uriInfo, representation, parameters);
+    Response response = resource.updateForCustomer(uriInfo, representation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

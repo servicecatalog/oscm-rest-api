@@ -29,6 +29,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableOperationParameters;
 import org.oscm.rest.common.requestparameters.OperationParameters;
 
 @Path(CommonParams.PATH_VERSION + "/settings")
@@ -72,7 +73,7 @@ public class SettingsResource extends RestResource {
             description = "A single setting",
             content = @Content(schema = @Schema(implementation = SettingRepresentation.class)))
       })
-  public Response getSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
+  public Response getSetting(@Context UriInfo uriInfo, @BeanParam IdentifiableOperationParameters params)
       throws Exception {
     return get(uriInfo, sb.get(), params, true);
   }
@@ -133,7 +134,7 @@ public class SettingsResource extends RestResource {
   public Response updateSetting(
       @Context UriInfo uriInfo,
       SettingRepresentation content,
-      @BeanParam OperationParameters params)
+      @BeanParam IdentifiableOperationParameters params)
       throws Exception {
     return put(uriInfo, sb.put(), content, params);
   }
@@ -148,7 +149,7 @@ public class SettingsResource extends RestResource {
       responses = {
         @ApiResponse(responseCode = "204", description = "Setting deleted successfully")
       })
-  public Response deleteSetting(@Context UriInfo uriInfo, @BeanParam OperationParameters params)
+  public Response deleteSetting(@Context UriInfo uriInfo, @BeanParam IdentifiableOperationParameters params)
       throws Exception {
     return delete(uriInfo, sb.delete(), params);
   }

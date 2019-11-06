@@ -14,6 +14,7 @@ import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
 import org.oscm.rest.common.representation.SubscriptionDetailsRepresentation;
@@ -41,6 +42,7 @@ public class SubscriptionResourceTest {
     private SubscriptionDetailsRepresentation subscriptionDetailsRepresentation;
     private SubscriptionCreationRepresentation subscriptionCreationRepresentation;
     private SubscriptionParameters subscriptionParameters;
+    private IdentifiableSubscriptionParameters identifiableSubscriptionParameters;
     private UriInfo uriInfo;
     private VOSubscriptionDetails voSubscriptionDetails;
 
@@ -51,6 +53,7 @@ public class SubscriptionResourceTest {
         subscriptionDetailsRepresentation = SampleTestDataUtility.createSubscriptionDetailsRepresentation(voSubscriptionDetails);
         subscriptionCreationRepresentation = SampleTestDataUtility.createSubscriptionCreationRepresentation();
         subscriptionParameters = SampleTestDataUtility.createSubscriptionParameters();
+        identifiableSubscriptionParameters = SampleTestDataUtility.createIdentifiableSubscriptionParameters();
         uriInfo = SampleTestDataUtility.createUriInfo();
     }
 
@@ -118,7 +121,7 @@ public class SubscriptionResourceTest {
         when(subscriptionBackend.get()).thenReturn(params -> subscriptionDetailsRepresentation);
 
         try {
-            response = subscriptionResource.getSubscription(uriInfo, subscriptionParameters);
+            response = subscriptionResource.getSubscription(uriInfo, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -137,7 +140,7 @@ public class SubscriptionResourceTest {
                 .thenReturn((content, params) -> true);
 
         try {
-            response = subscriptionResource.updateSubscription(uriInfo, subscriptionCreationRepresentation, subscriptionParameters);
+            response = subscriptionResource.updateSubscription(uriInfo, subscriptionCreationRepresentation, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -155,7 +158,7 @@ public class SubscriptionResourceTest {
                 .thenReturn(params -> true);
 
         try {
-            response = subscriptionResource.deleteSubscription(uriInfo, subscriptionParameters);
+            response = subscriptionResource.deleteSubscription(uriInfo, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }

@@ -16,6 +16,7 @@ import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
@@ -30,7 +31,7 @@ public class ServiceBackend {
 
   @EJB ServiceProvisioningService sps;
 
-  public RestBackend.Delete<ServiceParameters> delete() {
+  public RestBackend.Delete<IdentifiableServiceParameters> delete() {
     return params -> {
       sps.deleteService(params.getId());
       return true;
@@ -46,7 +47,7 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.Put<ServiceDetailsRepresentation, ServiceParameters> put() {
+  public RestBackend.Put<ServiceDetailsRepresentation, IdentifiableServiceParameters> put() {
     return (content, params) -> {
       // image will be handled in separate URL
       sps.updateService(content.getVO(), null);
@@ -54,7 +55,7 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.Get<ServiceDetailsRepresentation, ServiceParameters> get() {
+  public RestBackend.Get<ServiceDetailsRepresentation, IdentifiableServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
       vo.setKey(params.getId().longValue());
@@ -74,7 +75,7 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCompatibles() {
+  public RestBackend.GetCollection<ServiceRepresentation, IdentifiableServiceParameters> getCompatibles() {
     return params -> {
       VOService vo = new VOService();
       vo.setKey(params.getId().longValue());
@@ -84,7 +85,7 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.Put<RepresentationCollection<ServiceRepresentation>, ServiceParameters>
+  public RestBackend.Put<RepresentationCollection<ServiceRepresentation>, IdentifiableServiceParameters>
       putCompatibles() {
     return (content, params) -> {
       VOService vo = new VOService();
@@ -96,7 +97,7 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.Put<StatusRepresentation, ServiceParameters> putStatus() {
+  public RestBackend.Put<StatusRepresentation, IdentifiableServiceParameters> putStatus() {
     return (content, params) -> {
       VOService vo = new VOService();
       vo.setKey(params.getId().longValue());

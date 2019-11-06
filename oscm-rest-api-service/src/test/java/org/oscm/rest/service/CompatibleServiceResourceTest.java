@@ -20,6 +20,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 
@@ -41,12 +42,14 @@ public class CompatibleServiceResourceTest {
   private ServiceRepresentation serviceRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
+  private IdentifiableServiceParameters indentifiableServiceParameters;
 
   @BeforeEach
   public void setUp() {
     serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
+    indentifiableServiceParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
   }
 
   @AfterEach
@@ -62,7 +65,7 @@ public class CompatibleServiceResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation)));
 
     try {
-      response = compatibleServiceResource.getCompatibleServices(uriInfo, serviceParameters);
+      response = compatibleServiceResource.getCompatibleServices(uriInfo, indentifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -89,7 +92,7 @@ public class CompatibleServiceResourceTest {
 
     try {
       response =
-          compatibleServiceResource.setCompatibleServices(uriInfo, getContent(), serviceParameters);
+          compatibleServiceResource.setCompatibleServices(uriInfo, getContent(), indentifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }

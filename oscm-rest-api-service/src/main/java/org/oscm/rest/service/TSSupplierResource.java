@@ -29,6 +29,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID + "/suppliers")
@@ -54,7 +55,7 @@ public class TSSupplierResource extends RestResource {
                     mediaType = "application/json",
                     schema = @Schema(implementation = OrganizationRepresentation.class)))
       })
-  public Response getSuppliers(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response getSuppliers(@Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return getCollection(uriInfo, sb.getCollection(), params);
   }
@@ -90,7 +91,7 @@ public class TSSupplierResource extends RestResource {
   public Response addSupplier(
       @Context UriInfo uriInfo,
       OrganizationRepresentation content,
-      @BeanParam ServiceParameters params)
+      @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return post(uriInfo, sb.post(), content, params);
   }
@@ -107,7 +108,7 @@ public class TSSupplierResource extends RestResource {
             responseCode = "204",
             description = "Technical service supplier deleted successfully")
       })
-  public Response removeSupplier(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response removeSupplier(@Context UriInfo uriInfo, @BeanParam IdentifiableServiceParameters params)
       throws Exception {
     return delete(uriInfo, sb.delete(), params);
   }

@@ -22,6 +22,7 @@ import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
@@ -46,6 +47,7 @@ public class ServiceResourceTest {
   private ServiceDetailsRepresentation serviceDetailsRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
+  private IdentifiableServiceParameters identifiableServiceParameters;
   private StatusRepresentation statusRepresentation;
   private VOServiceDetails voServiceDetails;
 
@@ -57,6 +59,7 @@ public class ServiceResourceTest {
     statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
+    identifiableServiceParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
   }
 
   @AfterEach
@@ -116,7 +119,7 @@ public class ServiceResourceTest {
     when(serviceBackend.get()).thenReturn(serviceParameters1 -> serviceDetailsRepresentation);
 
     try {
-      response = serviceResource.getService(uriInfo, serviceParameters);
+      response = serviceResource.getService(uriInfo, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -136,7 +139,7 @@ public class ServiceResourceTest {
 
     try {
       response =
-          serviceResource.updateService(uriInfo, serviceDetailsRepresentation, serviceParameters);
+          serviceResource.updateService(uriInfo, serviceDetailsRepresentation, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -153,7 +156,7 @@ public class ServiceResourceTest {
     when(serviceBackend.delete()).thenReturn(serviceParameters1 -> true);
 
     try {
-      response = serviceResource.deleteService(uriInfo, serviceParameters);
+      response = serviceResource.deleteService(uriInfo, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -171,7 +174,7 @@ public class ServiceResourceTest {
         .thenReturn((statusRepresentation1, serviceParameters1) -> true);
 
     try {
-      response = serviceResource.setServiceState(uriInfo, statusRepresentation, serviceParameters);
+      response = serviceResource.setServiceState(uriInfo, statusRepresentation, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }

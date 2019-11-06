@@ -17,6 +17,7 @@ import org.oscm.rest.common.WebException;
 
 public class UserParameters extends RequestParameters {
 
+  //FIXME: This should be in fact a @PathParam
   @QueryParam("userId")
   @Parameter(description = "User ID")
   private String userId;
@@ -59,13 +60,6 @@ public class UserParameters extends RequestParameters {
 
   public void setPattern(String pattern) {
     this.pattern = pattern;
-  }
-
-  @Override
-  public void validateId() throws WebApplicationException {
-    if (isUserIdRequired && userId == null) {
-      throw WebException.notFound().message(CommonParams.ERROR_INVALID_ID).build();
-    }
   }
 
   public void setUserIdRequired(boolean userIdRequired) {

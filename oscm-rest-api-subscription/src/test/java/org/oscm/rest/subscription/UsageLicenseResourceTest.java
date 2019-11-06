@@ -14,6 +14,7 @@ import org.oscm.internal.vo.VOUsageLicense;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 import org.oscm.rest.common.representation.SubscriptionRepresentation;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
@@ -38,12 +39,14 @@ public class UsageLicenseResourceTest {
     private Response response;
     private UriInfo uriInfo;
     private SubscriptionParameters subscriptionParameters;
+    private IdentifiableSubscriptionParameters identifiableSubscriptionParameters;
     private SubscriptionRepresentation subscriptionRepresentation;
     private UsageLicenseRepresentation usageLicenseRepresentation;
 
     @BeforeEach
     public void setUp() {
         subscriptionParameters = SampleTestDataUtility.createSubscriptionParameters();
+        identifiableSubscriptionParameters = SampleTestDataUtility.createIdentifiableSubscriptionParameters();
         uriInfo = SampleTestDataUtility.createUriInfo();
         subscriptionRepresentation = SampleTestDataUtility.createSubscriptionRepresentation();
         VOUsageLicense voUsageLicense = SampleTestDataUtility.createVOUsageLicense();
@@ -61,7 +64,7 @@ public class UsageLicenseResourceTest {
                 .thenReturn(params -> new RepresentationCollection<>(Lists.newArrayList(usageLicenseRepresentation)));
 
         try {
-            response = usageLicenseResource.getLicenses(uriInfo, subscriptionParameters);
+            response = usageLicenseResource.getLicenses(uriInfo, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -87,7 +90,7 @@ public class UsageLicenseResourceTest {
                 .thenReturn((content, params) -> true);
 
         try {
-            response = usageLicenseResource.createLicense(uriInfo, usageLicenseRepresentation, subscriptionParameters);
+            response = usageLicenseResource.createLicense(uriInfo, usageLicenseRepresentation, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -105,7 +108,7 @@ public class UsageLicenseResourceTest {
                 .thenReturn((content, params) -> true);
 
         try {
-            response = usageLicenseResource.updateLicense(uriInfo, usageLicenseRepresentation, subscriptionParameters);
+            response = usageLicenseResource.updateLicense(uriInfo, usageLicenseRepresentation, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }
@@ -123,7 +126,7 @@ public class UsageLicenseResourceTest {
                 .thenReturn(params -> true);
 
         try {
-            response = usageLicenseResource.deleteLicense(uriInfo, subscriptionParameters);
+            response = usageLicenseResource.deleteLicense(uriInfo, identifiableSubscriptionParameters);
         } catch (Exception e) {
             fail(e);
         }

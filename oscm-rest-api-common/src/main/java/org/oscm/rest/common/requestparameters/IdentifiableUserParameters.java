@@ -10,24 +10,40 @@
 package org.oscm.rest.common.requestparameters;
 
 import io.swagger.v3.oas.annotations.Parameter;
+
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
-public class AccountParameters extends RequestParameters {
+public class IdentifiableUserParameters extends IdentifableRequestParameters {
 
+  @PathParam("userId")
+  @Parameter(description = "User ID")
+  private String userId;
+
+  @QueryParam("mId")
   @Parameter(description = "Marketplace ID")
-  @QueryParam("marketplaceId")
   private String marketplaceId;
 
-  @Parameter(description = "Organization ID")
-  @QueryParam("orgId")
-  private String orgId;
+  @QueryParam("pattern")
+  @Parameter(description = "Pattern")
+  private String pattern;
+
+  private boolean isUserIdRequired;
 
   @Override
   public void validateParameters() throws WebApplicationException {}
 
   @Override
   public void update() {}
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
   public String getMarketplaceId() {
     return marketplaceId;
@@ -37,11 +53,19 @@ public class AccountParameters extends RequestParameters {
     this.marketplaceId = marketplaceId;
   }
 
-  public String getOrgId() {
-    return orgId;
+  public String getPattern() {
+    return pattern;
   }
 
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
+
+  public void setUserIdRequired(boolean userIdRequired) {
+    this.isUserIdRequired = userIdRequired;
+  }
+
+  public boolean getUserIdRequired() {
+    return isUserIdRequired;
   }
 }

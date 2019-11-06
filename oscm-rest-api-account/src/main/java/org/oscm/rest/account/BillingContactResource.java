@@ -30,6 +30,7 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.BillingContactRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 @Path(CommonParams.PATH_VERSION + "/billingcontacts")
 @Stateless
@@ -73,7 +74,7 @@ public class BillingContactResource extends RestResource {
             content =
                 @Content(schema = @Schema(implementation = BillingContactRepresentation.class)))
       })
-  public Response getBillingContact(@Context UriInfo uriInfo, @BeanParam AccountParameters params)
+  public Response getBillingContact(@Context UriInfo uriInfo, @BeanParam IdentifiableAccountParameters params)
       throws Exception {
     return get(uriInfo, ab.getBillingContact(), params, true);
   }
@@ -142,7 +143,7 @@ public class BillingContactResource extends RestResource {
   public Response updateBillingContact(
       @Context UriInfo uriInfo,
       BillingContactRepresentation content,
-      @BeanParam AccountParameters params)
+      @BeanParam IdentifiableAccountParameters params)
       throws Exception {
     // FIXME: Move investigate why the same command doesn't work from RestResource#128
     content.setId(params.getId());
@@ -160,7 +161,7 @@ public class BillingContactResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Billing contact deleted successfully")
       })
   public Response deleteBillingContact(
-      @Context UriInfo uriInfo, @BeanParam AccountParameters params) throws Exception {
+      @Context UriInfo uriInfo, @BeanParam IdentifiableAccountParameters params) throws Exception {
     return delete(uriInfo, ab.deleteBillingContact(), params);
   }
 }

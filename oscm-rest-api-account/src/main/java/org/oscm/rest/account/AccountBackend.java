@@ -23,6 +23,7 @@ import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+import org.oscm.rest.common.requestparameters.IdentifiableAccountParameters;
 
 @Stateless
 public class AccountBackend {
@@ -47,7 +48,7 @@ public class AccountBackend {
     };
   }
 
-  public RestBackend.Get<BillingContactRepresentation, AccountParameters> getBillingContact() {
+  public RestBackend.Get<BillingContactRepresentation, IdentifiableAccountParameters> getBillingContact() {
     return params -> {
       BillingContactRepresentation item = null;
       List<VOBillingContact> list = as.getBillingContacts();
@@ -65,14 +66,14 @@ public class AccountBackend {
     };
   }
 
-  public RestBackend.Put<BillingContactRepresentation, AccountParameters> putBillingContact() {
+  public RestBackend.Put<BillingContactRepresentation, IdentifiableAccountParameters> putBillingContact() {
     return (content, params) -> {
       as.saveBillingContact(content.getVO());
       return true;
     };
   }
 
-  public RestBackend.Delete<AccountParameters> deleteBillingContact() {
+  public RestBackend.Delete<IdentifiableAccountParameters> deleteBillingContact() {
     return params -> {
       VOBillingContact bc = new VOBillingContact();
       bc.setKey(params.getId().longValue());
@@ -91,14 +92,14 @@ public class AccountBackend {
     };
   }
 
-  public RestBackend.Put<PaymentInfoRepresentation, AccountParameters> putPaymentInfo() {
+  public RestBackend.Put<PaymentInfoRepresentation, IdentifiableAccountParameters> putPaymentInfo() {
     return (content, params) -> {
       as.savePaymentInfo(content.getVO());
       return true;
     };
   }
 
-  public RestBackend.Get<PaymentInfoRepresentation, AccountParameters> getPaymentInfo() {
+  public RestBackend.Get<PaymentInfoRepresentation, IdentifiableAccountParameters> getPaymentInfo() {
     return params -> {
       PaymentInfoRepresentation item = null;
       List<VOPaymentInfo> list = as.getPaymentInfos();
@@ -116,7 +117,7 @@ public class AccountBackend {
     };
   }
 
-  public RestBackend.Delete<AccountParameters> deletePaymentInfo() {
+  public RestBackend.Delete<IdentifiableAccountParameters> deletePaymentInfo() {
     return params -> {
       VOPaymentInfo pi = new VOPaymentInfo();
       pi.setKey(params.getId().longValue());
@@ -165,7 +166,7 @@ public class AccountBackend {
     };
   }
 
-  public RestBackend.Get<OrganizationRepresentation, AccountParameters> getOrganization() {
+  public RestBackend.Get<OrganizationRepresentation, IdentifiableAccountParameters> getOrganization() {
     return params -> {
       VOOrganization org = as.getOrganizationData();
       OrganizationRepresentation item;

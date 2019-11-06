@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 import org.junit.jupiter.api.Test;
+import org.oscm.rest.common.requestparameters.IdentifableRequestParameters;
 import org.oscm.rest.common.requestparameters.RequestParameters;
 
 /**
@@ -25,7 +26,7 @@ import org.oscm.rest.common.requestparameters.RequestParameters;
  */
 public class RequestParametersTest {
 
-  private class TestParameters extends RequestParameters {
+  private class TestParameters extends IdentifableRequestParameters {
 
     @Override
     public void validateParameters() throws WebApplicationException {}
@@ -37,7 +38,7 @@ public class RequestParametersTest {
   @Test
   public void testIdValidation() throws Exception {
 
-    RequestParameters params = new TestParameters();
+    IdentifableRequestParameters params = new TestParameters();
 
     params.setId(1L);
 
@@ -127,7 +128,7 @@ public class RequestParametersTest {
 
   @Test
   public void shouldConvertIdToKey_givenNullId() {
-    RequestParameters parameters = new TestParameters();
+    IdentifableRequestParameters parameters = new TestParameters();
 
     Long result = parameters.convertIdToKey();
 
@@ -136,7 +137,7 @@ public class RequestParametersTest {
 
   @Test
   public void shouldConvertIdToKey_givenNoNNullId() {
-    RequestParameters parameters = new TestParameters();
+    IdentifableRequestParameters parameters = new TestParameters();
     parameters.setId(12345L);
 
     Long result = parameters.convertIdToKey();

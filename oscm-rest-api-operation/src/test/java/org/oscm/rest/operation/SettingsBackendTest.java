@@ -22,6 +22,7 @@ import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableOperationParameters;
 import org.oscm.rest.common.requestparameters.OperationParameters;
 import org.oscm.rest.common.representation.SettingRepresentation;
 
@@ -43,6 +44,7 @@ public class SettingsBackendTest {
 
   private UriInfo uriInfo;
   private OperationParameters parameters;
+  private IdentifiableOperationParameters indentifiableParameters;
   private SettingRepresentation representation;
   private VOConfigurationSetting vo;
 
@@ -53,6 +55,7 @@ public class SettingsBackendTest {
 
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createOperationParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableOperationParameters();
     representation = SampleTestDataUtility.createSettingRepresentation();
     vo = SampleTestDataUtility.createVOConfigurationSetting();
   }
@@ -82,7 +85,7 @@ public class SettingsBackendTest {
   public void shouldGetSettingById() {
     when(operatorService.getConfigurationSetting(any())).thenReturn(vo);
 
-    Response response = resource.getSetting(uriInfo, parameters);
+    Response response = resource.getSetting(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -110,7 +113,7 @@ public class SettingsBackendTest {
   public void shouldUpdateSetting() {
     doNothing().when(operatorService).saveConfigurationSetting(any());
 
-    Response response = resource.updateSetting(uriInfo, representation, parameters);
+    Response response = resource.updateSetting(uriInfo, representation, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -123,7 +126,7 @@ public class SettingsBackendTest {
   public void shouldDeleteSetting() {
     doNothing().when(operatorService).deleteConfigurationSetting(any());
 
-    Response response = resource.deleteSetting(uriInfo, parameters);
+    Response response = resource.deleteSetting(uriInfo, indentifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

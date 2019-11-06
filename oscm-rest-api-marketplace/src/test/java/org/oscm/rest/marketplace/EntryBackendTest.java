@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 import org.oscm.rest.common.representation.EntryRepresentation;
 
@@ -37,7 +38,7 @@ public class EntryBackendTest {
   private EntryResource resource;
 
   private UriInfo uriInfo;
-  private MarketplaceParameters parameters;
+  private IdentifiableMarketplaceParameters parameters;
   private EntryRepresentation representation;
   private VOServiceDetails vo;
 
@@ -46,7 +47,7 @@ public class EntryBackendTest {
     resource = new EntryResource();
     resource.setEb(backend);
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = SampleTestDataUtility.createMarketplaceParameters();
+    parameters = SampleTestDataUtility.createIdentifiableMarketplaceParameters();
     representation = SampleTestDataUtility.createEntryRepresentation();
     vo = SampleTestDataUtility.createVOServiceDetails();
   }

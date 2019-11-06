@@ -10,10 +10,11 @@
 package org.oscm.rest.common.requestparameters;
 
 import io.swagger.v3.oas.annotations.Parameter;
+
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
-public class AccountParameters extends RequestParameters {
+public class IdentifiableAccountParameters extends IdentifableRequestParameters {
 
   @Parameter(description = "Marketplace ID")
   @QueryParam("marketplaceId")
@@ -44,4 +45,7 @@ public class AccountParameters extends RequestParameters {
   public void setOrgId(String orgId) {
     this.orgId = orgId;
   }
+
+  @Override
+  public void validateId() throws WebApplicationException {}
 }

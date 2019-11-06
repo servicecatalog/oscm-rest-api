@@ -13,6 +13,7 @@ import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.vo.*;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableSubscriptionParameters;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
@@ -37,6 +38,7 @@ public class SubscriptionBackendTest {
   private UriInfo uriInfo;
   private SubscriptionCreationRepresentation representation;
   private SubscriptionParameters parameters;
+  private IdentifiableSubscriptionParameters identifiableParameters;
   private VOUserSubscription voUserSubscription;
   private VOSubscriptionDetails voSubscriptionDetails;
   private VOSubscription voSubscription;
@@ -48,6 +50,7 @@ public class SubscriptionBackendTest {
     uriInfo = SampleTestDataUtility.createUriInfo();
     representation = SampleTestDataUtility.createSubscriptionCreationRepresentation();
     parameters = SampleTestDataUtility.createSubscriptionParameters();
+    identifiableParameters = SampleTestDataUtility.createIdentifiableSubscriptionParameters();
     voUserSubscription = SampleTestDataUtility.createVOUserSubscription();
     voSubscriptionDetails = SampleTestDataUtility.createVOSubscriptionDetails();
     voSubscription = SampleTestDataUtility.createVOSubscription();
@@ -101,7 +104,7 @@ public class SubscriptionBackendTest {
   public void shouldGetSubscriptionById() {
     when(service.getSubscriptionDetails(anyLong())).thenReturn(voSubscriptionDetails);
 
-    Response response = resource.getSubscription(uriInfo, parameters);
+    Response response = resource.getSubscription(uriInfo, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -129,7 +132,7 @@ public class SubscriptionBackendTest {
   public void shouldUpdateSubscription() {
     when(service.modifySubscription(any(), any(), any())).thenReturn(voSubscriptionDetails);
 
-    Response response = resource.updateSubscription(uriInfo, representation, parameters);
+    Response response = resource.updateSubscription(uriInfo, representation, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -142,7 +145,7 @@ public class SubscriptionBackendTest {
   public void shouldDeleteSubscription() {
     when(service.unsubscribeFromService(anyLong())).thenReturn(true);
 
-    Response response = resource.deleteSubscription(uriInfo, parameters);
+    Response response = resource.deleteSubscription(uriInfo, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)

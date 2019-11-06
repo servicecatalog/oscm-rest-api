@@ -20,6 +20,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
@@ -42,12 +43,14 @@ public class TSSupplierResourceTest {
   private OrganizationRepresentation organizationRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
+  private IdentifiableServiceParameters identifiableServiceParameters;
 
   @BeforeEach
   public void setUp() {
     organizationRepresentation = SampleTestDataUtility.createOrgRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
+    identifiableServiceParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
   }
 
   @AfterEach
@@ -63,7 +66,7 @@ public class TSSupplierResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(organizationRepresentation)));
 
     try {
-      response = tsSupplierResource.getSuppliers(uriInfo, serviceParameters);
+      response = tsSupplierResource.getSuppliers(uriInfo, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -90,7 +93,7 @@ public class TSSupplierResourceTest {
 
     try {
       response =
-          tsSupplierResource.addSupplier(uriInfo, organizationRepresentation, serviceParameters);
+          tsSupplierResource.addSupplier(uriInfo, organizationRepresentation, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -107,7 +110,7 @@ public class TSSupplierResourceTest {
     when(tsSupplierBackend.delete()).thenReturn(serviceParameters1 -> true);
 
     try {
-      response = tsSupplierResource.removeSupplier(uriInfo, serviceParameters);
+      response = tsSupplierResource.removeSupplier(uriInfo, identifiableServiceParameters);
     } catch (Exception e) {
       fail(e);
     }

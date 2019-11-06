@@ -9,21 +9,24 @@
  */
 package org.oscm.rest.common;
 
-import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
-
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.security.SecuritySchemes;
-import java.util.List;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.IdentifableRequestParameters;
+import org.oscm.rest.common.requestparameters.RequestParameters;
+import org.oscm.rest.common.requestparameters.UserParameters;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import org.oscm.rest.common.representation.Representation;
-import org.oscm.rest.common.requestparameters.RequestParameters;
+import java.util.List;
+
+import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
 
 /**
  * Super class for REST resources and their endpoints.
@@ -147,7 +150,9 @@ public abstract class RestResource {
     prepareData(version, params, true, content, true);
 
     if (content != null) {
-      content.setId(params.getId());
+      if(params instanceof IdentifableRequestParameters) {
+        content.setId(((IdentifableRequestParameters) params).getId());
+      }
       content.setETag(params.getETag());
     }
 
@@ -207,8 +212,8 @@ public abstract class RestResource {
       int version, RequestParameters params, boolean withId, Representation rep, boolean withRep)
       throws WebApplicationException {
 
-    if (withId) {
-      params.validateId();
+    if (withId && params instanceof IdentifableRequestParameters) {
+      ((IdentifableRequestParameters) params).validateId();
     }
 
     params.validateETag();
@@ -226,8 +231,8 @@ public abstract class RestResource {
       rep.validateContent();
       rep.setVersion(version);
 
-      if (withId) {
-        rep.setId(params.getId());
+      if (withId && params instanceof IdentifableRequestParameters) {
+        rep.setId(((IdentifableRequestParameters) params).getId());
       }
 
       rep.update();

@@ -21,6 +21,7 @@ import org.oscm.internal.vo.VOCatalogEntry;
 import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.EntryRepresentation;
+import org.oscm.rest.common.requestparameters.IdentifiableMarketplaceParameters;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @Stateless
@@ -28,7 +29,7 @@ public class EntryBackend {
 
   @EJB MarketplaceService ms;
 
-  public RestBackend.Put<EntryRepresentation, MarketplaceParameters> put()
+  public RestBackend.Put<EntryRepresentation, IdentifiableMarketplaceParameters> put()
       throws ObjectNotFoundException, ValidationException, NonUniqueBusinessKeyException,
           OperationNotPermittedException {
     return (content, params) -> {

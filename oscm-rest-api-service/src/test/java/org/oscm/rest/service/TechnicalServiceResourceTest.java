@@ -22,6 +22,7 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.exception.*;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
@@ -48,12 +49,14 @@ public class TechnicalServiceResourceTest {
   private TechnicalServiceRepresentation technicalServiceRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
+  private IdentifiableServiceParameters indentifiableParameters;
 
   @BeforeEach
   public void setUp() {
     technicalServiceRepresentation = SampleTestDataUtility.createTSRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
+    indentifiableParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
   }
 
   @AfterEach
@@ -114,7 +117,7 @@ public class TechnicalServiceResourceTest {
     when(technicalServiceBackend.delete()).thenReturn(serviceParameters1 -> true);
 
     try {
-      response = technicalServiceResource.deleteTechnicalService(uriInfo, serviceParameters);
+      response = technicalServiceResource.deleteTechnicalService(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }
@@ -137,7 +140,7 @@ public class TechnicalServiceResourceTest {
     }
 
     try {
-      response = technicalServiceResource.exportTechnicalService(uriInfo, serviceParameters);
+      response = technicalServiceResource.exportTechnicalService(uriInfo, indentifiableParameters);
     } catch (Exception e) {
       fail(e);
     }

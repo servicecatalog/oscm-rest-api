@@ -13,6 +13,7 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.requestparameters.IdentifiableServiceParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 
@@ -32,6 +33,7 @@ public class TechnicalServiceBackendTest {
   private TechnicalServiceResource resource;
   private UriInfo uriInfo;
   private ServiceParameters parameters;
+  private IdentifiableServiceParameters identifiableParameters;
   private TechnicalServiceRepresentation representation;
 
   @BeforeEach
@@ -39,6 +41,7 @@ public class TechnicalServiceBackendTest {
     resource = new TechnicalServiceResource();
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createServiceParameters();
+    identifiableParameters = SampleTestDataUtility.createIdentifiableServiceParameters();
     representation = SampleTestDataUtility.createTSRepresentation();
     resource.setTsb(backend);
   }
@@ -88,7 +91,7 @@ public class TechnicalServiceBackendTest {
   public void shouldDeleteTechnicalService() {
     doNothing().when(service).deleteTechnicalService(any(Long.class));
 
-    Response response = resource.deleteTechnicalService(uriInfo, parameters);
+    Response response = resource.deleteTechnicalService(uriInfo, identifiableParameters);
 
     assertThat(response).isNotNull();
     assertThat(response)
