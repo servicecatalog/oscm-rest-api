@@ -9,18 +9,20 @@
  */
 package org.oscm.rest.marketplace;
 
-import java.util.List;
-import javax.ejb.ConcurrentAccessException;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.MarketplaceService;
-import org.oscm.internal.types.exception.*;
 import org.oscm.internal.types.exception.IllegalArgumentException;
+import org.oscm.internal.types.exception.*;
 import org.oscm.internal.vo.VOMarketplace;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+
+import javax.ejb.ConcurrentAccessException;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.List;
 
 @Stateless
 public class MarketplaceBackend {
@@ -51,10 +53,14 @@ public class MarketplaceBackend {
     };
   }
 
+  // TODO: Test
   public RestBackend.Post<MarketplaceRepresentation, MarketplaceParameters> post() {
     return (content, params) -> {
       VOMarketplace mp = ms.createMarketplace(content.getVO());
-      return Long.valueOf(mp.getKey());
+      return PostResponseBody.of()
+          .createdObjectName(mp.getName())
+          .createdObjectId(String.valueOf(mp.getKey()))
+          .build();
     };
   }
 

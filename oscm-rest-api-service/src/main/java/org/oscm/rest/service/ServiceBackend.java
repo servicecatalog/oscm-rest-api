@@ -14,12 +14,13 @@ import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
-import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -42,7 +43,10 @@ public class ServiceBackend {
       // image will be handled in separate URL
       VOServiceDetails vo =
           sps.createService(content.getTechnicalService().getVO(), content.getVO(), null);
-      return Long.valueOf(vo.getKey());
+      return PostResponseBody.of()
+          .createdObjectId(String.valueOf(vo.getKey()))
+          .createdObjectName(vo.getServiceId())
+          .build();
     };
   }
 

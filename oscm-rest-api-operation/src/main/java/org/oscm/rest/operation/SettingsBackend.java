@@ -12,9 +12,10 @@ package org.oscm.rest.operation;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.requestparameters.OperationParameters;
 import org.oscm.rest.common.representation.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -34,12 +35,16 @@ public class SettingsBackend {
     };
   }
 
+  // TODO: Test
   public RestBackend.Post<SettingRepresentation, OperationParameters> post() throws Exception {
     return (content, params) -> {
       os.saveConfigurationSetting(content.getVO());
       VOConfigurationSetting vo =
           cs.getVOConfigurationSetting(content.getInformationId(), content.getContextId());
-      return Long.valueOf(vo.getKey());
+      return PostResponseBody.of()
+          .createdObjectId(String.valueOf(vo.getKey()))
+          .createdObjectName(vo.getContextId())
+          .build();
     };
   }
 

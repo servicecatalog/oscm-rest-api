@@ -9,16 +9,18 @@
  */
 package org.oscm.rest.service;
 
-import java.util.Arrays;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOTechnicalService;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.Arrays;
+import java.util.List;
 
 @Stateless
 public class TSSupplierBackend {
@@ -34,12 +36,16 @@ public class TSSupplierBackend {
     };
   }
 
+  //TODO: Test
   public RestBackend.Post<OrganizationRepresentation, ServiceParameters> post() {
     return (content, params) -> {
       VOTechnicalService vo = new VOTechnicalService();
       vo.setKey(params.getId().longValue());
       as.addSuppliersForTechnicalService(vo, Arrays.asList(content.getOrganizationId()));
-      return content.getOrganizationId();
+      return PostResponseBody.of()
+          .createdObjectName(content.getOrganizationId())
+          .createdObjectId(String.valueOf(vo.getKey()))
+          .build();
     };
   }
 

@@ -19,4 +19,5 @@ import lombok.Value;
 @Builder(builderMethodName = "of")
 public class PostResponseBody {
         private String createdObjectId;
+        private String createdObjectName;
 }
