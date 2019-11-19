@@ -38,8 +38,9 @@ public class AccountBackend {
       VOBillingContact vo = content.getVO();
       VOBillingContact responseVO = as.saveBillingContact(vo);
       return PostResponseBody.of()
-          .createdObjectName(vo.getId())
-          .createdObjectId(String.valueOf(vo.getKey()));
+          .createdObjectName(responseVO.getId())
+          .createdObjectId(String.valueOf(responseVO.getKey()))
+          .build();
     };
   }
 
@@ -166,7 +167,10 @@ public class AccountBackend {
         // active
         return null;
       }
-      return org.getOrganizationId();
+      return PostResponseBody.of()
+          .createdObjectName(org.getOrganizationId())
+          .createdObjectId(String.valueOf(org.getKey()))
+          .build();
     };
   }
 

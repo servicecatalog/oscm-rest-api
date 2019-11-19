@@ -18,6 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.internal.vo.VOBillingContact;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.representation.BillingContactRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
@@ -83,8 +85,10 @@ public class BillingContactResourceTest {
 
   @Test
   public void shouldCreateBillingContact() {
+    VOBillingContact vo = SampleTestDataUtility.createBillingContactVO();
     when(accountBackend.postBillingContact())
-        .thenReturn(((billingContactRepresentation, accountParameters) -> "newId"));
+        .thenReturn(((billingContactRepresentation, accountParameters) -> PostResponseBody.of().createdObjectId(
+                String.valueOf(vo.getKey())).createdObjectName(vo.getId()).build()));
 
     try {
       result = resource.createBillingContact(uriInfo, representation, parameters);
@@ -96,6 +100,9 @@ public class BillingContactResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
+    assertThat(result).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat((PostResponseBody) result.getEntity()).extracting(PostResponseBody::getCreatedObjectId).isNotNull();
+    assertThat((PostResponseBody) result.getEntity()).extracting(PostResponseBody::getCreatedObjectName).isNotNull();
   }
 
   @Test

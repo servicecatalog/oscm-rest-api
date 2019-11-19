@@ -42,7 +42,6 @@ public class SettingsBackend {
           cs.getVOConfigurationSetting(content.getInformationId(), content.getContextId());
       return PostResponseBody.of()
           .createdObjectId(String.valueOf(vo.getKey()))
-          .createdObjectName(vo.getContextId())
           .build();
     };
   }

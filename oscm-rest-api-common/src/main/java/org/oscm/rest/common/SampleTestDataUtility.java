@@ -157,6 +157,7 @@ public class SampleTestDataUtility {
   public static VOBillingContact createBillingContactVO() {
     VOBillingContact vo = new VOBillingContact();
     vo.setKey(TestContants.LONG_VALUE);
+    vo.setId("con@tact.com");
     return vo;
   }
 
@@ -330,6 +331,8 @@ public class SampleTestDataUtility {
 
   public static VOOrganization createVOOrganization() {
     VOOrganization vo = new VOOrganization();
+    vo.setOrganizationId("orgid");
+    vo.setKey(123);
     return vo;
   }
 
