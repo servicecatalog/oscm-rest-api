@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.OperationParameters;
@@ -103,6 +104,8 @@ public class SettingsBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat((PostResponseBody) response.getEntity()).extracting(PostResponseBody::getCreatedObjectId).isNotNull();
   }
 
   @Test

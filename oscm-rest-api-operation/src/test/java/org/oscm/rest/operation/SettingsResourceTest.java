@@ -18,10 +18,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.OperationParameters;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -86,7 +87,9 @@ class SettingsResourceTest {
   public void shouldCreateSettings() {
     try {
       when(settingsBackend.post())
-          .thenReturn((settingRepresentation1, operationParameters) -> 100L);
+          .thenReturn(
+              (settingRepresentation1, operationParameters) ->
+                  PostResponseBody.of().createdObjectId(String.valueOf(123)).build());
     } catch (Exception e) {
       fail(e);
     }
@@ -103,6 +106,9 @@ class SettingsResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat((PostResponseBody) response.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectId)
+        .isNotNull();
   }
 
   @Test

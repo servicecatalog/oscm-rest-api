@@ -10,20 +10,22 @@
 package org.oscm.rest.subscription;
 
 import com.google.common.collect.Lists;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUser;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class SubscriptionBackend {
@@ -86,7 +88,11 @@ public class SubscriptionBackend {
       if (sub == null) {
         return null;
       }
-      return Long.valueOf(sub.getKey());
+
+      return PostResponseBody.of()
+          .createdObjectId(String.valueOf(sub.getKey()))
+          .createdObjectName(sub.getSubscriptionId())
+          .build();
     };
   }
 

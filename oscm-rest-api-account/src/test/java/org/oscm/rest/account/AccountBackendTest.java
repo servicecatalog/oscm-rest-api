@@ -25,6 +25,7 @@ import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOBillingContact;
 import org.oscm.internal.vo.VOOperatorOrganization;
 import org.oscm.internal.vo.VOPaymentInfo;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.TestContants;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.SampleTestDataUtility;
@@ -249,6 +250,9 @@ public class AccountBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat((PostResponseBody) response.getEntity()).extracting(PostResponseBody::getCreatedObjectId).isNotNull();
+    assertThat((PostResponseBody) response.getEntity()).extracting(PostResponseBody::getCreatedObjectName).isNotNull();
   }
 
   private static Stream<Arguments> provideRepresentationForCreatingOrganization() {

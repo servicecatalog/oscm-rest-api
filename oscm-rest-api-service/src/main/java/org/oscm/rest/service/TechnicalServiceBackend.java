@@ -12,10 +12,11 @@ package org.oscm.rest.service;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.VOTechnicalService;
-import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -49,7 +50,10 @@ public class TechnicalServiceBackend {
   public RestBackend.Post<TechnicalServiceRepresentation, ServiceParameters> post() {
     return (content, params) -> {
       VOTechnicalService ts = sps.createTechnicalService(content.getVO());
-      return Long.valueOf(ts.getKey());
+      return PostResponseBody.of()
+          .createdObjectId(String.valueOf(ts.getKey()))
+          .createdObjectName(ts.getTechnicalServiceId())
+          .build();
     };
   }
 }

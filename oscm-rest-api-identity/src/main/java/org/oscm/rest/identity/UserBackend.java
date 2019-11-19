@@ -9,20 +9,22 @@
  */
 package org.oscm.rest.identity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
+import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.RolesRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 @Stateless
 public class UserBackend {
@@ -60,7 +62,10 @@ public class UserBackend {
       if (vo == null) {
         return null;
       }
-      return vo.getUserId();
+      return PostResponseBody.of()
+          .createdObjectId(String.valueOf(vo.getKey()))
+          .createdObjectName(vo.getUserId())
+          .build();
     };
   }
 
@@ -109,8 +114,14 @@ public class UserBackend {
   }
 
   public RestBackend.Post<OnBehalfUserRepresentation, UserParameters> postOnBehalfUser() {
-    return (content, params) ->
-        is.createOnBehalfUser(content.getOrganizationId(), content.getPassword()).getUserId();
+    return (content, params) -> {
+      VOUserDetails userDetails =
+          is.createOnBehalfUser(content.getOrganizationId(), content.getPassword());
+      return PostResponseBody.of()
+          .createdObjectId(String.valueOf(userDetails.getKey()))
+          .createdObjectName(userDetails.getUserId())
+          .build();
+    };
   }
 
   public RestBackend.Delete<UserParameters> deleteOBehalfUser() {

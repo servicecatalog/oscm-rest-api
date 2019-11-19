@@ -17,15 +17,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.internal.vo.VOOrganization;
+import org.oscm.rest.common.PostResponseBody;
+import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.AccountRepresentation;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
-import org.oscm.rest.common.representation.UserRepresentation;
-import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,8 +59,14 @@ public class OrganizationResourceTest {
 
   @Test
   public void shouldCreateOrganization() {
+    VOOrganization vo = SampleTestDataUtility.createVOOrganization();
     when(backend.postOrganization())
-        .thenReturn(((accountRepresentation, accountParameters) -> "newId"));
+        .thenReturn(
+            ((accountRepresentation, accountParameters) ->
+                PostResponseBody.of()
+                    .createdObjectName(vo.getOrganizationId())
+                    .createdObjectId(String.valueOf(vo.getKey()))
+                    .build()));
 
     try {
       result = resource.createOrganization(uriInfo, accountRepresentation, parameters);
@@ -72,6 +78,13 @@ public class OrganizationResourceTest {
     assertThat(result)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
+    assertThat(result).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat((PostResponseBody) result.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectId)
+        .isNotNull();
+    assertThat((PostResponseBody) result.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectName)
+        .isNotNull();
   }
 
   @Test

@@ -9,21 +9,22 @@
  */
 package org.oscm.rest.common;
 
-import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
-
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.security.SecuritySchemes;
-import java.util.List;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.RequestParameters;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import org.oscm.rest.common.representation.Representation;
-import org.oscm.rest.common.requestparameters.RequestParameters;
+import java.util.List;
+
+import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
 
 /**
  * Super class for REST resources and their endpoints.
@@ -120,11 +121,8 @@ public abstract class RestResource {
 
     prepareData(version, params, false, content, true);
 
-    Object newId = backend.post(content, params);
-
-    return Response.status(Response.Status.CREATED)
-        .entity(PostResponseBody.of().createdObjectId(newId.toString()).build())
-        .build();
+    Object response = backend.post(content, params);
+    return Response.status(Response.Status.CREATED).entity(response).build();
   }
 
   /**
