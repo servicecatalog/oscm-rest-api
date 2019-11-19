@@ -9,6 +9,12 @@
  */
 package org.oscm.rest.account;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,17 +26,10 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VOBillingContact;
 import org.oscm.rest.common.PostResponseBody;
+import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.BillingContactRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BillingContactResourceTest {
@@ -87,8 +86,12 @@ public class BillingContactResourceTest {
   public void shouldCreateBillingContact() {
     VOBillingContact vo = SampleTestDataUtility.createBillingContactVO();
     when(accountBackend.postBillingContact())
-        .thenReturn(((billingContactRepresentation, accountParameters) -> PostResponseBody.of().createdObjectId(
-                String.valueOf(vo.getKey())).createdObjectName(vo.getId()).build()));
+        .thenReturn(
+            ((billingContactRepresentation, accountParameters) ->
+                PostResponseBody.of()
+                    .createdObjectId(String.valueOf(vo.getKey()))
+                    .createdObjectName(vo.getId())
+                    .build()));
 
     try {
       result = resource.createBillingContact(uriInfo, representation, parameters);
@@ -101,8 +104,12 @@ public class BillingContactResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
     assertThat(result).extracting(Response::hasEntity).isEqualTo(true);
-    assertThat((PostResponseBody) result.getEntity()).extracting(PostResponseBody::getCreatedObjectId).isNotNull();
-    assertThat((PostResponseBody) result.getEntity()).extracting(PostResponseBody::getCreatedObjectName).isNotNull();
+    assertThat((PostResponseBody) result.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectId)
+        .isNotNull();
+    assertThat((PostResponseBody) result.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectName)
+        .isNotNull();
   }
 
   @Test

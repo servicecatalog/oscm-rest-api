@@ -9,6 +9,9 @@
  */
 package org.oscm.rest.operation;
 
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
@@ -16,10 +19,6 @@ import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.SettingRepresentation;
 import org.oscm.rest.common.requestparameters.OperationParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.List;
 
 @Stateless
 public class SettingsBackend {
@@ -40,9 +39,7 @@ public class SettingsBackend {
       os.saveConfigurationSetting(content.getVO());
       VOConfigurationSetting vo =
           cs.getVOConfigurationSetting(content.getInformationId(), content.getContextId());
-      return PostResponseBody.of()
-          .createdObjectId(String.valueOf(vo.getKey()))
-          .build();
+      return PostResponseBody.of().createdObjectId(String.valueOf(vo.getKey())).build();
     };
   }
 

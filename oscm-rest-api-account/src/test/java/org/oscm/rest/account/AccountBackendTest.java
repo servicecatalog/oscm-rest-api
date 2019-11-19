@@ -9,7 +9,15 @@
  */
 package org.oscm.rest.account;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 import com.google.common.collect.Lists;
+import java.util.Optional;
+import java.util.stream.Stream;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,19 +34,10 @@ import org.oscm.internal.vo.VOBillingContact;
 import org.oscm.internal.vo.VOOperatorOrganization;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.PostResponseBody;
+import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.TestContants;
 import org.oscm.rest.common.representation.*;
-import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.AccountParameters;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountBackendTest {
@@ -251,8 +250,12 @@ public class AccountBackendTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
-    assertThat((PostResponseBody) response.getEntity()).extracting(PostResponseBody::getCreatedObjectId).isNotNull();
-    assertThat((PostResponseBody) response.getEntity()).extracting(PostResponseBody::getCreatedObjectName).isNotNull();
+    assertThat((PostResponseBody) response.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectId)
+        .isNotNull();
+    assertThat((PostResponseBody) response.getEntity())
+        .extracting(PostResponseBody::getCreatedObjectName)
+        .isNotNull();
   }
 
   private static Stream<Arguments> provideRepresentationForCreatingOrganization() {
@@ -261,13 +264,14 @@ public class AccountBackendTest {
     representation.setUser(new UserRepresentation());
 
     return Stream.of(
-        Arguments.of(SampleTestDataUtility.createAccountRepresentation(
+        Arguments.of(
+            SampleTestDataUtility.createAccountRepresentation(
                 Optional.of(TestContants.OrganizationRegistrationMode.DEFAULT))),
-        Arguments.of(SampleTestDataUtility.createAccountRepresentation(
-                Optional.of(
-                        TestContants.OrganizationRegistrationMode.SELF_REGISTRATION))),
-        Arguments.of(SampleTestDataUtility.createAccountRepresentation(
-                Optional
-                        .of(TestContants.OrganizationRegistrationMode.KNOWN_CUSTOMER))));
+        Arguments.of(
+            SampleTestDataUtility.createAccountRepresentation(
+                Optional.of(TestContants.OrganizationRegistrationMode.SELF_REGISTRATION))),
+        Arguments.of(
+            SampleTestDataUtility.createAccountRepresentation(
+                Optional.of(TestContants.OrganizationRegistrationMode.KNOWN_CUSTOMER))));
   }
 }

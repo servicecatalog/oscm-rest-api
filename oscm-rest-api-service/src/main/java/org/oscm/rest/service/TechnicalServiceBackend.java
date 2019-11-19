@@ -9,6 +9,10 @@
  */
 package org.oscm.rest.service;
 
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.VOTechnicalService;
@@ -17,11 +21,6 @@ import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.Collection;
-import java.util.List;
 
 @Stateless
 public class TechnicalServiceBackend {

@@ -9,6 +9,9 @@
  */
 package org.oscm.rest.service;
 
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
@@ -21,10 +24,6 @@ import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.StatusRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import java.util.List;
 
 @Stateless
 public class ServiceBackend {

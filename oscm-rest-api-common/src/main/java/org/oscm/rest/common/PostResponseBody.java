@@ -12,12 +12,10 @@ package org.oscm.rest.common;
 import lombok.Builder;
 import lombok.Value;
 
-/**
- * Wrapper class for presenting data about newly created object to the user
- */
+/** Wrapper class for presenting data about newly created object to the user */
 @Value
 @Builder(builderMethodName = "of")
 public class PostResponseBody {
-        private String createdObjectId;
-        private String createdObjectName;
+  private String createdObjectId;
+  private String createdObjectName;
 }

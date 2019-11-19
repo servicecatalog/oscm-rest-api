@@ -9,22 +9,21 @@
  */
 package org.oscm.rest.common;
 
+import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
+
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.security.SecuritySchemes;
-import org.oscm.rest.common.representation.Representation;
-import org.oscm.rest.common.requestparameters.RequestParameters;
-
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.List;
-
-import static org.oscm.rest.common.CommonParams.PARAM_VERSION;
+import org.oscm.rest.common.representation.Representation;
+import org.oscm.rest.common.requestparameters.RequestParameters;
 
 /**
  * Super class for REST resources and their endpoints.

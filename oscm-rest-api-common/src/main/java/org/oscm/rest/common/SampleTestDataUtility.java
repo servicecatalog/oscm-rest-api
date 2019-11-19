@@ -11,6 +11,11 @@ package org.oscm.rest.common;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import javax.ws.rs.core.*;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.enumtypes.Salutation;
@@ -19,12 +24,6 @@ import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.*;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.*;
-
-import javax.ws.rs.core.*;
-import java.net.URI;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 /** Utility class to create some sample data for testing purposes */
 @Generated
@@ -148,8 +147,6 @@ public class SampleTestDataUtility {
     return new BillingContactRepresentation();
   }
 
-
-
   public static PaymentInfoRepresentation createPaymentInfoRepresentation() {
     return new PaymentInfoRepresentation();
   }
@@ -175,7 +172,7 @@ public class SampleTestDataUtility {
   }
 
   public static AccountRepresentation createAccountRepresentation(
-          Optional<TestContants.OrganizationRegistrationMode> mode) {
+      Optional<TestContants.OrganizationRegistrationMode> mode) {
     AccountRepresentation representation = new AccountRepresentation();
     representation.setOrganization(new OrganizationRepresentation());
     representation.setUser(new UserRepresentation());
@@ -183,7 +180,7 @@ public class SampleTestDataUtility {
     if (mode.isPresent()) {
       if (!TestContants.OrganizationRegistrationMode.KNOWN_CUSTOMER.equals(mode)) {
         representation.setOrganizationRoles(
-                new OrganizationRoleType[] {OrganizationRoleType.SUPPLIER});
+            new OrganizationRoleType[] {OrganizationRoleType.SUPPLIER});
       }
       if (TestContants.OrganizationRegistrationMode.SELF_REGISTRATION.equals(mode))
         representation.setPassword(TestContants.STRING_VALUE);
@@ -207,14 +204,12 @@ public class SampleTestDataUtility {
     return new EventParameters();
   }
 
-  public static EventRepresentation createEventRepresentation(
-          boolean hasSubscriptionKeySet) {
+  public static EventRepresentation createEventRepresentation(boolean hasSubscriptionKeySet) {
     EventRepresentation representation = new EventRepresentation();
     representation.setETag(TestContants.LONG_VALUE);
     if (hasSubscriptionKeySet) representation.setSubscriptionKey(TestContants.LONG_VALUE);
     return representation;
   }
-
 
   public static UserRepresentation createUserRepresentation() {
     UserRepresentation representation = new UserRepresentation();
@@ -352,9 +347,9 @@ public class SampleTestDataUtility {
   }
 
   public static ServiceDetailsRepresentation createServiceDetailsRepresentation(
-          VOServiceDetails voServiceDetails) {
+      VOServiceDetails voServiceDetails) {
     ServiceDetailsRepresentation representation;
-    if(voServiceDetails == null) representation = new ServiceDetailsRepresentation();
+    if (voServiceDetails == null) representation = new ServiceDetailsRepresentation();
     else representation = new ServiceDetailsRepresentation(voServiceDetails);
     representation.setTechnicalService(new TechnicalServiceRepresentation());
     return representation;
@@ -385,9 +380,10 @@ public class SampleTestDataUtility {
   }
 
   public static UsageLicenseRepresentation createUsageLicenseRepresentation(
-          VOUsageLicense voUsageLicense) {
+      VOUsageLicense voUsageLicense) {
     UsageLicenseRepresentation usageLicenseRepresentation;
-    if(voUsageLicense != null)  usageLicenseRepresentation = new UsageLicenseRepresentation(voUsageLicense);
+    if (voUsageLicense != null)
+      usageLicenseRepresentation = new UsageLicenseRepresentation(voUsageLicense);
     else usageLicenseRepresentation = new UsageLicenseRepresentation();
 
     UserRepresentation userRepresentation = new UserRepresentation();
@@ -418,12 +414,13 @@ public class SampleTestDataUtility {
   }
 
   public static SubscriptionDetailsRepresentation createSubscriptionDetailsRepresentation(
-          VOSubscriptionDetails voSubscriptionDetails) {
+      VOSubscriptionDetails voSubscriptionDetails) {
     return new SubscriptionDetailsRepresentation(voSubscriptionDetails);
   }
 
   public static SubscriptionCreationRepresentation createSubscriptionCreationRepresentation() {
-    SubscriptionCreationRepresentation subscriptionCreationRepresentation = new SubscriptionCreationRepresentation();
+    SubscriptionCreationRepresentation subscriptionCreationRepresentation =
+        new SubscriptionCreationRepresentation();
     subscriptionCreationRepresentation.setService(new ServiceRepresentation());
     subscriptionCreationRepresentation.setUdas(Lists.newArrayList(new UdaRepresentation()));
     return subscriptionCreationRepresentation;
@@ -445,4 +442,3 @@ public class SampleTestDataUtility {
     return new VOSubscription();
   }
 }
-
