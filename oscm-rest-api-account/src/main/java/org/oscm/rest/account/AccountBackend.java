@@ -33,7 +33,6 @@ public class AccountBackend {
 
   @EJB OperatorService os;
 
-  //TODO: Test
   public RestBackend.Post<BillingContactRepresentation, AccountParameters> postBillingContact() {
     return (content, params) -> {
       VOBillingContact vo = content.getVO();

@@ -35,7 +35,6 @@ public class SettingsBackend {
     };
   }
 
-  // TODO: Test
   public RestBackend.Post<SettingRepresentation, OperationParameters> post() throws Exception {
     return (content, params) -> {
       os.saveConfigurationSetting(content.getVO());

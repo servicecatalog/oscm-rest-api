@@ -72,7 +72,6 @@ public class SubscriptionBackend {
     };
   }
 
-  //TODO: Test
   public RestBackend.Post<SubscriptionCreationRepresentation, SubscriptionParameters> post() {
     return (content, params) -> {
       content.getService().update();

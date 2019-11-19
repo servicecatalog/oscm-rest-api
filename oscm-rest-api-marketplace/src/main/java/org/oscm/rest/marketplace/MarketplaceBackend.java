@@ -53,7 +53,6 @@ public class MarketplaceBackend {
     };
   }
 
-  // TODO: Test
   public RestBackend.Post<MarketplaceRepresentation, MarketplaceParameters> post() {
     return (content, params) -> {
       VOMarketplace mp = ms.createMarketplace(content.getVO());

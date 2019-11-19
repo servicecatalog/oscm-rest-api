@@ -36,7 +36,6 @@ public class TSSupplierBackend {
     };
   }
 
-  //TODO: Test
   public RestBackend.Post<OrganizationRepresentation, ServiceParameters> post() {
     return (content, params) -> {
       VOTechnicalService vo = new VOTechnicalService();

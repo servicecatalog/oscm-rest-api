@@ -113,7 +113,6 @@ public class UserBackend {
     };
   }
 
-  //TODO: Test
   public RestBackend.Post<OnBehalfUserRepresentation, UserParameters> postOnBehalfUser() {
     return (content, params) -> {
       VOUserDetails userDetails =

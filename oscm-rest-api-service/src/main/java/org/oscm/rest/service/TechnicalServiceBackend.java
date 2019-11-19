@@ -47,7 +47,6 @@ public class TechnicalServiceBackend {
     };
   }
 
-  // TODO: Test
   public RestBackend.Post<TechnicalServiceRepresentation, ServiceParameters> post() {
     return (content, params) -> {
       VOTechnicalService ts = sps.createTechnicalService(content.getVO());
