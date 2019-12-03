@@ -49,7 +49,11 @@ public class UsageLicenseRepresentation extends Representation {
 
   @Override
   public void convert() {
-    role = new RoleDefinitionRepresentation(vo.getRoleDefinition());
+    if (vo.getRoleDefinition() == null) {
+      role = new RoleDefinitionRepresentation();
+    } else {
+      role = new RoleDefinitionRepresentation(vo.getRoleDefinition());
+    }
     role.convert();
     user = new UserRepresentation(vo.getUser());
     user.convert();
