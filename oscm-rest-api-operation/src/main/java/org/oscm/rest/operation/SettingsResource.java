@@ -11,6 +11,7 @@ package org.oscm.rest.operation;
 
 import constants.CommonConstants;
 import constants.OperationConstants;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -79,6 +80,7 @@ public class SettingsResource extends RestResource {
 
   @POST
   @Since(CommonParams.VERSION_1)
+  @Hidden //Hidden due to a fact that only updating settings is currently possible. Creating requires major refactoring.
   @Operation(
       summary = "Create a setting",
       tags = {"settings"},
@@ -113,7 +115,8 @@ public class SettingsResource extends RestResource {
   @Operation(
       summary = "Update a single setting",
       tags = {"settings"},
-      description = "Updates a single setting",
+      description = "Updates a single setting. Please use get endpoint to see the possible settings. \n" +
+              "It is important to include the \"id\" with value in the json body, because the setting to be updated.",
       requestBody =
           @RequestBody(
               description = "SettingRepresentation object to be updated",
