@@ -102,7 +102,9 @@ public class BillingContactResource extends RestResource {
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
       responses = {
-        @ApiResponse(responseCode = "201", description = "Billing contact created successfully." + CommonConstants.ID_INFO)
+        @ApiResponse(
+            responseCode = "201",
+            description = "Billing contact created successfully." + CommonConstants.ID_INFO)
       })
   public Response createBillingContact(
       @Context UriInfo uriInfo,

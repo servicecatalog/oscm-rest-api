@@ -66,7 +66,9 @@ public class OnBehalfUserResource extends RestResource {
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
       responses = {
-        @ApiResponse(responseCode = "204", description = "On behalf user created successfully" + CommonConstants.ID_INFO)
+        @ApiResponse(
+            responseCode = "204",
+            description = "On behalf user created successfully" + CommonConstants.ID_INFO)
       })
   public Response createOnBehalfUser(
       @Context UriInfo uriInfo,
