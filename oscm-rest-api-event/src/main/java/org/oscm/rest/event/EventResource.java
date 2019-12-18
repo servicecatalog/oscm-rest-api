@@ -76,8 +76,8 @@ public class EventResource extends RestResource {
                       })),
       responses = {
         @ApiResponse(
-            responseCode = "200",
-            description = "A single event",
+            responseCode = "201",
+            description = "Event created successfully." + CommonConstants.ID_INFO,
             content = @Content(schema = @Schema(implementation = EventRepresentation.class)))
       })
   public Response recordEvent(
