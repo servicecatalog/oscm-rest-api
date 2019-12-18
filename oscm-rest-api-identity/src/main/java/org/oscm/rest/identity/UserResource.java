@@ -17,12 +17,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -30,6 +24,13 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/users")
 @Stateless
@@ -99,7 +100,11 @@ public class UserResource extends RestResource {
                             value = IdentityConstants.USER_MAXIMUM_BODY,
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
-      responses = {@ApiResponse(responseCode = "201", description = "User created successfully")})
+      responses = {
+        @ApiResponse(
+            responseCode = "201",
+            description = "User created successfully" + CommonConstants.ID_INFO)
+      })
   public Response createUser(
       @Context UriInfo uriInfo, UserRepresentation content, @BeanParam UserParameters params)
       throws Exception {

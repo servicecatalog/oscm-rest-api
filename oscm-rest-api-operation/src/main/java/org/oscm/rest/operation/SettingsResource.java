@@ -18,12 +18,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -31,6 +25,13 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SettingRepresentation;
 import org.oscm.rest.common.requestparameters.OperationParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/settings")
 @Stateless
@@ -81,7 +82,7 @@ public class SettingsResource extends RestResource {
   @POST
   @Since(CommonParams.VERSION_1)
   @Hidden // Hidden due to a fact that only updating settings is currently possible. Creating
-          // requires major refactoring.
+  // requires major refactoring.
   @Operation(
       summary = "Create a setting",
       tags = {"settings"},
@@ -100,7 +101,9 @@ public class SettingsResource extends RestResource {
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
       responses = {
-        @ApiResponse(responseCode = "201", description = "Setting created successfully")
+        @ApiResponse(
+            responseCode = "201",
+            description = "Setting created successfully" + CommonConstants.ID_INFO)
       })
   public Response createSetting(
       @Context UriInfo uriInfo,

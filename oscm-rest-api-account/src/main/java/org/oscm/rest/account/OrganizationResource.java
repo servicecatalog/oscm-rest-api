@@ -85,7 +85,7 @@ public class OrganizationResource extends RestResource {
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
       responses = {
-        @ApiResponse(responseCode = "201", description = "Organization successfully created")
+        @ApiResponse(responseCode = "201", description = "Organization successfully created" + CommonConstants.ID_INFO)
       })
   public Response createOrganization(
       // FIXME Why is AccountRepresentation expected in body of creating organization method?

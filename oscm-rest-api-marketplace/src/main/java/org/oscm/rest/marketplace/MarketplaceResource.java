@@ -17,12 +17,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -31,6 +25,13 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
 @Stateless
@@ -110,7 +111,9 @@ public class MarketplaceResource extends RestResource {
                             summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
                       })),
       responses = {
-        @ApiResponse(responseCode = "201", description = "Marketplace created successfully")
+        @ApiResponse(
+            responseCode = "201",
+            description = "Marketplace created successfully" + CommonConstants.ID_INFO)
       })
   public Response createMarketplace(
       @Context UriInfo uriInfo,
