@@ -10,9 +10,7 @@
 package org.oscm.rest.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.servers.ServerVariable;
 
@@ -21,8 +19,7 @@ import io.swagger.v3.oas.annotations.servers.ServerVariable;
         @Info(
             title = "OSCM REST API Documentation",
             version = "1.0",
-            description = "NOTICE: Remember to use URL-encoded values for path variables!"
-        ),
+            description = "NOTICE: Remember to use URL-encoded values for path variables!"),
     servers = {
       @Server(
           description = "OSCM instance",
