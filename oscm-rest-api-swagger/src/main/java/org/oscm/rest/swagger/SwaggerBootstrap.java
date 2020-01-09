@@ -19,16 +19,10 @@ import io.swagger.v3.oas.annotations.servers.ServerVariable;
 @OpenAPIDefinition(
     info =
         @Info(
-            title = "OSCM REST API",
+            title = "OSCM REST API Documentation",
             version = "1.0",
-            description = "This is the REST API for OSCM",
-            license =
-                @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0"),
-            contact =
-                @Contact(
-                    url = "https://example.com",
-                    name = "Sample Contact Details",
-                    email = "example@email.com")),
+            description = "NOTICE: Remember to use URL-encoded values for path variables!"
+        ),
     servers = {
       @Server(
           description = "OSCM instance",
