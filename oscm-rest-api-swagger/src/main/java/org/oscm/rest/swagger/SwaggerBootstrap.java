@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.servers.ServerVariable;
             @ServerVariable(
                 name = "server",
                 description = "Base REST API URL",
-                defaultValue = "https://oscm-ip:8081/oscm-rest-api")
+                defaultValue = "/oscm-rest-api")
           })
     })
 public class SwaggerBootstrap {}
