@@ -3,8 +3,9 @@
 
 # oscm-rest-api
 This is a RESTful API for the Open Service Catalog Manager.
-It is integrated with Swagger, which is an implementation of OpenApi standard. You can explore and use the OSCM API resources via the Swagger UI. This interface in deployed in the 'oscm-core' container. A description for installing OSCM on docker can be found here.
-You can access the Swagger UI with &lt;OSCM BASE URL&gt;/oscm-rest-api, by default on the oscm-core HTTPS port 8081. All resources as well as Swagger UI are protected. When visiting the Swagger UI, your browser will ask for authorization. Enter the user key 1000 and password for the platform administrator.
+
+This API is integrated with Swagger - an implementation of OpenApi standard. You can explore and use the OSCM API resources via the Swagger UI, which is deployed in the 'oscm-core' container. A description for installing OSCM on docker can be found here.
+You can access the Swagger UI with ```OSCM BASE URL/oscm-rest-api```, by default on the oscm-core HTTPS port 8081. All resources as well as Swagger UI are protected. When visiting the Swagger UI, your browser will ask for authorization. Enter the user key ```1000``` and password for the OSCM platform administrator.
 
 ![Swagger UI endpoint categories view]()
 
