@@ -6,7 +6,7 @@
     <!-- FIXME: Move this config to Java class (in scope od oscm-rest-api#44)-->
     <login-config>
            <auth-method>BASIC</auth-method>
-           <realm-name>bss-realm</realm-name>
+           <realm-name>Login with user key and password.</realm-name>
     </login-config>
 
     <security-constraint>
