@@ -11,6 +11,7 @@ package org.oscm.rest.identity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.Lists;
@@ -25,6 +26,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.PostResponseBody;
+import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UserRepresentation;
@@ -38,14 +40,16 @@ public class UserResourceTest {
 
   private UserRepresentation userRepresentation;
   private UriInfo uriInfo;
-  private UserParameters parameters;
   private Response result;
+
+  private final String API_VERSION = "v1";
+  private final String USER_ID = "userId";
+  private final Long USER_KEY = 1000L;
 
   @BeforeEach
   public void setUp() {
     userRepresentation = SampleTestDataUtility.createUserRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
-    parameters = SampleTestDataUtility.createUserParameters();
   }
 
   @AfterEach
@@ -55,13 +59,14 @@ public class UserResourceTest {
 
   @Test
   public void shouldGetUsers() {
+
     when(userBackend.getUsers())
         .thenReturn(
             userParameters ->
                 new RepresentationCollection<>(Lists.newArrayList(userRepresentation)));
 
     try {
-      result = userResource.getUsers(uriInfo, parameters);
+      result = userResource.getUsers(uriInfo, API_VERSION);
     } catch (Exception e) {
       fail(e);
     }
@@ -88,7 +93,7 @@ public class UserResourceTest {
                 PostResponseBody.of().createdObjectId("id").createdObjectName("name").build());
 
     try {
-      result = userResource.createUser(uriInfo, userRepresentation, parameters);
+      result = userResource.createUser(uriInfo, userRepresentation, API_VERSION);
     } catch (Exception e) {
       fail(e);
     }
@@ -111,7 +116,7 @@ public class UserResourceTest {
     when(userBackend.getUser()).thenReturn(userParameters -> userRepresentation);
 
     try {
-      result = userResource.getUser(uriInfo, parameters);
+      result = userResource.getUser(uriInfo, API_VERSION, USER_ID);
     } catch (Exception e) {
       fail(e);
     }
@@ -128,7 +133,7 @@ public class UserResourceTest {
     when(userBackend.putUser()).thenReturn((userRepresentation1, userParameters) -> true);
 
     try {
-      result = userResource.updateUser(uriInfo, userRepresentation, parameters);
+      result = userResource.updateUser(uriInfo, userRepresentation, API_VERSION, USER_ID);
     } catch (Exception e) {
       fail(e);
     }
@@ -144,7 +149,7 @@ public class UserResourceTest {
     when(userBackend.deleteUser()).thenReturn(userParameters -> true);
 
     try {
-      result = userResource.deleteUser(uriInfo, parameters);
+      result = userResource.deleteUser(uriInfo, API_VERSION, USER_KEY);
     } catch (Exception e) {
       fail(e);
     }
