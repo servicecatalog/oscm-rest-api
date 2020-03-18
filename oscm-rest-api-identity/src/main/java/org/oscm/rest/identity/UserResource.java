@@ -88,7 +88,7 @@ public class UserResource extends RestResource {
   @Operation(
       summary = "Get a single user",
       tags = {"users"},
-      description = "Returns a single user",
+      description = "Returns a single user with provided user id",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -120,7 +120,7 @@ public class UserResource extends RestResource {
   @Operation(
       summary = "Create a user",
       tags = {"users"},
-      description = "Creates a user",
+      description = "Creates a user with provided user representation",
       requestBody =
           @RequestBody(
               description = "UserRepresentation object to be created",
@@ -168,7 +168,7 @@ public class UserResource extends RestResource {
   @Operation(
       summary = "Update a user",
       tags = {"users"},
-      description = "Updates a user",
+      description = "Updates a selected user with provided user representation",
       requestBody =
           @RequestBody(
               description = "UserRepresentation object to be updated",
@@ -214,7 +214,7 @@ public class UserResource extends RestResource {
   @Operation(
       summary = "Delete a single user",
       tags = {"users"},
-      description = "Deletes a single user",
+      description = "Deletes a single user with provided user key",
       responses = {@ApiResponse(responseCode = "204", description = "User deleted successfully")})
   public Response deleteUser(
       @Context UriInfo uriInfo,
