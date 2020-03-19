@@ -70,6 +70,7 @@ public class SubscriptionCreationRepresentation extends Representation {
     }
     List<VOUsageLicense> result = new ArrayList<VOUsageLicense>();
     for (UsageLicenseRepresentation ulr : users) {
+      ulr.update();
       result.add(ulr.getVO());
     }
     return result;
