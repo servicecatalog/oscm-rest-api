@@ -70,6 +70,7 @@ public class SubscriptionCreationRepresentation extends Representation {
     }
     List<VOUsageLicense> result = new ArrayList<VOUsageLicense>();
     for (UsageLicenseRepresentation ulr : users) {
+      ulr.update();
       result.add(ulr.getVO());
     }
     return result;
@@ -81,6 +82,7 @@ public class SubscriptionCreationRepresentation extends Representation {
     }
     List<VOUda> result = new ArrayList<VOUda>();
     for (UdaRepresentation uda : udas) {
+      uda.update();
       result.add(uda.getVO());
     }
     return result;
