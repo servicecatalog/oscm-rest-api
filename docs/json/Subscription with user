@@ -1,0 +1,52 @@
+{
+  "paymentInfoKey": 10001,
+  "users": [
+    {
+      "user": {
+        "organizationId": "959c9bf7",
+        "userId": "supplier",
+        "realmUserId": "supplier",
+        "egat": "1"
+      },
+       "applicationUserId": "supplier"
+    }
+  ],
+  "udas": [],
+  "subscriptionId": "restSubscriptionId6",
+  "service": {
+    "id": 10004,
+    "etag": 2,
+    "parameters": [
+      {
+        "parameterDefinition": {
+          "parameterId": "NetworkIP"
+        },
+        "value": "127.0.0.1"
+      },
+	  {
+        "parameterDefinition": {
+          "parameterId": "ExternIP"
+        },
+        "value": "127.0.0.1"
+      },
+	  {
+        "parameterDefinition": {
+          "parameterId": "InternIP"
+        },
+        "value": "127.0.0.1"
+      },
+	  {
+        "parameterDefinition": {
+          "parameterId": "PARAM_EMAIL"
+        },
+        "value": "test@fujitsu.com"
+      },
+      {
+        "parameterDefinition": {
+          "parameterId": "TEXT"
+        },
+        "value": "test"
+      }
+    ]
+  }
+}
