@@ -17,6 +17,7 @@ import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOService;
 
 import javax.ws.rs.WebApplicationException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -35,6 +36,9 @@ public class ServiceRepresentation extends Representation {
   private String configuratorUrl;
   private String billingIdentifier;
   private ServiceType serviceType;
+  private List<String> tags = new ArrayList();
+  private BigDecimal averageRating;
+  private int numberOfReviews;
 
   private transient VOService vo;
 
@@ -65,6 +69,9 @@ public class ServiceRepresentation extends Representation {
     vo.setStatus(getStatus());
     vo.setTechnicalId(getTechnicalId());
     vo.setVersion(convertETagToVersion());
+    vo.setTags(getTags());
+    vo.setAverageRating(getAverageRating());
+    vo.setNumberOfReviews(getNumberOfReviews());
     updateParameters();
   }
 
@@ -96,6 +103,9 @@ public class ServiceRepresentation extends Representation {
     setStatus(vo.getStatus());
     setETag(Long.valueOf(vo.getVersion()));
     setTechnicalId(vo.getTechnicalId());
+    setTags(vo.getTags());
+    setAverageRating(vo.getAverageRating());
+    setNumberOfReviews(vo.getNumberOfReviews());
     convertParameters();
   }
 
@@ -211,6 +221,18 @@ public class ServiceRepresentation extends Representation {
   public void setServiceType(ServiceType serviceType) {
     this.serviceType = serviceType;
   }
+
+  public List<String> getTags() { return tags; }
+
+  public void setTags(List<String> tags) { this.tags = tags; }
+
+  public BigDecimal getAverageRating() { return averageRating; }
+
+  public void setAverageRating(BigDecimal averageRating) { this.averageRating = averageRating; }
+
+  public int getNumberOfReviews() { return numberOfReviews; }
+
+  public void setNumberOfReviews(int numberOfReviews) { this.numberOfReviews = numberOfReviews; }
 
   public static Collection<ServiceRepresentation> toCollection(Collection<VOService> list) {
     Collection<ServiceRepresentation> result = new ArrayList<ServiceRepresentation>();
