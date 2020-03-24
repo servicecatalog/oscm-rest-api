@@ -9,18 +9,17 @@
  */
 package org.oscm.rest.common.representation;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.ws.rs.WebApplicationException;
 import org.oscm.internal.types.enumtypes.OfferingType;
 import org.oscm.internal.types.enumtypes.ServiceAccessType;
 import org.oscm.internal.types.enumtypes.ServiceStatus;
 import org.oscm.internal.types.enumtypes.ServiceType;
 import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOService;
-
-import javax.ws.rs.WebApplicationException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ServiceRepresentation extends Representation {
 
@@ -222,17 +221,29 @@ public class ServiceRepresentation extends Representation {
     this.serviceType = serviceType;
   }
 
-  public List<String> getTags() { return tags; }
+  public List<String> getTags() {
+    return tags;
+  }
 
-  public void setTags(List<String> tags) { this.tags = tags; }
+  public void setTags(List<String> tags) {
+    this.tags = tags;
+  }
 
-  public BigDecimal getAverageRating() { return averageRating; }
+  public BigDecimal getAverageRating() {
+    return averageRating;
+  }
 
-  public void setAverageRating(BigDecimal averageRating) { this.averageRating = averageRating; }
+  public void setAverageRating(BigDecimal averageRating) {
+    this.averageRating = averageRating;
+  }
 
-  public int getNumberOfReviews() { return numberOfReviews; }
+  public int getNumberOfReviews() {
+    return numberOfReviews;
+  }
 
-  public void setNumberOfReviews(int numberOfReviews) { this.numberOfReviews = numberOfReviews; }
+  public void setNumberOfReviews(int numberOfReviews) {
+    this.numberOfReviews = numberOfReviews;
+  }
 
   public static Collection<ServiceRepresentation> toCollection(Collection<VOService> list) {
     Collection<ServiceRepresentation> result = new ArrayList<ServiceRepresentation>();
