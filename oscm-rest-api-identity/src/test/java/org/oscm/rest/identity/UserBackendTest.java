@@ -51,6 +51,10 @@ public class UserBackendTest {
   private RolesRepresentation rolesRepresentation;
   private VOUserDetails vo;
 
+  private final String API_VERSION = "v1";
+  private final String USER_ID = "userId";
+  private final Long USER_KEY = 1000L;
+
   @BeforeEach
   public void setUp() {
     userResource = new UserResource();
@@ -73,7 +77,7 @@ public class UserBackendTest {
   public void shouldGetUsers() {
     when(identityService.getUsersForOrganization()).thenReturn(Lists.newArrayList(vo));
 
-    Response response = userResource.getUsers(uriInfo, parameters);
+    Response response = userResource.getUsers(uriInfo, API_VERSION);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -93,7 +97,7 @@ public class UserBackendTest {
   public void shouldGetUserById() {
     when(identityService.getUserDetails(any())).thenReturn(vo);
 
-    Response response = userResource.getUser(uriInfo, parameters);
+    Response response = userResource.getUser(uriInfo, API_VERSION, USER_ID);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -107,7 +111,7 @@ public class UserBackendTest {
   public void shouldPostUser() {
     when(identityService.createUser(any(), any(), any())).thenReturn(vo);
 
-    Response response = userResource.createUser(uriInfo, userRepresentation, parameters);
+    Response response = userResource.createUser(uriInfo, userRepresentation, API_VERSION);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -120,7 +124,7 @@ public class UserBackendTest {
   public void shouldPutUser() {
     when(identityService.updateUser(any())).thenReturn(vo);
 
-    Response response = userResource.updateUser(uriInfo, userRepresentation, parameters);
+    Response response = userResource.updateUser(uriInfo, userRepresentation, API_VERSION, USER_ID);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -133,7 +137,7 @@ public class UserBackendTest {
   public void shouldDeleteUser() {
     doNothing().when(identityService).deleteUser(any(), any());
 
-    Response response = userResource.deleteUser(uriInfo, parameters);
+    Response response = userResource.deleteUser(uriInfo, API_VERSION, USER_KEY);
 
     assertThat(response).isNotNull();
     assertThat(response)
