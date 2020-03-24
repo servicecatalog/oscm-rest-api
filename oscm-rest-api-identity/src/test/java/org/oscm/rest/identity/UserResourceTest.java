@@ -11,7 +11,6 @@ package org.oscm.rest.identity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.Lists;
@@ -26,11 +25,9 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.PostResponseBody;
-import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UserRepresentation;
-import org.oscm.rest.common.requestparameters.UserParameters;
 
 @ExtendWith(MockitoExtension.class)
 public class UserResourceTest {

@@ -9,7 +9,14 @@
  */
 package org.oscm.rest.identity;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+
 import com.google.common.collect.Lists;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -20,20 +27,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUserDetails;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.UserParameters;
 import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.RolesRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 @ExtendWith(MockitoExtension.class)
 public class UserBackendTest {
