@@ -1,3 +1,12 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2020
+ *
+ * <p>Creation Date: 24-03-2020
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common.representation;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -5,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSubscription;
