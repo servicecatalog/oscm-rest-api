@@ -21,7 +21,7 @@ Call the endpoint https://host:8081/oscm-rest-api/v1/technicalservices. This pro
 -	Use in Postman authorization “BasicAuth”
 -	Login with user key and password (default: 10000 and supplier)
 -	To subscribe without an assgined user, build your JSON as shown [here](https://github.com/servicecatalog/oscm-rest-api/blob/add/gettingStarted/docs/json/Subscription%20example). 
--	To subscirbe with an assigned user, build your JSON as shown [here](https://github.com/servicecatalog/oscm-rest-api/blob/add/gettingStarted/docs/json/Subscription%20with%20user). 
+-	To subscribe with an assigned user, build your JSON as shown [here](https://github.com/servicecatalog/oscm-rest-api/blob/add/gettingStarted/docs/json/Subscription%20with%20user). 
 -	Use POST method of endpoint https:/host:8081/oscm-rest-api/v1/subscriptions to post the message body. 
 
 **Get Data to Create a Subscription**
