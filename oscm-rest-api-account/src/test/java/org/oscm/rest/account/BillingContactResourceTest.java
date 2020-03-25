@@ -63,7 +63,7 @@ public class BillingContactResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(representation)));
 
     try {
-      result = resource.getBillingContacts(uriInfo, parameters);
+      result = resource.getBillingContacts(uriInfo, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -94,7 +94,8 @@ public class BillingContactResourceTest {
                     .build()));
 
     try {
-      result = resource.createBillingContact(uriInfo, representation, parameters);
+      result =
+          resource.createBillingContact(uriInfo, representation, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -117,7 +118,9 @@ public class BillingContactResourceTest {
     when(accountBackend.getBillingContact()).thenReturn((accountParameters -> representation));
 
     try {
-      result = resource.getBillingContact(uriInfo, parameters);
+      result =
+          resource.getBillingContact(
+              uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -135,7 +138,12 @@ public class BillingContactResourceTest {
         .thenReturn(((billingContactRepresentation, accountParameters) -> true));
 
     try {
-      result = resource.updateBillingContact(uriInfo, representation, parameters);
+      result =
+          resource.updateBillingContact(
+              uriInfo,
+              representation,
+              parameters.getEndpointVersion(),
+              parameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -151,7 +159,9 @@ public class BillingContactResourceTest {
     when(accountBackend.deleteBillingContact()).thenReturn((accountParameters -> true));
 
     try {
-      result = resource.deleteBillingContact(uriInfo, parameters);
+      result =
+          resource.deleteBillingContact(
+              uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }

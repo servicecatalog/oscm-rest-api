@@ -22,6 +22,7 @@ public class CommonConstants {
   public static final String EXAMPLE_MAXIMUM_BODY_NAME = "All possible parameters";
   public static final String EXAMPLE_MAXIMUM_BODY_SUMMARY = "Maximum body example";
 
+  public static final String EXAMPLE_REQUEST_BODY_DESCRIPTION = "Request contains object specific data";
   public static final String EXAMPLE_REQUEST_BODY_SUMMARY = "RequestBody example";
 
   public static final String ID_INFO = "ID is present in the response body.";
