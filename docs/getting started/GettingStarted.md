@@ -14,7 +14,7 @@ This is a short sample for getting started with the OSCM RESTful API.
 
 **Get Data to Create a Service**
 
-Call the endpoint https://host:8081/oscm-rest-api/v1/technicalservices. This provides a list of all available technical services. Use the technical service list to get values such as "id" or "TechnicalServiceId". This collection also contains the parameter definitions for each technical service. Here you will find an “id” and other values for each parameter. With this information, you can build your JSON to create a service.
+Call the endpoint https://host:8081/oscm-rest-api/v1/technicalservices. This provides a list of all available technical services. Use the technical service list to get values such as "id" or "technicalServiceId". This collection also contains the parameter definitions for each technical service. Here you will find an “id” and other values for each parameter. With this information, you can build your JSON to create a service.
 
 
 ## Create a Subscription via API
