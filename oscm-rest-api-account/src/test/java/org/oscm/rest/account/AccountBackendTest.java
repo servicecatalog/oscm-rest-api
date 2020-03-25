@@ -245,7 +245,8 @@ public class AccountBackendTest {
         .thenReturn(operatorOrgVO);
 
     Response response =
-        organizationResource.createOrganization(uriInfo, representation, parameters.getEndpointVersion());
+        organizationResource.createOrganization(
+            uriInfo, representation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)

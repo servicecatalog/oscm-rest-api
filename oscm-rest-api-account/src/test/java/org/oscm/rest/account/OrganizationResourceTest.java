@@ -68,7 +68,9 @@ public class OrganizationResourceTest {
                     .build()));
 
     try {
-      result = resource.createOrganization(uriInfo, accountRepresentation, parameters.getEndpointVersion());
+      result =
+          resource.createOrganization(
+              uriInfo, accountRepresentation, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
