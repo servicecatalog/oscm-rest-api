@@ -219,7 +219,9 @@ public class AccountBackendTest {
     when(operatorService.getOrganization(any())).thenReturn(operatorOrgVO);
     when(accountService.getOrganizationData()).thenReturn(operatorOrgVO);
 
-    Response response = organizationResource.getOrganization(uriInfo, parameters);
+    Response response =
+        organizationResource.getOrganization(
+            uriInfo, parameters.getEndpointVersion(), parameters.getOrgId());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -243,7 +245,7 @@ public class AccountBackendTest {
         .thenReturn(operatorOrgVO);
 
     Response response =
-        organizationResource.createOrganization(uriInfo, representation, parameters);
+        organizationResource.createOrganization(uriInfo, representation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)

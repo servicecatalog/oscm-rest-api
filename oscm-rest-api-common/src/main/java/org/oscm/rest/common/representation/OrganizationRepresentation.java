@@ -12,6 +12,8 @@ package org.oscm.rest.common.representation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.WebApplicationException;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.oscm.internal.vo.VOOrganization;
 
 public class OrganizationRepresentation extends Representation {

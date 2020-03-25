@@ -68,7 +68,7 @@ public class OrganizationResourceTest {
                     .build()));
 
     try {
-      result = resource.createOrganization(uriInfo, accountRepresentation, parameters);
+      result = resource.createOrganization(uriInfo, accountRepresentation, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -91,7 +91,8 @@ public class OrganizationResourceTest {
     when(backend.getOrganization()).thenReturn((accountParameters -> orgRepresentation));
 
     try {
-      result = resource.getOrganization(uriInfo, parameters);
+      result =
+          resource.getOrganization(uriInfo, parameters.getEndpointVersion(), parameters.getOrgId());
     } catch (Exception e) {
       fail(e);
     }
