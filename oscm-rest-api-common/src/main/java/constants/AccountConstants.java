@@ -77,6 +77,31 @@ public class AccountConstants {
           + "}\n"
           + "}\n";
 
+  public static final String ORGANIZATION_EXAMPLE_BODY =
+          "{\n"
+                  + "\"organizationRoles\": [\"TECHNOLOGY_PROVIDER\"],\n"
+                  + "\"organization\": {\n"
+                  + "\"address\": \"sample address2\",\n"
+                  + "\"email\": \"secondsupplier@escm.org\",\n"
+                  + "\"locale\": \"en\",\n"
+                  + "\"name\": \"restorg\",\n"
+                  + "\"phone\": \"987654321\",\n"
+                  + "\"url\": \"http://example.com/org\",\n"
+                  + "\"description\": \"\",\n"
+                  + "\"domicileCountry\": \"PL\"\n"
+                  + "},\n"
+                  + "\"user\": {\n"
+                  + "\"email\": \"mail@orgidd.com\",\n"
+                  + "\"firstName\": \"fname\",\n"
+                  + "\"lastName\": \"lname\",\n"
+                  + "\"address\": \"addr\",\n"
+                  + "\"phone\": \"111111111\",\n"
+                  + "\"locale\": \"en\",\n"
+                  + "\"salutation\": \"MR\",\n"
+                  + "\"userId\": \"user\"\n"
+                  + "}\n"
+                  + "}\n";
+
   public static final String PAYMENTINFOS_MINIMUM_BODY =
       "{\n"
           + "\"paymentType\": {\n"
