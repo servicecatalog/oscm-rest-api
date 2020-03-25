@@ -27,3 +27,5 @@ To build the REST API:
      There is no need to restart the container afterwards. You can view the .war deployment logs in the newest `/logs/juli.log` file in the oscm-core container.
 4. Open the Swagger UI in your client browser on https://FQDN:8081/oscm-rest-api (where FQDN refers to your OSCM fully qualified domain name as configured in your `/docker/var.env` file).
 
+# Getting Started
+Checkout this sample for [getting started](https://github.com/servicecatalog/oscm-rest-api/tree/add/gettingStarted/docs/getting%20started).

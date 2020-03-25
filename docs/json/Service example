@@ -1,0 +1,83 @@
+{
+  "description": "App Sample Service",
+  "name": "App Sample Service",
+  "serviceId": "Rest Sample Service",
+  "status": "ACTIVE",
+  "accessType": "DIRECT",
+  "serviceType": "SUBSCRIPTION",
+  "technicalService": {
+    "eventDefinitions": [],
+    "technicalServiceId": "AppSampleService",
+    "technicalServiceBuildId": "20171108",
+    "accessType": "DIRECT",
+    "version": "1",
+    "id": "10000",
+    "baseUrl": "",
+    "provisioningUrl": "http://oscm-app:8880/oscm-app/webservices/oscm-app/oscm-app/org.oscm.app.v2_0.service.AsynchronousProvisioningProxy?wsdl",
+    "loginPath": "/",
+	"etag": "1",
+    "provisioningVersion": "1.0",
+			"parameterDefinitions": [
+				{
+					"description": "The ID of the sample controller implementation.",
+					"parameterId": "APP_CONTROLLER_ID",
+					"configurable": "false",
+					"mandatory": "true",
+					"valueType": "STRING",
+					"etag": "1",
+					"id": "10000",
+					"defaultValue": "ess.sample"
+				},
+				{
+					"description": "The message text for emails.",
+					"parameterId": "PARAM_MESSAGETEXT",
+					"configurable": "true",
+					"mandatory": "true",
+					"valueType": "STRING",
+					"etag": "1",
+					"id": "10001",
+					"defaultValue": "Some message."
+				},
+				{
+					"description": "The receiver of emails.",
+					"parameterId": "PARAM_EMAIL",
+					"configurable": "true",
+					"mandatory": "true",
+					"valueType": "STRING",
+					"etag": "1",
+					"id": "10002",
+					"defaultValue": "user@myorg.com"
+				},
+				{
+					"description": "IAAS user",
+					"parameterId": "PARAM_USER",
+					"configurable": "true",
+					"mandatory": "true",
+					"valueType": "STRING",
+					"etag": "1",
+					"id": "10003",
+					"defaultValue": "defaultuser"
+				},
+				{
+					"description": "IAAS password",
+					"parameterId": "PARAM_PWD",
+					"configurable": "true",
+					"mandatory": "true",
+					"valueType": "PWD",
+					"etag": "1",
+					"id": "10004",
+					"defaultValue": ""
+				},
+				{
+					"description": "The css styling",
+					"parameterId": "CSSSTYLE",
+					"configurable": "true",
+					"mandatory": "false",
+					"valueType": "STRING",
+					"etag": "1",
+					"id": "10005",
+					"defaultValue": ""
+				}
+			]
+  }
+}
