@@ -16,15 +16,7 @@ package constants;
  */
 public class AccountConstants {
 
-  public static final String BILLING_CONTACT_MINIMUM_BODY =
-      "{\n"
-          + "\"email\": \"sample.email@escm.com\",\n"
-          + "\"companyName\": \"Sample Company Name\",\n"
-          + "\"address\": \"Sample addresss\",\n"
-          + "\"contactId\": \"Sample contact ID.\"\n"
-          + "}";
-
-  public static final String BILLING_CONTACT_MAXIMUM_BODY =
+  public static final String BILLING_CONTACT_EXAMPLE_BODY =
       "{\n"
           + "\"email\": \"sample.email@escm.com\",\n"
           + "\"companyName\": \"Sample Company Name\",\n"
@@ -32,50 +24,6 @@ public class AccountConstants {
           + "\"orgAddressUsed\": true,"
           + "\"contactId\": \"Sample contact ID.\"\n"
           + "}";
-
-  public static final String ORGANIZATION_MINIMUM_BODY =
-      "{\n"
-          + "\"organization\": {\n"
-          + "\t\"email\": \"asupplier@escm.org\",\n"
-          + "\t\"locale\": \"en\",\n"
-          + "\t\"domicileCountry\": \"PL\"\n"
-          + "},\n"
-          + "\"user\": {\n"
-          + "\t\"email\": \"other@email.com\",\n"
-          + "\t\"locale\": \"en\",\n"
-          + "\t\"userId\": \"1003\"\n"
-          + "}\n"
-          + "}\n";
-
-  public static final String ORGANIZATION_MAXIMUM_BODY =
-      "{\n"
-          + "\"props\": {},\n"
-          + "\"organization\": {\n"
-          + "\"organizationId\": \"\",\n"
-          + "\"address\": \"sample address2\",\n"
-          + "\"email\": \"secondsupplier@escm.org\",\n"
-          + "\"locale\": \"en\",\n"
-          + "\"name\": \"restorg\",\n"
-          + "\"phone\": \"987654321\",\n"
-          + "\"url\": \"http://example.com/org\",\n"
-          + "\"description\": \"\",\n"
-          + "\"domicileCountry\": \"PL\",\n"
-          + "\"supportEmail\": \"supportmail@mail.pl\"\n"
-          + "},\n"
-          + "\"user\": {\n"
-          + "\"email\": \"mail@orgidd.com\",\n"
-          + "\"firstName\": \"fname\",\n"
-          + "\"additionalName\": \"adname\",\n"
-          + "\"lastName\": \"lname\",\n"
-          + "\"address\": \"addr\",\n"
-          + "\"phone\": \"111111111\",\n"
-          + "\"locale\": \"en\",\n"
-          + "\"salutation\": \"MR\",\n"
-          + "\"realmUserId\": \"realmuid\",\n"
-          + "\"organizationId\": \"restorgid\",\n"
-          + "\"userId\": \"1000\"\n"
-          + "}\n"
-          + "}\n";
 
   public static final String ORGANIZATION_EXAMPLE_BODY =
       "{\n"

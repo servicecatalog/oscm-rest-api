@@ -80,7 +80,8 @@ public class AccountBackendTest {
   public void shouldGetBillingContactCollection() {
     when(accountService.getBillingContacts()).thenReturn(Lists.newArrayList(billingContactVO));
 
-    Response response = billingContactResource.getBillingContacts(uriInfo, parameters);
+    Response response =
+        billingContactResource.getBillingContacts(uriInfo, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -100,7 +101,9 @@ public class AccountBackendTest {
   public void shouldGetBillingContact() {
     when(accountService.getBillingContacts()).thenReturn(Lists.newArrayList(billingContactVO));
 
-    Response response = billingContactResource.getBillingContact(uriInfo, parameters);
+    Response response =
+        billingContactResource.getBillingContact(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -116,7 +119,7 @@ public class AccountBackendTest {
 
     Response response =
         billingContactResource.createBillingContact(
-            uriInfo, billingContactRepresentation, parameters);
+            uriInfo, billingContactRepresentation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -131,7 +134,10 @@ public class AccountBackendTest {
 
     Response response =
         billingContactResource.updateBillingContact(
-            uriInfo, billingContactRepresentation, parameters);
+            uriInfo,
+            billingContactRepresentation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -144,7 +150,9 @@ public class AccountBackendTest {
   public void shouldDeleteBillingContact() {
     doNothing().when(accountService).deleteBillingContact(any());
 
-    Response response = billingContactResource.deleteBillingContact(uriInfo, parameters);
+    Response response =
+        billingContactResource.deleteBillingContact(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
