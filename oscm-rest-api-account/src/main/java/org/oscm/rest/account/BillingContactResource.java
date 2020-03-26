@@ -47,7 +47,7 @@ public class BillingContactResource extends RestResource {
       summary = "Retrieves all billing contacts of the organization",
       tags = {"billingcontacts"},
       description =
-          "Returns all billing contacts of the organization. The organization is considered to be the one as user of which client is currently authorized",
+          "Returns all billing contacts of the organization. The organization is considered to be the one which client is currently authorized as user of",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -151,7 +151,7 @@ public class BillingContactResource extends RestResource {
                       schema = @Schema(implementation = BillingContactRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
                             value = AccountConstants.BILLING_CONTACT_EXAMPLE_BODY,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
@@ -167,7 +167,6 @@ public class BillingContactResource extends RestResource {
           String version,
       @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
-
     AccountParameters params = new AccountParameters();
     params.setEndpointVersion(version);
     params.setId(Long.valueOf(id));

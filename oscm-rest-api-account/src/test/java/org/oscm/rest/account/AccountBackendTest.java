@@ -165,7 +165,7 @@ public class AccountBackendTest {
   public void shouldGetPaymentInfoCollection() {
     when(accountService.getPaymentInfos()).thenReturn(Lists.newArrayList(paymentInfoVO));
 
-    Response response = paymentInfoResource.getPaymentInfos(uriInfo, parameters);
+    Response response = paymentInfoResource.getPaymentInfos(uriInfo, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -185,7 +185,9 @@ public class AccountBackendTest {
   public void shouldGetPaymentInfo() {
     when(accountService.getPaymentInfos()).thenReturn(Lists.newArrayList(paymentInfoVO));
 
-    Response response = paymentInfoResource.getPaymentInfo(uriInfo, parameters);
+    Response response =
+        paymentInfoResource.getPaymentInfo(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -200,7 +202,11 @@ public class AccountBackendTest {
     when(accountService.savePaymentInfo(any())).thenReturn(paymentInfoVO);
 
     Response response =
-        paymentInfoResource.updatePaymentInfo(uriInfo, paymentInfoRepresentation, parameters);
+        paymentInfoResource.updatePaymentInfo(
+            uriInfo,
+            paymentInfoRepresentation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -213,7 +219,9 @@ public class AccountBackendTest {
   public void shouldDeletePaymentInfo() {
     doNothing().when(accountService).deletePaymentInfo(any());
 
-    Response response = paymentInfoResource.deletePaymentInfo(uriInfo, parameters);
+    Response response =
+        paymentInfoResource.deletePaymentInfo(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)

@@ -61,7 +61,7 @@ public class PaymentInfoResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(paymentInfoRepresentation))));
 
     try {
-      result = resource.getPaymentInfos(uriInfo, parameters);
+      result = resource.getPaymentInfos(uriInfo, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -85,7 +85,9 @@ public class PaymentInfoResourceTest {
     when(backend.getPaymentInfo()).thenReturn((accountParameters -> paymentInfoRepresentation));
 
     try {
-      result = resource.getPaymentInfo(uriInfo, parameters);
+      result =
+          resource.getPaymentInfo(
+              uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -103,7 +105,12 @@ public class PaymentInfoResourceTest {
         .thenReturn(((paymentInfoRepresentation1, accountParameters) -> true));
 
     try {
-      result = resource.updatePaymentInfo(uriInfo, paymentInfoRepresentation, parameters);
+      result =
+          resource.updatePaymentInfo(
+              uriInfo,
+              paymentInfoRepresentation,
+              parameters.getEndpointVersion(),
+              parameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -119,7 +126,9 @@ public class PaymentInfoResourceTest {
     when(backend.deletePaymentInfo()).thenReturn((accountParameters -> true));
 
     try {
-      result = resource.deletePaymentInfo(uriInfo, parameters);
+      result =
+          resource.deletePaymentInfo(
+              uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
