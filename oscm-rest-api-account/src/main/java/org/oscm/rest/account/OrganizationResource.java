@@ -76,7 +76,8 @@ public class OrganizationResource extends RestResource {
   @Operation(
       summary = "Creates organization",
       tags = {"organizations"},
-      description = "Creates an organization along with its administrator based on given request data",
+      description =
+          "Creates an organization along with its administrator based on given request data",
       requestBody =
           @RequestBody(
               description = "JSON representing organization to be created",
