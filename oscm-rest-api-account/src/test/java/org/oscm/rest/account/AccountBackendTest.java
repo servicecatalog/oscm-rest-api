@@ -165,7 +165,8 @@ public class AccountBackendTest {
   public void shouldGetPaymentInfoCollection() {
     when(accountService.getPaymentInfos()).thenReturn(Lists.newArrayList(paymentInfoVO));
 
-    Response response = paymentInfoResource.getPaymentInfos(uriInfo, parameters.getEndpointVersion());
+    Response response =
+        paymentInfoResource.getPaymentInfos(uriInfo, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
