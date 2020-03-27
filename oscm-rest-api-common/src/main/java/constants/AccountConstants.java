@@ -49,31 +49,4 @@ public class AccountConstants {
           + "\"userId\": \"user\"\n"
           + "}\n"
           + "}\n";
-
-  public static final String PAYMENTINFOS_MINIMUM_BODY =
-      "{\n"
-          + "\"paymentType\": {\n"
-          + "\t\"paymentTypeId\": \"INVOICE\",\n"
-          + "\t\"collectionType\": \"ORGANIZATION\"\n"
-          + "},\n"
-          + "\"infoId\": \"INVOICE\",\n"
-          + "\"etag\": 5,\n"
-          + "\"id\": 10000\n"
-          + "}\n";
-
-  public static final String PAYMENTINFOS_MAXIMUM_BODY =
-      "{\n"
-          + "\"paymentType\": {\n"
-          + "\"name\": \"UpdatedInvoice\",\n"
-          + "\"paymentTypeId\": \"DIRECT_DEBIT\",\n"
-          + "\"collectionType\": \"PAYMENT_SERVICE_PROVIDER\"\n"
-          + "},\n"
-          + "\"infoId\": \"DIRECT_DEBIT\",\n"
-          + "\"providerName\": \"provname\",\n"
-          + "\"accountNumer\": 12345,\n"
-          + "\"etag\": 2 \n"
-          + "}";
-
-  public static final String PAYMENTINFOS_ADDITIONAL_INFO =
-      "Field \\\"etag\\\" is required. It's a version number. Must be greater that existing one. otherwise, 500 SC will be returned";
 }
