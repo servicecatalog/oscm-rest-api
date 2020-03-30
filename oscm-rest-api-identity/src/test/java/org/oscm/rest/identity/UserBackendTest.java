@@ -121,6 +121,7 @@ public class UserBackendTest {
   @Test
   @SneakyThrows
   public void shouldPutUser() {
+    when(identityService.getUserDetails(any())).thenReturn(vo);
     when(identityService.updateUser(any())).thenReturn(vo);
 
     Response response = userResource.updateUser(uriInfo, userRepresentation, API_VERSION, USER_ID);
@@ -136,7 +137,7 @@ public class UserBackendTest {
   public void shouldDeleteUser() {
     doNothing().when(identityService).deleteUser(any(), any());
 
-    Response response = userResource.deleteUser(uriInfo, API_VERSION, USER_KEY);
+    Response response = userResource.deleteUser(uriInfo, API_VERSION, USER_ID);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -149,7 +150,9 @@ public class UserBackendTest {
   public void shouldGetRoles() {
     when(identityService.getUserDetails(any())).thenReturn(vo);
 
-    Response response = rolesResource.getUserRoles(uriInfo, parameters);
+    Response response =
+        rolesResource.getUserRoles(
+            uriInfo, parameters.getEndpointVersion(), parameters.getUserId());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -163,7 +166,9 @@ public class UserBackendTest {
   public void shouldPutRoles() {
     doNothing().when(identityService).setUserRoles(any(), any());
 
-    Response response = rolesResource.setUserRoles(uriInfo, rolesRepresentation, parameters);
+    Response response =
+        rolesResource.setUserRoles(
+            uriInfo, rolesRepresentation, parameters.getEndpointVersion(), parameters.getUserId());
 
     assertThat(response).isNotNull();
     assertThat(response)

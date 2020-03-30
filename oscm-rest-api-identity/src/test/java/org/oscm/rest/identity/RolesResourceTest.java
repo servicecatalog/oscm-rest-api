@@ -56,7 +56,9 @@ public class RolesResourceTest {
     when(userBackend.getRoles()).thenReturn(userParameters -> rolesRepresentation);
 
     try {
-      result = rolesResource.getUserRoles(uriInfo, parameters);
+      result =
+          rolesResource.getUserRoles(
+              uriInfo, parameters.getEndpointVersion(), parameters.getUserId());
     } catch (Exception e) {
       fail(e);
     }
@@ -74,7 +76,12 @@ public class RolesResourceTest {
     when(userBackend.putRoles()).thenReturn((rolesRepresentation1, userParameters) -> true);
 
     try {
-      result = rolesResource.setUserRoles(uriInfo, rolesRepresentation, parameters);
+      result =
+          rolesResource.setUserRoles(
+              uriInfo,
+              rolesRepresentation,
+              parameters.getEndpointVersion(),
+              parameters.getUserId());
     } catch (Exception e) {
       fail(e);
     }

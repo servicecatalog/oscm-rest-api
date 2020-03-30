@@ -27,67 +27,68 @@ public class IdentityConstants {
           + "\"etag\": 1\n"
           + "}";
 
-  public static final String ROLE_EXAMPLE_BODY =
+  public static final String USER_ROLE_EXAMPLE_RESPONSE =
+      "{\"userRoles\": [\"PLATFORM_OPERATOR\",\"MARKETPLACE_OWNER\",\"ORGANIZATION_ADMIN\"],\"etag\": 0,\"id\": 1000}";
+
+  public static final String USER_ROLE_UPDATE_EXAMPLE_REQUEST =
+      "{\"userRoles\": [\"PLATFORM_OPERATOR\",\"MARKETPLACE_OWNER\",\"ORGANIZATION_ADMIN\"]}";
+
+  public static final String USER_EXAMPLE_RESPONSE =
       "{\n"
-          + "\"userRoles\": [\"TECHNOLOGY_MANAGER\", \"SERVICE_MANAGER\", \"MARKETPLACE_OWNER\", \"ORGANIZATION_ADMIN\"],\n"
-          + "\"etag\": 0,\n"
-          + "\"id\": 13010\n"
+          + "  \"email\": \"rest@user.com\",\n"
+          + "  \"firstName\": \"John\",\n"
+          + "  \"lastName\": \"Rest\",\n"
+          + "  \"locale\": \"en\",\n"
+          + "  \"realmUserId\": \"administrator\",\n"
+          + "  \"remoteLdapActive\": false,\n"
+          + "  \"organizationId\": \"PLATFORM_OPERATOR\",\n"
+          + "  \"userId\": \"administrator\",\n"
+          + "  \"status\": \"ACTIVE\",\n"
+          + "  \"organizationRoles\": [\n"
+          + "    \"CUSTOMER\",\n"
+          + "    \"PLATFORM_OPERATOR\",\n"
+          + "    \"MARKETPLACE_OWNER\"\n"
+          + "  ],\n"
+          + "  \"userRoles\": [\n"
+          + "    \"PLATFORM_OPERATOR\",\n"
+          + "    \"ORGANIZATION_ADMIN\"\n"
+          + "  ],\n"
+          + "  \"etag\": 0,\n"
+          + "  \"id\": 1000\n"
           + "}";
 
-  public static final String USER_MINIMUM_BODY =
+  public static final String USER_LIST_EXAMPLE_RESPONSE =
+      "{\"items\":[" + USER_EXAMPLE_RESPONSE + "]}";
+
+  public static final String USER_CREATE_EXAMPLE_BODY =
       "{\n"
-          + "\"email\": \"test@email.com\",\n"
-          + "\"locale\": \"ja\",\n"
-          + "\"organizationId\": \"10000\",\n"
-          + "\"userId\": \"fdgdfg\",\n"
-          + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"]\n"
+          + "  \"salutation\": \"MR\",\n"
+          + "  \"email\": \"rest@user.com\",\n"
+          + "  \"firstName\": \"John\",\n"
+          + "  \"lastName\": \"Rest\",\n"
+          + "  \"address\": \"Some Address From Rest\",\n"
+          + "  \"phone\": \"123123123\",\n"
+          + "  \"locale\": \"en\",\n"
+          + "  \"organizationId\": \"c5c0a827\",\n"
+          + "  \"userId\": \"jrest\",\n"
+          + "  \"userRoles\": [\n"
+          + "    \"MARKETPLACE_OWNER\",\n"
+          + "    \"ORGANIZATION_ADMIN\"\n"
+          + "  ]\n"
           + "}";
 
-  public static final String USER_MAXIMUM_BODY =
+  public static final String USER_UPDATE_EXAMPLE_REQUEST =
       "{\n"
           + "\"email\": \"rest@user.com\",\n"
-          + "\"firstName\": \"John\",\n"
-          + "\"lastName\": \"Rambo\",\n"
-          + "\"address\": \"Some Address From Rest\",\n"
-          + "\"phone\": \"123123123\",\n"
-          + "\"locale\": \"ja\",\n"
           + "\"salutation\": \"MR\",\n"
-          + "\"realmUserId\": \"jrambo\",\n"
-          + "\"remoteLdapActive\": true,\n"
-          + "\"organizationId\": \"10000\",\n"
-          + "\"userId\": \"jbravo\",\n"
-          + "\"status\": \"ACTIVE\",\n"
-          + "\"organizationRoles\": [\"TECHNOLOGY_PROVIDER\", \"CUSTOMER\", \"SUPPLIER\", \"MARKETPLACE_OWNER\"],\n"
-          + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"],\n"
-          + "\"etag\": 1\n"
-          + "}";
-
-  // FIXME: TMP values shall be removed after fixing problem with redundant id.
-  public static final String USER_MIN_PUT_BODY =
-      "{\n"
-          + "\"email\": \"test@email.com\",\n"
-          + "\"locale\": \"ja\",\n"
-          + "\"organizationId\": \"10000\",\n"
-          + "\"userId\": \"fdgdfg\",\n"
-          + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"]\n"
-          + "}";
-
-  public static final String USER_MAX_PUT_BODY =
-      "{\n"
-          + "\"email\": \"rest@user.com\",\n"
           + "\"firstName\": \"John\",\n"
-          + "\"lastName\": \"Rambo\",\n"
+          + "\"lastName\": \"Rest\",\n"
           + "\"address\": \"Address From REST TEST\",\n"
           + "\"phone\": \"123123123\",\n"
-          + "\"locale\": \"ja\",\n"
-          + "\"salutation\": \"MR\",\n"
-          + "\"realmUserId\": \"jrambo\",\n"
-          + "\"remoteLdapActive\": true,\n"
-          + "\"organizationId\": \"10000\",\n"
-          + "\"userId\": \"jbravo\",\n"
-          + "\"status\": \"ACTIVE\",\n"
-          + "\"organizationRoles\": [\"TECHNOLOGY_PROVIDER\", \"CUSTOMER\", \"SUPPLIER\", \"MARKETPLACE_OWNER\"],\n"
+          + "\"locale\": \"en\",\n"
+          + "\"organizationId\": \"c5c0a827\",\n"
+          + "\"userId\": \"jrest\",\n"
           + "\"userRoles\": [\"MARKETPLACE_OWNER\", \"SERVICE_MANAGER\", \"TECHNOLOGY_MANAGER\", \"ORGANIZATION_ADMIN\"],\n"
-          + "\"etag\": 4,\n"
+          + "\"etag\": 1\n"
           + "}";
 }
