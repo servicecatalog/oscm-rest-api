@@ -110,8 +110,10 @@ public class ServiceBackendTest {
     parameters.setServiceName("testService");
     parameters.setMarketPlaceId("123456789");
 
+    // when
     Response response = resource.getServices(uriInfo, parameters);
 
+    // then
     assertThat(response).isNotNull();
     assertThat(response)
         .extracting(Response::getStatus)
