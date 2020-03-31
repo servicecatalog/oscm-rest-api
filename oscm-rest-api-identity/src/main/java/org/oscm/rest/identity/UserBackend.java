@@ -79,6 +79,10 @@ public class UserBackend {
   public RestBackend.Put<UserRepresentation, UserParameters> putUser() {
     return (content, params) -> {
       // TODO: createResponse id change?
+      VOUser vo = new VOUser();
+      vo.setUserId(params.getUserId());
+      long userKey = is.getUserDetails(vo).getKey();
+      content.getVO().setKey(userKey);
       is.updateUser(content.getVO());
       return true;
     };
@@ -88,9 +92,8 @@ public class UserBackend {
     return params -> {
       VOUser vo = new VOUser();
       vo.setUserId(params.getUserId());
-      vo.setKey(Long.valueOf(params.getUserId()));
-      vo.setVersion(Integer.MAX_VALUE);
-      is.deleteUser(vo, params.getMarketplaceId());
+      VOUserDetails userDetails = is.getUserDetails(vo);
+      is.deleteUser(userDetails, params.getMarketplaceId());
       return true;
     };
   }
@@ -107,7 +110,8 @@ public class UserBackend {
     return (content, params) -> {
       VOUserDetails vo = content.getVO();
       vo.setUserId(params.getUserId());
-      is.setUserRoles(vo, new ArrayList<>(content.getUserRoles()));
+      VOUserDetails userDetails = is.getUserDetails(vo);
+      is.setUserRoles(userDetails, new ArrayList<>(content.getUserRoles()));
       return true;
     };
   }

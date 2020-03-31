@@ -9,6 +9,7 @@
  */
 package org.oscm.rest.account;
 
+import constants.AccountConstants;
 import constants.CommonConstants;
 import constants.DocDescription;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +30,6 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.common.json.PaymentInformation;
 import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
 
@@ -56,7 +56,7 @@ public class PaymentInfoResource extends RestResource {
                 @Content(
                     mediaType = "application/json",
                     examples = {
-                      @ExampleObject(PaymentInformation.PAYMENT_INFO_LIST_EXAMPLE_RESPONSE)
+                      @ExampleObject(AccountConstants.PAYMENT_INFO_LIST_EXAMPLE_RESPONSE)
                     }))
       })
   public Response getPaymentInfos(
@@ -86,7 +86,7 @@ public class PaymentInfoResource extends RestResource {
                 @Content(
                     mediaType = "application/json",
                     examples = {
-                      @ExampleObject(value = PaymentInformation.PAYMENT_INFO_EXAMPLE_RESPONSE)
+                      @ExampleObject(value = AccountConstants.PAYMENT_INFO_EXAMPLE_RESPONSE)
                     }))
       })
   public Response getPaymentInfo(
@@ -122,7 +122,7 @@ public class PaymentInfoResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
-                            value = PaymentInformation.PAYMENT_INFO_UPDATE_EXAMPLE_REQUEST,
+                            value = AccountConstants.PAYMENT_INFO_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {

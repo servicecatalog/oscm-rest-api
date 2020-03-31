@@ -10,6 +10,7 @@
 package org.oscm.rest.identity;
 
 import constants.CommonConstants;
+import constants.DocDescription;
 import constants.IdentityConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,12 +19,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -32,12 +27,16 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 @Path(CommonParams.PATH_VERSION + "/users")
 @Stateless
 public class UserResource extends RestResource {
-
-  private static final String PATH_USERID = "/{userId}";
-  private static final String PATH_USERKEY = "/{userKey}";
 
   @EJB
   @Setter(value = AccessLevel.PROTECTED)
@@ -54,18 +53,26 @@ public class UserResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Get all users.",
+      summary = "Retrieves all users.",
       tags = {"users"},
-      description = "Returns all users for current organization.",
+      description =
+          "Returns all users of the organization. The organization is considered to be the one which client is currently authorized as user of.",
       responses = {
         @ApiResponse(
             responseCode = "200",
             description = "Users list",
-            content = @Content(schema = @Schema(implementation = UserRepresentation.class)))
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = UserRepresentation.class),
+                    examples = {@ExampleObject(IdentityConstants.USER_LIST_EXAMPLE_RESPONSE)}))
       })
   public Response getUsers(
       @Context UriInfo uriInfo,
-      @Parameter(description = "Endpoint's version") @PathParam(value = "version") String version)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
       throws Exception {
     final UserParameters params = new UserParameters();
     params.setEndpointVersion(version);
@@ -83,21 +90,28 @@ public class UserResource extends RestResource {
    */
   @GET
   @Since(CommonParams.VERSION_1)
-  @Path(PATH_USERID)
+  @Path(CommonParams.PATH_USER_ID)
   @Operation(
-      summary = "Get a single user",
+      summary = "Retrieves a single user",
       tags = {"users"},
-      description = "Returns a single user with provided user id",
+      description = "Returns a single user based on the provided user id",
       responses = {
         @ApiResponse(
             responseCode = "200",
             description = "A single user",
-            content = @Content(schema = @Schema(implementation = UserRepresentation.class)))
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = UserRepresentation.class),
+                    examples = {@ExampleObject(IdentityConstants.USER_EXAMPLE_RESPONSE)}))
       })
   public Response getUser(
       @Context UriInfo uriInfo,
-      @Parameter(description = "Endpoint's version") @PathParam(value = "version") String version,
-      @Parameter(description = "User ID") @PathParam(value = "userId") String userId)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.USER_ID) @PathParam(value = "userId") String userId)
       throws Exception {
     final UserParameters params = new UserParameters();
     params.setEndpointVersion(params.getEndpointVersion());
@@ -117,35 +131,35 @@ public class UserResource extends RestResource {
   @POST
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Create a user",
+      summary = "Creates a user",
       tags = {"users"},
-      description = "Creates a user with provided user representation",
+      description = "Creates a user in current organization based on given request data",
       requestBody =
           @RequestBody(
-              description = "UserRepresentation object to be created",
+              description = "JSON representing user to be created",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = UserRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = IdentityConstants.USER_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = IdentityConstants.USER_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = IdentityConstants.USER_CREATE_EXAMPLE_BODY,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(
             responseCode = "201",
-            description = "User created successfully" + CommonConstants.ID_INFO)
+            description = "User created successfully. " + CommonConstants.ID_INFO)
       })
   public Response createUser(
       @Context UriInfo uriInfo,
       UserRepresentation content,
-      @Parameter(description = "Endpoint's version") @PathParam(value = "version") String version)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
       throws Exception {
     final UserParameters params = new UserParameters();
     params.setEndpointVersion(version);
@@ -163,34 +177,34 @@ public class UserResource extends RestResource {
    */
   @PUT
   @Since(CommonParams.VERSION_1)
-  @Path(PATH_USERID)
+  @Path(CommonParams.PATH_USER_ID)
   @Operation(
-      summary = "Update a user",
+      summary = "Updates a user",
       tags = {"users"},
-      description = "Updates a selected user with provided user representation",
+      description = "Updates a user based on given user's id and request data",
       requestBody =
           @RequestBody(
-              description = "UserRepresentation object to be updated",
+              description = "JSON representing user to be updated",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = UserRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = IdentityConstants.USER_MIN_PUT_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = IdentityConstants.USER_MAX_PUT_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
+                            value = IdentityConstants.USER_UPDATE_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
-      responses = {@ApiResponse(responseCode = "201", description = "User created successfully")})
+      responses = {@ApiResponse(responseCode = "201", description = "User updated successfully")})
   public Response updateUser(
       @Context UriInfo uriInfo,
       UserRepresentation content,
-      @Parameter(description = "Endpoint's version") @PathParam(value = "version") String version,
-      @Parameter(description = "User ID") @PathParam(value = "userId") String userId)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.USER_ID) @PathParam(value = "userId") String userId)
       throws Exception {
     final UserParameters params = new UserParameters();
     params.setEndpointVersion(version);
@@ -203,26 +217,29 @@ public class UserResource extends RestResource {
    *
    * @param uriInfo uri context information
    * @param version version of the endpoint
-   * @param userKey key of the user
+   * @param userId id of the user
    * @return http response with no content
    * @throws Exception
    */
   @DELETE
   @Since(CommonParams.VERSION_1)
-  @Path(PATH_USERKEY)
+  @Path(CommonParams.PATH_USER_ID)
   @Operation(
-      summary = "Delete a single user",
+      summary = "Deletes a single user",
       tags = {"users"},
-      description = "Deletes a single user with provided user key",
+      description = "Deletes a single user based on given user id",
       responses = {@ApiResponse(responseCode = "204", description = "User deleted successfully")})
   public Response deleteUser(
       @Context UriInfo uriInfo,
-      @Parameter(description = "Endpoint's version") @PathParam(value = "version") String version,
-      @Parameter(description = "User key") @PathParam(value = "userKey") Long userKey)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.USER_ID) @PathParam(value = "userId") String userId)
       throws Exception {
     final UserParameters params = new UserParameters();
     params.setEndpointVersion(version);
-    params.setUserId(userKey.toString());
+    params.setUserId(userId);
     return delete(uriInfo, ub.deleteUser(), params);
   }
 }

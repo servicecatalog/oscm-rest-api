@@ -31,7 +31,7 @@ public class CommonParams {
   public static final String PARAM_VERSION = "version";
   public static final String PARAM_ID = "id";
   public static final String PARAM_ORG_ID = "orgId";
-  public static final String PARAM_OBJECT_KEY = "objectKey";
+  public static final String PARAM_USER_ID = "userId";
   public static final String PARAM_MATCH = "If-Match";
   public static final String PARAM_NONE_MATCH = "If-None-Match";
   public static final String ETAG_WILDCARD = "*";
@@ -40,7 +40,7 @@ public class CommonParams {
   public static final String PATH_VERSION = "/{" + PARAM_VERSION + "}";
   public static final String PATH_ID = "/{" + PARAM_ID + "}";
   public static final String PATH_ORG_ID = "/{" + PARAM_ORG_ID + "}";
-  public static final String PATH_OBJECT_KEY = "/{" + PARAM_OBJECT_KEY + "}";
+  public static final String PATH_USER_ID = "/{" + PARAM_USER_ID + "}";
 
   // pattern for version validation
   public static final String PATTERN_VERSION = "v[0-9]+";

@@ -41,7 +41,6 @@ public class UserResourceTest {
 
   private final String API_VERSION = "v1";
   private final String USER_ID = "userId";
-  private final Long USER_KEY = 1000L;
 
   @BeforeEach
   public void setUp() {
@@ -146,7 +145,7 @@ public class UserResourceTest {
     when(userBackend.deleteUser()).thenReturn(userParameters -> true);
 
     try {
-      result = userResource.deleteUser(uriInfo, API_VERSION, USER_KEY);
+      result = userResource.deleteUser(uriInfo, API_VERSION, USER_ID);
     } catch (Exception e) {
       fail(e);
     }
