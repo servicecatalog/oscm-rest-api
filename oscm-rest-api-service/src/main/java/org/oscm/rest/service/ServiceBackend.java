@@ -104,7 +104,7 @@ public class ServiceBackend {
     };
   }
 
-  private List<VOService> getServices(String mpId, String locale, String searchPhrase)
+  protected List<VOService> getServices(String mpId, String locale, String searchPhrase)
       throws ObjectNotFoundException, InvalidPhraseException {
     List<VOService> slr = new ArrayList<VOService>();
     if (mpId == null || mpId.isEmpty()) {
@@ -122,7 +122,7 @@ public class ServiceBackend {
     return slr;
   }
 
-  private String getLocale(String locale) {
+  protected String getLocale(String locale) {
     if (locale == null || locale.isEmpty()) {
       locale = "en";
     }
