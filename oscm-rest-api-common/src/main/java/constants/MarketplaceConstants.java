@@ -73,5 +73,5 @@ public class MarketplaceConstants {
           + "\"categoriesEnabled\": true,\n"
           + "\"owningOrganizationId\": \"959c9bf7\",\n"
           + "\"etag\": 1\n"
-          + "}\n";;
+          + "}\n";
 }
