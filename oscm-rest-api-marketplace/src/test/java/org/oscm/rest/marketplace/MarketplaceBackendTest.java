@@ -9,7 +9,13 @@
  */
 package org.oscm.rest.marketplace;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 import com.google.common.collect.Lists;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,17 +28,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.rest.common.MarketplaceListType;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @ExtendWith(MockitoExtension.class)
 public class MarketplaceBackendTest {
