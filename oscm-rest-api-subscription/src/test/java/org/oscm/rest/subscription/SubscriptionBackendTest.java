@@ -11,12 +11,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.vo.*;
+import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
+import org.oscm.rest.common.representation.SubscriptionRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
-import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
-import org.oscm.rest.common.representation.UdaRepresentation;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -24,6 +24,7 @@ import javax.ws.rs.core.UriInfo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -58,9 +59,9 @@ public class SubscriptionBackendTest {
   public void shouldGetSubscriptionsForUser() {
     when(serviceInternal.getSubscriptionsForUser(any(), any()))
         .thenReturn(Lists.newArrayList(voUserSubscription));
-
     parameters.setUserId("uid");
-    Response response = resource.getSubscriptions(uriInfo, parameters);
+
+    Response response = resource.getSubscriptions(uriInfo, parameters.getEndpointVersion(), parameters.getUserId());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -81,7 +82,7 @@ public class SubscriptionBackendTest {
     when(serviceInternal.getSubscriptionsForOrganization(any()))
         .thenReturn(Lists.newArrayList(voUserSubscription));
 
-    Response response = resource.getSubscriptions(uriInfo, parameters);
+    Response response = resource.getSubscriptions(uriInfo, parameters.getEndpointVersion(), null);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -101,7 +102,10 @@ public class SubscriptionBackendTest {
   public void shouldGetSubscriptionById() {
     when(service.getSubscriptionDetails(anyLong())).thenReturn(voSubscriptionDetails);
 
-    Response response = resource.getSubscription(uriInfo, parameters);
+    Response response = resource.getSubscription(
+            uriInfo,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -116,7 +120,7 @@ public class SubscriptionBackendTest {
     when(service.subscribeToService(any(), any(), any(), any(), any(), any()))
         .thenReturn(voSubscription);
 
-    Response response = resource.createSubscription(uriInfo, representation, parameters);
+    Response response = resource.createSubscription(uriInfo, representation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -129,7 +133,11 @@ public class SubscriptionBackendTest {
   public void shouldUpdateSubscription() {
     when(service.modifySubscription(any(), any(), any())).thenReturn(voSubscriptionDetails);
 
-    Response response = resource.updateSubscription(uriInfo, representation, parameters);
+    Response response = resource.updateSubscription(
+            uriInfo,
+            representation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -142,7 +150,7 @@ public class SubscriptionBackendTest {
   public void shouldDeleteSubscription() {
     when(service.unsubscribeFromService(anyLong())).thenReturn(true);
 
-    Response response = resource.deleteSubscription(uriInfo, parameters);
+    Response response = resource.deleteSubscription(uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
