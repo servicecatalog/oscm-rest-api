@@ -9,7 +9,10 @@
  */
 package org.oscm.rest.common.requestparameters;
 
+import constants.DocDescription;
 import io.swagger.v3.oas.annotations.Parameter;
+
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
@@ -25,11 +28,12 @@ public class RequestParameters {
 
   private int version;
 
-  @Parameter(description = "ID of a single resource", required = true)
+  @Parameter(description = DocDescription.OBJECT_ID, required = true)
   @PathParam(CommonParams.PARAM_ID)
   private Long id;
 
-  @Parameter(description = "Endpoint's version", required = true)
+  @Parameter(description = DocDescription.ENDPOINT_VERSION, required = true)
+  @DefaultValue("v1")
   @PathParam(CommonParams.PARAM_VERSION)
   private String endpointVersion;
 

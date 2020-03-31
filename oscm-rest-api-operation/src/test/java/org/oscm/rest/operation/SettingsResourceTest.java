@@ -9,13 +9,7 @@
  */
 package org.oscm.rest.operation;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.Lists;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,11 +18,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.SettingRepresentation;
 import org.oscm.rest.common.requestparameters.OperationParameters;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SettingsResourceTest {
@@ -62,7 +62,7 @@ class SettingsResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(settingRepresentation)));
 
     try {
-      response = settingsResource.getSettings(uriInfo, operationParameters);
+      response = settingsResource.getSettings(uriInfo, operationParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -80,34 +80,6 @@ class SettingsResourceTest {
               return representationCollection.getItems().toArray()[0];
             })
         .isEqualTo(settingRepresentation);
-  }
-
-  @Test
-  public void shouldCreateSettings() {
-    try {
-      when(settingsBackend.post())
-          .thenReturn(
-              (settingRepresentation1, operationParameters) ->
-                  PostResponseBody.of().createdObjectId(String.valueOf(123)).build());
-    } catch (Exception e) {
-      fail(e);
-    }
-
-    try {
-      response =
-          settingsResource.createSetting(uriInfo, settingRepresentation, operationParameters);
-    } catch (Exception e) {
-      fail(e);
-    }
-
-    assertThat(response).isNotNull();
-    assertThat(response)
-        .extracting(Response::getStatus)
-        .isEqualTo(Response.Status.CREATED.getStatusCode());
-    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
-    assertThat((PostResponseBody) response.getEntity())
-        .extracting(PostResponseBody::getCreatedObjectId)
-        .isNotNull();
   }
 
   @Test
