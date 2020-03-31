@@ -64,6 +64,7 @@ public class UserResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
+                    schema = @Schema(implementation = UserRepresentation.class),
                     examples = {@ExampleObject(IdentityConstants.USER_LIST_EXAMPLE_RESPONSE)}))
       })
   public Response getUsers(
@@ -101,6 +102,7 @@ public class UserResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
+                    schema = @Schema(implementation = UserRepresentation.class),
                     examples = {@ExampleObject(IdentityConstants.USER_EXAMPLE_RESPONSE)}))
       })
   public Response getUser(
