@@ -11,7 +11,6 @@ package org.oscm.rest.common.requestparameters;
 
 import constants.DocDescription;
 import io.swagger.v3.oas.annotations.Parameter;
-
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
