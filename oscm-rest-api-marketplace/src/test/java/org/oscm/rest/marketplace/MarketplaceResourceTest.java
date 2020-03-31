@@ -62,7 +62,11 @@ class MarketplaceResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(marketplaceRepresentation)));
 
     try {
-      response = marketplaceResource.getMarketplaces(uriInfo, marketplaceParameters);
+      response =
+          marketplaceResource.getMarketplaces(
+              uriInfo,
+              marketplaceParameters.getEndpointVersion(),
+              marketplaceParameters.getListType());
     } catch (Exception e) {
       fail(e);
     }
@@ -89,7 +93,7 @@ class MarketplaceResourceTest {
     try {
       response =
           marketplaceResource.createMarketplace(
-              uriInfo, marketplaceRepresentation, marketplaceParameters);
+              uriInfo, marketplaceRepresentation, marketplaceParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -107,7 +111,11 @@ class MarketplaceResourceTest {
     when(marketplaceBackend.get()).thenReturn(params -> marketplaceRepresentation);
 
     try {
-      response = marketplaceResource.getMarketplace(uriInfo, marketplaceParameters);
+      response =
+          marketplaceResource.getMarketplace(
+              uriInfo,
+              marketplaceParameters.getEndpointVersion(),
+              marketplaceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -128,7 +136,10 @@ class MarketplaceResourceTest {
     try {
       response =
           marketplaceResource.updateMarketplace(
-              uriInfo, marketplaceRepresentation, marketplaceParameters);
+              uriInfo,
+              marketplaceRepresentation,
+              marketplaceParameters.getEndpointVersion(),
+              marketplaceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -146,7 +157,11 @@ class MarketplaceResourceTest {
     when(marketplaceBackend.delete()).thenReturn(params -> true);
 
     try {
-      response = marketplaceResource.deleteMarketplace(uriInfo, marketplaceParameters);
+      response =
+          marketplaceResource.deleteMarketplace(
+              uriInfo,
+              marketplaceParameters.getEndpointVersion(),
+              marketplaceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }

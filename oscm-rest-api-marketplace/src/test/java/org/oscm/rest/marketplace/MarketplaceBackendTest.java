@@ -67,7 +67,9 @@ public class MarketplaceBackendTest {
     lenient().when(service.getAccessibleMarketplaces()).thenReturn(Lists.newArrayList(vo));
     lenient().when(service.getMarketplacesOwned()).thenReturn(Lists.newArrayList(vo));
 
-    Response response = resource.getMarketplaces(uriInfo, parameters);
+    Response response =
+        resource.getMarketplaces(
+            uriInfo, parameters.getEndpointVersion(), parameters.getListType());
 
     assertThat(response).isNotNull();
     assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
@@ -88,7 +90,9 @@ public class MarketplaceBackendTest {
     when(service.getMarketplaceIdForKey(any())).thenReturn(representation.getMarketplaceId());
     when(service.getMarketplaceById(any())).thenReturn(vo);
 
-    Response response = resource.getMarketplace(uriInfo, parameters);
+    Response response =
+        resource.getMarketplace(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -102,7 +106,8 @@ public class MarketplaceBackendTest {
   public void shouldCreateMarketplace() {
     when(service.createMarketplace(any())).thenReturn(vo);
 
-    Response response = resource.createMarketplace(uriInfo, representation, parameters);
+    Response response =
+        resource.createMarketplace(uriInfo, representation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -115,7 +120,12 @@ public class MarketplaceBackendTest {
   public void shouldUpdateMarketplace() {
     when(service.updateMarketplace(any())).thenReturn(vo);
 
-    Response response = resource.updateMarketplace(uriInfo, representation, parameters);
+    Response response =
+        resource.updateMarketplace(
+            uriInfo,
+            representation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -128,7 +138,9 @@ public class MarketplaceBackendTest {
   public void shouldDeleteMarketplace() {
     doNothing().when(service).deleteMarketplace(any());
 
-    Response response = resource.deleteMarketplace(uriInfo, parameters);
+    Response response =
+        resource.deleteMarketplace(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)

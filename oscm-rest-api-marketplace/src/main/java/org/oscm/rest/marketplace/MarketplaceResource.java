@@ -10,27 +10,31 @@
 package org.oscm.rest.marketplace;
 
 import constants.CommonConstants;
+import constants.DocDescription;
 import constants.MarketplaceConstants;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.AccessLevel;
+import lombok.Setter;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.MarketplaceListType;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
+import org.oscm.rest.common.representation.MarketplaceRepresentation;
+import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lombok.AccessLevel;
-import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
-import org.oscm.rest.common.representation.MarketplaceRepresentation;
-import org.oscm.rest.common.requestparameters.MarketplaceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
 @Stateless
@@ -43,9 +47,10 @@ public class MarketplaceResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Get all marketplaces",
+      summary = "Retrieves marketplaces",
       tags = {"marketplaces"},
-      description = "Returns all marketplaces",
+      description =
+          "Returns all marketplaces based on given type (by default OWNED - all marketplaces owned by the organization).",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -53,11 +58,23 @@ public class MarketplaceResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = MarketplaceRepresentation.class)))
+                    examples = {
+                      @ExampleObject(MarketplaceConstants.MARKETPLACE_LIST_EXAMPLE_RESPONSE)
+                    }))
       })
-  public Response getMarketplaces(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
+  public Response getMarketplaces(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.MARKETPLACE_TYPE) @QueryParam("listType")
+          MarketplaceListType listType)
       throws Exception {
     try {
+      MarketplaceParameters params = new MarketplaceParameters();
+      params.setEndpointVersion(version);
+      params.setListType(listType);
       return getCollection(uriInfo, mb.getCollection(), params);
     } catch (Exception e) {
       return RestErrorResponseFactory.getResponse(e);
@@ -68,18 +85,30 @@ public class MarketplaceResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
-      summary = "Get a single marketplace",
+      summary = "Retrieves a single marketplace",
       tags = {"marketplaces"},
-      description = "Returns a single marketplace",
+      description = "Returns a single marketplace based on provided object id",
       responses = {
         @ApiResponse(
             responseCode = "200",
             description = "A single marketplace",
-            content = @Content(schema = @Schema(implementation = MarketplaceRepresentation.class)))
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    examples = {@ExampleObject(MarketplaceConstants.MARKETPLACE_EXAMPLE_RESPONSE)}))
       })
-  public Response getMarketplace(@Context UriInfo uriInfo, @BeanParam MarketplaceParameters params)
+  public Response getMarketplace(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
     try {
+      MarketplaceParameters params = new MarketplaceParameters();
+      params.setEndpointVersion(version);
+      params.setId(Long.valueOf(id));
       return get(uriInfo, mb.get(), params, true);
     } catch (Exception e) {
       return RestErrorResponseFactory.getResponse(e);
@@ -89,25 +118,22 @@ public class MarketplaceResource extends RestResource {
   @POST
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Create a marketplace",
+      summary = "Creates a marketplace",
       tags = {"marketplaces"},
-      description = "Creates a marketplace",
+      description = "Creates a marketplace based on given request data",
       requestBody =
           @RequestBody(
-              description = "MarketplaceRepresentation object to be created",
+              description = "JSON representing marketplace to be created",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = MarketplaceRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = MarketplaceConstants.MARKETPLACE_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = MarketplaceConstants.MARKETPLACE_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = MarketplaceConstants.MARKETPLACE_CREATE_EXAMPLE_RESPONSE,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION)
                       })),
       responses = {
         @ApiResponse(
@@ -117,9 +143,14 @@ public class MarketplaceResource extends RestResource {
   public Response createMarketplace(
       @Context UriInfo uriInfo,
       MarketplaceRepresentation content,
-      @BeanParam MarketplaceParameters params)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
       throws Exception {
     try {
+      MarketplaceParameters params = new MarketplaceParameters();
+      params.setEndpointVersion(version);
       return post(uriInfo, mb.post(), content, params);
     } catch (Exception e) {
       return RestErrorResponseFactory.getResponse(e);
@@ -130,34 +161,39 @@ public class MarketplaceResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
-      summary = "Update a single marketplace",
+      summary = "Updates a single marketplace",
       tags = {"marketplaces"},
-      description = "Updates a single marketplace",
+      description = "Updates a single marketplace based on given request data",
       requestBody =
           @RequestBody(
-              description = "MarketplaceRepresentation object to be updated",
+              description = "JSON representing marketplace to be updated",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = MarketplaceRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = MarketplaceConstants.MARKETPLACE_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = MarketplaceConstants.MARKETPLACE_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
+                            value = MarketplaceConstants.MARKETPLACE_UPDATE_EXAMPLE_RESPONSE,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
-        @ApiResponse(responseCode = "204", description = "Billing contact updated successfully")
+        @ApiResponse(responseCode = "204", description = "Marketplace updated successfully")
       })
   public Response updateMarketplace(
       @Context UriInfo uriInfo,
       MarketplaceRepresentation content,
-      @BeanParam MarketplaceParameters params) {
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
+      throws Exception {
     try {
+      MarketplaceParameters params = new MarketplaceParameters();
+      params.setEndpointVersion(version);
+      params.setId(Long.valueOf(id));
       return put(uriInfo, mb.put(), content, params);
     } catch (Exception e) {
       return RestErrorResponseFactory.getResponse(e);
@@ -175,8 +211,17 @@ public class MarketplaceResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Marketplace deleted successfully")
       })
   public Response deleteMarketplace(
-      @Context UriInfo uriInfo, @BeanParam MarketplaceParameters params) {
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
+      throws Exception {
     try {
+      MarketplaceParameters params = new MarketplaceParameters();
+      params.setEndpointVersion(version);
+      params.setId(Long.valueOf(id));
       return delete(uriInfo, mb.delete(), params);
     } catch (Exception e) {
       return RestErrorResponseFactory.getResponse(e);
