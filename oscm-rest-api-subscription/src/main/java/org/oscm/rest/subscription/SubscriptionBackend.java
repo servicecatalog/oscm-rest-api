@@ -9,12 +9,13 @@
  */
 package org.oscm.rest.subscription;
 
-import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import com.google.common.collect.Lists;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
@@ -46,17 +47,11 @@ public class SubscriptionBackend {
       }
 
       Collection<SubscriptionRepresentation> subscriptionRepresentations =
-          Lists.newArrayList(
               subs.stream()
-                  .map(
-                      s -> {
-                        return new SubscriptionRepresentation(s);
-                      })
-                  .collect(Collectors.toList()));
+                      .map(
+                              SubscriptionRepresentation::new).collect(Collectors.toList());
 
-      RepresentationCollection<SubscriptionRepresentation> list =
-          new RepresentationCollection<>(subscriptionRepresentations);
-      return list;
+      return new RepresentationCollection<>(subscriptionRepresentations);
     };
   }
 
@@ -66,7 +61,7 @@ public class SubscriptionBackend {
 
   public RestBackend.Get<SubscriptionDetailsRepresentation, SubscriptionParameters> get() {
     return params -> {
-      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
+      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId());
       return new SubscriptionDetailsRepresentation(sub);
     };
   }

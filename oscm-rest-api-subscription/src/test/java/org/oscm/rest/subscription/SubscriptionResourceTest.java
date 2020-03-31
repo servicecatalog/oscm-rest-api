@@ -75,7 +75,7 @@ public class SubscriptionResourceTest {
                         params -> new RepresentationCollection<>(Lists.newArrayList(subscriptionRepresentation)));
 
         try {
-            response = subscriptionResource.getSubscriptions(uriInfo, subscriptionParameters);
+            response = subscriptionResource.getSubscriptions(uriInfo, subscriptionParameters.getEndpointVersion(), null);
         } catch (Exception e) {
             fail(e);
         }
@@ -101,7 +101,10 @@ public class SubscriptionResourceTest {
                 .thenReturn((content, params) -> true);
 
         try {
-            response = subscriptionResource.createSubscription(uriInfo, subscriptionCreationRepresentation, subscriptionParameters);
+            response = subscriptionResource.createSubscription(
+                    uriInfo,
+                    subscriptionCreationRepresentation,
+                    subscriptionParameters.getEndpointVersion());
         } catch (Exception e) {
             fail(e);
         }
@@ -118,7 +121,10 @@ public class SubscriptionResourceTest {
         when(subscriptionBackend.get()).thenReturn(params -> subscriptionDetailsRepresentation);
 
         try {
-            response = subscriptionResource.getSubscription(uriInfo, subscriptionParameters);
+            response = subscriptionResource.getSubscription(
+                    uriInfo,
+                    subscriptionParameters.getEndpointVersion(),
+                    subscriptionParameters.getId().toString());
         } catch (Exception e) {
             fail(e);
         }
@@ -137,7 +143,11 @@ public class SubscriptionResourceTest {
                 .thenReturn((content, params) -> true);
 
         try {
-            response = subscriptionResource.updateSubscription(uriInfo, subscriptionCreationRepresentation, subscriptionParameters);
+            response = subscriptionResource.updateSubscription(
+                    uriInfo,
+                    subscriptionCreationRepresentation,
+                    subscriptionParameters.getEndpointVersion(),
+                    subscriptionParameters.getId().toString());
         } catch (Exception e) {
             fail(e);
         }
@@ -155,7 +165,10 @@ public class SubscriptionResourceTest {
                 .thenReturn(params -> true);
 
         try {
-            response = subscriptionResource.deleteSubscription(uriInfo, subscriptionParameters);
+            response = subscriptionResource.deleteSubscription(
+                    uriInfo,
+                    subscriptionParameters.getEndpointVersion(),
+                    subscriptionParameters.getId().toString());
         } catch (Exception e) {
             fail(e);
         }
