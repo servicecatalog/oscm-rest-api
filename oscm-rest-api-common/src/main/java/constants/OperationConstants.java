@@ -34,5 +34,5 @@ public class OperationConstants {
           + "}";
 
   public static final String SETTING_LIST_EXAMPLE_RESPONSE =
-      "{\"items\":[" + SETTING_EXAMPLE_RESPONSE + "]}";;
+      "{\"items\":[" + SETTING_EXAMPLE_RESPONSE + "]}";
 }
