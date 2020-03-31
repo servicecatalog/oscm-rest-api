@@ -17,6 +17,7 @@ import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.types.exception.*;
 import org.oscm.internal.types.exception.IllegalArgumentException;
 import org.oscm.internal.vo.VOMarketplace;
+import org.oscm.rest.common.MarketplaceListType;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
@@ -32,7 +33,12 @@ public class MarketplaceBackend {
       getCollection() {
     return params -> {
       List<VOMarketplace> mps;
-      switch (params.getListType()) {
+
+      MarketplaceListType listType = params.getListType();
+      if (listType == null) {
+        listType = MarketplaceListType.OWNED;
+      }
+      switch (listType) {
         case ALL:
           mps = ms.getMarketplacesForOperator();
           break;
