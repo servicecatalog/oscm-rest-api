@@ -83,26 +83,12 @@ public class SubscriptionConstants {
           + "}\n"
           + "}\n";
 
-  public static final String LICENSE_MINIMUM_BODY =
-      "{\n"
-          + "\"user\": {\n"
-          + "\"userId\": \"customer@adfs.com\",\n"
-          + "\"id\": 10001\n"
-          + "},\n"
-          + "\"role\": {\n"
-          + "\"roleId\": \"SAMPLE_ROLE\",\n"
-          + "\"name\": \"RoleName\",\n"
-          + "\"description\": \"RoleDescription\",\n"
-          + "\"id\": 10000\n"
-          + "}\n"
-          + "}\n";
-
-  public static final String LICENSE_MAXIMUM_BODY =
+  public static final String LICENSE_CREATE_EXAMPLE_REQUEST =
       "{\n"
           + "\"user\": {\n"
           + "\"remoteLdapActive\": false,\n"
           + "\"organizationId\": \"d4e7e9f4\",\n"
-          + "\"userId\": \"customer@adfs.com\",\n"
+          + "\"userId\": \"customer\",\n"
           + "\"status\": \"ACTIVE\",\n"
           + "\"organizationRoles\": [\n"
           + "\"CUSTOMER\"\n"
@@ -112,13 +98,6 @@ public class SubscriptionConstants {
           + "],\n"
           + "\"etag\": 1,\n"
           + "\"id\": 10001\n"
-          + "},\n"
-          + "\"role\": {\n"
-          + "\"roleId\": \"SAMPLE_ROLE\",\n"
-          + "\"name\": \"\",\n"
-          + "\"description\": \"\",\n"
-          + "\"etag\": 0,\n"
-          + "\"id\": 10000\n"
           + "}\n"
           + "}";
 }
