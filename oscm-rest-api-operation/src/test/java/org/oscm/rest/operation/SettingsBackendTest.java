@@ -9,14 +9,7 @@
  */
 package org.oscm.rest.operation;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.Lists;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,11 +20,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ConfigurationService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.vo.VOConfigurationSetting;
-import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.SettingRepresentation;
 import org.oscm.rest.common.requestparameters.OperationParameters;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class SettingsBackendTest {
@@ -62,7 +62,7 @@ public class SettingsBackendTest {
   public void shouldGetSettings() {
     when(operatorService.getConfigurationSettings()).thenReturn(Lists.newArrayList(vo));
 
-    Response response = resource.getSettings(uriInfo, parameters);
+    Response response = resource.getSettings(uriInfo, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -89,24 +89,6 @@ public class SettingsBackendTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.OK.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
-  }
-
-  @Test
-  @SneakyThrows
-  public void shouldCreateSetting() {
-    doNothing().when(operatorService).saveConfigurationSetting(any());
-    when(configurationService.getVOConfigurationSetting(any(), any())).thenReturn(vo);
-
-    Response response = resource.createSetting(uriInfo, representation, parameters);
-
-    assertThat(response).isNotNull();
-    assertThat(response)
-        .extracting(Response::getStatus)
-        .isEqualTo(Response.Status.CREATED.getStatusCode());
-    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
-    assertThat((PostResponseBody) response.getEntity())
-        .extracting(PostResponseBody::getCreatedObjectId)
-        .isNotNull();
   }
 
   @Test

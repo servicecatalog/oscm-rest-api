@@ -16,19 +16,23 @@ package constants;
  */
 public class OperationConstants {
 
-  public static final String SETTING_POST_BODY =
-      "{\n"
-          + "\"informationId\": \"MP_ERROR_REDIRECT_HTTPS\",\n"
-          + "\"contextId\": \"global\",\n"
-          + "\"value\": \"https://redirect.com\"\n"
-          + "}";
-
-  public static final String SETTING_PUT_BODY =
+  public static final String SETTING_UPDATED_EXAMPLE_REQUEST =
       "{\n"
           + "\"informationId\": \"LOG_LEVEL\",\n"
           + "\"contextId\": \"global\",\n"
           + "\"value\": \"INFO\",\n"
-          + "\"etag\": 0,\n"
-          + "\"id\": 13\n"
+          + "\"etag\": 0\n"
           + "}";
+
+  public static final String SETTING_EXAMPLE_RESPONSE =
+      "{\n"
+          + "  \"informationId\": \"LOG_LEVEL\",\n"
+          + "  \"contextId\": \"global\",\n"
+          + "  \"value\": \"INFO\",\n"
+          + "  \"etag\": 0,\n"
+          + "  \"id\": 9\n"
+          + "}";
+
+  public static final String SETTING_LIST_EXAMPLE_RESPONSE =
+      "{\"items\":[" + SETTING_EXAMPLE_RESPONSE + "]}";;
 }
