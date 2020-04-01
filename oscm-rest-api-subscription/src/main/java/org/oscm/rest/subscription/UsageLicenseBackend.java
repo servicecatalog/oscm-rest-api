@@ -56,11 +56,6 @@ public class UsageLicenseBackend {
       getCollection() {
     return params -> {
       List<VOUsageLicense> licenses = ss.getSubscriptionDetails(params.getId()).getUsageLicenses();
-      //      List<VOUsageLicense> sss =
-      //          ss.getSubscriptionsForCurrentUser()
-      //              .stream()
-      //              .map(s -> s.getLicense())
-      //              .collect(Collectors.toList());
       List<UsageLicenseRepresentation> lics = UsageLicenseRepresentation.convert(licenses);
       return new RepresentationCollection<UsageLicenseRepresentation>(lics);
     };
