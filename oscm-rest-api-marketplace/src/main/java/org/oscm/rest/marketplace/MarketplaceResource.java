@@ -142,7 +142,7 @@ public class MarketplaceResource extends RestResource {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
                             value = MarketplaceConstants.MARKETPLACE_CREATE_EXAMPLE_RESPONSE,
-                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION)
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(
@@ -215,7 +215,7 @@ public class MarketplaceResource extends RestResource {
   @Operation(
       summary = "Delete a single marketplace",
       tags = {"marketplaces"},
-      description = "Deletes a single marketplace",
+      description = "Deletes a single marketplace based on given id of the object",
       responses = {
         @ApiResponse(responseCode = "204", description = "Marketplace deleted successfully")
       })
