@@ -11,8 +11,10 @@ package org.oscm.rest.subscription;
 
 import java.util.Collections;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUsageLicense;
@@ -53,9 +55,8 @@ public class UsageLicenseBackend {
   public RestBackend.GetCollection<UsageLicenseRepresentation, SubscriptionParameters>
       getCollection() {
     return params -> {
-      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
-      List<UsageLicenseRepresentation> lics =
-          UsageLicenseRepresentation.convert(sub.getUsageLicenses());
+      List<VOUsageLicense> licenses = ss.getSubscriptionDetails(params.getId()).getUsageLicenses();
+      List<UsageLicenseRepresentation> lics = UsageLicenseRepresentation.convert(licenses);
       return new RepresentationCollection<UsageLicenseRepresentation>(lics);
     };
   }

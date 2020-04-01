@@ -1,7 +1,14 @@
 package org.oscm.rest.subscription;
 
-import com.google.common.collect.Lists;
-import lombok.SneakyThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,24 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.SubscriptionService;
-import org.oscm.internal.vo.VORoleDefinition;
 import org.oscm.internal.vo.VOSubscriptionDetails;
-import org.oscm.internal.vo.VOUsageLicense;
-import org.oscm.internal.vo.VOUser;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
-import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class UsageLicenseBackendTest {
@@ -53,10 +49,18 @@ public class UsageLicenseBackendTest {
   @Test
   @SneakyThrows
   public void shouldGetLicenses() {
+    // given
     doReturn(vo).when(service).getSubscriptionDetails(anyLong());
 
-    Response response = resource.getLicenses(uriInfo, parameters);
+    // when
+    Response response =
+        resource.getLicenses(
+            uriInfo,
+            String.valueOf(parameters.getVersion()),
+            parameters.getId().toString(),
+            parameters.getUserId());
 
+    // then
     assertThat(response).isNotNull();
     assertThat(response)
         .extracting(Response::getStatus)
@@ -76,7 +80,13 @@ public class UsageLicenseBackendTest {
     when(service.addRevokeUser(any(), any(), any())).thenReturn(true);
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.createLicense(uriInfo, representation, parameters);
+    Response response =
+        resource.createLicense(
+            uriInfo,
+            representation,
+            String.valueOf(parameters.getVersion()),
+            String.valueOf(parameters.getId()),
+            parameters.getUserId());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -90,7 +100,14 @@ public class UsageLicenseBackendTest {
     when(service.addRevokeUser(any(), any(), any())).thenReturn(true);
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.updateLicense(uriInfo, representation, parameters);
+    Response response =
+        resource.updateLicense(
+            uriInfo,
+            representation,
+            String.valueOf(parameters.getVersion()),
+            String.valueOf(parameters.getId()),
+            parameters.getUserId(),
+            parameters.getLicKey().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -103,7 +120,14 @@ public class UsageLicenseBackendTest {
   public void shouldDeleteLicesne() {
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.deleteLicense(uriInfo, parameters);
+    Response response =
+        resource.deleteLicense(
+            uriInfo,
+            representation,
+            String.valueOf(parameters.getVersion()),
+            String.valueOf(parameters.getId()),
+            parameters.getUserId(),
+            parameters.getLicKey().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
