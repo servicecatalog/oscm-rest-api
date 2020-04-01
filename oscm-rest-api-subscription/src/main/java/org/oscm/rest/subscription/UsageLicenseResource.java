@@ -170,9 +170,9 @@ public class UsageLicenseResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
-      summary = "Delete a single usage license",
+      summary = "Deletes a single usage license for a subscirption",
       tags = {"usagelicenses"},
-      description = "Deletes a single usage license",
+      description = "Deletes a single usage license for a subscirption by given licenskey",
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license deleted successfully")
       })
