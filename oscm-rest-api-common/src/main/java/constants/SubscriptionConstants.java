@@ -16,7 +16,7 @@ package constants;
  */
 public class SubscriptionConstants {
 
-  public static final String SUBSCRIPTION_CREATE_EXAMPLE_REQUEST =
+  public static final String SUBSCRIPTION_EXAMPLE_REQUEST =
       "{\n"
           + "\"billingContactKey\": 10000,\n"
           + "\"paymentInfoKey\": 10001,\n"

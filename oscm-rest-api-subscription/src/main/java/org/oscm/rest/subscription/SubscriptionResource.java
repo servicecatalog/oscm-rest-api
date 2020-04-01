@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -116,9 +117,9 @@ public class SubscriptionResource extends RestResource {
                       schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.SUBSCRIPTION_CREATE_EXAMPLE_REQUEST,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(
@@ -156,9 +157,9 @@ public class SubscriptionResource extends RestResource {
                       schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.SUBSCRIPTION_CREATE_EXAMPLE_REQUEST,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(responseCode = "204", description = "Subscription updated successfully")
