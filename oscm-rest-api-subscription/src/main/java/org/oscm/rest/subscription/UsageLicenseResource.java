@@ -59,7 +59,7 @@ public class UsageLicenseResource extends RestResource {
       responses = {
         @ApiResponse(
             responseCode = "200",
-            description = "All usage licenses for te subscription",
+            description = "All usage licenses for the subscription",
             content =
                 @Content(
                     mediaType = "application/json",
