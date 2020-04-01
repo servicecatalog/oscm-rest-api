@@ -9,6 +9,13 @@
  */
 package org.oscm.rest.identity;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,15 +25,8 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.UserParameters;
 import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
+import org.oscm.rest.common.requestparameters.UserParameters;
 
 @ExtendWith(MockitoExtension.class)
 public class OnBehalfUserResourceTest {
@@ -49,14 +49,17 @@ public class OnBehalfUserResourceTest {
 
   @Test
   public void shouldCreateOnBehalfUser() {
-    OnBehalfUserRepresentation userRepresentation = SampleTestDataUtility.createOBUserRepresentation();
+    OnBehalfUserRepresentation userRepresentation =
+        SampleTestDataUtility.createOBUserRepresentation();
     UserParameters parameters = SampleTestDataUtility.createUserParameters();
 
     when(userBackend.postOnBehalfUser())
         .thenReturn((onBehalfUserRepresentation, userParameters) -> "newId");
 
     try {
-      result = obUserResource.createOnBehalfUser(uriInfo, userRepresentation, parameters);
+      result =
+          obUserResource.createOnBehalfUser(
+              uriInfo, userRepresentation, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -70,11 +73,13 @@ public class OnBehalfUserResourceTest {
   @Test
   public void shouldDeleteOnBehalfUser() {
     UserParameters parameters = SampleTestDataUtility.createUserParameters();
-
+    parameters.setId((long) 1);
     when(userBackend.deleteOBehalfUser()).thenReturn(userParameters -> true);
 
     try {
-      result = obUserResource.deleteOnBehalfUser(uriInfo, parameters);
+      result =
+          obUserResource.deleteOnBehalfUser(
+              uriInfo, parameters.getEndpointVersion(), String.valueOf(parameters.getId()));
     } catch (Exception e) {
       fail(e);
     }
