@@ -94,7 +94,7 @@ public class UsageLicenseResourceTest {
               uriInfo,
               usageLicenseRepresentation,
               String.valueOf(subscriptionParameters.getVersion()),
-              subscriptionParameters.getUserId());
+              String.valueOf(subscriptionParameters.getId()));
     } catch (Exception e) {
       fail(e);
     }

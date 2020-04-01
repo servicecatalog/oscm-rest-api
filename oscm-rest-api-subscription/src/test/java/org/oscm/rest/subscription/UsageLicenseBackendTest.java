@@ -55,7 +55,7 @@ public class UsageLicenseBackendTest {
     // when
     Response response =
         resource.getLicenses(
-            uriInfo, String.valueOf(parameters.getVersion()), parameters.getUserId());
+            uriInfo, String.valueOf(parameters.getVersion()), String.valueOf(parameters.getId()));
 
     // then
     assertThat(response).isNotNull();
@@ -82,7 +82,7 @@ public class UsageLicenseBackendTest {
             uriInfo,
             representation,
             String.valueOf(parameters.getVersion()),
-            parameters.getUserId());
+            String.valueOf(parameters.getId()));
 
     assertThat(response).isNotNull();
     assertThat(response)
