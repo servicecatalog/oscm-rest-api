@@ -15,5 +15,7 @@ public class DocDescription {
   public static final String ORGANIZATION_ID = "id of the organization";
   public static final String USER_ID = "id of the user";
   public static final String OBJECT_ID = "unique id of the object";
+  public static final String SUBSCRIPTION_ID = "id of the subscription";
+  public static final String SERVICE_ID = "id of the service";
   public static final String MARKETPLACE_TYPE = "type defining list of returned marketplaces";
 }
