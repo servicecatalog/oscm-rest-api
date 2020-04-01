@@ -100,7 +100,14 @@ public class UsageLicenseBackendTest {
     when(service.addRevokeUser(any(), any(), any())).thenReturn(true);
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.updateLicense(uriInfo, representation, parameters);
+    Response response =
+        resource.updateLicense(
+            uriInfo,
+            representation,
+            String.valueOf(parameters.getVersion()),
+            String.valueOf(parameters.getId()),
+            parameters.getUserId(),
+            parameters.getLicKey().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -113,7 +120,14 @@ public class UsageLicenseBackendTest {
   public void shouldDeleteLicesne() {
     when(service.getSubscriptionDetails(anyLong())).thenReturn(vo);
 
-    Response response = resource.deleteLicense(uriInfo, parameters);
+    Response response =
+        resource.deleteLicense(
+            uriInfo,
+            representation,
+            String.valueOf(parameters.getVersion()),
+            String.valueOf(parameters.getId()),
+            parameters.getUserId(),
+            parameters.getLicKey().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)

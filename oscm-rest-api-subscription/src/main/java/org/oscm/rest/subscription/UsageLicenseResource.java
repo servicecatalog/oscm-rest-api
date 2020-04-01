@@ -11,7 +11,6 @@ package org.oscm.rest.subscription;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -128,12 +127,12 @@ public class UsageLicenseResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
-      summary = "Update a single usage license",
+      summary = "Updates a single usage license for a subscription",
       tags = {"usagelicenses"},
-      description = "Updates a single usage license",
+      description = "Updates a single usage license for a subscirption by a given licenseKey",
       requestBody =
           @RequestBody(
-              description = "UsageLicenseRepresentation object to be updated",
+              description = "JSON representing a UsageLicenseRepresentation to be updated",
               required = true,
               content =
                   @Content(
@@ -141,7 +140,7 @@ public class UsageLicenseResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.LICENSE_CREATE_EXAMPLE_REQUEST,
+                            value = SubscriptionConstants.LICENSE_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
                       })),
       responses = {
@@ -150,8 +149,20 @@ public class UsageLicenseResource extends RestResource {
   public Response updateLicense(
       @Context UriInfo uriInfo,
       UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
+      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION) @PathParam(value = "licKey")
+          String licKey)
       throws Exception {
+    SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    params.setUserId(userId);
+    params.setLicKey(Long.valueOf(licKey));
     return put(uriInfo, ulb.put(), content, params);
   }
 
@@ -165,8 +176,23 @@ public class UsageLicenseResource extends RestResource {
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license deleted successfully")
       })
-  public Response deleteLicense(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
+  public Response deleteLicense(
+      @Context UriInfo uriInfo,
+      UsageLicenseRepresentation content,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
+      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION) @PathParam(value = "licKey")
+          String licKey)
       throws Exception {
+    SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    params.setUserId(userId);
+    params.setLicKey(Long.valueOf(licKey));
     return delete(uriInfo, ulb.delete(), params);
   }
 }

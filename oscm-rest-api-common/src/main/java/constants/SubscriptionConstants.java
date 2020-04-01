@@ -100,4 +100,24 @@ public class SubscriptionConstants {
           + "\"id\": 10001\n"
           + "}\n"
           + "}";
+
+  public static final String LICENSE_UPDATE_EXAMPLE_REQUEST =
+      "{\n"
+          + "\"user\": {\n"
+          + "\"remoteLdapActive\": false,\n"
+          + "\"organizationId\": \"d4e7e9f4\",\n"
+          + "\"userId\": \"customer\",\n"
+          + "\"status\": \"ACTIVE\",\n"
+          + "\"organizationRoles\": [\n"
+          + "\"TECHNOLOGY_PROVIDER\", \n"
+          + "\"CUSTOMER\"\n"
+          + "],\n"
+          + "\"userRoles\": [\n"
+          + "\"ORGANIZATION_ADMIN\",\n"
+          + "\"SERVICE_MANAGER\" \n"
+          + "],\n"
+          + "\"etag\": 1,\n"
+          + "\"id\": 10001\n"
+          + "}\n"
+          + "}";
 }

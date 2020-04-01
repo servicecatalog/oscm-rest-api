@@ -115,7 +115,12 @@ public class UsageLicenseResourceTest {
     try {
       response =
           usageLicenseResource.updateLicense(
-              uriInfo, usageLicenseRepresentation, subscriptionParameters);
+              uriInfo,
+              usageLicenseRepresentation,
+              String.valueOf(subscriptionParameters.getVersion()),
+              String.valueOf(subscriptionParameters.getId()),
+              subscriptionParameters.getUserId(),
+              subscriptionParameters.getLicKey().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -132,7 +137,14 @@ public class UsageLicenseResourceTest {
     when(usageLicenseBackend.delete()).thenReturn(params -> true);
 
     try {
-      response = usageLicenseResource.deleteLicense(uriInfo, subscriptionParameters);
+      response =
+          usageLicenseResource.deleteLicense(
+              uriInfo,
+              usageLicenseRepresentation,
+              String.valueOf(subscriptionParameters.getVersion()),
+              String.valueOf(subscriptionParameters.getId()),
+              subscriptionParameters.getUserId(),
+              subscriptionParameters.getLicKey().toString());
     } catch (Exception e) {
       fail(e);
     }
