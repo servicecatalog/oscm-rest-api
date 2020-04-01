@@ -18,7 +18,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -53,9 +52,9 @@ public class UsageLicenseResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Retrievs all usage licenses for the subscription",
+      summary = "Retrieves all usage licenses for the subscription",
       tags = {"usagelicenses"},
-      description = "Retrievs all usage licenses for the given subscription id",
+      description = "Retrieves all usage licenses for the given subscription id",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -63,7 +62,9 @@ public class UsageLicenseResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = UsageLicenseRepresentation.class)))
+                    examples = {
+                      @ExampleObject(SubscriptionConstants.LICENSE_LIST_EXAMPLE_RESPONSE)
+                    }))
       })
   public Response getLicenses(
       @Context UriInfo uriInfo,
@@ -71,13 +72,11 @@ public class UsageLicenseResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
-      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId)
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
       throws Exception {
     SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
     params.setId(Long.valueOf(id));
-    params.setUserId(userId);
     return getCollection(uriInfo, ulb.getCollection(), params);
   }
 
@@ -89,7 +88,7 @@ public class UsageLicenseResource extends RestResource {
       description = "Creates a license for the given subscription id",
       requestBody =
           @RequestBody(
-              description = "JSON representing UsageLicenseRepresentation to be created",
+              description = "JSON representing usage license to be created",
               required = true,
               content =
                   @Content(
@@ -113,13 +112,11 @@ public class UsageLicenseResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
-      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId)
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
       throws Exception {
     SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
     params.setId(Long.valueOf(id));
-    params.setUserId(userId);
     return post(uriInfo, ulb.post(), content, params);
   }
 
@@ -132,14 +129,14 @@ public class UsageLicenseResource extends RestResource {
       description = "Updates a single usage license for a subscirption by a given licenseKey",
       requestBody =
           @RequestBody(
-              description = "JSON representing a UsageLicenseRepresentation to be updated",
+              description = "JSON representing a usage license to be updated",
               required = true,
               content =
                   @Content(
                       schema = @Schema(implementation = UsageLicenseRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
                             value = SubscriptionConstants.LICENSE_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
                       })),
@@ -154,14 +151,12 @@ public class UsageLicenseResource extends RestResource {
           @PathParam(value = "version")
           String version,
       @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
-      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId,
-      @Parameter(description = DocDescription.ENDPOINT_VERSION) @PathParam(value = "licKey")
+      @Parameter(description = DocDescription.LICENSE_KEY) @PathParam(value = "licKey")
           String licKey)
       throws Exception {
     SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
     params.setId(Long.valueOf(id));
-    params.setUserId(userId);
     params.setLicKey(Long.valueOf(licKey));
     return put(uriInfo, ulb.put(), content, params);
   }
@@ -184,14 +179,12 @@ public class UsageLicenseResource extends RestResource {
           @PathParam(value = "version")
           String version,
       @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
-      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId,
-      @Parameter(description = DocDescription.ENDPOINT_VERSION) @PathParam(value = "licKey")
+      @Parameter(description = DocDescription.LICENSE_KEY) @PathParam(value = "licKey")
           String licKey)
       throws Exception {
     SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
     params.setId(Long.valueOf(id));
-    params.setUserId(userId);
     params.setLicKey(Long.valueOf(licKey));
     return delete(uriInfo, ulb.delete(), params);
   }

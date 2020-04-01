@@ -120,4 +120,7 @@ public class SubscriptionConstants {
           + "\"id\": 10001\n"
           + "}\n"
           + "}";
+
+  public static final String LICENSE_LIST_EXAMPLE_RESPONSE =
+      "{\"items\":[" + LICENSE_CREATE_EXAMPLE_REQUEST + "]}";
 }
