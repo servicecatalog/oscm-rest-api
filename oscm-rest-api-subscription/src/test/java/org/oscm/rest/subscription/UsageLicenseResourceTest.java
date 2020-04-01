@@ -64,8 +64,7 @@ public class UsageLicenseResourceTest {
           usageLicenseResource.getLicenses(
               uriInfo,
               String.valueOf(subscriptionParameters.getVersion()),
-              subscriptionParameters.getId().toString(),
-              subscriptionParameters.getUserId());
+              subscriptionParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -95,7 +94,6 @@ public class UsageLicenseResourceTest {
               uriInfo,
               usageLicenseRepresentation,
               String.valueOf(subscriptionParameters.getVersion()),
-              String.valueOf(subscriptionParameters.getId()),
               subscriptionParameters.getUserId());
     } catch (Exception e) {
       fail(e);
@@ -119,7 +117,6 @@ public class UsageLicenseResourceTest {
               usageLicenseRepresentation,
               String.valueOf(subscriptionParameters.getVersion()),
               String.valueOf(subscriptionParameters.getId()),
-              subscriptionParameters.getUserId(),
               subscriptionParameters.getLicKey().toString());
     } catch (Exception e) {
       fail(e);
@@ -143,7 +140,6 @@ public class UsageLicenseResourceTest {
               usageLicenseRepresentation,
               String.valueOf(subscriptionParameters.getVersion()),
               String.valueOf(subscriptionParameters.getId()),
-              subscriptionParameters.getUserId(),
               subscriptionParameters.getLicKey().toString());
     } catch (Exception e) {
       fail(e);
