@@ -99,7 +99,7 @@ public class UsageLicenseResource extends RestResource {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
                             value = SubscriptionConstants.LICENSE_CREATE_EXAMPLE_REQUEST,
-                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION),
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
                       })),
       responses = {
         @ApiResponse(
@@ -139,9 +139,9 @@ public class UsageLicenseResource extends RestResource {
                       schema = @Schema(implementation = UsageLicenseRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
                             value = SubscriptionConstants.LICENSE_UPDATE_EXAMPLE_REQUEST,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
                       })),
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license updated successfully")
