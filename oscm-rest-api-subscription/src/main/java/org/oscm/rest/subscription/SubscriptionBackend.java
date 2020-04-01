@@ -48,8 +48,8 @@ public class SubscriptionBackend {
 
       Collection<SubscriptionRepresentation> subscriptionRepresentations =
               subs.stream()
-                      .map(
-                              SubscriptionRepresentation::new).collect(Collectors.toList());
+                      .map(SubscriptionRepresentation::new)
+                      .collect(Collectors.toList());
 
       return new RepresentationCollection<>(subscriptionRepresentations);
     };
