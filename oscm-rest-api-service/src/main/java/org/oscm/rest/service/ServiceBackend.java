@@ -11,6 +11,7 @@ package org.oscm.rest.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -113,10 +114,10 @@ public class ServiceBackend {
   }
 
   protected String getLocale(String locale) {
-    if (locale == null || locale.isEmpty()) {
-      locale = "en";
+    if (Optional.of(locale).isPresent() && !locale.isEmpty()) {
+      return locale;
     }
-    return locale;
+    return "en";
   }
 
   public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCompatibles() {
