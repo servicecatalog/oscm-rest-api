@@ -47,7 +47,7 @@ public class TechnicalServiceResource extends RestResource {
   @Produces(CommonParams.JSON)
   @Operation(
       summary = "Retrieves all available technical services",
-      tags = {"services"},
+      tags = {"technicalservices"},
       description = "Returns all available technical services",
       responses = {
         @ApiResponse(
@@ -77,7 +77,7 @@ public class TechnicalServiceResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Operation(
       summary = "Creates a technical service",
-      tags = {"services"},
+      tags = {"technicalservices"},
       description = "Creates a technical service based on given request data",
       requestBody =
           @RequestBody(
@@ -116,7 +116,7 @@ public class TechnicalServiceResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   @Operation(
       summary = "Delete a single technical service",
-      tags = {"services"},
+      tags = {"technicalservices"},
       description = "Deletes a single technical service based on given id of the object",
       responses = {
         @ApiResponse(responseCode = "204", description = "Technical service deleted successfully")

@@ -10,24 +10,15 @@
 package org.oscm.rest.service;
 
 import constants.CommonConstants;
+import constants.DocDescription;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.BeanParam;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -35,6 +26,13 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices" + CommonParams.PATH_ID + "/suppliers")
 @Stateless
@@ -48,8 +46,8 @@ public class TSSupplierResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Produces(CommonParams.JSON)
   @Operation(
-      summary = "Get all suppliers for technical service",
-      tags = {"services"},
+      summary = "Retrieves suppliers for technical service",
+      tags = {"technicalservices"},
       description = "Returns all suppliers for technical service",
       responses = {
         @ApiResponse(
@@ -58,64 +56,91 @@ public class TSSupplierResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
+                    examples = {@ExampleObject(ServiceConstants.SUPPLIER_LIST_EXAMPLE_RESPONSE)},
                     schema = @Schema(implementation = OrganizationRepresentation.class)))
       })
-  public Response getSuppliers(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response getSuppliers(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
   @POST
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Create supplier for the technical service",
-      tags = {"services"},
-      description = "Creates supplier for the technical service",
+      summary = "Adds supplier to the technical service",
+      tags = {"technicalservices"},
+      description = "Adds supplier to the specific technical service",
       requestBody =
           @RequestBody(
-              description = "OrganizationRepresentation (supplier) object to be created",
+              description = "JSON representing organization (supplier) object to be added",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = OrganizationRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = ServiceConstants.TS_SUPPLIER_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = ServiceConstants.TS_SUPPLIER_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = ServiceConstants.SUPPLIER_ADD_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(
             responseCode = "201",
             description =
-                "Technical service supplier created successfully" + CommonConstants.ID_INFO)
+                "Technical service supplier created successfully. " + CommonConstants.ID_INFO)
       })
   public Response addSupplier(
       @Context UriInfo uriInfo,
       OrganizationRepresentation content,
-      @BeanParam ServiceParameters params)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
     return post(uriInfo, sb.post(), content, params);
   }
 
   @DELETE
   @Since(CommonParams.VERSION_1)
-  @Path("/{orgId}")
+  @Path(CommonParams.PATH_ORG_ID)
   @Operation(
-      summary = "Delete a single technical service supplier",
-      tags = {"services"},
-      description = "Deletes a single technical service supplier",
+      summary = "Deletes a single technical service supplier",
+      tags = {"technicalservices"},
+      description =
+          "Deletes a single technical service supplier based on given id of the object and id of the organization",
       responses = {
         @ApiResponse(
             responseCode = "204",
             description = "Technical service supplier deleted successfully")
       })
-  public Response removeSupplier(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response removeSupplier(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id,
+      @Parameter(description = DocDescription.ORGANIZATION_ID) @PathParam(value = "orgId")
+          String orgId)
       throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    params.setOrgId(orgId);
     return delete(uriInfo, sb.delete(), params);
   }
 }

@@ -497,11 +497,6 @@ public class ServiceConstants {
           + "    \"id\": 12001\n"
           + "}\n";
 
-  public static final String TS_SUPPLIER_MINIMUM_BODY =
-      "{\n" + "\"organizationId\": \"dummyorgid\"\n" + "}\n";;
-  public static final String TS_SUPPLIER_MAXIMUM_BODY =
-      "{\n" + "\"organizationId\": \"dummyorgid\"\n" + "}\n";
-
   public static final String TECHNICAL_SERVICE_EXAMPLE_RESPONSE =
       "{\n"
           + "      \"eventDefinitions\": [],\n"
@@ -657,4 +652,25 @@ public class ServiceConstants {
           + "\"billingIdentifier\": \"billing id\",\n"
           + "\"externalBilling\": false\n"
           + "}\n";
+
+  public static final String SUPPLIER_EXAMPLE_RESPONSE =
+      "{\n"
+          + "      \"organizationId\": \"a4140b27\",\n"
+          + "      \"address\": \"qwerty123456\",\n"
+          + "      \"email\": \"supplier@company.com\",\n"
+          + "      \"locale\": \"en\",\n"
+          + "      \"name\": \"Supplier INC\",\n"
+          + "      \"phone\": \"123454321\",\n"
+          + "      \"url\": \"http://test.com\",\n"
+          + "      \"description\": \"\",\n"
+          + "      \"domicileCountry\": \"PF\",\n"
+          + "      \"etag\": 1,\n"
+          + "      \"id\": 11000\n"
+          + "    }";
+
+  public static final String SUPPLIER_LIST_EXAMPLE_RESPONSE =
+          "{\"items\":[" + SUPPLIER_EXAMPLE_RESPONSE + "]}";
+
+  public static final String SUPPLIER_ADD_EXAMPLE_REQUEST =
+      "{\n" + "\"organizationId\": \"dummyorgid\"\n" + "}\n";
 }

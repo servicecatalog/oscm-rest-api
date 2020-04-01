@@ -63,7 +63,11 @@ public class TSSupplierResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(organizationRepresentation)));
 
     try {
-      response = tsSupplierResource.getSuppliers(uriInfo, serviceParameters);
+      response =
+          tsSupplierResource.getSuppliers(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -90,7 +94,11 @@ public class TSSupplierResourceTest {
 
     try {
       response =
-          tsSupplierResource.addSupplier(uriInfo, organizationRepresentation, serviceParameters);
+          tsSupplierResource.addSupplier(
+              uriInfo,
+              organizationRepresentation,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -107,7 +115,12 @@ public class TSSupplierResourceTest {
     when(tsSupplierBackend.delete()).thenReturn(serviceParameters1 -> true);
 
     try {
-      response = tsSupplierResource.removeSupplier(uriInfo, serviceParameters);
+      response =
+          tsSupplierResource.removeSupplier(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString(),
+              serviceParameters.getOrgId());
     } catch (Exception e) {
       fail(e);
     }
