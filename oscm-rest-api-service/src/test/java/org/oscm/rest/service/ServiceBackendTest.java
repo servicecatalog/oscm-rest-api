@@ -83,7 +83,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldGetServices() {
+  public void getCollection_getServices() {
     when(service.getSuppliedServices()).thenReturn(Lists.newArrayList(vo));
 
     Response response = resource.getServices(uriInfo, parameters);
@@ -102,7 +102,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldGetServicesForPhrase() {
+  public void getCollection_getServicesForSearchPhrase() {
 
     // given
     mockSearchService();
@@ -128,7 +128,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldCreateService() {
+  public void post_createService() {
     when(service.createService(any(), any(), any())).thenReturn(vo);
 
     Response response = resource.createService(uriInfo, representation, parameters);
@@ -141,7 +141,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldUpdateService() {
+  public void put_updateService() {
     when(service.updateService(any(), any())).thenReturn(vo);
 
     Response response = resource.updateService(uriInfo, representation, parameters);
@@ -154,7 +154,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldDeleteService() {
+  public void delete_Service() {
     doNothing().when(service).deleteService(any(Long.class));
 
     Response response = resource.deleteService(uriInfo, parameters);
@@ -168,7 +168,7 @@ public class ServiceBackendTest {
   @ParameterizedTest
   @EnumSource(ServiceStatus.class)
   @SneakyThrows
-  public void shouldSetServiceStatus(ServiceStatus serviceStatus) {
+  public void putStatus_setServiceStatus(ServiceStatus serviceStatus) {
     lenient().when(service.activateService(any())).thenReturn(vo);
     lenient().when(service.deactivateService(any())).thenReturn(vo);
     lenient().when(service.resumeService(any())).thenReturn(vo);
@@ -185,7 +185,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldGetCompatibleServices() {
+  public void getCompatibles_forStatus() {
     when(service.getCompatibleServices(any())).thenReturn(Lists.newArrayList(vo));
 
     Response response = compatiblesResource.getCompatibleServices(uriInfo, parameters);
@@ -198,7 +198,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldUpdateCompatibleServices() {
+  public void putCompatibles_updateCompatibleServices() {
     doNothing().when(service).setCompatibleServices(any(), any());
 
     Response response =
@@ -211,7 +211,7 @@ public class ServiceBackendTest {
   }
 
   @Test
-  public void shouldGetdefaultLocal() {
+  public void getLocale_default() {
     // given
     String expected = "en";
 
@@ -223,7 +223,7 @@ public class ServiceBackendTest {
   }
 
   @Test
-  public void shouldReturnGivenLocal() {
+  public void getLocale_given() {
     // given
     String expected = "de";
 
@@ -234,7 +234,8 @@ public class ServiceBackendTest {
     assertThat(expected).isEqualTo(result);
   }
 
-  public void shouldReturnService() throws ObjectNotFoundException, InvalidPhraseException {
+  @Test
+  public void getServices() throws ObjectNotFoundException, InvalidPhraseException {
     // given
     mockSearchService();
 
