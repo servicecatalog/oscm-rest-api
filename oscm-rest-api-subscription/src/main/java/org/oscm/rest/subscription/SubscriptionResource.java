@@ -63,7 +63,7 @@ public class SubscriptionResource extends RestResource {
         @DefaultValue("v1")
         @PathParam(value = "version")
         String version,
-      @Parameter(description = DocDescription.USER_ID) @PathParam(value = "userId") String userId)
+      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId)
      throws Exception {
       final SubscriptionParameters params = new SubscriptionParameters();
       params.setEndpointVersion(version);
