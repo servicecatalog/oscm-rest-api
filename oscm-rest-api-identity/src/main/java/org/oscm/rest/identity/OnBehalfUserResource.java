@@ -100,7 +100,7 @@ public class OnBehalfUserResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.ENDPOINT_VERSION) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.ONBEHALFUSER_ID) @PathParam(value = "id") String id)
       throws Exception {
     UserParameters params = new UserParameters();
     params.setEndpointVersion(version);
