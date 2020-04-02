@@ -108,7 +108,7 @@ public class SubscriptionResource extends RestResource {
       description = "Creates a subscription in current service based on given request data",
       requestBody =
           @RequestBody(
-              description = "JSON representing SubscriptionCreationRepresentation to be created",
+              description = "JSON representing subscription to be created",
               required = true,
               content =
                   @Content(
@@ -148,7 +148,7 @@ public class SubscriptionResource extends RestResource {
       description = "Updates a subscription based on given subscription id and request data",
       requestBody =
           @RequestBody(
-              description = "JSON representing SubscriptionCreationRepresentation to be updated",
+              description = "JSON representing subscription to be updated",
               required = true,
               content =
                   @Content(
