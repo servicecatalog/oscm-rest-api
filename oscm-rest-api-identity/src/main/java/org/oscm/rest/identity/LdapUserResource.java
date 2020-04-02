@@ -15,10 +15,16 @@ import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import org.oscm.rest.common.*;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.ResponseFactory;
+import org.oscm.rest.common.ResponseType;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
 
@@ -30,6 +36,7 @@ public class LdapUserResource extends RestResource {
 
   @GET
   @Since(CommonParams.VERSION_1)
+  @Produces(CommonParams.JSON)
   public Response getLdapUsers(@Context UriInfo uriInfo, @BeanParam UserParameters params)
       throws Exception {
     // FIXME: LDAP endpoints are disabled for now as the functionality is currently not supported

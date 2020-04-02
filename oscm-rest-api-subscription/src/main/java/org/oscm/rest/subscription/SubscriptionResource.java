@@ -9,6 +9,25 @@
  */
 package org.oscm.rest.subscription;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+
 import constants.CommonConstants;
 import constants.DocDescription;
 import constants.SubscriptionConstants;
@@ -19,19 +38,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
-import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless
@@ -43,6 +51,7 @@ public class SubscriptionResource extends RestResource {
 
   @GET
   @Since(CommonParams.VERSION_1)
+  @Produces(CommonParams.JSON)
   @Operation(
       summary = "Retrieves subscriptions for the specific user or for whole organization",
       tags = {"subscriptions"},
@@ -74,6 +83,7 @@ public class SubscriptionResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
+  @Produces(CommonParams.JSON)
   @Operation(
       summary = "Retrieves a subscription for a given service",
       tags = {"subscriptions"},
