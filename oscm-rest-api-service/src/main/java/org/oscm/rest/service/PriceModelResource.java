@@ -9,6 +9,23 @@
  */
 package org.oscm.rest.service;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.PriceModelRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+
 import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,22 +34,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.BeanParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.PriceModelRepresentation;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/pricemodel")
 @Stateless
@@ -44,6 +47,7 @@ public class PriceModelResource extends RestResource {
 
   @GET
   @Since(CommonParams.VERSION_1)
+  @Produces(CommonParams.JSON)
   @Operation(
       summary = "Get generic price model for the service",
       tags = {"services"},
@@ -65,6 +69,7 @@ public class PriceModelResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Path("/customer/{orgKey}")
+  @Produces(CommonParams.JSON)
   @Operation(
       summary = "Get customer-specific price model for service",
       tags = {"services"},

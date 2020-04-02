@@ -9,6 +9,26 @@
  */
 package org.oscm.rest.operation;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.SettingRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
+
 import constants.CommonConstants;
 import constants.DocDescription;
 import constants.OperationConstants;
@@ -19,19 +39,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.SettingRepresentation;
-import org.oscm.rest.common.requestparameters.OperationParameters;
 
 @Path(CommonParams.PATH_VERSION + "/settings")
 @Stateless
@@ -43,6 +52,7 @@ public class SettingsResource extends RestResource {
 
   @GET
   @Since(CommonParams.VERSION_1)
+  @Produces(CommonParams.JSON)
   @Operation(
       summary = "Retrieves all settings",
       tags = {"settings"},
@@ -72,6 +82,7 @@ public class SettingsResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
+  @Produces(CommonParams.JSON)
   @Operation(
       summary = "Retrieves a single setting",
       tags = {"settings"},
