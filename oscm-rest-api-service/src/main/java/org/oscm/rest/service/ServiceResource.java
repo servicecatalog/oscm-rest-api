@@ -10,8 +10,10 @@
 package org.oscm.rest.service;
 
 import constants.CommonConstants;
+import constants.DocDescription;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -51,7 +53,7 @@ public class ServiceResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Produces(CommonParams.JSON)
   @Operation(
-      summary = "Get all services",
+      summary = "Retrieves all services",
       tags = {"services"},
       description = "Returns services available for current user",
       responses = {
@@ -61,10 +63,18 @@ public class ServiceResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
+                    examples = {@ExampleObject(ServiceConstants.SERVICE_LIST_EXAMPLE_RESPONSE)},
                     schema = @Schema(implementation = ServiceRepresentation.class)))
       })
-  public Response getServices(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response getServices(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
       throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
@@ -80,10 +90,23 @@ public class ServiceResource extends RestResource {
         @ApiResponse(
             responseCode = "200",
             description = "A single service",
-            content = @Content(schema = @Schema(implementation = ServiceRepresentation.class)))
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    examples = {@ExampleObject(ServiceConstants.SERVICE_EXAMPLE_RESPONSE)},
+                    schema = @Schema(implementation = ServiceRepresentation.class)))
       })
-  public Response getService(@Context UriInfo uriInfo, @BeanParam ServiceParameters params)
+  public Response getService(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
     return get(uriInfo, sb.get(), params, true);
   }
 
