@@ -12,6 +12,8 @@ package org.oscm.rest.common;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import javax.ws.rs.core.MediaType;
+
 /**
  * Class for common shared parameters
  *
@@ -22,6 +24,7 @@ public class CommonParams {
   // global formating
   public static final Charset CHARSET = StandardCharsets.UTF_8;
   public static final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ssXXX";
+  public static final String JSON = MediaType.APPLICATION_JSON;
 
   // all available versions
   public static final int VERSION_1 = 1;
