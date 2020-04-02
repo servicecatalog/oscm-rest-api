@@ -11,10 +11,8 @@ package org.oscm.rest.subscription;
 
 import java.util.Collections;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUsageLicense;

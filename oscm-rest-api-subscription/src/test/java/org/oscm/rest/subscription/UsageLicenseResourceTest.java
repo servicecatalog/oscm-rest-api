@@ -1,12 +1,21 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2020
+ *
+ * <p>Creation Date: 02-04-2020
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.subscription;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
+import com.google.common.collect.Lists;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +30,6 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.SubscriptionRepresentation;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
-
-import com.google.common.collect.Lists;
 
 @ExtendWith(MockitoExtension.class)
 public class UsageLicenseResourceTest {
