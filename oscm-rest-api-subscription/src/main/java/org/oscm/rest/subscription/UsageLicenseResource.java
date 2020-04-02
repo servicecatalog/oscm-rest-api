@@ -9,27 +9,37 @@
  */
 package org.oscm.rest.subscription;
 
-import constants.CommonConstants;
-import constants.SubscriptionConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lombok.AccessLevel;
-import lombok.Setter;
+
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+
+import constants.CommonConstants;
+import constants.DocDescription;
+import constants.SubscriptionConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.AccessLevel;
+import lombok.Setter;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions" + CommonParams.PATH_ID + "/usagelicenses")
 @Stateless
@@ -42,20 +52,31 @@ public class UsageLicenseResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Get all usage licenses for the subscription",
+      summary = "Retrieves all usage licenses for the subscription",
       tags = {"usagelicenses"},
-      description = "Returns all usage licenses for the subscription",
+      description = "Retrieves all usage licenses for the given subscription id",
       responses = {
         @ApiResponse(
             responseCode = "200",
-            description = "Usage licenses list",
+            description = "All usage licenses for the subscription",
             content =
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = UsageLicenseRepresentation.class)))
+                    examples = {
+                      @ExampleObject(SubscriptionConstants.LICENSE_LIST_EXAMPLE_RESPONSE)
+                    }))
       })
-  public Response getLicenses(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
+  public Response getLicenses(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
       throws Exception {
+    SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
     return getCollection(uriInfo, ulb.getCollection(), params);
   }
 
@@ -64,23 +85,20 @@ public class UsageLicenseResource extends RestResource {
   @Operation(
       summary = "Create a license for the subscription",
       tags = {"usagelicenses"},
-      description = "Creates a license for the subscription",
+      description = "Creates a license for the given subscription id",
       requestBody =
           @RequestBody(
-              description = "UsageLicenseRepresentation object to be created",
+              description = "JSON representing usage license to be created",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = UsageLicenseRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.LICENSE_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = SubscriptionConstants.LICENSE_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = SubscriptionConstants.LICENSE_CREATE_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
                       })),
       responses = {
         @ApiResponse(
@@ -90,8 +108,15 @@ public class UsageLicenseResource extends RestResource {
   public Response createLicense(
       @Context UriInfo uriInfo,
       UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
       throws Exception {
+    SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
     return post(uriInfo, ulb.post(), content, params);
   }
 
@@ -99,25 +124,21 @@ public class UsageLicenseResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
-      summary = "Update a single usage license",
+      summary = "Updates a single usage license for a subscription",
       tags = {"usagelicenses"},
-      description = "Updates a single usage license",
+      description = "Updates a single usage license for a subscirption by a given licenseKey",
       requestBody =
           @RequestBody(
-              description = "UsageLicenseRepresentation object to be updated",
+              description = "JSON representing a usage license to be updated",
               required = true,
               content =
                   @Content(
                       schema = @Schema(implementation = UsageLicenseRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.LICENSE_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = SubscriptionConstants.LICENSE_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
+                            value = SubscriptionConstants.LICENSE_UPDATE_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
                       })),
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license updated successfully")
@@ -125,8 +146,18 @@ public class UsageLicenseResource extends RestResource {
   public Response updateLicense(
       @Context UriInfo uriInfo,
       UsageLicenseRepresentation content,
-      @BeanParam SubscriptionParameters params)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
+      @Parameter(description = DocDescription.LICENSE_KEY) @PathParam(value = "licKey")
+          String licKey)
       throws Exception {
+    SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    params.setLicKey(Long.valueOf(licKey));
     return put(uriInfo, ulb.put(), content, params);
   }
 
@@ -134,14 +165,27 @@ public class UsageLicenseResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
-      summary = "Delete a single usage license",
+      summary = "Deletes a single usage license for a subscirption",
       tags = {"usagelicenses"},
-      description = "Deletes a single usage license",
+      description = "Deletes a single usage license for a subscirption by given licenskey",
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license deleted successfully")
       })
-  public Response deleteLicense(@Context UriInfo uriInfo, @BeanParam SubscriptionParameters params)
+  public Response deleteLicense(
+      @Context UriInfo uriInfo,
+      UsageLicenseRepresentation content,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
+      @Parameter(description = DocDescription.LICENSE_KEY) @PathParam(value = "licKey")
+          String licKey)
       throws Exception {
+    SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    params.setLicKey(Long.valueOf(licKey));
     return delete(uriInfo, ulb.delete(), params);
   }
 }
