@@ -47,42 +47,6 @@ public class ServiceConstants {
           + "\"etag\": 7\n"
           + "}\n";
 
-  public static final String SERVICE_PRICE_MODEL_MINIMUM_BODY =
-      "{\n"
-          + "\"period\": \"MONTH\",\n"
-          + "\"currencyISOCode\": \"EUR\",\n"
-          + "\"etag\": 3,\n"
-          + "\"id\": 10000\n"
-          + "}\n";
-
-  public static final String SERVICE_PRICE_MODEL_MAXIMUM_BODY =
-      "{\n"
-          + "    \"description\": \"\",\n"
-          + "    \"period\": \"MONTH\",\n"
-          + "    \"pricePerPeriod\": 0,\n"
-          + "    \"pricePerUserAssignment\": 0,\n"
-          + "    \"currencyISOCode\": \"EUR\",\n"
-          + "    \"oneTimeFee\": 150,\n"
-          + "    \"type\": \"PRO_RATA\",\n"
-          + "    \"etag\": 2,\n"
-          + "    \"id\": 12001\n"
-          + "}\n";
-
-  public static final String CUSTOMER_PRICE_MODEL_MINIMUM_BODY = "{ }";
-
-  public static final String CUSTOMER_PRICE_MODEL_MAXIMUM_BODY =
-      "{\n"
-          + "   \"description\": \"\",\n"
-          + "    \"period\": \"MONTH\",\n"
-          + "    \"pricePerPeriod\": 0,\n"
-          + "    \"pricePerUserAssignment\": 0,\n"
-          + "    \"currencyISOCode\": \"EUR\",\n"
-          + "    \"oneTimeFee\": 251,\n"
-          + "    \"type\": \"PRO_RATA\",\n"
-          + "    \"etag\": 3,\n"
-          + "    \"id\": 12001\n"
-          + "}\n";
-
   public static final String TECHNICAL_SERVICE_EXAMPLE_RESPONSE =
       "{\n"
           + "      \"eventDefinitions\": [],\n"
@@ -459,4 +423,44 @@ public class ServiceConstants {
           + "        }\n"
           + "      ]\n"
           + "}";
+
+  public static final String PRICE_MODEL_EXAMPLE_RESPONSE =
+      "{\n"
+          + "  \"description\": \"test price\",\n"
+          + "  \"period\": \"MONTH\",\n"
+          + "  \"pricePerPeriod\": 2,\n"
+          + "  \"pricePerUserAssignment\": 0,\n"
+          + "  \"currencyISOCode\": \"EUR\",\n"
+          + "  \"oneTimeFee\": 10,\n"
+          + "  \"type\": \"PRO_RATA\",\n"
+          + "  \"etag\": 1,\n"
+          + "  \"id\": 10003\n"
+          + "}";
+
+  public static final String CUSTOMER_PRICE_MODEL_EXAMPLE_RESPONSE =
+      "{\n"
+          + "  \"description\": \"description\",\n"
+          + "  \"period\": \"MONTH\",\n"
+          + "  \"pricePerPeriod\": 1,\n"
+          + "  \"pricePerUserAssignment\": 0,\n"
+          + "  \"currencyISOCode\": \"EUR\",\n"
+          + "  \"oneTimeFee\": 100,\n"
+          + "  \"type\": \"PRO_RATA\",\n"
+          + "  \"selectedParameters\": [],\n"
+          + "  \"etag\": 1,\n"
+          + "  \"id\": 11000\n"
+          + "}";
+
+  public static final String PRICE_MODEL_UPDATE_EXAMPLE_REQUEST =
+      "{\n"
+          + "    \"description\": \"\",\n"
+          + "    \"period\": \"MONTH\",\n"
+          + "    \"pricePerPeriod\": 0,\n"
+          + "    \"pricePerUserAssignment\": 0,\n"
+          + "    \"currencyISOCode\": \"EUR\",\n"
+          + "    \"oneTimeFee\": 150,\n"
+          + "    \"type\": \"PRO_RATA\",\n"
+          + "    \"etag\": 2,\n"
+          + "    \"id\": 12001\n"
+          + "}\n";
 }

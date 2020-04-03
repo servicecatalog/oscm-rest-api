@@ -97,7 +97,7 @@ public class ServiceResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
@@ -174,7 +174,7 @@ public class ServiceResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
@@ -213,7 +213,7 @@ public class ServiceResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
@@ -237,7 +237,7 @@ public class ServiceResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);

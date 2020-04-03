@@ -60,7 +60,11 @@ public class PriceModelResourceTest {
     when(priceModelBackend.get()).thenReturn(serviceParameters1 -> priceModelRepresentation);
 
     try {
-      response = priceModelResource.get(uriInfo, serviceParameters);
+      response =
+          priceModelResource.get(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -79,7 +83,12 @@ public class PriceModelResourceTest {
         .thenReturn((priceModelRepresentation1, serviceParameters1) -> true);
 
     try {
-      response = priceModelResource.update(uriInfo, priceModelRepresentation, serviceParameters);
+      response =
+          priceModelResource.update(
+              uriInfo,
+              priceModelRepresentation,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -97,7 +106,12 @@ public class PriceModelResourceTest {
         .thenReturn(serviceParameters1 -> priceModelRepresentation);
 
     try {
-      response = priceModelResource.getForCustomer(uriInfo, serviceParameters);
+      response =
+          priceModelResource.getForCustomer(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString(),
+              serviceParameters.getOrgKey().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -118,7 +132,11 @@ public class PriceModelResourceTest {
     try {
       response =
           priceModelResource.updateForCustomer(
-              uriInfo, priceModelRepresentation, serviceParameters);
+              uriInfo,
+              priceModelRepresentation,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString(),
+              serviceParameters.getOrgKey().toString());
     } catch (Exception e) {
       fail(e);
     }

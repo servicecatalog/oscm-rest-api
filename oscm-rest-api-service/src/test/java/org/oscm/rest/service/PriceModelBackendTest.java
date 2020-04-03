@@ -48,7 +48,8 @@ public class PriceModelBackendTest {
   public void shouldGetPricemodel() {
     when(service.getServiceDetails(any())).thenReturn(vo);
 
-    Response response = resource.get(uriInfo, parameters);
+    Response response =
+        resource.get(uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -61,7 +62,12 @@ public class PriceModelBackendTest {
   public void shouldGetPricemodelForCustomer() {
     when(service.getServiceForCustomer(any(), any())).thenReturn(vo);
 
-    Response response = resource.getForCustomer(uriInfo, parameters);
+    Response response =
+        resource.getForCustomer(
+            uriInfo,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString(),
+            parameters.getOrgKey().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -74,7 +80,12 @@ public class PriceModelBackendTest {
   public void shouldUpdatePricemodel() {
     when(service.savePriceModel(any(), any())).thenReturn(vo);
 
-    Response response = resource.update(uriInfo, representation, parameters);
+    Response response =
+        resource.update(
+            uriInfo,
+            representation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -87,7 +98,13 @@ public class PriceModelBackendTest {
   public void shouldUpdatePricemodelForCustomer() {
     when(service.savePriceModelForCustomer(any(), any(), any())).thenReturn(vo);
 
-    Response response = resource.updateForCustomer(uriInfo, representation, parameters);
+    Response response =
+        resource.updateForCustomer(
+            uriInfo,
+            representation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString(),
+            parameters.getOrgKey().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
