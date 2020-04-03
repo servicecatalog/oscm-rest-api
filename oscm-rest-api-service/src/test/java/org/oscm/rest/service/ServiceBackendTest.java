@@ -87,7 +87,7 @@ public class ServiceBackendTest {
         .isEqualTo(1);
   }
 
-/*  @Test
+  /*  @Test
   @SneakyThrows
   public void shouldCreateService() {
     when(service.createService(any(), any(), any())).thenReturn(vo);
@@ -162,7 +162,9 @@ public class ServiceBackendTest {
   public void shouldGetCompatibleServices() {
     when(service.getCompatibleServices(any())).thenReturn(Lists.newArrayList(vo));
 
-    Response response = compatiblesResource.getCompatibleServices(uriInfo, parameters);
+    Response response =
+        compatiblesResource.getCompatibleServices(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -176,7 +178,11 @@ public class ServiceBackendTest {
     doNothing().when(service).setCompatibleServices(any(), any());
 
     Response response =
-        compatiblesResource.setCompatibleServices(uriInfo, compatiblesCollection, parameters);
+        compatiblesResource.setCompatibleServices(
+            uriInfo,
+            compatiblesCollection,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)

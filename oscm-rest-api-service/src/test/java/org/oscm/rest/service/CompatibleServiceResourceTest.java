@@ -62,7 +62,11 @@ public class CompatibleServiceResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation)));
 
     try {
-      response = compatibleServiceResource.getCompatibleServices(uriInfo, serviceParameters);
+      response =
+          compatibleServiceResource.getCompatibleServices(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -89,7 +93,11 @@ public class CompatibleServiceResourceTest {
 
     try {
       response =
-          compatibleServiceResource.setCompatibleServices(uriInfo, getContent(), serviceParameters);
+          compatibleServiceResource.setCompatibleServices(
+              uriInfo,
+              getContent(),
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
