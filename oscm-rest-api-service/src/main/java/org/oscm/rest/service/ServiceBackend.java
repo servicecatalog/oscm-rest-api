@@ -13,10 +13,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
+import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
+import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
@@ -39,9 +41,17 @@ public class ServiceBackend {
 
   public RestBackend.Post<ServiceDetailsRepresentation, ServiceParameters> post() {
     return (content, params) -> {
-      // image will be handled in separate URL
-      VOServiceDetails vo =
-          sps.createService(content.getTechnicalService().getVO(), content.getVO(), null);
+      List<VOTechnicalService> technicalServices =
+          sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+      VOServiceDetails vo = new VOServiceDetails();
+      for (VOTechnicalService technicalService : technicalServices) {
+        Long serviceId = content.getTechnicalService().getId();
+        if (Long.valueOf(technicalService.getKey()).equals(serviceId)) {
+          vo = sps.createService(technicalService, content.getVO(), null);
+        }
+      }
+
       return PostResponseBody.of()
           .createdObjectId(String.valueOf(vo.getKey()))
           .createdObjectName(vo.getServiceId())

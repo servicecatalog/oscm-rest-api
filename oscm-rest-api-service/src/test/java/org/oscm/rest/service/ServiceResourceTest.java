@@ -53,7 +53,8 @@ public class ServiceResourceTest {
   public void setUp() {
     voServiceDetails = SampleTestDataUtility.createVOServiceDetails();
     serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
-    serviceDetailsRepresentation = SampleTestDataUtility.createServiceDetailsRepresentation(voServiceDetails);
+    serviceDetailsRepresentation =
+        SampleTestDataUtility.createServiceDetailsRepresentation(voServiceDetails);
     statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
@@ -72,7 +73,7 @@ public class ServiceResourceTest {
                 new RepresentationCollection<>(Lists.newArrayList(serviceRepresentation)));
 
     try {
-      response = serviceResource.getServices(uriInfo, serviceParameters);
+      response = serviceResource.getServices(uriInfo, serviceParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -99,7 +100,8 @@ public class ServiceResourceTest {
 
     try {
       response =
-          serviceResource.createService(uriInfo, serviceDetailsRepresentation, serviceParameters);
+          serviceResource.createService(
+              uriInfo, serviceDetailsRepresentation, serviceParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -116,7 +118,11 @@ public class ServiceResourceTest {
     when(serviceBackend.get()).thenReturn(serviceParameters1 -> serviceDetailsRepresentation);
 
     try {
-      response = serviceResource.getService(uriInfo, serviceParameters);
+      response =
+          serviceResource.getService(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -136,7 +142,11 @@ public class ServiceResourceTest {
 
     try {
       response =
-          serviceResource.updateService(uriInfo, serviceDetailsRepresentation, serviceParameters);
+          serviceResource.updateService(
+              uriInfo,
+              serviceDetailsRepresentation,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -153,7 +163,11 @@ public class ServiceResourceTest {
     when(serviceBackend.delete()).thenReturn(serviceParameters1 -> true);
 
     try {
-      response = serviceResource.deleteService(uriInfo, serviceParameters);
+      response =
+          serviceResource.deleteService(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
@@ -171,7 +185,12 @@ public class ServiceResourceTest {
         .thenReturn((statusRepresentation1, serviceParameters1) -> true);
 
     try {
-      response = serviceResource.setServiceState(uriInfo, statusRepresentation, serviceParameters);
+      response =
+          serviceResource.setServiceState(
+              uriInfo,
+              statusRepresentation,
+              serviceParameters.getEndpointVersion(),
+              serviceParameters.getId().toString());
     } catch (Exception e) {
       fail(e);
     }
