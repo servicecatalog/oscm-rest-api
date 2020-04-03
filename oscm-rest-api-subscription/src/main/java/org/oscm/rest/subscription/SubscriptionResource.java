@@ -10,8 +10,10 @@
 package org.oscm.rest.subscription;
 
 import constants.CommonConstants;
+import constants.DocDescription;
 import constants.SubscriptionConstants;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -42,9 +44,10 @@ public class SubscriptionResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Get all subscriptions for the service",
+      summary = "Retrieves subscriptions for the specific user or for whole organization",
       tags = {"subscriptions"},
-      description = "Returns all subscriptions for the service",
+      description = "If a user id is provided, the subscription list for the user will be returned, " +
+                    "otherwise the entire subscription list for organization will be returned",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -55,17 +58,26 @@ public class SubscriptionResource extends RestResource {
                     schema = @Schema(implementation = SubscriptionCreationRepresentation.class)))
       })
   public Response getSubscriptions(
-      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
-    return getCollection(uriInfo, sb.getCollection(), params);
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+        @DefaultValue("v1")
+        @PathParam(value = "version")
+        String version,
+      @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId)
+     throws Exception {
+      final SubscriptionParameters params = new SubscriptionParameters();
+      params.setEndpointVersion(version);
+      params.setUserId(userId);
+      return getCollection(uriInfo, sb.getCollection(), params);
   }
 
   @GET
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
   @Operation(
-      summary = "Get a single subscription for a service",
+      summary = "Retrieves a subscription for a given service",
       tags = {"subscriptions"},
-      description = "Returns a single subscription",
+      description = "Returns a single subscription based on the provided service id",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -75,8 +87,17 @@ public class SubscriptionResource extends RestResource {
                     schema = @Schema(implementation = SubscriptionCreationRepresentation.class)))
       })
   public Response getSubscription(
-      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
-    return get(uriInfo, sb.get(), params, true);
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+      @DefaultValue("v1")
+      @PathParam(value = "version")
+           String version,
+      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
+    throws Exception {
+      final SubscriptionParameters params = new SubscriptionParameters();
+      params.setEndpointVersion(version);
+      params.setId(Long.valueOf(id));
+      return get(uriInfo, sb.get(), params, true);
   }
 
   @POST
@@ -84,23 +105,20 @@ public class SubscriptionResource extends RestResource {
   @Operation(
       summary = "Create a subscription",
       tags = {"subscriptions"},
-      description = "Creates a subscription",
+      description = "Creates a subscription in current service based on given request data",
       requestBody =
           @RequestBody(
-              description = "SubscriptionCreationRepresentation object to be created",
+              description = "JSON representing subscription to be created",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(
@@ -110,9 +128,15 @@ public class SubscriptionResource extends RestResource {
   public Response createSubscription(
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
-      @BeanParam SubscriptionParameters params)
-      throws Exception {
-    return post(uriInfo, sb.post(), content, params);
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+      @DefaultValue("v1")
+      @PathParam(value = "version")
+              String version)
+    throws Exception {
+      final SubscriptionParameters params = new SubscriptionParameters();
+      params.setEndpointVersion(version);
+      content.setId(params.getId());
+      return post(uriInfo, sb.post(), content, params);
   }
 
   @PUT
@@ -121,23 +145,20 @@ public class SubscriptionResource extends RestResource {
   @Operation(
       summary = "Update a single subscription",
       tags = {"subscriptions"},
-      description = "Updates a single subscription",
+      description = "Updates a subscription based on given subscription id and request data",
       requestBody =
           @RequestBody(
-              description = "SubscriptionCreationRepresentation object to be updated",
+              description = "JSON representing subscription to be updated",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = SubscriptionCreationRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = SubscriptionConstants.SUBSCRIPTION_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = SubscriptionConstants.SUBSCRIPTION_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(responseCode = "204", description = "Subscription updated successfully")
@@ -145,9 +166,17 @@ public class SubscriptionResource extends RestResource {
   public Response updateSubscription(
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
-      @BeanParam SubscriptionParameters params)
-      throws Exception {
-    return put(uriInfo, sb.put(), content, params);
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+      @DefaultValue("v1")
+      @PathParam(value = "version")
+              String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
+    throws Exception {
+      final SubscriptionParameters params = new SubscriptionParameters();
+      params.setEndpointVersion(version);
+      params.setId(Long.valueOf(id));
+      content.setId(params.getId());
+      return put(uriInfo, sb.put(), content, params);
   }
 
   @DELETE
@@ -156,12 +185,21 @@ public class SubscriptionResource extends RestResource {
   @Operation(
       summary = "Delete a single subscription",
       tags = {"subscriptions"},
-      description = "Deletes a single subscription",
+      description = "Delete a single subscription based on given subscription id",
       responses = {
         @ApiResponse(responseCode = "204", description = "Subscription deleted successfully")
       })
   public Response deleteSubscription(
-      @Context UriInfo uriInfo, @BeanParam SubscriptionParameters params) throws Exception {
-    return delete(uriInfo, sb.delete(), params);
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+      @DefaultValue("v1")
+      @PathParam(value = "version")
+              String version,
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
+    throws Exception {
+      final SubscriptionParameters params = new SubscriptionParameters();
+      params.setEndpointVersion(version);
+      params.setId(Long.valueOf(id));
+      return delete(uriInfo, sb.delete(), params);
   }
 }

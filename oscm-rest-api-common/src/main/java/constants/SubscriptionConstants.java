@@ -16,39 +16,7 @@ package constants;
  */
 public class SubscriptionConstants {
 
-  public static final String SUBSCRIPTION_MINIMUM_BODY =
-      "{\n"
-          + "\"billingContactKey\": 10002,\n"
-          + "\"paymentInfoKey\": 10001,\n"
-          + "\"users\": [],\n"
-          + "\"udas\": [\n"
-          + "{\n"
-          + "\"udaDefinition\": {\n"
-          + "\"udaId\": \"TENANT_ID\",\n"
-          + "\"targetType\": \"CUSTOMER_SUBSCRIPTION\",\n"
-          + "\"configurationType\": \"USER_OPTION_MANDATORY\",\n"
-          + "\"id\": 10000,\n"
-          + "\"etag\": 2\n"
-          + "},\n"
-          + "\"udaValue\": \"someudavalue\"\n"
-          + "}\n"
-          + "],\n"
-          + "\"subscriptionId\": \"restSubscriptionId\",\n"
-          + "\"service\": {\n"
-          + "\"id\": 10000,\n"
-          + "\"etag\": 4,\n"
-          + "\"parameters\": [\n"
-          + "{\n"
-          + "\"parameterDefinition\": {\n"
-          + "\"parameterId\": \"STACK_NAME\"\n"
-          + "},\n"
-          + "\"value\": \"RESTStackName\"\n"
-          + "}\n"
-          + "]\n"
-          + "}\n"
-          + "}\n";
-
-  public static final String SUBSCRIPTION_MAXIMUM_BODY =
+  public static final String SUBSCRIPTION_EXAMPLE_REQUEST =
       "{\n"
           + "\"billingContactKey\": 10000,\n"
           + "\"paymentInfoKey\": 10001,\n"
