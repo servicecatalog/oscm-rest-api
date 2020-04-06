@@ -118,14 +118,14 @@ public class TSSupplierResource extends RestResource {
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ORG_ID)
   @Operation(
-      summary = "Deletes a single technical service supplier",
+      summary = "Removes supplier from a single technical service",
       tags = {"technicalservices"},
       description =
-          "Deletes a single technical service supplier based on given id of the object and id of the organization",
+          "Removes supplier from a specific technical service based on given id of the technical service and id of the organization",
       responses = {
         @ApiResponse(
             responseCode = "204",
-            description = "Technical service supplier deleted successfully")
+            description = "Technical service supplier removed successfully")
       })
   public Response removeSupplier(
       @Context UriInfo uriInfo,
