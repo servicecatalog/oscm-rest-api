@@ -18,8 +18,8 @@ public class ServiceParameters extends RequestParameters {
 
   private String orgId;
 
-  @QueryParam("serviceName")
-  private String serviceName;
+  @QueryParam("searchPhrase")
+  private String searchPhrase;
 
   @QueryParam("locale")
   private String locale;
@@ -52,12 +52,12 @@ public class ServiceParameters extends RequestParameters {
     this.orgId = orgId;
   }
 
-  public String getServiceName() {
-    return serviceName;
+  public String getSearchPhrase() {
+    return searchPhrase;
   }
 
-  public void setServiceName(String serviceName) {
-    this.serviceName = serviceName;
+  public void setSearchPhrase(String searchPhrase) {
+    this.searchPhrase = searchPhrase;
   }
 
   public String getLocale() {

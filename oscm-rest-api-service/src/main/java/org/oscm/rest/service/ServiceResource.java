@@ -76,19 +76,19 @@ public class ServiceResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.LICENSE_KEY, required = false)
-          @QueryParam(value = "serviceName")
-          String serviceName,
-      @Parameter(description = DocDescription.LICENSE_KEY, required = false)
+      @Parameter(description = DocDescription.SEARCH_PHRASE, required = false)
+          @QueryParam(value = "searchPhrase")
+          String searchPhrase,
+      @Parameter(description = DocDescription.LOCALE, required = false)
           @QueryParam(value = "locale")
           String locale,
-      @Parameter(description = DocDescription.LICENSE_KEY, required = false)
+      @Parameter(description = DocDescription.MARKETPLACE_ID, required = false)
           @QueryParam(value = "marketplaceId")
           String marketplaceId)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
-    params.setServiceName(serviceName);
+    params.setSearchPhrase(searchPhrase);
     params.setLanguage(locale);
     params.setMarketPlaceId(marketplaceId);
     return getCollection(uriInfo, sb.getCollection(), params);

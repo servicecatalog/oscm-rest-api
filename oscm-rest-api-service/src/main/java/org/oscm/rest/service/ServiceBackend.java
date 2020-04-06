@@ -91,18 +91,26 @@ public class ServiceBackend {
 
   public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCollection() {
     return params -> {
-      if (params.getServiceName() == null || params.getServiceName().isEmpty()) {
-        List<VOService> list = sps.getSuppliedServices();
-        return new RepresentationCollection<ServiceRepresentation>(
-            ServiceRepresentation.toCollection(list));
-      } else {
-        String loc = getLocale(params.getLocale());
-        List<VOService> services =
-            getServices(params.getMarketPlaceId(), loc, params.getServiceName());
-        return new RepresentationCollection<ServiceRepresentation>(
-            ServiceRepresentation.toCollection(services));
+      final Optional<String> phrase = Optional.ofNullable(params.getSearchPhrase());
+      if (phrase.isPresent()) {
+        return createSearchResult(params);
       }
+      return createServiceList();
     };
+  }
+
+  private RepresentationCollection<ServiceRepresentation> createSearchResult(
+      ServiceParameters params) throws ObjectNotFoundException, InvalidPhraseException {
+    List<VOService> services =
+        getServices(
+            params.getMarketPlaceId(), getLocale(params.getLocale()), params.getSearchPhrase());
+    return new RepresentationCollection<ServiceRepresentation>(
+        ServiceRepresentation.toCollection(services));
+  }
+
+  private RepresentationCollection<ServiceRepresentation> createServiceList() {
+    return new RepresentationCollection<ServiceRepresentation>(
+        ServiceRepresentation.toCollection(sps.getSuppliedServices()));
   }
 
   protected List<VOService> getServices(String mpId, String locale, String searchPhrase)
@@ -116,7 +124,6 @@ public class ServiceBackend {
                 .searchServices(mp.getMarketplaceId(), locale, searchPhrase)
                 .getServices());
       }
-
     } else {
       slr.addAll(searchService.searchServices(mpId, locale, searchPhrase).getServices());
     }
@@ -124,10 +131,7 @@ public class ServiceBackend {
   }
 
   protected String getLocale(String locale) {
-    if (Optional.of(locale).isPresent() && !locale.isEmpty()) {
-      return locale;
-    }
-    return "en";
+    return Optional.ofNullable(locale).filter(l -> !l.isEmpty()).orElse("en");
   }
 
   public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCompatibles() {

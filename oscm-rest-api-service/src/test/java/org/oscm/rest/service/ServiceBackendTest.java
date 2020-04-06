@@ -118,9 +118,6 @@ public class ServiceBackendTest {
 
     // given
     mockSearchService();
-    parameters.setLanguage("en");
-    parameters.setServiceName("testService");
-    parameters.setMarketPlaceId("123456789");
 
     // when
     Response response =
