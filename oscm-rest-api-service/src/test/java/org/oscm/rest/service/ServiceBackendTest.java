@@ -1,6 +1,21 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2020
+ *
+ * <p>Creation Date: 06-04-2020
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 import com.google.common.collect.Lists;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,18 +27,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOServiceDetails;
-import org.oscm.internal.vo.VOTechnicalService;
+import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.ServiceStatus;
 import org.oscm.rest.common.representation.*;
-import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ServiceBackendTest {

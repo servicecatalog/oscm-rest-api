@@ -9,7 +9,13 @@
  */
 package org.oscm.rest.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
 import com.google.common.collect.Lists;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,17 +24,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceRepresentation;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @ExtendWith(MockitoExtension.class)
 public class CompatibleServiceResourceTest {
