@@ -16,16 +16,8 @@ package constants;
  */
 public class IdentityConstants {
 
-  public static final String ONBEHALFUSERS_MINIMUM_BODY =
+  public static final String ONBEHALFUSERS_EXAMPLE_REQUEST =
       "{\n" + "\"organizationId\": \"959c9bf7\",\n" + "\"password\": \"somePasword\"\n" + "}";
-
-  public static final String ONBEHALFUSERS_MAXIMUM_BODY =
-      "{\n"
-          + "\"organizationId\": \"959c9bf7\",\n"
-          + "\"password\": \"somePasword\",\n"
-          + "\"userId\": \"obUserId\",\n"
-          + "\"etag\": 1\n"
-          + "}";
 
   public static final String USER_ROLE_EXAMPLE_RESPONSE =
       "{\"userRoles\": [\"PLATFORM_OPERATOR\",\"MARKETPLACE_OWNER\",\"ORGANIZATION_ADMIN\"],\"etag\": 0,\"id\": 1000}";
