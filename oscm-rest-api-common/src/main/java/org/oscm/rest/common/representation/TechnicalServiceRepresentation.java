@@ -9,13 +9,18 @@
  */
 package org.oscm.rest.common.representation;
 
-import org.oscm.internal.types.enumtypes.ServiceAccessType;
-import org.oscm.internal.vo.*;
-
-import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javax.ws.rs.WebApplicationException;
+
+import org.oscm.internal.types.enumtypes.ServiceAccessType;
+import org.oscm.internal.vo.VOEventDefinition;
+import org.oscm.internal.vo.VOParameterDefinition;
+import org.oscm.internal.vo.VORoleDefinition;
+import org.oscm.internal.vo.VOTechnicalService;
+import org.oscm.internal.vo.VOTechnicalServiceOperation;
 
 public class TechnicalServiceRepresentation extends Representation {
 
@@ -40,6 +45,16 @@ public class TechnicalServiceRepresentation extends Representation {
   private List<OperationRepresentation> technicalServiceOperations =
       new ArrayList<OperationRepresentation>();
   private boolean externalBilling;
+  // only for import of technical service
+  private byte[] technicalService;
+
+  public byte[] getTechnicalService() {
+    return technicalService;
+  }
+
+  public void setTechnicalService(byte[] technicalService) {
+    this.technicalService = technicalService;
+  }
 
   private transient VOTechnicalService vo;
 
