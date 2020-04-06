@@ -14,9 +14,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+import com.google.common.collect.Lists;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -32,10 +33,6 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.RolesRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
-
-import com.google.common.collect.Lists;
-
-import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class UserBackendTest {
