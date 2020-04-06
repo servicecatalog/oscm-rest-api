@@ -17,6 +17,13 @@ import com.google.common.collect.Lists;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,17 +32,26 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.ServiceProvisioningService;
+import org.oscm.internal.types.exception.InvalidPhraseException;
+import org.oscm.internal.types.exception.ObjectNotFoundException;
+import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.ServiceStatus;
-import org.oscm.rest.common.representation.*;
+import org.oscm.internal.vo.VOServiceListResult;
+import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.StatusRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @ExtendWith(MockitoExtension.class)
 public class ServiceBackendTest {
 
   @Mock private ServiceProvisioningService service;
+  @Mock private SearchService searchService;
   @InjectMocks private ServiceBackend backend;
   private ServiceResource resource;
   private CompatibleServiceResource compatiblesResource;
@@ -77,7 +93,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldGetServices() {
+  public void getCollection_getServices() {
     when(service.getSuppliedServices()).thenReturn(Lists.newArrayList(vo));
 
     Response response = resource.getServices(uriInfo, parameters.getEndpointVersion());
@@ -96,7 +112,33 @@ public class ServiceBackendTest {
 
   /*  @Test
   @SneakyThrows
-  public void shouldCreateService() {
+  public void getCollection_getServicesForSearchPhrase() {
+
+    // given
+    mockSearchService();
+    parameters.setLanguage("en");
+    parameters.setServiceName("testService");
+    parameters.setMarketPlaceId("123456789");
+
+    // when
+    Response response = resource.getServices(uriInfo, parameters);
+
+    // then
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response)
+        .extracting(
+            r -> {
+              return ((RepresentationCollection) r.getEntity()).getItems().size();
+            })
+        .isEqualTo(1);
+  }
+
+  @Test
+  @SneakyThrows
+  public void post_createService() {
     when(service.createService(any(), any(), any())).thenReturn(vo);
 
     Response response =
@@ -110,7 +152,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldUpdateService() {
+  public void put_updateService() {
     when(service.updateService(any(), any())).thenReturn(vo);
 
     Response response =
@@ -128,7 +170,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldDeleteService() {
+  public void delete_Service() {
     doNothing().when(service).deleteService(any(Long.class));
 
     Response response =
@@ -144,7 +186,7 @@ public class ServiceBackendTest {
   @ParameterizedTest
   @EnumSource(ServiceStatus.class)
   @SneakyThrows
-  public void shouldSetServiceStatus(ServiceStatus serviceStatus) {
+  public void putStatus_setServiceStatus(ServiceStatus serviceStatus) {
     lenient().when(service.activateService(any())).thenReturn(vo);
     lenient().when(service.deactivateService(any())).thenReturn(vo);
     lenient().when(service.resumeService(any())).thenReturn(vo);
@@ -166,7 +208,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldGetCompatibleServices() {
+  public void getCompatibles_forStatus() {
     when(service.getCompatibleServices(any())).thenReturn(Lists.newArrayList(vo));
 
     Response response =
@@ -181,7 +223,7 @@ public class ServiceBackendTest {
 
   @Test
   @SneakyThrows
-  public void shouldUpdateCompatibleServices() {
+  public void putCompatibles_updateCompatibleServices() {
     doNothing().when(service).setCompatibleServices(any(), any());
 
     Response response =
@@ -195,6 +237,54 @@ public class ServiceBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+  }
+
+  @Test
+  public void getLocale_default() {
+    // given
+    String expected = "en";
+
+    // when
+    String result = backend.getLocale("");
+
+    // then
+    assertThat(expected).isEqualTo(result);
+  }
+
+  @Test
+  public void getLocale_given() {
+    // given
+    String expected = "de";
+
+    // when
+    String result = backend.getLocale("de");
+
+    // then
+    assertThat(expected).isEqualTo(result);
+  }
+
+  @Test
+  public void getServices() throws ObjectNotFoundException, InvalidPhraseException {
+    // given
+    mockSearchService();
+
+    // when
+    List<VOService> slr = backend.getServices("12345678", "en", "test");
+
+    // then
+    assertThat(slr.get(0).getServiceId()).isEqualTo("testId");
+  }
+
+  private void mockSearchService() throws ObjectNotFoundException, InvalidPhraseException {
+    List<VOService> slr = new ArrayList<VOService>();
+    VOServiceListResult VOslr = new VOServiceListResult();
+    VOService s = new VOService();
+
+    s.setServiceId("testId");
+    slr.add(s);
+    VOslr.setServices(slr);
+
+    when(searchService.searchServices(any(), any(), any())).thenReturn(VOslr);
   }
 
   private RepresentationCollection<ServiceRepresentation> createCompatiblesCollection() {
