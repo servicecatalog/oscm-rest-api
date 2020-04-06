@@ -11,8 +11,10 @@ package org.oscm.rest.service;
 
 import java.util.Collection;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.VOTechnicalService;
@@ -53,6 +55,13 @@ public class TechnicalServiceBackend {
           .createdObjectId(String.valueOf(ts.getKey()))
           .createdObjectName(ts.getTechnicalServiceId())
           .build();
+    };
+  }
+
+  public RestBackend.Put<TechnicalServiceRepresentation, ServiceParameters> put() {
+    return (content, params) -> {
+      String msg = sps.importTechnicalServices(new byte[1]); // fix
+      return true;
     };
   }
 }

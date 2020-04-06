@@ -9,7 +9,29 @@
  */
 package org.oscm.rest.service;
 
-import com.google.common.base.Strings;
+import java.util.Collections;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.oscm.internal.intf.ServiceProvisioningService;
+import org.oscm.internal.vo.VOTechnicalService;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+
 import constants.CommonConstants;
 import constants.ServiceConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,24 +40,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import java.util.Collections;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.internal.intf.ServiceProvisioningService;
-import org.oscm.internal.vo.VOTechnicalService;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
@@ -114,20 +120,61 @@ public class TechnicalServiceResource extends RestResource {
     return post(uriInfo, tsb.post(), content, params);
   }
 
+  //  @PUT
+  //  @Since(CommonParams.VERSION_1)
+  //  public Response importTechnicalServices1(
+  //      @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
+  //      throws Exception {
+  //    // FIXME: Implement this endpoint properly. Use put() from interface
+  //    // FIXME: This endpoint should accept TSRepresentation instead of byte array (just like
+  // every
+  //    // FIXME: Document this endpoint using Swagger
+  //    // other  PUT endpoint)
+  //    String msg = sps.importTechnicalServices(input);
+  //    if (Strings.isNullOrEmpty(msg)) {
+  //      return Response.noContent().build();
+  //    }
+  //    return Response.status(Status.BAD_REQUEST).entity(msg).build();
+  //  }
+
   @PUT
   @Since(CommonParams.VERSION_1)
+  @Operation(
+      summary = "Import a technical service",
+      tags = {"services"},
+      description = "Import a technical service",
+      requestBody =
+          @RequestBody(
+              description = "TechnicalServiceRepresentation object to be created",
+              required = true,
+              content =
+                  @Content(
+                      schema = @Schema(implementation = TechnicalServiceRepresentation.class),
+                      examples = {
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
+                            value = ServiceConstants.TECHNICAL_SERVICE_MINIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
+                        @ExampleObject(
+                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
+                            value = ServiceConstants.TECHNICAL_SERVICE_MAXIMUM_BODY,
+                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                      })),
+      responses = {
+        @ApiResponse(
+            responseCode = "201",
+            description = "Technical service created successfully" + CommonConstants.ID_INFO)
+      })
   public Response importTechnicalServices(
-      @Context UriInfo uriInfo, byte[] input, @BeanParam ServiceParameters params)
+      @Context UriInfo uriInfo,
+      TechnicalServiceRepresentation content,
+      @BeanParam ServiceParameters params)
       throws Exception {
     // FIXME: Implement this endpoint properly. Use put() from interface
     // FIXME: This endpoint should accept TSRepresentation instead of byte array (just like every
     // FIXME: Document this endpoint using Swagger
     // other  PUT endpoint)
-    String msg = sps.importTechnicalServices(input);
-    if (Strings.isNullOrEmpty(msg)) {
-      return Response.noContent().build();
-    }
-    return Response.status(Status.BAD_REQUEST).entity(msg).build();
+    return put(uriInfo, tsb.put(), content, params);
   }
 
   @DELETE
