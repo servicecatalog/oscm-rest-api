@@ -9,6 +9,16 @@
  */
 package org.oscm.rest.marketplace;
 
+import constants.CommonConstants;
+import constants.DocDescription;
+import constants.MarketplaceConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.DELETE;
@@ -23,7 +33,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.MarketplaceListType;
 import org.oscm.rest.common.RestResource;
@@ -31,19 +42,6 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
-
-import constants.CommonConstants;
-import constants.DocDescription;
-import constants.MarketplaceConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.AccessLevel;
-import lombok.Setter;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
 @Stateless

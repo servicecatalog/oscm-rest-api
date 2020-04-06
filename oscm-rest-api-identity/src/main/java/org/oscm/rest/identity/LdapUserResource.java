@@ -19,7 +19,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.ResponseFactory;
 import org.oscm.rest.common.ResponseType;

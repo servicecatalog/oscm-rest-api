@@ -11,7 +11,6 @@ package org.oscm.rest.common;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-
 import javax.ws.rs.core.MediaType;
 
 /**
