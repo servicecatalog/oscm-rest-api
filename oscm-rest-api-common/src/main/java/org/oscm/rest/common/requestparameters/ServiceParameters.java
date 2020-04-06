@@ -14,11 +14,18 @@ import javax.ws.rs.WebApplicationException;
 
 public class ServiceParameters extends RequestParameters {
 
-  @QueryParam("orgKey")
   private Long orgKey;
 
-  @QueryParam("orgId")
   private String orgId;
+
+  @QueryParam("searchPhrase")
+  private String searchPhrase;
+
+  @QueryParam("locale")
+  private String locale;
+
+  @QueryParam("marketplaceId")
+  private String marketPlaceId;
 
   @Override
   public void validateParameters() throws WebApplicationException {}
@@ -43,6 +50,30 @@ public class ServiceParameters extends RequestParameters {
 
   public void setOrgId(String orgId) {
     this.orgId = orgId;
+  }
+
+  public String getSearchPhrase() {
+    return searchPhrase;
+  }
+
+  public void setSearchPhrase(String searchPhrase) {
+    this.searchPhrase = searchPhrase;
+  }
+
+  public String getLocale() {
+    return locale;
+  }
+
+  public void setLanguage(String locale) {
+    this.locale = locale;
+  }
+
+  public String getMarketPlaceId() {
+    return marketPlaceId;
+  }
+
+  public void setMarketPlaceId(String marketPlaceId) {
+    this.marketPlaceId = marketPlaceId;
   }
 
   public int eTagToVersion() {

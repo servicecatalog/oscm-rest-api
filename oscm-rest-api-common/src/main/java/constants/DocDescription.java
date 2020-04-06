@@ -21,4 +21,7 @@ public class DocDescription {
   public static final String LICENSE_KEY = "key of the usage license";
   public static final String ONBEHALFUSER_ID = "id of the on behalf user";
   public static final String ORGANIZATION_KEY = "key of the organization";
+  public static final String SEARCH_PHRASE = "phrase which should be searched for";
+  public static final String LOCALE = "locale of the service";
+  public static final String MARKETPLACE_ID = "id of the marketplace";
 }

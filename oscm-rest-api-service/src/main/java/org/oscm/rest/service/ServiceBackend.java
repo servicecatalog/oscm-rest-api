@@ -9,13 +9,21 @@
  */
 package org.oscm.rest.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import org.oscm.internal.intf.MarketplaceService;
+import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
+import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
+import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.internal.vo.VOTechnicalService;
@@ -31,6 +39,8 @@ import org.oscm.rest.common.requestparameters.ServiceParameters;
 public class ServiceBackend {
 
   @EJB ServiceProvisioningService sps;
+  @EJB SearchService searchService;
+  @EJB MarketplaceService ms;
 
   public RestBackend.Delete<ServiceParameters> delete() {
     return params -> {
@@ -81,10 +91,47 @@ public class ServiceBackend {
 
   public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCollection() {
     return params -> {
-      List<VOService> list = sps.getSuppliedServices();
-      return new RepresentationCollection<ServiceRepresentation>(
-          ServiceRepresentation.toCollection(list));
+      final Optional<String> phrase = Optional.ofNullable(params.getSearchPhrase());
+      if (phrase.isPresent()) {
+        return createSearchResult(params);
+      }
+      return createServiceList();
     };
+  }
+
+  private RepresentationCollection<ServiceRepresentation> createSearchResult(
+      ServiceParameters params) throws ObjectNotFoundException, InvalidPhraseException {
+    List<VOService> services =
+        getServices(
+            params.getMarketPlaceId(), getLocale(params.getLocale()), params.getSearchPhrase());
+    return new RepresentationCollection<ServiceRepresentation>(
+        ServiceRepresentation.toCollection(services));
+  }
+
+  private RepresentationCollection<ServiceRepresentation> createServiceList() {
+    return new RepresentationCollection<ServiceRepresentation>(
+        ServiceRepresentation.toCollection(sps.getSuppliedServices()));
+  }
+
+  protected List<VOService> getServices(String mpId, String locale, String searchPhrase)
+      throws ObjectNotFoundException, InvalidPhraseException {
+    List<VOService> slr = new ArrayList<VOService>();
+    if (mpId == null || mpId.isEmpty()) {
+      List<VOMarketplace> mps = ms.getMarketplacesOwned();
+      for (VOMarketplace mp : mps) {
+        slr.addAll(
+            searchService
+                .searchServices(mp.getMarketplaceId(), locale, searchPhrase)
+                .getServices());
+      }
+    } else {
+      slr.addAll(searchService.searchServices(mpId, locale, searchPhrase).getServices());
+    }
+    return slr;
+  }
+
+  protected String getLocale(String locale) {
+    return Optional.ofNullable(locale).filter(l -> !l.isEmpty()).orElse("en");
   }
 
   public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCompatibles() {
