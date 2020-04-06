@@ -11,13 +11,15 @@ package org.oscm.rest.subscription;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -55,8 +57,9 @@ public class SubscriptionResource extends RestResource {
   @Operation(
       summary = "Retrieves subscriptions for the specific user or for whole organization",
       tags = {"subscriptions"},
-      description = "If a user id is provided, the subscription list for the user will be returned, " +
-                    "otherwise the entire subscription list for organization will be returned",
+      description =
+          "If a user id is provided, the subscription list for the user will be returned, "
+              + "otherwise the entire subscription list for organization will be returned",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -69,15 +72,15 @@ public class SubscriptionResource extends RestResource {
   public Response getSubscriptions(
       @Context UriInfo uriInfo,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
-        @DefaultValue("v1")
-        @PathParam(value = "version")
-        String version,
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
       @Parameter(description = DocDescription.USER_ID) @QueryParam(value = "userId") String userId)
-     throws Exception {
-      final SubscriptionParameters params = new SubscriptionParameters();
-      params.setEndpointVersion(version);
-      params.setUserId(userId);
-      return getCollection(uriInfo, sb.getCollection(), params);
+      throws Exception {
+    final SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setUserId(userId);
+    return getCollection(uriInfo, sb.getCollection(), params);
   }
 
   @GET
@@ -99,15 +102,15 @@ public class SubscriptionResource extends RestResource {
   public Response getSubscription(
       @Context UriInfo uriInfo,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
-      @DefaultValue("v1")
-      @PathParam(value = "version")
-           String version,
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
       @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
-    throws Exception {
-      final SubscriptionParameters params = new SubscriptionParameters();
-      params.setEndpointVersion(version);
-      params.setId(Long.valueOf(id));
-      return get(uriInfo, sb.get(), params, true);
+      throws Exception {
+    final SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    return get(uriInfo, sb.get(), params, true);
   }
 
   @POST
@@ -139,14 +142,14 @@ public class SubscriptionResource extends RestResource {
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
-      @DefaultValue("v1")
-      @PathParam(value = "version")
-              String version)
-    throws Exception {
-      final SubscriptionParameters params = new SubscriptionParameters();
-      params.setEndpointVersion(version);
-      content.setId(params.getId());
-      return post(uriInfo, sb.post(), content, params);
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
+      throws Exception {
+    final SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    content.setId(params.getId());
+    return post(uriInfo, sb.post(), content, params);
   }
 
   @PUT
@@ -177,16 +180,16 @@ public class SubscriptionResource extends RestResource {
       @Context UriInfo uriInfo,
       SubscriptionCreationRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
-      @DefaultValue("v1")
-      @PathParam(value = "version")
-              String version,
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
       @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
-    throws Exception {
-      final SubscriptionParameters params = new SubscriptionParameters();
-      params.setEndpointVersion(version);
-      params.setId(Long.valueOf(id));
-      content.setId(params.getId());
-      return put(uriInfo, sb.put(), content, params);
+      throws Exception {
+    final SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    content.setId(params.getId());
+    return put(uriInfo, sb.put(), content, params);
   }
 
   @DELETE
@@ -202,14 +205,14 @@ public class SubscriptionResource extends RestResource {
   public Response deleteSubscription(
       @Context UriInfo uriInfo,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
-      @DefaultValue("v1")
-      @PathParam(value = "version")
-              String version,
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
       @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
-    throws Exception {
-      final SubscriptionParameters params = new SubscriptionParameters();
-      params.setEndpointVersion(version);
-      params.setId(Long.valueOf(id));
-      return delete(uriInfo, sb.delete(), params);
+      throws Exception {
+    final SubscriptionParameters params = new SubscriptionParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    return delete(uriInfo, sb.delete(), params);
   }
 }
