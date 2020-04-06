@@ -11,10 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
-import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -49,7 +49,7 @@ public class TechnicalServiceBackendTest {
     when(service.getTechnicalServices(any()))
         .thenReturn(Lists.newArrayList(new VOTechnicalService()));
 
-    Response response = resource.getTechnicalServices(uriInfo, parameters);
+    Response response = resource.getTechnicalServices(uriInfo, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -65,17 +65,11 @@ public class TechnicalServiceBackendTest {
 
   @Test
   @SneakyThrows
-  @Disabled("Not implemented")
-  public void shouldGetTechnicalServicesById() {
-    // FIXME: To be implemented in scope of OSCM-REST-API/#92
-  }
-
-  @Test
-  @SneakyThrows
   public void shouldCreateTechnicalService() {
     when(service.createTechnicalService(any())).thenReturn(new VOTechnicalService());
 
-    Response response = resource.createTechnicalService(uriInfo, representation, parameters);
+    Response response =
+        resource.createTechnicalService(uriInfo, parameters.getEndpointVersion(), representation);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -88,7 +82,9 @@ public class TechnicalServiceBackendTest {
   public void shouldDeleteTechnicalService() {
     doNothing().when(service).deleteTechnicalService(any(Long.class));
 
-    Response response = resource.deleteTechnicalService(uriInfo, parameters);
+    Response response =
+        resource.deleteTechnicalService(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)

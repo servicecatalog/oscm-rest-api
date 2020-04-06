@@ -51,7 +51,9 @@ public class TSSupplierBackendTest {
     when(service.getSuppliersForTechnicalService(any()))
         .thenReturn(Lists.newArrayList(new VOOrganization()));
 
-    Response response = resource.getSuppliers(uriInfo, parameters);
+    Response response =
+        resource.getSuppliers(
+            uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -73,7 +75,12 @@ public class TSSupplierBackendTest {
   public void shouldAddSupplier() {
     doNothing().when(service).addSuppliersForTechnicalService(any(), any());
 
-    Response response = resource.addSupplier(uriInfo, representation, parameters);
+    Response response =
+        resource.addSupplier(
+            uriInfo,
+            representation,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -86,7 +93,12 @@ public class TSSupplierBackendTest {
   public void shouldDeleteSupplier() {
     doNothing().when(service).removeSuppliersFromTechnicalService(any(), any());
 
-    Response response = resource.removeSupplier(uriInfo, parameters);
+    Response response =
+        resource.removeSupplier(
+            uriInfo,
+            parameters.getEndpointVersion(),
+            parameters.getId().toString(),
+            parameters.getOrgId());
 
     assertThat(response).isNotNull();
     assertThat(response)

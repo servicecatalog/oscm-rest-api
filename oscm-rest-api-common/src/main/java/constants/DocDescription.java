@@ -20,4 +20,5 @@ public class DocDescription {
   public static final String MARKETPLACE_TYPE = "type defining list of returned marketplaces";
   public static final String LICENSE_KEY = "key of the usage license";
   public static final String ONBEHALFUSER_ID = "id of the on behalf user";
+  public static final String ORGANIZATION_KEY = "key of the organization";
 }
