@@ -9,6 +9,29 @@
  */
 package org.oscm.rest.service;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
+import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+
 import constants.CommonConstants;
 import constants.DocDescription;
 import constants.ServiceConstants;
@@ -19,21 +42,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
-import org.oscm.rest.common.representation.ServiceRepresentation;
-import org.oscm.rest.common.representation.StatusRepresentation;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/services")
 @Stateless
@@ -65,10 +75,22 @@ public class ServiceResource extends RestResource {
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
-          String version)
+          String version,
+      @Parameter(description = DocDescription.LICENSE_KEY, required = false)
+          @QueryParam(value = "serviceName")
+          String serviceName,
+      @Parameter(description = DocDescription.LICENSE_KEY, required = false)
+          @QueryParam(value = "locale")
+          String locale,
+      @Parameter(description = DocDescription.LICENSE_KEY, required = false)
+          @QueryParam(value = "marketplaceId")
+          String marketplaceId)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
+    params.setServiceName(serviceName);
+    params.setLanguage(locale);
+    params.setMarketPlaceId(marketplaceId);
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 

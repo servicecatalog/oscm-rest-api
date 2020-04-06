@@ -11,18 +11,15 @@ package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
-import com.google.common.collect.Lists;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import lombok.SneakyThrows;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,14 +35,18 @@ import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
+import org.oscm.internal.vo.VOServiceListResult;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.ServiceStatus;
-import org.oscm.internal.vo.VOServiceListResult;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.StatusRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+
+import com.google.common.collect.Lists;
+
+import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class ServiceBackendTest {
@@ -96,7 +97,8 @@ public class ServiceBackendTest {
   public void getCollection_getServices() {
     when(service.getSuppliedServices()).thenReturn(Lists.newArrayList(vo));
 
-    Response response = resource.getServices(uriInfo, parameters.getEndpointVersion());
+    Response response =
+        resource.getServices(uriInfo, parameters.getEndpointVersion(), null, null, null);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -110,7 +112,7 @@ public class ServiceBackendTest {
         .isEqualTo(1);
   }
 
-  /*  @Test
+  @Test
   @SneakyThrows
   public void getCollection_getServicesForSearchPhrase() {
 
@@ -121,7 +123,9 @@ public class ServiceBackendTest {
     parameters.setMarketPlaceId("123456789");
 
     // when
-    Response response = resource.getServices(uriInfo, parameters);
+    Response response =
+        resource.getServices(
+            uriInfo, String.valueOf(parameters.getVersion()), "testService", "en", "123456789");
 
     // then
     assertThat(response).isNotNull();
@@ -139,8 +143,6 @@ public class ServiceBackendTest {
   @Test
   @SneakyThrows
   public void post_createService() {
-    when(service.createService(any(), any(), any())).thenReturn(vo);
-
     Response response =
         resource.createService(uriInfo, representation, parameters.getEndpointVersion());
 
@@ -148,7 +150,7 @@ public class ServiceBackendTest {
     assertThat(response)
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.CREATED.getStatusCode());
-  }*/
+  }
 
   @Test
   @SneakyThrows
