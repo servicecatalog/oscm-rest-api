@@ -31,6 +31,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.ServiceProvisioningService;
+import org.oscm.internal.types.enumtypes.PerformanceHint;
+import org.oscm.internal.types.enumtypes.Sorting;
 import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
 import org.oscm.internal.vo.VOService;
@@ -98,7 +100,17 @@ public class ServiceBackendTest {
     when(service.getSuppliedServices()).thenReturn(Lists.newArrayList(vo));
 
     Response response =
-        resource.getServices(uriInfo, parameters.getEndpointVersion(), null, null, null);
+        resource.getServices(
+            uriInfo,
+            parameters.getEndpointVersion(),
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            PerformanceHint.ALL_FIELDS,
+            Sorting.RATING_ASCENDING);
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -122,7 +134,16 @@ public class ServiceBackendTest {
     // when
     Response response =
         resource.getServices(
-            uriInfo, String.valueOf(parameters.getVersion()), "testService", "en", "123456789");
+            uriInfo,
+            String.valueOf(parameters.getVersion()),
+            "testService",
+            "en",
+            "123456789",
+            null,
+            null,
+            null,
+            PerformanceHint.ALL_FIELDS,
+            Sorting.RATING_ASCENDING);
 
     // then
     assertThat(response).isNotNull();
