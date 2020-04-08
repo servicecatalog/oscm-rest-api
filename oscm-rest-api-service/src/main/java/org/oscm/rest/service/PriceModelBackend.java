@@ -16,8 +16,8 @@ import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -30,7 +30,11 @@ public class PriceModelBackend {
   public RestBackend.Put<PriceModelRepresentation, ServiceParameters> put() {
     return (content, params) -> {
       VOServiceDetails svc = new VOServiceDetails();
-      svc.setKey(params.getId().longValue());
+      svc.setKey(params.getId());
+
+      VOServiceDetails sd = sps.getServiceDetails(svc);
+      content.getVO().setKey(sd.getPriceModel().getKey());
+
       sps.savePriceModel(svc, content.getVO());
       return true;
     };
@@ -39,10 +43,17 @@ public class PriceModelBackend {
   public RestBackend.Put<PriceModelRepresentation, ServiceParameters> putForCustomer() {
     return (content, params) -> {
       VOServiceDetails svc = new VOServiceDetails();
-      svc.setKey(params.getId().longValue());
-      VOOrganization cust = new VOOrganization();
-      cust.setKey(params.getOrgKey().longValue());
-      sps.savePriceModelForCustomer(svc, content.getVO(), cust);
+      svc.setKey(params.getId());
+      VOOrganization customer = new VOOrganization();
+      customer.setKey(params.getOrgKey());
+
+      VOServiceDetails sd = sps.getServiceForCustomer(customer, svc);
+      if (sd != null) {
+        content.getVO().setKey(sd.getPriceModel().getKey());
+        svc.setKey(sd.getKey());
+      }
+
+      sps.savePriceModelForCustomer(svc, content.getVO(), customer);
       return true;
     };
   }
@@ -50,7 +61,7 @@ public class PriceModelBackend {
   public RestBackend.Get<PriceModelRepresentation, ServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
-      vo.setKey(params.getId().longValue());
+      vo.setKey(params.getId());
       VOServiceDetails sd = sps.getServiceDetails(vo);
       if (sd == null) {
         throw new ObjectNotFoundException(ClassEnum.SERVICE, String.valueOf(vo.getKey()));
@@ -62,10 +73,10 @@ public class PriceModelBackend {
   public RestBackend.Get<PriceModelRepresentation, ServiceParameters> getForCustomer() {
     return params -> {
       VOService svc = new VOService();
-      svc.setKey(params.getId().longValue());
-      VOOrganization cust = new VOOrganization();
-      cust.setKey(params.getOrgKey().longValue());
-      VOServiceDetails sd = sps.getServiceForCustomer(cust, svc);
+      svc.setKey(params.getId());
+      VOOrganization customer = new VOOrganization();
+      customer.setKey(params.getOrgKey());
+      VOServiceDetails sd = sps.getServiceForCustomer(customer, svc);
       if (sd == null) {
         throw new ObjectNotFoundException(ClassEnum.SERVICE, String.valueOf(svc.getKey()));
       }
