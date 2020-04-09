@@ -103,7 +103,6 @@ public class ServiceResource extends RestResource {
           String filter,
       @Parameter(description = DocDescription.SORTING) @QueryParam("sorting") Sorting sorting)
       throws Exception {
-    ListCriteria c = createListCriteria(offset, limit, filter, sorting);
 
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
@@ -111,7 +110,7 @@ public class ServiceResource extends RestResource {
     params.setLanguage(locale);
     params.setMarketPlaceId(marketplaceId);
     params.setPerformanceHint(PerformanceHint.ALL_FIELDS);
-    params.setListCriteria(c);
+    params.setListCriteria(createListCriteria(offset, limit, filter, sorting));
     return getCollection(uriInfo, sb.getCollection(), params);
   }
 
