@@ -22,6 +22,7 @@ import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.SearchServiceInternal;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
+import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
@@ -108,37 +109,35 @@ public class ServiceBackend {
   }
 
   private boolean isPageingRequest(ServiceParameters params) {
-    return params.getListCriteria().getLimit() != 0 && params.getListCriteria().getOffset() != 0;
+    return params.getListCriteria().getLimit() != 0
+        && Optional.ofNullable(params.getListCriteria().getSorting()).isPresent();
   }
 
   private RepresentationCollection<ServiceRepresentation> createPagedServiceList(
       ServiceParameters params) throws ObjectNotFoundException, InvalidPhraseException {
-    List<VOService> services = getPagedServices(params, getLocale(params.getLocale()));
+    List<VOService> services = getPagedServices(params);
     return new RepresentationCollection<ServiceRepresentation>(
         ServiceRepresentation.toCollection(services));
   }
 
-  protected List<VOService> getPagedServices(ServiceParameters params, String locale)
+  protected List<VOService> getPagedServices(ServiceParameters params)
       throws ObjectNotFoundException, InvalidPhraseException {
 
-    Optional<String> m = Optional.of(params.getMarketPlaceId());
-    return m.map(
+    return Optional.ofNullable(params.getMarketPlaceId())
+        .map(
             p -> {
               return getServicesByCriteria(params, p);
             })
-        .orElse(
-            m.map(
-                    p -> {
-                      return ms.getMarketplacesOwned()
-                          .stream()
-                          .flatMap(
-                              mp -> {
-                                return getServicesByCriteria(params, mp.getMarketplaceId())
-                                    .stream();
-                              })
-                          .collect(Collectors.toList());
-                    })
-                .get());
+        .orElseGet(
+            () -> {
+              return ms.getMarketplacesOwned()
+                  .stream()
+                  .flatMap(
+                      mp -> {
+                        return getServicesByCriteria(params, mp.getMarketplaceId()).stream();
+                      })
+                  .collect(Collectors.toList());
+            });
   }
 
   private List<VOService> getServicesByCriteria(ServiceParameters params, String mpId) {
@@ -148,11 +147,15 @@ public class ServiceBackend {
               mpId,
               getLocale(params.getLocale()),
               params.getListCriteria(),
-              params.getPerformanceHint())
+              getPerformanceHint(params.getPerformanceHint()))
           .getServices();
     } catch (ObjectNotFoundException e) {
     }
     return new ArrayList<VOService>();
+  }
+
+  protected PerformanceHint getPerformanceHint(PerformanceHint performanceHint) {
+    return Optional.ofNullable(performanceHint).orElse(PerformanceHint.ALL_FIELDS);
   }
 
   private RepresentationCollection<ServiceRepresentation> createSearchResult(

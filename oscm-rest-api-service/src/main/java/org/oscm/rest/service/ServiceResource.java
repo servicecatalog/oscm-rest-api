@@ -90,19 +90,15 @@ public class ServiceResource extends RestResource {
       @Parameter(description = DocDescription.SEARCH_PHRASE, required = false)
           @QueryParam(value = "searchPhrase")
           String searchPhrase,
-      @Parameter(description = DocDescription.MARKETPLACE_ID, required = false)
-          @QueryParam(value = "limit")
+      @Parameter(description = DocDescription.LIMIT, required = false) @QueryParam(value = "limit")
           String limit,
-      @Parameter(description = DocDescription.MARKETPLACE_ID, required = false)
+      @Parameter(description = DocDescription.OFFSET, required = false)
           @QueryParam(value = "offset")
           String offset,
-      @Parameter(description = DocDescription.MARKETPLACE_ID, required = false)
+      @Parameter(description = DocDescription.FILTER, required = false)
           @QueryParam(value = "filter")
           String filter,
-      @Parameter(description = DocDescription.MARKETPLACE_TYPE) @QueryParam("performanceHint")
-          PerformanceHint performanceHint,
-      @Parameter(description = DocDescription.MARKETPLACE_TYPE) @QueryParam("sorting")
-          Sorting sorting)
+      @Parameter(description = DocDescription.SORTING) @QueryParam("sorting") Sorting sorting)
       throws Exception {
     ListCriteria c = createListCriteria(offset, limit, filter, sorting);
 
@@ -111,7 +107,7 @@ public class ServiceResource extends RestResource {
     params.setSearchPhrase(searchPhrase);
     params.setLanguage(locale);
     params.setMarketPlaceId(marketplaceId);
-    params.setPerformanceHint(performanceHint);
+    params.setPerformanceHint(PerformanceHint.ALL_FIELDS);
     params.setListCriteria(c);
     return getCollection(uriInfo, sb.getCollection(), params);
   }
@@ -123,9 +119,13 @@ public class ServiceResource extends RestResource {
       c.setFilter(filter);
       c.setLimit(Integer.parseInt(limit));
       c.setOffset(Integer.parseInt(offset));
-      c.setSorting(sorting);
+      c.setSorting(getSorting(sorting));
     }
     return c;
+  }
+
+  private Sorting getSorting(Sorting sorting) {
+    return Optional.ofNullable(sorting).orElse(Sorting.NAME_ASCENDING);
   }
 
   @GET

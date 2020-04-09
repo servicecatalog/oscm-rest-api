@@ -29,12 +29,15 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.intf.SearchService;
+import org.oscm.internal.intf.SearchServiceInternal;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.types.enumtypes.Sorting;
 import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
+import org.oscm.internal.vo.VOMarketplace;
 import org.oscm.internal.vo.VOService;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.internal.vo.VOServiceListResult;
@@ -55,6 +58,8 @@ public class ServiceBackendTest {
 
   @Mock private ServiceProvisioningService service;
   @Mock private SearchService searchService;
+  @Mock private SearchServiceInternal searchServiceInternal;
+  @Mock private MarketplaceService ms;
   @InjectMocks private ServiceBackend backend;
   private ServiceResource resource;
   private CompatibleServiceResource compatiblesResource;
@@ -109,7 +114,6 @@ public class ServiceBackendTest {
             null,
             null,
             null,
-            PerformanceHint.ALL_FIELDS,
             Sorting.RATING_ASCENDING);
 
     assertThat(response).isNotNull();
@@ -122,6 +126,92 @@ public class ServiceBackendTest {
               return ((RepresentationCollection) r.getEntity()).getItems().size();
             })
         .isEqualTo(1);
+  }
+
+  @Test
+  @SneakyThrows
+  public void getCollection_getServicesForPagingWithGivenMarketplace() {
+    // given
+    mockPagingService();
+
+    // when
+    Response response =
+        resource.getServices(
+            uriInfo,
+            parameters.getEndpointVersion(),
+            null,
+            "123456789",
+            null,
+            "5",
+            "0",
+            null,
+            Sorting.RATING_ASCENDING);
+
+    // then
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response)
+        .extracting(
+            r -> {
+              return ((RepresentationCollection) r.getEntity()).getItems().size();
+            })
+        .isEqualTo(1);
+  }
+
+  @Test
+  @SneakyThrows
+  public void getCollection_getServicesForPagingWithoutMarketplace() {
+    // given
+    mockPagingService();
+    mockMarketPlace();
+
+    // when
+    Response response =
+        resource.getServices(
+            uriInfo,
+            parameters.getEndpointVersion(),
+            null,
+            null,
+            null,
+            "5",
+            "0",
+            null,
+            Sorting.RATING_ASCENDING);
+
+    // then
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response)
+        .extracting(
+            r -> {
+              return ((RepresentationCollection) r.getEntity()).getItems().size();
+            })
+        .isEqualTo(1);
+  }
+
+  private void mockMarketPlace() {
+    List<VOMarketplace> mpl = new ArrayList<VOMarketplace>();
+    VOMarketplace mp = SampleTestDataUtility.createVOMarketplace();
+    mp.setMarketplaceId("123456789");
+    mpl.add(mp);
+
+    when(ms.getMarketplacesOwned()).thenReturn(mpl);
+  }
+
+  private void mockPagingService() throws ObjectNotFoundException, InvalidPhraseException {
+    List<VOService> slr = new ArrayList<VOService>();
+    VOServiceListResult VOslr = new VOServiceListResult();
+    VOService s = new VOService();
+
+    s.setServiceId("testId");
+    slr.add(s);
+    VOslr.setServices(slr);
+
+    when(searchServiceInternal.getServicesByCriteria(any(), any(), any(), any())).thenReturn(VOslr);
   }
 
   @Test
@@ -142,7 +232,6 @@ public class ServiceBackendTest {
             null,
             null,
             null,
-            PerformanceHint.ALL_FIELDS,
             Sorting.RATING_ASCENDING);
 
     // then
@@ -293,6 +382,30 @@ public class ServiceBackendTest {
 
     // then
     assertThat(slr.get(0).getServiceId()).isEqualTo("testId");
+  }
+
+  @Test
+  public void getPerformanceHint_given() {
+    // given
+    PerformanceHint expected = PerformanceHint.ONLY_IDENTIFYING_FIELDS;
+
+    // when
+    PerformanceHint result = backend.getPerformanceHint(expected);
+
+    // then
+    assertThat(expected).isEqualTo(result);
+  }
+
+  @Test
+  public void getPerformanceHint_default() {
+    // given
+    PerformanceHint expected = PerformanceHint.ALL_FIELDS;
+
+    // when
+    PerformanceHint result = backend.getPerformanceHint(null);
+
+    // then
+    assertThat(expected).isEqualTo(result);
   }
 
   private void mockSearchService() throws ObjectNotFoundException, InvalidPhraseException {

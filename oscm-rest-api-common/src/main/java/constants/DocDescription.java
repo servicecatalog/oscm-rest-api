@@ -24,4 +24,10 @@ public class DocDescription {
   public static final String SEARCH_PHRASE = "phrase which should be searched for";
   public static final String LOCALE = "locale of the service";
   public static final String MARKETPLACE_ID = "id of the marketplace";
+  public static final String LIMIT = "limit of results per page";
+  public static final String OFFSET = "offset of the result";
+  public static final String FILTER =
+      "filter criteria for retrieving services. This is the tag and only available for paging";
+  public static final String PERFORMANCE_HINT = "performance hint for paging";
+  public static final String SORTING = "sorting criteria for paging";
 }
