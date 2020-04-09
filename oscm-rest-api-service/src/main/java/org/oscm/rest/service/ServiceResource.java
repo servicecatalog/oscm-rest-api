@@ -64,7 +64,10 @@ public class ServiceResource extends RestResource {
   @Operation(
       summary = "Retrieves all services",
       tags = {"services"},
-      description = "Returns services available for current user",
+      description =
+          "Returns services available for current user if no query parameter is specified. "
+              + "Use the searchPhrase query parameter to search for a list of services by name. "
+              + "Paging can not be performed when searching via phrase. Specify offset and limit to use paging",
       responses = {
         @ApiResponse(
             responseCode = "200",
