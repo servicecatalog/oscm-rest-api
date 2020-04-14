@@ -437,30 +437,14 @@ public class ServiceConstants {
           + "  \"id\": 10003\n"
           + "}";
 
-  public static final String CUSTOMER_PRICE_MODEL_EXAMPLE_RESPONSE =
-      "{\n"
-          + "  \"description\": \"description\",\n"
-          + "  \"period\": \"MONTH\",\n"
-          + "  \"pricePerPeriod\": 1,\n"
-          + "  \"pricePerUserAssignment\": 0,\n"
-          + "  \"currencyISOCode\": \"EUR\",\n"
-          + "  \"oneTimeFee\": 100,\n"
-          + "  \"type\": \"PRO_RATA\",\n"
-          + "  \"selectedParameters\": [],\n"
-          + "  \"etag\": 1,\n"
-          + "  \"id\": 11000\n"
-          + "}";
-
   public static final String PRICE_MODEL_UPDATE_EXAMPLE_REQUEST =
       "{\n"
-          + "    \"description\": \"\",\n"
+          + "    \"type\": \"PRO_RATA\",\n"
           + "    \"period\": \"MONTH\",\n"
-          + "    \"pricePerPeriod\": 0,\n"
+          + "    \"pricePerPeriod\": 10,\n"
           + "    \"pricePerUserAssignment\": 0,\n"
           + "    \"currencyISOCode\": \"EUR\",\n"
-          + "    \"oneTimeFee\": 150,\n"
-          + "    \"type\": \"PRO_RATA\",\n"
-          + "    \"etag\": 2,\n"
-          + "    \"id\": 12001\n"
-          + "}\n";
+          + "    \"oneTimeFee\": 10,\n"
+          + "    \"etag\": 1\n"
+          + "}";
 }
