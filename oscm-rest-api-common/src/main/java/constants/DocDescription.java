@@ -29,7 +29,7 @@ public class DocDescription {
   public static final String LIMIT =
       "Mandatory for pagination. Maximum number of services per page included in response (=page size)";
   public static final String OFFSET =
-      "Mandatory for pagination. Number of the first service in the whole services list that marks begin index of the returned page. The resulting service page contains a list of services starting from index offset to offset + limit -1.";
+      "Mandatory for pagination. Number of the first service in the whole services list that marks the start index of the returned page. The resulting service page contains a list of services starting from index offset to offset + limit -1.";
   public static final String FILTER =
       "Optional parameter in conjunction with LIMIT and OFFSET, to filter services with service tags matching the given string value.";
   public static final String PERFORMANCE_HINT = "Performance hint for paging";
