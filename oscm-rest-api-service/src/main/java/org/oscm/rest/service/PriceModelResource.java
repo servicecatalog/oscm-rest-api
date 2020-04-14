@@ -19,6 +19,12 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -26,13 +32,6 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/services" + CommonParams.PATH_ID + "/pricemodel")
 @Stateless
@@ -89,9 +88,7 @@ public class PriceModelResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
-                    examples = {
-                      @ExampleObject(ServiceConstants.PRICE_MODEL_EXAMPLE_RESPONSE)
-                    },
+                    examples = {@ExampleObject(ServiceConstants.PRICE_MODEL_EXAMPLE_RESPONSE)},
                     schema = @Schema(implementation = PriceModelRepresentation.class)))
       })
   public Response getForCustomer(

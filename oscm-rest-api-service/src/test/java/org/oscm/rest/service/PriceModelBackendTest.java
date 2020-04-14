@@ -9,6 +9,12 @@
  */
 package org.oscm.rest.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,13 +27,6 @@ import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class PriceModelBackendTest {

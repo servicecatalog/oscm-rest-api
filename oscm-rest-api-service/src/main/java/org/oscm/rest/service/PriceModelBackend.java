@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.service;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
@@ -18,9 +20,6 @@ import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 
 @Stateless
 public class PriceModelBackend {
