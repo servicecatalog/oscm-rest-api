@@ -27,7 +27,7 @@ public class DocDescription {
       "Locale identifier of the language for displaying the marketable services (default: en)";
   public static final String MARKETPLACE_ID = "id of the marketplace";
   public static final String LIMIT =
-      "Mandatory for pagination. Maximum number of servicss per page included in response (=page size)";
+      "Mandatory for pagination. Maximum number of services per page included in response (=page size)";
   public static final String OFFSET =
       "Mandatory for pagination. Number of the first service in the whole services list that marks begin index of the returned page. The resulting service page contains a list of services starting from index offset to offset + limit -1.";
   public static final String FILTER =
