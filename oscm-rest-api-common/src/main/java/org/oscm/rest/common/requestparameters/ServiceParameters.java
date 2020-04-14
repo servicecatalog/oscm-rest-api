@@ -12,6 +12,9 @@ package org.oscm.rest.common.requestparameters;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
+import org.oscm.internal.types.enumtypes.PerformanceHint;
+import org.oscm.internal.vo.ListCriteria;
+
 public class ServiceParameters extends RequestParameters {
 
   private Long orgKey;
@@ -26,6 +29,11 @@ public class ServiceParameters extends RequestParameters {
 
   @QueryParam("marketplaceId")
   private String marketPlaceId;
+
+  @QueryParam("performanceHint")
+  private PerformanceHint performanceHint;
+
+  private ListCriteria listCriteria = new ListCriteria();
 
   @Override
   public void validateParameters() throws WebApplicationException {}
@@ -74,6 +82,22 @@ public class ServiceParameters extends RequestParameters {
 
   public void setMarketPlaceId(String marketPlaceId) {
     this.marketPlaceId = marketPlaceId;
+  }
+
+  public ListCriteria getListCriteria() {
+    return listCriteria;
+  }
+
+  public void setListCriteria(ListCriteria listCriteria) {
+    this.listCriteria = listCriteria;
+  }
+
+  public PerformanceHint getPerformanceHint() {
+    return performanceHint;
+  }
+
+  public void setPerformanceHint(PerformanceHint performanceHint) {
+    this.performanceHint = performanceHint;
   }
 
   public int eTagToVersion() {

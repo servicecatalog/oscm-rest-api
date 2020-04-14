@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.service;
 
+import java.util.Optional;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.DELETE;
@@ -24,6 +26,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.oscm.internal.types.enumtypes.PerformanceHint;
+import org.oscm.internal.types.enumtypes.Sorting;
+import org.oscm.internal.vo.ListCriteria;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
@@ -59,7 +64,10 @@ public class ServiceResource extends RestResource {
   @Operation(
       summary = "Retrieves all services",
       tags = {"services"},
-      description = "Returns services available for current user",
+      description =
+          "Returns services available for current user if no query parameter is specified. "
+              + "Use the searchPhrase query parameter to search for a list of services by name. "
+              + "Paging can not be performed when searching via phrase. Specify offset and limit to use paging",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -76,22 +84,50 @@ public class ServiceResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.SEARCH_PHRASE, required = false)
-          @QueryParam(value = "searchPhrase")
-          String searchPhrase,
       @Parameter(description = DocDescription.LOCALE, required = false)
           @QueryParam(value = "locale")
           String locale,
       @Parameter(description = DocDescription.MARKETPLACE_ID, required = false)
           @QueryParam(value = "marketplaceId")
-          String marketplaceId)
+          String marketplaceId,
+      @Parameter(description = DocDescription.SEARCH_PHRASE, required = false)
+          @QueryParam(value = "searchPhrase")
+          String searchPhrase,
+      @Parameter(description = DocDescription.LIMIT, required = false) @QueryParam(value = "limit")
+          String limit,
+      @Parameter(description = DocDescription.OFFSET, required = false)
+          @QueryParam(value = "offset")
+          String offset,
+      @Parameter(description = DocDescription.FILTER, required = false)
+          @QueryParam(value = "filter")
+          String filter,
+      @Parameter(description = DocDescription.SORTING) @QueryParam("sorting") Sorting sorting)
       throws Exception {
+
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
     params.setSearchPhrase(searchPhrase);
     params.setLanguage(locale);
     params.setMarketPlaceId(marketplaceId);
+    params.setPerformanceHint(PerformanceHint.ALL_FIELDS);
+    params.setListCriteria(createListCriteria(offset, limit, filter, sorting));
     return getCollection(uriInfo, sb.getCollection(), params);
+  }
+
+  private ListCriteria createListCriteria(
+      String offset, String limit, String filter, Sorting sorting) {
+    ListCriteria c = new ListCriteria();
+    if (Optional.ofNullable(limit).isPresent() && Optional.ofNullable(offset).isPresent()) {
+      c.setFilter(filter);
+      c.setLimit(Integer.parseInt(limit));
+      c.setOffset(Integer.parseInt(offset));
+      c.setSorting(getSorting(sorting));
+    }
+    return c;
+  }
+
+  private Sorting getSorting(Sorting sorting) {
+    return Optional.ofNullable(sorting).orElse(Sorting.NAME_ASCENDING);
   }
 
   @GET

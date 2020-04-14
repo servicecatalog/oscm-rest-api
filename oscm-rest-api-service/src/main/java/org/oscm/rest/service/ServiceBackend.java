@@ -12,14 +12,17 @@ package org.oscm.rest.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.intf.SearchService;
+import org.oscm.internal.intf.SearchServiceInternal;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
+import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
@@ -40,6 +43,7 @@ public class ServiceBackend {
 
   @EJB ServiceProvisioningService sps;
   @EJB SearchService searchService;
+  @EJB SearchServiceInternal searchServiceInternal;
   @EJB MarketplaceService ms;
 
   public RestBackend.Delete<ServiceParameters> delete() {
@@ -91,12 +95,67 @@ public class ServiceBackend {
 
   public RestBackend.GetCollection<ServiceRepresentation, ServiceParameters> getCollection() {
     return params -> {
-      final Optional<String> phrase = Optional.ofNullable(params.getSearchPhrase());
-      if (phrase.isPresent()) {
+      if (isSeachRequest(params)) {
         return createSearchResult(params);
+      } else if (isPageingRequest(params)) {
+        return createPagedServiceList(params);
       }
       return createServiceList();
     };
+  }
+
+  private boolean isSeachRequest(ServiceParameters params) {
+    return Optional.ofNullable(params.getSearchPhrase()).isPresent();
+  }
+
+  private boolean isPageingRequest(ServiceParameters params) {
+    return params.getListCriteria().getLimit() != 0
+        && Optional.ofNullable(params.getListCriteria().getSorting()).isPresent();
+  }
+
+  private RepresentationCollection<ServiceRepresentation> createPagedServiceList(
+      ServiceParameters params) throws ObjectNotFoundException, InvalidPhraseException {
+    List<VOService> services = getPagedServices(params);
+    return new RepresentationCollection<ServiceRepresentation>(
+        ServiceRepresentation.toCollection(services));
+  }
+
+  protected List<VOService> getPagedServices(ServiceParameters params)
+      throws ObjectNotFoundException, InvalidPhraseException {
+
+    return Optional.ofNullable(params.getMarketPlaceId())
+        .map(
+            p -> {
+              return getServicesByCriteria(params, p);
+            })
+        .orElseGet(
+            () -> {
+              return ms.getMarketplacesOwned()
+                  .stream()
+                  .flatMap(
+                      mp -> {
+                        return getServicesByCriteria(params, mp.getMarketplaceId()).stream();
+                      })
+                  .collect(Collectors.toList());
+            });
+  }
+
+  private List<VOService> getServicesByCriteria(ServiceParameters params, String mpId) {
+    try {
+      return searchServiceInternal
+          .getServicesByCriteria(
+              mpId,
+              getLocale(params.getLocale()),
+              params.getListCriteria(),
+              getPerformanceHint(params.getPerformanceHint()))
+          .getServices();
+    } catch (ObjectNotFoundException e) {
+    }
+    return new ArrayList<VOService>();
+  }
+
+  protected PerformanceHint getPerformanceHint(PerformanceHint performanceHint) {
+    return Optional.ofNullable(performanceHint).orElse(PerformanceHint.ALL_FIELDS);
   }
 
   private RepresentationCollection<ServiceRepresentation> createSearchResult(

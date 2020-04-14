@@ -24,6 +24,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.oscm.internal.types.enumtypes.Sorting;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
@@ -75,7 +76,15 @@ public class ServiceResourceTest {
     try {
       response =
           serviceResource.getServices(
-              uriInfo, serviceParameters.getEndpointVersion(), null, null, null);
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              Sorting.RATING_ASCENDING);
     } catch (Exception e) {
       fail(e);
     }
@@ -117,7 +126,7 @@ public class ServiceResourceTest {
 
   @Test
   public void shouldGetService() {
-    when(serviceBackend.get()).thenReturn(serviceParameters1 -> serviceDetailsRepresentation);
+    when(serviceBackend.get()).thenReturn(serviceParameters -> serviceDetailsRepresentation);
 
     try {
       response =
