@@ -11,7 +11,6 @@ package org.oscm.rest.common.requestparameters;
 
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-
 import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.vo.ListCriteria;
 

@@ -9,8 +9,17 @@
  */
 package org.oscm.rest.service;
 
+import constants.CommonConstants;
+import constants.DocDescription;
+import constants.ServiceConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.Optional;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.DELETE;
@@ -25,7 +34,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.types.enumtypes.Sorting;
 import org.oscm.internal.vo.ListCriteria;
@@ -36,19 +46,6 @@ import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.StatusRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import constants.CommonConstants;
-import constants.DocDescription;
-import constants.ServiceConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.AccessLevel;
-import lombok.Setter;
 
 @Path(CommonParams.PATH_VERSION + "/services")
 @Stateless

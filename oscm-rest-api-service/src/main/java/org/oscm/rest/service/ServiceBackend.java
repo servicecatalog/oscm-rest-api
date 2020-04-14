@@ -13,10 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.SearchServiceInternal;
@@ -130,8 +128,7 @@ public class ServiceBackend {
             })
         .orElseGet(
             () -> {
-              return ms.getMarketplacesOwned()
-                  .stream()
+              return ms.getMarketplacesOwned().stream()
                   .flatMap(
                       mp -> {
                         return getServicesByCriteria(params, mp.getMarketplaceId()).stream();
