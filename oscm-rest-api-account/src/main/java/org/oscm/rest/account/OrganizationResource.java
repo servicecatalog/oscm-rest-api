@@ -17,6 +17,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -120,7 +121,7 @@ public class OrganizationResource extends RestResource {
   @PUT
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Updates organization",
+      summary = "Update organization",
       tags = {"organizations"},
       description =
           "Updates an organization along with its administrator based on given request data",
@@ -135,8 +136,8 @@ public class OrganizationResource extends RestResource {
                         @ExampleObject(
                             name =
                                 "Request contains specific organization roles, sample organization data and its administrator's user data which. Administrator user will be automatically created along with organization",
-                            value = AccountConstants.ORGANIZATION_EXAMPLE_BODY,
-                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
+                            value = AccountConstants.ORGANIZATION_EXAMPLE_PUT_BODY,
+                            summary = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION)
                       })),
       responses = {
         @ApiResponse(
@@ -149,10 +150,12 @@ public class OrganizationResource extends RestResource {
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
-          String version)
+          String version,
+      @QueryParam("marketplaceId") String marketplaceId)
       throws Exception {
     AccountParameters params = new AccountParameters();
     params.setEndpointVersion(version);
-    return post(uriInfo, ab.postOrganization(), content, params);
+    params.setMarketplaceId(marketplaceId);
+    return put(uriInfo, ab.putOrganization(), content, params);
   }
 }

@@ -181,39 +181,11 @@ public class AccountBackend {
 
   public RestBackend.Put<AccountRepresentation, AccountParameters> putOrganization() {
     return (content, params) -> {
-      VOOrganization org;
-      if (content.isSelfRegistration()) {
-        // TODO: this is available public
-        org =
-            as.registerCustomer(
-                content.getOrganization().getVO(),
-                content.getUser().getVO(),
-                content.getPassword(),
-                content.getServiceKey(),
-                params.getMarketplaceId(),
-                content.getSellerId());
-      } else if (content.isCustomerRegistration()) {
-        org =
-            as.registerKnownCustomer(
-                content.getOrganization().getVO(),
-                content.getUser().getVO(),
-                content.getProps(),
-                params.getMarketplaceId());
-      } else {
-        org =
-            os.registerOrganization(
-                content.getOrganization().getVO(),
-                null,
-                content.getUser().getVO(),
-                content.getProps(),
-                params.getMarketplaceId(),
-                content.getOrganizationRoles());
-      }
-      if (org == null) {
-        // registration of a known customer has a suspending trigger
-        // active
-        return false;
-      }
+      as.updateAccountInformation(
+          content.getOrganization().getVO(),
+          content.getUser().getVO(),
+          params.getMarketplaceId(),
+          null);
       return true;
     };
   }
