@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import org.oscm.rest.common.GsonMessageProvider;
-import org.oscm.rest.common.OSCMExceptionMapper;
+import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.subscription.SubscriptionResource;
