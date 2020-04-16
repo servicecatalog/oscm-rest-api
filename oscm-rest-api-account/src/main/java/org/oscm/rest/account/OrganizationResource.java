@@ -127,22 +127,23 @@ public class OrganizationResource extends RestResource {
           "Updates an organization along with its administrator based on given request data",
       requestBody =
           @RequestBody(
-              description = "JSON representing organization to be created",
+              description = "JSON representing organization to be updated",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = OrganizationRepresentation.class),
                       examples = {
                         @ExampleObject(
                             name =
-                                "Request contains specific organization roles, sample organization data and its administrator's user data which. Administrator user will be automatically created along with organization",
+                                "Request contains organization data and its administrator's user data. Administrator user will be automatically updated along with organization",
                             value = AccountConstants.ORGANIZATION_EXAMPLE_PUT_BODY,
-                            summary = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION)
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
         @ApiResponse(
-            responseCode = "201",
-            description = "Organization successfully created. " + CommonConstants.ID_INFO)
+            responseCode = "204",
+            description = "Organization successfully updated. " + CommonConstants.ID_INFO)
       })
   public Response updateOrganization(
       @Context UriInfo uriInfo,
@@ -151,7 +152,8 @@ public class OrganizationResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @QueryParam("marketplaceId") String marketplaceId)
+      @Parameter(description = DocDescription.MARKETPLACE_ID) @QueryParam("marketplaceId")
+          String marketplaceId)
       throws Exception {
     AccountParameters params = new AccountParameters();
     params.setEndpointVersion(version);

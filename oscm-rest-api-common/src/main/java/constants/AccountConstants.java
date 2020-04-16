@@ -52,7 +52,7 @@ public class AccountConstants {
 
   public static final String ORGANIZATION_EXAMPLE_PUT_BODY =
       "{\n"
-          + "\"organization\": \"{\" \n"
+          + "\"organization\": { \n"
           + "\"etag\": \"1\", \n"
           + "\"id\": \"10000\", \n"
           + "\"organizationId\": \"959c9bf7\", \n"
