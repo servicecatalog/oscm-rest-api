@@ -182,10 +182,7 @@ public class AccountBackend {
   public RestBackend.Put<AccountRepresentation, AccountParameters> putOrganization() {
     return (content, params) -> {
       as.updateAccountInformation(
-          content.getOrganization().getVO(),
-          content.getUser().getVO(),
-          params.getMarketplaceId(),
-          null);
+          content.getOrganization().getVO(), null, params.getMarketplaceId(), null);
       return true;
     };
   }

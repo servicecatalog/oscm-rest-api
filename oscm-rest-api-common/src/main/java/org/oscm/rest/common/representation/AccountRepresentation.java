@@ -9,13 +9,14 @@
  */
 package org.oscm.rest.common.representation;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Properties;
+
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
 import org.oscm.internal.vo.Setting;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 public class AccountRepresentation extends Representation {
 
@@ -38,7 +39,7 @@ public class AccountRepresentation extends Representation {
   @Override
   public void update() {
     organization.update();
-    user.update();
+    Optional.ofNullable(user).ifPresent(u -> u.update());
     props = toProperties();
   }
 

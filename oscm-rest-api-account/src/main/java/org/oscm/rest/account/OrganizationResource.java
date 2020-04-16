@@ -123,8 +123,7 @@ public class OrganizationResource extends RestResource {
   @Operation(
       summary = "Update organization",
       tags = {"organizations"},
-      description =
-          "Updates an organization along with its administrator based on given request data",
+      description = "Updates an organization based on given request data",
       requestBody =
           @RequestBody(
               description = "JSON representing organization to be updated",
@@ -136,7 +135,7 @@ public class OrganizationResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name =
-                                "Request contains organization data and its administrator's user data. Administrator user will be automatically updated along with organization",
+                                "Request contains organization data. Organization will be automatically updated",
                             value = AccountConstants.ORGANIZATION_EXAMPLE_PUT_BODY,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
