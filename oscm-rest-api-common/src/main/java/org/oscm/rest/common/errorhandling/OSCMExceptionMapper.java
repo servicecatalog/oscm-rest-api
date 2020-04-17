@@ -12,7 +12,6 @@ package org.oscm.rest.common.errorhandling;
 import lombok.extern.slf4j.Slf4j;
 import org.oscm.internal.types.exception.SaaSApplicationException;
 import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.errorhandling.ErrorResponse;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -26,8 +25,8 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
   public Response toResponse(SaaSApplicationException e) {
 
     Response response;
-
     log.info("Handling exception: " + e.getClass().getName());
+
     String exceptionName = e.getClass().getSimpleName();
     switch (exceptionName) {
       case "ObjectNotFoundException":

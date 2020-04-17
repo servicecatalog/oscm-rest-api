@@ -1,7 +1,7 @@
 /**
  * *****************************************************************************
  *
- * <p>Copyright FUJITSU LIMITED 2017
+ * <p>Copyright FUJITSU LIMITED 2020
  *
  * <p>Creation Date: April 16, 2020
  *
@@ -10,6 +10,7 @@
 package org.oscm.rest.common.errorhandling;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.openejb.ApplicationException;
 import org.oscm.rest.common.CommonParams;
 
 import javax.ws.rs.core.Response;
@@ -18,10 +19,10 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 @Slf4j
-public class ApplicationExceptionMapper implements ExceptionMapper<Exception> {
+public class ApplicationExceptionMapper implements ExceptionMapper<ApplicationException> {
 
   @Override
-  public Response toResponse(Exception e) {
+  public Response toResponse(ApplicationException e) {
 
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
