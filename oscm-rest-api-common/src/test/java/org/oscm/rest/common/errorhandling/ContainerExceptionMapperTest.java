@@ -18,13 +18,13 @@ import javax.ws.rs.core.Response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ApplicationExceptionMapperTest {
+class ContainerExceptionMapperTest {
 
   @Test
   void testToResponse_returnsInternalError_whenGeneralApplicationException() {
 
     // given
-    ApplicationExceptionMapper mapper = new ApplicationExceptionMapper();
+    ContainerExceptionMapper mapper = new ContainerExceptionMapper();
     String excMsg = "ExceptionMessage";
     ApplicationException exc = new ApplicationException(excMsg);
 
@@ -43,7 +43,7 @@ class ApplicationExceptionMapperTest {
   void testToResponse_returnsForbidden_whenInvalidateReferenceException() {
 
     // given
-    ApplicationExceptionMapper mapper = new ApplicationExceptionMapper();
+    ContainerExceptionMapper mapper = new ContainerExceptionMapper();
     String excMsg = "ExceptionMessage";
     InvalidateReferenceException exc = new InvalidateReferenceException(excMsg);
 

@@ -10,19 +10,23 @@
 package org.oscm.rest.common.errorhandling;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.openejb.ApplicationException;
+import org.apache.openejb.OpenEJBException;
 import org.oscm.rest.common.CommonParams;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * Exception handler triggered in case of EJB container exception is thrown (check @{@link
+ * OpenEJBException})
+ */
 @Provider
 @Slf4j
-public class ApplicationExceptionMapper implements ExceptionMapper<ApplicationException> {
+public class ContainerExceptionMapper implements ExceptionMapper<OpenEJBException> {
 
   @Override
-  public Response toResponse(ApplicationException e) {
+  public Response toResponse(OpenEJBException e) {
 
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
