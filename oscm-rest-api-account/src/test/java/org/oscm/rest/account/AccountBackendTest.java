@@ -11,14 +11,16 @@ package org.oscm.rest.account;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Lists;
 import java.util.Optional;
 import java.util.stream.Stream;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lombok.SneakyThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +29,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.OperatorService;
@@ -36,8 +39,17 @@ import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.TestContants;
-import org.oscm.rest.common.representation.*;
+import org.oscm.rest.common.representation.AccountRepresentation;
+import org.oscm.rest.common.representation.BillingContactRepresentation;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.representation.PaymentInfoRepresentation;
+import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+
+import com.google.common.collect.Lists;
+
+import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountBackendTest {
@@ -276,6 +288,23 @@ public class AccountBackendTest {
     assertThat((PostResponseBody) response.getEntity())
         .extracting(PostResponseBody::getCreatedObjectName)
         .isNotNull();
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideRepresentationForCreatingOrganization")
+  @SneakyThrows
+  public void organizationResource_updateOrganization(AccountRepresentation representation) {
+
+    Mockito.doNothing().when(accountService).updateAccountInformation(any(), any(), any(), any());
+
+    Response response =
+        organizationResource.updateOrganization(
+            uriInfo, representation, parameters.getEndpointVersion(), null);
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
   }
 
   private static Stream<Arguments> provideRepresentationForCreatingOrganization() {

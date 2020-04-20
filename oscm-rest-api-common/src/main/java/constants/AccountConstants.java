@@ -50,8 +50,25 @@ public class AccountConstants {
           + "}\n"
           + "}\n";
 
+  public static final String ORGANIZATION_EXAMPLE_PUT_BODY =
+      "{\n"
+          + "\"organization\": { \n"
+          + "\"etag\": \"1\", \n"
+          + "\"id\": \"10000\", \n"
+          + "\"organizationId\": \"959c9bf7\", \n"
+          + "\"address\": \"sample address2\",\n"
+          + "\"email\": \"secondsupplier@escm.org\",\n"
+          + "\"locale\": \"en\",\n"
+          + "\"name\": \"restorg\",\n"
+          + "\"phone\": \"987654321\",\n"
+          + "\"url\": \"http://example.com/org\",\n"
+          + "\"description\": \"\",\n"
+          + "\"domicileCountry\": \"PL\"\n"
+          + "}\n"
+          + "}\n";
+
   public static final String PAYMENT_INFO_EXAMPLE_RESPONSE =
-      "{\"paymentType\":{\"name\":\"Invoice\",\"paymentTypeId\":\"INVOICE\",\"collectionType\":\"ORGANIZATION\",\"etag\":0,\"id\":3},\"infoId\":\"some info id\",\"etag\":0,\"id\":10000}";
+      "\"{\"paymentType\":{\"name\":\"Invoice\",\"paymentTypeId\":\"INVOICE\",\"collectionType\":\"ORGANIZATION\",\"etag\":0,\"id\":3},\"infoId\":\"some info id\",\"etag\":0,\"id\":10000}";
 
   public static final String PAYMENT_INFO_LIST_EXAMPLE_RESPONSE =
       "{\"items\":[" + PAYMENT_INFO_EXAMPLE_RESPONSE + "]}";
