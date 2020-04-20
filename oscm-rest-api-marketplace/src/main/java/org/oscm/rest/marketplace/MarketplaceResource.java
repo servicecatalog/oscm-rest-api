@@ -19,29 +19,21 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.MarketplaceListType;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.common.errorhandling.RestErrorResponseFactory;
 import org.oscm.rest.common.representation.MarketplaceRepresentation;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces")
 @Stateless
@@ -79,14 +71,10 @@ public class MarketplaceResource extends RestResource {
       @Parameter(description = DocDescription.MARKETPLACE_TYPE) @QueryParam("listType")
           MarketplaceListType listType)
       throws Exception {
-    try {
-      MarketplaceParameters params = new MarketplaceParameters();
-      params.setEndpointVersion(version);
-      params.setListType(listType);
-      return getCollection(uriInfo, mb.getCollection(), params);
-    } catch (Exception e) {
-      return RestErrorResponseFactory.getResponse(e);
-    }
+    MarketplaceParameters params = new MarketplaceParameters();
+    params.setEndpointVersion(version);
+    params.setListType(listType);
+    return getCollection(uriInfo, mb.getCollection(), params);
   }
 
   @GET
@@ -114,14 +102,10 @@ public class MarketplaceResource extends RestResource {
           String version,
       @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
-    try {
-      MarketplaceParameters params = new MarketplaceParameters();
-      params.setEndpointVersion(version);
-      params.setId(Long.valueOf(id));
-      return get(uriInfo, mb.get(), params, true);
-    } catch (Exception e) {
-      return RestErrorResponseFactory.getResponse(e);
-    }
+    MarketplaceParameters params = new MarketplaceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    return get(uriInfo, mb.get(), params, true);
   }
 
   @POST
@@ -157,13 +141,9 @@ public class MarketplaceResource extends RestResource {
           @PathParam(value = "version")
           String version)
       throws Exception {
-    try {
-      MarketplaceParameters params = new MarketplaceParameters();
-      params.setEndpointVersion(version);
-      return post(uriInfo, mb.post(), content, params);
-    } catch (Exception e) {
-      return RestErrorResponseFactory.getResponse(e);
-    }
+    MarketplaceParameters params = new MarketplaceParameters();
+    params.setEndpointVersion(version);
+    return post(uriInfo, mb.post(), content, params);
   }
 
   @PUT
@@ -199,14 +179,10 @@ public class MarketplaceResource extends RestResource {
           String version,
       @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
-    try {
-      MarketplaceParameters params = new MarketplaceParameters();
-      params.setEndpointVersion(version);
-      params.setId(Long.valueOf(id));
-      return put(uriInfo, mb.put(), content, params);
-    } catch (Exception e) {
-      return RestErrorResponseFactory.getResponse(e);
-    }
+    MarketplaceParameters params = new MarketplaceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    return put(uriInfo, mb.put(), content, params);
   }
 
   @DELETE
@@ -227,13 +203,9 @@ public class MarketplaceResource extends RestResource {
           String version,
       @Parameter(description = DocDescription.OBJECT_ID) @PathParam(value = "id") String id)
       throws Exception {
-    try {
-      MarketplaceParameters params = new MarketplaceParameters();
-      params.setEndpointVersion(version);
-      params.setId(Long.valueOf(id));
-      return delete(uriInfo, mb.delete(), params);
-    } catch (Exception e) {
-      return RestErrorResponseFactory.getResponse(e);
-    }
+    MarketplaceParameters params = new MarketplaceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    return delete(uriInfo, mb.delete(), params);
   }
 }
