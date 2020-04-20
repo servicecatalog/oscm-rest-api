@@ -15,12 +15,12 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
+import com.google.common.collect.Lists;
 import java.util.Optional;
 import java.util.stream.Stream;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,10 +46,6 @@ import org.oscm.rest.common.representation.PaymentInfoRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
-
-import com.google.common.collect.Lists;
-
-import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountBackendTest {

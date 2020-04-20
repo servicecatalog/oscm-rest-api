@@ -11,10 +11,8 @@ package org.oscm.rest.account;
 
 import java.util.Collection;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.OperatorService;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
