@@ -45,6 +45,8 @@ public class SettingsBackend {
 
   public RestBackend.Put<SettingRepresentation, OperationParameters> put() throws Exception {
     return (content, params) -> {
+      VOConfigurationSetting vo = os.getConfigurationSetting(params.getId());
+      content.getVO().setInformationId(vo.getInformationId());
       os.saveConfigurationSetting(content.getVO());
       return true;
     };

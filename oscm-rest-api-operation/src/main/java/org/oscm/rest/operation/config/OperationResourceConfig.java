@@ -10,7 +10,7 @@
 package org.oscm.rest.operation.config;
 
 import org.oscm.rest.common.GsonMessageProvider;
-import org.oscm.rest.common.OSCMExceptionMapper;
+import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.operation.SettingsResource;

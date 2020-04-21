@@ -2,7 +2,7 @@ package org.oscm.rest.event.config;
 
 import org.junit.jupiter.api.Test;
 import org.oscm.rest.common.GsonMessageProvider;
-import org.oscm.rest.common.OSCMExceptionMapper;
+import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
 import org.oscm.rest.common.VersionFilter;
 import org.oscm.rest.event.EventResource;
 

@@ -94,7 +94,7 @@ public class SettingsBackendTest {
   @SneakyThrows
   public void shouldUpdateSetting() {
     doNothing().when(operatorService).saveConfigurationSetting(any());
-
+    when(operatorService.getConfigurationSetting(any())).thenReturn(vo);
     Response response = resource.updateSetting(uriInfo, representation, parameters);
 
     assertThat(response).isNotNull();

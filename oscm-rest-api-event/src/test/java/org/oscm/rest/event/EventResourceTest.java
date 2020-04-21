@@ -76,28 +76,4 @@ public class EventResourceTest {
         .isEqualTo(Response.Status.CREATED.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
   }
-
-  @ParameterizedTest
-  @MethodSource("provideThrowablesAsArguments")
-  @SneakyThrows
-  public void shouldReturnResponseWithError_whenExceptionIsThrown(
-      Exception exception, Response.Status status) {
-    doThrow(exception).when(eventBackend).post();
-
-    Response response = eventResource.recordEvent(uriInfo, eventRepresentation, eventParameters);
-
-    assertThat(response.getStatus()).isEqualTo(status.getStatusCode());
-  }
-
-  public static Stream<Arguments> provideThrowablesAsArguments() {
-    return Stream.of(
-        Arguments.of(new DuplicateEventException(), Response.Status.CONFLICT),
-        Arguments.of(new OrganizationAuthoritiesException(), Response.Status.FORBIDDEN),
-        Arguments.of(new ObjectNotFoundException(), Response.Status.NOT_FOUND),
-        Arguments.of(new ValidationException(), Response.Status.BAD_REQUEST),
-        // FIXME: Explicit package name should be removed in scope of oscm#419
-        Arguments.of(new java.lang.IllegalArgumentException(), Response.Status.BAD_REQUEST),
-        Arguments.of(new SaaSSystemException(), Response.Status.INTERNAL_SERVER_ERROR),
-        Arguments.of(new WebApplicationException(), Response.Status.INTERNAL_SERVER_ERROR));
-  }
 }
