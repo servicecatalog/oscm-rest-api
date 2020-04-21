@@ -9,13 +9,12 @@
  */
 package org.oscm.rest.common.errorhandling;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.openejb.OpenEJBException;
-import org.oscm.rest.common.CommonParams;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.openejb.OpenEJBException;
+import org.oscm.rest.common.CommonParams;
 
 /**
  * Exception handler triggered in case of EJB container exception is thrown (check @{@link

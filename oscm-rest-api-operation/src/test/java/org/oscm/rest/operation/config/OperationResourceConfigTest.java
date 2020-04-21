@@ -9,15 +9,14 @@
  */
 package org.oscm.rest.operation.config;
 
-import org.junit.jupiter.api.Test;
-import org.oscm.rest.common.GsonMessageProvider;
-import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
-import org.oscm.rest.common.VersionFilter;
-import org.oscm.rest.operation.SettingsResource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.oscm.rest.common.GsonMessageProvider;
+import org.oscm.rest.common.VersionFilter;
+import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
+import org.oscm.rest.operation.SettingsResource;
 
 class OperationResourceConfigTest {
 

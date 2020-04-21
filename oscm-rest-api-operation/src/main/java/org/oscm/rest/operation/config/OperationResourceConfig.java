@@ -9,17 +9,17 @@
  */
 package org.oscm.rest.operation.config;
 
-import org.oscm.rest.common.GsonMessageProvider;
-import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
-import org.oscm.rest.common.ResourceConfiguration;
-import org.oscm.rest.common.VersionFilter;
-import org.oscm.rest.operation.SettingsResource;
-
 import java.util.HashSet;
 import java.util.Set;
+import org.oscm.rest.common.GsonMessageProvider;
+import org.oscm.rest.common.ResourceConfiguration;
+import org.oscm.rest.common.VersionFilter;
+import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
+import org.oscm.rest.operation.SettingsResource;
 
 /**
- * Lists out resources and providers of the operation component that will be registered to the application.
+ * Lists out resources and providers of the operation component that will be registered to the
+ * application.
  *
  * @author Weiser
  */

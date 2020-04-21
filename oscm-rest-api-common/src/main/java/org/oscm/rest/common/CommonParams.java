@@ -54,7 +54,8 @@ public class CommonParams {
   // error messages
   public static final String ERROR_RESOURCE_NOT_FOUND = "Requested resource was not found";
   public static final String ERROR_UNEXPECTED_EXCEPTION = "Unexpected problem occurred";
-  public static final String ERROR_OUTDATED_VERSION = "Object to be updated is not in the latest version";
+  public static final String ERROR_OUTDATED_VERSION =
+      "Object to be updated is not in the latest version";
   public static final String ERROR_JSON_FORMAT = "Invalid JSON format";
   public static final String ERROR_INVALID_ID = "ID not valid or unknown";
   public static final String ERROR_INVALID_VERSION = "Version not valid or unknown";
@@ -68,7 +69,6 @@ public class CommonParams {
 
   // general purpose constants
   public static final String DUMMY_ID = "DummyIdentifier";
-
 
   private CommonParams() {}
 }

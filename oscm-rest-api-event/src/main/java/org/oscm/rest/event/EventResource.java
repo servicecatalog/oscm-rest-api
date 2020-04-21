@@ -17,14 +17,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.AccessLevel;
-import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.EventRepresentation;
-import org.oscm.rest.common.requestparameters.EventParameters;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.BeanParam;
@@ -33,6 +25,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import lombok.AccessLevel;
+import lombok.Setter;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.EventRepresentation;
+import org.oscm.rest.common.requestparameters.EventParameters;
 
 @Path(CommonParams.PATH_VERSION + "/events")
 @Stateless
@@ -81,7 +80,8 @@ public class EventResource extends RestResource {
             content = @Content(schema = @Schema(implementation = EventRepresentation.class)))
       })
   public Response recordEvent(
-      @Context UriInfo uriInfo, EventRepresentation content, @BeanParam EventParameters params) throws Exception{
+      @Context UriInfo uriInfo, EventRepresentation content, @BeanParam EventParameters params)
+      throws Exception {
     return post(uriInfo, eb.post(), content, params);
   }
 }

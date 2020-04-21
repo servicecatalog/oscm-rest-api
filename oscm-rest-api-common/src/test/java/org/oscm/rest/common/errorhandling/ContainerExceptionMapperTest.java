@@ -9,14 +9,13 @@
  */
 package org.oscm.rest.common.errorhandling;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import javax.ws.rs.core.Response;
 import org.apache.openejb.ApplicationException;
 import org.apache.openejb.InvalidateReferenceException;
 import org.junit.jupiter.api.Test;
 import org.oscm.rest.common.CommonParams;
-
-import javax.ws.rs.core.Response;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class ContainerExceptionMapperTest {
 

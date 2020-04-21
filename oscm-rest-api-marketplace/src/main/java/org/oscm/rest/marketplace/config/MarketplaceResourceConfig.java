@@ -12,9 +12,9 @@ package org.oscm.rest.marketplace.config;
 import java.util.HashSet;
 import java.util.Set;
 import org.oscm.rest.common.GsonMessageProvider;
-import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
 import org.oscm.rest.common.ResourceConfiguration;
 import org.oscm.rest.common.VersionFilter;
+import org.oscm.rest.common.errorhandling.OSCMExceptionMapper;
 import org.oscm.rest.marketplace.EntryResource;
 import org.oscm.rest.marketplace.MarketplaceResource;
 
