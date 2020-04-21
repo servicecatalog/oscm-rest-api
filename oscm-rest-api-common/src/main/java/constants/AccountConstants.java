@@ -16,13 +16,37 @@ package constants;
  */
 public class AccountConstants {
 
-  public static final String BILLING_CONTACT_EXAMPLE_BODY =
+  public static final String BILLING_CONTACT_EXAMPLE_RESPONSE =
+      "{\n"
+          + "  \"email\": \"sample.email@escm.com\",\n"
+          + "  \"companyName\": \"Sample Company Name\",\n"
+          + "  \"address\": \"Sample addresssssssssss\",\n"
+          + "  \"orgAddressUsed\": true,\n"
+          + "  \"contactId\": \"Sample contact ID.\",\n"
+          + "  \"etag\": 3,\n"
+          + "  \"id\": 10000\n"
+          + "}";
+
+  public static final String BILLING_CONTACT_LIST_EXAMPLE_RESPONSE =
+          "{\"items\":[" + BILLING_CONTACT_EXAMPLE_RESPONSE + "]}";
+
+  public static final String BILLING_CONTACT_CREATE_EXAMPLE_REQUEST =
       "{\n"
           + "\"email\": \"sample.email@escm.com\",\n"
           + "\"companyName\": \"Sample Company Name\",\n"
           + "\"address\": \"Sample addresss\",\n"
           + "\"orgAddressUsed\": true,"
           + "\"contactId\": \"Sample contact ID.\"\n"
+          + "}";
+
+  public static final String BILLING_CONTACT_UPDATE_EXAMPLE_REQUEST =
+      "{\n"
+          + "\"email\": \"sample.email@escm.com\",\n"
+          + "\"companyName\": \"Sample Company Name\",\n"
+          + "\"address\": \"Sample addresss\",\n"
+          + "\"orgAddressUsed\": true,"
+          + "\"contactId\": \"Sample contact ID.\",\n"
+          + "\"etag\": 1 \n"
           + "}";
 
   public static final String ORGANIZATION_EXAMPLE_BODY =

@@ -11,6 +11,7 @@ package org.oscm.rest.account;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.oscm.internal.intf.AccountService;
@@ -76,6 +77,13 @@ public class AccountBackend {
 
   public RestBackend.Put<BillingContactRepresentation, AccountParameters> putBillingContact() {
     return (content, params) -> {
+      List<VOBillingContact> list = as.getBillingContacts();
+      Optional<VOBillingContact> foundContact =
+          list.stream().filter(contact -> contact.getKey()==params.getId()).findAny();
+      if (!foundContact.isPresent()) {
+        throw new ObjectNotFoundException(
+            ClassEnum.BILLING_CONTACT, String.valueOf(params.getId().longValue()));
+      }
       as.saveBillingContact(content.getVO());
       return true;
     };
