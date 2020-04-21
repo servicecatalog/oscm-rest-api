@@ -139,6 +139,7 @@ public class AccountBackendTest {
   @SneakyThrows
   public void shouldPutBillingContact() {
     when(accountService.saveBillingContact(any())).thenReturn(billingContactVO);
+    when(accountService.getBillingContacts()).thenReturn(Lists.newArrayList(billingContactVO));
 
     Response response =
         billingContactResource.updateBillingContact(
