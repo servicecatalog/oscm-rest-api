@@ -9,29 +9,34 @@
  */
 package org.oscm.rest.marketplace;
 
-import constants.CommonConstants;
-import constants.MarketplaceConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.BeanParam;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lombok.AccessLevel;
-import lombok.Setter;
+
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.EntryRepresentation;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
+
+import constants.CommonConstants;
+import constants.DocDescription;
+import constants.MarketplaceConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.AccessLevel;
+import lombok.Setter;
 
 @Path(CommonParams.PATH_VERSION + "/marketplaces" + CommonParams.PATH_ID + "/entries/{sKey}")
 @Stateless
@@ -44,34 +49,40 @@ public class EntryResource extends RestResource {
   @PUT
   @Since(CommonParams.VERSION_1)
   @Operation(
-      summary = "Update a single marketplace entry",
+      summary = "Publish service to marketplace",
       tags = {"marketplaces"},
-      description = "Updates a single marketplace entry",
+      description = "Publishes a single service to a marketplace",
       requestBody =
           @RequestBody(
               description = "EntryRepresentation object to be updated",
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = EntryRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MINIMUM_BODY_NAME,
-                            value = MarketplaceConstants.ENTRY_MINIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MINIMUM_BODY_SUMMARY),
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_MAXIMUM_BODY_NAME,
-                            value = MarketplaceConstants.ENTRY_MAXIMUM_BODY,
-                            summary = CommonConstants.EXAMPLE_MAXIMUM_BODY_SUMMARY)
+                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
+                            value = MarketplaceConstants.ENTRY_PUBLISH_EXAMPLE_REQUEST,
+                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
                       })),
       responses = {
-        @ApiResponse(responseCode = "204", description = "Marketplace entry updated successfully")
+        @ApiResponse(responseCode = "204", description = "Service published successfully")
       })
   public Response updateCatalogEntry(
       @Context UriInfo uriInfo,
-      EntryRepresentation content,
-      @BeanParam MarketplaceParameters params)
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.SERVICE_KEY) @PathParam(value = "sKey") String sKey,
+      @Parameter(description = DocDescription.MARKETPLACE_ID) @PathParam(value = "id") String id,
+      EntryRepresentation content)
       throws Exception {
+    MarketplaceParameters params = new MarketplaceParameters();
+    params.setEndpointVersion(version);
+    params.setServiceKey(Long.valueOf(sKey));
+    params.setId(Long.valueOf(id));
     return put(uriInfo, eb.put(), content, params);
   }
 }
