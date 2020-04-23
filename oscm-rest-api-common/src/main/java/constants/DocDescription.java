@@ -34,4 +34,5 @@ public class DocDescription {
       "Optional parameter in conjunction with LIMIT and OFFSET, to filter services with service tags matching the given string value.";
   public static final String PERFORMANCE_HINT = "Performance hint for paging";
   public static final String SORTING = "Sorting criteria for paging";
+  public static final String SERVICE_KEY = "Key of the service";
 }

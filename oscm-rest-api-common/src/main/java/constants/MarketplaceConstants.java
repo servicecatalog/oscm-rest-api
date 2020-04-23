@@ -16,20 +16,10 @@ package constants;
  */
 public class MarketplaceConstants {
 
-  public static final String ENTRY_MINIMUM_BODY = "{}";
-
-  public static final String ENTRY_MAXIMUM_BODY =
+  public static final String ENTRY_PUBLISH_EXAMPLE_REQUEST =
       "{\n"
           + "\"anonymousVisible\": true,\n"
           + "\"visibleInCatalog\": true,\n"
-          + "\"categories\": [\n"
-          + "{\n"
-          + "\"categoryId\": \"sampleCategory2\",\n"
-          + "\"marketplaceId\": \"959c9bf7\",\n"
-          + "\"id\": 10000,\n"
-          + "\"etag\": 1\n"
-          + "}\n"
-          + "],\n"
           + "\"etag\": 1\n"
           + "}\n";
 
