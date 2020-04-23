@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,8 +27,6 @@ import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.EntryRepresentation;
 import org.oscm.rest.common.requestparameters.MarketplaceParameters;
-
-import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class EntryBackendTest {
