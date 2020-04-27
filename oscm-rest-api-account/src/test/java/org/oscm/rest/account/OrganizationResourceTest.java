@@ -9,13 +9,6 @@
  */
 package org.oscm.rest.account;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +20,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.vo.VOOrganization;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.representation.AccountRepresentation;
+import org.oscm.rest.common.representation.CreateOrganizationRepresentation;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class OrganizationResourceTest {
@@ -37,7 +37,7 @@ public class OrganizationResourceTest {
   @Mock private AccountBackend backend;
   @InjectMocks @Spy private OrganizationResource resource;
 
-  private AccountRepresentation accountRepresentation;
+  private CreateOrganizationRepresentation createOrganizationRepresentation;
   private OrganizationRepresentation orgRepresentation;
   private UriInfo uriInfo;
   private AccountParameters parameters;
@@ -45,7 +45,7 @@ public class OrganizationResourceTest {
 
   @BeforeEach
   public void setUp() {
-    accountRepresentation = SampleTestDataUtility.createAccountRepresentation(Optional.empty());
+    createOrganizationRepresentation = SampleTestDataUtility.createOrgCreateRepresentation();
     orgRepresentation = SampleTestDataUtility.createOrgRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createAccountParameters();
@@ -70,7 +70,7 @@ public class OrganizationResourceTest {
     try {
       result =
           resource.createOrganization(
-              uriInfo, accountRepresentation, parameters.getEndpointVersion());
+              uriInfo, createOrganizationRepresentation, parameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }

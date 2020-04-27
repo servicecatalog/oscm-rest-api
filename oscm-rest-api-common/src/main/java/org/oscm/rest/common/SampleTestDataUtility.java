@@ -189,6 +189,14 @@ public class SampleTestDataUtility {
     return representation;
   }
 
+  public static CreateOrganizationRepresentation createOrgCreateRepresentation() {
+    CreateOrganizationRepresentation representation = new CreateOrganizationRepresentation();
+    representation.setOrganization(new OrganizationRepresentation());
+    representation.setUser(new UserRepresentation());
+    representation.setOrganizationRoles(new OrganizationRoleType[] {OrganizationRoleType.SUPPLIER});
+    return representation;
+  }
+
   public static OrganizationRepresentation createOrgRepresentation() {
     OrganizationRepresentation representation = new OrganizationRepresentation();
     representation.setOrganizationId(TestContants.STRING_VALUE);

@@ -53,6 +53,7 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
                 .build();
         break;
       case "ValidationException":
+      case "NonUniqueBusinessKeyException":
         response =
             Response.status(Response.Status.BAD_REQUEST)
                 .entity(
@@ -61,6 +62,28 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
                         .errorDetails(e.getMessage())
                         .build())
                 .build();
+        break;
+      case "OrganizationAuthorityException":
+        String message = e.getMessage();
+        if (message.contains("Creation of organization failed")) {
+          response =
+              Response.status(Response.Status.BAD_REQUEST)
+                  .entity(
+                      ErrorResponse.of()
+                          .errorMessage(CommonParams.ERROR_JSON_FORMAT)
+                          .errorDetails(e.getMessage())
+                          .build())
+                  .build();
+        } else {
+          response =
+              Response.status(Response.Status.FORBIDDEN)
+                  .entity(
+                      ErrorResponse.of()
+                          .errorMessage(CommonParams.ERROR_NOT_AUTHORIZED)
+                          .errorDetails(e.getMessage())
+                          .build())
+                  .build();
+        }
         break;
       case "OperationNotPermittedException":
         response =
