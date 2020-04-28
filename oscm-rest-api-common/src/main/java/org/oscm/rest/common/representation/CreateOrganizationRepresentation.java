@@ -11,7 +11,7 @@ package org.oscm.rest.common.representation;
 
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
-import org.oscm.rest.common.FieldValidator;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 import java.util.Map;
 import java.util.Properties;
@@ -72,9 +72,10 @@ public class CreateOrganizationRepresentation extends Representation {
 
   @Override
   public void validateContent() {
-    FieldValidator.validateNotBlank("user", user);
-    FieldValidator.validateNotBlank("organization", organization);
-    FieldValidator.validateNotBlank("organizationRoles", organizationRoles);
+    RequiredFieldValidator validator = new RequiredFieldValidator();
+    validator.validateNotBlank("user", user);
+    validator.validateNotBlank("organization", organization);
+    validator.validateNotBlank("organizationRoles", organizationRoles);
   }
 
   public LdapProperties toProperties() {

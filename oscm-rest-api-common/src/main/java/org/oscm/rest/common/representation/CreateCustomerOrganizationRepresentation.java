@@ -10,7 +10,7 @@
 package org.oscm.rest.common.representation;
 
 import org.oscm.internal.vo.LdapProperties;
-import org.oscm.rest.common.FieldValidator;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 import java.util.Map;
 import java.util.Properties;
@@ -62,9 +62,10 @@ public class CreateCustomerOrganizationRepresentation extends Representation {
 
   @Override
   public void validateContent() {
-    FieldValidator.validateNotBlank("user", user);
-    FieldValidator.validateNotBlank("organization", organization);
-    FieldValidator.validateNotBlank("marketplaceId", marketplaceId);
+    RequiredFieldValidator validator = new RequiredFieldValidator();
+    validator.validateNotBlank("user", user);
+    validator.validateNotBlank("organization", organization);
+    validator.validateNotBlank("marketplaceId", marketplaceId);
   }
 
   public LdapProperties toProperties() {

@@ -22,8 +22,7 @@ public class GeneralExceptionMapper implements ExceptionMapper<Exception> {
 
   @Override
   public Response toResponse(Exception e) {
-
     log.info("Handling exception: " + e.getClass().getName());
-    return ErrorResponse.Provider.internalServerError(e);
+    return ErrorResponse.provider().build().internalServerError(e.getMessage());
   }
 }

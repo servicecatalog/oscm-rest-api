@@ -74,7 +74,7 @@ public class VersionFilterTest {
       testVersionFilter(version);
       fail();
     } catch (WebApplicationException e) {
-      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
+      assertEquals(Status.BAD_REQUEST.getStatusCode(), e.getResponse().getStatus());
     }
   }
 
@@ -87,7 +87,7 @@ public class VersionFilterTest {
       testVersionFilter(version);
       fail();
     } catch (WebApplicationException e) {
-      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
+      assertEquals(Status.BAD_REQUEST.getStatusCode(), e.getResponse().getStatus());
     }
   }
 
@@ -142,7 +142,7 @@ public class VersionFilterTest {
       testVersionFilter(version);
       fail();
     } catch (WebApplicationException e) {
-      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
+      assertEquals(Status.BAD_REQUEST.getStatusCode(), e.getResponse().getStatus());
     }
   }
 
@@ -167,7 +167,7 @@ public class VersionFilterTest {
       testVersionFilter(version);
       fail();
     } catch (WebApplicationException e) {
-      assertEquals(Status.NOT_FOUND.getStatusCode(), e.getResponse().getStatus());
+      assertEquals(Status.BAD_REQUEST.getStatusCode(), e.getResponse().getStatus());
     }
   }
 

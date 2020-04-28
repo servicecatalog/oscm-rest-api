@@ -26,17 +26,16 @@ public class ContainerExceptionMapper implements ExceptionMapper<OpenEJBExceptio
 
   @Override
   public Response toResponse(OpenEJBException e) {
-
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
     String exceptionName = e.getClass().getSimpleName();
 
     switch (exceptionName) {
       case "InvalidateReferenceException":
-        response = ErrorResponse.Provider.forbidden(e);
+        response = ErrorResponse.provider().build().forbidden(e.getMessage());
         break;
       default:
-        response = ErrorResponse.Provider.internalServerError(e);
+        response = ErrorResponse.provider().build().internalServerError(e.getMessage());
         break;
     }
 

@@ -26,35 +26,34 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
 
   @Override
   public Response toResponse(SaaSApplicationException e) {
-
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
     String exceptionName = e.getClass().getSimpleName();
 
     switch (exceptionName) {
       case "ObjectNotFoundException":
-        response = ErrorResponse.Provider.notFound(e);
+        response = ErrorResponse.provider().build().notFound(e.getMessage());
         break;
       case "ConcurrentModificationException":
-        response = ErrorResponse.Provider.conflict(e);
+        response = ErrorResponse.provider().build().conflict(e.getMessage());
         break;
       case "ValidationException":
       case "NonUniqueBusinessKeyException":
-        response = ErrorResponse.Provider.badRequest(e);
+        response = ErrorResponse.provider().build().badRequest(e.getMessage());
         break;
       case "OrganizationAuthorityException":
         String message = e.getMessage();
         if (message.contains("Creation of organization failed")) {
-          response = ErrorResponse.Provider.badRequest(e);
+          response = ErrorResponse.provider().build().badRequest(e.getMessage());
         } else {
-          response = ErrorResponse.Provider.forbidden(e);
+          response = ErrorResponse.provider().build().forbidden(e.getMessage());
         }
         break;
       case "OperationNotPermittedException":
-        response = ErrorResponse.Provider.forbidden(e);
+        response = ErrorResponse.provider().build().forbidden(e.getMessage());
         break;
       default:
-        response = ErrorResponse.Provider.internalServerError(e);
+        response = ErrorResponse.provider().build().internalServerError(e.getMessage());
         break;
     }
 
