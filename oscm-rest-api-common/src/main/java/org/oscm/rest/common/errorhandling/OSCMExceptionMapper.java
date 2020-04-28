@@ -9,12 +9,12 @@
  */
 package org.oscm.rest.common.errorhandling;
 
+import lombok.extern.slf4j.Slf4j;
+import org.oscm.internal.types.exception.SaaSApplicationException;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import lombok.extern.slf4j.Slf4j;
-import org.oscm.internal.types.exception.SaaSApplicationException;
-import org.oscm.rest.common.CommonParams;
 
 /**
  * Exception handler triggered in case of OSCM defined exception is thrown (check @{@link
@@ -29,81 +29,32 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
 
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
-
     String exceptionName = e.getClass().getSimpleName();
+
     switch (exceptionName) {
       case "ObjectNotFoundException":
-        response =
-            Response.status(Response.Status.NOT_FOUND)
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_RESOURCE_NOT_FOUND)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.Provider.notFound(e);
         break;
       case "ConcurrentModificationException":
-        response =
-            Response.status(Response.Status.CONFLICT)
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_OUTDATED_VERSION)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.Provider.conflict(e);
         break;
       case "ValidationException":
       case "NonUniqueBusinessKeyException":
-        response =
-            Response.status(Response.Status.BAD_REQUEST)
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_JSON_FORMAT)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.Provider.badRequest(e);
         break;
       case "OrganizationAuthorityException":
         String message = e.getMessage();
         if (message.contains("Creation of organization failed")) {
-          response =
-              Response.status(Response.Status.BAD_REQUEST)
-                  .entity(
-                      ErrorResponse.of()
-                          .errorMessage(CommonParams.ERROR_JSON_FORMAT)
-                          .errorDetails(e.getMessage())
-                          .build())
-                  .build();
+          response = ErrorResponse.Provider.badRequest(e);
         } else {
-          response =
-              Response.status(Response.Status.FORBIDDEN)
-                  .entity(
-                      ErrorResponse.of()
-                          .errorMessage(CommonParams.ERROR_NOT_AUTHORIZED)
-                          .errorDetails(e.getMessage())
-                          .build())
-                  .build();
+          response = ErrorResponse.Provider.forbidden(e);
         }
         break;
       case "OperationNotPermittedException":
-        response =
-            Response.status(Response.Status.FORBIDDEN)
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_NOT_AUTHORIZED)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.Provider.forbidden(e);
         break;
       default:
-        response =
-            Response.serverError()
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_UNEXPECTED_EXCEPTION)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.Provider.internalServerError(e);
         break;
     }
 
