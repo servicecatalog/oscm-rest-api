@@ -16,9 +16,8 @@ package constants;
  */
 public class OperationConstants {
 
-  public static final String SETTING_UPDATED_EXAMPLE_REQUEST =
+  public static final String SETTING_UPDATE_EXAMPLE_REQUEST =
       "{\n"
-          + "\"informationId\": \"LOG_LEVEL\",\n"
           + "\"contextId\": \"global\",\n"
           + "\"value\": \"INFO\",\n"
           + "\"etag\": 0\n"

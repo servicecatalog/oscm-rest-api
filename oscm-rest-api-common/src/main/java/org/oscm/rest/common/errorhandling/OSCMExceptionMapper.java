@@ -41,6 +41,7 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
       case "ValidationException":
       case "UserRoleAssignmentException":
       case "NonUniqueBusinessKeyException":
+      case "MarketplaceValidationException":
         response = ErrorResponse.provider().build().badRequest(exceptionMessage);
         break;
       case "OrganizationAuthorityException":
