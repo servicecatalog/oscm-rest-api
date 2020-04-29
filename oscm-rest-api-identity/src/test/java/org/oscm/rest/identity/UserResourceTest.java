@@ -27,6 +27,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.UserCreateRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,6 +37,7 @@ public class UserResourceTest {
   @InjectMocks @Spy private UserResource userResource;
 
   private UserRepresentation userRepresentation;
+  private UserCreateRepresentation userCreateRepresentation;
   private UriInfo uriInfo;
   private Response result;
 
@@ -45,6 +47,7 @@ public class UserResourceTest {
   @BeforeEach
   public void setUp() {
     userRepresentation = SampleTestDataUtility.createUserRepresentation();
+    userCreateRepresentation = SampleTestDataUtility.createUserCreateRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
   }
 
@@ -89,7 +92,7 @@ public class UserResourceTest {
                 PostResponseBody.of().createdObjectId("id").createdObjectName("name").build());
 
     try {
-      result = userResource.createUser(uriInfo, userRepresentation, API_VERSION);
+      result = userResource.createUser(uriInfo, userCreateRepresentation, API_VERSION);
     } catch (Exception e) {
       fail(e);
     }

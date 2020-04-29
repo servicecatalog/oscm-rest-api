@@ -19,10 +19,7 @@ import org.oscm.internal.vo.VOUser;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
-import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.RolesRepresentation;
-import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.UserParameters;
 
 @Stateless
@@ -54,9 +51,9 @@ public class UserBackend {
     };
   }
 
-  public RestBackend.Post<UserRepresentation, UserParameters> postUser() {
+  public RestBackend.Post<UserCreateRepresentation, UserParameters> postUser() {
     return (content, params) -> {
-      VOUserDetails vo = content.getVO();
+      VOUserDetails vo = content.getVo();
       vo = is.createUser(vo, new ArrayList<>(vo.getUserRoles()), params.getMarketplaceId());
       if (vo == null) {
         return null;

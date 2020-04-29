@@ -241,6 +241,21 @@ public class SampleTestDataUtility {
     return representation;
   }
 
+  public static UserCreateRepresentation createUserCreateRepresentation() {
+    UserCreateRepresentation representation = new UserCreateRepresentation();
+    representation.setAddress(TestContants.STRING_VALUE);
+    representation.setEmail(TestContants.STRING_VALUE);
+    representation.setFirstName(TestContants.STRING_VALUE);
+    representation.setLastName(TestContants.STRING_VALUE);
+    representation.setLocale(TestContants.STRING_VALUE);
+    representation.setOrganizationId(TestContants.STRING_VALUE);
+    representation.setPhone(TestContants.STRING_NUM_VALUE);
+    representation.setSalutation(Salutation.MR);
+    representation.setUserId(TestContants.STRING_VALUE);
+    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
+    return representation;
+  }
+
   public static UserParameters createUserParameters() {
     UserParameters parameters = new UserParameters();
     parameters.setUserId(TestContants.STRING_NUM_VALUE);

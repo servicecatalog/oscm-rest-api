@@ -29,31 +29,32 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
     String exceptionName = e.getClass().getSimpleName();
+    String exceptionMessage = e.getMessage();
 
     switch (exceptionName) {
       case "ObjectNotFoundException":
-        response = ErrorResponse.provider().build().notFound(e.getMessage());
+        response = ErrorResponse.provider().build().notFound(exceptionMessage);
         break;
       case "ConcurrentModificationException":
-        response = ErrorResponse.provider().build().conflict(e.getMessage());
+        response = ErrorResponse.provider().build().conflict(exceptionMessage);
         break;
       case "ValidationException":
+      case "UserRoleAssignmentException":
       case "NonUniqueBusinessKeyException":
-        response = ErrorResponse.provider().build().badRequest(e.getMessage());
+        response = ErrorResponse.provider().build().badRequest(exceptionMessage);
         break;
       case "OrganizationAuthorityException":
-        String message = e.getMessage();
-        if (message.contains("Creation of organization failed")) {
-          response = ErrorResponse.provider().build().badRequest(e.getMessage());
+        if (exceptionMessage.contains("Creation of organization failed")) {
+          response = ErrorResponse.provider().build().badRequest(exceptionMessage);
         } else {
-          response = ErrorResponse.provider().build().forbidden(e.getMessage());
+          response = ErrorResponse.provider().build().forbidden(exceptionMessage);
         }
         break;
       case "OperationNotPermittedException":
-        response = ErrorResponse.provider().build().forbidden(e.getMessage());
+        response = ErrorResponse.provider().build().forbidden(exceptionMessage);
         break;
       default:
-        response = ErrorResponse.provider().build().internalServerError(e.getMessage());
+        response = ErrorResponse.provider().build().internalServerError(exceptionMessage);
         break;
     }
 
