@@ -12,5 +12,5 @@ package org.oscm.rest.common.validator;
 import javax.ws.rs.core.Response;
 
 public interface RequestValidator {
-  Response provideErrorResponse(String validatedElement);
+  Response provideErrorResponse(String... responseParameters);
 }

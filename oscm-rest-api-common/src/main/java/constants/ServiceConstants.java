@@ -12,17 +12,6 @@ package constants;
 /** Class for account api module constants */
 public class ServiceConstants {
 
-  public static final String COMPATIBLE_SERVICE_MINIMUM_BODY =
-      "{\n"
-          + "\"items\": [\n"
-          + "{\n"
-          + "\"etag\": 1,\n"
-          + "\"id\": 11022\n"
-          + "        }\n"
-          + "],\n"
-          + "\"etag\": 7\n"
-          + "}\n";
-
   public static final String COMPATIBLE_SERVICE_MAXIMUM_BODY =
       "{\n"
           + "\"items\": [\n"
@@ -328,10 +317,12 @@ public class ServiceConstants {
 
   public static final String SERVICE_CREATE_EXAMPLE_REQUEST =
       "{\n"
+          + "  \"technicalServiceId\": 10000,\n"
           + "  \"serviceId\": \"REST_example_service\",\n"
           + "  \"description\": \"REST example service\",\n"
           + "  \"name\": \"REST example created service\",\n"
           + "  \"shortDescription\": \"REST short desc\",\n"
+          + "  \"description\": \"REST normal description\",\n"
           + "  \"configuratorUrl\": \"http://somerandom-url.com\",\n"
           + "  \"parameters\": [\n"
           + "        {\n"
@@ -370,10 +361,7 @@ public class ServiceConstants {
           + "          \"value\": \"secretpwd\",\n"
           + "          \"configurable\": true\n"
           + "        }\n"
-          + "      ],\n"
-          + "  \"technicalService\": {\n"
-          + "    \"id\": 10000\n"
-          + "  }\n"
+          + "      ]\n"
           + "}";
 
   public static final String SERVICE_UPDATE_EXAMPLE_REQUEST =

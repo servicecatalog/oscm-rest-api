@@ -15,6 +15,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
+
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.SearchServiceInternal;
@@ -30,10 +32,8 @@ import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
-import org.oscm.rest.common.representation.ServiceRepresentation;
-import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.errorhandling.ErrorResponse;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Stateless
@@ -51,19 +51,26 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.Post<ServiceDetailsRepresentation, ServiceParameters> post() {
+  public RestBackend.Post<ServiceCreateRepresentation, ServiceParameters> post() {
     return (content, params) -> {
       List<VOTechnicalService> technicalServices =
           sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
 
-      VOServiceDetails vo = new VOServiceDetails();
-      for (VOTechnicalService technicalService : technicalServices) {
-        Long serviceId = content.getTechnicalService().getId();
-        if (Long.valueOf(technicalService.getKey()).equals(serviceId)) {
-          vo = sps.createService(technicalService, content.getVO(), null);
-        }
-      }
+      Optional<VOTechnicalService> foundTechnicalService =
+          technicalServices.stream()
+              .filter(ts -> !content.getTechnicalServiceId().equals(ts.getKey()))
+              .findAny();
 
+      if (!foundTechnicalService.isPresent()) {
+        throw new BadRequestException(
+            ErrorResponse.provider()
+                .errorMessage("Invalid technicalServiceId")
+                .errorDetails(
+                    "Technical service does not exist or does not belong to current technology provider")
+                .build()
+                .badRequest());
+      }
+      VOServiceDetails vo = sps.createService(foundTechnicalService.get(), content.getVo(), null);
       return PostResponseBody.of()
           .createdObjectId(String.valueOf(vo.getKey()))
           .createdObjectName(vo.getServiceId())

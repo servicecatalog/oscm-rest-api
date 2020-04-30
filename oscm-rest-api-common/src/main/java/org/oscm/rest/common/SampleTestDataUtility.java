@@ -378,6 +378,13 @@ public class SampleTestDataUtility {
     return representation;
   }
 
+  public static ServiceCreateRepresentation createServiceCreateRepresentation() {
+    ServiceCreateRepresentation representation = new ServiceCreateRepresentation();
+    representation.setTechnicalServiceId("10000");
+    representation.setServiceId("serviceId");
+    return representation;
+  }
+
   public static PriceModelRepresentation createPriceModelRepresentation() {
     return new PriceModelRepresentation();
   }

@@ -42,6 +42,7 @@ import org.oscm.internal.vo.ListCriteria;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.ServiceCreateRepresentation;
 import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.StatusRepresentation;
@@ -172,7 +173,7 @@ public class ServiceResource extends RestResource {
               content =
                   @Content(
                       mediaType = "application/json",
-                      schema = @Schema(implementation = ServiceRepresentation.class),
+                      schema = @Schema(implementation = ServiceCreateRepresentation.class),
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
@@ -185,9 +186,9 @@ public class ServiceResource extends RestResource {
             description = "Service created successfully" + CommonConstants.ID_INFO)
       })
   public Response createService(
-      @Context UriInfo uriInfo,
-      ServiceDetailsRepresentation content,
-      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @Context UriInfo uriInfo,
+          ServiceCreateRepresentation content,
+          @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version)

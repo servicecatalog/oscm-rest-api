@@ -35,10 +35,11 @@ public class RequiredFieldValidator implements RequestValidator {
     }
   }
 
+
   @Override
-  public Response provideErrorResponse(String fieldName) {
+  public Response provideErrorResponse(String... responseParameters) {
     return ErrorResponse.provider()
-        .build()
-        .badRequest(String.format(REQUIRED_FIELD_MSG, fieldName));
+            .build()
+            .badRequest(String.format(REQUIRED_FIELD_MSG, responseParameters[0]));
   }
 }
