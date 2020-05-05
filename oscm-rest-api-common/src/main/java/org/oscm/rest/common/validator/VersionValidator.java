@@ -9,11 +9,10 @@
  */
 package org.oscm.rest.common.validator;
 
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.errorhandling.ErrorResponse;
-
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.errorhandling.ErrorResponse;
 
 /** Authored by dawidch */
 public class VersionValidator implements RequestValidator {
@@ -53,13 +52,12 @@ public class VersionValidator implements RequestValidator {
     return vnr;
   }
 
-
   @Override
   public Response provideErrorResponse(String... responseParameters) {
     return ErrorResponse.provider()
-            .errorMessage(CommonParams.ERROR_INVALID_VERSION)
-            .errorDetails(String.format(INVALID_VERSION_MSG, responseParameters[0]))
-            .build()
-            .badRequest();
+        .errorMessage(CommonParams.ERROR_INVALID_VERSION)
+        .errorDetails(String.format(INVALID_VERSION_MSG, responseParameters[0]))
+        .build()
+        .badRequest();
   }
 }

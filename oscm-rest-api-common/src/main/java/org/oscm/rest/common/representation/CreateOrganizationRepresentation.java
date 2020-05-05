@@ -9,12 +9,11 @@
  */
 package org.oscm.rest.common.representation;
 
+import java.util.Map;
+import java.util.Properties;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.vo.LdapProperties;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import java.util.Map;
-import java.util.Properties;
 
 public class CreateOrganizationRepresentation extends Representation {
 

@@ -17,11 +17,7 @@ package constants;
 public class OperationConstants {
 
   public static final String SETTING_UPDATE_EXAMPLE_REQUEST =
-      "{\n"
-          + "\"contextId\": \"global\",\n"
-          + "\"value\": \"INFO\",\n"
-          + "\"etag\": 0\n"
-          + "}";
+      "{\n" + "\"contextId\": \"global\",\n" + "\"value\": \"INFO\",\n" + "\"etag\": 0\n" + "}";
 
   public static final String SETTING_EXAMPLE_RESPONSE =
       "{\n"

@@ -19,15 +19,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.AccessLevel;
-import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.CreateCustomerOrganizationRepresentation;
-import org.oscm.rest.common.representation.OrganizationRepresentation;
-import org.oscm.rest.common.requestparameters.AccountParameters;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.DefaultValue;
@@ -37,6 +28,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import lombok.AccessLevel;
+import lombok.Setter;
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.CreateCustomerOrganizationRepresentation;
+import org.oscm.rest.common.representation.OrganizationRepresentation;
+import org.oscm.rest.common.requestparameters.AccountParameters;
 
 @Path(CommonParams.PATH_VERSION + "/customers")
 @Stateless

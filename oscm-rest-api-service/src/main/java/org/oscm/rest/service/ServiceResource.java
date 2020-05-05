@@ -186,9 +186,9 @@ public class ServiceResource extends RestResource {
             description = "Service created successfully" + CommonConstants.ID_INFO)
       })
   public Response createService(
-          @Context UriInfo uriInfo,
-          ServiceCreateRepresentation content,
-          @Parameter(description = DocDescription.ENDPOINT_VERSION)
+      @Context UriInfo uriInfo,
+      ServiceCreateRepresentation content,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version)

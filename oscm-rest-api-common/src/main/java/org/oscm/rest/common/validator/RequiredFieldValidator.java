@@ -9,11 +9,10 @@
  */
 package org.oscm.rest.common.validator;
 
-import org.apache.commons.lang3.StringUtils;
-import org.oscm.rest.common.errorhandling.ErrorResponse;
-
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
+import org.apache.commons.lang3.StringUtils;
+import org.oscm.rest.common.errorhandling.ErrorResponse;
 
 public class RequiredFieldValidator implements RequestValidator {
 
@@ -35,11 +34,10 @@ public class RequiredFieldValidator implements RequestValidator {
     }
   }
 
-
   @Override
   public Response provideErrorResponse(String... responseParameters) {
     return ErrorResponse.provider()
-            .build()
-            .badRequest(String.format(REQUIRED_FIELD_MSG, responseParameters[0]));
+        .build()
+        .badRequest(String.format(REQUIRED_FIELD_MSG, responseParameters[0]));
   }
 }

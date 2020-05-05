@@ -108,7 +108,8 @@ public class ServiceResourceTest {
 
     try {
       response =
-          serviceResource.createService(uriInfo, serviceCreateRepresentation, serviceParameters.getEndpointVersion());
+          serviceResource.createService(
+              uriInfo, serviceCreateRepresentation, serviceParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }

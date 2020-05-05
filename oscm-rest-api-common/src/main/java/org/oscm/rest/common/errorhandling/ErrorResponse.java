@@ -9,12 +9,11 @@
  */
 package org.oscm.rest.common.errorhandling;
 
+import javax.ws.rs.core.Response;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
-
-import javax.ws.rs.core.Response;
 
 @Builder(builderMethodName = "provider")
 @Getter

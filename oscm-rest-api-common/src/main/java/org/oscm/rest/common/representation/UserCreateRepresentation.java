@@ -1,12 +1,20 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2020
+ *
+ * <p>Creation Date: 05-05-2020
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common.representation;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.oscm.internal.types.enumtypes.Salutation;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class UserCreateRepresentation extends Representation {
 

@@ -9,8 +9,6 @@
  */
 package org.oscm.rest.common;
 
-import org.oscm.rest.common.validator.VersionValidator;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import javax.ws.rs.WebApplicationException;
@@ -20,6 +18,7 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
+import org.oscm.rest.common.validator.VersionValidator;
 
 /**
  * Request filter for validating the requested version and comparing with endpoint annotations

@@ -9,11 +9,10 @@
  */
 package org.oscm.rest.common.errorhandling;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import lombok.extern.slf4j.Slf4j;
 
 /** Exception handler triggered in case exception is not handled by any of other mappers */
 @Slf4j

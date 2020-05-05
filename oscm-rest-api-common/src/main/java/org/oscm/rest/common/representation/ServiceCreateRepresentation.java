@@ -1,11 +1,19 @@
+/**
+ * *****************************************************************************
+ *
+ * <p>Copyright FUJITSU LIMITED 2020
+ *
+ * <p>Creation Date: 05-05-2020
+ *
+ * <p>*****************************************************************************
+ */
 package org.oscm.rest.common.representation;
-
-import org.oscm.internal.vo.VOParameter;
-import org.oscm.internal.vo.VOService;
-import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.oscm.internal.vo.VOParameter;
+import org.oscm.internal.vo.VOService;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 public class ServiceCreateRepresentation extends Representation {
 

@@ -9,11 +9,10 @@
  */
 package org.oscm.rest.common.representation;
 
-import org.oscm.internal.vo.LdapProperties;
-import org.oscm.rest.common.validator.RequiredFieldValidator;
-
 import java.util.Map;
 import java.util.Properties;
+import org.oscm.internal.vo.LdapProperties;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 public class CreateCustomerOrganizationRepresentation extends Representation {
 
