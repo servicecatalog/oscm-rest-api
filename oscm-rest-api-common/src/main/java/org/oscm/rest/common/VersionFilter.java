@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.common;
 
+import org.oscm.rest.common.validator.VersionValidator;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import javax.ws.rs.WebApplicationException;
@@ -42,7 +44,7 @@ public class VersionFilter implements ContainerRequestFilter {
 
       String version = params.get(CommonParams.PARAM_VERSION).get(0);
 
-      int vnr = versionValidator.doIt(version);
+      int vnr = versionValidator.validateVersion(version);
 
       Method method = getResourceInfo().getResourceMethod();
 

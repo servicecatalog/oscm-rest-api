@@ -27,10 +27,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.types.enumtypes.Sorting;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
-import org.oscm.rest.common.representation.ServiceRepresentation;
-import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,6 +40,7 @@ public class ServiceResourceTest {
   private Response response;
   private ServiceRepresentation serviceRepresentation;
   private ServiceDetailsRepresentation serviceDetailsRepresentation;
+  private ServiceCreateRepresentation serviceCreateRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
   private StatusRepresentation statusRepresentation;
@@ -54,6 +52,7 @@ public class ServiceResourceTest {
     serviceRepresentation = SampleTestDataUtility.createServiceRepresentation();
     serviceDetailsRepresentation =
         SampleTestDataUtility.createServiceDetailsRepresentation(voServiceDetails);
+    serviceCreateRepresentation = SampleTestDataUtility.createServiceCreateRepresentation();
     statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
@@ -109,8 +108,7 @@ public class ServiceResourceTest {
 
     try {
       response =
-          serviceResource.createService(
-              uriInfo, serviceDetailsRepresentation, serviceParameters.getEndpointVersion());
+          serviceResource.createService(uriInfo, serviceCreateRepresentation, serviceParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }

@@ -37,16 +37,10 @@ import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.types.enumtypes.Sorting;
 import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
-import org.oscm.internal.vo.VOMarketplace;
-import org.oscm.internal.vo.VOService;
-import org.oscm.internal.vo.VOServiceDetails;
-import org.oscm.internal.vo.VOServiceListResult;
+import org.oscm.internal.vo.*;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.ServiceStatus;
-import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
-import org.oscm.rest.common.representation.ServiceRepresentation;
-import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,6 +56,7 @@ public class ServiceBackendTest {
   private UriInfo uriInfo;
   private ServiceParameters parameters;
   private ServiceDetailsRepresentation representation;
+  private ServiceCreateRepresentation serviceCreateRepresentation;
   private StatusRepresentation statusRepresentation;
   private VOServiceDetails vo;
   private RepresentationCollection<ServiceRepresentation> compatiblesCollection;
@@ -73,6 +68,7 @@ public class ServiceBackendTest {
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createServiceParameters();
     representation = SampleTestDataUtility.createServiceDetailsRepresentation(null);
+    serviceCreateRepresentation = SampleTestDataUtility.createServiceCreateRepresentation();
     statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     compatiblesCollection = createCompatiblesCollection();
     vo = SampleTestDataUtility.createVOServiceDetails();
@@ -246,8 +242,15 @@ public class ServiceBackendTest {
   @Test
   @SneakyThrows
   public void post_createService() {
+    VOTechnicalService technicalService = new VOTechnicalService();
+    technicalService.setKey(10000);
+    ArrayList<VOTechnicalService> list = new ArrayList<>();
+    list.add(technicalService);
+    when(service.getTechnicalServices(any())).thenReturn(list);
+    when(service.createService(any(), any(), any())).thenReturn(vo);
     Response response =
-        resource.createService(uriInfo, representation, parameters.getEndpointVersion());
+        resource.createService(
+            uriInfo, serviceCreateRepresentation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)

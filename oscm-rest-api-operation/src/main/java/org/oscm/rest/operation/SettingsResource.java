@@ -118,7 +118,7 @@ public class SettingsResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
-                            value = OperationConstants.SETTING_UPDATED_EXAMPLE_REQUEST,
+                            value = OperationConstants.SETTING_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {

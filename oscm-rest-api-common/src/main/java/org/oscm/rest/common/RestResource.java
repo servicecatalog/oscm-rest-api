@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.oscm.rest.common.representation.Representation;
 import org.oscm.rest.common.requestparameters.RequestParameters;
+import org.oscm.rest.common.validator.VersionValidator;
 
 /**
  * Super class for REST resources and their endpoints.
@@ -188,7 +189,7 @@ public abstract class RestResource {
     if (strings == null) {
       throw WebException.notFound().message(CommonParams.ERROR_INVALID_VERSION).build();
     }
-    return versionValidator.doIt(strings.get(0));
+    return versionValidator.validateVersion(strings.get(0));
   }
 
   /**

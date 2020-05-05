@@ -37,6 +37,7 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.UserCreateRepresentation;
 import org.oscm.rest.common.representation.UserRepresentation;
 import org.oscm.rest.common.requestparameters.UserParameters;
 
@@ -163,7 +164,7 @@ public class UserResource extends RestResource {
       })
   public Response createUser(
       @Context UriInfo uriInfo,
-      UserRepresentation content,
+      UserCreateRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")

@@ -9,12 +9,12 @@
  */
 package org.oscm.rest.common.errorhandling;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.openejb.OpenEJBException;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.openejb.OpenEJBException;
-import org.oscm.rest.common.CommonParams;
 
 /**
  * Exception handler triggered in case of EJB container exception is thrown (check @{@link
@@ -26,31 +26,16 @@ public class ContainerExceptionMapper implements ExceptionMapper<OpenEJBExceptio
 
   @Override
   public Response toResponse(OpenEJBException e) {
-
     Response response;
     log.info("Handling exception: " + e.getClass().getName());
-
     String exceptionName = e.getClass().getSimpleName();
+
     switch (exceptionName) {
       case "InvalidateReferenceException":
-        response =
-            Response.status(Response.Status.FORBIDDEN)
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_NOT_AUTHORIZED)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.provider().build().forbidden(e.getMessage());
         break;
       default:
-        response =
-            Response.serverError()
-                .entity(
-                    ErrorResponse.of()
-                        .errorMessage(CommonParams.ERROR_UNEXPECTED_EXCEPTION)
-                        .errorDetails(e.getMessage())
-                        .build())
-                .build();
+        response = ErrorResponse.provider().build().internalServerError(e.getMessage());
         break;
     }
 

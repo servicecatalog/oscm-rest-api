@@ -37,6 +37,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.AccountRepresentation;
+import org.oscm.rest.common.representation.CreateOrganizationRepresentation;
 import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.requestparameters.AccountParameters;
 
@@ -59,7 +60,11 @@ public class OrganizationResource extends RestResource {
         @ApiResponse(
             responseCode = "200",
             description = "The organization",
-            content = @Content(schema = @Schema(implementation = OrganizationRepresentation.class)))
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = OrganizationRepresentation.class),
+                    examples = {@ExampleObject(AccountConstants.ORGANIZATION_EXAMPLE_RESPONSE)}))
       })
   public Response getOrganization(
       @Context UriInfo uriInfo,
@@ -90,12 +95,13 @@ public class OrganizationResource extends RestResource {
               required = true,
               content =
                   @Content(
-                      schema = @Schema(implementation = OrganizationRepresentation.class),
+                      mediaType = "application/json",
+                      schema = @Schema(implementation = CreateOrganizationRepresentation.class),
                       examples = {
                         @ExampleObject(
                             name =
                                 "Request contains specific organization roles, sample organization data and its administrator's user data which. Administrator user will be automatically created along with organization",
-                            value = AccountConstants.ORGANIZATION_EXAMPLE_BODY,
+                            value = AccountConstants.ORGANIZATION_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
@@ -105,7 +111,7 @@ public class OrganizationResource extends RestResource {
       })
   public Response createOrganization(
       @Context UriInfo uriInfo,
-      AccountRepresentation content,
+      CreateOrganizationRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")

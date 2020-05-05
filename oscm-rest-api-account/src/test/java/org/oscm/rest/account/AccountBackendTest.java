@@ -39,12 +39,7 @@ import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.TestContants;
-import org.oscm.rest.common.representation.AccountRepresentation;
-import org.oscm.rest.common.representation.BillingContactRepresentation;
-import org.oscm.rest.common.representation.OrganizationRepresentation;
-import org.oscm.rest.common.representation.PaymentInfoRepresentation;
-import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.AccountParameters;
 
 @ExtendWith(MockitoExtension.class)
@@ -139,6 +134,7 @@ public class AccountBackendTest {
   @SneakyThrows
   public void shouldPutBillingContact() {
     when(accountService.saveBillingContact(any())).thenReturn(billingContactVO);
+    when(accountService.getBillingContacts()).thenReturn(Lists.newArrayList(billingContactVO));
 
     Response response =
         billingContactResource.updateBillingContact(
@@ -255,23 +251,17 @@ public class AccountBackendTest {
     assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
   }
 
-  @ParameterizedTest
-  @MethodSource("provideRepresentationForCreatingOrganization")
+  @Test
   @SneakyThrows
-  public void shouldPostOrganization(AccountRepresentation representation) {
-    lenient()
-        .when(accountService.registerCustomer(any(), any(), any(), any(), any(), any()))
-        .thenReturn(operatorOrgVO);
-    lenient()
-        .when(accountService.registerKnownCustomer(any(), any(), any(), any()))
-        .thenReturn(operatorOrgVO);
+  public void shouldPostOrganization() {
     lenient()
         .when(operatorService.registerOrganization(any(), any(), any(), any(), any(), any()))
         .thenReturn(operatorOrgVO);
-
+    CreateOrganizationRepresentation createOrganizationRepresentation =
+        SampleTestDataUtility.createOrgCreateRepresentation();
     Response response =
         organizationResource.createOrganization(
-            uriInfo, representation, parameters.getEndpointVersion());
+            uriInfo, createOrganizationRepresentation, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)

@@ -63,7 +63,10 @@ public class BillingContactResource extends RestResource {
             content =
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = BillingContactRepresentation.class)))
+                    schema = @Schema(implementation = BillingContactRepresentation.class),
+                    examples = {
+                      @ExampleObject(AccountConstants.BILLING_CONTACT_LIST_EXAMPLE_RESPONSE)
+                    }))
       })
   public Response getBillingContacts(
       @Context UriInfo uriInfo,
@@ -90,7 +93,10 @@ public class BillingContactResource extends RestResource {
             responseCode = "200",
             description = "A single billing contact",
             content =
-                @Content(schema = @Schema(implementation = BillingContactRepresentation.class)))
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = BillingContactRepresentation.class),
+                    examples = {@ExampleObject(AccountConstants.BILLING_CONTACT_EXAMPLE_RESPONSE)}))
       })
   public Response getBillingContact(
       @Context UriInfo uriInfo,
@@ -118,11 +124,12 @@ public class BillingContactResource extends RestResource {
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = BillingContactRepresentation.class),
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
-                            value = AccountConstants.BILLING_CONTACT_EXAMPLE_BODY,
+                            value = AccountConstants.BILLING_CONTACT_CREATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
@@ -157,11 +164,12 @@ public class BillingContactResource extends RestResource {
               required = true,
               content =
                   @Content(
+                      mediaType = "application/json",
                       schema = @Schema(implementation = BillingContactRepresentation.class),
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
-                            value = AccountConstants.BILLING_CONTACT_EXAMPLE_BODY,
+                            value = AccountConstants.BILLING_CONTACT_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {

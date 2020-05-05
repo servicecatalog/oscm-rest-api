@@ -28,10 +28,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.vo.VOUserDetails;
 import org.oscm.rest.common.SampleTestDataUtility;
-import org.oscm.rest.common.representation.OnBehalfUserRepresentation;
-import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.RolesRepresentation;
-import org.oscm.rest.common.representation.UserRepresentation;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.UserParameters;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,6 +43,7 @@ public class UserBackendTest {
   private UriInfo uriInfo;
   private UserParameters parameters;
   private UserRepresentation userRepresentation;
+  private UserCreateRepresentation userCreateRepresentation;
   private OnBehalfUserRepresentation onBehalfUserRepresentation;
   private RolesRepresentation rolesRepresentation;
   private VOUserDetails vo;
@@ -66,6 +64,7 @@ public class UserBackendTest {
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createUserParameters();
     userRepresentation = SampleTestDataUtility.createUserRepresentation();
+    userCreateRepresentation = SampleTestDataUtility.createUserCreateRepresentation();
     onBehalfUserRepresentation = SampleTestDataUtility.createOBUserRepresentation();
     rolesRepresentation = SampleTestDataUtility.createRolesRepresentation();
     vo = SampleTestDataUtility.createVOUserDetails();
@@ -110,7 +109,7 @@ public class UserBackendTest {
   public void shouldPostUser() {
     when(identityService.createUser(any(), any(), any())).thenReturn(vo);
 
-    Response response = userResource.createUser(uriInfo, userRepresentation, API_VERSION);
+    Response response = userResource.createUser(uriInfo, userCreateRepresentation, API_VERSION);
 
     assertThat(response).isNotNull();
     assertThat(response)

@@ -189,6 +189,14 @@ public class SampleTestDataUtility {
     return representation;
   }
 
+  public static CreateOrganizationRepresentation createOrgCreateRepresentation() {
+    CreateOrganizationRepresentation representation = new CreateOrganizationRepresentation();
+    representation.setOrganization(new OrganizationRepresentation());
+    representation.setUser(new UserRepresentation());
+    representation.setOrganizationRoles(new OrganizationRoleType[] {OrganizationRoleType.SUPPLIER});
+    return representation;
+  }
+
   public static OrganizationRepresentation createOrgRepresentation() {
     OrganizationRepresentation representation = new OrganizationRepresentation();
     representation.setOrganizationId(TestContants.STRING_VALUE);
@@ -230,6 +238,21 @@ public class SampleTestDataUtility {
     representation.setUserId(TestContants.STRING_VALUE);
     representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
     representation.setETag(TestContants.LONG_VALUE);
+    return representation;
+  }
+
+  public static UserCreateRepresentation createUserCreateRepresentation() {
+    UserCreateRepresentation representation = new UserCreateRepresentation();
+    representation.setAddress(TestContants.STRING_VALUE);
+    representation.setEmail(TestContants.STRING_VALUE);
+    representation.setFirstName(TestContants.STRING_VALUE);
+    representation.setLastName(TestContants.STRING_VALUE);
+    representation.setLocale(TestContants.STRING_VALUE);
+    representation.setOrganizationId(TestContants.STRING_VALUE);
+    representation.setPhone(TestContants.STRING_NUM_VALUE);
+    representation.setSalutation(Salutation.MR);
+    representation.setUserId(TestContants.STRING_VALUE);
+    representation.setUserRoles(Sets.newHashSet(UserRoleType.SERVICE_MANAGER));
     return representation;
   }
 
@@ -352,6 +375,13 @@ public class SampleTestDataUtility {
     if (voServiceDetails == null) representation = new ServiceDetailsRepresentation();
     else representation = new ServiceDetailsRepresentation(voServiceDetails);
     representation.setTechnicalService(new TechnicalServiceRepresentation());
+    return representation;
+  }
+
+  public static ServiceCreateRepresentation createServiceCreateRepresentation() {
+    ServiceCreateRepresentation representation = new ServiceCreateRepresentation();
+    representation.setTechnicalServiceId("10000");
+    representation.setServiceId("serviceId");
     return representation;
   }
 

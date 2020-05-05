@@ -56,7 +56,7 @@ public class CommonParams {
   public static final String ERROR_UNEXPECTED_EXCEPTION = "Unexpected problem occurred";
   public static final String ERROR_OUTDATED_VERSION =
       "Object to be updated is not in the latest version";
-  public static final String ERROR_JSON_FORMAT = "Invalid JSON format";
+  public static final String ERROR_JSON_FORMAT = "Invalid JSON request body";
   public static final String ERROR_INVALID_ID = "ID not valid or unknown";
   public static final String ERROR_INVALID_VERSION = "Version not valid or unknown";
   public static final String ERROR_INVALID_TAG = "Invalid ETag";

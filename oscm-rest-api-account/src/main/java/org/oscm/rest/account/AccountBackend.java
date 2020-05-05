@@ -11,6 +11,7 @@ package org.oscm.rest.account;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.oscm.internal.intf.AccountService;
@@ -22,11 +23,7 @@ import org.oscm.internal.vo.VOOrganization;
 import org.oscm.internal.vo.VOPaymentInfo;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
-import org.oscm.rest.common.representation.AccountRepresentation;
-import org.oscm.rest.common.representation.BillingContactRepresentation;
-import org.oscm.rest.common.representation.OrganizationRepresentation;
-import org.oscm.rest.common.representation.PaymentInfoRepresentation;
-import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.AccountParameters;
 
 @Stateless
@@ -76,6 +73,13 @@ public class AccountBackend {
 
   public RestBackend.Put<BillingContactRepresentation, AccountParameters> putBillingContact() {
     return (content, params) -> {
+      List<VOBillingContact> list = as.getBillingContacts();
+      Optional<VOBillingContact> foundContact =
+          list.stream().filter(contact -> contact.getKey() == params.getId()).findAny();
+      if (!foundContact.isPresent()) {
+        throw new ObjectNotFoundException(
+            ClassEnum.BILLING_CONTACT, String.valueOf(params.getId().longValue()));
+      }
       as.saveBillingContact(content.getVO());
       return true;
     };
@@ -135,39 +139,36 @@ public class AccountBackend {
     };
   }
 
-  public RestBackend.Post<AccountRepresentation, AccountParameters> postOrganization() {
+  public RestBackend.Post<CreateOrganizationRepresentation, AccountParameters> postOrganization() {
     return (content, params) -> {
-      VOOrganization org;
-      if (content.isSelfRegistration()) {
-        // TODO: this is available public
-        org =
-            as.registerCustomer(
-                content.getOrganization().getVO(),
-                content.getUser().getVO(),
-                content.getPassword(),
-                content.getServiceKey(),
-                params.getMarketplaceId(),
-                content.getSellerId());
-      } else if (content.isCustomerRegistration()) {
-        org =
-            as.registerKnownCustomer(
-                content.getOrganization().getVO(),
-                content.getUser().getVO(),
-                content.getProps(),
-                params.getMarketplaceId());
-      } else {
-        org =
-            os.registerOrganization(
-                content.getOrganization().getVO(),
-                null,
-                content.getUser().getVO(),
-                content.getProps(),
-                params.getMarketplaceId(),
-                content.getOrganizationRoles());
-      }
+      VOOrganization org =
+          os.registerOrganization(
+              content.getOrganization().getVO(),
+              null,
+              content.getUser().getVO(),
+              content.toProperties(),
+              content.getMarketplaceId(),
+              content.getOrganizationRoles());
+
+      return PostResponseBody.of()
+          .createdObjectName(org.getOrganizationId())
+          .createdObjectId(String.valueOf(org.getKey()))
+          .build();
+    };
+  }
+
+  public RestBackend.Post<CreateCustomerOrganizationRepresentation, AccountParameters>
+      postCustomer() {
+    return (content, params) -> {
+      VOOrganization org =
+          as.registerKnownCustomer(
+              content.getOrganization().getVO(),
+              content.getUser().getVO(),
+              content.toProperties(),
+              content.getMarketplaceId());
+
       if (org == null) {
-        // registration of a known customer has a suspending trigger
-        // active
+        // registration of a known customer has a suspending trigger active
         return null;
       }
       return PostResponseBody.of()
