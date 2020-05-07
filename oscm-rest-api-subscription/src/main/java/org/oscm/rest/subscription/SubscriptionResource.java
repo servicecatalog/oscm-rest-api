@@ -119,7 +119,9 @@ public class SubscriptionResource extends RestResource {
       description = "Creates a subscription in current service based on given request data",
       requestBody =
           @RequestBody(
-              description = "JSON representing subscription to be created",
+              description =
+                  "JSON representing subscription to be created. It must contains reference to service (serviceId) for which subscription is going to be created. "
+                      + "If service is not free of charge JSON must also contains references to payment information (paymentInfoId) and billing contact (billingContactId).",
               required = true,
               content =
                   @Content(
@@ -128,7 +130,7 @@ public class SubscriptionResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
-                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            value = SubscriptionConstants.SUBSCRIPTION_CREATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
@@ -146,7 +148,6 @@ public class SubscriptionResource extends RestResource {
       throws Exception {
     final SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
-    content.setId(params.getId());
     return post(uriInfo, sb.post(), content, params);
   }
 

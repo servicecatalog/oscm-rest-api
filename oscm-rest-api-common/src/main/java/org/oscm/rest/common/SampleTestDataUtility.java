@@ -10,9 +10,11 @@
 package org.oscm.rest.common;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import javax.ws.rs.core.*;
@@ -451,8 +453,8 @@ public class SampleTestDataUtility {
   public static SubscriptionCreationRepresentation createSubscriptionCreationRepresentation() {
     SubscriptionCreationRepresentation subscriptionCreationRepresentation =
         new SubscriptionCreationRepresentation();
-    subscriptionCreationRepresentation.setService(new ServiceRepresentation());
-    subscriptionCreationRepresentation.setUdas(Lists.newArrayList(new UdaRepresentation()));
+    // subscriptionCreationRepresentation.setService(new ServiceRepresentation());
+    subscriptionCreationRepresentation.setUdas(Maps.newHashMap());
     return subscriptionCreationRepresentation;
   }
 

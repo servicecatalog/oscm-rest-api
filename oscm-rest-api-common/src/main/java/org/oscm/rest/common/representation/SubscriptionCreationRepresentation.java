@@ -9,25 +9,26 @@
  */
 package org.oscm.rest.common.representation;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
-import org.oscm.internal.vo.*;
+import org.oscm.internal.vo.VOSubscription;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SubscriptionCreationRepresentation extends Representation {
 
   private transient VOSubscription vo;
 
-  private Long billingContactKey;
-  private Long paymentInfoKey;
-  private List<UsageLicenseRepresentation> users;
-  private List<UdaRepresentation> udas;
-  private ServiceRepresentation service;
-
-  private String purchaseOrderNumber;
+  private String serviceId;
   private String subscriptionId;
-  private Long unitKey;
+  private String purchaseOrderNumber;
   private String unitName;
+
+  private Long billingContactId;
+  private Long paymentInfoId;
+
+  private Map<String, String> udas = new HashMap<>();
+  private Map<String, String> parameters = new HashMap<>();
 
   public SubscriptionCreationRepresentation() {
     this(new VOSubscription());
@@ -38,106 +39,37 @@ public class SubscriptionCreationRepresentation extends Representation {
   }
 
   @Override
-  public void validateContent() throws WebApplicationException {}
+  public void validateContent() {
+    RequiredFieldValidator validator = new RequiredFieldValidator();
+    validator.validateNotBlank("serviceId", serviceId);
+    validator.validateNotBlank("subscriptionId", subscriptionId);
+  }
 
   @Override
   public void update() {
     vo.setPurchaseOrderNumber(getPurchaseOrderNumber());
     vo.setSubscriptionId(getSubscriptionId());
-    if (getUnitKey() != null) {
-      vo.setUnitKey(getUnitKey().longValue());
-    }
     vo.setUnitName(getUnitName());
-    vo.setKey(convertIdToKey());
-    vo.setVersion(convertETagToVersion());
-  }
-
-  @Override
-  public void convert() {
-    // not really needed as it is only input for creating a subscription
-    setPurchaseOrderNumber(vo.getPurchaseOrderNumber());
-    setSubscriptionId(vo.getSubscriptionId());
   }
 
   public VOSubscription getVO() {
     return vo;
   }
 
-  public List<VOUsageLicense> getUsageLicenses() {
-    if (users == null) {
-      return null;
-    }
-    List<VOUsageLicense> result = new ArrayList<VOUsageLicense>();
-    for (UsageLicenseRepresentation ulr : users) {
-      ulr.update();
-      result.add(ulr.getVO());
-    }
-    return result;
+  public Long getBillingContactId() {
+    return billingContactId;
   }
 
-  public List<VOUda> getUdas() {
-    if (udas == null) {
-      return null;
-    }
-    List<VOUda> result = new ArrayList<VOUda>();
-    for (UdaRepresentation uda : udas) {
-      uda.update();
-      result.add(uda.getVO());
-    }
-    return result;
+  public void setBillingContactId(Long billingContactId) {
+    this.billingContactId = billingContactId;
   }
 
-  public List<UdaRepresentation> getUdaRepresentations() {
-    return this.udas;
+  public Long getPaymentInfoId() {
+    return paymentInfoId;
   }
 
-  public VOBillingContact getBillingContact() {
-    if (billingContactKey == null) {
-      return null;
-    }
-    VOBillingContact bc = new VOBillingContact();
-    bc.setKey(billingContactKey.longValue());
-    return bc;
-  }
-
-  public VOPaymentInfo getPaymentInfo() {
-    if (paymentInfoKey == null) {
-      return null;
-    }
-    VOPaymentInfo pi = new VOPaymentInfo();
-    pi.setKey(paymentInfoKey.longValue());
-    return pi;
-  }
-
-  public VOService getVOService() {
-    if (service == null) {
-      return null;
-    }
-    return service.getVO();
-  }
-
-  public Long getBillingContactKey() {
-    return billingContactKey;
-  }
-
-  public void setBillingContactKey(Long billingContactKey) {
-    this.billingContactKey = billingContactKey;
-  }
-
-  public Long getPaymentInfoKey() {
-    return paymentInfoKey;
-  }
-
-  public void setPaymentInfoKey(Long paymentInfoKey) {
-    this.paymentInfoKey = paymentInfoKey;
-  }
-
-  public List<UsageLicenseRepresentation> getUsers() {
-    return users;
-  }
-
-  public void setUsers(List<UsageLicenseRepresentation> users) {
-    this.users = users;
+  public void setPaymentInfoId(Long paymentInfoId) {
+    this.paymentInfoId = paymentInfoId;
   }
 
   public String getPurchaseOrderNumber() {
@@ -156,14 +88,6 @@ public class SubscriptionCreationRepresentation extends Representation {
     this.subscriptionId = subscriptionId;
   }
 
-  public Long getUnitKey() {
-    return unitKey;
-  }
-
-  public void setUnitKey(Long unitKey) {
-    this.unitKey = unitKey;
-  }
-
   public String getUnitName() {
     return unitName;
   }
@@ -172,15 +96,27 @@ public class SubscriptionCreationRepresentation extends Representation {
     this.unitName = unitName;
   }
 
-  public void setUdas(List<UdaRepresentation> udas) {
+  public String getServiceId() {
+    return serviceId;
+  }
+
+  public void setServiceId(String serviceId) {
+    this.serviceId = serviceId;
+  }
+
+  public Map<String, String> getParameters() {
+    return parameters;
+  }
+
+  public void setParameters(Map<String, String> parameters) {
+    this.parameters = parameters;
+  }
+
+  public Map<String, String> getUdas() {
+    return udas;
+  }
+
+  public void setUdas(Map<String, String> udas) {
     this.udas = udas;
-  }
-
-  public ServiceRepresentation getService() {
-    return service;
-  }
-
-  public void setService(ServiceRepresentation service) {
-    this.service = service;
   }
 }
