@@ -317,7 +317,7 @@ public class ServiceConstants {
 
   public static final String SERVICE_CREATE_EXAMPLE_REQUEST =
       "{\n"
-          + "  \"technicalServiceId\": 10000,\n"
+          + "  \"technicalServiceId\": \"REST_technical_service\",\n"
           + "  \"serviceId\": \"REST_example_service\",\n"
           + "  \"description\": \"REST example service\",\n"
           + "  \"name\": \"REST example created service\",\n"

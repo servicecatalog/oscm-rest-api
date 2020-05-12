@@ -96,7 +96,7 @@ public class ServiceCreateRepresentation extends Representation {
     vo.setServiceId(getServiceId());
     vo.setName(getName());
     vo.setShortDescription(getShortDescription());
-    vo.setDescription(getShortDescription());
+    vo.setDescription(getDescription());
 
     updateParameters();
   }

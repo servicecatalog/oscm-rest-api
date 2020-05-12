@@ -243,11 +243,12 @@ public class ServiceBackendTest {
   @SneakyThrows
   public void post_createService() {
     VOTechnicalService technicalService = new VOTechnicalService();
-    technicalService.setKey(10000);
+    technicalService.setTechnicalServiceId("technicalServiceId");
     ArrayList<VOTechnicalService> list = new ArrayList<>();
     list.add(technicalService);
     when(service.getTechnicalServices(any())).thenReturn(list);
     when(service.createService(any(), any(), any())).thenReturn(vo);
+
     Response response =
         resource.createService(
             uriInfo, serviceCreateRepresentation, parameters.getEndpointVersion());
