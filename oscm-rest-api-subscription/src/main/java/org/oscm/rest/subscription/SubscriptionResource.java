@@ -39,6 +39,7 @@ import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.SubscriptionUpdateRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
@@ -86,9 +87,9 @@ public class SubscriptionResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   @Produces(CommonParams.JSON)
   @Operation(
-      summary = "Retrieves a subscription for a given service",
+      summary = "Retrieves a single subscription and its details",
       tags = {"subscriptions"},
-      description = "Returns a single subscription based on the provided service id",
+      description = "Returns a single subscription and its details based on the provided id",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -169,7 +170,7 @@ public class SubscriptionResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
-                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            value = SubscriptionConstants.SUBSCRIPTION_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
@@ -177,7 +178,7 @@ public class SubscriptionResource extends RestResource {
       })
   public Response updateSubscription(
       @Context UriInfo uriInfo,
-      SubscriptionCreationRepresentation content,
+      SubscriptionUpdateRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")

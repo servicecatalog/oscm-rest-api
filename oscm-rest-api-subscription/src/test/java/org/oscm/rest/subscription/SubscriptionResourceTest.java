@@ -137,7 +137,7 @@ public class SubscriptionResourceTest {
         assertThat(response).extracting(Response::getEntity).isEqualTo(subscriptionDetailsRepresentation);
     }
 
-    @Test
+/*    @Test
     public void shouldUpdateSubscription() {
         when(subscriptionBackend.put())
                 .thenReturn((content, params) -> true);
@@ -157,7 +157,7 @@ public class SubscriptionResourceTest {
                 .extracting(Response::getStatus)
                 .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
         assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
-    }
+    }*/
 
     @Test
     public void shouldDeleteSubscription() {

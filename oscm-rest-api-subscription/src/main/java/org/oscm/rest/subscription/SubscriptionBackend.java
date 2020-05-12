@@ -82,39 +82,18 @@ public class SubscriptionBackend {
 
       Map<String, String> parameters = content.getParameters();
       List<VOParameter> serviceParameters = service.getParameters();
-      processParameters(serviceParameters, parameters);
+      processParametersForCreation(serviceParameters, parameters);
 
       List<VOUdaDefinition> udaDefinitions = as.getUdaDefinitionsForCustomer(service.getSellerId());
       Map<String, String> requestedUdas = content.getUdas();
-      List<VOUda> udas = processUdas(udaDefinitions, requestedUdas);
+      List<VOUda> udas = processUdasForCreation(udaDefinitions, requestedUdas);
 
       if (isChargeable) {
         validator.validateNotBlank("paymentInfoId", content.getPaymentInfoId());
         validator.validateNotBlank("billingContactId", content.getBillingContactId());
 
-        Optional<VOPaymentInfo> foundPayment =
-            as.getPaymentInfos().stream()
-                .filter(info -> info.getKey() == content.getPaymentInfoId())
-                .findAny();
-
-        if (!foundPayment.isPresent()) {
-          throw new ObjectNotFoundException(
-              DomainObjectException.ClassEnum.PAYMENT_INFO,
-              String.valueOf(content.getPaymentInfoId()));
-        }
-
-        Optional<VOBillingContact> foundContact =
-            as.getBillingContacts().stream()
-                .filter(contact -> contact.getKey() == content.getBillingContactId())
-                .findAny();
-
-        if (!foundContact.isPresent()) {
-          throw new ObjectNotFoundException(
-              DomainObjectException.ClassEnum.BILLING_CONTACT,
-              String.valueOf(content.getBillingContactId()));
-        }
-        paymentInfo = foundPayment.get();
-        billingContact = foundContact.get();
+        paymentInfo = preparePaymentInfo(content.getPaymentInfoId());
+        billingContact = prepareBillingContact(content.getBillingContactId());
       }
 
       VOSubscription sub =
@@ -127,7 +106,69 @@ public class SubscriptionBackend {
     };
   }
 
-  private List<VOUda> processUdas(List<VOUdaDefinition> udaDefinitions, Map<String, String> udas) {
+  public RestBackend.Put<SubscriptionUpdateRepresentation, SubscriptionParameters> put() {
+    return (content, params) -> {
+      VOSubscriptionDetails subscription = ss.getSubscriptionDetails(params.getId());
+      VOService subscribedService = subscription.getSubscribedService();
+      
+      processPaymentData(subscription, content);
+
+      List<VOParameter> subscriptionParameters =
+          subscribedService.getParameters().stream()
+              .filter(VOParameter::isConfigurable)
+              .collect(Collectors.toList());
+
+      String sellerId = subscribedService.getSellerId();
+      List<VOUda> subscriptionUdas =
+          as.getUdasForCustomer("CUSTOMER_SUBSCRIPTION", params.getId(), sellerId);
+
+      Map<String, String> requestParameters = content.getParameters();
+      processParametersForUpdate(subscriptionParameters, requestParameters);
+
+      Map<String, String> requestUdas = content.getUdas();
+      processUdasForUpdate(subscriptionUdas, requestUdas);
+
+      String requestedSubscriptionId = content.getSubscriptionId();
+      if (StringUtils.isNotBlank(requestedSubscriptionId)) {
+        subscription.setSubscriptionId(requestedSubscriptionId);
+      }
+      String requestedReferenceNo = content.getPurchaseOrderNumber();
+      if (StringUtils.isNotBlank(requestedReferenceNo)) {
+        subscription.setPurchaseOrderNumber(requestedReferenceNo);
+      }
+
+      VOSubscription result =
+          ss.modifySubscription(subscription, subscriptionParameters, subscriptionUdas);
+      return result != null;
+    };
+  }
+
+  private VOSubscriptionDetails processPaymentData(VOSubscriptionDetails subscription, SubscriptionUpdateRepresentation content) throws Exception {
+
+    boolean chargeable = subscription.getPriceModel().isChargeable();
+
+    if (chargeable) {
+      VOBillingContact billingContact = subscription.getBillingContact();
+      VOPaymentInfo paymentInfo = subscription.getPaymentInfo();
+
+      String billingContactId = content.getBillingContactId();
+      String paymentInfoId = content.getPaymentInfoId();
+
+      if (StringUtils.isNotBlank(billingContactId) || StringUtils.isNotBlank(paymentInfoId)) {
+        if (StringUtils.isNotBlank(billingContactId)) {
+          billingContact = prepareBillingContact(Long.valueOf(billingContactId));
+        }
+        if (StringUtils.isNotBlank(paymentInfoId)) {
+          paymentInfo = preparePaymentInfo(Long.valueOf(paymentInfoId));
+        }
+        subscription = ss.modifySubscriptionPaymentData(subscription, billingContact, paymentInfo);
+      }
+    }
+    return subscription;
+  }
+
+  private List<VOUda> processUdasForCreation(
+      List<VOUdaDefinition> udaDefinitions, Map<String, String> udas) {
 
     List<VOUda> voUdas = new ArrayList<>();
 
@@ -155,7 +196,7 @@ public class SubscriptionBackend {
     return voUdas;
   }
 
-  private void processParameters(
+  private void processParametersForCreation(
       List<VOParameter> serviceParameters, Map<String, String> parameters) {
 
     // processes only parameter which are configurable for given service
@@ -177,17 +218,75 @@ public class SubscriptionBackend {
             });
   }
 
-  public RestBackend.Put<SubscriptionCreationRepresentation, SubscriptionParameters> put() {
-    return (content, params) -> {
-      // content.getService().update();
-      // content.getUdaRepresentations().forEach(UdaRepresentation::update);
+  private void processUdasForUpdate(List<VOUda> subscriptionUdas, Map<String, String> requestUdas) {
 
-      VOSubscription result =
-          ss.modifySubscription(
-              content.getVO(),
-              null /*content.getVOService().getParameters()*/,
-              null /*content.getUdas()*/);
-      return result != null;
-    };
+    requestUdas
+        .keySet()
+        .forEach(
+            udaKey -> {
+              Optional<VOUda> currentUda =
+                  subscriptionUdas.stream()
+                      .filter(uda -> uda.getUdaDefinition().getUdaId().equals(udaKey))
+                      .findFirst();
+              String requestedUda = requestUdas.get(udaKey);
+              if (currentUda.isPresent()) {
+                if (currentUda.get().getUdaDefinition().getConfigurationType().isMandatory()) {
+                  validator.validateNotBlank(udaKey + " uda", requestedUda);
+                }
+                currentUda.get().setUdaValue(requestedUda);
+              }
+            });
+  }
+
+  private void processParametersForUpdate(
+      List<VOParameter> subscriptionParameters, Map<String, String> requestParameters) {
+
+    requestParameters
+        .keySet()
+        .forEach(
+            parameterKey -> {
+              Optional<VOParameter> currentParameter =
+                  subscriptionParameters.stream()
+                      .filter(
+                          parameter ->
+                              parameter
+                                  .getParameterDefinition()
+                                  .getParameterId()
+                                  .equals(parameterKey))
+                      .findFirst();
+              if (currentParameter.isPresent()) {
+
+                String requestedParameter = requestParameters.get(parameterKey);
+                if (currentParameter.get().getParameterDefinition().isMandatory()) {
+                  validator.validateNotBlank(parameterKey + " parameter", requestedParameter);
+                }
+                currentParameter.get().setValue(requestedParameter);
+              }
+            });
+  }
+
+  private VOPaymentInfo preparePaymentInfo(Long paymentInfoId) throws ObjectNotFoundException {
+    Optional<VOPaymentInfo> foundPayment =
+        as.getPaymentInfos().stream().filter(info -> info.getKey() == paymentInfoId).findAny();
+
+    if (!foundPayment.isPresent()) {
+      throw new ObjectNotFoundException(
+          DomainObjectException.ClassEnum.PAYMENT_INFO, String.valueOf(paymentInfoId));
+    }
+    return foundPayment.get();
+  }
+
+  private VOBillingContact prepareBillingContact(Long billingContactId)
+      throws ObjectNotFoundException {
+    Optional<VOBillingContact> foundContact =
+        as.getBillingContacts().stream()
+            .filter(contact -> contact.getKey() == billingContactId)
+            .findAny();
+
+    if (!foundContact.isPresent()) {
+      throw new ObjectNotFoundException(
+          DomainObjectException.ClassEnum.BILLING_CONTACT, String.valueOf(billingContactId));
+    }
+    return foundContact.get();
   }
 }

@@ -34,6 +34,23 @@ public class SubscriptionConstants {
           + "   }\n"
           + "}";
 
+  public static final String SUBSCRIPTION_UPDATE_EXAMPLE_REQUEST =
+      "{\n"
+          + "  \"subscriptionId\": \"RestSubscription\",\n"
+          + "  \"purchaseOrderNumber\": \"ref123456\",\n"
+          + "  \"unitName\": \"default\",\n"
+          + "  \"billingContactId\": 10000,\n"
+          + "  \"paymentInfoId\": 10000,\n"
+          + "  \"parameters\": {\n"
+          + "     \"PARAM1_ID\":\"param1 value\",\n"
+          + "     \"PARAM2_ID\": \"param2 value\"\n"
+          + "   },\n"
+          + "  \"udas\": {\n"
+          + "     \"UDA1_ID\":\"uda1 value\",\n"
+          + "     \"UDA2_ID\": \"uda2 value\"\n"
+          + "   }\n"
+          + "}";
+
   public static final String SUBSCRIPTION_EXAMPLE_REQUEST =
       "{\n"
           + "\"billingContactKey\": 10000,\n"
