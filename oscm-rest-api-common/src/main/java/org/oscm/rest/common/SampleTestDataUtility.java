@@ -380,7 +380,7 @@ public class SampleTestDataUtility {
 
   public static ServiceCreateRepresentation createServiceCreateRepresentation() {
     ServiceCreateRepresentation representation = new ServiceCreateRepresentation();
-    representation.setTechnicalServiceId("10000");
+    representation.setTechnicalServiceId("technicalServiceId");
     representation.setServiceId("serviceId");
     return representation;
   }

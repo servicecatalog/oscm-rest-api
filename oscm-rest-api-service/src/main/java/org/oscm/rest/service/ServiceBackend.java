@@ -57,7 +57,7 @@ public class ServiceBackend {
 
       Optional<VOTechnicalService> foundTechnicalService =
           technicalServices.stream()
-              .filter(ts -> !content.getTechnicalServiceId().equals(ts.getKey()))
+              .filter(ts -> content.getTechnicalServiceId().equals(ts.getTechnicalServiceId()))
               .findAny();
 
       if (!foundTechnicalService.isPresent()) {
@@ -65,7 +65,9 @@ public class ServiceBackend {
             ErrorResponse.provider()
                 .errorMessage("Invalid technicalServiceId")
                 .errorDetails(
-                    "Technical service does not exist or does not belong to current technology provider")
+                    "Technical service '"
+                        + content.getTechnicalServiceId()
+                        + "' does not exist or does not belong to the current technology provider")
                 .build()
                 .badRequest());
       }
