@@ -1,9 +1,9 @@
 /**
  * *****************************************************************************
  *
- * <p>Copyright FUJITSU LIMITED 2019
+ * <p>Copyright FUJITSU LIMITED 2020
  *
- * <p>Creation Date: 10-04-2019
+ * <p>Creation Date: 07-05-2020
  *
  * <p>*****************************************************************************
  */
@@ -16,7 +16,6 @@ public class SubscriptionUpdateRepresentation extends Representation {
 
   private String subscriptionId;
   private String purchaseOrderNumber;
-  private String unitName;
   private String billingContactId;
   private String paymentInfoId;
 
@@ -53,14 +52,6 @@ public class SubscriptionUpdateRepresentation extends Representation {
 
   public void setSubscriptionId(String subscriptionId) {
     this.subscriptionId = subscriptionId;
-  }
-
-  public String getUnitName() {
-    return unitName;
-  }
-
-  public void setUnitName(String unitName) {
-    this.unitName = unitName;
   }
 
   public Map<String, String> getParameters() {

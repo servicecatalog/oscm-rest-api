@@ -14,18 +14,23 @@ import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.intf.SubscriptionServiceInternal;
+import org.oscm.internal.types.enumtypes.ParameterModificationType;
 import org.oscm.internal.types.enumtypes.PerformanceHint;
+import org.oscm.internal.types.enumtypes.ServiceStatus;
 import org.oscm.internal.types.exception.DomainObjectException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
 import org.oscm.internal.vo.*;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.errorhandling.ErrorResponse;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+import org.oscm.rest.common.validator.ParameterValidator;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,6 +43,7 @@ public class SubscriptionBackend {
   @EJB AccountService as;
 
   private RequiredFieldValidator validator = new RequiredFieldValidator();
+  private ParameterValidator parameterValidator = new ParameterValidator();
 
   public RestBackend.GetCollection<SubscriptionRepresentation, SubscriptionParameters>
       getCollection() {
@@ -73,10 +79,19 @@ public class SubscriptionBackend {
 
     return (content, params) -> {
       VOService vo = new VOService();
-      vo.setKey(Long.parseLong(content.getServiceId()));
+      vo.setKey(Long.parseLong(content.getServiceKey()));
       VOServiceDetails service = sps.getServiceDetails(vo);
 
-      boolean isChargeable = service.getPriceModel().isChargeable();
+      if (!service.getStatus().equals(ServiceStatus.ACTIVE)) {
+        throw new BadRequestException(
+            ErrorResponse.provider()
+                .build()
+                .badRequest(
+                    "Referenced service (serviceKey="
+                        + content.getServiceKey()
+                        + ") is inaccessible"));
+      }
+
       VOPaymentInfo paymentInfo = null;
       VOBillingContact billingContact = null;
 
@@ -88,6 +103,7 @@ public class SubscriptionBackend {
       Map<String, String> requestedUdas = content.getUdas();
       List<VOUda> udas = processUdasForCreation(udaDefinitions, requestedUdas);
 
+      boolean isChargeable = service.getPriceModel().isChargeable();
       if (isChargeable) {
         validator.validateNotBlank("paymentInfoId", content.getPaymentInfoId());
         validator.validateNotBlank("billingContactId", content.getBillingContactId());
@@ -109,22 +125,26 @@ public class SubscriptionBackend {
   public RestBackend.Put<SubscriptionUpdateRepresentation, SubscriptionParameters> put() {
     return (content, params) -> {
       VOSubscriptionDetails subscription = ss.getSubscriptionDetails(params.getId());
+      subscription = processPaymentData(subscription, content);
+
       VOService subscribedService = subscription.getSubscribedService();
-      
-      processPaymentData(subscription, content);
 
       List<VOParameter> subscriptionParameters =
           subscribedService.getParameters().stream()
               .filter(VOParameter::isConfigurable)
+              .filter(
+                  parameter ->
+                      parameter
+                          .getParameterDefinition()
+                          .getModificationType()
+                          .equals(ParameterModificationType.STANDARD))
               .collect(Collectors.toList());
+      Map<String, String> requestParameters = content.getParameters();
+      processParametersForUpdate(subscriptionParameters, requestParameters);
 
       String sellerId = subscribedService.getSellerId();
       List<VOUda> subscriptionUdas =
           as.getUdasForCustomer("CUSTOMER_SUBSCRIPTION", params.getId(), sellerId);
-
-      Map<String, String> requestParameters = content.getParameters();
-      processParametersForUpdate(subscriptionParameters, requestParameters);
-
       Map<String, String> requestUdas = content.getUdas();
       processUdasForUpdate(subscriptionUdas, requestUdas);
 
@@ -143,7 +163,9 @@ public class SubscriptionBackend {
     };
   }
 
-  private VOSubscriptionDetails processPaymentData(VOSubscriptionDetails subscription, SubscriptionUpdateRepresentation content) throws Exception {
+  private VOSubscriptionDetails processPaymentData(
+      VOSubscriptionDetails subscription, SubscriptionUpdateRepresentation content)
+      throws Exception {
 
     boolean chargeable = subscription.getPriceModel().isChargeable();
 
@@ -156,12 +178,12 @@ public class SubscriptionBackend {
 
       if (StringUtils.isNotBlank(billingContactId) || StringUtils.isNotBlank(paymentInfoId)) {
         if (StringUtils.isNotBlank(billingContactId)) {
-          billingContact = prepareBillingContact(Long.valueOf(billingContactId));
+          billingContact = prepareBillingContact(billingContactId);
         }
         if (StringUtils.isNotBlank(paymentInfoId)) {
-          paymentInfo = preparePaymentInfo(Long.valueOf(paymentInfoId));
+          paymentInfo = preparePaymentInfo(paymentInfoId);
         }
-        subscription = ss.modifySubscriptionPaymentData(subscription, billingContact, paymentInfo);
+        return ss.modifySubscriptionPaymentData(subscription, billingContact, paymentInfo);
       }
     }
     return subscription;
@@ -208,9 +230,7 @@ public class SubscriptionBackend {
                   serviceParameter.getParameterDefinition();
               String serviceParameterId = serviceParameterDefinition.getParameterId();
               String parameterValue = parameters.get(serviceParameterId);
-              if (serviceParameterDefinition.isMandatory()) {
-                validator.validateNotBlank(serviceParameterId + " parameter", parameterValue);
-              }
+              parameterValidator.validate(serviceParameterDefinition, parameterValue);
               if (parameterValue == null) {
                 parameterValue = serviceParameterDefinition.getDefaultValue();
               }
@@ -255,19 +275,17 @@ public class SubscriptionBackend {
                                   .equals(parameterKey))
                       .findFirst();
               if (currentParameter.isPresent()) {
-
                 String requestedParameter = requestParameters.get(parameterKey);
-                if (currentParameter.get().getParameterDefinition().isMandatory()) {
-                  validator.validateNotBlank(parameterKey + " parameter", requestedParameter);
-                }
+                parameterValidator.validate(
+                    currentParameter.get().getParameterDefinition(), requestedParameter);
                 currentParameter.get().setValue(requestedParameter);
               }
             });
   }
 
-  private VOPaymentInfo preparePaymentInfo(Long paymentInfoId) throws ObjectNotFoundException {
+  private VOPaymentInfo preparePaymentInfo(String paymentInfoId) throws ObjectNotFoundException {
     Optional<VOPaymentInfo> foundPayment =
-        as.getPaymentInfos().stream().filter(info -> info.getKey() == paymentInfoId).findAny();
+        as.getPaymentInfos().stream().filter(info -> info.getId().equals(paymentInfoId)).findAny();
 
     if (!foundPayment.isPresent()) {
       throw new ObjectNotFoundException(
@@ -276,11 +294,11 @@ public class SubscriptionBackend {
     return foundPayment.get();
   }
 
-  private VOBillingContact prepareBillingContact(Long billingContactId)
+  private VOBillingContact prepareBillingContact(String billingContactId)
       throws ObjectNotFoundException {
     Optional<VOBillingContact> foundContact =
         as.getBillingContacts().stream()
-            .filter(contact -> contact.getKey() == billingContactId)
+            .filter(contact -> contact.getId().equals(billingContactId))
             .findAny();
 
     if (!foundContact.isPresent()) {

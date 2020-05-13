@@ -19,13 +19,12 @@ public class SubscriptionCreationRepresentation extends Representation {
 
   private transient VOSubscription vo;
 
-  private String serviceId;
+  private String serviceKey;
   private String subscriptionId;
   private String purchaseOrderNumber;
   private String unitName;
-
-  private Long billingContactId;
-  private Long paymentInfoId;
+  private String billingContactId;
+  private String paymentInfoId;
 
   private Map<String, String> udas = new HashMap<>();
   private Map<String, String> parameters = new HashMap<>();
@@ -41,7 +40,7 @@ public class SubscriptionCreationRepresentation extends Representation {
   @Override
   public void validateContent() {
     RequiredFieldValidator validator = new RequiredFieldValidator();
-    validator.validateNotBlank("serviceId", serviceId);
+    validator.validateNotBlank("serviceKey", serviceKey);
     validator.validateNotBlank("subscriptionId", subscriptionId);
   }
 
@@ -56,19 +55,19 @@ public class SubscriptionCreationRepresentation extends Representation {
     return vo;
   }
 
-  public Long getBillingContactId() {
+  public String getBillingContactId() {
     return billingContactId;
   }
 
-  public void setBillingContactId(Long billingContactId) {
+  public void setBillingContactId(String billingContactId) {
     this.billingContactId = billingContactId;
   }
 
-  public Long getPaymentInfoId() {
+  public String getPaymentInfoId() {
     return paymentInfoId;
   }
 
-  public void setPaymentInfoId(Long paymentInfoId) {
+  public void setPaymentInfoId(String paymentInfoId) {
     this.paymentInfoId = paymentInfoId;
   }
 
@@ -96,12 +95,12 @@ public class SubscriptionCreationRepresentation extends Representation {
     this.unitName = unitName;
   }
 
-  public String getServiceId() {
-    return serviceId;
+  public String getServiceKey() {
+    return serviceKey;
   }
 
-  public void setServiceId(String serviceId) {
-    this.serviceId = serviceId;
+  public void setServiceKey(String serviceKey) {
+    this.serviceKey = serviceKey;
   }
 
   public Map<String, String> getParameters() {
