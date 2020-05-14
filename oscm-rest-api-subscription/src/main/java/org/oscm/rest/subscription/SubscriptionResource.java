@@ -104,7 +104,7 @@ public class SubscriptionResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
       throws Exception {
     final SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
@@ -121,7 +121,7 @@ public class SubscriptionResource extends RestResource {
       requestBody =
           @RequestBody(
               description =
-                  "JSON representing subscription to be created. It must contains reference to service (serviceId) for which subscription is going to be created. "
+                  "JSON representing subscription to be created. It must contains reference to service (serviceKey) for which subscription is going to be created. "
                       + "If service is not free of charge JSON must also contains references to payment information (paymentInfoId) and billing contact (billingContactId).",
               required = true,
               content =
