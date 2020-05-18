@@ -19,6 +19,12 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -27,13 +33,6 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
 import org.oscm.rest.common.representation.SubscriptionUpdateRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless

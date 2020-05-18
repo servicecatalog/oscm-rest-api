@@ -9,11 +9,10 @@
  */
 package org.oscm.rest.common.representation;
 
-import org.oscm.internal.vo.VOSubscription;
-import org.oscm.rest.common.validator.RequiredFieldValidator;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.oscm.internal.vo.VOSubscription;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
 
 public class SubscriptionCreationRepresentation extends Representation {
 

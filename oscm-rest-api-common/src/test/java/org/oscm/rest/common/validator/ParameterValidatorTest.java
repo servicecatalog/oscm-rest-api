@@ -9,21 +9,20 @@
  */
 package org.oscm.rest.common.validator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.types.enumtypes.ParameterValueType;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.internal.vo.VOParameterOption;
 import org.oscm.rest.common.CommonParams;
-
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
 class ParameterValidatorTest {
 

@@ -9,6 +9,11 @@
  */
 package org.oscm.rest.subscription;
 
+import java.util.*;
+import java.util.stream.Collectors;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
 import org.apache.commons.lang3.StringUtils;
 import org.oscm.internal.intf.AccountService;
 import org.oscm.internal.intf.ServiceProvisioningService;
@@ -27,12 +32,6 @@ import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 import org.oscm.rest.common.validator.ParameterValidator;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.BadRequestException;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Stateless
 public class SubscriptionBackend {

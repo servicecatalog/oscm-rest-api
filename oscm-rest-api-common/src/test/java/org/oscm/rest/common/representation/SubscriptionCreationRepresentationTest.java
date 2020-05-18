@@ -9,12 +9,12 @@
  */
 package org.oscm.rest.common.representation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.rest.common.TestContants;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class SubscriptionCreationRepresentationTest {
 

@@ -9,14 +9,13 @@
  */
 package org.oscm.rest.common.validator;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.oscm.internal.vo.VOParameterDefinition;
 import org.oscm.rest.common.errorhandling.ErrorResponse;
-
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ParameterValidator implements RequestValidator {
 
