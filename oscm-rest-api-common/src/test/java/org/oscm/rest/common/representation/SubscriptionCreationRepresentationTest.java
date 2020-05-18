@@ -9,17 +9,12 @@
  */
 package org.oscm.rest.common.representation;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.oscm.internal.vo.BaseVO;
 import org.oscm.internal.vo.VOSubscription;
 import org.oscm.rest.common.TestContants;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SubscriptionCreationRepresentationTest {
 
@@ -81,57 +76,6 @@ public class SubscriptionCreationRepresentationTest {
     assertThat(representation)
         .extracting(SubscriptionCreationRepresentation::getSubscriptionId)
         .isEqualTo(voSubscription.getSubscriptionId());
-  }
-
-/*
-  @Test
-  @Ignore
-  public void shouldUpdateVOUsageLicense() {
-
-    // given
-    ArrayList<UsageLicenseRepresentation> ulrList = new ArrayList<UsageLicenseRepresentation>();
-    SubscriptionCreationRepresentation scr = createRepresentation();
-    UsageLicenseRepresentation ulr = new UsageLicenseRepresentation();
-    UserRepresentation ur = new UserRepresentation();
-
-    ur.setUserId("supplier");
-    ur.setOrganizationId("959c9bf7");
-    ulr.setUser(ur);
-    ulrList.add(ulr);
-    //scr.setUsers(ulrList);
-
-    // when
-    //List<VOUsageLicense> result = scr.getUsageLicenses();
-
-    // then
-    assertEquals("supplier", result.get(0).getUser().getUserId());
-    assertEquals("959c9bf7", result.get(0).getUser().getOrganizationId());
-  }
-*/
-
-  @Test
-  public void shouldUpdateVOUdaRepresentation() {
-
-    // given
-    Map<String, String> urList = new HashMap<>();
-    SubscriptionCreationRepresentation scr = createRepresentation();
-    UdaRepresentation ur = new UdaRepresentation();
-    UdaDefinitionRepresentation udr = new UdaDefinitionRepresentation();
-
-    udr.setDefaultValue("test");
-    udr.setUdaId("123");
-    ur.setUdaDefinition(udr);
-    ur.setUdaValue("testvalue");
-    //urList.add(ur);
-    scr.setUdas(urList);
-
-    // when
-    Map<String, String> result = scr.getUdas();
-
-    // then
-    //assertEquals("testvalue", result.get(0).getUdaValue());
-    //assertEquals("test", result.get(0).getUdaDefinition().getDefaultValue());
-    //assertEquals("123", result.get(0).getUdaDefinition().getUdaId());
   }
 
   private VOSubscription createVO() {

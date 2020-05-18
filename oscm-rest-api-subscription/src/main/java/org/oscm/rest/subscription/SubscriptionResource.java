@@ -19,20 +19,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -41,6 +27,13 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
 import org.oscm.rest.common.representation.SubscriptionUpdateRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless
@@ -121,7 +114,7 @@ public class SubscriptionResource extends RestResource {
       requestBody =
           @RequestBody(
               description =
-                  "JSON representing subscription to be created. It must contains reference to service (serviceKey) for which subscription is going to be created. "
+                  "JSON representing subscription to be created. It must contains reference to marketable service (serviceKey) for which subscription is going to be created. "
                       + "If service is not free of charge JSON must also contains references to payment information (paymentInfoId) and billing contact (billingContactId).",
               required = true,
               content =
