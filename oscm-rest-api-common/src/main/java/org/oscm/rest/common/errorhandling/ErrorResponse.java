@@ -11,6 +11,7 @@ package org.oscm.rest.common.errorhandling;
 
 import javax.ws.rs.core.Response;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -18,6 +19,7 @@ import org.oscm.rest.common.CommonParams;
 @Builder(builderMethodName = "provider")
 @Getter
 @Setter
+@EqualsAndHashCode
 public class ErrorResponse {
 
   private String errorMessage;

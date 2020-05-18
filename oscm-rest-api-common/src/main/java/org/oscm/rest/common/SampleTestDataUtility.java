@@ -10,15 +10,18 @@
 package org.oscm.rest.common;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import javax.ws.rs.core.*;
 import lombok.Generated;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.enumtypes.Salutation;
+import org.oscm.internal.types.enumtypes.ServiceStatus;
 import org.oscm.internal.types.enumtypes.UserAccountStatus;
 import org.oscm.internal.types.enumtypes.UserRoleType;
 import org.oscm.internal.vo.*;
@@ -312,6 +315,7 @@ public class SampleTestDataUtility {
     VOServiceDetails voServiceDetails = new VOServiceDetails();
     VOTechnicalService voTechnicalService = new VOTechnicalService();
     voServiceDetails.setTechnicalService(voTechnicalService);
+    voServiceDetails.setStatus(ServiceStatus.ACTIVE);
     voServiceDetails.setPriceModel(new VOPriceModel());
     return voServiceDetails;
   }
@@ -451,9 +455,15 @@ public class SampleTestDataUtility {
   public static SubscriptionCreationRepresentation createSubscriptionCreationRepresentation() {
     SubscriptionCreationRepresentation subscriptionCreationRepresentation =
         new SubscriptionCreationRepresentation();
-    subscriptionCreationRepresentation.setService(new ServiceRepresentation());
-    subscriptionCreationRepresentation.setUdas(Lists.newArrayList(new UdaRepresentation()));
+    subscriptionCreationRepresentation.setServiceKey(TestContants.STRING_NUM_VALUE);
+    subscriptionCreationRepresentation.setSubscriptionId(TestContants.TS_ID);
     return subscriptionCreationRepresentation;
+  }
+
+  public static SubscriptionUpdateRepresentation createSubscriptionUpdateRepresentation() {
+    SubscriptionUpdateRepresentation subscriptionUpdateRepresentation =
+            new SubscriptionUpdateRepresentation();
+    return subscriptionUpdateRepresentation;
   }
 
   public static VOUserSubscription createVOUserSubscription() {

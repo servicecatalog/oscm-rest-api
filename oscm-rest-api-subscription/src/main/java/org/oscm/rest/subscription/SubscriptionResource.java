@@ -19,27 +19,21 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.SubscriptionCreationRepresentation;
+import org.oscm.rest.common.representation.SubscriptionUpdateRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path(CommonParams.PATH_VERSION + "/subscriptions")
 @Stateless
@@ -86,9 +80,9 @@ public class SubscriptionResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   @Produces(CommonParams.JSON)
   @Operation(
-      summary = "Retrieves a subscription for a given service",
+      summary = "Retrieves a single subscription and its details",
       tags = {"subscriptions"},
-      description = "Returns a single subscription based on the provided service id",
+      description = "Returns a single subscription and its details based on the provided id",
       responses = {
         @ApiResponse(
             responseCode = "200",
@@ -103,7 +97,7 @@ public class SubscriptionResource extends RestResource {
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id)
       throws Exception {
     final SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
@@ -119,7 +113,9 @@ public class SubscriptionResource extends RestResource {
       description = "Creates a subscription in current service based on given request data",
       requestBody =
           @RequestBody(
-              description = "JSON representing subscription to be created",
+              description =
+                  "JSON representing subscription to be created. It must contains reference to marketable service (serviceKey) for which subscription is going to be created. "
+                      + "If service is not free of charge JSON must also contains references to payment information (paymentInfoId) and billing contact (billingContactId).",
               required = true,
               content =
                   @Content(
@@ -128,7 +124,7 @@ public class SubscriptionResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
-                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            value = SubscriptionConstants.SUBSCRIPTION_CREATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
@@ -146,7 +142,6 @@ public class SubscriptionResource extends RestResource {
       throws Exception {
     final SubscriptionParameters params = new SubscriptionParameters();
     params.setEndpointVersion(version);
-    content.setId(params.getId());
     return post(uriInfo, sb.post(), content, params);
   }
 
@@ -168,7 +163,7 @@ public class SubscriptionResource extends RestResource {
                       examples = {
                         @ExampleObject(
                             name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
-                            value = SubscriptionConstants.SUBSCRIPTION_EXAMPLE_REQUEST,
+                            value = SubscriptionConstants.SUBSCRIPTION_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
       responses = {
@@ -176,7 +171,7 @@ public class SubscriptionResource extends RestResource {
       })
   public Response updateSubscription(
       @Context UriInfo uriInfo,
-      SubscriptionCreationRepresentation content,
+      SubscriptionUpdateRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
