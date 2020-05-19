@@ -9,44 +9,75 @@
  */
 package org.oscm.rest.subscription;
 
-import java.util.Collections;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
 import org.oscm.internal.vo.VOUsageLicense;
+import org.oscm.internal.vo.VOUser;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
+import org.oscm.rest.common.errorhandling.ErrorResponse;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.UsageLicenseCreationRepresentation;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class UsageLicenseBackend {
 
   @EJB SubscriptionService ss;
+  @EJB IdentityService is;
 
-  public RestBackend.Post<UsageLicenseRepresentation, SubscriptionParameters> post() {
+  public RestBackend.Post<UsageLicenseCreationRepresentation, SubscriptionParameters> post() {
     return (content, params) -> {
-      content.update();
+      long subscriptionKey = params.getId();
+      String userId = content.getUserId();
 
-      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
+      VOSubscriptionDetails subscription = ss.getSubscriptionDetails(subscriptionKey);
+      List<VOUsageLicense> usageLicenses = subscription.getUsageLicenses();
+
+      Optional<VOUsageLicense> foundLicense =
+          usageLicenses.stream()
+              .filter(license -> license.getUser().getUserId().equals(userId))
+              .findFirst();
+
+      if (foundLicense.isPresent()) {
+        throw new BadRequestException(
+            ErrorResponse.provider()
+                .build()
+                .badRequest("User " + userId + " already assigned to the subscription"));
+      }
+
+      VOUser voUser = new VOUser();
+      voUser.setUserId(userId);
+      VOUser user = is.getUser(voUser);
+      VOUsageLicense usageLicense = new VOUsageLicense();
+      usageLicense.setUser(user);
+
       boolean added =
           ss.addRevokeUser(
-              sub.getSubscriptionId(), Collections.singletonList(content.getVO()), null);
-      Long licKey = null;
+              subscription.getSubscriptionId(), Collections.singletonList(usageLicense), null);
+      long licenseKey = 0;
+
       if (added) {
-        List<VOUsageLicense> lics =
-            ss.getSubscriptionDetails(params.getId().longValue()).getUsageLicenses();
-        for (VOUsageLicense lic : lics) {
-          if (lic.getUser().getUserId().equals(content.getUser().getUserId())) {
-            licKey = Long.valueOf(lic.getKey());
+        List<VOUsageLicense> licenses =
+            ss.getSubscriptionDetails(subscriptionKey).getUsageLicenses();
+        for (VOUsageLicense lic : licenses) {
+          if (lic.getUser().getUserId().equals(userId)) {
+            licenseKey = lic.getKey();
             break;
           }
         }
       }
-      return PostResponseBody.of().createdObjectId(String.valueOf(licKey)).build();
+      return PostResponseBody.of().createdObjectId(String.valueOf(licenseKey)).build();
     };
   }
 
@@ -55,36 +86,34 @@ public class UsageLicenseBackend {
     return params -> {
       List<VOUsageLicense> licenses = ss.getSubscriptionDetails(params.getId()).getUsageLicenses();
       List<UsageLicenseRepresentation> lics = UsageLicenseRepresentation.convert(licenses);
-      return new RepresentationCollection<UsageLicenseRepresentation>(lics);
-    };
-  }
-
-  public RestBackend.Put<UsageLicenseRepresentation, SubscriptionParameters> put() {
-    return (content, params) -> {
-      content.update();
-
-      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
-      VOUsageLicense vo = content.getVO();
-      vo.setKey(params.getLicKey().longValue());
-      return ss.addRevokeUser(sub.getSubscriptionId(), Collections.singletonList(vo), null);
+      return new RepresentationCollection<>(lics);
     };
   }
 
   public RestBackend.Delete<SubscriptionParameters> delete() {
     return params -> {
-      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId().longValue());
-      List<VOUsageLicense> lics = sub.getUsageLicenses();
-      long licKey = params.getLicKey().longValue();
-      boolean result = true;
-      for (VOUsageLicense lic : lics) {
-        if (lic.getKey() == licKey) {
-          result =
-              ss.addRevokeUser(
-                  sub.getSubscriptionId(), null, Collections.singletonList(lic.getUser()));
-          break;
-        }
+      VOSubscriptionDetails sub = ss.getSubscriptionDetails(params.getId());
+      List<VOUsageLicense> licenses = sub.getUsageLicenses();
+
+      Long licenseKey = params.getLicKey();
+      Optional<VOUsageLicense> foundLicense =
+          licenses.stream().filter(license -> licenseKey.equals(license.getKey())).findFirst();
+
+      if (foundLicense.isPresent()) {
+        return ss.addRevokeUser(
+            sub.getSubscriptionId(), null, Collections.singletonList(foundLicense.get().getUser()));
+      } else {
+
+        throw new NotFoundException(
+            ErrorResponse.provider()
+                .build()
+                .notFound(
+                    "Usage license (key:"
+                        + licenseKey
+                        + ") does not exist for given subscription ("
+                        + sub.getSubscriptionId()
+                        + ")"));
       }
-      return result;
     };
   }
 }

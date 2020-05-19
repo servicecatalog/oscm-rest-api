@@ -37,6 +37,7 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.UsageLicenseCreationRepresentation;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
 
@@ -88,7 +89,7 @@ public class UsageLicenseResource extends RestResource {
       description = "Creates a license for the given subscription id",
       requestBody =
           @RequestBody(
-              description = "JSON representing usage license to be created",
+              description = "JSON containing userId for which license is going to be created",
               required = true,
               content =
                   @Content(
@@ -107,7 +108,7 @@ public class UsageLicenseResource extends RestResource {
       })
   public Response createLicense(
       @Context UriInfo uriInfo,
-      UsageLicenseRepresentation content,
+      UsageLicenseCreationRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
@@ -120,60 +121,18 @@ public class UsageLicenseResource extends RestResource {
     return post(uriInfo, ulb.post(), content, params);
   }
 
-  @PUT
-  @Since(CommonParams.VERSION_1)
-  @Path("/{licKey}")
-  @Operation(
-      summary = "Updates a single usage license for a subscription",
-      tags = {"usagelicenses"},
-      description = "Updates a single usage license for a subscirption by a given licenseKey",
-      requestBody =
-          @RequestBody(
-              description = "JSON representing a usage license to be updated",
-              required = true,
-              content =
-                  @Content(
-                      schema = @Schema(implementation = UsageLicenseRepresentation.class),
-                      examples = {
-                        @ExampleObject(
-                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
-                            value = SubscriptionConstants.LICENSE_UPDATE_EXAMPLE_REQUEST,
-                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY),
-                      })),
-      responses = {
-        @ApiResponse(responseCode = "204", description = "Usage license updated successfully")
-      })
-  public Response updateLicense(
-      @Context UriInfo uriInfo,
-      UsageLicenseRepresentation content,
-      @Parameter(description = DocDescription.ENDPOINT_VERSION)
-          @DefaultValue("v1")
-          @PathParam(value = "version")
-          String version,
-      @Parameter(description = DocDescription.SUBSCRIPTION_ID) @PathParam(value = "id") String id,
-      @Parameter(description = DocDescription.LICENSE_KEY) @PathParam(value = "licKey")
-          String licKey)
-      throws Exception {
-    SubscriptionParameters params = new SubscriptionParameters();
-    params.setEndpointVersion(version);
-    params.setId(Long.valueOf(id));
-    params.setLicKey(Long.valueOf(licKey));
-    return put(uriInfo, ulb.put(), content, params);
-  }
-
   @DELETE
   @Since(CommonParams.VERSION_1)
   @Path("/{licKey}")
   @Operation(
-      summary = "Deletes a single usage license for a subscirption",
+      summary = "Deletes a single usage license for a subscription",
       tags = {"usagelicenses"},
-      description = "Deletes a single usage license for a subscirption by given licenskey",
+      description = "Deletes a single usage license for a subscription by given license key",
       responses = {
         @ApiResponse(responseCode = "204", description = "Usage license deleted successfully")
       })
   public Response deleteLicense(
       @Context UriInfo uriInfo,
-      UsageLicenseRepresentation content,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")

@@ -10,60 +10,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UsageLicenseRepresentationTest {
 
-    @Test
-    public void shouldUpdateVOUsageLicense() {
-        UsageLicenseRepresentation usageLicenseRepresentation = createRepresentation();
+  @Test
+  public void shouldUpdateVOUsageLicense() {
+    UsageLicenseRepresentation usageLicenseRepresentation = createRepresentation();
     usageLicenseRepresentation.setETag(TestContants.LONG_VALUE);
-        usageLicenseRepresentation.setId(TestContants.LONG_VALUE);
+    usageLicenseRepresentation.setId(TestContants.LONG_VALUE);
 
-        usageLicenseRepresentation.update();
-        VOUsageLicense result = usageLicenseRepresentation.getVO();
+    usageLicenseRepresentation.update();
+    VOUsageLicense result = usageLicenseRepresentation.getVO();
 
-        assertThat(result).isNotNull();
-        assertThat(result.getRoleDefinition().getDescription()).isEqualTo(usageLicenseRepresentation.getRole().getDescription());
-    }
+    assertThat(result).isNotNull();
+    assertThat(result.getKey()).isEqualTo(usageLicenseRepresentation.getId());
+  }
 
-    @Test
-    public void shouldUpdateVOUsageLicense_evenIIdAndETagIsNull() {
-        UsageLicenseRepresentation usageLicenseRepresentation = createRepresentation();
-        usageLicenseRepresentation.setETag(TestContants.LONG_VALUE);
-        usageLicenseRepresentation.setId(TestContants.LONG_VALUE);
+  @Test
+  public void shouldConvertToUsageLicenseRepresentation() {
+    VOUsageLicense voUsageLicense = createVO();
 
-        usageLicenseRepresentation.update();
-        VOUsageLicense result = usageLicenseRepresentation.getVO();
+    UsageLicenseRepresentation representation = new UsageLicenseRepresentation(voUsageLicense);
+    representation.convert();
 
-        assertThat(result).isNotNull();
-        assertThat(result.getRoleDefinition().getDescription()).isEqualTo(usageLicenseRepresentation.getRole().getDescription());
-    }
+    assertThat(representation.getId()).isEqualTo(voUsageLicense.getKey());
+  }
 
-    @Test
-    public void shouldConvertToUsageLicenseRepresentation() {
-        VOUsageLicense voUsageLicense = createVO();
+  private VOUsageLicense createVO() {
+    VOUsageLicense voUsageLicense = new VOUsageLicense();
+    voUsageLicense.setKey(TestContants.LONG_VALUE);
+    VOUser voUser = new VOUser();
+    voUsageLicense.setUser(voUser);
+    VORoleDefinition voRoleDefinition = new VORoleDefinition();
+    voRoleDefinition.setDescription(TestContants.STRING_VALUE);
+    voUsageLicense.setRoleDefinition(voRoleDefinition);
 
-        UsageLicenseRepresentation representation = new UsageLicenseRepresentation(voUsageLicense);
-        representation.convert();
+    return voUsageLicense;
+  }
 
-        assertThat(representation.getRole().getDescription())
-                .isEqualTo(voUsageLicense.getRoleDefinition().getDescription());
-    }
-
-    private VOUsageLicense createVO() {
-        VOUsageLicense voUsageLicense = new VOUsageLicense();
-        VOUser voUser = new VOUser();
-        voUsageLicense.setUser(voUser);
-        VORoleDefinition voRoleDefinition = new VORoleDefinition();
-        voRoleDefinition.setDescription(TestContants.STRING_VALUE);
-        voUsageLicense.setRoleDefinition(voRoleDefinition);
-
-        return voUsageLicense;
-    }
-
-    private UsageLicenseRepresentation createRepresentation() {
-        UsageLicenseRepresentation usageLicenseRepresentation = new UsageLicenseRepresentation();
-        RoleDefinitionRepresentation roleDefinitionRepresentation = new RoleDefinitionRepresentation();
-        roleDefinitionRepresentation.setDescription(TestContants.STRING_VALUE);
-        usageLicenseRepresentation.setRole(roleDefinitionRepresentation);
-
-        return usageLicenseRepresentation;
-    }
+  private UsageLicenseRepresentation createRepresentation() {
+    UsageLicenseRepresentation usageLicenseRepresentation = new UsageLicenseRepresentation();
+    return usageLicenseRepresentation;
+  }
 }
