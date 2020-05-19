@@ -40,4 +40,7 @@
     <security-role>
            <role-name>TECHNOLOGY_MANAGER</role-name>
     </security-role>
+    <security-role>
+           <role-name>PLATFORM_OPERATOR</role-name>
+    </security-role>
 </web-app>
