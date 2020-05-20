@@ -9,6 +9,14 @@
  */
 package org.oscm.rest.subscription;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,15 +33,6 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UsageLicenseCreationRepresentation;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UsageLicenseBackendTest {

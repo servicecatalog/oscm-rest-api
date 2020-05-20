@@ -9,6 +9,13 @@
  */
 package org.oscm.rest.subscription;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 import org.oscm.internal.intf.IdentityService;
 import org.oscm.internal.intf.SubscriptionService;
 import org.oscm.internal.vo.VOSubscriptionDetails;
@@ -21,14 +28,6 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.UsageLicenseCreationRepresentation;
 import org.oscm.rest.common.representation.UsageLicenseRepresentation;
 import org.oscm.rest.common.requestparameters.SubscriptionParameters;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotFoundException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @Stateless
 public class UsageLicenseBackend {
