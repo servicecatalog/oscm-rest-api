@@ -9,11 +9,11 @@
  */
 package org.oscm.rest.common.representation;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOService;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceCreateRepresentation extends Representation {
 
@@ -22,7 +22,7 @@ public class ServiceCreateRepresentation extends Representation {
   private String name;
   private String description;
   private String shortDescription;
-  private List<ParameterRepresentation> parameters = new ArrayList<>();
+  private List<ServiceParameterRepresentation> parameters = new ArrayList<>();
 
   private transient VOService vo = new VOService();
 
@@ -66,11 +66,11 @@ public class ServiceCreateRepresentation extends Representation {
     this.shortDescription = shortDescription;
   }
 
-  public List<ParameterRepresentation> getParameters() {
+  public List<ServiceParameterRepresentation> getParameters() {
     return parameters;
   }
 
-  public void setParameters(List<ParameterRepresentation> parameters) {
+  public void setParameters(List<ServiceParameterRepresentation> parameters) {
     this.parameters = parameters;
   }
 
@@ -97,19 +97,5 @@ public class ServiceCreateRepresentation extends Representation {
     vo.setName(getName());
     vo.setShortDescription(getShortDescription());
     vo.setDescription(getDescription());
-
-    updateParameters();
-  }
-
-  private List<VOParameter> updateParameters() {
-    List<VOParameter> result = new ArrayList<VOParameter>();
-    if (parameters == null) {
-      return result;
-    }
-    for (ParameterRepresentation p : parameters) {
-      p.update();
-      result.add(p.getVO());
-    }
-    return result;
   }
 }
