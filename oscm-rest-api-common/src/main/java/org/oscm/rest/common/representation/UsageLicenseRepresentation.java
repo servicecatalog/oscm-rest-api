@@ -9,17 +9,17 @@
  */
 package org.oscm.rest.common.representation;
 
+import org.oscm.internal.vo.VOUsageLicense;
+
+import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.WebApplicationException;
-import org.oscm.internal.vo.VOUsageLicense;
 
 public class UsageLicenseRepresentation extends Representation {
 
   private transient VOUsageLicense vo;
 
   private UserRepresentation user;
-  private RoleDefinitionRepresentation role;
 
   public UsageLicenseRepresentation() {
     this(new VOUsageLicense());
@@ -34,11 +34,7 @@ public class UsageLicenseRepresentation extends Representation {
 
   @Override
   public void update() {
-    if (role != null) {
-      role.update();
-      vo.setKey(role.convertIdToKey());
-      vo.setRoleDefinition(role.getVO());
-    }
+    vo.setKey(convertIdToKey());
     if (user != null) {
       user.update();
       vo.setKey(user.convertIdToKey());
@@ -48,12 +44,7 @@ public class UsageLicenseRepresentation extends Representation {
 
   @Override
   public void convert() {
-    if (vo.getRoleDefinition() == null) {
-      role = new RoleDefinitionRepresentation();
-    } else {
-      role = new RoleDefinitionRepresentation(vo.getRoleDefinition());
-    }
-    role.convert();
+    setId(vo.getKey());
     user = new UserRepresentation(vo.getUser());
     user.convert();
   }
@@ -66,23 +57,13 @@ public class UsageLicenseRepresentation extends Representation {
     this.user = user;
   }
 
-  public RoleDefinitionRepresentation getRole() {
-    return role;
-  }
-
-  public void setRole(RoleDefinitionRepresentation role) {
-    this.role = role;
-  }
-
   public VOUsageLicense getVO() {
     return vo;
   }
 
   public static List<UsageLicenseRepresentation> convert(List<VOUsageLicense> lics) {
-    if (lics == null || lics.isEmpty()) {
-      return null;
-    }
-    List<UsageLicenseRepresentation> result = new ArrayList<UsageLicenseRepresentation>();
+    List<UsageLicenseRepresentation> result = new ArrayList<>();
+
     for (VOUsageLicense lic : lics) {
       UsageLicenseRepresentation ulr = new UsageLicenseRepresentation(lic);
       ulr.convert();
