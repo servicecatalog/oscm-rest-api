@@ -9,17 +9,7 @@
  */
 package org.oscm.rest.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +33,15 @@ import org.oscm.rest.common.ServiceStatus;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 public class ServiceBackendTest {
 
@@ -57,6 +56,7 @@ public class ServiceBackendTest {
   private ServiceParameters parameters;
   private ServiceDetailsRepresentation representation;
   private ServiceCreateRepresentation serviceCreateRepresentation;
+  private ServiceUpdateRepresentation serviceUpdateRepresentation;
   private StatusRepresentation statusRepresentation;
   private VOServiceDetails vo;
   private RepresentationCollection<ServiceRepresentation> compatiblesCollection;
@@ -69,6 +69,7 @@ public class ServiceBackendTest {
     parameters = SampleTestDataUtility.createServiceParameters();
     representation = SampleTestDataUtility.createServiceDetailsRepresentation(null);
     serviceCreateRepresentation = SampleTestDataUtility.createServiceCreateRepresentation();
+    serviceUpdateRepresentation = new ServiceUpdateRepresentation();
     statusRepresentation = SampleTestDataUtility.createStatusRepresentation();
     compatiblesCollection = createCompatiblesCollection();
     vo = SampleTestDataUtility.createVOServiceDetails();
@@ -267,7 +268,7 @@ public class ServiceBackendTest {
     Response response =
         resource.updateService(
             uriInfo,
-            representation,
+            serviceUpdateRepresentation,
             parameters.getEndpointVersion(),
             parameters.getId().toString());
 
