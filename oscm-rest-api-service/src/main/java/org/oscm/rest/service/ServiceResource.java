@@ -42,10 +42,7 @@ import org.oscm.internal.vo.ListCriteria;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.ServiceCreateRepresentation;
-import org.oscm.rest.common.representation.ServiceDetailsRepresentation;
-import org.oscm.rest.common.representation.ServiceRepresentation;
-import org.oscm.rest.common.representation.StatusRepresentation;
+import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/services")
@@ -215,7 +212,7 @@ public class ServiceResource extends RestResource {
                       schema = @Schema(implementation = ServiceRepresentation.class),
                       examples = {
                         @ExampleObject(
-                            name = CommonConstants.EXAMPLE_PUT_REQUEST_BODY_DESCRIPTION,
+                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
                             value = ServiceConstants.SERVICE_UPDATE_EXAMPLE_REQUEST,
                             summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
                       })),
@@ -223,13 +220,13 @@ public class ServiceResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Service updated successfully")
       })
   public Response updateService(
-      @Context UriInfo uriInfo,
-      ServiceDetailsRepresentation content,
-      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @Context UriInfo uriInfo,
+          ServiceUpdateRepresentation content,
+          @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
+          @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);

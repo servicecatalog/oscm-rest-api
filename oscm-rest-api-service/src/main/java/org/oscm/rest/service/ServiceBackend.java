@@ -9,13 +9,7 @@
  */
 package org.oscm.rest.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.BadRequestException;
+import org.apache.commons.lang3.StringUtils;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.SearchServiceInternal;
@@ -25,15 +19,22 @@ import org.oscm.internal.types.enumtypes.PerformanceHint;
 import org.oscm.internal.types.exception.DomainObjectException.ClassEnum;
 import org.oscm.internal.types.exception.InvalidPhraseException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
-import org.oscm.internal.vo.VOMarketplace;
-import org.oscm.internal.vo.VOService;
-import org.oscm.internal.vo.VOServiceDetails;
-import org.oscm.internal.vo.VOTechnicalService;
+import org.oscm.internal.vo.*;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.errorhandling.ErrorResponse;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+import org.oscm.rest.common.validator.ParameterValidator;
+import org.oscm.rest.common.validator.RequiredFieldValidator;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Stateless
 public class ServiceBackend {
@@ -42,6 +43,8 @@ public class ServiceBackend {
   @EJB SearchService searchService;
   @EJB SearchServiceInternal searchServiceInternal;
   @EJB MarketplaceService ms;
+
+  private ParameterValidator parameterValidator = new ParameterValidator();
 
   public RestBackend.Delete<ServiceParameters> delete() {
     return params -> {
@@ -71,7 +74,43 @@ public class ServiceBackend {
                 .build()
                 .badRequest());
       }
-      VOServiceDetails vo = sps.createService(foundTechnicalService.get(), content.getVo(), null);
+
+      VOTechnicalService technicalService = foundTechnicalService.get();
+      List<VOParameterDefinition> parameterDefinitions = technicalService.getParameterDefinitions();
+
+      List<ServiceParameterRepresentation> requestedParameters = content.getParameters();
+
+      List<VOParameter> parameters =
+          parameterDefinitions.stream()
+              .filter(VOParameterDefinition::isConfigurable)
+              .map(
+                  parameterDefinition -> {
+                    VOParameter parameter = new VOParameter(parameterDefinition);
+                    parameter.setValue(parameterDefinition.getDefaultValue());
+
+                    Optional<ServiceParameterRepresentation> foundRequestedParameter =
+                        requestedParameters.stream()
+                            .filter(
+                                requestedParam ->
+                                    parameterDefinition
+                                        .getParameterId()
+                                        .equals(requestedParam.getParameterId()))
+                            .findFirst();
+
+                    if (foundRequestedParameter.isPresent()) {
+                      parameter.setValue(foundRequestedParameter.get().getValue());
+                      parameter.setConfigurable(foundRequestedParameter.get().isConfigurable());
+                    }
+                    if (!parameter.isConfigurable()) {
+                      parameterValidator.validate(parameterDefinition, parameter.getValue());
+                    }
+                    return parameter;
+                  })
+              .collect(Collectors.toList());
+
+      VOService service = content.getVo();
+      service.setParameters(parameters);
+      VOServiceDetails vo = sps.createService(technicalService, service, null);
       return PostResponseBody.of()
           .createdObjectId(String.valueOf(vo.getKey()))
           .createdObjectName(vo.getServiceId())
@@ -79,18 +118,85 @@ public class ServiceBackend {
     };
   }
 
-  public RestBackend.Put<ServiceDetailsRepresentation, ServiceParameters> put() {
+  public RestBackend.Put<ServiceUpdateRepresentation, ServiceParameters> put() {
     return (content, params) -> {
+      VOService vo = new VOService();
+      vo.setKey(params.getId());
+      VOServiceDetails service = sps.getServiceDetails(vo);
+
+      content.update(service);
       // image will be handled in separate URL
-      sps.updateService(content.getVO(), null);
+      sps.updateService(service, null);
       return true;
     };
   }
 
+/*  private void prepareForUpdate(VOServiceDetails service, ServiceUpdateRepresentation content) {
+
+    String serviceId = content.getServiceId();
+    if (StringUtils.isNotBlank(serviceId)) {
+      RequiredFieldValidator validator = new RequiredFieldValidator();
+      validator.validateNotBlank("serviceId", serviceId);
+      service.setServiceId(serviceId);
+    }
+
+    String name = content.getName();
+    if (StringUtils.isNotBlank(name)) {
+      service.setName(name);
+    }
+    String description = content.getDescription();
+    if (StringUtils.isNotBlank(description)) {
+      service.setDescription(description);
+    }
+    String shortDescription = content.getShortDescription();
+    if (StringUtils.isNotBlank(shortDescription)) {
+      service.setShortDescription(shortDescription);
+    }
+    String configuratorUrl = content.getConfiguratorUrl();
+    if (StringUtils.isNotBlank(configuratorUrl)) {
+      service.setConfiguratorUrl(configuratorUrl);
+    }
+    String customTabName = content.getCustomTabName();
+    if (StringUtils.isNotBlank(customTabName)) {
+      service.setCustomTabName(customTabName);
+    }
+    String customTabUrl = content.getCustomTabUrl();
+    if (StringUtils.isNotBlank(customTabUrl)) {
+      service.setCustomTabUrl(customTabUrl);
+    }
+    List<VOParameter> serviceParameters = service.getParameters();
+    List<ServiceParameterRepresentation> requestedParameters = content.getParameters();
+
+    requestedParameters.forEach(
+        parameter -> {
+          String parameterId = parameter.getParameterId();
+          Optional<VOParameter> foundParameter =
+              serviceParameters.stream()
+                  .filter(
+                      serviceParameter ->
+                          serviceParameter
+                              .getParameterDefinition()
+                              .getParameterId()
+                              .equals(parameterId))
+                  .findFirst();
+
+          if (foundParameter.isPresent()) {
+            VOParameter serviceParameter = foundParameter.get();
+            serviceParameter.setConfigurable(parameter.isConfigurable());
+            serviceParameter.setValue(parameter.getValue());
+
+            if (!serviceParameter.isConfigurable()) {
+              parameterValidator.validate(
+                  serviceParameter.getParameterDefinition(), serviceParameter.getValue());
+            }
+          }
+        });
+  }*/
+
   public RestBackend.Get<ServiceDetailsRepresentation, ServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
-      vo.setKey(params.getId().longValue());
+      vo.setKey(params.getId());
       VOServiceDetails sd = sps.getServiceDetails(vo);
       if (sd == null) {
         throw new ObjectNotFoundException(ClassEnum.SERVICE, String.valueOf(vo.getKey()));
