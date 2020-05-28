@@ -9,6 +9,9 @@
  */
 package org.oscm.rest.common.representation;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -16,10 +19,6 @@ import org.oscm.internal.vo.VOParameter;
 import org.oscm.internal.vo.VOServiceDetails;
 import org.oscm.rest.common.validator.ParameterValidator;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter

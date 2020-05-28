@@ -9,7 +9,13 @@
  */
 package org.oscm.rest.service;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.BadRequestException;
 import org.oscm.internal.intf.MarketplaceService;
 import org.oscm.internal.intf.SearchService;
 import org.oscm.internal.intf.SearchServiceInternal;
@@ -26,15 +32,6 @@ import org.oscm.rest.common.errorhandling.ErrorResponse;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 import org.oscm.rest.common.validator.ParameterValidator;
-import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.BadRequestException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Stateless
 public class ServiceBackend {
@@ -131,7 +128,7 @@ public class ServiceBackend {
     };
   }
 
-/*  private void prepareForUpdate(VOServiceDetails service, ServiceUpdateRepresentation content) {
+  /*  private void prepareForUpdate(VOServiceDetails service, ServiceUpdateRepresentation content) {
 
     String serviceId = content.getServiceId();
     if (StringUtils.isNotBlank(serviceId)) {

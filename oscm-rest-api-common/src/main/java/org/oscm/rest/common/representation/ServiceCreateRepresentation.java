@@ -9,13 +9,12 @@
  */
 package org.oscm.rest.common.representation;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.oscm.internal.vo.VOService;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

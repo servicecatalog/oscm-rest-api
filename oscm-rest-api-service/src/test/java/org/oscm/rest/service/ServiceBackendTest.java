@@ -9,7 +9,15 @@
  */
 package org.oscm.rest.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,15 +40,6 @@ import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.ServiceStatus;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ServiceBackendTest {

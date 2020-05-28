@@ -220,13 +220,13 @@ public class ServiceResource extends RestResource {
         @ApiResponse(responseCode = "204", description = "Service updated successfully")
       })
   public Response updateService(
-          @Context UriInfo uriInfo,
-          ServiceUpdateRepresentation content,
-          @Parameter(description = DocDescription.ENDPOINT_VERSION)
+      @Context UriInfo uriInfo,
+      ServiceUpdateRepresentation content,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version,
-          @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
+      @Parameter(description = DocDescription.SERVICE_ID) @PathParam(value = "id") String id)
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
