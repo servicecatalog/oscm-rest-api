@@ -19,12 +19,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
@@ -33,6 +27,13 @@ import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
 public class TechnicalServiceResource extends RestResource {
@@ -40,6 +41,41 @@ public class TechnicalServiceResource extends RestResource {
   @EJB
   @Setter(value = AccessLevel.PROTECTED)
   TechnicalServiceBackend tsb;
+
+  @GET
+  @Since(CommonParams.VERSION_1)
+  @Path(CommonParams.PATH_ID)
+  @Produces(CommonParams.JSON)
+  @Operation(
+      summary = "Retrieves technical service",
+      tags = {"technicalservices"},
+      description = "Returns technical services based on given id",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Technical service",
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    examples = {
+                      @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_EXAMPLE_RESPONSE)
+                    },
+                    schema = @Schema(implementation = TechnicalServiceRepresentation.class)))
+      })
+  public Response getTechnicalService(
+      @Context UriInfo uriInfo,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.TECHNICAL_SERVICE_ID) @PathParam(value = "id")
+          long id)
+      throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    params.setId(id);
+    return get(uriInfo, tsb.get(), params, true);
+  }
 
   @GET
   @Since(CommonParams.VERSION_1)

@@ -9,14 +9,7 @@
  */
 package org.oscm.rest.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.Lists;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +23,14 @@ import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TechnicalServiceBackendTest {
@@ -63,11 +64,24 @@ public class TechnicalServiceBackendTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.OK.getStatusCode());
     assertThat(response)
-        .extracting(
-            r -> {
-              return ((RepresentationCollection) r.getEntity()).getItems().size();
-            })
+        .extracting(r -> ((RepresentationCollection) r.getEntity()).getItems().size())
         .isEqualTo(1);
+  }
+
+  @Test
+  @SneakyThrows
+  public void shouldGetTechnicalService() {
+    VOTechnicalService technicalService = new VOTechnicalService();
+    technicalService.setKey(parameters.getId());
+    when(service.getTechnicalServices(any())).thenReturn(Lists.newArrayList(technicalService));
+
+    Response response =
+        resource.getTechnicalService(uriInfo, parameters.getEndpointVersion(), parameters.getId());
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
   }
 
   @Test
