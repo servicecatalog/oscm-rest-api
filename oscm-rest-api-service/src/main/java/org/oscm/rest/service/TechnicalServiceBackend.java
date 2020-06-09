@@ -15,11 +15,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
+import org.oscm.internal.types.exception.DomainObjectException;
+import org.oscm.internal.types.exception.ObjectNotFoundException;
+import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.SettingRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.OperationParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Stateless
@@ -36,6 +41,22 @@ public class TechnicalServiceBackend {
       Collection<TechnicalServiceRepresentation> list =
           TechnicalServiceRepresentation.toCollection(technicalServices);
       return new RepresentationCollection<>(list);
+    };
+  }
+
+  public RestBackend.Get<TechnicalServiceRepresentation, ServiceParameters> get() {
+    return params -> {
+      List<VOTechnicalService> technicalServices =
+          sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+      for (VOTechnicalService technicalService : technicalServices) {
+        if (params.getId().equals(technicalService.getKey())) {
+          return new TechnicalServiceRepresentation(technicalService);
+        }
+      }
+
+      throw new ObjectNotFoundException(
+          DomainObjectException.ClassEnum.TECHNICAL_SERVICE, String.valueOf(params.getId()));
     };
   }
 

@@ -88,6 +88,32 @@ public class TechnicalServiceResourceTest {
   }
 
   @Test
+  public void shouldGetTechnicalService() {
+    when(technicalServiceBackend.get())
+        .thenReturn(serviceParameters -> technicalServiceRepresentation);
+
+    try {
+      response =
+          technicalServiceResource.getTechnicalService(
+              uriInfo, serviceParameters.getEndpointVersion(), serviceParameters.getId());
+    } catch (Exception e) {
+      fail(e);
+    }
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
+    assertThat(response)
+        .extracting(
+            r -> {
+              return (TechnicalServiceRepresentation) r.getEntity();
+            })
+        .isEqualTo(technicalServiceRepresentation);
+  }
+
+  @Test
   public void shouldCreateTechnicalService() {
     when(technicalServiceBackend.post())
         .thenReturn((serviceDetailsRepresentation1, serviceParameters1) -> true);
