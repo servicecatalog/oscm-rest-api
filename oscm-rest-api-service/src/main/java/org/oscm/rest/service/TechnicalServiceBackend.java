@@ -17,14 +17,11 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
-import org.oscm.internal.vo.VOConfigurationSetting;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
-import org.oscm.rest.common.representation.SettingRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
-import org.oscm.rest.common.requestparameters.OperationParameters;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Stateless
