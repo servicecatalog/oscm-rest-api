@@ -28,6 +28,7 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
@@ -42,11 +43,13 @@ public class TechnicalServiceResourceTest {
 
   private Response response;
   private TechnicalServiceRepresentation technicalServiceRepresentation;
+  private TechnicalServiceImportRepresentation technicalServiceImportRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
 
   @BeforeEach
   public void setUp() {
+    technicalServiceImportRepresentation = SampleTestDataUtility.createTSImportRepresentation();
     technicalServiceRepresentation = SampleTestDataUtility.createTSRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
@@ -152,5 +155,26 @@ public class TechnicalServiceResourceTest {
         .extracting(Response::getStatus)
         .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     assertThat(response).extracting(Response::hasEntity).isEqualTo(false);
+  }
+
+  @Test
+  public void shouldImportTechnicalService() {
+    when(technicalServiceBackend.importFromXml())
+        .thenReturn((importRepresentation, serviceParameters) -> true);
+
+    try {
+      response =
+          technicalServiceResource.importTechnicalService(
+              uriInfo,
+              serviceParameters.getEndpointVersion(),
+              technicalServiceImportRepresentation);
+    } catch (Exception e) {
+      fail(e);
+    }
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
   }
 }
