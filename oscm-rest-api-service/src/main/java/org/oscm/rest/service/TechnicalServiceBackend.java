@@ -9,10 +9,13 @@
  */
 package org.oscm.rest.service;
 
+import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.Response;
+
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException;
@@ -21,6 +24,7 @@ import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
@@ -71,6 +75,15 @@ public class TechnicalServiceBackend {
           .createdObjectId(String.valueOf(ts.getKey()))
           .createdObjectName(ts.getTechnicalServiceId())
           .build();
+    };
+  }
+
+  public RestBackend.Put<TechnicalServiceImportRepresentation, ServiceParameters> importFromXml() {
+    return (content, params) -> {
+
+      byte[] bytes = content.getTechnicalServiceXml().getBytes("UTF-8");
+      String s = sps.importTechnicalServices(bytes);
+      return true;
     };
   }
 }

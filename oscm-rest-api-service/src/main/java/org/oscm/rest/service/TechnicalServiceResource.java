@@ -30,6 +30,7 @@ import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
@@ -168,4 +169,44 @@ public class TechnicalServiceResource extends RestResource {
     params.setId(Long.valueOf(id));
     return delete(uriInfo, tsb.delete(), params);
   }
+
+    @PUT
+    @Path("/import")
+    @Since(CommonParams.VERSION_1)
+    @Operation(
+            summary = "Imports a technical service",
+            tags = {"technicalservices"},
+            description = "Imports a technical service based on given xml content",
+            requestBody =
+            @RequestBody(
+                    description = "JSON representing technical service object to be imported",
+                    required = true,
+                    content =
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = TechnicalServiceImportRepresentation.class),
+                            examples = {
+                                    @ExampleObject(
+                                            name = CommonConstants.EXAMPLE_REQUEST_BODY_DESCRIPTION,
+                                            value = ServiceConstants.TECHNICAL_SERVICE_IMPORT_EXAMPLE_BODY,
+                                            summary = CommonConstants.EXAMPLE_REQUEST_BODY_SUMMARY)
+                            })),
+            responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "Technical service imported successfully")
+            })
+    public Response importTechnicalService(
+            @Context UriInfo uriInfo,
+            @Parameter(description = DocDescription.ENDPOINT_VERSION)
+            @DefaultValue("v1")
+            @PathParam(value = "version")
+                    String version,
+            TechnicalServiceImportRepresentation content)
+            throws Exception {
+        ServiceParameters params = new ServiceParameters();
+        params.setEndpointVersion(version);
+        params.setId(0L);
+        return put(uriInfo, tsb.importFromXml(), content, params);
+    }
 }

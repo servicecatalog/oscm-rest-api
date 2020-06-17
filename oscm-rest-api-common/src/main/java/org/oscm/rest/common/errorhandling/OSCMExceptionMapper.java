@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
+import org.oscm.internal.types.exception.ImportException;
 import org.oscm.internal.types.exception.SaaSApplicationException;
 
 /**
@@ -43,6 +44,10 @@ public class OSCMExceptionMapper implements ExceptionMapper<SaaSApplicationExcep
       case "MarketplaceValidationException":
       case "PaymentInformationException":
         response = ErrorResponse.provider().build().badRequest(exceptionMessage);
+        break;
+      case "ImportException":
+        String details = ((ImportException) e).getDetails();
+        response = ErrorResponse.provider().build().badRequest(exceptionMessage + ":" + details);
         break;
       case "OrganizationAuthorityException":
         if (exceptionMessage.contains("Creation of organization failed")) {
