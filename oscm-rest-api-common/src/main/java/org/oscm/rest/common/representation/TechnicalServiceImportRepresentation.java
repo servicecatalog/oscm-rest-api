@@ -7,14 +7,12 @@
  *
  * <p>*****************************************************************************
  */
-
 package org.oscm.rest.common.representation;
 
+import javax.ws.rs.WebApplicationException;
 import lombok.Getter;
 import lombok.Setter;
 import org.oscm.rest.common.validator.RequiredFieldValidator;
-
-import javax.ws.rs.WebApplicationException;
 
 @Getter
 @Setter

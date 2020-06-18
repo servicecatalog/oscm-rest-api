@@ -361,7 +361,8 @@ public class SampleTestDataUtility {
   }
 
   public static TechnicalServiceImportRepresentation createTSImportRepresentation() {
-    TechnicalServiceImportRepresentation tsImportRepresentation = new TechnicalServiceImportRepresentation();
+    TechnicalServiceImportRepresentation tsImportRepresentation =
+        new TechnicalServiceImportRepresentation();
     tsImportRepresentation.setTechnicalServiceXml("tsXml");
     return tsImportRepresentation;
   }
