@@ -9,14 +9,7 @@
  */
 package org.oscm.rest.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-
 import com.google.common.collect.Lists;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +21,17 @@ import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.RepresentationCollection;
+import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TechnicalServiceBackendTest {
@@ -40,6 +42,7 @@ public class TechnicalServiceBackendTest {
   private UriInfo uriInfo;
   private ServiceParameters parameters;
   private TechnicalServiceRepresentation representation;
+  private TechnicalServiceImportRepresentation importRepresentation;
 
   @BeforeEach
   public void setUp() {
@@ -47,6 +50,7 @@ public class TechnicalServiceBackendTest {
     uriInfo = SampleTestDataUtility.createUriInfo();
     parameters = SampleTestDataUtility.createServiceParameters();
     representation = SampleTestDataUtility.createTSRepresentation();
+    importRepresentation = SampleTestDataUtility.createTSImportRepresentation();
     resource.setTsb(backend);
   }
 
@@ -105,6 +109,21 @@ public class TechnicalServiceBackendTest {
     Response response =
         resource.deleteTechnicalService(
             uriInfo, parameters.getEndpointVersion(), parameters.getId().toString());
+
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
+  }
+
+  @Test
+  @SneakyThrows
+  public void shouldImportTechnicalService() {
+    when(service.importTechnicalServices(any())).thenReturn("");
+
+    Response response =
+        resource.importTechnicalService(
+            uriInfo, parameters.getEndpointVersion(), importRepresentation);
 
     assertThat(response).isNotNull();
     assertThat(response)

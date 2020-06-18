@@ -360,6 +360,12 @@ public class SampleTestDataUtility {
     return new TechnicalServiceRepresentation();
   }
 
+  public static TechnicalServiceImportRepresentation createTSImportRepresentation() {
+    TechnicalServiceImportRepresentation tsImportRepresentation = new TechnicalServiceImportRepresentation();
+    tsImportRepresentation.setTechnicalServiceXml("tsXml");
+    return tsImportRepresentation;
+  }
+
   public static ServiceRepresentation createServiceRepresentation() {
     ServiceRepresentation serviceRepresentation = new ServiceRepresentation();
     serviceRepresentation.setVersion(TestContants.INTEGER_VALUE);

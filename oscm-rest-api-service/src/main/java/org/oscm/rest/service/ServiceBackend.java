@@ -128,68 +128,6 @@ public class ServiceBackend {
     };
   }
 
-  /*  private void prepareForUpdate(VOServiceDetails service, ServiceUpdateRepresentation content) {
-
-    String serviceId = content.getServiceId();
-    if (StringUtils.isNotBlank(serviceId)) {
-      RequiredFieldValidator validator = new RequiredFieldValidator();
-      validator.validateNotBlank("serviceId", serviceId);
-      service.setServiceId(serviceId);
-    }
-
-    String name = content.getName();
-    if (StringUtils.isNotBlank(name)) {
-      service.setName(name);
-    }
-    String description = content.getDescription();
-    if (StringUtils.isNotBlank(description)) {
-      service.setDescription(description);
-    }
-    String shortDescription = content.getShortDescription();
-    if (StringUtils.isNotBlank(shortDescription)) {
-      service.setShortDescription(shortDescription);
-    }
-    String configuratorUrl = content.getConfiguratorUrl();
-    if (StringUtils.isNotBlank(configuratorUrl)) {
-      service.setConfiguratorUrl(configuratorUrl);
-    }
-    String customTabName = content.getCustomTabName();
-    if (StringUtils.isNotBlank(customTabName)) {
-      service.setCustomTabName(customTabName);
-    }
-    String customTabUrl = content.getCustomTabUrl();
-    if (StringUtils.isNotBlank(customTabUrl)) {
-      service.setCustomTabUrl(customTabUrl);
-    }
-    List<VOParameter> serviceParameters = service.getParameters();
-    List<ServiceParameterRepresentation> requestedParameters = content.getParameters();
-
-    requestedParameters.forEach(
-        parameter -> {
-          String parameterId = parameter.getParameterId();
-          Optional<VOParameter> foundParameter =
-              serviceParameters.stream()
-                  .filter(
-                      serviceParameter ->
-                          serviceParameter
-                              .getParameterDefinition()
-                              .getParameterId()
-                              .equals(parameterId))
-                  .findFirst();
-
-          if (foundParameter.isPresent()) {
-            VOParameter serviceParameter = foundParameter.get();
-            serviceParameter.setConfigurable(parameter.isConfigurable());
-            serviceParameter.setValue(parameter.getValue());
-
-            if (!serviceParameter.isConfigurable()) {
-              parameterValidator.validate(
-                  serviceParameter.getParameterDefinition(), serviceParameter.getValue());
-            }
-          }
-        });
-  }*/
-
   public RestBackend.Get<ServiceDetailsRepresentation, ServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
