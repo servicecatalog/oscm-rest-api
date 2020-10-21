@@ -10,12 +10,13 @@
 package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Lists;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,8 @@ import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+import com.google.common.collect.Lists;
+
 @ExtendWith(MockitoExtension.class)
 public class TechnicalServiceResourceTest {
 
@@ -40,6 +43,27 @@ public class TechnicalServiceResourceTest {
   @Mock private ServiceProvisioningService serviceProvisioningService;
 
   @InjectMocks @Spy TechnicalServiceResource technicalServiceResource;
+
+  private String TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE =
+      "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+          + "  <tns:TechnicalServices xmlns:tns=\"oscm.serviceprovisioning/1.9/TechnicalService.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"oscm.serviceprovisioning/1.9/TechnicalService.xsd ../../oscm-serviceprovisioning/javares/TechnicalServices.xsd\">\n"
+          + "    <tns:TechnicalService accessType=\"DIRECT\" allowingOnBehalfActing=\"false\" baseUrl=\"\" billingIdentifier=\"NATIVE_BILLING\" build=\"2019.12.13\" id=\"AppSampleService\" loginPath=\"/Dynamically provided.\" onlyOneSubscriptionPerUser=\"false\" provisioningPassword=\"\" provisioningType=\"ASYNCHRONOUS\" provisioningUrl=\"http://oscm-app:8880/oscm-app/webservices/oscm-app/oscm-app/org.oscm.app.v2_0.service.AsynchronousProvisioningProxy?wsdl\" provisioningUsername=\"\" provisioningVersion=\"1.0\">\n"
+          + "      <AccessInfo locale=\"en\">Description of how to access the application.</AccessInfo>\n"
+          + "      <LocalizedDescription locale=\"en\">Sample APP implementation.</LocalizedDescription>\n"
+          + "      <LocalizedDescription locale=\"de\">Sample APP Implementierung.</LocalizedDescription>\n"
+          + "      <LocalizedLicense locale=\"en\"/>\n"
+          + "      <ParameterDefinition configurable=\"true\" id=\"PARAM_PWD\" mandatory=\"true\" valueType=\"PWD\">\n"
+          + "        <LocalizedDescription locale=\"en\">IAAS password</LocalizedDescription>\n"
+          + "        <LocalizedDescription locale=\"de\"/>\n"
+          + "        <LocalizedDescription locale=\"ja\"/>\n"
+          + "      </ParameterDefinition>\n"
+          + "      <ParameterDefinition configurable=\"true\" id=\"CSSSTYLE\" mandatory=\"false\" valueType=\"STRING\">\n"
+          + "        <LocalizedDescription locale=\"en\">Inline CSS for Email Notification</LocalizedDescription>\n"
+          + "        <LocalizedDescription locale=\"de\"/>\n"
+          + "        <LocalizedDescription locale=\"ja\"/>\n"
+          + "      </ParameterDefinition>\n"
+          + "    </tns:TechnicalService>\n"
+          + "  </tns:TechnicalServices>";
 
   private Response response;
   private TechnicalServiceRepresentation technicalServiceRepresentation;
@@ -88,6 +112,35 @@ public class TechnicalServiceResourceTest {
               return representationCollection.getItems().toArray()[0];
             })
         .isEqualTo(technicalServiceRepresentation);
+  }
+
+  @Test
+  public void shouldGetTechnicalServicesXML() throws Exception {
+
+    // given
+    when(technicalServiceBackend.getXMLCollection())
+        .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
+
+    // when
+    byte[] service =
+        technicalServiceResource.getTechnicalServicesXML(serviceParameters.getEndpointVersion());
+
+    // then
+    assertArrayEquals(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), service);
+  }
+
+  @Test
+  public void shouldGetTechnicalServiceXML() throws Exception {
+    // given
+    when(technicalServiceBackend.getXML(0l))
+        .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
+
+    // when
+    byte[] service =
+        technicalServiceResource.getTechnicalServiceXML(serviceParameters.getEndpointVersion(), 0);
+
+    // then
+    assertArrayEquals(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), service);
   }
 
   @Test

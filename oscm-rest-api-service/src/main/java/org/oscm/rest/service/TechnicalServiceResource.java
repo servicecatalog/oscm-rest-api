@@ -9,6 +9,28 @@
  */
 package org.oscm.rest.service;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.oscm.rest.common.CommonParams;
+import org.oscm.rest.common.RestResource;
+import org.oscm.rest.common.Since;
+import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.requestparameters.ServiceParameters;
+
 import constants.CommonConstants;
 import constants.DocDescription;
 import constants.ServiceConstants;
@@ -19,20 +41,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.oscm.rest.common.CommonParams;
-import org.oscm.rest.common.RestResource;
-import org.oscm.rest.common.Since;
-import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
-import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
-import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
@@ -106,6 +116,64 @@ public class TechnicalServiceResource extends RestResource {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
     return getCollection(uriInfo, tsb.getCollection(), params);
+  }
+
+  @GET
+  @Since(CommonParams.VERSION_1)
+  @Path(CommonParams.PATH_ID + "/xml")
+  @Produces(MediaType.APPLICATION_XML)
+  @Operation(
+      summary = "Retrieves technical service as xml",
+      tags = {"technicalservices"},
+      description = "Returns technical service as xml based on given id",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Technical service",
+            content =
+                @Content(
+                    mediaType = MediaType.APPLICATION_XML,
+                    examples = {
+                      @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE)
+                    }))
+      })
+  public byte[] getTechnicalServiceXML(
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.TECHNICAL_SERVICE_ID) @PathParam(value = "id")
+          long id)
+      throws Exception {
+    return tsb.getXML(id);
+  }
+
+  @GET
+  @Path("/xml")
+  @Since(CommonParams.VERSION_1)
+  @Produces(MediaType.APPLICATION_XML)
+  @Operation(
+      summary = "Retrieves all available technical services in xml",
+      tags = {"technicalservices"},
+      description = "Returns all available technical services in xml",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Technical services list",
+            content =
+                @Content(
+                    mediaType = MediaType.APPLICATION_XML,
+                    examples = {
+                      @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE)
+                    }))
+      })
+  public byte[] getTechnicalServicesXML(
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
+      throws Exception {
+    return tsb.getXMLCollection();
   }
 
   @POST

@@ -12,12 +12,16 @@ package org.oscm.rest.service;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
+import org.oscm.internal.types.exception.OperationNotPermittedException;
+import org.oscm.internal.types.exception.OrganizationAuthoritiesException;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
@@ -25,6 +29,8 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
+
+import com.google.common.collect.Lists;
 
 @Stateless
 public class TechnicalServiceBackend {
@@ -74,6 +80,29 @@ public class TechnicalServiceBackend {
           .createdObjectName(ts.getTechnicalServiceId())
           .build();
     };
+  }
+
+  public byte[] getXML(Long id)
+      throws ObjectNotFoundException, OrganizationAuthoritiesException,
+          OperationNotPermittedException {
+    List<VOTechnicalService> technicalServices =
+        sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+    for (VOTechnicalService technicalService : technicalServices) {
+      if (id.equals(technicalService.getKey())) {
+        return sps.exportTechnicalServices(Lists.newArrayList(technicalService));
+      }
+    }
+    throw new ObjectNotFoundException(
+        DomainObjectException.ClassEnum.TECHNICAL_SERVICE, String.valueOf(id));
+  }
+
+  public byte[] getXMLCollection()
+      throws OrganizationAuthoritiesException, ObjectNotFoundException,
+          OperationNotPermittedException {
+    List<VOTechnicalService> technicalServices =
+        sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+    return sps.exportTechnicalServices(technicalServices);
   }
 
   public RestBackend.Put<TechnicalServiceImportRepresentation, ServiceParameters> importFromXml() {
