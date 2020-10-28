@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -55,7 +56,7 @@ public class TechnicalServiceResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
-  @Produces(CommonParams.JSON)
+  @Produces({CommonParams.JSON, MediaType.APPLICATION_XML})
   @Operation(
       summary = "Retrieves technical service",
       tags = {"technicalservices"},
@@ -74,6 +75,7 @@ public class TechnicalServiceResource extends RestResource {
       })
   public Response getTechnicalService(
       @Context UriInfo uriInfo,
+      @Context HttpHeaders headers,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
@@ -81,6 +83,10 @@ public class TechnicalServiceResource extends RestResource {
       @Parameter(description = DocDescription.TECHNICAL_SERVICE_ID) @PathParam(value = "id")
           long id)
       throws Exception {
+    if (headers.getMediaType() != null
+        && headers.getMediaType().toString().equals(MediaType.APPLICATION_XML)) {
+      return tsb.getXML(id);
+    }
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
     params.setId(id);
@@ -89,7 +95,7 @@ public class TechnicalServiceResource extends RestResource {
 
   @GET
   @Since(CommonParams.VERSION_1)
-  @Produces(CommonParams.JSON)
+  @Produces({CommonParams.JSON, MediaType.APPLICATION_XML})
   @Operation(
       summary = "Retrieves all available technical services",
       tags = {"technicalservices"},
@@ -108,72 +114,19 @@ public class TechnicalServiceResource extends RestResource {
       })
   public Response getTechnicalServices(
       @Context UriInfo uriInfo,
+      @Context HttpHeaders headers,
       @Parameter(description = DocDescription.ENDPOINT_VERSION)
           @DefaultValue("v1")
           @PathParam(value = "version")
           String version)
       throws Exception {
+    if (headers.getMediaType() != null
+        && headers.getMediaType().toString().equals(MediaType.APPLICATION_XML)) {
+      return tsb.getXMLCollection();
+    }
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
     return getCollection(uriInfo, tsb.getCollection(), params);
-  }
-
-  @GET
-  @Since(CommonParams.VERSION_1)
-  @Path(CommonParams.PATH_ID + "/xml")
-  @Produces(MediaType.APPLICATION_XML)
-  @Operation(
-      summary = "Retrieves technical service as xml",
-      tags = {"technicalservices"},
-      description = "Returns technical service as xml based on given id",
-      responses = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Technical service",
-            content =
-                @Content(
-                    mediaType = MediaType.APPLICATION_XML,
-                    examples = {
-                      @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE)
-                    }))
-      })
-  public byte[] getTechnicalServiceXML(
-      @Parameter(description = DocDescription.ENDPOINT_VERSION)
-          @DefaultValue("v1")
-          @PathParam(value = "version")
-          String version,
-      @Parameter(description = DocDescription.TECHNICAL_SERVICE_ID) @PathParam(value = "id")
-          long id)
-      throws Exception {
-    return tsb.getXML(id);
-  }
-
-  @GET
-  @Path("/xml")
-  @Since(CommonParams.VERSION_1)
-  @Produces(MediaType.APPLICATION_XML)
-  @Operation(
-      summary = "Retrieves all available technical services in xml",
-      tags = {"technicalservices"},
-      description = "Returns all available technical services in xml",
-      responses = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Technical services list",
-            content =
-                @Content(
-                    mediaType = MediaType.APPLICATION_XML,
-                    examples = {
-                      @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE)
-                    }))
-      })
-  public byte[] getTechnicalServicesXML(
-      @Parameter(description = DocDescription.ENDPOINT_VERSION)
-          @DefaultValue("v1")
-          @PathParam(value = "version")
-          String version)
-      throws Exception {
-    return tsb.getXMLCollection();
   }
 
   @POST

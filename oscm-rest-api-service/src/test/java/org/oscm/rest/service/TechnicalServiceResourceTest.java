@@ -10,10 +10,12 @@
 package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -23,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ServiceProvisioningService;
@@ -39,6 +42,7 @@ import com.google.common.collect.Lists;
 public class TechnicalServiceResourceTest {
 
   @Mock private TechnicalServiceBackend technicalServiceBackend;
+  @Mock HttpHeaders headers;
 
   @Mock private ServiceProvisioningService serviceProvisioningService;
 
@@ -94,7 +98,7 @@ public class TechnicalServiceResourceTest {
     try {
       response =
           technicalServiceResource.getTechnicalServices(
-              uriInfo, serviceParameters.getEndpointVersion());
+              uriInfo, headers, serviceParameters.getEndpointVersion());
     } catch (Exception e) {
       fail(e);
     }
@@ -119,28 +123,51 @@ public class TechnicalServiceResourceTest {
 
     // given
     when(technicalServiceBackend.getXMLCollection())
-        .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
+        .thenReturn(
+            Response.ok(
+                    TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), MediaType.APPLICATION_XML)
+                .build());
+    MediaType type = Mockito.mock(MediaType.class);
+    when(headers.getMediaType()).thenReturn(type);
+    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
 
     // when
-    byte[] service =
-        technicalServiceResource.getTechnicalServicesXML(serviceParameters.getEndpointVersion());
+    response =
+        technicalServiceResource.getTechnicalServices(
+            uriInfo, headers, serviceParameters.getEndpointVersion());
 
     // then
-    assertArrayEquals(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), service);
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
   }
 
   @Test
   public void shouldGetTechnicalServiceXML() throws Exception {
     // given
-    when(technicalServiceBackend.getXML(0l))
-        .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
+    when(technicalServiceBackend.getXML(anyLong()))
+        .thenReturn(
+            Response.ok(
+                    TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), MediaType.APPLICATION_XML)
+                .build());
+
+    MediaType type = Mockito.mock(MediaType.class);
+    when(headers.getMediaType()).thenReturn(type);
+    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
 
     // when
-    byte[] service =
-        technicalServiceResource.getTechnicalServiceXML(serviceParameters.getEndpointVersion(), 0);
+    response =
+        technicalServiceResource.getTechnicalService(
+            uriInfo, headers, serviceParameters.getEndpointVersion(), serviceParameters.getId());
 
     // then
-    assertArrayEquals(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), service);
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
+    assertThat(response).extracting(Response::hasEntity).isEqualTo(true);
   }
 
   @Test
@@ -151,7 +178,7 @@ public class TechnicalServiceResourceTest {
     try {
       response =
           technicalServiceResource.getTechnicalService(
-              uriInfo, serviceParameters.getEndpointVersion(), serviceParameters.getId());
+              uriInfo, headers, serviceParameters.getEndpointVersion(), serviceParameters.getId());
     } catch (Exception e) {
       fail(e);
     }

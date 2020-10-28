@@ -10,11 +10,12 @@
 package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
@@ -40,6 +42,7 @@ import lombok.SneakyThrows;
 public class TechnicalServiceBackendTest {
 
   @Mock private ServiceProvisioningService service;
+  @Mock HttpHeaders headers;
   @InjectMocks private TechnicalServiceBackend backend;
   private TechnicalServiceResource resource;
   private UriInfo uriInfo;
@@ -84,7 +87,8 @@ public class TechnicalServiceBackendTest {
     when(service.getTechnicalServices(any()))
         .thenReturn(Lists.newArrayList(new VOTechnicalService()));
 
-    Response response = resource.getTechnicalServices(uriInfo, parameters.getEndpointVersion());
+    Response response =
+        resource.getTechnicalServices(uriInfo, headers, parameters.getEndpointVersion());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -103,7 +107,8 @@ public class TechnicalServiceBackendTest {
     when(service.getTechnicalServices(any())).thenReturn(Lists.newArrayList(technicalService));
 
     Response response =
-        resource.getTechnicalService(uriInfo, parameters.getEndpointVersion(), parameters.getId());
+        resource.getTechnicalService(
+            uriInfo, headers, parameters.getEndpointVersion(), parameters.getId());
 
     assertThat(response).isNotNull();
     assertThat(response)
@@ -119,13 +124,20 @@ public class TechnicalServiceBackendTest {
     when(service.getTechnicalServices(any())).thenReturn(Lists.newArrayList(technicalService));
     when(service.exportTechnicalServices(any()))
         .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
+    MediaType type = Mockito.mock(MediaType.class);
+    when(headers.getMediaType()).thenReturn(type);
+    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
 
     // when
-    byte[] response =
-        resource.getTechnicalServiceXML(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE, parameters.getId());
+    Response response =
+        resource.getTechnicalService(
+            uriInfo, headers, parameters.getEndpointVersion(), parameters.getId());
 
     // then
-    assertArrayEquals(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), response);
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
   }
 
   @Test
@@ -135,12 +147,19 @@ public class TechnicalServiceBackendTest {
     when(service.getTechnicalServices(any())).thenReturn(Lists.newArrayList(technicalService));
     when(service.exportTechnicalServices(any()))
         .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
+    MediaType type = Mockito.mock(MediaType.class);
+    when(headers.getMediaType()).thenReturn(type);
+    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
 
     // when
-    byte[] response = resource.getTechnicalServicesXML(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE);
+    Response response =
+        resource.getTechnicalServices(uriInfo, headers, parameters.getEndpointVersion());
 
     // then
-    assertArrayEquals(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), response);
+    assertThat(response).isNotNull();
+    assertThat(response)
+        .extracting(Response::getStatus)
+        .isEqualTo(Response.Status.OK.getStatusCode());
   }
 
   @Test
