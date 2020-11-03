@@ -11,6 +11,16 @@ package org.oscm.rest.service;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 
+import constants.CommonConstants;
+import constants.DocDescription;
+import constants.ServiceConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.DELETE;
@@ -25,26 +35,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.oscm.rest.common.CommonParams;
 import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-
-import constants.CommonConstants;
-import constants.DocDescription;
-import constants.ServiceConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.AccessLevel;
-import lombok.Setter;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
 @Stateless
