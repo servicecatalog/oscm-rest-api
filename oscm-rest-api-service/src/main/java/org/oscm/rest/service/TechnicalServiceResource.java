@@ -9,6 +9,8 @@
  */
 package org.oscm.rest.service;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_XML;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.DELETE;
@@ -21,7 +23,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -56,7 +57,7 @@ public class TechnicalServiceResource extends RestResource {
   @GET
   @Since(CommonParams.VERSION_1)
   @Path(CommonParams.PATH_ID)
-  @Produces({CommonParams.JSON, MediaType.APPLICATION_XML})
+  @Produces({CommonParams.JSON, APPLICATION_XML})
   @Operation(
       summary = "Retrieves technical service",
       tags = {"technicalservices"},
@@ -84,7 +85,7 @@ public class TechnicalServiceResource extends RestResource {
           long id)
       throws Exception {
     if (headers.getMediaType() != null
-        && headers.getMediaType().toString().equals(MediaType.APPLICATION_XML)) {
+        && APPLICATION_XML.equals(headers.getMediaType().toString())) {
       return tsb.getXML(id);
     }
     ServiceParameters params = new ServiceParameters();
@@ -95,7 +96,7 @@ public class TechnicalServiceResource extends RestResource {
 
   @GET
   @Since(CommonParams.VERSION_1)
-  @Produces({CommonParams.JSON, MediaType.APPLICATION_XML})
+  @Produces({CommonParams.JSON, APPLICATION_XML})
   @Operation(
       summary = "Retrieves all available technical services",
       tags = {"technicalservices"},
@@ -121,7 +122,7 @@ public class TechnicalServiceResource extends RestResource {
           String version)
       throws Exception {
     if (headers.getMediaType() != null
-        && headers.getMediaType().toString().equals(MediaType.APPLICATION_XML)) {
+        && APPLICATION_XML.equals(headers.getMediaType().toString())) {
       return tsb.getXMLCollection();
     }
     ServiceParameters params = new ServiceParameters();
