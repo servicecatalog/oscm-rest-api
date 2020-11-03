@@ -12,12 +12,19 @@ package org.oscm.rest.service;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException;
 import org.oscm.internal.types.exception.ObjectNotFoundException;
+import org.oscm.internal.types.exception.OperationNotPermittedException;
+import org.oscm.internal.types.exception.OrganizationAuthoritiesException;
 import org.oscm.internal.vo.VOTechnicalService;
 import org.oscm.rest.common.PostResponseBody;
 import org.oscm.rest.common.RestBackend;
@@ -74,6 +81,34 @@ public class TechnicalServiceBackend {
           .createdObjectName(ts.getTechnicalServiceId())
           .build();
     };
+  }
+
+  @Produces(MediaType.APPLICATION_XML)
+  public Response getXML(Long id)
+      throws ObjectNotFoundException, OrganizationAuthoritiesException,
+          OperationNotPermittedException {
+    List<VOTechnicalService> technicalServices =
+        sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+    for (VOTechnicalService technicalService : technicalServices) {
+      if (id.equals(technicalService.getKey())) {
+        byte[] b = sps.exportTechnicalServices(technicalServices);
+        return Response.ok(b, MediaType.APPLICATION_XML).build();
+      }
+    }
+    throw new ObjectNotFoundException(
+        DomainObjectException.ClassEnum.TECHNICAL_SERVICE, String.valueOf(id));
+  }
+
+  @Produces(MediaType.APPLICATION_XML)
+  public Response getXMLCollection()
+      throws OrganizationAuthoritiesException, ObjectNotFoundException,
+          OperationNotPermittedException {
+    List<VOTechnicalService> technicalServices =
+        sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+    byte[] b = sps.exportTechnicalServices(technicalServices);
+    return Response.ok(b, MediaType.APPLICATION_XML).build();
   }
 
   public RestBackend.Put<TechnicalServiceImportRepresentation, ServiceParameters> importFromXml() {
