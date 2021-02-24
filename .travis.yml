@@ -1,12 +1,11 @@
-language: java
 sudo: required
-dist: trusty
+dist: xenial
 
 cache:
   directories:
     - $HOME/.m2
-    - $TRAVIS_BUILD_DIR/libraries
     - $HOME/.sonar/cache
+    - $TRAVIS_BUILD_DIR/libraries
 env:
   - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info mvn org.jacoco:jacoco-maven-plugin:prepare-agent $MVN_GOAL -q -fae -Dmaven.javadoc.skip=true -DfailIfNoTests=false -B -P travis
 
