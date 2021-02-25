@@ -15,7 +15,7 @@ addons:
     token:
       secure: "WIaBgjCNjzEcEM9/q1xWf3JKvfXqsxacHGaY1iXH9zQu9kGDT2zw6ptSsSmikMa1THWQrJHOWdaMHEYcjq9Icgw6v/cy22N7n5MrLIFibc+QhoNrULdSRldt1UOrYgf4iXe8engLKyzzyS5CqfD7bcrqz82juzNcv31FErFNTtFKXSQPtH0zwv6quJQaY6X1feAdyodJMovLR9TVqHDlfUa6Mbccu/zi1q+C/6WWZ5PVivd+DIzCyYu7VFLQVJxPyYVmsrWSXXlFQYbiHdOmFX2BaZiCbfKhCIFq3NGke/Bav7UWstVeg0V01tsTrDbw4Y7vUwuRWT9ERuX+V+R2emGyPA+IXMejdxh1hV9FaYRV9Bz7jwToKUsAjIHpMUrwNpGlqy7QhpX0VLm+0ToZawBpUaOkk43ZXlMfJdeEsfEbrQyUsVEQNWc61dIP2cGDaw2162Bdrl3UEbXCoZ5ZEZrYUtt1RT7fDBBOW2f+icaFPt+BidssBKd2TvPBIXAkltioMegsq0jtCnKypR1ahfIP6brM+J2b9jfajqUrohAxRq5Ih3KsuobDOvcBpo+QaqNgdfcIrlRRLV4JFDb66XB6QIf4ycvAFo/cVFrLVqM182aDc3FflzIiOzRj10TXK+st84EJifKhWkIZ5FIkcDONOsbKEhItN8WcfLv3rSQ="
     branches:
-      - master
+      - Task#53_Add_sonarcloud
 
 jobs:
   include:
