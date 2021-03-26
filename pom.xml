@@ -43,10 +43,6 @@
         <swagger.jaxrs2.version>2.0.9</swagger.jaxrs2.version>
 
         <oscm.intf.internal.version>master-SNAPSHOT</oscm.intf.internal.version>
-
-        <sonar.projectKey>servicecatalog_oscm-rest-api</sonar.projectKey>
-        <sonar.organization>openservicecatalogmanager</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io/sonar.host.url</sonar.host.url>
     </properties>
 
     <modules>
