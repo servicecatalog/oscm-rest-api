@@ -1,15 +1,19 @@
-language: java
 sudo: required
-
-jdk:
-  - openjdk8
+dist: xenial
 
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
     - $TRAVIS_BUILD_DIR/libraries
 env:
   - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info mvn org.jacoco:jacoco-maven-plugin:prepare-agent $MVN_GOAL -q -fae -Dmaven.javadoc.skip=true -DfailIfNoTests=false -B -P travis
+
+addons:
+  sonarcloud:
+    organization: "openservicecatalogmanager"
+    token:
+      secure: "FVLjrJkKRbIMxGjoDhoAWS9Dyqm+q8ciuXl8mjB9APqTvIJhz5TRi4VUdEoVATrNJM6qVetYbLyLveNNmR2UcJsHqa93VaN2hSrg2sTpnWNKFu6nF0x6Yto5FdWp8C+uhK2gUt4+FVl/dYrl7oyKZO/dpKvyvW50yoiPjenUOVlgUCjrU4CJ/WGkSUzUrrqK8tKCXSSVETnMuPg3VHcqel2+4SUytNa5s5Grit7QnETtd/LEU0jiZmsEJJ7b/sK78U6x7VmoJuxtEsWrXOJKSfMAkyg3QGCXupAIPJFPTfWqfj2pmq/3OqtFmSvh4qFyVqieVcFVDRhWkoZaX3Jf/1Y/64nmMQWoebpTm4Vu3uP7RWGwH3PQQHBGfrlA4myv1vmnHnGo/BY5vaSzW8qyLVk4eHwFMgnQIuUzBZ0FHyDUyTXgLcnB5LehUBJFwX6jIm8+oSwvYyeKDSJfeijgLDtHDaZ6bTV5ubFxsjrmEsgwpq1bwBkTaWNocq1LhsLUwXNp0lylkuEQe7Apwm/4oGTxefqkGpL8PM0fJetOMAdqqUUHTDwVa8WflX6ejQP5BhP9VVLcwWxyldZ/gKwH5Y9Ff0lqeM0NAt+0HHwlMGmD1QURxwSPD/wujuqlSnmwq5HU+yDJAnKeYqjTy+MwmRWJB8uEJenkhFiKbi8RQvs="
 
 jobs:
   include:
@@ -18,6 +22,7 @@ jobs:
       script:
         - mvn clean test jacoco:report
         - bash <(curl -s https://codecov.io/bash)
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=servicecatalog_oscm-rest-api
     - stage: format_code
       name: Format Code
       script:
