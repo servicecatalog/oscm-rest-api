@@ -50,10 +50,10 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage-report
+          name: ${{ github.event.repository.name }}-code-coverage-report
           path: ./**/target/site/jacoco/
       - name: Archive test results
         uses: actions/upload-artifact@v2
         with:
-          name: junit reports
+          name: ${{ github.event.repository.name }}-junit-report
           path: ./**/target/surefire-reports
