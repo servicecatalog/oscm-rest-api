@@ -20,6 +20,8 @@ jobs:
         with:
            distribution: 'temurin' # See 'Supported distributions' for available options
            java-version: '8'
+      - run: |
+           chmod +x ./scripts/*.sh
       - name: Check copyright headers
         run: ./scripts/check_copyrights.sh
         shell: bash
