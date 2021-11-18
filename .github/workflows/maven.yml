@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v2
         with:
            distribution: 'temurin' # See 'Supported distributions' for available options
@@ -26,7 +28,7 @@ jobs:
       - name: Check copyright headers
         run: ./scripts/check_copyrights.sh
         env:
-           COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}
+           COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}
            COMMIT: ${{ github.event.pull_request.head.sha }}
         shell: bash
       - name: Code formatting   
