@@ -14,7 +14,7 @@ determine_files_to_process
 if [[ ! -z "$GIT_DIFF_OUTPUT" ]] ; then
     git add *.java
     git commit -m "Applied code formatting [ci skip]"
-    git push origin HEAD:$TRAVIS_BRANCH
+    git push origin HEAD:$BRANCH
 else
     echo "NOTHING TO PUSH. ABORTING..."
 fi
