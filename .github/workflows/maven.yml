@@ -52,3 +52,8 @@ jobs:
         with:
           name: code-coverage-report
           path: ./**/target/site/jacoco/
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: junit reports
+          path: ./**/target/surefire-reports
