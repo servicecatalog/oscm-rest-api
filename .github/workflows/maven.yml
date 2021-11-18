@@ -21,4 +21,8 @@ jobs:
            distribution: 'temurin' # See 'Supported distributions' for available options
            java-version: '8'
       - name: Build with Maven      
-        run: mvn clean install -f pom.xml    
+        run: mvn clean install -f pom.xml
+      - name: Surefire Report
+        uses: ScaCap/action-surefire-report@v1
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
