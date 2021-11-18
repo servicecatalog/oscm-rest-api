@@ -16,9 +16,36 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v2
         with:
            distribution: 'temurin' # See 'Supported distributions' for available options
            java-version: '8'
+        
+      - run: |
+           chmod +x ./scripts/*.sh
+      - name: Check copyright headers
+        run: ./scripts/check_copyrights.sh
+        env:
+           COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}
+           COMMIT: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+      - name: Code formatting   
+        run: ./scripts/format_code.sh
+        env:
+           COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}
+           COMMIT: ${{ github.event.pull_request.head.sha }}
+        shell: bash
       - name: Build with Maven      
-        run: mvn clean install -f pom.xml    
+        run: mvn clean install -f pom.xml
+      - name: Publish formatted code   
+        run: ./scripts/repush_formatted_code.sh
+        env:
+           COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+           COMMIT: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+      - name: Surefire Report
+        uses: ScaCap/action-surefire-report@v1
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
