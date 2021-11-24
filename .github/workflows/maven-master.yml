@@ -11,9 +11,8 @@ jobs:
   build:
 
     env:
-      COMMIT_RANGE: ${{ github.sha }}
       COMMIT: ${{ github.sha }}
-      BRANCH: ${{ github.head_ref }}
+      BRANCH: master
 
     runs-on: ubuntu-latest
 
@@ -38,9 +37,8 @@ jobs:
       - name: Publish formatted code   
         run: ./scripts/repush_formatted_code.sh
         env:
-          COMMIT_RANGE: ${{ github.sha }}
           COMMIT: ${{ github.sha }}
-          BRANCH: ${{ github.head_ref }}
+          BRANCH: master
         shell: bash
       - name: Surefire Report
         uses: ScaCap/action-surefire-report@v1
