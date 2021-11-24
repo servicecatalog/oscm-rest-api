@@ -6,7 +6,7 @@ package org.oscm.rest.account;
               private Dummy()  {
 
 
-         //       This should appear well formatted.
+         //    This should appear well formatted.
 
                                 }
   }
