@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-java@v2
         with:
            distribution: 'temurin' # See 'Supported distributions' for available options
@@ -49,8 +50,10 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}-coveragereport
           path: ./**/target/site/jacoco/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Archive test results
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}-testresults
           path: ./**/target/surefire-reports
+          github_token: ${{ secrets.GITHUB_TOKEN }}
