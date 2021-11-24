@@ -15,7 +15,6 @@ jobs:
       BRANCH: master
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-    
     runs-on: ubuntu-latest
 
 
@@ -23,8 +22,8 @@ jobs:
       - name: Find GH_TOKEN
         if: env.GH_TOKEN == ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GH_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
         with:
