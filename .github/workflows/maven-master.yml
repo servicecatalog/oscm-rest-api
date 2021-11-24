@@ -15,9 +15,17 @@ jobs:
       BRANCH: master
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+    
     runs-on: ubuntu-latest
 
+
     steps:
+      - name: Find GH_TOKEN
+        if: env.GH_TOKEN == ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -41,6 +49,7 @@ jobs:
         env:
           COMMIT: ${{ github.sha }}
           BRANCH: master
+          GH_TOKEN:  ${{ env.GH_TOKEN }}
         shell: bash
       - name: Surefire Report
         uses: ScaCap/action-surefire-report@v1
