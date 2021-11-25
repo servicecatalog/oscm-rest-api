@@ -17,14 +17,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
-
     steps:
-      - name: Find GH_TOKEN
+      - name: Setup workspace
         if: env.GH_TOKEN == ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: echo "GH_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
-
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -58,11 +56,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}-coveragereport
-          path: ./**/target/site/jacoco/
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./**/target/site/jacoco/          
       - name: Archive test results
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}-testresults
           path: ./**/target/surefire-reports
-          github_token: ${{ secrets.GITHUB_TOKEN }}
