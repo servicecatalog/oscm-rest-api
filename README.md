@@ -1,4 +1,4 @@
-[![Maven](https://github.com/servicecatalog/oscm-rest-api/actions/workflows/maven.yml/badge.svg)](https://github.com/servicecatalog/oscm-rest-api/actions)
+[![Maven](https://github.com/servicecatalog/oscm-rest-api/actions/workflows/maven-master.yml/badge.svg)](https://github.com/servicecatalog/oscm-rest-api/actions)
 [![codecov](https://codecov.io/gh/servicecatalog/oscm-rest-api/branch/master/graph/badge.svg)](https://codecov.io/gh/servicecatalog/oscm-rest-api)
 
 # oscm-rest-api
