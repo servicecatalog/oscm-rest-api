@@ -10,6 +10,7 @@
 package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -31,6 +32,7 @@ import org.oscm.rest.common.representation.OrganizationRepresentation;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+@SuppressWarnings({"rawtypes", "boxing"})
 @ExtendWith(MockitoExtension.class)
 public class TSSupplierBackendTest {
 

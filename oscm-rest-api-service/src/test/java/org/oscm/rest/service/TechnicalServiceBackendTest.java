@@ -10,22 +10,20 @@
 package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Lists;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lombok.SneakyThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.vo.VOTechnicalService;
@@ -35,6 +33,11 @@ import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+import com.google.common.collect.Lists;
+
+import lombok.SneakyThrows;
+
+@SuppressWarnings({"boxing"})
 @ExtendWith(MockitoExtension.class)
 public class TechnicalServiceBackendTest {
 
@@ -78,6 +81,7 @@ public class TechnicalServiceBackendTest {
     resource.setTsb(backend);
   }
 
+  @SuppressWarnings("rawtypes")
   @Test
   @SneakyThrows
   public void shouldGetTechnicalServices() {
@@ -119,11 +123,6 @@ public class TechnicalServiceBackendTest {
     VOTechnicalService technicalService = new VOTechnicalService();
     technicalService.setKey(parameters.getId());
     when(service.getTechnicalServices(any())).thenReturn(Lists.newArrayList(technicalService));
-    when(service.exportTechnicalServices(any()))
-        .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
-    MediaType type = Mockito.mock(MediaType.class);
-    when(headers.getMediaType()).thenReturn(type);
-    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
 
     // when
     Response response =
@@ -142,11 +141,8 @@ public class TechnicalServiceBackendTest {
     // given
     VOTechnicalService technicalService = new VOTechnicalService();
     when(service.getTechnicalServices(any())).thenReturn(Lists.newArrayList(technicalService));
-    when(service.exportTechnicalServices(any()))
-        .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
-    MediaType type = Mockito.mock(MediaType.class);
-    when(headers.getMediaType()).thenReturn(type);
-    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
+    // when(service.exportTechnicalServices(any()))
+    // .thenReturn(TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes());
 
     // when
     Response response =

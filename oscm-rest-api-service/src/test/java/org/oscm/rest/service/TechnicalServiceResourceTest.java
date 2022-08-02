@@ -11,21 +11,18 @@ package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Lists;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.oscm.internal.intf.ServiceProvisioningService;
@@ -34,8 +31,12 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceXMLRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+import com.google.common.collect.Lists;
+
+@SuppressWarnings({"unchecked", "boxing"})
 @ExtendWith(MockitoExtension.class)
 public class TechnicalServiceResourceTest {
 
@@ -70,6 +71,7 @@ public class TechnicalServiceResourceTest {
   private Response response;
   private TechnicalServiceRepresentation technicalServiceRepresentation;
   private TechnicalServiceImportRepresentation technicalServiceImportRepresentation;
+  private TechnicalServiceXMLRepresentation technicalServiceXMLRepresentation;
   private UriInfo uriInfo;
   private ServiceParameters serviceParameters;
 
@@ -77,6 +79,7 @@ public class TechnicalServiceResourceTest {
   public void setUp() {
     technicalServiceImportRepresentation = SampleTestDataUtility.createTSImportRepresentation();
     technicalServiceRepresentation = SampleTestDataUtility.createTSRepresentation();
+    technicalServiceXMLRepresentation = SampleTestDataUtility.createTSXMLRepresentation();
     uriInfo = SampleTestDataUtility.createUriInfo();
     serviceParameters = SampleTestDataUtility.createServiceParameters();
   }
@@ -122,17 +125,17 @@ public class TechnicalServiceResourceTest {
     // given
     when(technicalServiceBackend.getXMLCollection())
         .thenReturn(
-            Response.ok(
-                    TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), MediaType.APPLICATION_XML)
-                .build());
-    MediaType type = Mockito.mock(MediaType.class);
-    when(headers.getMediaType()).thenReturn(type);
-    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
-
+            serviceParameters1 ->
+                new RepresentationCollection<>(
+                    Lists.newArrayList(technicalServiceXMLRepresentation)));
     // when
-    response =
-        technicalServiceResource.getTechnicalServices(
-            uriInfo, headers, serviceParameters.getEndpointVersion());
+    try {
+      response =
+          technicalServiceResource.getTechnicalServicesAsXML(
+              uriInfo, headers, serviceParameters.getEndpointVersion());
+    } catch (Exception e) {
+      fail(e);
+    }
 
     // then
     assertThat(response).isNotNull();
@@ -145,19 +148,13 @@ public class TechnicalServiceResourceTest {
   @Test
   public void shouldGetTechnicalServiceXML() throws Exception {
     // given
-    when(technicalServiceBackend.getXML(anyLong()))
+    when(technicalServiceBackend.getXML())
         .thenReturn(
-            Response.ok(
-                    TECHNICAL_SERVICE_XML_EXAMPLE_RESPONSE.getBytes(), MediaType.APPLICATION_XML)
-                .build());
-
-    MediaType type = Mockito.mock(MediaType.class);
-    when(headers.getMediaType()).thenReturn(type);
-    when(type.toString()).thenReturn(MediaType.APPLICATION_XML);
+            serviceParameters1 -> Lists.newArrayList(technicalServiceXMLRepresentation).get(0));
 
     // when
     response =
-        technicalServiceResource.getTechnicalService(
+        technicalServiceResource.getTechnicalServiceAsXML(
             uriInfo, headers, serviceParameters.getEndpointVersion(), serviceParameters.getId());
 
     // then

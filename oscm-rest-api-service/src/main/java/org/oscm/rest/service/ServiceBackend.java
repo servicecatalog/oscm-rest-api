@@ -118,7 +118,7 @@ public class ServiceBackend {
   public RestBackend.Put<ServiceUpdateRepresentation, ServiceParameters> put() {
     return (content, params) -> {
       VOService vo = new VOService();
-      vo.setKey(params.getId());
+      vo.setKey(params.getId().longValue());
       VOServiceDetails service = sps.getServiceDetails(vo);
 
       content.update(service);
@@ -131,7 +131,7 @@ public class ServiceBackend {
   public RestBackend.Get<ServiceDetailsRepresentation, ServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
-      vo.setKey(params.getId());
+      vo.setKey(params.getId().longValue());
       VOServiceDetails sd = sps.getServiceDetails(vo);
       if (sd == null) {
         throw new ObjectNotFoundException(ClassEnum.SERVICE, String.valueOf(vo.getKey()));

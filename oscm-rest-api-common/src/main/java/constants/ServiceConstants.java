@@ -174,8 +174,10 @@ public class ServiceConstants {
           + "    }";
 
   public static final String TECHNICAL_SERVICE_LIST_EXAMPLE_RESPONSE =
-      "{\"items\":[" + TECHNICAL_SERVICE_EXAMPLE_RESPONSE + "]}";
+          "{\"items\":[" + TECHNICAL_SERVICE_EXAMPLE_RESPONSE + "]}";
 
+ 
+  
   public static final String TECHNICAL_SERVICE_CREATE_EXAMPLE_BODY =
       "{\n"
           + "\"technicalServiceId\": \"newTSRESTID\",\n"
@@ -191,7 +193,8 @@ public class ServiceConstants {
           + "\"billingIdentifier\": \"billing id\",\n"
           + "\"externalBilling\": false\n"
           + "}\n";
-
+  
+  
   public static final String TECHNICAL_SERVICE_IMPORT_EXAMPLE_BODY =
       "{\n"
           + "\"technicalServiceXml\": \"<?xml version='1.0' encoding='UTF-8'?>\n"
@@ -251,6 +254,9 @@ public class ServiceConstants {
           + "</tns:TechnicalServices>\n\"\n"
           + "}\n";
 
+  public static final String TECHNICAL_SERVICE_LIST_XML_EXAMPLE_RESPONSE =
+          "{\"items\":[" + TECHNICAL_SERVICE_IMPORT_EXAMPLE_BODY + "]}";
+  
   public static final String SUPPLIER_EXAMPLE_RESPONSE =
       "{\n"
           + "      \"organizationId\": \"a4140b27\",\n"

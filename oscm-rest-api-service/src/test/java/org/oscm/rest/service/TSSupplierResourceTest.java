@@ -10,6 +10,7 @@
 package org.oscm.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +31,7 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+@SuppressWarnings({"unchecked", "boxing"})
 @ExtendWith(MockitoExtension.class)
 public class TSSupplierResourceTest {
 
