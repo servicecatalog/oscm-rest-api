@@ -29,6 +29,7 @@ import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+@SuppressWarnings({"unchecked", "boxing"})
 @ExtendWith(MockitoExtension.class)
 public class CompatibleServiceResourceTest {
 

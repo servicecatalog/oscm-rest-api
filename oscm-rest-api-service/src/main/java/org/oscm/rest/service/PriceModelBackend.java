@@ -29,7 +29,7 @@ public class PriceModelBackend {
   public RestBackend.Put<PriceModelRepresentation, ServiceParameters> put() {
     return (content, params) -> {
       VOServiceDetails svc = new VOServiceDetails();
-      svc.setKey(params.getId());
+      svc.setKey(params.getId().longValue());
 
       VOServiceDetails sd = sps.getServiceDetails(svc);
       content.getVO().setKey(sd.getPriceModel().getKey());
@@ -42,9 +42,9 @@ public class PriceModelBackend {
   public RestBackend.Put<PriceModelRepresentation, ServiceParameters> putForCustomer() {
     return (content, params) -> {
       VOServiceDetails svc = new VOServiceDetails();
-      svc.setKey(params.getId());
+      svc.setKey(params.getId().longValue());
       VOOrganization customer = new VOOrganization();
-      customer.setKey(params.getOrgKey());
+      customer.setKey(params.getOrgKey().longValue());
 
       VOServiceDetails sd = sps.getServiceForCustomer(customer, svc);
       if (sd != null) {
@@ -60,7 +60,7 @@ public class PriceModelBackend {
   public RestBackend.Get<PriceModelRepresentation, ServiceParameters> get() {
     return params -> {
       VOService vo = new VOService();
-      vo.setKey(params.getId());
+      vo.setKey(params.getId().longValue());
       VOServiceDetails sd = sps.getServiceDetails(vo);
       if (sd == null) {
         throw new ObjectNotFoundException(ClassEnum.SERVICE, String.valueOf(vo.getKey()));
@@ -72,9 +72,9 @@ public class PriceModelBackend {
   public RestBackend.Get<PriceModelRepresentation, ServiceParameters> getForCustomer() {
     return params -> {
       VOService svc = new VOService();
-      svc.setKey(params.getId());
+      svc.setKey(params.getId().longValue());
       VOOrganization customer = new VOOrganization();
-      customer.setKey(params.getOrgKey());
+      customer.setKey(params.getOrgKey().longValue());
       VOServiceDetails sd = sps.getServiceForCustomer(customer, svc);
       if (sd == null) {
         throw new ObjectNotFoundException(ClassEnum.SERVICE, String.valueOf(svc.getKey()));

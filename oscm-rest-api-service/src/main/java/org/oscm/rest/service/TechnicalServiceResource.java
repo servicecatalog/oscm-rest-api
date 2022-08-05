@@ -42,6 +42,7 @@ import org.oscm.rest.common.RestResource;
 import org.oscm.rest.common.Since;
 import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceXMLRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Path(CommonParams.PATH_VERSION + "/technicalservices")
@@ -57,7 +58,7 @@ public class TechnicalServiceResource extends RestResource {
   @Path(CommonParams.PATH_ID)
   @Produces({CommonParams.JSON, APPLICATION_XML})
   @Operation(
-      summary = "Retrieves technical service",
+      summary = "Retrieves a technical service with given id",
       tags = {"technicalservices"},
       description = "Returns technical services based on given id",
       responses = {
@@ -82,19 +83,16 @@ public class TechnicalServiceResource extends RestResource {
       @Parameter(description = DocDescription.TECHNICAL_SERVICE_ID) @PathParam(value = "id")
           long id)
       throws Exception {
-    if (headers.getMediaType() != null
-        && APPLICATION_XML.equals(headers.getMediaType().toString())) {
-      return tsb.getXML(id);
-    }
+
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
-    params.setId(id);
+    params.setId(Long.valueOf(id));
     return get(uriInfo, tsb.get(), params, true);
   }
 
   @GET
   @Since(CommonParams.VERSION_1)
-  @Produces({CommonParams.JSON, APPLICATION_XML})
+  @Produces({CommonParams.JSON})
   @Operation(
       summary = "Retrieves all available technical services",
       tags = {"technicalservices"},
@@ -119,13 +117,79 @@ public class TechnicalServiceResource extends RestResource {
           @PathParam(value = "version")
           String version)
       throws Exception {
-    if (headers.getMediaType() != null
-        && APPLICATION_XML.equals(headers.getMediaType().toString())) {
-      return tsb.getXMLCollection();
-    }
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
     return getCollection(uriInfo, tsb.getCollection(), params);
+  }
+
+  @GET
+  @Path("/xml")
+  @Since(CommonParams.VERSION_1)
+  @Produces({CommonParams.JSON})
+  @Operation(
+      summary = "Retrieves all available technical services as XML",
+      tags = {"technicalservices"},
+      description = "Returns all available technical services as XML",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Technical services list",
+            content =
+                @Content(
+                    mediaType = "application/json",
+                    examples = {
+                      @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_LIST_XML_EXAMPLE_RESPONSE)
+                    },
+                    schema = @Schema(implementation = TechnicalServiceXMLRepresentation.class)))
+      })
+  public Response getTechnicalServicesAsXML(
+      @Context UriInfo uriInfo,
+      @Context HttpHeaders headers,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version)
+      throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    return getCollection(uriInfo, tsb.getXMLCollection(), params);
+  }
+
+  @GET
+  @Path("/xml/" + CommonParams.PATH_ID)
+  @Since(CommonParams.VERSION_1)
+  @Produces({CommonParams.JSON, APPLICATION_XML})
+  @Operation(
+      summary = "Retrieves a technical service with given id as XML",
+      tags = {"technicalservices"},
+      description = "Returns technical services based on given id",
+      responses = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Technical service",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  examples = {
+                    @ExampleObject(ServiceConstants.TECHNICAL_SERVICE_LIST_XML_EXAMPLE_RESPONSE)
+                  },
+                  schema = @Schema(implementation = TechnicalServiceXMLRepresentation.class))
+            })
+      })
+  public Response getTechnicalServiceAsXML(
+      @Context UriInfo uriInfo,
+      @Context HttpHeaders headers,
+      @Parameter(description = DocDescription.ENDPOINT_VERSION)
+          @DefaultValue("v1")
+          @PathParam(value = "version")
+          String version,
+      @Parameter(description = DocDescription.TECHNICAL_SERVICE_ID) @PathParam(value = "id")
+          long id)
+      throws Exception {
+    ServiceParameters params = new ServiceParameters();
+    params.setEndpointVersion(version);
+    params.setId(Long.valueOf(id));
+    return get(uriInfo, tsb.getXML(), params, true);
   }
 
   @POST
@@ -224,7 +288,7 @@ public class TechnicalServiceResource extends RestResource {
       throws Exception {
     ServiceParameters params = new ServiceParameters();
     params.setEndpointVersion(version);
-    params.setId(0L);
+    params.setId(Long.valueOf(0L));
     return put(uriInfo, tsb.importFromXml(), content, params);
   }
 }

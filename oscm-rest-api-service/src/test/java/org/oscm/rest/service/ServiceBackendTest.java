@@ -41,6 +41,7 @@ import org.oscm.rest.common.ServiceStatus;
 import org.oscm.rest.common.representation.*;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
+@SuppressWarnings({"boxing", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
 public class ServiceBackendTest {
 

@@ -9,14 +9,15 @@
  */
 package org.oscm.rest.service;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+
 import org.oscm.internal.intf.ServiceProvisioningService;
 import org.oscm.internal.types.enumtypes.OrganizationRoleType;
 import org.oscm.internal.types.exception.DomainObjectException;
@@ -29,6 +30,7 @@ import org.oscm.rest.common.RestBackend;
 import org.oscm.rest.common.representation.RepresentationCollection;
 import org.oscm.rest.common.representation.TechnicalServiceImportRepresentation;
 import org.oscm.rest.common.representation.TechnicalServiceRepresentation;
+import org.oscm.rest.common.representation.TechnicalServiceXMLRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
 
 @Stateless
@@ -44,6 +46,7 @@ public class TechnicalServiceBackend {
           sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
       Collection<TechnicalServiceRepresentation> list =
           TechnicalServiceRepresentation.toCollection(technicalServices);
+
       return new RepresentationCollection<>(list);
     };
   }
@@ -53,14 +56,47 @@ public class TechnicalServiceBackend {
       List<VOTechnicalService> technicalServices =
           sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
 
-      for (VOTechnicalService technicalService : technicalServices) {
-        if (params.getId().equals(technicalService.getKey())) {
-          return new TechnicalServiceRepresentation(technicalService);
+      for (VOTechnicalService vo : technicalServices) {
+        if (params.getId().longValue() == vo.getKey()) {
+          return new TechnicalServiceRepresentation(vo);
         }
       }
 
       throw new ObjectNotFoundException(
           DomainObjectException.ClassEnum.TECHNICAL_SERVICE, String.valueOf(params.getId()));
+    };
+  }
+
+  public RestBackend.Get<TechnicalServiceXMLRepresentation, ServiceParameters> getXML() {
+    return params -> {
+      List<VOTechnicalService> ts =
+          sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+      ts =
+          ts.stream()
+              .filter(vo -> params.getId().longValue() == vo.getKey())
+              .collect(Collectors.toList());
+
+      if (!ts.isEmpty()) {
+        return new TechnicalServiceXMLRepresentation(asXML(ts));
+      }
+      throw new ObjectNotFoundException(
+          DomainObjectException.ClassEnum.TECHNICAL_SERVICE, String.valueOf(params.getId()));
+    };
+  }
+
+  public RestBackend.GetCollection<TechnicalServiceXMLRepresentation, ServiceParameters>
+      getXMLCollection()
+          throws OrganizationAuthoritiesException, ObjectNotFoundException,
+              OperationNotPermittedException {
+
+    return params -> {
+      List<VOTechnicalService> technicalServices =
+          sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
+
+      Collection<TechnicalServiceXMLRepresentation> list =
+          TechnicalServiceXMLRepresentation.toCollection(asXML(technicalServices));
+      return new RepresentationCollection<>(list);
     };
   }
 
@@ -81,32 +117,15 @@ public class TechnicalServiceBackend {
     };
   }
 
-  @Produces(MediaType.APPLICATION_XML)
-  public Response getXML(Long id)
-      throws ObjectNotFoundException, OrganizationAuthoritiesException,
-          OperationNotPermittedException {
-    List<VOTechnicalService> technicalServices =
-        sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
-
-    for (VOTechnicalService technicalService : technicalServices) {
-      if (id.equals(technicalService.getKey())) {
-        byte[] b = sps.exportTechnicalServices(technicalServices);
-        return Response.ok(b, MediaType.APPLICATION_XML).build();
-      }
-    }
-    throw new ObjectNotFoundException(
-        DomainObjectException.ClassEnum.TECHNICAL_SERVICE, String.valueOf(id));
-  }
-
-  @Produces(MediaType.APPLICATION_XML)
-  public Response getXMLCollection()
+  private String asXML(List<VOTechnicalService> technicalServices)
       throws OrganizationAuthoritiesException, ObjectNotFoundException,
           OperationNotPermittedException {
-    List<VOTechnicalService> technicalServices =
-        sps.getTechnicalServices(OrganizationRoleType.TECHNOLOGY_PROVIDER);
-
     byte[] b = sps.exportTechnicalServices(technicalServices);
-    return Response.ok(b, MediaType.APPLICATION_XML).build();
+    try {
+      return new String(b, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public RestBackend.Put<TechnicalServiceImportRepresentation, ServiceParameters> importFromXml() {
