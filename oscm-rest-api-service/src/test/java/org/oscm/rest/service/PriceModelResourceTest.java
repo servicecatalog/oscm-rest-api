@@ -27,7 +27,8 @@ import org.oscm.rest.common.SampleTestDataUtility;
 import org.oscm.rest.common.representation.PriceModelRepresentation;
 import org.oscm.rest.common.representation.ServiceRepresentation;
 import org.oscm.rest.common.requestparameters.ServiceParameters;
-@SuppressWarnings({ "boxing" })
+
+@SuppressWarnings({"boxing"})
 @ExtendWith(MockitoExtension.class)
 public class PriceModelResourceTest {
 
